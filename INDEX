@@ -30,7 +30,7 @@ Filtering
  spencer
  fractdiff
 Filter analysis
- freqs 
+ freqs freqs_plot
  freqspace 
  freqz freqz_plot
  grpdelay 
