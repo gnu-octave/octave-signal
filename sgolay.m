@@ -14,9 +14,10 @@
 ## along with this program; if not, write to the Free Software
 ## Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-## F = sgolay (p, n)
+## F = sgolay (p, n [, m [, ts]])
 ##   Computes the filter coefficients for all Savitzsky-Golay smoothing
-##   filters of order p for length n (odd).
+##   filters of order p for length n (odd). m can be used in order to
+##   get directly the mth derivative. In this case, ts is a scaling factor. 
 ##
 ## The early rows of F smooth based on future values and later rows
 ## smooth based on past values, with the middle row using half future
@@ -36,30 +37,29 @@
 ##
 ## See also: sgolayfilt
 
+## 15 Dec 2004 modified by Pascal Dupuis <Pascal.Dupuis@esat.kuleuven.ac.be>
 ## Author: Paul Kienzle <pkienzle@kienzle.powernet.co.uk>
 ## Based on smooth.m by E. Farhi <manuf@ldv.univ-montp2.fr>
 
-## TODO: Doesn't accept "weight vector" as fourth parameter since
-## TODO: Should be able to estimate derivatives using second and
-## TODO: subsequent columns of A, but they seem to have the wrong
-## TODO: sign and the wrong scale, so I won't put that in.
+function F = sgolay (p, n, m, ts)
 
-function F = sgolay (p, n)
-
-  if (nargin < 2 || nargin > 3)
-    usage ("F = sgolay (p, n)");
+  if (nargin < 2 || nargin > 4)
+    usage ("F = sgolay (p, n [, m [, ts]])");
   elseif rem(n,2) != 1
     error ("sgolay needs an odd filter length n");
   elseif p >= n
     error ("sgolay needs filter length n larger than polynomial order p");
   else 
+    if nargin < 3, m = 0; endif
+    if nargin < 4, ts = 1; endif
+    if length(m) > 1, error("weight vector unimplemented"); endif
     k = floor (n/2);
     F = zeros (n, n);
     for row = 1:k+1
       A = pinv( ( [(1:n)-row]'*ones(1,p+1) ) .^ ( ones(n,1)*[0:p] ) );
-      F(row,:) = A(1,:);
+      F(row,:) = A(1+m,:);
     end
     F(k+2:n,:) = F(k:-1:1,n:-1:1);
   endif
-
+  if m > 1, F =  F * ( factorial(m) / (ts^m) ); endif
 endfunction

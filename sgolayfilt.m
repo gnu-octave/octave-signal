@@ -14,7 +14,7 @@
 ## along with this program; if not, write to the Free Software
 ## Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-## y = sgolayfilt (x, p, n)
+## y = sgolayfilt (x, p, n [, m [, ts]])
 ##    Smooth the data in x with a Savitsky-Golay smoothing filter of 
 ##    polynomial order p and length n, n odd, n > p.  By default, p=3
 ##    and n=p+2 or n=p+3 if p is even.
@@ -36,20 +36,24 @@
 ##
 ## See also: sgolay
 
-## TODO: Doesn't accept "weight vector" as fourth parameter.
+## 15 Dec 2004 modified by Pascal Dupuis <Pascal.Dupuis@esat.kuleuven.ac.be>
+## Author: Paul Kienzle <pkienzle@kienzle.powernet.co.uk>
+
 ## TODO: Patch filter.cc so that it accepts matrix arguments
 
-function y = sgolayfilt (x, p, n)
+function y = sgolayfilt (x, p, n, m, ts)
 
-  if nargin < 1 || nargin > 3 
-    usage("y = sgolayfilt(x,p,n) or y = sgolayfilt(x,F)"); 
+  if nargin < 1 || nargin > 5 
+    usage("y = sgolayfilt(x,p,n [, m [, ts]]) or y = sgolayfilt(x,F)"); 
   endif
 
   if (nargin < 2)
     p = 3;
   endif
-  if (nargin == 3)
-    F = sgolay(p, n);
+  if nargin < 4, m = 0; endif
+  if nargin < 5, ts = 1; endif
+  if (nargin >= 3)
+    F = sgolay(p, n, m, ts);
   elseif (prod(size(p)) == 1)
     n = p+3-rem(p,2);
     F = sgolay(p, n);
@@ -73,8 +77,12 @@ function y = sgolayfilt (x, p, n)
   ## The last k rows of F are used to filter the last k points
   ## of the data set based on the last n points of the dataset.
   ## The remaining data is filtered using the central row of F.
+  ## As the filter coefficients are used in the reverse order of what
+  ## seems the logical notation, reverse F(k+1, :) so that antisymmetric
+  ## sequences are used with the right sign.
+
   k = floor(n/2);
-  z = filter(F(k+1,:), 1, x);
+  z = filter(F(k+1,n:-1:1), 1, x);
   y = [ F(1:k,:)*x(1:n,:) ; z(n:len,:) ; F(k+2:n,:)*x(len-n+1:len,:) ];
 
   if (transpose) y = y.'; endif
