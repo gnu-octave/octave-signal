@@ -43,7 +43,7 @@ function [a, v, k] = aryule (x, p)
 
   if (nargin != 2) usage("[a, v, k] = aryule(x,p)"); end
 
-  c = xcorr(x, p+1, 'unbiased');
+  c = xcorr(x, p+1, 'none');
   c(1:p+1) = [];
   if nargout == 1
     a = levinson(c, p);
