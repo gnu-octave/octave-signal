@@ -1,0 +1,60 @@
+## Copyright (C) 2002   André Carezia
+##
+## This program is free software; you can redistribute it and/or modify
+## it under the terms of the GNU General Public License as published by
+## the Free Software Foundation; either version 2 of the License, or (at
+## your option) any later version.
+##
+## This program is distributed in the hope that it will be useful, but
+## WITHOUT ANY WARRANTY; without even the implied warranty of
+## MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+## General Public License for more details.
+##
+## You should have received a copy of the GNU General Public License
+## along with this program; if not, write to the Free Software
+## Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
+## USA
+
+## Usage:  cheb (n, x)
+##
+## Returns the value of the nth-order Chebyshev polynomial calculated at
+## the point x. The Chebyshev polynomials are defined by the equations:
+##
+##           / cos(n acos(x),    |x| <= 1
+##   Tn(x) = |
+##           \ cosh(n acosh(x),  |x| > 1
+##
+## If x is a vector, the output is a vector of the same size, where each
+## element is calculated as y(i) = Tn(x(i)).
+
+## Author:  AHCC <acarezia@uol.com.br>
+## Description:  Value of the Chebyshev polynomials
+
+function T = cheb (n, x)
+  if (nargin != 2)
+    usage ("cheb (n, x)");
+  endif
+  
+  if !(is_scalar (n) && (n == round(n)) && (n >= 0))
+    error ("cheb: n has to be a positive integer");
+  endif
+
+  if (max(size(x)) == 0)
+    T = [];
+  endif
+				# avoid resizing latencies
+  T = zeros(size(x));
+  
+  ind = x<=1;
+  if (max(size(ind)))
+    T(ind) = cos(n*acos(x(ind)));
+  endif
+
+  ind = x>1;
+  if (max(size(ind)))
+    T(ind) = cosh(n*acosh(x(ind)));
+  endif
+
+  T = real(T);
+end
+
