@@ -14,6 +14,11 @@
 ## along with this program; if not, write to the Free Software
 ## Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
+## b = polystab(a)
+##
+## Stabalize the polynomial transfer function by replacing all roots
+## outside the unit circle with their reflection inside the unit circle.
+
 function b = polystab(a)
 
    r = roots(a);
