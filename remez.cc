@@ -751,7 +751,7 @@ int remez(double h[], int numtaps,
 
 DEFUN_DLD (remez, args, ,
   "b = remez(n, f, a [, w] [, ftype] [, griddensity])\n\
-\n\
+Parks-McClellan optimal FIR filter design.\n\
 n gives the number of taps in the returned filter\n\
 f gives frequency at the band edges [ b1 e1 b2 e2 b3 e3 ...]\n\
 a gives amplitude at the band edges [ a(b1) a(e1) a(b2) a(e2) ...]\n\
