@@ -18,7 +18,7 @@
 ##
 ## Compute correlation R_xy of X and Y for various lags k:  
 ##
-##    R_xy(k) = sum_{i=1}^{N-k}{x_i y_{i+k}}/(N-k),  for k >= 0
+##    R_xy(k) = sum_{i=1}^{N-k}{x_i y_{i-k}}/(N-k),  for k >= 0
 ##    R_xy(k) = R_yx(-k),  for k <= 0
 ##
 ## Returns R(k+maxlag+1)=Rxy(k) for lag k=[-maxlag:maxlag].
@@ -56,6 +56,12 @@
 ## Ref: Stearns, SD and David, RA (1988). Signal Processing Algorithms.
 ##      New Jersey: Prentice-Hall.
 
+## 2004-05 asbjorn dot sabo at broadpark dot no
+##     - Changed definition of cross correlation from 
+##       sum{x(i)y(y+k)} to sum(x(i)y(i-k)}  (Note sign change.)
+##       Results are now returned in reverse order of before.
+##       The function is now compatible with Matlab (and with f.i.
+##       "Digital Signal Processing" by Proakis and Manolakis).
 ## 2000-03 pkienzle@kienzle.powernet.co.uk
 ##     - use fft instead of brute force to compute correlations
 ##     - allow row or column vectors as input, returning same
@@ -138,7 +144,7 @@ function [R, lags] = xcorr (X, Y, maxlag, scale)
     ## For remaining i,j generate xcorr(i,j) and by symmetry xcorr(j,i).
     for i=1:P-1
       j = i+1:P;
-      cor = ifft (post(:,i*ones(length(j),1)) .* pre(:,j));
+      cor = ifft (pre(:,i*ones(length(j),1)) .* post(:,j));
       R(:,(i-1)*P+j) = conj (cor (1:2*maxlag+1, :));
       R(:,(j-1)*P+i) = flipud (cor (1:2*maxlag+1, :));
     endfor
@@ -149,8 +155,8 @@ function [R, lags] = xcorr (X, Y, maxlag, scale)
     R = [ conj(cor(maxlag+1:-1:2)) ; cor(1:maxlag+1) ];
   else 
     ## compute cross-correlation of X and Y
-    post = fft (postpad(X,M));
-    pre = fft (postpad(prepad(Y,N+maxlag),M));
+    post = fft (postpad(Y,M));
+    pre = fft (postpad(prepad(X,N+maxlag),M));
     cor = conj (ifft (conj(post(:)) .* pre(:)));
     R = cor(1:2*maxlag+1);
   endif
