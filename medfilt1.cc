@@ -149,7 +149,7 @@ double Median::operator()()
   if (max % 2 == 1)
     return window[(max-1)/2];
   else if (max == 0)
-    return octave_NaN;
+    return lo_ieee_nan_value();
   else
     return (window[max/2-1]+window[max/2])/2.0;
 }
