@@ -33,6 +33,7 @@
 
 #include <octave/oct.h>
 #include <math.h>
+using namespace std;
 
 #define CONST const
 #define BANDPASS       1

@@ -17,6 +17,7 @@
 #include <octave/lo-ieee.h>
 #include <octave/lo-mappers.h>
 #include <math.h>
+using namespace std;
 
 // The median class holds a sorted data window.  This window is
 // intended to slide over the data, so when the window shifts
