@@ -97,8 +97,7 @@ function [varargout] = pwelch(x, varargin)
     (!isempty(y) && columns(y) != 1 && rows(y) != 1)
     error ([calledby, " data must be a vector"]);
   end
-  if columns(x) != 1, x = x'; end
-  if columns(y) != 1, y = y'; end
+  x = x(:); y = y(:);
   if !isempty(y) && rows(x)!=rows(y)
     error ([calledby, " x and y vectors must be the same length"]);
   endif
