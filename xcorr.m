@@ -16,8 +16,12 @@
 
 ## usage: [R, lag] = xcorr (X [, Y] [, maxlag] [, scale])
 ##
-## Compute correlation of X and Y for various lags.  
-## Returns R(m+maxlag+1)=Rxy(m) for lag m=[-maxlag:maxlag].
+## Compute correlation R_xy of X and Y for various lags k:  
+##
+##    R_xy(k) = sum_{i=1}^{N-k}{x_i y_{i+k}}/(N-k),  for k >= 0
+##    R_xy(k) = R_yx(-k),  for k <= 0
+##
+## Returns R(k+maxlag+1)=Rxy(k) for lag k=[-maxlag:maxlag].
 ## Scale is one of:
 ##    'biased'   for correlation=raw/N, 
 ##    'unbiased' for correlation=raw/(N-|lag|), 
@@ -30,11 +34,24 @@
 ## If X is a matrix, computes the cross correlation of each column
 ## against every other column for every lag.  The resulting matrix has
 ## 2*maxlag+1 rows and P^2 columns where P is columns(X). That is,
-##    R(m+maxlag+1,P*(i-1)+j) == Rij(m) for lag m=[-maxlag:maxlag],
+##    R(k+maxlag+1,P*(i-1)+j) == Rij(k) for lag k=[-maxlag:maxlag],
 ## so
 ##    R(:,P*(i-1)+j) == xcorr(X(:,i),X(:,j))
 ## and
-##    reshape(R(m,:),P,P) is the cross-correlation matrix for X(m,:).
+##    reshape(R(k,:),P,P) is the cross-correlation matrix for X(k,:).
+##
+## xcorr computes the cross correlation using an FFT, so the cost is
+## dependent on the length N of the vectors and independent of the
+## number of lags k that you need.  If you only need lags 0:k-1 for 
+## vectors x and y, then the direct sum may be faster:
+##
+## unbiased:
+##  ( hankel(x(1:k),[x(k:N); zeros(k-1,1)]) * y ) ./ [N:-1:N-k+1](:)
+## biased:
+##  ( hankel(x(1:k),[x(k:N); zeros(k-1,1)]) * y ) ./ N
+##
+## If length(x) == length(y) + k, then you can use the simpler
+##    ( hankel(x(1:k),x(k:N-k)) * y ) ./ N
 ##
 ## Ref: Stearns, SD and David, RA (1988). Signal Processing Algorithms.
 ##      New Jersey: Prentice-Hall.
