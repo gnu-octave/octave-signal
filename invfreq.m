@@ -15,7 +15,7 @@
 % Software Foundation, 59 Temple Place - Suite 330, Boston, MA
 % 02111-1307, USA.
 
-% usage: [B,A] = invfreq(H,F,nB,nA,)
+% usage: [B,A] = invfreq(H,F,nB,nA)
 %        [B,A] = invfreq(H,F,nB,nA,W)
 %        [B,A] = invfreq(H,F,nB,nA,W,[],[],plane)
 %        [B,A] = invfreq(H,F,nB,nA,W,iter,tol,plane)

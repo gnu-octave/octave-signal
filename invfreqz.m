@@ -15,9 +15,9 @@
 % Software Foundation, 59 Temple Place - Suite 330, Boston, MA
 % 02111-1307, USA.
 
-% usage: [B,A] = invfreqz(H,F,nA,nB)
-%        [B,A] = invfreqz(H,F,nA,nB,W)
-%        [B,A] = invfreqz(H,F,nA,nB,W,iter,tol,'trace')
+% usage: [B,A] = invfreqz(H,F,nB,nA)
+%        [B,A] = invfreqz(H,F,nB,nA,W)
+%        [B,A] = invfreqz(H,F,nB,nA,W,iter,tol,'trace')
 %
 % Fit filter B(z)/A(z)to the complex frequency response H at frequency
 % points F.  A and B are real polynomial coefficients of order nA and nB.
