@@ -11,13 +11,11 @@ function freqs_plot(w,h)
     maxmag = max(mag);
     title('Frequency response plot by freqs');
     unwind_protect # protect graph state
-      if gnuplot_has_multiplot
-      	subplot(211);
-      	gset lmargin 10;
-	axis("labely");
-	ylabel("dB");
-	xlabel("");
-      endif
+      subplot(211);
+      gset lmargin 10;
+      axis("labely");
+      ylabel("dB");
+      xlabel("");
       grid("on");
       if (maxmag - min(mag) > 100) % make 100 a parameter?
       	axis([w(1), w(n), maxmag-100, maxmag]);
@@ -27,13 +25,9 @@ function freqs_plot(w,h)
       plot(w, mag, ";Magnitude (dB);");
 %     semilogx(w, mag, ";Magnitude (dB);");
 
-      if gnuplot_has_multiplot
-      	subplot(212);
-	axis("label");
-	title("");
-      else
-	input("press any key for the next plot: ");
-      endif
+      subplot(212);
+      axis("label");
+      title("");
       grid("on");
       axis("autoy");
       xlabel("Frequency (rad/sec)");
