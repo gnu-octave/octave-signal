@@ -58,14 +58,14 @@ function b = fir1(n, w, ftype, window, scale)
   
   ## interpret arguments
   if nargin==2
-    ftype=[]; window=[]; scale=[];
+    ftype=""; window=[]; scale=[];
   elseif nargin==3
     window=[]; scale=[];
-    if !isstr(ftype), window=ftype; ftype=[]; endif
+    if !isstr(ftype), window=ftype; ftype=""; endif
   elseif nargin==4
     scale=[];
     if isstr(window), scale=window; window=[]; endif
-    if !isstr(ftype), window=ftype; ftype=[]; endif
+    if !isstr(ftype), window=ftype; ftype=""; endif
   endif
 
   ## If single band edge, the first band defaults to a pass band
