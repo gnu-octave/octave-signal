@@ -14,25 +14,20 @@
 ## along with this program; if not, write to the Free Software
 ## Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-## usage: w = gaussian(n, a)
+## usage: w = gausswin(n, a)
 ##
-## Generate an n-point gaussian convolution window of the given
-## width.  Use larger a for a narrower window.  Use larger n for
-## longer tails.
+## Generate an n-point gaussian window of the given width. Use larger a
+## for a narrow window.  Use larger n for a smoother curve. 
 ##
 ##     w = exp ( -(a*x)^2/2 )
 ##
-## for x = linspace ( (n-1)/2, (n-1)/2, n ).
-##
-## Width a is measured in frequency units (sample rate/num samples). 
-## It should be f when multiplying in the time domain, but 1/f when 
-## multiplying in the frequency domain (for use in convolutions).
+## for x = linspace(-(n-1)/n, (n-1)/n, n)
 function x = gaussian(n, w)
 
   if nargin < 1 || nargin > 2
     usage("x = gaussian(n, w)");
   end
-  if nargin == 1, w = 1; endif
-  x = exp(-0.5*(([0:n-1]'-(n-1)/2)*w).^2);
+  if nargin == 1, w = 2.5; endif
+  x = exp ( -0.5 * ( w/n * [ -(n-1) : 2 : n-1 ]' ) .^ 2 );
 
 endfunction
