@@ -31,17 +31,27 @@
 ## may be displayed as occurring around a circle rather than at a single
 ## point.
 ##
+## The transfer function is
+##                         
+##        B(z)   b0 + b1 z^(-1) + b2 z^(-2) + ... + bM z^(-M)
+## H(z) = ---- = --------------------------------------------
+##        A(z)   a0 + a1 z^(-1) + a2 z^(-2) + ... + aN z^(-N)
+##
+##               b0          (z - z1) (z - z2) ... (z - zM)
+##             = -- z^(-M+N) ------------------------------
+##               a0          (z - p1) (z - p2) ... (z - pN)
+##
 ## The denominator a defaults to 1, and the poles p defaults to [].
-## Either way no poles are displayed.
 
 ## 2001-03-17 Paul Kienzle
 ##     * extend axes to include all points outside the unit circle
 
-## TODO: Give some indication of the number of poles or zeros at a 
-## TODO:    specific point.  Affixing a x3 or something similar beside 
-## TODO:    three identical poles for example would be useful.
-## TODO: Use different colors for different columns of the matrix for
-## TODO:    compatibility if no other reason
+## 2004-04-20 Stefan van der Walt
+##     * plot correct nr of zeros at 0
+##     * label nr of zeros/poles at a point
+##     * use different colours for plotting each column (matrix zeros/poles)
+##     * set automatic_replot to 0 for duration of demo
+
 ## TODO: Consider a plot-like interface:
 ## TODO:       zplane(x1,y1,fmt1,x2,y2,fmt2,...)
 ## TODO:    with y_i or fmt_i optional as usual.  This would allow
@@ -57,9 +67,15 @@ function zplane(z, p)
     if rows(z)>1 || rows(p)>1
       ## matrix form: columns are already zeros/poles
     else
+      ## z -> b
+      ## p -> a      
       if isempty(z), z=1; endif
       if isempty(p), p=1; endif
-      [z, p, g] = tf2zp(z, p);
+          
+      M = length(z) - 1;
+      N = length(p) - 1;
+      z = [ roots(z); zeros(N - M, 1) ];
+      p = [ roots(p); zeros(M - N, 1) ];
     endif
   endif
 
@@ -89,12 +105,11 @@ function zplane(z, p)
     r = exp(2i*pi*[0:100]/100);           ##<oct
     plot(real(r), imag(r),";;");          ##<oct
     hold on;                              ##<oct
-    if !isempty(z),                       ##<oct
-      plot(real(z), imag(z), "bo;;");     ##<oct
-    endif                                 ##<oct
-    if !isempty(p),                       ##<oct
-      plot(real(p), imag(p), "bx;;");     ##<oct
-    endif                                 ##<oct
+
+    text();
+    plot_with_labels(z, "o");
+    plot_with_labels(p, "x");
+      
   unwind_protect_cleanup                  ##<oct
     empty_list_elements_ok = eleo;        ##<oct
     warn_empty_list_elements = wele;      ##<oct
@@ -114,6 +129,26 @@ function zplane(z, p)
   ##<mat hold off;
 endfunction
 
+function plot_with_labels(x, symbol)
+  if ( !isempty(x) )
+
+    x_u = unique(x(:));
+    
+    for i = 1:length(x_u)
+      n = sum(x_u(i) == x(:));
+      if (n > 1)
+        text(real(x_u(i)), imag(x_u(i)), [" " num2str(n)]);
+       endif
+    endfor
+
+    for c = 1:columns(x)
+      plot(real( x(:,c) ), imag( x(:,c) ), 
+           [ num2str(mod(c+1,6) + 1) symbol ";;" ]);
+    endfor
+    
+  endif
+endfunction
+
 %!demo
 %! ## construct target system:
 %! ##   symmetric zero-pole pairs at r*exp(iw),r*exp(-iw)
@@ -125,23 +160,15 @@ endfunction
 %! zr=[0.95]; # zr=[];
 %! zs=[];
 %! 
-%! try save_empty_list_elements_ok = empty_list_elements_ok;     ##<oct
-%! catch save_empty_list_elements_ok = 0; end;                   ##<oct
-%! try save_warn_empty_list_elements = warn_empty_list_elements; ##<oct
-%! catch save_warn_empty_list_elements = 0; end;                 ##<oct
-%! unwind_protect
-%!   empty_list_elements_ok = 1;                                 ##<oct
-%!   warn_empty_list_elements = 0;                               ##<oct
-%!   ## system function for target system
-%!   p=[[pr, pr].*exp(1i*pi*[pw, -pw]), ps]';
-%!   z=[[zr, zr].*exp(1i*pi*[zw, -zw]), zs]';
-%! unwind_protect_cleanup
-%!   empty_list_elements_ok = save_empty_list_elements_ok;       ##<oct
-%!   warn_empty_list_elements = save_warn_empty_list_elements;   ##<oct
-%! end_unwind_protect
-%! sys_a = real(poly(p));
-%! sys_b = real(poly(z));
+%! ## system function for target system
+%! p=[[pr, pr].*exp(1i*pi*[pw, -pw]), ps]';
+%! z=[[zr, zr].*exp(1i*pi*[zw, -zw]), zs]';
+%! M = length(z); N = length(p);
+%! sys_a = [ zeros(1, M-N), real(poly(p)) ];
+%! sys_b = [ zeros(1, N-M), real(poly(z)) ];
 
+%! save_replot = automatic_replot;
+%! automatic_replot = 0;
 %! disp("The first two graphs should be identical, with poles at (r,w)=");
 %! disp(sprintf(" (%.2f,%.2f)", [pr ; pw]));
 %! disp("and zeros at (r,w)=");
@@ -155,3 +182,4 @@ endfunction
 %! disp("The matrix plot has 2 sets of points, one inside the other");
 %! subplot(235); title("matrix"); zplane([z, 0.7*z], [p, 0.7*p]);
 %! oneplot();
+%! automatic_replot = save_replot;
