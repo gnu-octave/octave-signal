@@ -14,9 +14,7 @@ Signals
  square 
  sinetone sinewave
  chirp 
- vco= $TFTB
- modulate= $TFTB
- demod= $TFTB
+ vco modulate demod= $TFTB
  strips 
  specgram 
  periodogram stft synthesis hurst
@@ -109,10 +107,7 @@ Power spectrum analysis
  cohere 
  csd 
  pburg 
- pcov 
- pmcov 
- pmtm 
- pmusic= $SPCTOOLS
+ pcov pmcov pmtm pmusic= $SPCTOOLS
  pyulear 
  xcorr
  xcorr2 
@@ -154,10 +149,10 @@ Sample rate change
  resample 
  upfirdn 
 Compatibility
- buttap= see internals of <code>butter</code>
- cheb1ap= see internals of <code>cheby1</code>
- cheb2ap= see internals of <code>cheby2</code>
- ellipap= see internals of <code>nellip</code>
+ buttap= use <code>butter(n,1,'s')</code>
+ cheb1ap= use <code>cheby1(n,Rp,1,'s')</code>
+ cheb2ap= use <code>cheby2(n,Rs,1,'s')</code>
+ ellipap= use <code>ellip(n,Rp,Rs,1,'s')</code>
  lp2bp= use <code>sftrans</code>
  lp2bs= use <code>sftrans</code>
  lp2hp= use <code>sftrans</code>
