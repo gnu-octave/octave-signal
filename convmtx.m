@@ -1,4 +1,4 @@
-## Copyright (C) 2002 Anand V
+## Copyright (C) 2003 David Bateman
 ##
 ## This program is free software; you can redistribute it and/or modify
 ## it under the terms of the GNU General Public License as published by
@@ -14,42 +14,44 @@
 ## along with this program; if not, write to the Free Software
 ## Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-## A = convmtx(h,n)
+## -*- texinfo -*-
+## @deftypefn {Function File} {} convmtx (@var{a}, @var{n})
+## If @var{a} is a column vector and @var{x} is a column vector
+## of length @var{n}, then 
 ##
-## Returns the convolution matrix given a vector 'h' and length of x.
+## @code{convmtx(@var{a}, @var{n}) * @var{x}}
 ##
-## The convolution matrix is the matrix formed from a vector whose 
-## product with another vector is the convolution of the two vectors.
+## gives the convolution of of @var{a} and @var{x} and is the
+## same as @code{conv(@var{a}, @var{x})}. The difference is if
+## many vectors are to be convolved with the same vector, then
+## this technique is possibly faster.
 ##
-## A = convmtx(c,n) where c is a length m column vector returns a matrix A
-## of size (m+n-1)-by-n. The product of A and a column vector x of
-## length n is the convolution of c with x.
+## Similarly, if @var{a} is a row vector and @var{x} is a row 
+## vector of length @var{n}, then
 ##
-## A = convmtx(r,n) where r is a length m row vector returns a matrix A of
-## size n-by-(m+n-1). The product of a row vector x of length n and A
-## is the convolution of r with x.
+## @code{@var{x} * convmtx(@var{a}, @var{n})}
+##
+## is the same as @code{conv(@var{x}, @var{a})}.
+## @end deftypefn
+## @seealso{conv}
 
-## Author: Anand V <anand.v@achayans.com>
- 
-function retval = convmtx(h,n)
- 
+function b = convmtx (a, n)
+
   if (nargin != 2)
-    usage ("convmtx(h,n)");
+    usage ("convmtx (a, n)");
+  endif
+   
+  [r, c] = size(a);
+  
+  if ((r != 1) && (c != 1)) || (r*c == 0)
+    error("convmtx: expecting vector argument");
+  endif
+  
+  b = toeplitz([a(:); zeros(n-1,1)],[a(1); zeros(n-1,1)]);
+  if (c > r)
+    b = b.';
   endif
 
-  [nr, nc] = size(h);
-  if ( (nr > 1) && (nc > 1) )
-    error ("'h' should be either a row or column vector");
-  endif
-
-  r = [h(:);zeros(n-1,1)];
-  c = [h(1);zeros(n-1,1)];
-  retval = toeplitz(c,r);
- 
-  if (nc == 1)
-    retval = retval.';
-  endif
- 
 endfunction
 
 %!assert(convmtx([3,4,5],3),[3,4,5,0,0;0,3,4,5,0;0,0,3,4,5])
