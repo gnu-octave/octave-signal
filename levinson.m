@@ -16,8 +16,8 @@
 ##
 ## Based on:
 ##    yulewalker.m
-##    Copyright (C) 1995 (GPL)
-##    Friedrich Leisch <Friedrich.Leisch@ci.tuwien.ac.at>
+##    Copyright (C) 1995 Friedrich Leisch <Friedrich.Leisch@ci.tuwien.ac.at>
+##    GPL license
 
 ## usage:  [a, v, ref] = levinson (acf [, p])
 ##
@@ -36,7 +36,7 @@
 ##         implementation of the filter
 ## Use freqz(sqrt(v),a) to plot the power spectrum.
    
-## Author:  PAK <pkienzle@kienzle.powernet.co.uk>
+## Author:  Paul Kienzle <pkienzle@users.sf.net>
 
 ## TODO: Matlab doesn't return reflection coefficients and 
 ## TODO:    errors in addition to the polynomial a.
