@@ -47,7 +47,7 @@
 ## Author: Paul Kienzle <pkienzle@cs.indiana.edu>
 ## Modified by: Doug Stewart <dastew@sympatico.ca> Feb, 2003
 
-function [a, b, c, d] = butter1(n, W, varargin)
+function [a, b, c, d] = butter (n, W, varargin)
   
   if (nargin>4 || nargin<2) || (nargout>4 || nargout<2)
     usage ("[b, a] or [z, p, g] or [a,b,c,d] = butter (n, W [, 'ftype'][,'s'])");
