@@ -16,7 +16,6 @@
 #include <cmath>
 #include <octave/oct.h>
 #include <octave/lo-ieee.h>
-#include <octave/lo-mappers.h>
 #include <octave/pager.h>
 using namespace std;
 
@@ -73,7 +72,7 @@ void Median::print()
 void Median::remove(double v)
 {
   // NaN's are not added or removed
-  if (xisnan(v)) return;
+  if (lo_ieee_isnan(v)) return;
 
   //  octave_stdout << "Remove " << v << " from "; print();
 
@@ -112,7 +111,7 @@ void Median::remove(double v)
 void Median::add(double v)
 {
   // NaN's are not added or removed
-  if (xisnan(v)) return;
+  if (lo_ieee_isnan(v)) return;
 
   //  octave_stdout << "Add " << v << " to "; print();
 
