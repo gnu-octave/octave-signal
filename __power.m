@@ -33,7 +33,7 @@
 ## TODO: consider folding this into freqz --- just one more parameter to
 ## TODO:    distinguish between 'linear', 'log', 'logsquared' and 'squared'
 
-function [varargou] = __power (b, a, varargin)
+function [varargout] = __power (b, a, varargin)
   usagestr = "[P w] = __power(b, a [,nfft [,Fs]] [,range] [, units])";
   if (nargin < 2 || nargin > 6) usage(usagestr); endif
 
