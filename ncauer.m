@@ -1,4 +1,4 @@
-## Copyright (C) 2001 Paulo Neis
+## Copyright (C) 2001 Paulo Neis <p_neis@yahoo.com.br>
 ##
 ## This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -17,7 +17,6 @@
 ## References: 
 ##
 ## Serra, Celso Penteado, Teoria e Projeto de Filtros, Campinas: CARTGRAF, 1983.
-## Author: p_neis@yahoo.com.br
 
 ## usage: [Zz, Zp, Zg] = ncauer(Rp, Rs, ws)
 ##

@@ -20,7 +20,8 @@
 ## If the optional argument correct has the value 1, a correction
 ## method is applied.  The default is not to do this.
 
-## Author: AW (Andreas.Weingessel@ci.tuwien.ac.at) on Apr 1, 1994
+## Author: Andreas Weingessel <Andreas.Weingessel@ci.tuwien.ac.at>
+## Apr 1, 1994
 ## Last modifified by AW on Nov 8, 1994
   
 function cep = cceps (x, c)

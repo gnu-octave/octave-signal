@@ -30,7 +30,7 @@
 ##
 ## See also: kaiserord
   
-## Author:  KH <Kurt.Hornik@ci.tuwien.ac.at>
+## Author:  Kurt Hornik <Kurt.Hornik@ci.tuwien.ac.at>
 ## Description:  Coefficients of the Kaiser window
 
 ## 2000-02 Paul Kienzle (pkienzle@kienzle.powernet.co.uk)

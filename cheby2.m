@@ -1,4 +1,4 @@
-## Copyright (C) 1999-2001 Paul Kienzle
+## Copyright (C) 1999-2001 Paul Kienzle <pkienzle@cs.indiana.edu>
 ##
 ## This program is free software; you can redistribute it and/or modify
 ## it under the terms of the GNU General Public License as published by
@@ -32,7 +32,7 @@
 ##    return filter as zero-pole-gain rather than coefficients of the
 ##    numerator and denominator polynomials.
 
-## Author: pkienzle@cs.indiana.edu
+## Author: Paul Kienzle <pkienzle@cs.indiana.edu>
 ## 2001-03-09 pkienzle@kienzle.powernet.co.uk
 ##     * for odd n, skip zero at infinity for theta==pi/2
 

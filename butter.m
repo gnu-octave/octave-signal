@@ -1,4 +1,4 @@
-## Copyright (C) 1999 Paul Kienzle
+## Copyright (C) 1999 Paul Kienzle <pkienzle@cs.indiana.edu>
 ##
 ## This program is free software; you can redistribute it and/or modify
 ## it under the terms of the GNU General Public License as published by
@@ -37,7 +37,7 @@
 ## Proakis & Manolakis (1992). Digital Signal Processing. New York:
 ## Macmillan Publishing Company.
 
-## Author: pkienzle@cs.indiana.edu
+## Author: Paul Kienzle <pkienzle@cs.indiana.edu>
 
 function [Zz, Zp, Zg] = butter(n, W, stype)
 
