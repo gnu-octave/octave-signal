@@ -44,7 +44,7 @@ endfunction
 %!assert (triang(3), [1; 2; 1]/2);
 %!assert (triang(4), [1; 3; 3; 1]/4);
 %!test
-%! x = bartlett(5)';
+%! x = bartlett(5);
 %! assert (triang(3), x(2:4));
 
 %!demo
