@@ -33,6 +33,9 @@
 
 #include <octave/oct.h>
 #include <cmath>
+#ifndef OCTAVE_LOCAL_BUFFER
+#define OCTAVE_LOCAL_BUFFER(T,v,n) T v[n]
+#endif
 
 #define CONST const
 #define BANDPASS       1
