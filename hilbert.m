@@ -17,8 +17,10 @@
 ## usage: y = hilbert(x)
 ##
 ## real(y) contains the original signal x (x must be a real-valued)
-## imag(y) contains the hilbert transform of x
-## if x is a matrix, computes the hilbert transform on each row
+## imag(y) contains the hilbert transform of x, which is the same
+## signal with a phase shift of 90 degrees.
+##
+## If x is a matrix, computes the hilbert transform on each row.
 function y = hilbert(x)
   if nargin != 1, usage("y = hilbert(x)"); endif
   if !isreal(x), error("hilbert: requires real input vector"); endif
@@ -32,3 +34,15 @@ function y = hilbert(x)
   if r < n, y(r+1:n,:) = []; endif
   if transpose, y = y.'; endif
 endfunction
+
+%!demo
+%! % notice that the imaginary signal is phase-shifted 90 degrees
+%! t=linspace(0,10,256);
+%! z = hilbert(sin(2*pi*0.5*t));
+%! grid on; plot(t,real(z),';real;',t,imag(z),';imag;');
+
+%!demo
+%! % the magnitude of the hilbert transform eliminates the carrier
+%! t=linspace(0,10,1024);
+%! x=5*cos(0.2*t).*sin(100*t);
+%! grid on; plot(t,x,'g;z;',t,abs(hilbert(x)),'b;|hilbert(z)|;');
