@@ -50,6 +50,8 @@
 ##     - remove all but one loop
 ## 2001-10-30 Paul Kienzle <pkienzle@users.sf.net>
 ##     - fix arg parsing for 3 args
+## 2001-12-05 Paul Kienzle <pkienzle@users.sf.net>
+##     - return lags as vector rather than range
 
 function [R, lags] = xcorr (X, Y, maxlag, scale)
   
@@ -160,7 +162,7 @@ function [R, lags] = xcorr (X, Y, maxlag, scale)
   
   ## return the lag indices if desired
   if nargout == 2
-    lags = -maxlag:maxlag;
+    lags = [-maxlag:maxlag];
   endif
 
 endfunction
