@@ -67,7 +67,7 @@ IIR Filter design
  butter 
  cheby1 
  cheby2 
- nellip ncauer nellipdemo
+ ncauer
  maxflat 
  yulewalker
  buttord 
