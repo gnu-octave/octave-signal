@@ -63,9 +63,13 @@ function zplane(z, p)
     endif
   endif
 
-  eleo = empty_list_elements_ok;          ##<oct
+  try eleo = empty_list_elements_ok;      ##<oct
+  catch eleo = 0; end;                    ##<oct
+  try wele = warn_empty_list_elements;    ##<oct
+  catch wele = 0; end;                    ##<oct
   unwind_protect                          ##<oct
     empty_list_elements_ok = 1;           ##<oct
+    warn_empty_list_elements = 0;         ##<oct
 
     xmin = min([-1; real(z(:)); real(p(:))]);
     xmax = max([ 1; real(z(:)); real(p(:))]);
@@ -93,6 +97,7 @@ function zplane(z, p)
     endif                                 ##<oct
   unwind_protect_cleanup                  ##<oct
     empty_list_elements_ok = eleo;        ##<oct
+    warn_empty_list_elements = wele;      ##<oct
     hold off;                             ##<oct
     grid("off");                          ##<oct
     axis();                               ##<oct
@@ -120,14 +125,19 @@ endfunction
 %! zr=[0.95]; # zr=[];
 %! zs=[];
 %! 
-%! save_empty_list_elements_ok = empty_list_elements_ok;      ##<oct
+%! try save_empty_list_elements_ok = empty_list_elements_ok;     ##<oct
+%! catch save_empty_list_elements_ok = 0; end;                   ##<oct
+%! try save_warn_empty_list_elements = warn_empty_list_elements; ##<oct
+%! catch save_warn_empty_list_elements = 0; end;                 ##<oct
 %! unwind_protect
-%!   empty_list_elements_ok = 1;                              ##<oct
+%!   empty_list_elements_ok = 1;                                 ##<oct
+%!   warn_empty_list_elements = 0;                               ##<oct
 %!   ## system function for target system
 %!   p=[[pr, pr].*exp(1i*pi*[pw, -pw]), ps]';
 %!   z=[[zr, zr].*exp(1i*pi*[zw, -zw]), zs]';
 %! unwind_protect_cleanup
-%!   empty_list_elements_ok = save_empty_list_elements_ok;    ##<oct
+%!   empty_list_elements_ok = save_empty_list_elements_ok;       ##<oct
+%!   warn_empty_list_elements = save_warn_empty_list_elements;   ##<oct
 %! end_unwind_protect
 %! sys_a = real(poly(p));
 %! sys_b = real(poly(z));

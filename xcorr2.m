@@ -65,15 +65,22 @@ function c = xcorr2(a,b,biasflag)
   if strcmp(lower(biasflag), 'biased'),
     c = c / ( min ([ma, mb]) * min ([na, nb]) );
   elseif strcmp(lower(biasflag), 'unbiased'), 
-    eleo = empty_list_elements_ok;
+    try eleo = empty_list_elements_ok;
+    catch eleo = 0;
+    end
+    try wele = warn_empty_list_elements;
+    catch wele = 0;
+    end
     unwind_protect
+      empty_list_elements_ok = 1;
+      warn_empty_list_elements = 0;
       lo = min ([na,nb]); hi = max ([na, nb]);
       row = [ 1:(lo-1), lo*ones(1,hi-lo+1), (lo-1):-1:1 ];
       lo = min ([ma,mb]); hi = max ([ma, mb]);
       col = [ 1:(lo-1), lo*ones(1,hi-lo+1), (lo-1):-1:1 ]';
-      empty_list_elements_ok = 1;
     unwind_protect_cleanup
       empty_list_elements_ok = eleo;
+      warn_empty_list_elements = wele;
     end_unwind_protect
     bias = col*row;
     c = c./bias;

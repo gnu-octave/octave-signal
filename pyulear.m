@@ -55,14 +55,19 @@ endfunction
 %! zr=[0.95]; # zr=[];
 %! zs=[];
 %! 
-%! save_empty_list_elements_ok = empty_list_elements_ok;
+%! try save_empty_list_elements_ok = empty_list_elements_ok;
+%! catch save_empty_list_elements_ok = 0; end;
+%! try save_warn_empty_list_elements = warn_empty_list_elements;
+%! catch save_warn_empty_list_elements = 0; end;
 %! unwind_protect
 %!   empty_list_elements_ok = 1;
+%!   warn_empty_list_elements = 0;
 %!   ## system function for target system
 %!   p=[[pr, pr].*exp(1i*pi*[pw, -pw]), ps];
 %!   z=[[zr, zr].*exp(1i*pi*[zw, -zw]), zs];
 %! unwind_protect_cleanup
 %!   empty_list_elements_ok = save_empty_list_elements_ok;
+%!   warn_empty_list_elements = save_warn_empty_list_elements;
 %! end_unwind_protect
 %! sys_a = real(poly(p));
 %! sys_b = real(poly(z));
