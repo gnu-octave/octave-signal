@@ -36,9 +36,7 @@ function y = rectpuls(t, w)
   if nargin < 2, w = 1; endif
 
   y = zeros(size(t));
-  # XXX FIXME XXX revert to the following when x&[] works
-  # idx = find(t>=-w/2 & t < w/2);
-  idx = find(t>=-w/2); idx = find(idx<w/2);
+  idx = find(t>=-w/2 & t < w/2);
   try dfi = do_fortran_indexing;
   catch dfi = 0;
   end
