@@ -21,18 +21,18 @@
 ##
 ## See pwelch for an explanation of the available parameters.
 
-function [...] = cohere(...)
+function [varargout] = cohere(varargin)
   if nargin < 2
     usage("Cxy=cohere(x,y,...)  [see pwelch for details]"); 
   endif
   if nargout==0, 
-    pwelch('cohere',all_va_args);
+    pwelch('cohere',varargin{:});
   elseif nargout==1
-    Cxy=pwelch('cohere',all_va_args);
-    vr_val(Cxy);
+    Cxy=pwelch('cohere',varargin{:});
+    varargout{1} = Cxy;
   elseif nargout==2
-    [Cxy, w]=pwelch('cohere',all_va_args);
-    vr_val(Cxy);
-    vr_val(w);
+    [Cxy, w]=pwelch('cohere',varargin{:});
+    varargout{1} = Cxy;
+    varargout{2} = w;
   endif
 endfunction

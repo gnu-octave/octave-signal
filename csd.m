@@ -27,23 +27,23 @@
 ##
 ## See also: tfe, cohere
 
-function [...] = csd(...)
+function [varargout] = csd(varargin)
   if nargin < 2
     usage("Pxy=csd(x,y,...)  [see pwelch for details]"); 
   endif
   if nargout==0, 
-    pwelch('csd',all_va_args);
+    pwelch('csd',varargin{:});
   elseif nargout==1
-    Pxy=pwelch('csd',all_va_args);
-    vr_val(Pxy);
+    Pxy=pwelch('csd',varargin{:});
+    varargout{1} = Pxy;
   elseif nargout==2
-    [Pxy, w]=pwelch('csd',all_va_args);
-    vr_val(Pxy);
-    vr_val(w);
+    [Pxy, w]=pwelch('csd',varargin{:});
+    varargout{1} = Pxy;
+    varargout{2} = w;
   else
-    [Pxy, Pci, w]=pwelch('csd',all_va_args);
-    vr_val(Pxx);
-    vr_val(Pci);
-    vr_val(w);
+    [Pxy, Pci, w]=pwelch('csd',varargin{:});
+    varargout{1} = Pxy;
+    varargout{2} = Pci;
+    varargout{3} = w;
   endif
 endfunction

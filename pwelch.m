@@ -63,12 +63,11 @@
 ## TODO:    of the frames.  SpcTools and I do it on the average, 
 ## TODO:    wdkirby@ix.netcom.com (1998-04-29 octave-sources) computes 
 ## TODO:    them frame-by-frame.
-function [...] = pwelch(x, ...)
+function [varargout] = pwelch(x, varargin)
   ## sort out parameters
   if nargin < 1, 
     usage("[Pxx, w] = pwelch(x,nfft,Fs,window,overlap,pc,range,units,trend)");
   endif
-  va_start(); 
 
   ## Determine if we are called as pwelch, csd, cohere or tfe
   if isstr(x)
@@ -88,11 +87,11 @@ function [...] = pwelch(x, ...)
 
   ## Sort out x and y vectors
   if ftype!=1 
-    x=va_arg(); y=va_arg(); 
-    first = 4;
+    x=varargin{1}; y=varargin{2}; 
+    first = 3;
   else
     y=[];
-    first = 2;
+    first = 1;
   endif
   if (columns(x) != 1 && rows(x) != 1) || ...
     (!isempty(y) && columns(y) != 1 && rows(y) != 1)
@@ -108,8 +107,8 @@ function [...] = pwelch(x, ...)
   trend=nfft=Fs=window=overlap=whole=use_dB=[];
   ci=-1; ## need to do stupid things with ci
   pos=0; ## no positional parameters yet interpreted.
-  for i=first:nargin
-    arg = va_arg();
+  for i=first:length(varargin)
+    arg = varargin{i};
     if isstr(arg), 
       arg=tolower(arg); 
       if strcmp(arg, 'squared')
@@ -324,10 +323,10 @@ function [...] = pwelch(x, ...)
     end_unwind_protect
   endif
 	   
-  if nargout>=1, vr_val(P); endif
-  if nargout>=2 && ci>0, vr_val(Pci); endif
-  if nargout>=2 && ci==0, vr_val(f); endif
-  if nargout>=3 && ci>0, vr_val(f); endif
+  if nargout>=1, varargout{1} = P; endif
+  if nargout>=2 && ci>0, varargout{2} = Pci; endif
+  if nargout>=2 && ci==0, varargout{2} = f; endif
+  if nargout>=3 && ci>0, varargout{3} = f; endif
 
 endfunction
 

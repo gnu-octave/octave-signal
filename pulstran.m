@@ -56,8 +56,7 @@
 ## since it works much better with a windowed sinc function, at least
 ## for short samples.
 
-function y = pulstran(t, d, pulse, ...) ##<oct
-##<mat function y = pulstran(t, d, pulse, varargin)
+function y = pulstran(t, d, pulse, varargin)
 
   if nargin<3 || (!isstr(pulse) && nargin>5)
     error("y=pulstran(t,d,'func',...) or y==pulstran(t,d,p,Fs,'interp')");
@@ -73,25 +72,21 @@ function y = pulstran(t, d, pulse, ...) ##<oct
   if isstr(pulse) 
     ## apply function t+d for all d
     for i=1:rows(d)
-      y = y+a(i)*feval(pulse,t-d(i,1),all_va_args); ##<oct
-      ##<mat y = y+a(i)*feval(pulse,t-d(i,1),varargin{:});
+      y = y+a(i)*feval(pulse,t-d(i,1),varargin{:});
     endfor
   else
     ## interpolate each pulse at the specified times
     Fs = 1; method = 'linear';
     if nargin==4
-      arg = va_arg();  ##<oct
-      ##<mat arg=varargin{1};
+      arg=varargin{1};
       if isstr(arg), 
 	method=arg;
       else
 	Fs = arg;
       endif
     elseif nargin==5
-      Fs=va_arg();     ##<oct
-      method=va_arg(); ##<oct
-      ##<mat Fs = varargin{1};
-      ##<mat method = varargin{2};
+      Fs = varargin{1};
+      method = varargin{2};
     endif
     span = (length(pulse)-1)/Fs;
     t_pulse = (0:length(pulse)-1)/Fs;

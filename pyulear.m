@@ -29,7 +29,7 @@
 ## is sampled.  If there are no return values requested, then plot the power
 ## spectrum and don't return anything.
 ##
-function [P, w] = pyulear (x, p, ...)
+function [P, w] = pyulear (x, p, varargin)
   
   if (nargin < 2 || nargin > 6) 
     usage("[P, f] = pyulear(x, p [,nfft [,Fs [,range]]] [, units])");
@@ -37,9 +37,9 @@ function [P, w] = pyulear (x, p, ...)
   
   [a, v] = aryule(x, p);
   if (nargout == 0)
-    __power(sqrt(v), a, all_va_args);
+    __power(sqrt(v), a, varargin{:});
   else
-    [P, w] = __power(sqrt(v), a, all_va_args);
+    [P, w] = __power(sqrt(v), a, varargin{:});
   endif
 
 endfunction

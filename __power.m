@@ -33,7 +33,7 @@
 ## TODO: consider folding this into freqz --- just one more parameter to
 ## TODO:    distinguish between 'linear', 'log', 'logsquared' and 'squared'
 
-function [...] = __power (b, a, ...)
+function [varargou] = __power (b, a, varargin)
   usagestr = "[P w] = __power(b, a [,nfft [,Fs]] [,range] [, units])";
   if (nargin < 2 || nargin > 6) usage(usagestr); endif
 
@@ -43,9 +43,8 @@ function [...] = __power (b, a, ...)
   units = [];
 
   pos = 0;
-  va_start();
-  for i=3:nargin
-    arg = va_arg();
+  for i=1:length(varargin)
+    arg = varargin{i};
     if strcmp(arg, 'squared') || strcmp(arg, 'db')
       units = arg;
     elseif strcmp(arg, 'whole') || strcmp(arg, 'half')
@@ -76,8 +75,8 @@ function [...] = __power (b, a, ...)
   endif
 
   if nargout == 0, plot(w, P, ";;"); endif
-  if nargout >= 1, vr_val(P); endif
-  if nargout >= 2, vr_val(w); endif
+  if nargout >= 1, varargout{1} = P; endif
+  if nargout >= 2, varargout{2} = w; endif
 
 endfunction
 
