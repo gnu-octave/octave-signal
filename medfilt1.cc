@@ -227,3 +227,7 @@ the remaining values.")
   retval(0) = filter;
   return retval;
 }
+
+/*
+%!assert(medfilt1([1, 2, 3, 4, 5], 3), [1.5, 2, 3, 4, 4.5]);
+*/
