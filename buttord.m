@@ -48,8 +48,7 @@ function [n, Wc] = buttord(Wp, Ws, Rp, Rs)
   if length(Wp) != 1 && length(Wp) != 2
     error("buttord: Wp,Ws must have length 1 or 2");
   end
-  if length(Wp) == 2 
-    && (all(Wp>Ws) || all(Ws>Wp) || diff(Wp)<=0 || diff(Ws)<=0)
+  if length(Wp) == 2 && (all(Wp>Ws) || all(Ws>Wp) || diff(Wp)<=0 || diff(Ws)<=0)
     error("buttord: Wp(1)<Ws(1)<Ws(2)<Wp(2) or Ws(1)<Wp(1)<Wp(2)<Ws(2)");
   end
 
