@@ -128,7 +128,7 @@ Window functions
  hanning 
  kaiser 
  triang 
- gaussian
+ gaussian gausswin
  rectangle_lw
  rectangle_sw
  triangle_lw
