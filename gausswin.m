@@ -22,10 +22,10 @@
 ##     w = exp ( -(a*x)^2/2 )
 ##
 ## for x = linspace(-(n-1)/n, (n-1)/n, n)
-function x = gaussian(n, w)
+function x = gausswin(n, w)
 
   if nargin < 1 || nargin > 2
-    usage("x = gaussian(n, w)");
+    usage("x = gausswin(n, w)");
   end
   if nargin == 1, w = 2.5; endif
   x = exp ( -0.5 * ( w/n * [ -(n-1) : 2 : n-1 ]' ) .^ 2 );
