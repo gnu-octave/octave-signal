@@ -49,10 +49,7 @@
 %  	Identification with Application to the Violin, Ph.D. Dissertation, 
 % 	Elec. Eng. Dept., Stanford University, June 1983, page 50; or,
 %
-% http://www-ccrma.stanford.edu/~jos/filters/Fast_Frequency_Domain_Equation_Error_Method.html
-% MUST STILL FIX LOWER LINK
-% http://www-ccrma.stanford.edu/~jos/book2000/Appendix_Filter_Design.html
-
+% http://ccrma.stanford.edu/~jos/filters/FFT_Based_Equation_Error_Method.html
 % written by J.O. Smith, 4-23-1986
 % updated for Octave on 6-11-2000
 % original name: eqnerr2()
