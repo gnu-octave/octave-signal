@@ -48,52 +48,35 @@
 ## TODO:    impulse response rather than relying on fir2.
 ## TODO: Find reference to the requirement that order be even for
 ## TODO:    filters that end high.  Figure out what to do with the
-## TODO:    window in these cases---duplicating the central value
-## TODO:    like I currently do seems very reasonable.
-function b = fir1(n, w, ftype, window, scale)
+## TODO:    window in these cases
+function b = fir1(n, w, varargin)
 
   if nargin < 2 || nargin > 5
     usage("b = fir1(n, w [, type] [, window] [, noscale])");
   endif
   
-  ## interpret arguments
-  if nargin==2
-    ftype=""; window=[]; scale=[];
-  elseif nargin==3
-    window=[]; scale=[];
-    if !isstr(ftype), window=ftype; ftype=""; endif
-  elseif nargin==4
-    scale=[];
-    if isstr(window), scale=window; window=[]; endif
-    if !isstr(ftype), window=ftype; ftype=""; endif
-  endif
+  ## Assign default window, filter type and scale.
+  ## If single band edge, the first band defaults to a pass band to 
+  ## create a lowpass filter.  If multiple band edges, the first band 
+  ## defaults to a stop band so that the two band case defaults to a 
+  ## band pass filter.  Ick.
+  window = []; 
+  scale = 1;
+  ftype = (length(w)==1);       
 
-  ## If single band edge, the first band defaults to a pass band
-  ## to create a lowpass filter.  If multiple band edges, assume
-  ## the first band is a stop band, so that the two band case defaults
-  ## to a band pass filter.  Ick.
-  ftype = tolower(ftype);
-  if isempty(ftype), ftype = length(w)==1;
-  elseif strcmp(ftype, 'low'), ftype = 1;
-  elseif strcmp(ftype, 'high'), ftype = 0;
-  elseif strcmp(ftype, 'pass'), ftype = 0;
-  elseif strcmp(ftype, 'stop'), ftype = 1;
-  elseif strcmp(ftype, 'dc-0'), ftype = 0;
-  elseif strcmp(ftype, 'dc-1'), ftype = 1;
-  elseif isstr(ftype)
-    error(["fir1 invalid filter type ", ftype]);
-  else
-    error("fir1 filter type should be a string");
-  endif
-
-  ## scale the magnitude by default
-  if isempty(scale) || strcmp(scale, 'scale'), scale = 1; 
-  elseif strcmp(scale, 'noscale'), scale=0;
-  else error("fir1 scale must be 'scale' or 'noscale'");
-  endif
-
-  ## use fir2 default filter
-  if isempty(window) && isempty(scale), window = []; endif
+  ## sort arglist, normalize any string
+  for i=1:length(varargin)
+    arg = varargin{i}; 
+    if ischar(arg), arg=tolower(arg);end
+    if isempty(arg) continue; end  # octave bug---can't switch on []
+    switch arg
+      case {'low','stop','dc-1'}, ftype = 1;
+      case {'high','pass','dc-0'}, ftype = 0;
+      case 'scale', scale = 1;
+      case 'noscale', scale = 0;
+      otherwise window = arg;
+    end
+  endfor
 
   ## build response function according to fir2 requirements
   bands = length(w)+1;
@@ -109,12 +92,16 @@ function b = fir1(n, w, ftype, window, scale)
   ## about having a nyquist frequency of zero causing problems.
   if rem(n,2)==1 && m(2*bands)==1, 
     warning("n must be even for highpass and bandstop filters. Incrementing.");
-    n=n+1; 
-    if !isempty(window), 
-      if rows(window) == 1
-      	window = [window(1:n/2), window(n/2:n-1)];
+    n = n+1;
+    if isvector(window) && isreal(window)
+      ## Extend the window using interpolation
+      M = length(window);
+      if M == 1,
+	window = [window; window];
+      elseif M < 4
+	window = interp1(linspace(0,1,M),window,linspace(0,1,M+1),'linear');
       else
-	window = [window(1:n/2); window(n/2:n-1)];
+	window = interp1(linspace(0,1,M),window,linspace(0,1,M+1),'spline');
       endif
     endif
   endif
@@ -143,3 +130,15 @@ endfunction
 %! freqz(fir1(15,[0.2, 0.5], 'stop'));  # note the zero-crossing at 0.1
 %!demo
 %! freqz(fir1(15,[0.2, 0.5], 'stop', 'noscale'));
+
+%!assert(fir1(2, .5, 'low', @hanning, 'scale'), [0 1 0]');
+%!assert(fir1(2, .5, 'low', "hanning", 'scale'), [0 1 0]');
+%!assert(fir1(2, .5, 'low', hanning(3), 'scale'), [0 1 0]');
+
+%!assert(fir1(10,.5,'noscale'), fir1(10,.5,'low','hamming','noscale'));
+%!assert(fir1(10,.5,'high'), fir1(10,.5,'high','hamming','scale'));
+%!assert(fir1(10,.5,'boxcar'), fir1(10,.5,'low','boxcar','scale'));
+%!assert(fir1(10,.5,'hanning','scale'), fir1(10,.5,'scale','hanning','low'));
+%!assert(fir1(10,.5,'haNNing','NOscale'), fir1(10,.5,'noscale','Hanning','LOW'));
+%!assert(fir1(10,.5,'boxcar',[]), fir1(10,.5,'boxcar'));
+
