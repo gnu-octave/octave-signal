@@ -1,0 +1,163 @@
+$SPCTOOLS= in spline directory of Dennis Brown's <a href="ftp://svr-ftp.eng.cam.ac.uk/pub/comp.speech/tools/spctools">SPCtools</a>
+$TFTB= try <a href="http://www-isis.enst.fr/Applications/tftb/iutsn.univ-nantes.fr/auger/tftb.html">Time-Frequency Tool box</a>
+
+
+signal >> Signal processing
+Signals
+ diric 
+ gauspuls 
+ pulstran 
+ tripuls 
+ rectpuls 
+ sawtooth 
+ sinc 
+ square 
+ sinetone sinewave
+ chirp 
+ vco= $TFTB
+ modulate= $TFTB
+ demod= $TFTB
+ strips 
+ specgram 
+ periodogram stft synthesis hurst
+ buffer
+Filtering
+ fftfilt 
+ filtfilt 
+ filtic 
+ latcfilt 
+ sgolayfilt 
+ sosfilt 
+ medfilt1 
+ spencer
+ fractdiff
+Filter analysis
+ freqs 
+ freqspace 
+ freqz freqz_plot
+ grpdelay 
+ impz 
+ zplane 
+Filter conversion
+ ac2poly 
+ poly2ac 
+ ac2rc 
+ rc2ac 
+ poly2rc 
+ rc2poly 
+ convmtx 
+ latc2tf 
+ residuez 
+ sos2ss 
+ sos2tf 
+ sos2zp 
+ ss2sos 
+ ss2tf 
+ ss2zp 
+ tf2latc 
+ tf2sos 
+ tf2ss 
+ tf2zp 
+ zp2sos 
+ zp2ss 
+ zp2tf 
+ polystab 
+IIR Filter design
+ besself 
+ butter 
+ cheby1 
+ cheby2 
+ nellip ncauer nellipdemo
+ maxflat 
+ yulewalker
+ buttord 
+ cheb1ord 
+ cheb2ord 
+ ellipord 
+ besselap 
+ sftrans
+ bilinear 
+ impinvar 
+FIR filter design
+ fir1 
+ fir2 
+ fircls 
+ fircls1 
+ firls 
+ firrcos 
+ intfilt 
+ kaiserord 
+ cremez 
+ remez 
+ remezord 
+ sgolay 
+Transforms
+ czt 
+ dctmtx 
+ dct2 
+ idct2 
+ dct 
+ idct 
+ dftmtx 
+ hilbert 
+ rceps 
+ cceps 
+ icceps 
+Power spectrum analysis
+ pwelch 
+ tfe 
+ cohere 
+ csd 
+ pburg 
+ pcov 
+ pmcov 
+ pmtm 
+ pmusic= $SPCTOOLS
+ pyulear 
+ xcorr
+ xcorr2 
+ xcov 
+ spectral_adf spectral_xdf
+ __power
+Window functions
+ bartlett 
+ blackman 
+ boxcar 
+ chebwin 
+ hamming 
+ hanning 
+ kaiser 
+ triang 
+ gaussian
+System identification
+ arburg 
+ arcov= use <code>ar_covar</code> $SPCTOOLS
+ armcov= use <code>ar_mdcov</code> $SPCTOOLS
+ prony= use <code>ar_prony</code> $SPCTOOLS
+ aryule 
+ invfreqs 
+ invfreqz 
+ levinson  durbinlevinson
+ lpc 
+ rlevinson 
+ stmcb 
+ diffpara
+ arch_rnd arch_fit arch_test
+ arma_rnd autoreg_matrix autocor autocov
+Sample rate change
+ decimate 
+ interp 
+ resample 
+ upfirdn 
+Compatibility
+ buttap= see internals of <code>butter</code>
+ cheb1ap= see internals of <code>cheby1</code>
+ cheb2ap= see internals of <code>cheby2</code>
+ ellipap= see internals of <code>nellip</code>
+ lp2bp= use <code>sftrans</code>
+ lp2bs= use <code>sftrans</code>
+ lp2hp= use <code>sftrans</code>
+ lp2lp= use <code>sftrans</code>
+ ellip= use <code>nellip</code>, but not that it underdesigns the filter
+ yulewalk=use <code>yulewalker</code>
+
