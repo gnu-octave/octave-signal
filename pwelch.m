@@ -186,7 +186,7 @@ function [varargout] = pwelch(x, varargin)
   win_size = length(window);
   if (win_size > nfft)
     nfft = win_size;
-    warning (sprintf("%s fft size adjusted to %d", calledby, n));
+    warning (sprintf("%s fft size adjusted to %d", calledby, nfft));
   end
   step = win_size - overlap;
 
