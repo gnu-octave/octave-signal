@@ -119,9 +119,9 @@ Window functions
  bartlett 
  blackman 
  boxcar 
- chebwin 
+ chebwin flattopwin
  hamming 
- hanning 
+ hanning hann
  kaiser 
  triang 
  gaussian gausswin
