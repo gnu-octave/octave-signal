@@ -53,13 +53,27 @@ function F = sgolay (p, n, m, ts)
     if nargin < 3, m = 0; endif
     if nargin < 4, ts = 1; endif
     if length(m) > 1, error("weight vector unimplemented"); endif
-    k = floor (n/2);
+
+    ## Construct a set of filters from complete causal to completely
+    ## noncausal, one filter per row.  For the bulk of your data you
+    ## will use the central filter, but towards the ends you will need
+    ## a filter that doesn't go beyond the end points.
     F = zeros (n, n);
+    k = floor (n/2);
     for row = 1:k+1
-      A = pinv( ( [(1:n)-row]'*ones(1,p+1) ) .^ ( ones(n,1)*[0:p] ) );
+      ## Construct a matrix of weights Cij = xi ^ j.  The points xi are
+      ## equally spaced on the unit grid, with past points using negative
+      ## values and future points using positive values.
+      C = ( [(1:n)-row]'*ones(1,p+1) ) .^ ( ones(n,1)*[0:p] );
+      ## A = pseudo-inverse (C), so C*A = I; this is constructed from the SVD 
+      A = pinv(C);
+      ## Take the row of the matrix corresponding to the derivative
+      ## you want to compute.
       F(row,:) = A(1+m,:);
     end
+    ## The filters shifted to the right are symmetric with those to the left.
     F(k+2:n,:) = F(k:-1:1,n:-1:1);
+
   endif
   if m > 1, F =  F * ( factorial(m) / (ts^m) ); endif
 endfunction
