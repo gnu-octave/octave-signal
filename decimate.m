@@ -62,7 +62,7 @@ function y = decimate(x, q, n, ftype)
     b = fir1(n, 1/q);
     y=fftfilt(b, x);
   else
-    [b, a] = cheby1(n, 0.05, 1/q);
+    [b, a] = cheby1(n, 0.05, 0.8/q);
     y=filtfilt(b,a,x);
   endif
   y = y(1:q:length(x));
