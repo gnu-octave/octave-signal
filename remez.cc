@@ -32,7 +32,7 @@
  *************************************************************************/
 
 #include <octave/oct.h>
-#include <math.h>
+#include <cmath>
 using namespace std;
 
 #define CONST const

@@ -13,7 +13,7 @@
  *      extend to handle matrix arguments
  */
 
-#include <math.h>
+#include <cmath>
 #include <octave/oct.h>
 #include <octave/lo-ieee.h>
 #include <octave/lo-mappers.h>
