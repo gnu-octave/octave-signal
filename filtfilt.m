@@ -64,9 +64,10 @@ function y = filtfilt(b, a, x)
   if (rows(x) == 1)
     y = filter(b,a,[x, zeros(1,2*max(length(a),length(b)))]);
     y = fliplr(filter(b,a,fliplr(y))); 
+    y = y(1:length(x));
   else
-    y = filter(b,a,[x ; zeros(2*max(length(a),length(b)), 1)]);
+    y = filter(b,a,[x ; zeros(2*max(length(a),length(b)), columns(x))]);
     y = flipud(filter(b,a,flipud(y))); 
+    y = y(1:rows(x),:);
   endif
-  y = y(1:length(x));
 endfunction
