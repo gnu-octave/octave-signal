@@ -74,6 +74,7 @@ function [Zz, Zp, Zg] = butter(n, W, stype)
   ## source: Kuc
   C = 1; # default cutoff frequency
   Sp = C*exp(1i*pi*(2*[1:n] + n - 1)/(2*n));
+  if mod(n,2) == 1, Sp((n+1)/2) = -1; end  # pure real value at exp(i*pi)
   Sz = [];
   Sg = C^n;
 
@@ -83,6 +84,9 @@ function [Zz, Zp, Zg] = butter(n, W, stype)
   ## Use bilinear transform to convert poles to the z plane
   [Zz, Zp, Zg] = bilinear(Sz, Sp, Sg, T);
 
-  if nargout==2, [Zz, Zp] = zp2tf(Zz, Zp, Zg); endif
+  if nargout==2, 
+	Zz = real(Zg*poly(Zz));
+	Zp = real(poly(Zp));
+  endif
 
 endfunction

@@ -85,7 +85,10 @@ Wpw = tan(pi*Wp/T);
 ## Use bilinear transform to convert poles to the z plane
 [Zz, Zp, Zg] = bilinear(Sz, Sp, Sg, T);
 
-if nargout==2, [Zz, Zp] = zp2tf(Zz, Zp, Zg); endif
+if nargout==2,
+	Zz = real(Zg*poly(Zz));
+	Zp = real(poly(Zp));
+endif
 
 endfunction
 
