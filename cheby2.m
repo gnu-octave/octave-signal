@@ -1,4 +1,4 @@
-## Copyright (C) 1999-2001 Paul Kienzle <pkienzle@cs.indiana.edu>
+## Copyright (C) 1999 Paul Kienzle
 ##
 ## This program is free software; you can redistribute it and/or modify
 ## it under the terms of the GNU General Public License as published by
@@ -14,56 +14,86 @@
 ## along with this program; if not, write to the Free Software
 ## Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-## Generate a chebyshev filter with Rp dB of stop band ripple (type II).
+## Generate an Chebyshev type II filter with Rs dB of pass band ripple.
 ## 
-## [b,a] = cheby2(n, Rs, Wc)
-##    low pass filter with stop band cut-off of -Rs dB at pi*Wc radians
+## [b, a] = cheby2(n, Rs, Wc)
+##    low pass filter with cutoff pi*Wc radians
 ##
-## [b,a] = cheby2(n, Rs, Wc, 'high')
-##    high pass filter with stop band cutoff of -Rs dB at pi*Wc radians
+## [b, a] = cheby2(n, Rs, Wc, 'high')
+##    high pass filter with cutoff pi*Wc radians
 ##
-## [b,a] = cheby2(n, Rs, [Wl, Wh])
-##    band pass filter with stop band edges at pi*Wl and pi*Wh radians
+## [b, a] = cheby2(n, Rs, [Wl, Wh])
+##    band pass filter with edges pi*Wl and pi*Wh radians
 ##
-## [b,a] = cheby2(n, Rs, [Wl, Wh], 'stop')
-##    band reject filter with pass band edges at pi*Wl and pi*Wh radians
+## [b, a] = cheby2(n, Rs, [Wl, Wh], 'stop')
+##    band reject filter with edges pi*Wl and pi*Wh radians
 ##
-## [z,p,g] = cheby2(...)
+## [z, p, g] = cheby2(...)
 ##    return filter as zero-pole-gain rather than coefficients of the
 ##    numerator and denominator polynomials.
+##
+## [...] = cheby2(...,'s')
+##     return a Laplace space filter, W can be larger than 1.
+## 
+## [a,b,c,d] = cheby2(...)
+##  return  state-space matrices 
+## 
+## References: 
+##
+## Parks & Burrus (1987). Digital Filter Design. New York:
+## John Wiley & Sons, Inc.
 
-## Author: Paul Kienzle <pkienzle@cs.indiana.edu>
-## 2001-03-09 pkienzle@kienzle.powernet.co.uk
-##     * for odd n, skip zero at infinity for theta==pi/2
+## Author: Paul Kienzle <pkienzle@users.sf.net>
+## Modified: Doug Stewart Feb. 2003
 
-function [Zz, Zp, Zg] = cheby2(n, Rs, W, stype)
+function [a,b,c,d] = cheby2(n, Rs, W, varargin)
 
-  if (nargin>4 || nargin<3) || (nargout>3 || nargout<2)
-    usage ("[b, a] or [z, p, g] = cheby2 (n, Rs, W, [, 'ftype'])");
+  if (nargin>5 || nargin<3) || (nargout>4 || nargout<2)
+    usage ("[b, a] or [z, p, g] or [a,b,c,d]= cheby2 (n, Rs, W, [, 'ftype'][,'s'])");
   end
 
-  stop = nargin==4;
-  if stop && !(strcmp(stype, 'high') || strcmp(stype, 'stop'))
-    error ("cheby2: ftype must be 'high' or 'stop'");
+  ## interpret the input parameters
+  if (!(length(n)==1 && n == round(n) && n > 0))
+    error ("cheby2: filter order n must be a positive integer");
   end
-  
+
+
+  stop = 0;
+  digital = 1;  
+  for i=1:length(varargin)
+    switch varargin{i}
+    case 's', digital = 0;
+    case 'z', digital = 1;
+    case { 'high', 'stop' }, stop = 1;
+    case { 'low',  'pass' }, stop = 0;
+    otherwise,  error ("cheby2: expected [high|stop] or [s|z]");
+    endswitch
+  endfor
+
   [r, c]=size(W);
   if (!(length(W)<=2 && (r==1 || c==1)))
     error ("cheby2: frequency must be given as w0 or [w0, w1]");
-  elseif (!all(W >= 0 & W <= 1))
-    error ("cheby2: critical frequencies must be in (0, 1)");
   elseif (!(length(W)==1 || length(W) == 2))
     error ("cheby2: only one filter band allowed");
   elseif (length(W)==2 && !(W(1) < W(2)))
     error ("cheby2: first band edge must be smaller than second");
   endif
+
+  if ( digital && !all(W >= 0 & W <= 1))
+    error ("cheby2: critical frequencies must be in (0 1)");
+  elseif ( !digital && !all(W >= 0 ))
+    error ("cheby2: critical frequencies must be in (0 inf)");
+  endif
+
   if (Rs < 0)
     error("cheby2: passband ripple must be positive decibels");
   end
 
   ## Prewarp to the band edges to s plane
-  T = 2;       # sampling frequency of 2 Hz
-  Ws = 2/T*tan(pi*W/T);
+  if digital
+    T = 2;       # sampling frequency of 2 Hz
+    W = 2/T*tan(pi*W/T);
+  endif
 
   ## Generate splane poles and zeros for the chebyshev type 2 filter
   ## From: Stearns, SD; David, RA; (1988). Signal Processing Algorithms. 
@@ -76,24 +106,38 @@ function [Zz, Zp, Zg] = cheby2(n, Rs, W, stype)
   beta = cosh(phi)*cos(theta);
   if (rem(n,2))
     ## drop theta==pi/2 since it results in a zero at infinity
-    Sz = 1i*C./cos(theta([1:(n-1)/2, (n+3)/2:n]));
+    zero = 1i*C./cos(theta([1:(n-1)/2, (n+3)/2:n]));
   else
-    Sz = 1i*C./cos(theta);
+   zero = 1i*C./cos(theta);
   endif
-  Sp = C./(alpha.^2+beta.^2).*(alpha-1i*beta);
+  pole = C./(alpha.^2+beta.^2).*(alpha-1i*beta);
 
-  ## compensate for amplitude at s=0
-  Sg = real(prod(Sp)/prod(Sz));
+  ## Compensate for amplitude at s=0
+  ## Because of the vagaries of floating point computations, the
+  ## prod(pole)/prod(zero) sometimes comes out as negative and
+  ## with a small imaginary component even though analytically
+  ## the gain will always be positive, hence the abs(real(...))
+  gain = abs(real(prod(pole)/prod(zero)));
 
   ## splane frequency transform
-  [Sz, Sp, Sg] = sftrans(Sz, Sp, Sg, Ws, stop);
+  [zero, pole, gain] = sftrans(zero, pole, gain, W, stop);
 
   ## Use bilinear transform to convert poles to the z plane
-  [Zz, Zp, Zg] = bilinear(Sz, Sp, Sg, T);
+  if digital
+    [zero, pole, gain] = bilinear(zero, pole, gain, T);
+  endif
 
-  if nargout==2,
-        Zz = real(Zg*poly(Zz));
-        Zp = real(poly(Zp));
+  ## convert to the correct output form
+  if nargout==2, 
+    a = real(gain*poly(zero));
+    b = real(poly(pole));
+  elseif nargout==3,
+    a = zero;
+    b = pole;
+    c = gain;
+  else
+    ## output ss results 
+    [a, b, c, d] = zp2ss (zero, pole, gain);
   endif
 
 endfunction
