@@ -145,4 +145,5 @@ endfunction
 %! % order.  Confirm that the blue filter meets the criteria and
 %! % the red line fails.
 
-%!test error("extend demo to show detail at criteria box corners");
+%!# XXX FIXME XXX extend demo to show detail at criteria box corners
+
