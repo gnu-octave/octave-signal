@@ -31,6 +31,12 @@
 ## [z, p, g] = cheby1(...)
 ##    return filter as zero-pole-gain rather than coefficients of the
 ##    numerator and denominator polynomials.
+##
+## [...] = cheby1(...,'s')
+##     return a Laplace space filter, W can be larger than 1.
+## 
+## [a,b,c,d] = cheby1(...)
+##  return  state-space matrices 
 ## 
 ## References: 
 ##
@@ -38,27 +44,44 @@
 ## John Wiley & Sons, Inc.
 
 ## Author: Paul Kienzle <pkienzle@cs.indiana.edu>
+## Modified: Doug Stewart Feb. 2003
 
-function [Zz, Zp, Zg] = cheby1(n, Rp, W, stype)
+function [a,b,c,d] = cheby1(n, Rp, W, varargin)
 
-  if (nargin>4 || nargin<3) || (nargout>3 || nargout<2)
-    usage ("[b, a] or [z, p, g] = cheby1 (n, Rp, W, [, 'ftype'])");
-  end
+  if (nargin>5 || nargin<3) || (nargout>4 || nargout<2)
+    usage ("[b, a] or [z, p, g] or [a,b,c,d]= cheby1 (n, Rp, W, [, 'ftype'][,'s'])");
+  endif
 
-  stop = nargin==4;
-  if stop && !(strcmp(stype, 'high') || strcmp(stype, 'stop'))
-    error ("cheby1: ftype must be 'high' or 'stop'");
-  end
+  ## interpret the input parameters
+  if (!(length(n)==1 && n == round(n) && n > 0))
+    error ("cheby1: filter order n must be a positive integer");
+  endif
+
+  stop = 0;
+  digital = 1;  
+  for i=1:length(varargin)
+    switch varargin{i}
+    case 's', digital = 0;
+    case 'z', digital = 1;
+    case { 'high', 'stop' }, stop = 1;
+    case { 'low',  'pass' }, stop = 0;
+    otherwise,  error ("cheby1: expected [high|stop] or [s|z]");
+    endswitch
+  endfor
 
   [r, c]=size(W);
   if (!(length(W)<=2 && (r==1 || c==1)))
     error ("cheby1: frequency must be given as w0 or [w0, w1]");
-  elseif (!all(W >= 0 & W <= 1))
-    error ("cheby1: critical frequencies must be in (0, 1)");
   elseif (!(length(W)==1 || length(W) == 2))
     error ("cheby1: only one filter band allowed");
   elseif (length(W)==2 && !(W(1) < W(2)))
     error ("cheby1: first band edge must be smaller than second");
+  endif
+
+  if ( digital && !all(W >= 0 & W <= 1))
+    error ("cheby1: critical frequencies must be in (0 1)");
+  elseif ( !digital && !all(W >= 0 ))
+    error ("cheby1: critical frequencies must be in (0 inf)");
   endif
 
   if (Rp < 0)
@@ -66,34 +89,46 @@ function [Zz, Zp, Zg] = cheby1(n, Rp, W, stype)
   end
 
   ## Prewarp to the band edges to s plane
-  T = 2;       # sampling frequency of 2 Hz
-  Ws = 2/T*tan(pi*W/T);
+  if digital
+    T = 2;       # sampling frequency of 2 Hz
+    W = 2/T*tan(pi*W/T);
+  endif
 
   ## Generate splane poles and zeros for the chebyshev type 1 filter
   C = 1; # default cutoff frequency
   epsilon = sqrt(10^(Rp/10) - 1);
   v0 = asinh(1/epsilon)/n;
-  Sp = exp(1i*pi*[-(n-1):2:(n-1)]/(2*n));
-  Sp = -sinh(v0)*real(Sp) + 1i*cosh(v0)*imag(Sp);
-  Sz = [];
+  pole = exp(1i*pi*[-(n-1):2:(n-1)]/(2*n));
+  pole = -sinh(v0)*real(pole) + 1i*cosh(v0)*imag(pole);
+  zero = [];
 
   ## compensate for amplitude at s=0
-  Sg = prod(-Sp);
+  gain = prod(-pole);
   ## if n is even, the ripple starts low, but if n is odd the ripple
   ## starts high. We must adjust the s=0 amplitude to compensate.
   if (rem(n,2)==0)
-    Sg = Sg/10^(Rp/20);
-  end
+    gain = gain/10^(Rp/20);
+  endif
 
   ## splane frequency transform
-  [Sz, Sp, Sg] = sftrans(Sz, Sp, Sg, Ws, stop);
+  [zero, pole, gain] = sftrans(zero, pole, gain, W, stop);
 
   ## Use bilinear transform to convert poles to the z plane
-  [Zz, Zp, Zg] = bilinear(Sz, Sp, Sg, T);
+  if digital
+    [zero, pole, gain] = bilinear(zero, pole, gain, T);
+  endif
 
-  if nargout==2,
-        Zz = real(Zg*poly(Zz));
-        Zp = real(poly(Zp));
+  ## convert to the correct output form
+  if nargout==2, 
+    a = real(gain*poly(zero));
+    b = real(poly(pole));
+  elseif nargout==3,
+    a = zero;
+    b = pole;
+    c = gain;
+  else
+    ## output ss results 
+    [a, b, c, d] = zp2ss (zero, pole, gain);
   endif
 
 endfunction

@@ -16,12 +16,13 @@
 ## 
 
 ## N-ellip 0.2.1
-##usage: [Zz, Zp, Zg] = ellip(n, Rp, Rs, Wp, stype)
+##usage: [Zz, Zp, Zg] = ellip(n, Rp, Rs, Wp, stype,'s')
 ##
-## Generate an Elliptic or Cauer filter (discrete).
+## Generate an Elliptic or Cauer filter (discrete and contnuious).
 ## 
 ## [b,a] = ellip(n, Rp, Rs, Wp)
-##  low pass filter with order n, cutoff pi*Wp radians, Rp decibels of ripple in the passband and a stopband Rs decibels down.
+##  low pass filter with order n, cutoff pi*Wp radians, Rp decibels 
+##  of ripple in the passband and a stopband Rs decibels down.
 ##
 ## [b,a] = ellip(n, Rp, Rs, Wp, 'high')
 ##  high pass filter with cutoff pi*Wp...
@@ -34,6 +35,13 @@
 ##
 ## [z,p,g] = ellip(...)
 ##  return filter as zero-pole-gain.
+##
+## [...] = ellip(...,'s')
+##     return a Laplace space filter, W can be larger than 1.
+## 
+## [a,b,c,d] = ellip(...)
+##  return  state-space matrices 
+##
 ## References: 
 ##
 ## - Oppenheim, Alan V., Discrete Time Signal Processing, Hardcover, 1999.
@@ -42,53 +50,87 @@
 ## - Kienzle, Paul, functions from Octave-Forge, 1999 (http://octave.sf.net).
 ##
 ## Author: p_neis@yahoo.com.br
-
-function [Zz, Zp, Zg] = ellip(n, Rp, Rs, Wp, stype)
-
-if (nargin>5 || nargin<4) || (nargout>3 || nargout<2)
-	usage ("[b, a] or [z, p, g] = ellip (n, Rp, Rs, Wp, [, 'ftype'])");
-end
-
-## interpret the input parameters
-if (!(length(n)==1 && n == round(n) && n > 0))
-	error ("butter: filter order n must be a positive integer");
-end
-
-stop = nargin==5;
-if stop && !(strcmp(stype, 'high') || strcmp(stype, 'stop'))
-	error ("ellip: ftype must be 'high' or 'stop'");
-end
-
-[rp, cp]=size(Wp);
-
-if ( !( length(Wp)<=2 && (rp==1 || cp==1) ) )
-	error ("ellip: frequency must be given as w0 or [w0, w1]");
-elseif ( !all( Wp >= 0 & Wp <= 1 ) )
-	error ("ellip: critical frequencies must be in (0 1)");
-elseif ( !( length(Wp)==1 || length(Wp) == 2 ) )
-	error ("ellip: only one filter band allowed");
-elseif ( length(Wp)==2 && !( Wp(1) < Wp(2 ) ) )
-	error ("ellip: first band edge must be smaller than second");
-endif
-
-##Prewarp the digital frequencies
-T = 2;       		# sampling frequency of 2 Hz
-Wpw = tan(pi*Wp/T);
+## Modified: Doug Stewart Feb. 2003
 
 
-##Generate s-plane poles, zeros and gain
-[zer, pol, gain] = ncauer(Rp, Rs, n);
+function [a,b,c,d] = ellip(n, Rp, Rs, W, varargin)
 
-## splane frequency transform
-[Sz, Sp, Sg] = sftrans(zer, pol, gain, Wpw, stop);
+  if (nargin>6 || nargin<4) || (nargout>4 || nargout<2)
+    usage ("[b, a] or [z, p, g] or [a,b,c,d] = ellip (n, Rp, Rs, Wp, [, 'ftype'][,'s'])");
+  endif
 
-## Use bilinear transform to convert poles to the z plane
-[Zz, Zp, Zg] = bilinear(Sz, Sp, Sg, T);
+  ## interpret the input parameters
+  if (!(length(n)==1 && n == round(n) && n > 0))
+    error ("ellip: filter order n must be a positive integer");
+  endif
 
-if nargout==2,
-	Zz = real(Zg*poly(Zz));
-	Zp = real(poly(Zp));
-endif
+
+  stop = 0;
+  digital = 1;  
+  for i=1:length(varargin)
+    switch varargin{i}
+    case 's', digital = 0;
+    case 'z', digital = 1;
+    case { 'high', 'stop' }, stop = 1;
+    case { 'low',  'pass' }, stop = 0;
+    otherwise,  error ("ellip: expected [high|stop] or [s|z]");
+    endswitch
+  endfor
+
+  [r, c]=size(W);
+  if (!(length(W)<=2 && (r==1 || c==1)))
+    error ("ellip: frequency must be given as w0 or [w0, w1]");
+  elseif (!(length(W)==1 || length(W) == 2))
+    error ("ellip: only one filter band allowed");
+  elseif (length(W)==2 && !(W(1) < W(2)))
+    error ("ellip: first band edge must be smaller than second");
+  endif
+
+  if ( digital && !all(W >= 0 & W <= 1))
+    error ("ellip: critical frequencies must be in (0 1)");
+  elseif ( !digital && !all(W >= 0 ))
+    error ("ellip: critical frequencies must be in (0 inf)");
+  endif
+
+  if (Rp < 0)
+    error("ellip: passband ripple must be positive decibels");
+  endif
+
+  if (Rs < 0)
+    error("ellip: stopband ripple must be positive decibels");
+  end
+
+
+  ##Prewarp the digital frequencies
+  if digital
+    T = 2;       # sampling frequency of 2 Hz
+    W = tan(pi*W/T);
+  endif
+
+  ##Generate s-plane poles, zeros and gain
+  [zero, pole, gain] = ncauer(Rp, Rs, n);
+
+  ## splane frequency transform
+  [zero, pole, gain] = sftrans(zero, pole, gain, W, stop);
+
+  ## Use bilinear transform to convert poles to the z plane
+  if digital
+    [zero, pole, gain] = bilinear(zero, pole, gain, T);
+  endif
+
+
+  ## convert to the correct output form
+  if nargout==2, 
+    a = real(gain*poly(zero));
+    b = real(poly(pole));
+  elseif nargout==3,
+    a = zero;
+    b = pole;
+    c = gain;
+  else
+    ## output ss results 
+    [a, b, c, d] = zp2ss (zero, pole, gain);
+  endif
 
 endfunction
 
