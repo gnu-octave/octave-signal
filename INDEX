@@ -135,6 +135,7 @@ System identification
  armcov= use <code>ar_mdcov</code> $SPCTOOLS
  prony= use <code>ar_prony</code> $SPCTOOLS
  aryule 
+ invfreq
  invfreqs 
  invfreqz 
  levinson  durbinlevinson
