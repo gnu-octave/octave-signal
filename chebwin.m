@@ -50,6 +50,8 @@
 ##
 ## See also: kaiser
 
+## $Id$
+##
 ## Author:  AHCC <acarezia@uol.com.br>
 ## Description:  Coefficients of the Dolph-Chebyshev window
 
@@ -59,8 +61,8 @@ function w = chebwin (n, at)
     usage ("chebwin (n, at)");
   endif
   
-  if !(is_scalar (n) && (n == round(n)) && (n > 0) && (rem(n,2)))
-    error ("chebwin: n has to be an odd, positive integer");
+  if !(is_scalar (n) && (n == round(n)) && (n > 0))
+    error ("chebwin: n has to be a positive integer");
   endif
   if !(is_scalar (at) && (at == real (at)))
     error ("chebwin: at has to be a real scalar");
@@ -78,10 +80,19 @@ function w = chebwin (n, at)
 				# Chebyshev window (freq. domain)
     p = cheb(n-1, x);
 				# inverse Fourier transform
-    w = real(fft(p));
-    M = (n+1)/2;
-    w = w(1:M)/w(1);
-    w = [w(M:-1:2) w]';
+    if (rem(n,2))
+      w = real(fft(p));
+      M = (n+1)/2;
+      w = w(1:M)/w(1);
+      w = [w(M:-1:2) w]';
+    else
+				# half-sample delay (even order)
+      p = p.*exp(j*pi/n * (0:n-1));
+      w = real(fft(p));
+      M = n/2+1;
+      w = w/w(2);
+      w = [w(M:-1:2) w(2:M)]';
+    endif
   endif  
 end
 
