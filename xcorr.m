@@ -48,6 +48,8 @@
 ##     - fix test for real return value
 ## 2001-02-24 Paul Kienzle
 ##     - remove all but one loop
+## 2001-10-30 Paul Kienzle <pkienzle@users.sf.net>
+##     - fix arg parsing for 3 args
 
 function [R, lags] = xcorr (X, Y, maxlag, scale)
   
@@ -65,7 +67,7 @@ function [R, lags] = xcorr (X, Y, maxlag, scale)
     endif
   elseif nargin==3
     scale=[];
-    if isstr(maxlag), scale=maxlag; scale=[]; endif
+    if isstr(maxlag), scale=maxlag; maxlag=[]; endif
     if is_scalar(Y), maxlag=Y; Y=[]; endif
   endif
 

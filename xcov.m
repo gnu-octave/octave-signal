@@ -34,6 +34,9 @@
 ## Returns the covariance for each lag in the range, plus an 
 ## optional vector of lags.
 
+## 2001-10-30 Paul Kienzle <pkienzle@users.sf.net>
+##     - fix arg parsing for 3 args
+
 function [retval, lags] = xcov (X, Y, maxlag, scale)
 
   if (nargin < 1 || nargin > 4)
@@ -49,7 +52,7 @@ function [retval, lags] = xcov (X, Y, maxlag, scale)
     endif
   elseif nargin==3
     scale=[];
-    if isstr(maxlag), scale=maxlag; scale=[]; endif
+    if isstr(maxlag), scale=maxlag; maxlag=[]; endif
     if is_scalar(Y), maxlag=Y; Y=[]; endif
   endif
 
