@@ -149,14 +149,13 @@ Sample rate change
  resample 
  upfirdn 
 Compatibility
- buttap= use <code>butter(n,1,'s')</code>
- cheb1ap= use <code>cheby1(n,Rp,1,'s')</code>
- cheb2ap= use <code>cheby2(n,Rs,1,'s')</code>
- ellipap= use <code>ellip(n,Rp,Rs,1,'s')</code>
- lp2bp= use <code>sftrans</code>
- lp2bs= use <code>sftrans</code>
- lp2hp= use <code>sftrans</code>
- lp2lp= use <code>sftrans</code>
- ellip= use <code>nellip</code>, but not that it underdesigns the filter
- yulewalk=use <code>yulewalker</code>
+ buttap= use <f>butter</f><code>(n,1,'s')</code>
+ cheb1ap= use <f>cheby1</f><code>(n,Rp,1,'s')</code>
+ cheb2ap= use <f>cheby2</f><code>(n,Rs,1,'s')</code>
+ ellipap= use <f>ellip</f><code>(n,Rp,Rs,1,'s')</code>
+ lp2bp= use <f>sftrans</f>
+ lp2bs= use <f>sftrans</f>
+ lp2hp= use <f>sftrans</f>
+ lp2lp= use <f>sftrans</f>
+ yulewalk=use <f>yulewalker</f>
 
