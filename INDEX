@@ -129,6 +129,10 @@ Window functions
  kaiser 
  triang 
  gaussian
+ rectangle_lw
+ rectangle_sw
+ triangle_lw
+ triangle_sw
 System identification
  arburg 
  arcov= use <code>ar_covar</code> $SPCTOOLS
