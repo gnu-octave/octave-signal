@@ -80,7 +80,7 @@ void CreateDenseGrid(int r, int numtaps, int numband, const double bands[],
                      double Grid[], double D[], double W[],
                      int symmetry, int griddensity)
 {
-   int i, j, k, band, band0_override;
+   int i, j, k, band;
    double delf, lowf, highf, grid0;
 
    delf = 0.5/(griddensity*r);
