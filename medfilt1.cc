@@ -13,10 +13,11 @@
  *      extend to handle matrix arguments
  */
 
+#include <math.h>
 #include <octave/oct.h>
 #include <octave/lo-ieee.h>
 #include <octave/lo-mappers.h>
-#include <math.h>
+#include <octave/pager.h>
 using namespace std;
 
 // The median class holds a sorted data window.  This window is
@@ -55,15 +56,15 @@ public:
 // Print the sorted window, and indicate any hole
 void Median::print()
 {
-  cout << "[ ";
+  octave_stdout << "[ ";
   for (int i=0; i < max; i++)
     {
       if (i == hole)
-	cout << "x ";
+	octave_stdout << "x ";
       else
-	cout << window[i] << " ";
+	octave_stdout << window[i] << " ";
     }
-  cout << " ]";
+  octave_stdout << " ]";
 }
 
     
@@ -74,7 +75,7 @@ void Median::remove(double v)
   // NaN's are not added or removed
   if (xisnan(v)) return;
 
-  //  cout << "Remove " << v << " from "; print();
+  //  octave_stdout << "Remove " << v << " from "; print();
 
   // only one hole allowed, so close pre-existing ones
   close_hole();
@@ -98,10 +99,10 @@ void Median::remove(double v)
       if (fabs(v-window[hole]) < fabs(v-window[hole+1])) break;
     warning ("medfilt1: value %f not found---removing %f instead", 
 	     v, window[hole]);
-    print(); cout << endl;
+    print(); octave_stdout << endl;
   }
 
-  //  cout << " gives "; print(); cout << endl;
+  //  octave_stdout << " gives "; print(); octave_stdout << endl;
 }
 
 // Insert a new value in the sorted window, plugging any holes, or
@@ -113,7 +114,7 @@ void Median::add(double v)
   // NaN's are not added or removed
   if (xisnan(v)) return;
 
-  //  cout << "Add " << v << " to "; print();
+  //  octave_stdout << "Add " << v << " to "; print();
 
   // If no holes, extend the array
   if (hole == max) max++;
@@ -136,7 +137,7 @@ void Median::add(double v)
   // close the hole
   hole = max;
 
-  //  cout << " gives "; print(); cout << endl;
+  //  octave_stdout << " gives "; print(); octave_stdout << endl;
 }
 
 // Compute the median value from the sorted window
