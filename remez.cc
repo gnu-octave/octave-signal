@@ -33,7 +33,6 @@
 
 #include <octave/oct.h>
 #include <cmath>
-using namespace std;
 
 #define CONST const
 #define BANDPASS       1
@@ -780,7 +779,7 @@ Frequency is in the range (0, 1), with 1 being the nyquist frequency")
 
   ColumnVector o_bands(args(1).vector_value());
   int numbands = o_bands.length()/2;
-  double bands[numbands*2];
+  OCTAVE_LOCAL_BUFFER(double, bands, numbands*2);
   if (numbands < 1 || o_bands.length()%2 == 1) {
     error("remez: must have an even number of band edges");
     return retval;
@@ -798,16 +797,16 @@ Frequency is in the range (0, 1), with 1 being the nyquist frequency")
   for(i=0; i < 2*numbands; i++) bands[i] = o_bands(i)/2.0;
 
   ColumnVector o_response(args(2).vector_value());
-  double response[numbands*2];
+  OCTAVE_LOCAL_BUFFER (double, response, numbands*2);
   if (o_response.length() != o_bands.length()) {
     error("remez: must have one response magnitude for each band edge");
     return retval;
   }
   for(i=0; i < 2*numbands; i++) response[i] = o_response(i);
 
-  string stype = string("bandpass");
+  std::string stype = std::string("bandpass");
   int density = 16;
-  double weight[numbands];
+  OCTAVE_LOCAL_BUFFER (double, weight, numbands);
   for (i=0; i < numbands; i++) weight[i] = 1.0;
   if (nargin > 3) {
     if (args(3).is_real_matrix()) {
@@ -865,7 +864,7 @@ Frequency is in the range (0, 1), with 1 being the nyquist frequency")
     return retval;
   }
 
-  double coeff[numtaps+5];
+  OCTAVE_LOCAL_BUFFER (double, coeff, numtaps+5);
   int err = remez(coeff,numtaps,numbands,bands,response,weight,itype,density);
 
   if (err == -1)
