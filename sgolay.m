@@ -72,8 +72,37 @@ function F = sgolay (p, n, m, ts)
       F(row,:) = A(1+m,:);
     end
     ## The filters shifted to the right are symmetric with those to the left.
-    F(k+2:n,:) = F(k:-1:1,n:-1:1);
+    F(k+2:n,:) = (-1)^m*F(k:-1:1,n:-1:1);
 
   endif
-  if m > 1, F =  F * ( factorial(m) / (ts^m) ); endif
+  F =  F * ( prod(1:m) / (ts^m) );
 endfunction
+
+%!test
+%! N=2^12;
+%! t=[0:N-1]'/N;
+%! dt=t(2)-t(1);
+%! w = 2*pi*50;
+%! offset = 0.5; # 50 Hz carrier
+%! # exponential modulation and its derivatives
+%! d = 1+exp(-3*(t-offset));
+%! dd = -3*exp(-3*(t-offset));
+%! d2d = 9*exp(-3*(t-offset));
+%! d3d = -27*exp(-3*(t-offset));
+%! # modulated carrier and its derivatives
+%! x = d.*sin(w*t);
+%! dx = dd.*sin(w*t) + w*d.*cos(w*t);
+%! d2x = (d2d-w^2*d).*sin(w*t) + 2*w*dd.*cos(w*t);
+%! d3x = (d3d-3*w^2*dd).*sin(w*t) + (3*w*d2d-w^3*d).*cos(w*t);
+%!
+%! y = sgolayfilt(x,sgolay(8,41,0,dt));
+%! assert(norm(y-x)/norm(x),0,1e-6);
+%!
+%! y = sgolayfilt(x,sgolay(8,41,1,dt));
+%! assert(norm(y-dx)/norm(dx),0,5e-6);
+%! 
+%! y = sgolayfilt(x,sgolay(8,41,2,dt));
+%! assert(norm(y-d2x)/norm(d2x),0,5e-6);
+%! 
+%! y = sgolayfilt(x,sgolay(8,41,3,dt));
+%! assert(norm(y-d3x)/norm(d3x),0,1e-4);
