@@ -29,7 +29,8 @@
 ##   1983.
 ## - Lamar, Marcus Vinicius, Notas de aula da disciplina TE 456 - Circuitos 
 ##   Analogicos II, UFPR, 2001/2002.
-## Author: p_neis@yahoo.com.br
+
+## Author: Paulo Neis <p_neis@yahoo.com.br>
 
 function [zer, pol, T0]=ncauer(Rp, Rs, n)
 

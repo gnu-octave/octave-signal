@@ -23,7 +23,7 @@
 ##
 ## - Serra, Celso Penteado, Teoria e Projeto de Filtros, Campinas: CARTGRAF, 
 ##   1983.
-## Author: p_neis@yahoo.com.br
+## Author: Paulo Neis <p_neis@yahoo.com.br>
 
 function err=__ellip_ws_min(kl, x)
 #
