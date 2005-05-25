@@ -1,5 +1,5 @@
 /*
- * Copyright 2000 Paul Kienzle, <pkienzle@kienzle.powernet.co.uk>
+ * Copyright 2000 Paul Kienzle <pkienzle@users.sf.net>
  * This source code is freely redistributable and may be used for
  * any purpose.  This copyright notice must be maintained. 
  * Paul Kienzle is not responsible for the consequences of using

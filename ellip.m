@@ -49,7 +49,7 @@
 ##   Digital de Sinais, UFPR, 2001/2002.
 ## - Kienzle, Paul, functions from Octave-Forge, 1999 (http://octave.sf.net).
 ##
-## Author: p_neis@yahoo.com.br
+## Author: Paulo Neis <p_neis@yahoo.com.br>
 ## Modified: Doug Stewart Feb. 2003
 
 

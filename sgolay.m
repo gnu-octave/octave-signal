@@ -38,7 +38,7 @@
 ## See also: sgolayfilt
 
 ## 15 Dec 2004 modified by Pascal Dupuis <Pascal.Dupuis@esat.kuleuven.ac.be>
-## Author: Paul Kienzle <pkienzle@kienzle.powernet.co.uk>
+## Author: Paul Kienzle <pkienzle@users.sf.net>
 ## Based on smooth.m by E. Farhi <manuf@ldv.univ-montp2.fr>
 
 function F = sgolay (p, n, m, ts)

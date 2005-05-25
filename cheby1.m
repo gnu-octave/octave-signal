@@ -1,4 +1,4 @@
-## Copyright (C) 1999 Paul Kienzle <pkienzle@cs.indiana.edu>
+## Copyright (C) 1999 Paul Kienzle
 ##
 ## This program is free software; you can redistribute it and/or modify
 ## it under the terms of the GNU General Public License as published by
@@ -43,7 +43,7 @@
 ## Parks & Burrus (1987). Digital Filter Design. New York:
 ## John Wiley & Sons, Inc.
 
-## Author: Paul Kienzle <pkienzle@cs.indiana.edu>
+## Author: Paul Kienzle <pkienzle@user.sf.net>
 ## Modified: Doug Stewart Feb. 2003
 
 function [a,b,c,d] = cheby1(n, Rp, W, varargin)

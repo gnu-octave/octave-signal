@@ -1,4 +1,4 @@
-## Copyright (C) 1999 Paul Kienzle <pkienzle@cs.indiana.edu>
+## Copyright (C) 1999 Paul Kienzle
 ##
 ## This program is free software; you can redistribute it and/or modify
 ## it under the terms of the GNU General Public License as published by
@@ -44,7 +44,7 @@
 ## Proakis & Manolakis (1992). Digital Signal Processing. New York:
 ## Macmillan Publishing Company.
 
-## Author: Paul Kienzle <pkienzle@cs.indiana.edu>
+## Author: Paul Kienzle <pkienzle@user.sf.net>
 ## Modified by: Doug Stewart <dastew@sympatico.ca> Feb, 2003
 
 function [a, b, c, d] = butter (n, W, varargin)

@@ -30,7 +30,7 @@
 ##
 ## See also: dct, idct, dct2, idct2
 
-## Author: Paul Kienzle <pkienzle@kienzle.powernet.co.uk>
+## Author: Paul Kienzle <pkienzle@users.sf.net>
 ## 2001-02-08
 ##    * initial release
 

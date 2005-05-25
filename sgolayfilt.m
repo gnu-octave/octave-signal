@@ -37,7 +37,7 @@
 ## See also: sgolay
 
 ## 15 Dec 2004 modified by Pascal Dupuis <Pascal.Dupuis@esat.kuleuven.ac.be>
-## Author: Paul Kienzle <pkienzle@kienzle.powernet.co.uk>
+## Author: Paul Kienzle <pkienzle@users.sf.net>
 
 ## TODO: Patch filter.cc so that it accepts matrix arguments
 

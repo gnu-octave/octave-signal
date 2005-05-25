@@ -26,7 +26,7 @@
 ## Note this is just a variation on convolution, with the parameters
 ## reversed and B rotated 180 degrees.
 
-## Author: Paul Kienzle <pkienzle@kienzle.powernet.co.uk>
+## Author: Paul Kienzle <pkienzle@users.sf.net>
 ## 2001-02-08 
 ##    * initial release
 
