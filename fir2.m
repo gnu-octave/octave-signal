@@ -98,18 +98,21 @@ function b = fir2(n, f, m, grid_n, ramp_n, window)
     f(idx) = f(idx) - ramp_n/grid_n/2;
     f(idx+1) = f(idx+1) + ramp_n/grid_n/2;
     
-    ## make sure the grid points stay monotonic
-    idx = find (diff(f) < 0);
-    f(idx) = f(idx+1) = (basef(idx) + basef(idx+1))/2;
-    
+    ## make sure the grid points stay monotonic in [0,1]
+    f(f<0) = 0;
+    f(f>1) = 1;
+    f = unique(f);
+
     ## preserve window shape even though f may have changed
     m = interp1(basef, basem, f);
 
-    % plot(f,m,';ramped;',basef,basem,';original;'); pause;
+    # axis([-.1 1.1 -.1 1.1])
+    # plot(f,m,'-xb;ramped;',basef,basem,'-or;original;'); pause;
   endif
 
   ## interpolate between grid points
   grid = interp1(f,m,linspace(0,1,grid_n+1)');
+  # hold on; plot(linspace(0,1,grid_n+1),grid,'-+g;grid;'); hold off; pause;
 
   ## Transform frequency response into time response and
   ## center the response about n/2, truncating the excess
