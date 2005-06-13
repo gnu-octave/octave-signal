@@ -96,7 +96,7 @@ endfunction
 %! d3x = (d3d-3*w^2*dd).*sin(w*t) + (3*w*d2d-w^3*d).*cos(w*t);
 %!
 %! y = sgolayfilt(x,sgolay(8,41,0,dt));
-%! assert(norm(y-x)/norm(x),0,1e-6);
+%! assert(norm(y-x)/norm(x),0,2e-6);
 %!
 %! y = sgolayfilt(x,sgolay(8,41,1,dt));
 %! assert(norm(y-dx)/norm(dx),0,5e-6);
