@@ -91,17 +91,18 @@ function b = fir2(n, f, m, grid_n, ramp_n, window)
   ## Apply ramps to discontinuities
   if (ramp_n > 0)
     ## remember original frequency points prior to applying ramps
-    basef = f; basem = m;
+    basef = f(:); basem = m(:);
     
-    ## separate identical frequencies
+    ## separate identical frequencies, but keep the midpoint
     idx = find (diff(f) == 0);
     f(idx) = f(idx) - ramp_n/grid_n/2;
     f(idx+1) = f(idx+1) + ramp_n/grid_n/2;
+    f = [f(:);basef(idx)]';
     
     ## make sure the grid points stay monotonic in [0,1]
     f(f<0) = 0;
     f(f>1) = 1;
-    f = unique(f);
+    f = unique([f(:);basef(idx)(:)]');
 
     ## preserve window shape even though f may have changed
     m = interp1(basef, basem, f);
