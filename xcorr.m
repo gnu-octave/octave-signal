@@ -97,7 +97,7 @@ function [R, lags] = xcorr (X, Y, maxlag, scale)
   endif
 
   ## assign defaults to arguments which were not passed in
-  if is_vector(X) 
+  if isvector(X) 
     if isempty(Y), Y=X; endif
     N = max(length(X),length(Y));
   else
@@ -110,10 +110,10 @@ function [R, lags] = xcorr (X, Y, maxlag, scale)
   if is_scalar(X) || ischar(X) || isempty(X)
     error("xcorr: X must be a vector or matrix"); 
   endif
-  if is_scalar(Y) || ischar(Y) || (!isempty(Y) && !is_vector(Y))
+  if is_scalar(Y) || ischar(Y) || (!isempty(Y) && !isvector(Y))
     error("xcorr: Y must be a vector");
   endif
-  if !is_vector(X) && !isempty(Y)
+  if !isvector(X) && !isempty(Y)
     error("xcorr: X must be a vector if Y is specified");
   endif
   if !is_scalar(maxlag) && !isempty(maxlag) 
@@ -122,14 +122,14 @@ function [R, lags] = xcorr (X, Y, maxlag, scale)
   if maxlag>N-1, 
     error("xcorr: maxlag must be less than length(X)"); 
   endif
-  if is_vector(X) && is_vector(Y) && length(X) != length(Y) && \
+  if isvector(X) && isvector(Y) && length(X) != length(Y) && \
 	!strcmp(scale,'none')
     error("xcorr: scale must be 'none' if length(X) != length(Y)")
   endif
     
   P = columns(X);
   M = 2^nextpow2(N + maxlag);
-  if !is_vector(X) 
+  if !isvector(X) 
     ## For matrix X, compute cross-correlation of all columns
     R = zeros(2*maxlag+1,P^2);
 
@@ -179,7 +179,7 @@ function [R, lags] = xcorr (X, Y, maxlag, scale)
   endif
     
   ## correct the shape so that it is the same as the input vector
-  if is_vector(X) && P > 1
+  if isvector(X) && P > 1
     R = R'; 
   endif
   
@@ -191,7 +191,7 @@ function [R, lags] = xcorr (X, Y, maxlag, scale)
 endfunction
 
 ##------------ Use brute force to compute the correlation -------
-##if !is_vector(X) 
+##if !isvector(X) 
 ##  ## For matrix X, compute cross-correlation of all columns
 ##  R = zeros(2*maxlag+1,P^2);
 ##  for i=1:P
