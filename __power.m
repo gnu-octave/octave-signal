@@ -49,7 +49,7 @@ function [varargout] = __power (b, a, varargin)
       units = arg;
     elseif strcmp(arg, 'whole') || strcmp(arg, 'half')
       range = arg;
-    elseif isstr(arg)
+    elseif ischar(arg)
       usage(usagestr);
     elseif pos == 0
       nfft = arg;

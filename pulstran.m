@@ -58,7 +58,7 @@
 
 function y = pulstran(t, d, pulse, varargin)
 
-  if nargin<3 || (!isstr(pulse) && nargin>5)
+  if nargin<3 || (!ischar(pulse) && nargin>5)
     error("y=pulstran(t,d,'func',...) or y==pulstran(t,d,p,Fs,'interp')");
   endif
   y = zeros(size(t));
@@ -69,7 +69,7 @@ function y = pulstran(t, d, pulse, varargin)
   else
     a=ones(rows(d),1);
   endif
-  if isstr(pulse) 
+  if ischar(pulse) 
     ## apply function t+d for all d
     for i=1:rows(d)
       y = y+a(i)*feval(pulse,t-d(i,1),varargin{:});
@@ -79,7 +79,7 @@ function y = pulstran(t, d, pulse, varargin)
     Fs = 1; method = 'linear';
     if nargin==4
       arg=varargin{1};
-      if isstr(arg), 
+      if ischar(arg), 
 	method=arg;
       else
 	Fs = arg;

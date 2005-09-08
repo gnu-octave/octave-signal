@@ -47,7 +47,7 @@ function c = xcorr2(a,b,biasflag)
     b = a; 
     biasflag = 'none'; 
   elseif nargin == 2
-    if isstr (b) 
+    if ischar (b) 
       biasflag = b; 
       b = a;
     else 

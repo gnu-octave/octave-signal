@@ -70,12 +70,12 @@ function [varargout] = pwelch(x, varargin)
   endif
 
   ## Determine if we are called as pwelch, csd, cohere or tfe
-  if isstr(x)
+  if ischar(x)
     calledby = x;
   else
     calledby = "pwelch";
   endif
-  if !isstr(x)
+  if !ischar(x)
     ftype = 1;
   elseif strcmp(x, 'csd')
     ftype = 2;
@@ -108,7 +108,7 @@ function [varargout] = pwelch(x, varargin)
   pos=0; ## no positional parameters yet interpreted.
   for i=first:length(varargin)
     arg = varargin{i};
-    if isstr(arg), 
+    if ischar(arg), 
       arg=tolower(arg); 
       if strcmp(arg, 'squared')
       	use_dB = 0;

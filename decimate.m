@@ -45,7 +45,7 @@ function y = decimate(x, q, n, ftype)
     ftype='iir';
     n=[];
   elseif nargin==3
-    if isstr(n)
+    if ischar(n)
       ftype=n; 
       n=[];
     else 

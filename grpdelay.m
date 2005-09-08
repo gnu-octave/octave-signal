@@ -95,7 +95,7 @@ function [gd,w] = grpdelay(b,a,nfft,whole,Fs)
   if nargin<5
     Fs=1; % return w in radians per sample
     if nargin<4, whole=''; 
-    elseif ~isstr(whole)
+    elseif ~ischar(whole)
       Fs = whole;
       HzFlag=1;
       whole = '';

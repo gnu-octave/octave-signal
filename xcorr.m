@@ -87,12 +87,12 @@ function [R, lags] = xcorr (X, Y, maxlag, scale)
     Y=[]; maxlag=[]; scale=[];
   elseif nargin==2
     maxlag=[]; scale=[];
-    if isstr(Y), scale=Y; Y=[];
+    if ischar(Y), scale=Y; Y=[];
     elseif is_scalar(Y), maxlag=Y; Y=[];
     endif
   elseif nargin==3
     scale=[];
-    if isstr(maxlag), scale=maxlag; maxlag=[]; endif
+    if ischar(maxlag), scale=maxlag; maxlag=[]; endif
     if is_scalar(Y), maxlag=Y; Y=[]; endif
   endif
 
@@ -107,10 +107,10 @@ function [R, lags] = xcorr (X, Y, maxlag, scale)
   if isempty(scale), scale='none'; endif
 
   ## check argument values
-  if is_scalar(X) || isstr(X) || isempty(X)
+  if is_scalar(X) || ischar(X) || isempty(X)
     error("xcorr: X must be a vector or matrix"); 
   endif
-  if is_scalar(Y) || isstr(Y) || (!isempty(Y) && !is_vector(Y))
+  if is_scalar(Y) || ischar(Y) || (!isempty(Y) && !is_vector(Y))
     error("xcorr: Y must be a vector");
   endif
   if !is_vector(X) && !isempty(Y)

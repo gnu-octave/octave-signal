@@ -47,12 +47,12 @@ function [retval, lags] = xcov (X, Y, maxlag, scale)
     Y=[]; maxlag=[]; scale=[];
   elseif nargin==2
     maxlag=[]; scale=[];
-    if isstr(Y), scale=Y; Y=[];
+    if ischar(Y), scale=Y; Y=[];
     elseif is_scalar(Y), maxlag=Y; Y=[];
     endif
   elseif nargin==3
     scale=[];
-    if isstr(maxlag), scale=maxlag; maxlag=[]; endif
+    if ischar(maxlag), scale=maxlag; maxlag=[]; endif
     if is_scalar(Y), maxlag=Y; Y=[]; endif
   endif
 
