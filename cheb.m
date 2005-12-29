@@ -1,4 +1,4 @@
-## Copyright (C) 2002 Andre Carezia
+## Copyright (C) 2002 André Carezia
 ##
 ## This program is free software; you can redistribute it and/or modify
 ## it under the terms of the GNU General Public License as published by
@@ -27,7 +27,7 @@
 ## If x is a vector, the output is a vector of the same size, where each
 ## element is calculated as y(i) = Tn(x(i)).
 
-## Author:  Andre Carezia <acarezia@uol.com.br>
+## Author:  André Carezia <acarezia@uol.com.br>
 ## Description:  Value of the Chebyshev polynomials
 
 function T = cheb (n, x)

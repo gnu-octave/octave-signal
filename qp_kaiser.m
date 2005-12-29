@@ -1,4 +1,4 @@
-## Copyright (C) 2002   Andre Carezia
+## Copyright (C) 2002 André Carezia
 ##
 ## This program is free software; you can redistribute it and/or modify
 ## it under the terms of the GNU General Public License as published by
@@ -32,7 +32,7 @@
 
 ## $Id$
 ##
-## Author: Andre Carezia <andre@carezia.eng.br>
+## Author: André Carezia <andre@carezia.eng.br>
 ## Description:  Coefficients for a PPN filter bank
 
 function h = qp_kaiser (nb, at, linear)
