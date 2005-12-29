@@ -1,4 +1,4 @@
-## Copyright (C) 2002   André Carezia
+## Copyright (C) 2002 Andre Carezia
 ##
 ## This program is free software; you can redistribute it and/or modify
 ## it under the terms of the GNU General Public License as published by
@@ -52,7 +52,7 @@
 
 ## $Id$
 ##
-## Author:  AHCC <acarezia@uol.com.br>
+## Author:  Andre Carezia <acarezia@uol.com.br>
 ## Description:  Coefficients of the Dolph-Chebyshev window
 
 function w = chebwin (n, at)
