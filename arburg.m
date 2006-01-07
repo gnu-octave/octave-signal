@@ -48,13 +48,13 @@
 ##   hold off;
 ##   ## Plot zero-pole graph of target system and matched system
 ##   figure(1); 
-##   axis("square"); gset pointsize 2; grid;
+##   axis("square"); __gnuplot_set__ pointsize 2; grid;
 ##   r = exp(2i*pi*[0:100]/100); plot(real(r), imag(r), "0;;");
 ##   hold on;
 ##   r = roots(sys_a); plot(real(r), imag(r), "1x;system;");
 ##   r = roots(a); plot(real(r), imag(r), "2x;arburg;");
 ##   hold off;
-##   axis("normal"); gset pointsize 1; grid('off');
+##   axis("normal"); __gnuplot_set__ pointsize 1; grid('off');
 ##
 ## See also:
 ## pburg, power, freqz, impz for measuring the characteristics 

@@ -88,27 +88,27 @@ endfunction
 %! [hx, w] = freqz(x,1,[],Fs); hxm = freqz(xm);
 %! figure(1);
 %! subplot(311);
-%!    gset tmargin 3;
-%!    gset lmargin 10;
+%!    __gnuplot_set__ tmargin 3;
+%!    __gnuplot_set__ lmargin 10;
 %!    auplot(x,Fs,'b',';signal;');
 %!    hold on; auplot(xm,Fs,'g',';reconstruction;'); 
 %!    hold off;
 %! subplot(312);
-%!    gset lmargin 10;
-%!    gset bmargin 0;
+%!    __gnuplot_set__ lmargin 10;
+%!    __gnuplot_set__ bmargin 0;
 %!    axis("ticy");
 %!    plot(w,log(abs(hx)), ";magnitude;", ...
 %!         w,log(abs(hxm)),";reconstruction;");
 %! subplot(313);
-%!    gset lmargin 10;
-%!    gset tmargin 0;
-%!    gset bmargin 3;
+%!    __gnuplot_set__ lmargin 10;
+%!    __gnuplot_set__ tmargin 0;
+%!    __gnuplot_set__ bmargin 3;
 %!    axis("on");
 %!    plot(w,unwrap(arg(hx))/(2*pi), ";phase;",...
 %!	   w,unwrap(arg(hxm))/(2*pi),";reconstruction;");
-%!    gset tmargin;
-%!    gset bmargin;
-%!    gset lmargin;
+%!    __gnuplot_set__ tmargin;
+%!    __gnuplot_set__ bmargin;
+%!    __gnuplot_set__ lmargin;
 %! oneplot();
 %! figure(2); auplot(y,Fs,';cepstrum;');
 %! %-------------------------------------------------------------

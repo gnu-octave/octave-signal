@@ -29,7 +29,7 @@ function freqs_plot(w,h)
     title('Frequency response plot by freqs');
     unwind_protect # protect graph state
       subplot(211);
-      gset lmargin 10;
+      __gnuplot_set__ lmargin 10;
       axis("labely");
       ylabel("dB");
       xlabel("");
@@ -55,8 +55,8 @@ function freqs_plot(w,h)
     unwind_protect_cleanup # restore graph state
       grid("off");
       axis("auto","label");
-      gset lmargin;
-      gset tmargin;
+      __gnuplot_set__ lmargin;
+      __gnuplot_set__ tmargin;
       oneplot();
     end_unwind_protect
 

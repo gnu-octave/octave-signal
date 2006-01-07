@@ -98,7 +98,7 @@ function zplane(z, p)
     ymin = ymin - yfluff;
     ymax = ymax + yfluff;
   
-    gset pointsize 2                      ##<oct
+    __gnuplot_set__ pointsize 2                      ##<oct
     axis('equal');                        ##<oct
     axis([xmin, xmax, ymin, ymax]);       ##<oct
     grid('on');                           ##<oct
@@ -116,7 +116,7 @@ function zplane(z, p)
     hold off;                             ##<oct
     grid("off");                          ##<oct
     axis();                               ##<oct
-    gset pointsize 1                      ##<oct
+    __gnuplot_set__ pointsize 1                      ##<oct
     axis('normal');                       ##<oct
   end_unwind_protect                      ##<oct
   ##<mat r = exp(2i*pi*[0:100]/100);
