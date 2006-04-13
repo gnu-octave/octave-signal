@@ -117,10 +117,15 @@ function b = fir2(n, f, m, grid_n, ramp_n, window)
 
   ## Transform frequency response into time response and
   ## center the response about n/2, truncating the excess
-  b = ifft([grid ; grid(grid_n:-1:2)]);
-  mid = (n+1)/2;
-  b = real ([ b([2*grid_n-floor(mid)+1:2*grid_n]) ; b(1:ceil(mid)) ]);
-
+  if (rem(n,2) == 0)
+    b = ifft([grid ; grid(grid_n:-1:2)]);
+    mid = (n+1)/2;
+    b = real ([ b([end-floor(mid)+1:end]) ; b(1:ceil(mid)) ]);
+  else
+    ## Add zeros to interpolate by 2, then pick the odd values below.
+    b = ifft([grid ; zeros(grid_n*2,1) ;grid(grid_n:-1:2)]);
+    b = 2 * real([ b([end-n+1:2:end]) ; b(2:2:(n+1))]);
+  endif
   ## Multiplication in the time domain is convolution in frequency,
   ## so multiply by our window now to smooth the frequency response.
   if rows(window) > 1
