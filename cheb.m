@@ -35,7 +35,7 @@ function T = cheb (n, x)
     usage ("cheb (n, x)");
   endif
   
-  if !(is_scalar (n) && (n == round(n)) && (n >= 0))
+  if !(isscalar (n) && (n == round(n)) && (n >= 0))
     error ("cheb: n has to be a positive integer");
   endif
 

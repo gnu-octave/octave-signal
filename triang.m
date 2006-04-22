@@ -30,7 +30,7 @@ function w = triang(n)
   if (nargin != 1) 
     usage("w = triang(n)"); 
   endif
-  if (!is_scalar(n) || n != fix (n) || n < 1)
+  if (!isscalar(n) || n != fix (n) || n < 1)
     error("triang(n): n has to be an integer > 0"); 
   endif
   w = 1 - abs ([-(n-1):2:(n-1)]' / (n+rem(n,2)));

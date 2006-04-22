@@ -48,12 +48,12 @@ function [retval, lags] = xcov (X, Y, maxlag, scale)
   elseif nargin==2
     maxlag=[]; scale=[];
     if ischar(Y), scale=Y; Y=[];
-    elseif is_scalar(Y), maxlag=Y; Y=[];
+    elseif isscalar(Y), maxlag=Y; Y=[];
     endif
   elseif nargin==3
     scale=[];
     if ischar(maxlag), scale=maxlag; maxlag=[]; endif
-    if is_scalar(Y), maxlag=Y; Y=[]; endif
+    if isscalar(Y), maxlag=Y; Y=[]; endif
   endif
 
   ## XXX FIXME XXX --- should let center(Y) deal with []

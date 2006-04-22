@@ -61,10 +61,10 @@ function w = chebwin (n, at)
     usage ("chebwin (n, at)");
   endif
   
-  if !(is_scalar (n) && (n == round(n)) && (n > 0))
+  if !(isscalar (n) && (n == round(n)) && (n > 0))
     error ("chebwin: n has to be a positive integer");
   endif
-  if !(is_scalar (at) && (at == real (at)))
+  if !(isscalar (at) && (at == real (at)))
     error ("chebwin: at has to be a real scalar");
   endif
   

@@ -24,7 +24,7 @@ function w = boxcar (n)
     usage ("w = boxcar(n)");
   endif
   
-  if !is_scalar(n) || n != floor(n) || n <= 0
+  if !isscalar(n) || n != floor(n) || n <= 0
     error ("boxcar:  n must be an integer > 0");
   endif
 

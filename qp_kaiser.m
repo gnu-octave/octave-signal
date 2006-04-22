@@ -45,11 +45,11 @@ function h = qp_kaiser (nb, at, linear)
     linear = 0;
   endif
 
-  if !(is_scalar (nb) && (nb == round(nb)) && (nb >= 0))
+  if !(isscalar (nb) && (nb == round(nb)) && (nb >= 0))
     error ("qp_kaiser: nb has to be a positive integer");
   endif
 
-  if !(is_scalar (at) && (at == real (at)))
+  if !(isscalar (at) && (at == real (at)))
     error ("qp_kaiser: at has to be a real constant");
   endif
 

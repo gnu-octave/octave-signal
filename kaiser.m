@@ -45,10 +45,10 @@ function w = kaiser (n, beta)
     usage ("kaiser (n, beta)");
   endif
   
-  if !(is_scalar (n) && (n == round (n)) && (n > 0))
+  if !(isscalar (n) && (n == round (n)) && (n > 0))
     error ("kaiser:  n has to be a positive integer");
   endif
-  if !(is_scalar (beta) && (beta == real (beta)))
+  if !(isscalar (beta) && (beta == real (beta)))
     error ("kaiser:  beta has to be a real scalar");
   endif
   
