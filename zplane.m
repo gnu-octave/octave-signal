@@ -83,9 +83,12 @@ function zplane(z, p)
   catch eleo = 0; end;                    ##<oct
   try wele = warn_empty_list_elements;    ##<oct
   catch wele = 0; end;                    ##<oct
+  try ar = automatic_replot;
+  catch ar = 1; end
   unwind_protect                          ##<oct
     empty_list_elements_ok = 1;           ##<oct
     warn_empty_list_elements = 0;         ##<oct
+    automatic_replot = 0;
 
     xmin = min([-1; real(z(:)); real(p(:))]);
     xmax = max([ 1; real(z(:)); real(p(:))]);
@@ -109,7 +112,8 @@ function zplane(z, p)
     text();
     plot_with_labels(z, "o");
     plot_with_labels(p, "x");
-      
+    replot;
+
   unwind_protect_cleanup                  ##<oct
     empty_list_elements_ok = eleo;        ##<oct
     warn_empty_list_elements = wele;      ##<oct
@@ -118,6 +122,7 @@ function zplane(z, p)
     axis();                               ##<oct
     __gnuplot_set__ pointsize 1                      ##<oct
     axis('normal');                       ##<oct
+    automatic_replot = ar;
   end_unwind_protect                      ##<oct
   ##<mat r = exp(2i*pi*[0:100]/100);
   ##<mat plot(real(r), imag(r),'k'); hold on;
