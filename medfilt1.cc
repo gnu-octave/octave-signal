@@ -170,7 +170,7 @@ the remaining values.")
   int nargin = args.length();
   if (nargin < 1 || nargin > 3) 
     {
-      print_usage ("medfilt1");
+      print_usage ();
       return retval;
     }
 

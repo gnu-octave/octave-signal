@@ -775,7 +775,7 @@ Frequency is in the range (0, 1), with 1 being the nyquist frequency")
 
   int nargin = args.length();
   if (nargin < 3 || nargin > 6) {
-    print_usage("remez");
+    print_usage ();
     return retval;
   }
 
