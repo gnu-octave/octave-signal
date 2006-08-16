@@ -40,7 +40,7 @@
 ##   [a, v] = arburg(x, order);
 ##   ## Plot magnitude response of signal and matched system
 ##   figure(0);
-##   mag = abs(fft(x))/sqrt(n);
+##   mag = abs(fft(x)) / sqrt(n);
 ##   [h, w] = freqz(sqrt(v), a, [], 2);
 ##   semilogy(2*[0:n/2-1]/n,mag(1:(n/2)),'1;spectrum;');
 ##   hold on;
@@ -77,7 +77,7 @@ function [a, v, k] = arburg (x, p)
 
   k = zeros(1,p);
   n = length(x);
-  v = sumsq(x);
+  v = sumsq(x) / n;
 
   ## f and b are the forward and backward error sequences
   f = x(2:n);
