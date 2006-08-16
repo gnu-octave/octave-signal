@@ -16,7 +16,7 @@
 
 ## usage:  [P, w] = __power (b, a, [, nfft [, Fs]] [, range] [, units])
 ## 
-## Plot the power spectrum of the given filter.
+## Plot the power spectrum of the given ARMA model.
 ##
 ## b, a: filter coefficients (b=numerator, a=denominator)
 ## nfft is number of points at which to sample the power spectrum
@@ -40,6 +40,7 @@ function [varargout] = __power (b, a, varargin)
   nfft = [];
   Fs = [];
   range = [];
+  range_fact = 1.0;
   units = [];
 
   pos = 0;
@@ -47,8 +48,12 @@ function [varargout] = __power (b, a, varargin)
     arg = varargin{i};
     if strcmp(arg, 'squared') || strcmp(arg, 'db')
       units = arg;
-    elseif strcmp(arg, 'whole') || strcmp(arg, 'half')
+    elseif strcmp(arg, 'whole')
       range = arg;
+      range_fact = 1.0;
+    elseif strcmp(arg, 'half')
+      range = arg;
+      range_fact = 2.0;
     elseif ischar(arg)
       usage(usagestr);
     elseif pos == 0
@@ -64,17 +69,21 @@ function [varargout] = __power (b, a, varargin)
   
   if isempty(nfft); nfft = 256; endif
   if isempty(Fs); Fs = 2; endif
-  if isempty(range) range = 'half'; endif
+  if isempty(range)
+    range = 'half';
+    range_fact = 2.0;
+    endif
   
   [P, w] = freqz(b, a, nfft, range, Fs);
 
-  if strcmp(units, 'squared') 
-    P = abs(P).^2;
-  else
-    P = 20.0*log10(abs(P));
+  P = (range_fact/Fs)*(P.*conj(P));
+  if nargout == 0,
+    if strcmp(units, 'squared')
+      plot(w, P, ";;");
+    else
+      plot(w, 10.0*log10(abs(P)), ";;");
+    endif
   endif
-
-  if nargout == 0, plot(w, P, ";;"); endif
   if nargout >= 1, varargout{1} = P; endif
   if nargout >= 2, varargout{2} = w; endif
 
