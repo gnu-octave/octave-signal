@@ -143,7 +143,7 @@ function [varargout] = pwelch(x, varargin)
       ci = arg;
       pos++;
     else
-      usage(usagestr);
+      error ("pwelch: Too many numerical arguments defined");
     endif
   endfor
 
