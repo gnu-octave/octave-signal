@@ -14,8 +14,10 @@
 ## along with this program; if not, write to the Free Software
 ## Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-## usage: [Pxx, w] = pwelch(x,n,Fs,window,overlap,ci,range,units,trend)
-##        [Pxx, Pci, w] = pwelch(x,n,Fs,window,overlap,ci,range,units,trend)
+
+## -*- texinfo -*-
+## @deftypefn {Function File} {[@var{Pxx}, @var{w}] =} pwelch (@var{x}, @var{n}, @var{Fs}, @var{window}, @var{overlap}, @var{ci}, @var{range}, @var{units}, @var{trend})
+## @deftypefnx {Function File} {[@var{Pxx}, @var{Pci}, @var{w}] =} pwelch(@dots{})
 ##
 ## Estimate power spectrum of a stationary signal. This chops the signal
 ## into overlapping slices, windows each slice and applies a Fourier
@@ -23,26 +25,46 @@
 ## magnitudes of these slices are then averaged to produce the estimate Pxx.
 ## The confidence interval around the estimate is returned in Pci.
 ##
-## x: vector of samples
-## n: size of fourier transform window, or [] for default=256
-## Fs: sample rate, or [] for default=2 Hz
-## window: shape of the fourier transform window, or [] for default=hanning(n)
-##    Note: window length can be specified instead, in which case
-##    window=hanning(length)
-## overlap: overlap with previous window, or [] for default=length(window)/2
-## ci: confidence interval, or [] for default=0.95
-##    ci must be between 0 and 1; if ci is not passed, or if it is
-##    passed as 0, then no confidence intervals will be computed.
-## range: 'whole',  or [] for default='half'
-##    show all frequencies, or just half of the frequencies
-## units: 'squared', or [] for default='db'
-##    show results as magnitude squared or as log magnitude squared
-## trend: 'mean', 'linear', or [] for default='none'
-##    remove trends from the data slices before computing spectral estimates
+## The input arguments are:
 ##
-## Example
+## @table @asis
+## @item @var{x}
+## vector of samples
+## @item @var{n} 
+## size of fourier transform window, or [] for default=256
+## @item @var{Fs} 
+## sample rate, or [] for default=2 Hz
+## @item @var{window} 
+## shape of the fourier transform window, or [] for default=hanning(n).
+## Note: window length can be specified instead, in which case
+## window=hanning(length)
+## @item @var{overlap}
+## overlap with previous window, or [] for default=length(window)/2
+## @item @var{ci}
+## confidence interval, or [] for default=0.95
+## @var{ci} must be between 0 and 1; if @var{ci} is not passed, or if it is
+## passed as 0, then no confidence intervals will be computed.
+## @var{range} 
+## The range of the spectrum calculation, can be either 'whole' or 'half'
+## (default 'half')
+## @item @var{units}   
+## show results as magnitude squared or as log magnitude squared. The valid
+## values can either be 'squared or 'db' (default 'db')
+## @item @var{trend}
+## remove trends from the data slices before computing spectral estimates. The
+## valid values can either be 'mean', 'linear' or 'none' (default 'none')
+## @end table
+##
+## Note that the string arguments @var{range}, @var{units} and @var{trend}
+## can be entered in any order. An example of the use of @code{pwelch} is
+##
+## @example
+## @group
 ##    [b,a] = cheby1(4,3,[0.2, 0.4]);     ## define noise colour
 ##    pwelch(filter(b,a,randn(2^12,1))); ## estimate noise colour
+## @end group
+## @end example
+## @end deftypefn
 
 ## 2001-04-02 Paul Kienzle
 ##    * return nfft/2+1 elements rather than nfft/2 for even nfft.
