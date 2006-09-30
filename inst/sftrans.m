@@ -117,7 +117,13 @@ function [Sz, Sp, Sg] = sftrans(Sz, Sp, Sg, W, stop)
 ## S -> C --------   gain: -x                   gain: -1/x
 ##        S^2+FhFl   b=C/x (Fh-Fl)/2            b=C/x (Fh-Fl)/2
 ## ----------------  -------------------------  ------------------------
-      Sg = Sg * real(prod(-Sz)/prod(-Sp));
+      if (isempty(Sz))
+	Sg = Sg * real (1./ prod(-Sp));
+      elseif (isempty(Sp))
+	Sg = Sg * real(prod(-Sz));
+      else
+	Sg = Sg * real(prod(-Sz)/prod(-Sp));
+      endif
       b = (C*(Fh-Fl)/2)./Sp;
       Sp = [b+sqrt(b.^2-Fh*Fl), b-sqrt(b.^2-Fh*Fl)];
       extend = [sqrt(-Fh*Fl), -sqrt(-Fh*Fl)];
@@ -158,7 +164,13 @@ function [Sz, Sp, Sg] = sftrans(Sz, Sp, Sg, W, stop)
 ## S -> C Fc/S       pole: 0                    zero: 0
 ##                   gain: -x                   gain: -1/x
 ## ----------------  -------------------------  ------------------------
-      Sg = Sg * real(prod(-Sz)/prod(-Sp));
+      if (isempty(Sz))
+	Sg = Sg * real (1./ prod(-Sp));
+      elseif (isempty(Sp))
+	Sg = Sg * real(prod(-Sz));
+      else
+	Sg = Sg * real(prod(-Sz)/prod(-Sp));
+      endif
       Sp = C * Fc ./ Sp;
       if isempty(Sz)
 	Sz = zeros(1,p);
