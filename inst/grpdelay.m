@@ -92,37 +92,38 @@ function [gd,w] = grpdelay(b,a,nfft,whole,Fs)
     usage("[g, w]=grpdelay(b [, a [, n [, 'whole' [, Fs]]]])");
   end
   HzFlag=0;
-  if nargin<5
-    Fs=1; % return w in radians per sample
-    if nargin<4, whole=''; 
-    elseif ~ischar(whole)
-      Fs = whole;
-      HzFlag=1;
-      whole = '';
-    end
-    if nargin<3, nfft=512; end
-    if nargin<2, a=1; end
-  else
-    HzFlag=1;
-  end
   if length(nfft)>1
-    if nargin>3  % grpdelay(B,A,F,Fs)
+    if nargin>4
+      print_usage();
+    elseif nargin>3  % grpdelay(B,A,F,Fs)
       Fs = whole;
       HzFlag=1;
     else % grpdelay(B,A,W)
       Fs = 1;
     end
+    Fs
     w = 2*pi*nfft/Fs;
     nfft = length(w);
+  else
+    if nargin<5
+      Fs=1; % return w in radians per sample
+      if nargin<4, whole=''; 
+      elseif ~ischar(whole)
+	Fs = whole;
+	HzFlag=1;
+	whole = '';
+      end
+      if nargin<3, nfft=512; end
+      if nargin<2, a=1; end
+    else
+      HzFlag=1;
+    end
+
+    if isempty(nfft), nfft = 512; end
+    if ~strcmp(whole,'whole'), nfft = 2*nfft; end
+    w = Fs*[0:nfft-1]/nfft;
   end
-  if isempty(nfft), nfft = 512; end
-    
-  % Debug output:
-  % b,a,nfft,whole,Fs,HzFlag
 
-  if ~strcmp(whole,'whole'), nfft = 2*nfft; end
-
-  w = Fs*[0:nfft-1]/nfft;
   if ~HzFlag, w = w * 2*pi; end
 
   oa = length(a)-1;             % order of a(z)
