@@ -46,6 +46,7 @@ Filter conversion
  convmtx 
  latc2tf 
  residuez 
+ residued
  sos2ss 
  sos2tf 
  sos2zp 
@@ -77,6 +78,7 @@ IIR Filter design
  sftrans
  bilinear 
  impinvar 
+ ellipdemo
 FIR filter design
  fir1 
  fir2 
@@ -90,6 +92,7 @@ FIR filter design
  remez 
  remezord 
  sgolay 
+ qp_kaiser
 Transforms
  czt 
  dctmtx 
@@ -102,6 +105,7 @@ Transforms
  rceps 
  cceps 
  icceps 
+ cplxreal
 Power spectrum analysis
  pwelch 
  tfe 
