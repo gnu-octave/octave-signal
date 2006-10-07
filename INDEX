@@ -10,29 +10,22 @@ Signals
  tripuls 
  rectpuls 
  sawtooth 
- sinc 
  square 
- sinetone sinewave
  chirp 
  vco modulate demod= $TFTB
  strips 
  specgram 
- periodogram stft synthesis hurst
  buffer
 Filtering
- fftfilt 
  filtfilt 
  filtic 
  latcfilt 
  sgolayfilt 
  sosfilt 
  medfilt1 
- spencer
- fractdiff
 Filter analysis
  freqs freqs_plot
  freqspace 
- freqz freqz_plot
  grpdelay 
  impz 
  zplane 
@@ -51,15 +44,9 @@ Filter conversion
  sos2tf 
  sos2zp 
  ss2sos 
- ss2tf 
- ss2zp 
  tf2latc 
  tf2sos 
- tf2ss 
- tf2zp 
  zp2sos 
- zp2ss 
- zp2tf 
  polystab 
 IIR Filter design
  besself 
@@ -69,7 +56,6 @@ IIR Filter design
  ellip
  ncauer
  maxflat 
- yulewalker
  buttord 
  cheb1ord 
  cheb2ord 
@@ -117,22 +103,14 @@ Power spectrum analysis
  xcorr
  xcorr2 
  xcov 
- spectral_adf spectral_xdf
  __power
 Window functions
- bartlett 
- blackman 
  boxcar 
  chebwin flattopwin
- hamming 
- hanning hann
+ hann
  kaiser 
  triang 
  gaussian gausswin
- rectangle_lw
- rectangle_sw
- triangle_lw
- triangle_sw
 System identification
  arburg 
  arcov= use <code>ar_covar</code> $SPCTOOLS
@@ -142,13 +120,10 @@ System identification
  invfreq
  invfreqs 
  invfreqz 
- levinson  durbinlevinson
+ levinson
  lpc 
  rlevinson 
  stmcb 
- diffpara
- arch_rnd arch_fit arch_test
- arma_rnd autoreg_matrix autocor autocov
 Sample rate change
  decimate 
  interp 
