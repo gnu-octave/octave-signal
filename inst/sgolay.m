@@ -102,7 +102,7 @@ endfunction
 %! assert(norm(y-dx)/norm(dx),0,5e-6);
 %! 
 %! y = sgolayfilt(x,sgolay(8,41,2,dt));
-%! assert(norm(y-d2x)/norm(d2x),0,5e-6);
+%! assert(norm(y-d2x)/norm(d2x),0,1e-5);
 %! 
 %! y = sgolayfilt(x,sgolay(8,41,3,dt));
 %! assert(norm(y-d3x)/norm(d3x),0,1e-4);
