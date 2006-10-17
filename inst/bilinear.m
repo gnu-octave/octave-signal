@@ -32,13 +32,14 @@
 ##
 ## The following table summarizes the transformation:
 ##
-## Transform         Zero at x                  Pole at x
-## ----------------  -------------------------  ------------------------
-## Bilinear          zero: (2+xT)/(2-xT)        pole: (2+xT)/(2-xT)
-##      2 z-1        pole: -1                   zero: -1
-## S -> - ---        gain: (2-xT)/T             gain: (2-xT)/T
-##      T z+1
-## ----------------  -------------------------  ------------------------
+## +---------------+-----------------------+----------------------+
+## | Transform     | Zero at x             | Pole at x            |
+## |    H(S)       |   H(S) = S-x          |    H(S)=1/(S-x)      |
+## +---------------+-----------------------+----------------------+
+## |       2 z-1   | zero: (2+xT)/(2-xT)   | zero: -1             |
+## |  S -> - ---   | pole: -1              | pole: (2+xT)/(2-xT)  |
+## |       T z+1   | gain: (2-xT)/T        | gain: (2-xT)/T       |
+## +---------------+-----------------------+----------------------+
 ##
 ## With tedious algebra, you can derive the above formulae yourself by
 ## substituting the transform for S into H(S)=S-x for a zero at x or
