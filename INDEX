@@ -95,8 +95,12 @@ Transforms
 Power spectrum analysis
  pwelch 
  tfe 
+ tfestimate 
  cohere 
  csd 
+ ar_psd
+ cpsd
+ mscohere
  pburg 
  pcov pmcov pmtm pmusic= $SPCTOOLS
  pyulear 
