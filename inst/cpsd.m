@@ -15,21 +15,20 @@
 %% Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 %% Usage:
-%%   [Pxx,freq] = csd(x,y,Nfft,Fs,window,overlap,range,plot_type,detrend)
+%%   [Pxx,freq] = cpsd(x,y,Nfft,Fs,window,overlap,range,plot_type,detrend)
 %%
 %%     Estimate cross power spectrum of data "x" and "y" by the Welch (1967)
-%%     periodogram/FFT method.  Compatible with Matlab R11 csd and earlier.
+%%     periodogram/FFT method.
 %%     See "help pwelch" for description of arguments, hints and references
-%%     --- especially hint (7) for Matlab R11 defaults.
-%%
+%%     Global variable "_pwelch_compatibility" provides Matlab compatibility.
 %%
 
 
-function [varargout] = csd(varargin)
+function [varargout] = cpsd(varargin)
 %%
 %% Check fixed argument
   if ( nargin<2 )
-    error( 'csd: Need at least 2 args. Use help csd.\n', 1 );
+    error( 'cpsd: Need at least 2 args. Use help cpsd.\n', 1 );
   end
   nvarargin = length(varargin);
   %% remove any pwelch RESULT args and add 'cross'
@@ -43,7 +42,6 @@ function [varargout] = csd(varargin)
   end
   varargin{nvarargin+1} = 'cross';
   %%
-  saved_compatib = pwelch('R11-');
   if ( nargout==0 )
     pwelch(varargin{:});
   elseif ( nargout==1 )
@@ -54,5 +52,4 @@ function [varargout] = csd(varargin)
     varargout{1} = Pxx;
     varargout{2} = f;
   end
-  pwelch(saved_compatib);
 end

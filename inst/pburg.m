@@ -1,97 +1,150 @@
-## Copyright (C) 1999 Paul Kienzle
-##
-## This program is free software; you can redistribute it and/or modify
-## it under the terms of the GNU General Public License as published by
-## the Free Software Foundation; either version 2 of the License, or
-## (at your option) any later version.
-##
-## This program is distributed in the hope that it will be useful,
-## but WITHOUT ANY WARRANTY; without even the implied warranty of
-## MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-## GNU General Public License for more details.
-##
-## You should have received a copy of the GNU General Public License
-## along with this program; if not, write to the Free Software
-## Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+%% Copyright (C) 2006 Peter V. Lanspeary
+%%
+%% This program is free software; you can redistribute it and/or
+%% modify it under the terms of the GNU General Public License
+%% as published by the Free Software Foundation; either version 2,
+%% or (at your option) any later version.
+%%
+%% This program is distributed in the hope that it will be useful,
+%% but WITHOUT ANY WARRANTY; without even the implied warranty of
+%% MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+%% GNU General Public License for more details.
+%%
+%% You should have received a copy of the GNU General Public License
+%% along with this program; if not, write to the Free Software Foundation,
+%% Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-## usage:  [P, f] = pburg (x, p [, nfft [, Fs [, range]]] [, units])
-## 
-## Fits x with an AR (p)-model with Burg's method, and computes
-## the power spectrum.
-##
-## x = signal to estimate
-## nfft is number of points at which to sample the power spectrum
-## Fs is the sampling frequency of x
-## range is 'half' or 'whole'
-## units is  'squared' for magnitude squared, or 'db' for decibels (default)
-##
-## Returns P, the magnitude vector, and f, the frequencies at which it
-## is sampled.  If there are no return values requested, then plot the power
-## spectrum and don't return anything.
-##
-function [P, w] = pburg (x, p, varargin)
-  
-  if (nargin < 2 || nargin > 6) 
-    usage("[P, f] = pburg(x, p [,nfft [,Fs [,range]]] [, units])");
-  endif
-  
-  [a, v] = arburg(x, p);
-  if (nargout == 0)
-    __power(sqrt(v), a, varargin{:});
-  else
-    [P, w] = __power(sqrt(v), a, varargin{:});
-  endif
+%% usage:
+%%    [psd,f_out] = pburg(x,poles,freq,Fs,range,method,plot_type,criterion)
+%%
+%% Calculate Burg maximum-entropy power spectral density.
+%% The functions "arburg" and "ar_psd" do all the work.
+%% See "help arburg" and "help ar_psd" for further details.
+%%
+%% ARGUMENTS:
+%%     All but the first two arguments are optional and may be empty.
+%%   x       %% [vector] sampled data
+%%
+%%   poles   %% [integer scalar] required number of poles of the AR model
+%%
+%%   freq    %% [real vector] frequencies at which power spectral density
+%%           %%               is calculated
+%%           %% [integer scalar] number of uniformly distributed frequency
+%%           %%          values at which spectral density is calculated.
+%%           %%          [default=256]
+%%
+%%   Fs      %% [real scalar] sampling frequency (Hertz) [default=1]
+%%
+%%
+%% CONTROL-STRING ARGUMENTS -- each of these arguments is a character string.
+%%   Control-string arguments can be in any order after the other arguments.
+%%
+%%
+%%   range   %% 'half',  'onesided' : frequency range of the spectrum is
+%%           %%       from zero up to but not including sample_f/2.  Power
+%%           %%       from negative frequencies is added to the positive
+%%           %%       side of the spectrum.
+%%           %% 'whole', 'twosided' : frequency range of the spectrum is
+%%           %%       -sample_f/2 to sample_f/2, with negative frequencies
+%%           %%       stored in "wrap around" order after the positive
+%%           %%       frequencies; e.g. frequencies for a 10-point 'twosided'
+%%           %%       spectrum are 0 0.1 0.2 0.3 0.4 0.5 -0.4 -0.3 -0.2 -0.1
+%%           %% 'shift', 'centerdc' : same as 'whole' but with the first half
+%%           %%       of the spectrum swapped with second half to put the
+%%           %%       zero-frequency value in the middle. (See "help
+%%           %%       fftshift". If "freq" is vector, 'shift' is ignored.
+%%           %% If model coefficients "ar_coeffs" are real, the default
+%%           %% range is 'half', otherwise default range is 'whole'.
+%%
+%%   method  %% 'fft':  use FFT to calculate power spectral density.
+%%           %% 'poly': calculate spectral density as a polynomial of 1/z
+%%           %% N.B. this argument is ignored if the "freq" argument is a
+%%           %%      vector.  The default is 'poly' unless the "freq"
+%%           %%      argument is an integer power of 2.
+%%   
+%% plot_type %% 'plot', 'semilogx', 'semilogy', 'loglog', 'squared' or 'db':
+%%           %% specifies the type of plot.  The default is 'plot', which
+%%           %% means linear-linear axes. 'squared' is the same as 'plot'.
+%%           %% 'dB' plots "10*log10(psd)".  This argument is ignored and a
+%%           %% spectrum is not plotted if the caller requires a returned
+%%           %% value.
+%%
+%% criterion %% [optional string arg]  model-selection criterion.  Limits
+%%           %%       the number of poles so that spurious poles are not 
+%%           %%       added when the whitened data has no more information
+%%           %%       in it (see Kay & Marple, 1981). Recognised values are
+%%           %%  'AKICc' -- approximate corrected Kullback information
+%%           %%             criterion (recommended),
+%%           %%   'KIC'  -- Kullback information criterion
+%%           %%   'AICc' -- corrected Akaike information criterion
+%%           %%   'AIC'  -- Akaike information criterion
+%%           %%   'FPE'  -- final prediction error" criterion
+%%           %% The default is to NOT use a model-selection criterion
+%%
+%% RETURNED VALUES:
+%%     If return values are not required by the caller, the spectrum
+%%     is plotted and nothing is returned.
+%%   psd       %% [real vector] power-spectral density estimate 
+%%   f_out     %% [real vector] frequency values 
+%%
+%% HINTS
+%%   This function is a wrapper for arburg and ar_psd.
+%%   See "help arburg", "help ar_psd".
 
-endfunction
+function [psd,f_out]=pburg(x,poles,varargin)
+  %%
+  if ( nargin<2 )
+    error( 'pburg: need at least 2 args. Use "help pburg"\n', 1);
+  end
+  nvarargin=length(varargin);
+  criterion=[];
+  %%
+  %% Search for a "criterion" arg. If found, remove it
+  %% from "varargin" list and feed it to arburg instead.
+  for iarg = 1: nvarargin
+    arrgh = varargin{iarg};
+    if ( ischar(arrgh) && ( strcmp(arrgh,'AKICc') ||...
+         strcmp(arrgh,'KIC') || strcmp(arrgh,'AICc') ||...
+         strcmp(arrgh,'AIC') || strcmp(arrgh,'FPE') ) )
+      criterion=arrgh;
+      if ( nvarargin>1 )
+        varargin{iarg}= [];
+      else
+        varargin={};
+        end
+      end
+    end
+  %%
+  [ar_coeffs,residual]=arburg(x,poles,criterion);
+  if ( nargout==0 )
+    ar_psd(ar_coeffs,residual,varargin{:});
+  elseif ( nargout==1 )
+    psd = ar_psd(ar_coeffs,residual,varargin{:});
+  elseif ( nargout>=2 )
+    [psd,f_out] = ar_psd(ar_coeffs,residual,varargin{:});
+  end
+end
+
 
 %!demo
-%! ## construct target system:
-%! ##   symmetric zero-pole pairs at r*exp(iw),r*exp(-iw)
-%! ##   zero-pole singletons at s
-%! pw=[0.2, 0.4, 0.45, 0.95];   #pw = [0.4];
-%! pr=[0.98, 0.98, 0.98, 0.96]; #pr = [0.85];
-%! ps=[];
-%! zw=[0.3];  # zw=[];
-%! zr=[0.95]; # zr=[];
-%! zs=[];
-%! 
-%! try save_empty_list_elements_ok = empty_list_elements_ok;
-%! catch save_empty_list_elements_ok = 0; end;
-%! try save_warn_empty_list_elements = warn_empty_list_elements;
-%! catch save_warn_empty_list_elements = 0; end;
-%! unwind_protect
-%!   empty_list_elements_ok = 1;
-%!   warn_empty_list_elements = 0;
-%!   ## system function for target system
-%!   p=[[pr, pr].*exp(1i*pi*[pw, -pw]), ps];
-%!   z=[[zr, zr].*exp(1i*pi*[zw, -zw]), zs];
-%! unwind_protect_cleanup
-%!   empty_list_elements_ok = save_empty_list_elements_ok;
-%!   warn_empty_list_elements = save_warn_empty_list_elements;
-%! end_unwind_protect
-%! sys_a = real(poly(p));
-%! sys_b = real(poly(z));
-%! order = length(p)+length(z);
-%!
-%! ## simulation
-%! n=512;
-%! var=0.05;  #var=0;
-%! s = [1; sqrt(var)*randn(n-1,1)]; var=(1+var*(n-1))/n;
-%! x = filter(sys_b,sys_a,s); % AR system output
-%!
-%! ## test
-%! subplot(211);
-%! title("magnitude squared spectral estimate (pburg)");
-%! p = abs(fft(x)).^2;
-%! plot(linspace(0,1,n/2),p(1:n/2),';FFT spectrum;');
-%! hold on; pburg(x, order, 'squared'); hold off;
-%!
-%! subplot(212);
-%! title("log-magnitude-squared spectral estimate (pburg)");
-%! p = 20*log10(abs(fft(x)));
-%! plot(linspace(0,1,n/2),p(1:n/2),';FFT spectrum;');
-%! hold on; pburg(x, order); hold off;
-%!
-%! oneplot();
-%! %------------------------------------------------
-%! % Confirm that the power spectrum matches the FFT
+%! fflush(stdout);
+%! rand('seed',2038014164);
+%! a = [ 1.0 -1.6216505 1.1102795 -0.4621741 0.2075552 -0.018756746 ];
+%! signal = detrend(filter(0.70181,a,rand(1,16384)));
+%! % frequency shift by modulating with exp(j.omega.t) 
+%! skewed = signal.*exp(2*pi*i*2/25*[1:16384]);
+%! Fs = 25;
+%! hold on
+%! pburg(signal,3,[],Fs);
+%! input('Onesided 3-pole spectrum. Press ENTER', 's' );
+%! pburg(signal,4,[],Fs,'whole');
+%! input('Twosided 4-pole spectrum of same data. Press ENTER', 's' );
+%! pburg(signal,5,128,Fs,'shift', 'semilogy');
+%! input('Twosided, centred zero-frequency, 5-pole. Press ENTER', 's' );
+%! pburg(skewed,7,128,Fs,'AKICc','shift','semilogy');
+%! input('Complex data, AKICc chooses no. of poles. Press ENTER', 's' );
+%! user_freq=[-0.2:0.02:0.2]*Fs;
+%! pburg(skewed,7,user_freq,Fs,'AKICc','semilogy');
+%! input('User-specified frequency values. Press ENTER', 's' );
+%! hold off
+%! clearplot
