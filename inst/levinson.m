@@ -43,31 +43,53 @@
 ## TODO: What is the difference between aryule, levinson, 
 ## TODO:    ac2poly, ac2ar, lpc, etc.?
   
+## Changes (Peter Lanspeary, 6 Nov 2006):
+##  Add input sanitising;
+##  avoid using ' (conjugate transpose) to force a column vector;
+##  take direct solution from Kay & Marple Eqn (2.39), code is now same
+##        as the theory;
+##  take Durbin-Levinson recursion from Kay & Marple Eqns (2.42-2.46),
+##        now works for complex data, code is now same as the theory;
+##  force real variance (get rid of imaginary part due to rounding error);
+##
+## REFERENCE
+## [1] Steven M. Kay and Stanley Lawrence Marple Jr.:
+##   "Spectrum analysis -- a modern perspective",
+##   Proceedings of the IEEE, Vol 69, pp 1380-1419, Nov., 1981
+
 function [a, v, ref] = levinson (acf, p)
-  
-  if( columns (acf) > 1 ) acf=acf'; endif
+if ( nargin<1 )
+  error( 'usage: [a,v,ref]=levinson(acf,p)\n', 1);
+elseif( ~isvector(acf) || length(acf)<2 )
+  error( 'levinson: arg 1 (acf) must be vector of length >1\n', 1);
+elseif ( nargin>1 && ( ~isscalar(p) || fix(p)~=p || p>length(acf)-2 ) )
+  error( 'aryule: arg 2 (p) must be integer >0 and <length(acf)-1\n', 1);
+else
   if (nargin == 1) p = length(acf) - 1; endif
+  if( columns(acf)>1 ) acf=acf(:); endif      # force a column vector
 
   if nargout < 3 && p < 100
     ## direct solution [O(p^3), but no loops so slightly faster for small p]
+    ##   Kay & Marple Eqn (2.39)
     R = toeplitz(acf(1:p), conj(acf(1:p)));
     a = R \ -acf(2:p+1);
-    a = [ 1, a' ];
-    v = sum(a'.*acf(1:p+1));
+    a = [ 1, a.' ];
+    v = real( a*conj(acf(1:p+1)) );
   else
     ## durbin-levinson [O(p^2), so significantly faster for large p]
-    ref = zeros (1, p);
-    g = acf(2) / acf(1);
+    ##   Kay & Marple Eqns (2.42-2.46)
+    ref = zeros(p,1);
+    g = -acf(2)/acf(1);
     a = [ g ];
-    v = ( 1 - g^2 ) * acf(1);
+    v = real( ( 1 - g*conj(g)) * acf(1) );
     ref(1) = g;
     for t = 2 : p
-      g = (acf(t+1) - a * acf(2:t)) / v;
-      a = [ g,  a-g*a(t-1:-1:1) ];
-      v = v * ( 1 - g^2 ) ;
+      g = -(acf(t+1) + a * acf(t:-1:2)) / v;
+      a = [ a+g*conj(a(t-1:-1:1)), g ];
+      v = v * ( 1 - real(g*conj(g)) ) ;
       ref(t) = g;
     endfor
-    a = [1, -a(p:-1:1)];
+    a = [1, a];
   endif
-    
+endif    
 endfunction
