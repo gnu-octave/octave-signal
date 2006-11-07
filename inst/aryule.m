@@ -24,12 +24,11 @@
 ## k: reflection coeffients for use in lattice filter 
 ##
 ## The power spectrum of the resulting filter can be plotted with
-## pyulear(x, p), or you can plot it directly with power(sqrt(v), a).
+## pyulear(x, p), or you can plot it directly with ar_psd(a,v,...).
 ##
 ## See also:
-## pyulear, power, freqz, impz for measuring the characteristics 
-##    of the resulting
-## arburg for alternative spectral estimators
+## pyulear, power, freqz, impz -- for observing characteristics of the model
+## arburg -- for alternative spectral estimators
 ##
 ## Example: Use example from arburg, but substitute aryule for arburg.
 ##
@@ -38,20 +37,31 @@
 ## lacking a lattice filter processor, I haven't tested that the lattice
 ## filter coefficients are reasonable.
 
+## Changes (Peter Lanspeary, 6 Nov 2006):
+##  Add input checking;
+##  'biased' arg for xcorr fixes scaling problem;
+##  force real zero-lag autocorrelation - prevents warning from toeplitz;
+##  returns 'a' only if nargout==0 (rather than returning a, v, k).
 
 function [a, v, k] = aryule (x, p)
-
-  if (nargin != 2) usage("[a, v, k] = aryule(x,p)"); end
-
-  c = xcorr(x, p+1, 'none');
-  c(1:p+1) = [];
-  if nargout == 1
+if ( nargin~=2 )
+  error( 'usage: [a,v,k] = aryule(x,p)\n', 1);
+elseif ( ~isvector(x) || length(x)<3 )
+  error( 'aryule: arg 1 (x) must be vector of length >2\n', 1);
+elseif ( ~isscalar(p) || fix(p)~=p || p > length(x)-2 )
+  error( 'aryule: arg 2 (p) must be an integer >0 and <length(x)-1\n', 1);
+else
+  c = xcorr(x, p+1, 'biased');
+  c(1:p+1) = [];     # remove negative autocorrelation lags
+  c(1) = real(c(1)); # levinson/toeplitz requires exactly c(1)==conj(c(1))
+  if nargout <= 1
     a = levinson(c, p);
   elseif nargout == 2
     [a, v] = levinson(c, p);
   else
     [a, v, k] = levinson(c, p);
   endif
+endif
 endfunction
 
 %!demo
