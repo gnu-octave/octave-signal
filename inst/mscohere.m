@@ -20,7 +20,6 @@
 %%     Estimate (mean square) coherence of signals "x" and "y".
 %%     Use the Welch (1967) periodogram/FFT method.
 %%     See "help pwelch" for description of arguments, hints and references
-%%     Global variable "_pwelch_compatibility" provides Matlab compatibility.
 %%
 
 
@@ -28,7 +27,7 @@ function [varargout] = mscohere(varargin)
 %%
 %% Check fixed argument
   if ( nargin<2 )
-    error( 'mscohere: Need at least 2 args. Use help mscohere\n', 1 );
+    error( 'mscohere: Need at least 2 args. Use help mscohere' );
   end
   nvarargin = length(varargin);
   %% remove any pwelch RESULT args and add 'cross'

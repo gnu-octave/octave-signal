@@ -105,18 +105,18 @@ function [varargout] = arburg( x, poles, criterion )
 %%
 %% Check arguments
 if ( nargin < 2 )
-  error( 'arburg(x,poles): Need at least 2 args.\n', 1 );
+  error( 'arburg(x,poles): Need at least 2 args.' );
 elseif ( ~isvector(x) || length(x) < 3 )
-  error( 'arburg: arg 1 (x) must be vector of length >2.\n', 1 );
+  error( 'arburg: arg 1 (x) must be vector of length >2.' );
 elseif ( ~isscalar(poles) || ~isreal(poles) || fix(poles)~=poles || poles<=0.5)
-  error( 'arburg: arg 2 (poles) must be positive integer.\n', 1 );
+  error( 'arburg: arg 2 (poles) must be positive integer.' );
 elseif ( poles >= length(x)-2 )
   %% lattice-filter algorithm requires "poles<length(x)"
   %% AKICc and AICc require "length(x)-poles-2">0
-  error( 'arburg: arg 2 (poles) must be less than length(x)-2.\n', 1 );
+  error( 'arburg: arg 2 (poles) must be less than length(x)-2.' );
 elseif ( nargin>2 && ~isempty(criterion) && ...
          (~ischar(criterion) || size(criterion,1)~=1 ) )
-  error( 'arburg: arg 3 (criterion) must be string.\n', 1 );
+  error( 'arburg: arg 3 (criterion) must be string.' );
 else
   %%
   %%  Set the model-selection-criterion flags.
@@ -128,7 +128,7 @@ else
     use_inf_crit = is_corrected || isa_KIC || strcmp(criterion,'AIC');
     use_FPE = strcmp(criterion,'FPE');
     if ( ~use_inf_crit && ~use_FPE )
-      error( 'arburg: value of arg 3 (criterion) not recognised\n', 1 );
+      error( 'arburg: value of arg 3 (criterion) not recognised' );
     end
   else
     use_inf_crit = 0;

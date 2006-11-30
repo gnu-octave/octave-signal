@@ -20,7 +20,6 @@
 %%     Estimate cross power spectrum of data "x" and "y" by the Welch (1967)
 %%     periodogram/FFT method.
 %%     See "help pwelch" for description of arguments, hints and references
-%%     Global variable "_pwelch_compatibility" provides Matlab compatibility.
 %%
 
 
@@ -28,7 +27,7 @@ function [varargout] = cpsd(varargin)
 %%
 %% Check fixed argument
   if ( nargin<2 )
-    error( 'cpsd: Need at least 2 args. Use help cpsd.\n', 1 );
+    error( 'cpsd: Need at least 2 args. Use help cpsd.' );
   end
   nvarargin = length(varargin);
   %% remove any pwelch RESULT args and add 'cross'

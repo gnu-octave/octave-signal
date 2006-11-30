@@ -29,7 +29,7 @@
 function [varargout] = cohere(varargin)
 %%
   if ( nargin<2 )
-    error( 'cohere: Need at least 2 args. Use help cohere.\n', 1 );
+    error( 'cohere: Need at least 2 args. Use help cohere.' );
   end
   nvarargin = length(varargin);
   %% remove any pwelch RESULT args and add 'trans'

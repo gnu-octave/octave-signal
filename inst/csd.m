@@ -29,7 +29,7 @@ function [varargout] = csd(varargin)
 %%
 %% Check fixed argument
   if ( nargin<2 )
-    error( 'csd: Need at least 2 args. Use help csd.\n', 1 );
+    error( 'csd: Need at least 2 args. Use help csd.' );
   end
   nvarargin = length(varargin);
   %% remove any pwelch RESULT args and add 'cross'

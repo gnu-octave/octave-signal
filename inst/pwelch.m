@@ -277,7 +277,7 @@ if ( isempty(compatib) || compatib<=0 || compatib>4 )
   compatib = 1;
 end
 if ( nargin <= 0 )
-  error( 'pwelch: Need at least 1 arg. Use "help pwelch".\n', 1 );
+  error( 'pwelch: Need at least 1 arg. Use "help pwelch".' );
 elseif ( nargin==1 && (ischar(x) || isempty(x)) )
   varargout{1} = compat_str{compatib};
   if ( isempty(x) ) % native
@@ -289,13 +289,13 @@ elseif ( nargin==1 && (ischar(x) || isempty(x)) )
   elseif ( strcmp(x,'psd') )
     compatib = 4;
   else
-    error( 'pwelch: compatibility arg must be empty, R11-, R12+ or psd\n', 1);
+    error( 'pwelch: compatibility arg must be empty, R11-, R12+ or psd' );
   end
   %% return
 %%
 %% Check fixed argument
 elseif ( isempty(x) || ~isvector(x) )
-  error( 'pwelch: arg 1 (x) must be vector.\n', 1 );
+  error( 'pwelch: arg 1 (x) must be vector.' );
 else
   %%  force x to be COLUMN vector
   if ( size(x,1)==1 )
@@ -315,7 +315,7 @@ else
       %% OK. Need "y". Grab it from 2nd arg.
       arg = varargin{1};
       if ( nargin<2 || isempty(arg) || ~isvector(arg) || length(arg)~=x_len )
-        error( 'pwelch: arg 2 (y) must be vector, same length as x.\n', 1 );
+        error( 'pwelch: arg 2 (y) must be vector, same length as x.' );
       end
       %% force  COLUMN vector
       y = varargin{1}(:);
@@ -425,14 +425,14 @@ else
           do_ypower = n_results;
         end
       else
-        error( 'pwelch: string arg %d illegal value: %s\n', iarg+1, arg ); 
+        error( 'pwelch: string arg %d illegal value: %s', iarg+1, arg ); 
       end
       %% end of processing string args
       %%
     elseif ( end_numeric_args )
       if ( ~isempty(arg) )
         %% found non-string arg after a string arg ... oops
-        error( 'pwelch: control arg must be string\n', 1 );
+        error( 'pwelch: control arg must be string' );
       end
     %%
     %% first 4 optional arguments are numeric -- in fixed order
@@ -443,7 +443,7 @@ else
       if ( isempty(arg) )
         Fs = 1;
       elseif ( ~isscalar(arg) || ~isreal(arg) || arg<0 )
-        error( 'pwelch: arg %d (Fs) must be real scalar >0\n', iarg+1 );
+        error( 'pwelch: arg %d (Fs) must be real scalar >0', iarg+1 );
       else
         Fs = arg;
       end
@@ -454,7 +454,7 @@ else
       if ( isempty(arg) )
         conf = 0.95;
       elseif ( ~isscalar(arg) || ~isreal(arg) || arg < 0.0 || arg >= 1.0 )
-        error( 'pwelch: arg %d (conf) must be real scalar, >=0, <1\n',iarg+1 );
+        error( 'pwelch: arg %d (conf) must be real scalar, >=0, <1',iarg+1 );
       else
         conf = arg;
       end
@@ -476,11 +476,11 @@ else
         is_win = 0;
       end
       if ( ~is_win )
-        error( 'pwelch: arg %d (window) must be scalar or vector\n', iarg+1 );
+        error( 'pwelch: arg %d (window) must be scalar or vector', iarg+1 );
       elseif ( is_win==1 && ( ~isreal(arg) || fix(arg)~=arg || arg<=3 ) )
-        error( 'pwelch: arg %d (window) must be integer >3\n', iarg+1 );
+        error( 'pwelch: arg %d (window) must be integer >3', iarg+1 );
       elseif ( is_win>1 && ( ~isreal(arg) || any(arg<0) ) )
-        error( 'pwelch: arg %d (window) vector must be real and >=0\n',iarg+1);
+        error( 'pwelch: arg %d (window) vector must be real and >=0',iarg+1);
       end
       window = arg;
       is_sloppy = 0;
@@ -488,7 +488,7 @@ else
     %% -- "overlap" arg -- segment overlap
     elseif ( iarg == arg_posn(2) )
       if (~isscalar(arg) || ~isreal(arg) || arg<0 || arg>max_overlap )
-        error( 'pwelch: arg %d (overlap) must be real from 0 to %f\n', ...
+        error( 'pwelch: arg %d (overlap) must be real from 0 to %f', ...
                iarg+1, max_overlap );
       end
       overlap = arg;
@@ -496,7 +496,7 @@ else
     %% -- "Nfft" arg -- FFT length
     elseif ( iarg == arg_posn(3) )
       if ( ~isscalar(arg) || ~isreal(arg) || fix(arg)~=arg || arg<0 )
-        error( 'pwelch: arg %d (Nfft) must be integer >=0\n', iarg+1 );
+        error( 'pwelch: arg %d (Nfft) must be integer >=0', iarg+1 );
       end
       Nfft = arg;
     %%
@@ -505,8 +505,7 @@ else
     end
   end
   if ( conf>0 && (n_results && ~do_power ) )
-   error('pwelch: can give confidence interval for x power spectrum only\n',...
-           1 );
+   error('pwelch: can give confidence interval for x power spectrum only' );
     end
   %%
   %% end DECODE AND CHECK OPTIONAL ARGUMENTS.
@@ -644,7 +643,7 @@ else
   if ( isempty(overlap) )
     overlap = fix(seg_len /2);
   elseif ( overlap >= seg_len )
-    error( 'pwelch: arg (overlap=%d) too big. Must be <length(window)=%d\n',...
+    error( 'pwelch: arg (overlap=%d) too big. Must be <length(window)=%d',...
            overlap, seg_len );
   end
   %%

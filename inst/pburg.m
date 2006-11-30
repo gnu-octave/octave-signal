@@ -94,7 +94,7 @@
 function [psd,f_out]=pburg(x,poles,varargin)
   %%
   if ( nargin<2 )
-    error( 'pburg: need at least 2 args. Use "help pburg"\n', 1);
+    error( 'pburg: need at least 2 args. Use "help pburg"' );
   end
   nvarargin=length(varargin);
   criterion=[];

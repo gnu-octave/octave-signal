@@ -45,11 +45,11 @@
 
 function [a, v, k] = aryule (x, p)
 if ( nargin~=2 )
-  error( 'usage: [a,v,k] = aryule(x,p)\n', 1);
+  error( 'usage: [a,v,k] = aryule(x,p)' );
 elseif ( ~isvector(x) || length(x)<3 )
-  error( 'aryule: arg 1 (x) must be vector of length >2\n', 1);
+  error( 'aryule: arg 1 (x) must be vector of length >2' );
 elseif ( ~isscalar(p) || fix(p)~=p || p > length(x)-2 )
-  error( 'aryule: arg 2 (p) must be an integer >0 and <length(x)-1\n', 1);
+  error( 'aryule: arg 2 (p) must be an integer >0 and <length(x)-1' );
 else
   c = xcorr(x, p+1, 'biased');
   c(1:p+1) = [];     # remove negative autocorrelation lags

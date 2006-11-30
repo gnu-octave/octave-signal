@@ -19,8 +19,7 @@
 %%
 %%     Estimate transfer function of system with input "x" and output "y".
 %%     Use the Welch (1967) periodogram/FFT method.
-%%     See "help pwelch" for description of arguments, hints and references
-%%     Global variable "_pwelch_compatibility" provides Matlab compatibility.
+%%     See "help pwelch" for description of arguments, hints and references.
 %%
 
 
@@ -28,7 +27,7 @@ function [varargout] = tfestimate(varargin)
 %%
 %% Check fixed argument
   if ( nargin<2 )
-    error( 'tfestimate: Need at least 2 args. Use help tfestimate\n', 1 );
+    error( 'tfestimate: Need at least 2 args. Use help tfestimate' );
   end
   nvarargin = length(varargin);
   %% remove any pwelch RESULT args and add 'cross'

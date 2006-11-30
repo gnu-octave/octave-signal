@@ -30,7 +30,7 @@ function [varargout] = tfe(varargin)
 %%
 %% Check fixed argument
   if ( nargin<2 )
-    error( 'tfe: Need at least 2 args. Use help tfe.\n', 1 );
+    error( 'tfe: Need at least 2 args. Use help tfe.' );
   end
   nvarargin = length(varargin);
   %% remove any pwelch RESULT args and add 'trans'

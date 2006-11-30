@@ -107,11 +107,11 @@ function [varargout]=ar_psd(a,v,varargin)
 %%
 %% Check fixed arguments
 if ( nargin < 2 )
-  error( 'ar_psd: needs at least 2 args. Use help ar_psd.\n', 1 );
+  error( 'ar_psd: needs at least 2 args. Use help ar_psd.' );
 elseif ( ~isvector(a) || length(a)<2 )
-  error( 'ar_psd: arg 1 (a) must be vector, length>=2.\n', 1 );
+  error( 'ar_psd: arg 1 (a) must be vector, length>=2.' );
 elseif ( ~isscalar(v) )
-  error( 'ar_psd: arg 2 (v) must be real scalar >0.\n', 1 );
+  error( 'ar_psd: arg 2 (v) must be real scalar >0.' );
 else
   real_model = isreal(a);
 %%
@@ -141,30 +141,30 @@ else
     %% a "return" here.
     elseif ( ~ischar(arg) )
       if ( end_numeric_args )
-        error( 'ar_psd: control arg must be string.\n', 1 );
+        error( 'ar_psd: control arg must be string.' );
       %%
       %% first optional numeric arg is "freq"
       elseif ( iarg == 1 )
         user_freqs = isvector(arg) && length(arg)>1;
         if ( ~isscalar(arg) && ~user_freqs )
-          error( 'ar_psd: arg 3 (freq) must be vector or scalar.\n', 1 );
+          error( 'ar_psd: arg 3 (freq) must be vector or scalar.' );
         elseif ( ~user_freqs && ( ~isreal(arg) || ...
                  fix(arg)~=arg || arg <= 2 || arg >= 1048576 ) )
-          error('ar_psd: arg 3 (freq) is not integer >=2, <=1048576\n', 1 );
+          error('ar_psd: arg 3 (freq) must be integer >=2, <=1048576' );
         elseif ( user_freqs && ~isreal(arg) )
-          error( 'ar_psd: arg 3 (freq) vector must be real.\n', 1 );
+          error( 'ar_psd: arg 3 (freq) vector must be real.' );
         end
         freq = arg(:); % -> column vector
       %%
       %% second optional numeric arg is  "Fs" - sampling frequency
       elseif ( iarg == 2 )
         if ( ~isscalar(arg) || ~isreal(arg) || arg<=0 )
-          error( 'ar_psd: arg 4 (Fs) must be real positive scalar.\n', 1 );
+          error( 'ar_psd: arg 4 (Fs) must be real positive scalar.' );
         end
         Fs = arg;
       %%
       else
-        error( 'ar_psd: control arg must be string.\n', 1 );
+        error( 'ar_psd: control arg must be string.' );
       end
   %%
   %% decode control-string arguments
@@ -194,7 +194,7 @@ else
       pad_fact = 1;
       do_shift = 1;
     else
-      error( 'ar_psd: string arg: illegal value: %s\n', arg ); 
+      error( 'ar_psd: string arg: illegal value: %s', arg ); 
     end 
   end
 %%  end of decoding and checking args
@@ -202,11 +202,9 @@ else
   if ( user_freqs )
     %% user provides (column) vector of frequencies
     if ( any(abs(freq)>Fs/2) )
-      error( 'ar_psd: arg 3 (freq) cannot exceed half sampling frequency.\n',
-             1 );
+      error( 'ar_psd: arg 3 (freq) cannot exceed half sampling frequency.' );
     elseif ( pad_fact==2 && any(freq<0) )
-      error( 'ar_psd: arg 3 (freq) must be positive in onesided spectrum,\n',
-             1 );
+      error( 'ar_psd: arg 3 (freq) must be positive in onesided spectrum' );
     end
     freq_len = length(freq);
     fft_len  = freq_len;
