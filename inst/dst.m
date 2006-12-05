@@ -7,11 +7,15 @@
 ##
 ## The discrete sine transform X of x can be defined as follows:
 ##
-##                     N
-##   X[k] = sqrt(2/N) sum x[n] sin (pi n k / N ),  k = 1, ..., N
-##                    n=1
+##           N
+##   X[k] = sum x[n] sin (pi n k / (N+1) ),  k = 1, ..., N
+##          n=1
+##
+## This is the type I transform.
 ##
 ## See also: idst
+
+## This program is public domain
 
 ## Author: Paul Kienzle
 ## 2006-12-08
