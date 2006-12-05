@@ -85,7 +85,8 @@ Transforms
  dct2 
  idct2 
  dct 
- idct 
+ idct
+ dst
  dftmtx 
  hilbert 
  rceps 
