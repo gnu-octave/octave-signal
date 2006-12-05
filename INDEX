@@ -87,6 +87,7 @@ Transforms
  dct 
  idct
  dst
+ idst
  dftmtx 
  hilbert 
  rceps 
