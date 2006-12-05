@@ -15,7 +15,7 @@
 ## Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 ## y = dct (x, n)
-##    Computes the disrete cosine transform of x.  If n is given, then
+##    Computes the discrete cosine transform of x.  If n is given, then
 ##    x is padded or trimmed to length n before computing the transform.
 ##    If x is a matrix, compute the transform along the columns of the
 ##    the matrix. The transform is faster if x is real-valued and even

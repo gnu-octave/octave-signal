@@ -1,9 +1,8 @@
 ## y = dst (x, n)
-##    Computes the disrete sine transform of x.  If n is given, then
-##    x is padded or trimmed to length n before computing the transform.
+##    Computes the type I discrete sine transform of x.  If n is given, 
+##    then x is padded or trimmed to length n before computing the transform.
 ##    If x is a matrix, compute the transform along the columns of the
-##    the matrix. The transform is faster if x is real-valued and even
-##    length.
+##    the matrix. 
 ##
 ## The discrete sine transform X of x can be defined as follows:
 ##
@@ -11,14 +10,12 @@
 ##   X[k] = sum x[n] sin (pi n k / (N+1) ),  k = 1, ..., N
 ##          n=1
 ##
-## This is the type I transform.
-##
 ## See also: idst
 
 ## This program is public domain
 
 ## Author: Paul Kienzle
-## 2006-12-08
+## 2006-12-05
 ##   * initial release
 function y = dst (x, n)
 
