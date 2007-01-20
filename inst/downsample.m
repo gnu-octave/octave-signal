@@ -1,37 +1,34 @@
-## Copyright (C) 2007   Sylvain Pelissier   <sylvain.pelissier@gmail.com>
-##
-## This program is free software; you can redistribute it and/or modify
-## it under the terms of the GNU General Public License as published by
-## the Free Software Foundation; either version 2 of the License, or
-## (at your option) any later version.
-##
-## This program is distributed in the hope that it will be useful,
-## but WITHOUT ANY WARRANTY; without even the implied warranty of
-## MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-## GNU General Public License for more details.
-##
-## You should have received a copy of the GNU General Public License
-## along with this program; if not, write to the Free Software
-## Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-
 ## -*- texinfo -*-
-## @deftypefn {Function File} {[@var{y}] =} downsample(@var{x},@var{n})
-##	Build the vector y by keeping only nth sample of x. x can be a vector or a matrix.
+## @deftypefn {Function File} @var{y} = downsample(@var{x},@var{n})
+## Downsample the signal, selecting every nth element.  Every @var{x}
+## is a matrix, downsample every column.
+##
+## For most signals you will want to use decimate() instead since
+## it prefilters the high frequency components of the signal and
+## avoids aliasing effects.
+##
+## @deftypefnx {Function File} @var{y} = downsample(@var{x},@var{n},@var{phase})
+## Select every nth element starting at sample @var{phase}.
 ## @end deftypefn
+## @seealso{decimate, interp, resample, upfirdn}
 
+## Author: Paul Kienzle
+## This function is public domain
 
-function [y] = downsample(x,n)
-	if (nargin < 2); usage('downsample(x,n)'); end
+function y = downsample(x,n,phase)
+  if nargin<2 || nargin>3, usage('downsample(x,n,[phase]'); end
+  if nargin==2, phase = 1; end
 
-	if(isvector(x))
-		k = 1:n:length(x);
-		y = x(k);
-	else
-		if(ismatrix(x))
-			k = 1:n:length(x);
-			s = size(x,2);
-			i = 1:s;
-			y(:,i) = x(k,i);
-		end
-	end
-endfunction
+  if isvector(x)
+    y = x(phase:n:end);
+  else
+    y = x(phase:n:end,:);
+  end
+end
+
+%!assert(downsample([1,2,3,4,5],2),[1,3,5]);
+%!assert(downsample([1;2;3;4;5],2),[1;3;5]);
+%!assert(downsample([1,2;3,4;5,6;7,8;9,10],2),[1,2;5,6;9,10]);
+%!assert(downsample([1,2,3,4,5],2,2),[2,4]);
+%!assert(downsample([1,2;3,4;5,6;7,8;9,10],2,2),[3,4;7,8]);
+
