@@ -133,6 +133,8 @@ System identification
 Sample rate change
  decimate 
  interp 
+ downsample
+ upsample
  resample 
  upfirdn 
 Compatibility

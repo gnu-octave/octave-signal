@@ -1,6 +1,6 @@
 ## -*- texinfo -*-
 ## @deftypefn {Function File} @var{y} = downsample(@var{x},@var{n})
-## Downsample the signal, selecting every nth element.  Every @var{x}
+## Downsample the signal, selecting every nth element.  If @var{x}
 ## is a matrix, downsample every column.
 ##
 ## For most signals you will want to use decimate() instead since
@@ -10,7 +10,7 @@
 ## @deftypefnx {Function File} @var{y} = downsample(@var{x},@var{n},@var{phase})
 ## Select every nth element starting at sample @var{phase}.
 ## @end deftypefn
-## @seealso{decimate, interp, resample, upfirdn}
+## @seealso{decimate, interp, resample, upfirdn, upsample}
 
 ## Author: Paul Kienzle
 ## This function is public domain
