@@ -3,4 +3,4 @@ all: remez.oct medfilt1.oct
 %.oct: %.cc
 	mkoctfile -s $<
 
-clean: ; rm *.o core octave-core *.oct *~
+clean: ; -rm *.o core octave-core *.oct *~
