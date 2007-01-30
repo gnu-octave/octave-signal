@@ -117,6 +117,7 @@ Window functions
  kaiser 
  triang 
  gaussian gausswin
+ rectwin
 System identification
  arburg 
  arcov= use <code>ar_covar</code> $SPCTOOLS
