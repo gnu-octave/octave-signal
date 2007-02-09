@@ -817,7 +817,9 @@ Frequency is in the range (0, 1), with 1 being the nyquist frequency")
   OCTAVE_LOCAL_BUFFER (double, weight, numbands);
   for (i=0; i < numbands; i++) weight[i] = 1.0;
   if (nargin > 3) {
-    if (args(3).is_real_matrix()) {
+    if (args(3).is_string())
+      stype = args(3).string_value();
+    else if (args(3).is_real_matrix() || args(3).is_real_scalar()) {
       ColumnVector o_weight(args(3).vector_value());
       if (o_weight.length() != numbands) {
 	error("remez: need one weight for each band [=length(band)/2]");
@@ -825,10 +827,6 @@ Frequency is in the range (0, 1), with 1 being the nyquist frequency")
       }
       for (i=0; i < numbands; i++) weight[i] = o_weight(i);
     }
-    else if (args(3).is_string())
-      stype = args(3).string_value();
-    else if (args(3).is_real_scalar())
-      density = NINT(args(3).double_value());
     else {
       error("remez: incorrect argument list");
       return retval;
@@ -837,7 +835,7 @@ Frequency is in the range (0, 1), with 1 being the nyquist frequency")
   if (nargin > 4) {
     if (args(4).is_string() && !args(3).is_string())
       stype = args(4).string_value();
-    else if (args(4).is_real_scalar() && !args(3).is_real_scalar())
+    else if (args(4).is_real_scalar())
       density = NINT(args(4).double_value());
     else {
       error("remez: incorrect argument list");
@@ -845,10 +843,9 @@ Frequency is in the range (0, 1), with 1 being the nyquist frequency")
     }
   }
   if (nargin > 5) {
-    if (args(5).is_real_scalar() 
-	&& !args(4).is_real_scalar() 
-	&& !args(3).is_real_scalar())
-      density = NINT(args(4).double_value());
+    if (args(5).is_real_scalar()
+	&& !args(4).is_real_scalar())
+      density = NINT(args(5).double_value());
     else {
       error("remez: incorrect argument list");
       return retval;
