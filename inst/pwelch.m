@@ -711,7 +711,7 @@ else
       fft_y = fft(yy);
     end
     if ( need_Pxx )
-      pgram = fft_x .* conj(fft_x);
+      pgram = real(fft_x .* conj(fft_x));
       Pxx = Pxx + pgram;
       %% sum of squared periodograms is required for confidence interval
       if ( conf>0 )
@@ -719,10 +719,10 @@ else
         end
     end
     if ( need_Pxy )
-      Pxy = Pxy + fft_x .* conj(fft_y);
+      Pxy = Pxy + real(fft_x .* conj(fft_y));
     end
     if ( need_Pyy )
-      Pyy = Pyy + fft_y .* conj(fft_y);
+      Pyy = Pyy + real(fft_y .* conj(fft_y));
     end
     n_ffts = n_ffts +1;
   end
@@ -808,7 +808,7 @@ else
     spect_type(do_trans) = 3;
   end
   if ( do_coher )
-    spectra(:,do_coher) = Pxy .* conj(Pxy) ./ Pxx ./ Pyy;
+    spectra(:,do_coher) = real(Pxy .* conj(Pxy)) ./ Pxx ./ Pyy;
     spect_type(do_coher) = 4;
   end
   if ( do_ypower )
