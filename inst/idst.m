@@ -1,10 +1,12 @@
-## x = idst (y, n)
-##    Computes the inverse type I discrete sine transform of y.  If n is 
-##    given, then y is padded or trimmed to length n before computing 
-##    the transform.  If y is a matrix, compute the transform along the 
-##    columns of the the matrix.
-##
-## See also: idst
+## -*- texinfo -*-
+## @deftypefn {Function File} @var{y} = idst (@var{x})
+## @deftypefnx {Function File} @var{y} = idst (@var{x}, @var{n})
+## Computes the inverse type I discrete sine transform of @var{y}.  If @var{n} is 
+## given, then @var{y} is padded or trimmed to length @var{n} before computing 
+## the transform.  If @var{y} is a matrix, compute the transform along the 
+## columns of the the matrix.
+## @end deftypefn
+## @seealso{dst}
 
 ## This program is public domain
 

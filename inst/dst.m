@@ -1,16 +1,19 @@
-## y = dst (x, n)
-##    Computes the type I discrete sine transform of x.  If n is given, 
-##    then x is padded or trimmed to length n before computing the transform.
-##    If x is a matrix, compute the transform along the columns of the
-##    the matrix. 
+## -*- texinfo -*-
+## @deftypefn {Function File} @var{y} = dst (@var{x})
+## @deftypefnx {Function File} @var{y} = dst (@var{x}, @var{n})
+## Computes the type I discrete sine transform of @var{x}.  If @var{n} is given, 
+## then @var{x} is padded or trimmed to length @var{n} before computing the transform.
+## If @var{x} is a matrix, compute the transform along the columns of the
+## the matrix.
 ##
 ## The discrete sine transform X of x can be defined as follows:
 ##
-##           N
-##   X[k] = sum x[n] sin (pi n k / (N+1) ),  k = 1, ..., N
-##          n=1
+##        N
+## X[k] = sum x[n] sin (pi n k / (N+1) ),  k = 1, ..., N
+##        n=1
 ##
-## See also: idst
+## @end deftypefn
+## @seealso{idst}
 
 ## This program is public domain
 
