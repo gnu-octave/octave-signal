@@ -42,10 +42,7 @@ function y = tripuls(t, w, skew)
 
   y = zeros(size(t));
   peak = skew*w/2;
-  try dfi = do_fortran_indexing;
-  catch dfi = 0;
-  end
-  try wfi = warn_fortran_indexing;
+  try wfi = warning("off", "Octave:fortran-indexing");
   catch wfi = 0;
   end
   unwind_protect
@@ -56,8 +53,7 @@ function y = tripuls(t, w, skew)
     idx = find(t>peak & t < w/2);
     if (idx) y(idx) = ( t(idx) - w/2 ) / ( peak - w/2 ); endif 
   unwind_protect_cleanup
-    do_fortran_indexing = dfi;
-    warn_fortran_indexing = wfi;
+    warning(wfi);
   end_unwind_protect
 endfunction
 

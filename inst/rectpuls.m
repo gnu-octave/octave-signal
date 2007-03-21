@@ -37,19 +37,13 @@ function y = rectpuls(t, w)
 
   y = zeros(size(t));
   idx = find(t>=-w/2 & t < w/2);
-  try dfi = do_fortran_indexing;
-  catch dfi = 0;
-  end
-  try wfi = warn_fortran_indexing;
+  try wfi = warning("off", "Octave:fortran-indexing");
   catch wfi = 0;
   end
   unwind_protect
-    do_fortran_indexing = 1;
-    warn_fortran_indexing = 0;
     y(idx) = ones(size(idx));
   unwind_protect_cleanup
-    do_fortran_indexing = dfi;
-    warn_fortran_indexing = wfi;
+    warning(wfi);
   end_unwind_protect
 endfunction
 
