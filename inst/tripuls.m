@@ -46,8 +46,6 @@ function y = tripuls(t, w, skew)
   catch wfi = 0;
   end
   unwind_protect
-    do_fortran_indexing = 1;
-    warn_fortran_indexing = 0;
     idx = find(t>=-w/2 & t <= peak);
     if (idx) y(idx) = ( t(idx) + w/2 ) / ( peak + w/2 ); endif
     idx = find(t>peak & t < w/2);
