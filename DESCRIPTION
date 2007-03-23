@@ -5,7 +5,7 @@ Author: Various Authors
 Maintainer: The Octave Community
 Title: Signal Processing.
 Description: Signal processing tools, including filtering, windowing and display functions.
-Depends: octave (>= 2.9.7)
+Depends: octave (> 2.9.9)
 Autoload: yes
 License: GPL version 2 or later
 Url: http://octave.sf.net

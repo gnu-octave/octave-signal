@@ -79,59 +79,37 @@ function zplane(z, p)
     endif
   endif
 
-  try eleo = empty_list_elements_ok;      ##<oct
-  catch eleo = 0; end;                    ##<oct
-  try wele = warn_empty_list_elements;    ##<oct
-  catch wele = 0; end;                    ##<oct
-  try ar = automatic_replot;
-  catch ar = 1; end
-  unwind_protect                          ##<oct
-    empty_list_elements_ok = 1;           ##<oct
-    warn_empty_list_elements = 0;         ##<oct
-    automatic_replot = 0;
 
-    xmin = min([-1; real(z(:)); real(p(:))]);
-    xmax = max([ 1; real(z(:)); real(p(:))]);
-    ymin = min([-1; imag(z(:)); imag(p(:))]);
-    ymax = max([ 1; imag(z(:)); imag(p(:))]);
-    xfluff = max([0.05*(xmax-xmin), (1.05*(ymax-ymin)-(xmax-xmin))/10]);
-    yfluff = max([0.05*(ymax-ymin), (1.05*(xmax-xmin)-(ymax-ymin))/10]);
-    xmin = xmin - xfluff;
-    xmax = xmax + xfluff;
-    ymin = ymin - yfluff;
-    ymax = ymax + yfluff;
-  
-    __gnuplot_set__ pointsize 2                      ##<oct
-    axis('equal');                        ##<oct
-    axis([xmin, xmax, ymin, ymax]);       ##<oct
-    grid('on');                           ##<oct
-    r = exp(2i*pi*[0:100]/100);           ##<oct
-    plot(real(r), imag(r),";;");          ##<oct
-    hold on;                              ##<oct
+  xmin = min([-1; real(z(:)); real(p(:))]);
+  xmax = max([ 1; real(z(:)); real(p(:))]);
+  ymin = min([-1; imag(z(:)); imag(p(:))]);
+  ymax = max([ 1; imag(z(:)); imag(p(:))]);
+  xfluff = max([0.05*(xmax-xmin), (1.05*(ymax-ymin)-(xmax-xmin))/10]);
+  yfluff = max([0.05*(ymax-ymin), (1.05*(xmax-xmin)-(ymax-ymin))/10]);
+  xmin = xmin - xfluff;
+  xmax = xmax + xfluff;
+  ymin = ymin - yfluff;
+  ymax = ymax + yfluff;
 
-    text();
-    plot_with_labels(z, "o");
-    plot_with_labels(p, "x");
-    replot;
+  text();
+  plot_with_labels(z, "o");
+  plot_with_labels(p, "x");
+  replot;
 
-  unwind_protect_cleanup                  ##<oct
-    empty_list_elements_ok = eleo;        ##<oct
-    warn_empty_list_elements = wele;      ##<oct
-    hold off;                             ##<oct
-    grid("off");                          ##<oct
-    axis();                               ##<oct
-    __gnuplot_set__ pointsize 1                      ##<oct
-    axis('normal');                       ##<oct
-    automatic_replot = ar;
-  end_unwind_protect                      ##<oct
-  ##<mat r = exp(2i*pi*[0:100]/100);
-  ##<mat plot(real(r), imag(r),'k'); hold on;
-  ##<mat axis equal;
-  ##<mat grid on;
-  ##<mat axis(1.05*[xmin, xmax, ymin, ymax]);
-  ##<mat if !isempty(p), plot(real(p), imag(p), "bx", 'MarkerSize', 10); end
-  ##<mat if !isempty(z), plot(real(z), imag(z), "bo", 'MarkerSize', 10); end
-  ##<mat hold off;
+  r = exp(2i*pi*[0:100]/100);
+  plot(real(r), imag(r),'k'); hold on;
+  axis equal;
+  grid on;
+  axis(1.05*[xmin, xmax, ymin, ymax]);
+  if (!isempty(p))
+    h = plot(real(p), imag(p), "bx");
+    set (h, 'MarkerSize', 10);
+  endif
+  if (!isempty(z)) 
+    h = plot(real(z), imag(z), "bo");
+    set (h, 'MarkerSize', 10);
+  endif
+  hold off;
 endfunction
 
 function plot_with_labels(x, symbol)
@@ -145,10 +123,10 @@ function plot_with_labels(x, symbol)
         text(real(x_u(i)), imag(x_u(i)), [" " num2str(n)]);
        endif
     endfor
-
+    
+    col = "rgbcmy";
     for c = 1:columns(x)
-      plot(real( x(:,c) ), imag( x(:,c) ), 
-           [ num2str(mod(c+1,6) + 1) symbol ";;" ]);
+      plot(real( x(:,c) ), imag( x(:,c) ), [col(mod(c,6)),symbol ";;"]);
     endfor
     
   endif
@@ -171,9 +149,6 @@ endfunction
 %! M = length(z); N = length(p);
 %! sys_a = [ zeros(1, M-N), real(poly(p)) ];
 %! sys_b = [ zeros(1, N-M), real(poly(z)) ];
-
-%! save_replot = automatic_replot;
-%! automatic_replot = 0;
 %! disp("The first two graphs should be identical, with poles at (r,w)=");
 %! disp(sprintf(" (%.2f,%.2f)", [pr ; pw]));
 %! disp("and zeros at (r,w)=");
@@ -181,10 +156,7 @@ endfunction
 %! disp("with reflection across the horizontal plane");
 %! subplot(231); title("transfer function form"); zplane(sys_b, sys_a);
 %! subplot(232); title("pole-zero form"); zplane(z,p);
-
 %! subplot(233); title("empty p"); zplane(z); 
 %! subplot(234); title("empty a"); zplane(sys_b);
 %! disp("The matrix plot has 2 sets of points, one inside the other");
 %! subplot(235); title("matrix"); zplane([z, 0.7*z], [p, 0.7*p]);
-%! oneplot();
-%! automatic_replot = save_replot;

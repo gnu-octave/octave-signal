@@ -81,35 +81,23 @@ endfunction
 %! f0=70; Fs=10000;           # 100 Hz fundamental, 10kHz sampling rate
 %! a=real(poly(0.985*exp(1i*pi*[0.1, -0.1, 0.3, -0.3]))); # two formants
 %! s=0.05*randn(1024,1);      # Noise excitation signal
-%! s(1:Fs/f0:length(s)) = 1;  # Impulse glottal wave
+%! s(floor(1:Fs/f0:length(s))) = 1;  # Impulse glottal wave
 %! x=filter(1,a,s);           # Speech signal in x
-%! isreal(x)
 %! [y, xm] = rceps(x);        # cepstrum and minimum phase x
 %! [hx, w] = freqz(x,1,[],Fs); hxm = freqz(xm);
 %! figure(1);
 %! subplot(311);
-%!    __gnuplot_set__ tmargin 3;
-%!    __gnuplot_set__ lmargin 10;
 %!    auplot(x,Fs,'b',';signal;');
 %!    hold on; auplot(xm,Fs,'g',';reconstruction;'); 
 %!    hold off;
 %! subplot(312);
-%!    __gnuplot_set__ lmargin 10;
-%!    __gnuplot_set__ bmargin 0;
 %!    axis("ticy");
 %!    plot(w,log(abs(hx)), ";magnitude;", ...
 %!         w,log(abs(hxm)),";reconstruction;");
 %! subplot(313);
-%!    __gnuplot_set__ lmargin 10;
-%!    __gnuplot_set__ tmargin 0;
-%!    __gnuplot_set__ bmargin 3;
 %!    axis("on");
 %!    plot(w,unwrap(arg(hx))/(2*pi), ";phase;",...
 %!	   w,unwrap(arg(hxm))/(2*pi),";reconstruction;");
-%!    __gnuplot_set__ tmargin;
-%!    __gnuplot_set__ bmargin;
-%!    __gnuplot_set__ lmargin;
-%! oneplot();
 %! figure(2); auplot(y,Fs,';cepstrum;');
 %! %-------------------------------------------------------------
 %! % confirm the magnitude spectrum is identical in the signal

@@ -12,7 +12,7 @@
 ##
 ## You should have received a copy of the GNU General Public License
 ## along with this program; see the file COPYING.  If not, write to the Free
-## Software Foundation, 59 Temple Place - Suite 330, Boston, MA
+## Software Foundation, 51 Franklin Street, Fifth Floor, Boston, MA
 ## 02110-1301, USA.
 
 ## -*- texinfo -*-
@@ -26,38 +26,27 @@ function freqs_plot(w,h)
     mag = 20*log10(abs(h));
     phase = unwrap(arg(h));
     maxmag = max(mag);
+
+    subplot(211);
+    plot(w, mag, ";Magnitude (dB);");
     title('Frequency response plot by freqs');
-    unwind_protect # protect graph state
-      subplot(211);
-      __gnuplot_set__ lmargin 10;
-      axis("labely");
-      ylabel("dB");
-      xlabel("");
-      grid("on");
-      if (maxmag - min(mag) > 100) % make 100 a parameter?
-      	axis([w(1), w(n), maxmag-100, maxmag]);
-      else
-      	axis("autoy");
-      endif
-      plot(w, mag, ";Magnitude (dB);");
-%     semilogx(w, mag, ";Magnitude (dB);");
-
-      subplot(212);
-      axis("label");
-      title("");
-      grid("on");
+    axis("labely");
+    ylabel("dB");
+    xlabel("");
+    grid("on");
+    if (maxmag - min(mag) > 100) % make 100 a parameter?
+      axis([w(1), w(n), maxmag-100, maxmag]);
+    else
       axis("autoy");
-      xlabel("Frequency (rad/sec)");
-      ylabel("Cycles");
-      axis([w(1), w(n)]);
-      plot(w, phase/(2*pi), ";Phase (radians/2pi);");
-      
-    unwind_protect_cleanup # restore graph state
-      grid("off");
-      axis("auto","label");
-      __gnuplot_set__ lmargin;
-      __gnuplot_set__ tmargin;
-      oneplot();
-    end_unwind_protect
+    endif
 
+    subplot(212);
+    plot(w, phase/(2*pi), ";Phase (radians/2pi);");
+    axis("label");
+    title("");
+    grid("on");
+    axis("autoy");
+    xlabel("Frequency (rad/sec)");
+    ylabel("Cycles");
+    axis([w(1), w(n)]);
 endfunction
