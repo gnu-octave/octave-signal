@@ -73,3 +73,10 @@ function w = tukeywin(m,r)
   endswitch
       
 endfunction
+
+%!demo
+%! m = 100;
+%! r = 1/3;
+%! w = tukeywin (m, r);
+%! title(sprintf("%d-point Tukey window, R = %d/%d", m, [p, q] = rat(r), q));
+%! plot(w);
