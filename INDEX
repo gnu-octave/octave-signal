@@ -117,6 +117,7 @@ Window functions
  kaiser 
  triang 
  gaussian gausswin
+ tukeywin
  rectwin
 System identification
  arburg 
