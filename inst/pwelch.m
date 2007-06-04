@@ -36,16 +36,23 @@
 %%     spectral density, transfer function and/or coherence functions of time-
 %%     series input data "x" and output data "y" by the Welch (1967)
 %%     periodogram/FFT method.
-%%         Requires arguments "x", "y", if results='cross', 'trans' or
-%%     'coher'.  All other arguments are optional.  All spectra are returned
-%%     in matrix "spectra".
+%%       pwelch treats the second argument as "y" if there is a control-string
+%%     argument "cross", "trans", "coher" or "ypower"; "power" does not force
+%%     the 2nd argument to be treated as "y".  All other arguments are
+%%     optional.  All spectra are returned in matrix "spectra". 
 %%
 %%  [spectra,Pxx_ci,freq] = pwelch(x,window,overlap,Nfft,Fs,conf,
 %%                                 range,plot_type,detrend,sloppy)
 %%  [spectra,Pxx_ci,freq] = pwelch(x,y,window,overlap,Nfft,Fs,conf,
 %%                                 range,plot_type,detrend,sloppy,results)
-%%     Includes estimate of confidence intervals for the spectral density.
-%%  See Hint (7) below for compatibility options.
+%%     Estimates confidence intervals for the spectral density.
+%%     See Hint (7) below for compatibility options.  Confidence level "conf"
+%%     is the 6th or 7th numeric argument.  If "results" control-string 
+%%     arguments are used, one of them must be "power" when the "conf"
+%%     argument is present; pwelch can estimate confidence intervals only for
+%%     the power spectrum of the "x" data.  It does not know how to estimate
+%%     confidence intervals of the cross-power spectrum, transfer function or
+%%     coherence; if you can suggest a good method, please send a bug report.
 %%
 %% ARGUMENTS
 %% All but the first argument are optional and may be empty, except that
@@ -711,6 +718,7 @@ else
       fft_y = fft(yy);
     end
     if ( need_Pxx )
+      %% force Pxx to be real
       pgram = real(fft_x .* conj(fft_x));
       Pxx = Pxx + pgram;
       %% sum of squared periodograms is required for confidence interval
@@ -719,9 +727,11 @@ else
         end
     end
     if ( need_Pxy )
-      Pxy = Pxy + real(fft_x .* conj(fft_y));
+      %% Pxy (cross power spectrum) is complex. Do not force to be real.
+      Pxy = Pxy + fft_x .* conj(fft_y);
     end
     if ( need_Pyy )
+      %% force Pyy to be real
       Pyy = Pyy + real(fft_y .* conj(fft_y));
     end
     n_ffts = n_ffts +1;
@@ -808,6 +818,7 @@ else
     spect_type(do_trans) = 3;
   end
   if ( do_coher )
+    %% force coherence to be real
     spectra(:,do_coher) = real(Pxy .* conj(Pxy)) ./ Pxx ./ Pyy;
     spect_type(do_coher) = 4;
   end
