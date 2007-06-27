@@ -51,7 +51,7 @@
 ##    S = S/max(S(:));           # normalize magnitude so that max is 0 dB.
 ##    S = max(S, 10^(-40/10));   # clip below -40 dB.
 ##    S = min(S, 10^(-3/10));    # clip above -3 dB.
-##    imagesc(flipud(log(S)));   # display in log scale
+##    imagesc(t, f, flipud(log(S)));   # display in log scale
 ##
 ## The choice of window defines the time-frequency resolution.  In
 ## speech for example, a wide window shows more harmonic detail while a
@@ -106,7 +106,7 @@
 ## energy scale and by convention has low frequencies on the bottom of
 ## the image:
 ##
-##     imagesc(flipud(log(S(idx,:))));
+##     imagesc(t, f, flipud(log(S(idx,:))));
 
 ## 2001-07-05 Paul Kienzle <pkienzle@users.sf.net>
 ## * remove "See also spectrogram"
@@ -168,7 +168,12 @@ function [S_r, f_r, t_r] = specgram(x, n, Fs, window, overlap)
 
   f = [0:ret_n-1]*Fs/n;
   t = offset/Fs;
-  if nargout==0, imagesc(20*log10(flipud(abs(S)))); endif
+  if nargout==0
+    imagesc(t, f, 20*log10(abs(S)));
+    set (gca (), "ydir", "normal");
+    xlabel ("Time")
+    ylabel ("Frequency")
+  endif
   if nargout>0, S_r = S; endif
   if nargout>1, f_r = f; endif
   if nargout>2, t_r = t; endif
