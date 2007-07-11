@@ -6,6 +6,7 @@ signal >> Signal processing
 Signals
  diric 
  gauspuls 
+ gmonopuls
  pulstran 
  tripuls 
  rectpuls 
@@ -111,6 +112,8 @@ Power spectrum analysis
  xcov 
  __power
 Window functions
+ barthannwin
+ blackmanharris
  boxcar 
  chebwin flattopwin
  hann
