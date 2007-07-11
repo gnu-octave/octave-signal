@@ -114,10 +114,12 @@ Power spectrum analysis
 Window functions
  barthannwin
  blackmanharris
+ bohmanwin
  boxcar 
  chebwin flattopwin
  hann
  kaiser 
+ nuttallwin
  triang 
  gaussian gausswin
  tukeywin
