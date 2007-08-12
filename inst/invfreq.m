@@ -60,6 +60,8 @@
 %    *added demo feature, not debugged yet
 % 2003-05-16 Julius Smith <jos@ccrma.stanford.edu>
 %     *final debugging
+% 2007-08-03 Rolf Schirmacher <Rolf.Schirmacher@MuellerBBM.de>
+%     *replaced == by strcmp() for character string comparison
 
 % TODO: implement Steiglitz-McBride iterations
 % TODO: improve numerical stability for high order filters (matlab is a bit better)
@@ -81,7 +83,7 @@ function [B,A] = invfreq(H,F,nB,nA,W,iter,tol,tr,plane)
 
   Ruu = zeros(mB,mB); Ryy = zeros(nA,nA); Ryu = zeros(nA,mB);
   Pu = zeros(mB,1);   Py = zeros(nA,1);
-  if tr == 'trace'
+  if strcmp(tr,'trace')
       disp(' ')
       disp('Computing nonuniformly sampled, equation-error, rational filter.');
       disp(['plane = ',plane]);
@@ -89,7 +91,7 @@ function [B,A] = invfreq(H,F,nB,nA,W,iter,tol,tr,plane)
   end
 
   s = sqrt(-1)*F;
-  if plane == 'z'
+  if strcmp(plane,'z')
     if max(F)>pi || min(F)<0
       disp('hey, you frequency is outside the range 0 to pi, making my own')
       F = linspace(0,pi,length(H));
@@ -117,7 +119,7 @@ function [B,A] = invfreq(H,F,nB,nA,W,iter,tol,tr,plane)
 
   B = Theta(1:mB)';
   A = [1 Theta(mB+1:mB+nA)'];
-  if plane == 's'
+  if strcmp(plane,'s')
     B = B(mB:-1:1);
     A = A(mA:-1:1);
   end
