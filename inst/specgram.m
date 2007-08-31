@@ -122,7 +122,7 @@ function [S_r, f_r, t_r] = specgram(x, n, Fs, window, overlap)
   if nargin < 2 || isempty(n), n = min(256, length(x)); end
   if nargin < 3 || isempty(Fs), Fs = 2; end
   if nargin < 4 || isempty(window), window = hanning(n); end
-  if nargin < 5 || isempty(overlap), overlap = length(window)/2; end
+  if nargin < 5 || isempty(overlap), overlap = ceil(length(window)/2); end
 
   ## make sure x is a vector
   if columns(x) != 1 && rows(x) != 1
