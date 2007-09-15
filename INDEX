@@ -17,6 +17,10 @@ Signals
  strips 
  specgram 
  buffer
+ mexihat
+ meyeraux
+ morlet
+ shanwavf
 Filtering
  filtfilt 
  filtic 
