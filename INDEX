@@ -118,6 +118,7 @@ Power spectrum analysis
 Window functions
  barthannwin
  blackmanharris
+ blackmannuttall
  bohmanwin
  boxcar 
  chebwin flattopwin
