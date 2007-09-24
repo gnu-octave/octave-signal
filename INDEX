@@ -129,6 +129,7 @@ Window functions
  gaussian gausswin
  tukeywin
  rectwin
+ welchwin
 System identification
  arburg 
  arcov= use <code>ar_covar</code> $SPCTOOLS
