@@ -1,4 +1,4 @@
-## Copyright (C) 2000 Paul Kienzle
+## Copyright (C) 2007   Peter L. Soendergaard   
 ##
 ## This program is free software; you can redistribute it and/or modify
 ## it under the terms of the GNU General Public License as published by
@@ -12,28 +12,142 @@
 ##
 ## You should have received a copy of the GNU General Public License
 ## along with this program; if not, write to the Free Software
-## Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
+## Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  
+## 02110-1301  USA
 
-## usage: y = hilbert(x)
+## -*- texinfo -*-
+## @deftypefn {Function File} {@var{h} =} hilbert (@var{f},@var{N},@var{dim})
+## Analytic extension of real valued signal
 ##
-## real(y) contains the original signal x (x must be a real-valued)
-## imag(y) contains the hilbert transform of x, which is the same
-## signal with a phase shift of 90 degrees.
+## @code{@var{h}=hilbert(@var{f})} computes the extension of the real
+## valued signal @var{f} to an analytic signal. If @var{f} is a matrix,
+## the transformation is applied to each column. For N-D arrays,
+## the transformation is applied to the first non-singleton dimension.
 ##
-## If x is a matrix, computes the hilbert transform on each row.
-function y = hilbert(x)
-  if nargin != 1, usage("y = hilbert(x)"); endif
-  if !isreal(x), error("hilbert: requires real input vector"); endif
-  transpose = rows(x)==1;
-  if transpose, x=x.'; endif
-  [r, c] = size(x);
-  n=2^nextpow2(r);
-  if r < n, x = [ x ; zeros(n-r, c) ]; endif
-  y = fft(x);
-  y = ifft([y(1,:) ; 2*y(2:n/2,:) ; y(n/2+1,:) ; zeros(n/2-1,columns(y))]);
-  if r < n, y(r+1:n,:) = []; endif
-  if transpose, y = y.'; endif
-endfunction
+## @code{real(@var{h})} contains the original signal @var{f}.
+## @code{imag(@var{h})} contains the Hilbert transform of @var{f}.
+##
+## @code{hilbert(@var{f},@var{N})} does the same using a length @var{N}
+## Hilbert transform. The result will also have length @var{N}.
+##
+## @code{hilbert(@var{f},[],@var{dim})} or
+## @code{hilbert(@var{f},@var{N},@var{dim})} does the same along
+## dimension dim.
+##@end deftypefn
+
+## Authors: Peter L. Soendergaard, 2007
+##          Paul Kienzle, 2000
+
+function f=hilbert(f,N,dim)  
+  
+  % ------ PRE: initialization and dimension shifting ---------
+   
+  if (nargin<1 || nargin>3)
+    usage('h = hilbert(f,N,dim);');
+  end;
+
+  if ~isreal(f)
+    error('HILBERT only works for real-valued signals.');
+  end;
+  
+  if nargin<3
+    dim=[];
+  end;
+  
+  if nargin<2
+    N=[];
+  end;
+  
+  D=ndims(f);
+  
+  % Dummy assignment.
+  order=1;
+  
+  if isempty(dim)
+    dim=1;
+    
+    if sum(size(f)>1)==1
+      % We have a vector, find the dimension where it lives.
+      dim=find(size(f)>1);
+    end;
+    
+  else
+    if (numel(dim)~=1 || ~isnumeric(dim))
+      error('HILBERT: dim must be a scalar.');
+    end;
+    if rem(dim,1)~=0
+      error('HILBERT: dim must be an integer.');
+    end;
+    if (dim<1) || (dim>D)
+      error('HILBERT: dim must be in the range from 1 to %d.',D);
+    end;  
+    
+  end;
+
+  if (numel(N)>1 || ~isnumeric(N))
+    error('N must be a scalar.');
+  end;
+  if (~isempty(N) && rem(N,1)~=0)
+    error('N must be an integer.');
+  end;
+
+  
+  if dim>1
+    order=[dim, 1:dim-1,dim+1:D];
+    
+    % Put the desired dimension first.
+    f=permute(f,order);
+    
+  end;
+  
+  Ls=size(f,1);
+  
+  % If N is empty it is set to be the length of the transform.
+  if isempty(N)
+    N=Ls;
+  end;  
+  
+  % Remember the exact size for later and modify it for the new length
+  permutedsize=size(f);
+  permutedsize(1)=N;
+  
+  % Reshape f to a matrix.
+  f=reshape(f,size(f,1),numel(f)/size(f,1));
+  W=size(f,2);
+  
+  if ~isempty(N)
+    f=postpad(f,N);
+  end;
+  
+  % ------- actual computation ----------------- 
+  if N>2
+    f=fft(f);
+    
+    if rem(N,2)==0
+      f=[f(1,:);
+         2*f(2:N/2,:);
+         f(N/2+1,:);
+         zeros(N/2-1,W)];
+    else
+      f=[f(1,:);
+         2*f(2:(N+1)/2,:);
+         zeros((N-1)/2,W)];    
+    end;
+    
+    f=ifft(f);
+  end;
+  
+  % ------- POST: Restoration of dimensions ------------
+  
+  % Restore the original, permuted shape.
+  f=reshape(f,permutedsize);
+  
+  if dim>1
+    % Undo the permutation.
+    f=ipermute(f,order);
+  end;
+  
+endfunction;
 
 %!demo
 %! % notice that the imaginary signal is phase-shifted 90 degrees
@@ -46,3 +160,4 @@ endfunction
 %! t=linspace(0,10,1024);
 %! x=5*cos(0.2*t).*sin(100*t);
 %! grid on; plot(t,x,'g;z;',t,abs(hilbert(x)),'b;|hilbert(z)|;');
+
