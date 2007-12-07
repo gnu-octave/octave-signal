@@ -32,8 +32,8 @@
 % W: vector of weights (must be same length as F)
 %
 % Example:
-%     [B,A] = butter(12,1/4);
-%     [H,w] = freqz(B,A,128);
+%     [B,A] = butter(4,1/4);
+%     [H,F] = freqz(B,A);
 %     [Bh,Ah] = invfreq(H,F,4,4);
 %     Hh = freqz(Bh,Ah);
 %     disp(sprintf('||frequency response error|| = %f',norm(H-Hh)));
