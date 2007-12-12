@@ -14,7 +14,7 @@
 ## along with this program; if not, write to the Free Software
 ## Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
-## Generate an Chebyshev type II filter with Rs dB of stop band ripple.
+## Generate an Chebyshev type II filter with Rs dB of stop band attenuation.
 ## 
 ## [b, a] = cheby2(n, Rs, Wc)
 ##    low pass filter with cutoff pi*Wc radians
@@ -86,7 +86,7 @@ function [a,b,c,d] = cheby2(n, Rs, W, varargin)
   endif
 
   if (Rs < 0)
-    error("cheby2: stopband ripple must be positive decibels");
+    error("cheby2: stopband attenuation must be positive decibels");
   end
 
   ## Prewarp to the band edges to s plane
