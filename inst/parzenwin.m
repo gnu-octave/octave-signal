@@ -24,13 +24,22 @@ function w = parzenwin(L)
 	if(nargin < 1 || nargin > 1)
 		error('usage : w = parzenwin(L)');
 	end
+	
+	if(L < 0)
+		error('L must be positive');
+	end
+	
+	if(L ~= floor(L))
+		L = round(L);
+	end
+	
 	N = L-1;
 	n = -(N/2):N/2;
-	n1 = n(find(abs(n) < N/4));
-	n2 = n(find(n >= N/4));
-	n3 = n(find(n <= -N/4));
+	n1 = n(find(abs(n) <= N/4));
+	n2 = n(find(n > N/4));
+	n3 = n(find(n < -N/4));
 	
-	w1 = 1 -6.*(n1./(N/2)).^2.*(1-abs(n1)./(N/2));
-	w2 = 2.*(1-abs(n2)./(N/2)).^3;
-	w3 = 2.*(1-abs(n3)./(N/2)).^3;
-	w = [w3 w1 w2];
+	w1 = 1 -6.*(abs(n1)./(L/2)).^2 + 6*(abs(n1)./(L/2)).^3;
+	w2 = 2.*(1-abs(n2)./(L/2)).^3;
+	w3 = 2.*(1-abs(n3)./(L/2)).^3;
+	w = [w3 w1 w2]';
