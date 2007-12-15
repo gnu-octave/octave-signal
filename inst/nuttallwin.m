@@ -21,17 +21,24 @@
 ## @end deftypefn
 
 function [w] = nuttallwin(L)
-	if (nargin < 1); usage('nuttallwin(x)'); end
-	if(! isscalar(L))
-		error("L must be a number");
-	endif
+	if (nargin < 1 || nargin > 1); usage('nuttallwin(x)'); end
+	
+	if(L < 0)
+		error('L must be positive');
+	end
+	
+	if(L ~= floor(L))
+		L = round(L);
+		warning('L rounded to the nearest integer.');
+	end
 	
 	N = L-1;
 	a0 = 0.3635819;
 	a1 = 0.4891775;
 	a2 = 0.1365995;
 	a3 = 0.0106411;
-	n = -ceil(N/2):N/2;
+	n = -N/2:N/2;
 	w = a0 + a1.*cos(2.*pi.*n./N) + a2.*cos(4.*pi.*n./N) + a3.*cos(6.*pi.*n./N);
+	w = w';
 endfunction;
 	
