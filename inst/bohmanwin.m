@@ -26,10 +26,28 @@ function [w] = bohmanwin(L)
 		error("L must be a number");
 	endif
 	
-	N = L-1;
-	n = -ceil(N/2):N/2;
+	if(L < 0)
+		error('L must be positive');
+	end
 	
-	w = (1-2.*abs(n)./N).*cos(2.*pi.*abs(n)./N) + (1./pi).*sin(2.*pi.*abs(n)./N);
-	w(1) = 0;
-	w(length(w))=0;
+	if(L ~= floor(L))
+		L = round(L);
+		warning('L rounded to the nearest integer.');
+	end
+	
+	if(L == 0)
+		w = [];
+	
+	elseif(L == 1)
+		w = 1;
+		
+	else
+		N = L-1;
+		n = -N/2:N/2;
+	
+		w = (1-2.*abs(n)./N).*cos(2.*pi.*abs(n)./N) + (1./pi).*sin(2.*pi.*abs(n)./N);
+		w(1) = 0;
+		w(length(w))=0;
+		w = w';
+	end
 endfunction;
