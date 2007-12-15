@@ -20,7 +20,7 @@
 ## @end deftypefn
 
 function [y] = gmonopuls(t,fc)
-	if nargin<1, error("Usage : gmonopuls(t,fc)"); end
+	if (nargin<1 || nargin > 2), error("Usage : gmonopuls(t,fc)"); end
 	if nargin<2, fc = 1e3; end
 	if fc < 0 , error("fc must be positive"); end
 	y = 2*sqrt(exp(1)) .* pi.*t.*fc.*exp(-2 .* (pi.*t.*fc).^2);
