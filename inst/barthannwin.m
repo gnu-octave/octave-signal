@@ -22,10 +22,11 @@
 
 function [w] = barthannwin(L)
 	if (nargin < 1); usage('barthannwin(x)'); end
-	if(! isscalar(L))
-		error("L must be a number");
-	endif
 	
+	if(! isscalar(L) || L < 0)
+		error("L must be a positive integer");
+	endif
+	L = round(L);
 	N = L-1;
 	n = 0:N;
 	
