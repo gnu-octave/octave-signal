@@ -30,5 +30,6 @@ function [w] = barthannwin(L)
 	n = 0:N;
 	
 	w = 0.62 -0.48.*abs(n./(L-1) - 0.5)+0.38*cos(2.*pi*(n./(L-1)-0.5));
+	w = w';
 endfunction;
 	
