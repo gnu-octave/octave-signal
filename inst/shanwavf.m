@@ -22,9 +22,14 @@
 function [psi,x] = shanwavf (lb,ub,n,fb,fc)
 	if (nargin < 5); usage('[psi,x] = shanwavf(lb,ub,n,fb,fc)'); end
 	
-	if (n <= 0)
-		error("n must be strictly positive");
+	if (n <= 0 || floor(n) ~= n)
+		error("n must be an integer strictly positive");
 	endif
+	
+	if (fc <= 0 || fb <= 0)
+		error("fc and fb must be strictly positive");
+	endif
+	
 	x = linspace(lb,ub,n);
-	psi = (fc.^0.5).*(sinc(fc.*x).*exp(-2.*i.*pi.*fb.*x));
+	psi = (fb.^0.5).*(sinc(fb.*x).*exp(2.*i.*pi.*fc.*x));
 endfunction
