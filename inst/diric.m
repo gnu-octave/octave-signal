@@ -23,8 +23,8 @@
 function [y] = diric(x,n)
 	if (nargin < 2); usage('diric(x,n)'); end
 	
-	if (n <= 0)
-		error("n must be strictly positive");
+	if (n <= 0 || floor(n) ~= n)
+		error("n must be an integer strictly positive");
 	endif
 	
 	y = sin(n.*x./2)./(n.*sin(x./2));
