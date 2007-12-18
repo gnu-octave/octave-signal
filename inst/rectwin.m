@@ -22,5 +22,5 @@
 
 function w = rectwin(n)
 	if (nargin < 1); usage('rectwin(x)'); end
-	w = ones(n,1);
+	w = ones(round(n),1);
 endfunction
