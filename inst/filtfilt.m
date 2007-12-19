@@ -1,4 +1,5 @@
 ## Copyright (C) 1999 Paul Kienzle
+## Copyright (C) 2007 Francesco Potortì
 ##
 ## This program is free software; you can redistribute it and/or modify
 ## it under the terms of the GNU General Public License as published by
@@ -12,7 +13,7 @@
 ##
 ## You should have received a copy of the GNU General Public License
 ## along with this program; if not, write to the Free Software
-## Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
+## Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 ## usage: y = filtfilt(b, a, x)
 ##
@@ -21,13 +22,7 @@
 ## magnitude response in the process. That's the theory at least.  In
 ## practice the phase correction is not perfect, and magnitude response
 ## is distorted, particularly in the stop band.
-##
-## In this version, I zero-pad the end of the signal to give the reverse
-## filter time to ramp up to the level at the end of the signal.
-## Unfortunately, the degree of padding required is dependent on the
-## nature of the filter and not just its order, so this function needs
-## some work yet.
-##
+####
 ## Example
 ##    [b, a]=butter(3, 0.1);                   % 10 Hz low-pass filter
 ##    t = 0:0.01:1.0;                         % 1 second sample
@@ -39,35 +34,38 @@
 ## 2000 02 pkienzle@kienzle.powernet.co.uk
 ##      - pad with zeros to load up the state vector on filter reverse.
 ##      - add example
+## 2007 12 pot@gnu.org
+##	- use filtic to compute initial and final states
+##      - work for multiple columns as well
 
-## TODO: In Matlab filtfilt `reduces filter startup transients by carefully
-## TODO:    choosing initial conditions, and by prepending onto the input
-## TODO:    sequence a short, reflected piece of the input sequence'.
-## TODO:    Once filtic is written, use that here.
-## TODO: My version seems to have similar quality to matlab, but both are
-## TODO:    pretty bad.  They do remove gross lag errors, though.
-## TODO: Note that if x is really long, it might be worth doing
-## TODO:   the zero padding as a separate call to filter so that the
-## TODO:   vector never has to be copied. E.g.,
-## TODO:      [y, state] = filter(b,a,x); 
-## TODO:      tail = filter(b,a,zeros(1,max(length(b),length(a))),state);
-## TODO:      [tail, state] = filter(b,a,flipXX(tail));
-## TODO:      y = flipXX(filter(b,a,flipXX(y), state));
-## TODO:   Don't know for what n this would be faster, if any, but the
-## TODO:   memory saving might be nice.
+## TODO:  (pkienzle) My version seems to have similar quality to matlab,
+##	but both are pretty bad.  They do remove gross lag errors, though.
+
 
 function y = filtfilt(b, a, x)
   if (nargin != 3)
     usage("y=filtfilt(b,a,x)");
   end
 
-  if (rows(x) == 1)
-    y = filter(b,a,[x, zeros(1,2*max(length(a),length(b)))]);
-    y = fliplr(filter(b,a,fliplr(y))); 
-    y = y(1:length(x));
-  else
-    y = filter(b,a,[x ; zeros(2*max(length(a),length(b)), columns(x))]);
-    y = flipud(filter(b,a,flipud(y))); 
-    y = y(1:rows(x),:);
+  if ((rotate = (rows(x)==1)))	# a row vector
+    x = x(:);			# make it a column vector
   endif
+
+  for (c = 1:columns(x))	# filter all columns, one by one
+    v = x(:,c);			# a column vector
+    ## Compute an approximate final state, use it to compute a
+    ## more precise initial state, iterate once.
+    sf = filtic(b,a,flipud(v)); # approximate final state
+    si = filtic(b,a,flipud(filter(b,a,flipud(v),sf)),v);
+    sf = filtic(b,a,flipud(filter(b,a,v,si)),flipud(v));
+    si = filtic(b,a,flipud(filter(b,a,flipud(v),sf)),v);
+    ## Do forward and reverse filtering
+    v = filter(b,a,v,si);		       # forward filter
+    y(:,c) = flipud(filter(b,a,flipud(v),sf)); # reverse filter
+  endfor
+
+  if (rotate)			# x was a row vector
+    y = rot90(y);		# rotate it back
+  endif
+
 endfunction
