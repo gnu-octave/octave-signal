@@ -41,10 +41,14 @@
   
 function w = kaiser (n, beta)
   
-  if (nargin != 2)
+  if (nargin < 1)
     usage ("kaiser (n, beta)");
   endif
   
+  if (nargin < 2)
+	beta = 0.5;
+  endif
+
   if !(isscalar (n) && (n == round (n)) && (n > 0))
     error ("kaiser:  n has to be a positive integer");
   endif
