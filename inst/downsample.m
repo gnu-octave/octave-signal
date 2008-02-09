@@ -19,6 +19,11 @@ function y = downsample(x,n,phase)
   if nargin<2 || nargin>3, usage('downsample(x,n,[phase]'); end
   if nargin==2, phase = 1; end
 
+  if phase > n
+    warning("This is incompatible with Matlab (phase = 0:n-1). See\
+    octave-forge signal package release notes for details." )
+  end
+
   if isvector(x)
     y = x(phase:n:end);
   else
