@@ -99,6 +99,7 @@ Transforms
  cceps 
  icceps 
  cplxreal
+ bitrevorder
 Power spectrum analysis
  pwelch 
  tfe 
