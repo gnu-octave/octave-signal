@@ -1,4 +1,4 @@
-all: remez.oct medfilt1.oct
+all: remez.oct medfilt1.oct sosfilt.oct
 
 %.oct: %.cc
 	mkoctfile -s $<
