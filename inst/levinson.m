@@ -58,13 +58,13 @@
 
 function [a, v, ref] = levinson (acf, p)
 if ( nargin<1 )
-  error( 'usage: [a,v,ref]=levinson(acf,p)\n', 1);
+  error( "usage: [a,v,ref]=levinson(acf,p)\n");
 elseif( ~isvector(acf) || length(acf)<2 )
-  error( 'levinson: arg 1 (acf) must be vector of length >1\n', 1);
-elseif ( nargin>1 && ( ~isscalar(p) || fix(p)~=p || p>length(acf)-2 ) )
-  error( 'aryule: arg 2 (p) must be integer >0 and <length(acf)-1\n', 1);
+  error( "levinson: arg 1 (acf) must be vector of length >1\n");
+elseif ( nargin>1 && ( ~isscalar(p) || fix(p)~=p ) )
+  error( "levinson: arg 2 (p) must be integer >0\n");
 else
-  if (nargin == 1) p = length(acf) - 1; endif
+  if ((nargin == 1)||(p>=length(acf))) p = length(acf) - 1; endif
   if( columns(acf)>1 ) acf=acf(:); endif      # force a column vector
 
   if nargout < 3 && p < 100
