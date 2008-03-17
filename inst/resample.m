@@ -1,8 +1,26 @@
-## Copyright (C) 2000 Paul Kienzle
+function  [y, h] = resample( x, p, q, h )
+
+## -*- texinfo -*-
+## @deftypefn {Function File}  {[@var{y} @var{h}]=} resample(@var{x},@var{p},@var{q})
+## @deftypefnx {Function File} {@var{y} =} resample(@var{x},@var{p},@var{q},@var{h})
+## Change the sample rate of @var{x} by a factor of @var{p}/@var{q}. This is
+## performed using a polyphase algorithm. The impulse response @var{h} of the antialiasing
+## filter is either specified or either designed with a Kaiser-windowed sinecard.
+## @end deftypefn
+
+## Ref [1] J. G. Proakis and D. G. Manolakis,
+## Digital Signal Processing: Principles, Algorithms, and Applications,
+## 4th ed., Prentice Hall, 2007. Chap. 6
 ##
+## Ref [2] A. V. Oppenheim, R. W. Schafer and J. R. Buck, 
+## Discrete-time signal processing, Signal processing series,
+## Prentice-Hall, 1999
+
+## Copyright (C) 2008 Eric Chassande-Mottin, CNRS (France)
+
 ## This program is free software; you can redistribute it and/or modify
 ## it under the terms of the GNU General Public License as published by
-## the Free Software Foundation; either version 2 of the License, or
+## the Free Software Foundation; either version 3 of the License, or
 ## (at your option) any later version.
 ##
 ## This program is distributed in the hope that it will be useful,
@@ -11,107 +29,166 @@
 ## GNU General Public License for more details.
 ##
 ## You should have received a copy of the GNU General Public License
-## along with this program; If not, see <http://www.gnu.org/licenses/>.
+## along with this program; if not, see .
 
-## usage: y=resample(x,p,q,d)
-##
-## Change the sample rate of x by a factor of p/q.  Note that p and q do
-## not need to be integers since this routine does not use a polyphase
-## rate change algorithm, but instead uses bandlimited interpolation,
-## wherein the continous time signal is estimated by summing the sinc
-## functions of the nearest neighbouring points up to distance d.
-##
-## This is discussed in:
-##     J. O. Smith and P. Gossett (1984). A flexible sampling-rate
-##     conversion method. In ICASSP-84, Volume II, pp. 19.4.1-19.4.2. 
-##     New York: IEEE Press.
-## See the authors page at: http://www-ccrma.stanford.edu/~jos/resample/
-##
-## Note that the resampling is not yet very fast or very good, but it is
-## very flexible.
-##
-## Example
-##    ## Speech example
-##    [x, fs] = auload(file_in_loadpath("sample.wav"));
-##    sound(resample(x,16000,fs), 16000);  # resample at 16 kHz
-##
-##    ## Example from interp1
-##    xf=0:0.05:10.95; yf = sin(2*pi*xf/5);
-##    xp=0:10;         yp = sin(2*pi*xp/5);
-##    r = resample(yp,xp(2),xf(2));
-##    plot(xf,yf,';original;',xf,r,';resample;',xp,yp,'*;;');
-##
-## Note that resample computes all samples up to but not including time
-## n+1. If you are increasing the sample rate, this means that it will
-## generate samples beyond the end of the time range of the original
-## signal. That is why xf must goes all the way to 10.95 in the example.
- 
-## TODO: Fix so that audible clicking goes away.
-## TODO: Change to a faster algorithm.
-## TODO: Test on a chirp signal.
-   
-function y=resample(x,p,q,order,beta)
-  if (nargin < 2 || nargin > 5)
-    usage("y=resample(x,p,q,order)");
+if nargchk(3,4,nargin)
+  usage("resample.m: [y, h] = resample( x, p, q[, h] )");
+end;
+
+if any([p q]<=0)|any([p q]~=floor([p q])),
+  error("resample.m: p and q must be positive integers");
+endif
+
+## simplify decimation and interpolation factors
+
+great_common_divisor=gcd(p,q);
+if (great_common_divisor>1)
+  p=p/great_common_divisor;
+  q=q/great_common_divisor;
+endif
+
+## filter design if required
+
+if (nargin < 4)
+
+  ## properties of the antialiasing filter
+  
+  log10_rejection = -3.0;
+  stopband_cutoff_f = 1.0/(2.0 * max(p,q));
+  roll_off_width = stopband_cutoff_f / 10.0;
+  
+  ## determine filter length
+  ## use empirical formula from [2] Chap 7, Eq. (7.63) p 476
+  
+  rejection_dB = -20.0*log10_rejection;
+  L = ceil((rejection_dB-8.0) / (28.714 * roll_off_width));
+  
+  ## ideal sinc filter
+  
+  t=(-L:L)';
+  ideal_filter=2*p*stopband_cutoff_f*sinc(2*stopband_cutoff_f*t);  
+  
+  ## determine parameter of Kaiser window
+  ## use empirical formula from [2] Chap 7, Eq. (7.62) p 474
+  
+  if ((rejection_dB>=21)&(rejection_dB<=50))
+    beta = 0.5842 * (rejection_dB-21.0)^0.4 + 0.07886 * (rejection_dB-21.0);
+  elseif (rejection_dB>50)
+    beta = 0.1102 * (rejection_dB-8.7);
+  else
+    beta = 0.0;
   endif
+  
+  ## apodize ideal filter response
+  
+  h=kaiser(2*L+1,beta).*ideal_filter;
+  
+endif
 
-  if (nargin < 3), q=1; endif
-  if (nargin < 4), order = 5; endif
+## check if input is a row vector
+isrowvector=false;
+if ((rows(x)==1)&(columns(x)>1))
+   x=x(:);
+   isrowvector=true;
+endif
 
-  ##  ## chain to decimate/interpolate if appropriate
-  ##  if p==1 && q==fix(q)
-  ##    y=decimate(x,q); order?
-  ##    return;
-  ##  elseif q==1 && p==fix(p)
-  ##    y=interp(x,q); order?
-  ##    return;
-  ##  endif
+## check if filter is a vector
+if ~isvector(h)
+  error("resample.m: the filter h should be a vector");
+endif
 
-  transpose = rows(x)==1;
-  if transpose, x = x.'; endif
+Lx = length(x);
+Lh = length(h);
+L = ( Lh - 1 )/2.0;
+Ly = ceil(Lx*p/q);
 
-  ## if rate reduction, apply antialiasing filter first
-  r=p/q;
-  if (r < 1)                 
-    b = fir1(2*order+1, r);
-    x = fftfilt(b, x);
-  endif
+## pre and postpad filter response
 
-  ## Determine the new sampling times, and their distance to the old
-  ## ones.  Note that the new series should be the maximum that can
-  ## be contained in the old series without going over the time
-  ## allotted to the old series.  In short, you have to go a little
-  ## beyond the last sample of the old series if your new sampling
-  ## rate is higher.
-  t=[1:1/r:length(x)+1-1/r]';   # the sampling points of the new series
-  idx = fix(t);                 # the nearest old point
-  t = t-idx;                    # distance to the nearest old point
+nz_pre = floor(q-mod(L,q));
+hpad = prepad(h,Lh+nz_pre);
 
-  ## generate the new series by summing the sinc functions of the
-  ## nearest neighbour points implicit in the continuous time
-  ## expansion of the old series.  This new series is truncated
-  ## to +/- order nearest neighbours.  For convenience, the original
-  ## series is zero-padded before and after, implicitly setting the
-  ## neighbours at the start of the signal to zero.
-  x = [zeros(order,columns(x)) ; x ; zeros(order,columns(x))];
-  y = zeros(length(idx),columns(x));        # the new series
-  for i=-order:order
-    w = sinc(t-i).*(0.5+0.5*cos(pi*(t-i)/(order+0.5))); # hanning window
-    y=y + x(idx+i+order,:).*w(:,ones(size(x,2),1));
-  endfor
+offset = floor((L+nz_pre)/q);
+nz_post = 0;
+while ceil( ( (Lx-1)*p + nz_pre + Lh + nz_post )/q ) - offset < Ly
+    nz_post++;
+endwhile
+hpad = postpad(hpad,Lh + nz_pre + nz_post);
 
-  if transpose, y=y.'; endif
+## filtering
+xfilt = upfirdn(x,hpad,p,q);
+y = xfilt(offset+1:offset+Ly,:);
+
+if isrowvector,
+   y=y.';
+endif
+
 endfunction
 
-%!demo
-%! xf=0:0.05:10.95; yf = sin(2*pi*xf/5);
-%! xp=0:10;      yp = sin(2*pi*xp/5);
-%! r = resample(yp,xp(2),xf(2));
-%! oneplot();
-%! title("confirm that the resampled function matches the original");
-%! plot(xf,yf,';original;',...
-%!    xf,r(1:length(xf)),';resample;',...
-%!    xp,yp,'*;;');
-%! title("");
-%! [x, fs] = auload(file_in_loadpath("sample.wav"));
-%! sound(resample(x,16000,fs), 16000);
+%!test
+%! N=512;
+%! p=3; q=5;
+%! r=p/q;
+%! NN=ceil(r*N);
+%! t=0:N-1;
+%! tt=0:NN-1;
+%! err=zeros(N/2,1);
+%! for n = 0:N/2-1,
+%!   phi0=2*pi*rand;
+%!   f0=n/N;
+%!   x=sin(2*pi*f0*t' + phi0);
+%!   [y,h]=resample(x,p,q);
+%!   xx=sin(2*pi*f0/r*tt' + phi0);
+%!   t0=ceil((length(h)-1)/2/q);
+%!   idx=t0+1:NN-t0;
+%!   err(n+1)=max(abs(y(idx)-xx(idx)));
+%! endfor;
+%! rolloff=.1;
+%! rejection=10^-3;
+%! idx_inband=1:ceil((1-rolloff/2)*r*N/2)-1;
+%! assert(max(err(idx_inband))<rejection);
+
+%!test
+%! N=512;
+%! p=3; q=5;
+%! r=p/q;
+%! NN=ceil(r*N);
+%! t=0:N-1;
+%! tt=0:NN-1;
+%! reject=zeros(N/2,1);
+%! for n = 0:N/2-1,
+%!   phi0=2*pi*rand;
+%!   f0=n/N;
+%!   x=sin(2*pi*f0*t' + phi0);
+%!   [y,h]=resample(x,p,q);
+%!   xx=sin(2*pi*f0/r*tt' + phi0);
+%!   t0=ceil((length(h)-1)/2/q);
+%!   idx=t0+1:NN-t0;
+%!   reject(n+1)=max(abs(y(idx)));  
+%! endfor;
+%! rolloff=.1;
+%! rejection=10^-3;
+%! idx_stopband=ceil((1+rolloff/2)*r*N/2)+1:N/2;
+%! assert(max(reject(idx_stopband))<=rejection);
+
+%!test
+%! N=1024;
+%! p=2; q=7;
+%! r=p/q;
+%! NN=ceil(r*N);
+%! t=0:N-1;
+%! tt=0:NN-1;
+%! err=zeros(N/2,1);
+%! for n = 0:N/2-1,
+%!   phi0=2*pi*rand;
+%!   f0=n/N;
+%!   x=sin(2*pi*f0*t' + phi0);
+%!   [y,h]=resample(x,p,q);
+%!   xx=sin(2*pi*f0/r*tt' + phi0);
+%!   t0=ceil((length(h)-1)/2/q);
+%!   idx=t0+1:NN-t0;
+%!   err(n+1)=max(abs(y(idx)-xx(idx)));
+%! endfor;
+%! rolloff=.1;
+%! rejection=10^-3;
+%! idx_inband=1:ceil((1-rolloff/2)*r*N/2)-1;
+%! assert(max(err(idx_inband))<rejection);
