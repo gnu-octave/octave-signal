@@ -332,6 +332,7 @@ else
   %%
   %% COMPATIBILITY
   %% To select default argument values, "compatib" is used as an array index.
+  %% Index values are   1=native,  2=R11,  3=R12,  4=spectrum.welch
   %%
   %%  argument positions:
   %%  arg_posn = varargin index of window, overlap, Nfft, Fs and conf
@@ -344,16 +345,21 @@ else
   %%
   %%  SPECIFY SOME DEFAULT VALUES for (not all) optional arguments
   %%  Use compatib as array index.
+  %%  Fs = sampling frequency
   Fs        = [ 1.0 2*pi 2*pi 2*pi ];
   Fs        = Fs(compatib);            
+  %%  plot_type: 1='plot'|'squared'; 5='db'|'dB'
   plot_type = [ 1 5 5 5 ];
   plot_type = plot_type(compatib);
+  %%  rm_mean: 3='long-mean'; 0='no-strip'|'none'
   rm_mean   = [ 3 0 0 0 ];
   rm_mean   = rm_mean(compatib);
   %% use max_overlap=x_len-1 because seg_len is not available yet
+  %% units of overlap are different for each version:
+  %%    fraction, samples, or percent
   max_overlap = [ 0.95 x_len-1 x_len-1 95];
   max_overlap = max_overlap(compatib);
-  %% estimate confidence interval
+  %% default confidence interval
   %%  if there are more than 2 return values and if there is a "conf" arg
   conf      = 0.95 * (nargout>2) * (arg_posn(5)>0);
   %%
@@ -693,7 +699,7 @@ else
   n_ffts = 0;
   for start_seg = [1:seg_len-overlap:x_len-seg_len+1]
     end_seg = start_seg+seg_len-1;
-    %% Don't overwrite the zero padding in xx and yy
+    %% Don't truncate/remove the zero padding in xx and yy
     if ( need_Pxx || need_Pxy )
       if ( rm_mean==1 ) % remove mean from segment
         xx(1:seg_len) = window .* ( ...
@@ -717,7 +723,7 @@ else
       fft_y = fft(yy);
     end
     if ( need_Pxx )
-      %% force Pxx to be real
+      %% force Pxx to be real; pgram = periodogram
       pgram = real(fft_x .* conj(fft_x));
       Pxx = Pxx + pgram;
       %% sum of squared periodograms is required for confidence interval
@@ -727,7 +733,7 @@ else
     end
     if ( need_Pxy )
       %% Pxy (cross power spectrum) is complex. Do not force to be real.
-      Pxy = Pxy + fft_x .* conj(fft_y);
+      Pxy = Pxy + fft_y .* conj(fft_x);
     end
     if ( need_Pyy )
       %% force Pyy to be real
@@ -737,8 +743,9 @@ else
   end
   %%
   %% Calculate confidence interval
-  %%    -- incorrectly assumes that periodogram has Gaussian probability
-  %%       distribution (it must be single-sided e.g. Rayleigh distribution)
+  %%    -- incorrectly assumes that the periodogram has Gaussian probability
+  %%       distribution (actually, it has a single-sided (e.g. exponential)
+  %%       distribution.
   %% Sample variance of periodograms is (Vxx-Pxx.^2/n_ffts)/(n_ffts-1).
   %%    This method of calculating variance is more susceptible to round-off
   %%  error, but is quicker, and for double-precision arithmetic and the
@@ -757,7 +764,7 @@ else
   %% For one-sided spectra, contributions from negative frequencies are added 
   %% to the positive side of the spectrum -- but not at zero or Nyquist
   %% (half sampling) frequencies.  This keeps power equal in time and spectral
-  %% domains.
+  %% domains, as required by Parseval theorem.
   %%
   if ( range == 0 )
     if ( ~ rem(Nfft,2) )    %% one-sided, Nfft is even
@@ -865,8 +872,6 @@ else
       if ( n_results > 1 )
         figure();
         end
-      title( char(plot_title(spect_type(ii),:)) );
-      ylabel( 'amplitude' );
       if ( plot_type == 1 )
         plot(freq,[abs(spectra(:,ii)) Vxxxx]);
       elseif ( plot_type == 2 )
@@ -879,16 +884,18 @@ else
         ylabel( 'amplitude (dB)' );
         plot(freq,[10*log10(abs(spectra(:,ii))) 10*log10(abs(Vxxxx))]);
       end
+      title( char(plot_title(spect_type(ii),:)) );
+      ylabel( 'amplitude' );
       %% Plot phase of cross spectrum and transfer function
       if ( spect_type(ii)==2 || spect_type(ii)==3 )
         figure();
-        title( char(plot_title(spect_type(ii),:)) );
-        ylabel( 'phase' );
         if ( plot_type==2 || plot_type==4 )
           semilogx(freq,180/pi*angle(spectra(:,ii)));
         else
           plot(freq,180/pi*angle(spectra(:,ii)));
         end
+        title( char(plot_title(spect_type(ii),:)) );
+        ylabel( 'phase' );
       end
     end %for
   end 
@@ -936,6 +943,7 @@ end
 %! hold on
 %! pwelch(signal,64,[],256,2*pi,'no-strip');
 %! input('4:1 zero padding gives artificial smoothing. Press ENTER', 's' );
+%! figure();
 %! pwelch('psd');
 %! pwelch(signal,'squared');
 %! input('Just like Matlab spectrum.welch(...) defaults. Press ENTER', 's' );
@@ -943,4 +951,5 @@ end
 %! pwelch({});
 %! pwelch(white,signal,'trans','coher','short')
 %! input('Transfer and coherence functions. Press ENTER', 's' );
-%! clearplot
+%! disp('Use "close all" to remove plotting windows.' );
+
