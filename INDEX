@@ -21,6 +21,7 @@ Signals
  meyeraux
  morlet
  shanwavf
+ cmorwavf
 Filtering
  filtfilt 
  filtic 
@@ -117,6 +118,7 @@ Power spectrum analysis
  xcov 
  __power
 Window functions
+ window
  barthannwin
  blackmanharris
  blackmannuttall
