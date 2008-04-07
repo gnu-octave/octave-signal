@@ -17,7 +17,7 @@
 ## -*- texinfo -*-
 ## @deftypefn {Function File} {@var{w} =} window (@var{f}, @var{n}, @var{opts})
 ## Create a @var{n}-point windowing from the function @var{f}. The
-## function @var{f} can be for example @code{@blackman}. Any additional
+## function @var{f} can be for example @code{@@blackman}. Any additional
 ## arguments @var{opt} are passed to the windowing function.
 ## @end deftypefn 
 
