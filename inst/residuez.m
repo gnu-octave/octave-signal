@@ -67,10 +67,12 @@ function [r, p, f, m] = residuez(B, A, tol)
 %
 % J.O. Smith, 9/19/05
   
-if nargin<3, tol=0.001; end
+if nargin==3
+  warning("tolerance ignored");
+end
 NUM = B(:)'; DEN = A(:)';
 % Matlab's residue does not return m (since it is implied by p):
-[r,p,f,m]=residue(conj(fliplr(NUM)),conj(fliplr(DEN)),tol);
+[r,p,f,m]=residue(conj(fliplr(NUM)),conj(fliplr(DEN)));
 p = 1 ./ p;
 r = r .* ((-p) .^m);
 if f, f = conj(fliplr(f)); end

@@ -75,7 +75,9 @@ function [r, p, f, m] = residued(b, a, toler)
 %
 % J.O. Smith, 9/19/05
   
-if nargin<3, toler=0.001; end
+if nargin==3, 
+  warning("tolerance ignored");
+end
 NUM = b(:)';
 DEN = a(:)';
 nb = length(NUM);
@@ -86,7 +88,7 @@ if na<=nb
   NUM = NUM - conv(DEN,f);
   NUM = NUM(nb-na+2:end);
 end
-[r,p,f2,m] = residuez(NUM,DEN,toler);
+[r,p,f2,m] = residuez(NUM,DEN);
 if f2, error('f2 not empty as expected'); end
 
 %!test 
@@ -155,5 +157,5 @@ if f2, error('f2 not empty as expected'); end
 %!test 
 %! B=[1 0 0 0 1]; A=[1 0 0 0 -1];
 %! [r,p,f,m] = residued(B,A);
-%! assert({r,p,f,m},{[-1/2;-j/2;j/2;1/2],[-1;-j;j;1],1,[1;1;1;1]},100*eps);
+%! assert({r,p,f,m},{[-1/2;j/2;1/2;-j/2],[-1;j;1,-j],1,[1;1;1;1]},100*eps);
 %  Verified in maxima: ratsimp(%I/2/(1-%I * d) - %I/2/(1+%I * d)); etc.
