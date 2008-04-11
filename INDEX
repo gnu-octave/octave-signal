@@ -164,4 +164,5 @@ Compatibility
  lp2hp= use <f>sftrans</f>
  lp2lp= use <f>sftrans</f>
  yulewalk=use <f>yulewalker</f>
-
+Utility
+ buffer
