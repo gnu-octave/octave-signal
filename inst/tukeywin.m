@@ -65,9 +65,9 @@ function w = tukeywin(m,r)
     otherwise
       ## cosine-tapered window
       t = linspace(0,1,m)(1:end/2)';
-      w = 1 + cos(pi*(2*t/r-1));
-      w(floor(r*(m-1)/2)+2:end) = 2;
-      w = [w; 2*ones(mod(m,2)); flipud(w)]/2;
+      w = (1 + cos(pi*(2*t/r-1)))/2;
+      w(floor(r*(m-1)/2)+2:end) = 1;
+      w = [w; ones(mod(m,2)); flipud(w)];
 
   endswitch
       
