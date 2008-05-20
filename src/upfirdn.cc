@@ -90,7 +90,7 @@ Upsample, FIR filtering and downsample.@*\n\
 
   double r=p/((double) q);
 
-  int Ly= ceil( ((Lx-1)*p + Lh)/q );
+  int Ly= ceil( ((Lx-1)*p + Lh)/((double) q) );
 
   Matrix y(Ly,cx,0.0);
   
