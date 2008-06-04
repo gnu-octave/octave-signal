@@ -90,7 +90,7 @@ Upsample, FIR filtering and downsample.@*\n\
 
   double r=p/(static_cast<double>(q));
 
-  octave_idx_type Ly= ceil( static_cast<souble>((Lx-1)*p + Lh) / 
+  octave_idx_type Ly= ceil( static_cast<double>((Lx-1)*p + Lh) / 
 			    static_cast<double>(q));
 
   Matrix y(Ly,cx,0.0);
@@ -133,6 +133,7 @@ Upsample, FIR filtering and downsample.@*\n\
     y=y.transpose();
 
   retval(0)=y;
-  
+ 
+  return retval;
 }  
   
