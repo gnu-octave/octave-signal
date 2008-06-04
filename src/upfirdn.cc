@@ -47,8 +47,8 @@ Upsample, FIR filtering and downsample.@*\n\
       return retval; 
     }
 
-  int rx=x.rows();
-  int cx=x.columns();
+  octave_idx_type rx=x.rows();
+  octave_idx_type cx=x.columns();
 
   bool isrowvector=false;
 
@@ -60,7 +60,7 @@ Upsample, FIR filtering and downsample.@*\n\
       isrowvector=true;      
     }
 
-  int Lx=rx;
+  octave_idx_type Lx=rx;
 
   ColumnVector h( args(1).vector_value() );
 
@@ -70,9 +70,9 @@ Upsample, FIR filtering and downsample.@*\n\
       return retval; 
     }
 
-  int Lh=h.length();
+  octave_idx_type Lh=h.length();
 
-  int p=args(2).int_value();
+  octave_idx_type p=args(2).idx_type_value();
 
   if (error_state) 
     { 
@@ -80,7 +80,7 @@ Upsample, FIR filtering and downsample.@*\n\
       return retval; 
     }
 
-  int q=args(3).int_value();
+  octave_idx_type q=args(3).idx_type_value();
 
   if (error_state) 
     { 
@@ -88,32 +88,33 @@ Upsample, FIR filtering and downsample.@*\n\
       return retval; 
     }
 
-  double r=p/((double) q);
+  double r=p/(static_cast<double>(q));
 
-  int Ly= ceil( ((Lx-1)*p + Lh)/((double) q) );
+  octave_idx_type Ly= ceil( static_cast<souble>((Lx-1)*p + Lh) / 
+			    static_cast<double>(q));
 
   Matrix y(Ly,cx,0.0);
   
-  for (int c=0; c<cx; c++)
+  for (octave_idx_type c=0; c<cx; c++)
     {
 
-      int m=0;
+      octave_idx_type m=0;
       while (m<Ly)
 	{
-	  int n=floor(m/r);
-	  int lm=(m*q)%p;
-	  int k=0;
+	  octave_idx_type n=floor(m/r);
+	  octave_idx_type lm=(m*q)%p;
+	  octave_idx_type k=0;
 	  double accum=0.0;
 	  do
 	    {
-	      int ix=n-k;
+	      octave_idx_type ix=n-k;
 	      if (ix>=Lx)
 		{
 		  k++;
 		  continue;
 		}
 	      
-	      int ih=k*p+lm;
+	      octave_idx_type ih=k*p+lm;
 	      if ((ih>=Lh)|(ix<0))
 		break;
 	      
