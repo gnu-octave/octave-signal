@@ -23,7 +23,7 @@
 #include <octave/quit.h>
 #include <octave/variables.h>
 
-template<class MT, class ET>
+template<class MT>
 MT upfirdn (MT &x, ColumnVector &h, octave_idx_type p, octave_idx_type q)
 {
   octave_idx_type rx = x.rows ();
@@ -54,7 +54,7 @@ MT upfirdn (MT &x, ColumnVector &h, octave_idx_type p, octave_idx_type q)
           const octave_idx_type n = floor (m/r);
           const octave_idx_type lm = (m * q) % p;
           octave_idx_type k = 0;
-          ET accum;
+          typename MT::element_type accum;
           accum = 0.0;
           do
             {
@@ -136,7 +136,7 @@ Upsample, FIR filtering and downsample.@*\n\
           return retval; 
         }
 
-      Matrix y = upfirdn<Matrix, double> (x, h, p, q);
+      Matrix y = upfirdn (x, h, p, q);
       retval (0) = y;
     }
   else if (args (0).is_complex_matrix ())
@@ -148,7 +148,7 @@ Upsample, FIR filtering and downsample.@*\n\
           return retval; 
         }
 
-      ComplexMatrix y = upfirdn<ComplexMatrix, std::complex<double> > (x, h, p, q);
+      ComplexMatrix y = upfirdn (x, h, p, q);
       retval (0) = y;
     }
  
