@@ -1,7 +1,6 @@
 $SPCTOOLS= in spline directory of Dennis Brown's <a href="ftp://svr-ftp.eng.cam.ac.uk/pub/comp.speech/tools/spctools">SPCtools</a>
 $TFTB= try <a href="http://www-isis.enst.fr/Applications/tftb/iutsn.univ-nantes.fr/auger/tftb.html">Time-Frequency Tool box</a>
 
-
 signal >> Signal processing
 Signals
  diric 
@@ -101,6 +100,9 @@ Transforms
  icceps 
  cplxreal
  bitrevorder
+ dwt
+ fht
+ ifht
 Power spectrum analysis
  pwelch 
  tfe 
@@ -166,3 +168,7 @@ Compatibility
  yulewalk=use <f>yulewalker</f>
 Utility
  buffer
+ fracshift
+ wkeep
+ wrev
+
