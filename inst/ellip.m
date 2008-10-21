@@ -102,8 +102,8 @@ function [a,b,c,d] = ellip(n, Rp, Rs, W, varargin)
 
   ##Prewarp the digital frequencies
   if digital
-    T = 2;       # sampling frequency of 2 Hz
-    W = tan(pi*W/T);
+    Fs = 2;       # sampling frequency of 2 Hz
+    W = tan(pi*W/Fs);
   endif
 
   ##Generate s-plane poles, zeros and gain
@@ -114,7 +114,7 @@ function [a,b,c,d] = ellip(n, Rp, Rs, W, varargin)
 
   ## Use bilinear transform to convert poles to the z plane
   if digital
-    [zero, pole, gain] = bilinear(zero, pole, gain, T);
+    [zero, pole, gain] = bilinear(zero, pole, gain, Fs);
   endif
 
 

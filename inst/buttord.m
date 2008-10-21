@@ -55,7 +55,7 @@ function [n, Wc] = buttord(Wp, Ws, Rp, Rs)
     warning("buttord: seems to overdesign bandpass and bandreject filters");
   end
 
-  T = 2;
+  Fs = 2;
   
   ## if high pass, reverse the sense of the test
   stop = find(Wp > Ws);
@@ -63,8 +63,8 @@ function [n, Wc] = buttord(Wp, Ws, Rp, Rs)
   Ws(stop) = 1-Ws(stop); # subtract from ones(1,length(stop))
   
   ## warp the target frequencies according to the bilinear transform
-  Ws = (2/T)*tan(pi*Ws./T);
-  Wp = (2/T)*tan(pi*Wp./T);
+  Ws = (2/Fs)*tan(pi*Ws./Fs);
+  Wp = (2/Fs)*tan(pi*Wp./Fs);
   
   ## compute minimum n which satisfies all band edge conditions
   ## the factor 1/length(Wp) is an artificial correction for the
@@ -77,7 +77,7 @@ function [n, Wc] = buttord(Wp, Ws, Rp, Rs)
   Wc = exp(log(Wp) - qp/2/n);
 
   ## unwarp the returned frequency
-  Wc = atan(T/2*Wc)*T/pi;
+  Wc = atan(Fs/2*Wc)*Fs/pi;
   
   ## if high pass, reverse the sense of the test
   Wc(stop) = 1-Wc(stop);

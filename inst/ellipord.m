@@ -55,10 +55,10 @@ endif
 
 
 # sampling frequency of 2 Hz
-T = 2;
+Fs = 2;
 
-Wpw = tan(pi.*Wp./T); # prewarp
-Wsw = tan(pi.*Ws./T); # prewarp
+Wpw = tan(pi.*Wp./Fs); # prewarp
+Wsw = tan(pi.*Ws./Fs); # prewarp
 
 ##pass/stop band to low pass filter transform:
 if (length(Wpw)==2 && length(Wsw)==2)

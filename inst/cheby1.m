@@ -89,8 +89,8 @@ function [a,b,c,d] = cheby1(n, Rp, W, varargin)
 
   ## Prewarp to the band edges to s plane
   if digital
-    T = 2;       # sampling frequency of 2 Hz
-    W = 2/T*tan(pi*W/T);
+    Fs = 2;       # sampling frequency of 2 Hz
+    W = 2/Fs*tan(pi*W/Fs);
   endif
 
   ## Generate splane poles and zeros for the chebyshev type 1 filter
@@ -114,7 +114,7 @@ function [a,b,c,d] = cheby1(n, Rp, W, varargin)
 
   ## Use bilinear transform to convert poles to the z plane
   if digital
-    [zero, pole, gain] = bilinear(zero, pole, gain, T);
+    [zero, pole, gain] = bilinear(zero, pole, gain, Fs);
   endif
 
   ## convert to the correct output form

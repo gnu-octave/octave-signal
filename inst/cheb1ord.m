@@ -44,14 +44,14 @@ function [n, Wc] = cheb1ord(Wp, Ws, Rp, Rs)
     error("cheb1ord: Wp(1)<Ws(1)<Ws(2)<Wp(2) or Ws(1)<Wp(1)<Wp(2)<Ws(2)");
   end
 
-  T = 2;
+  Fs = 2;
 
   ## returned frequency is the same as the input frequency
   Wc = Wp;
 
   ## warp the target frequencies according to the bilinear transform
-  Ws = (2/T)*tan(pi*Ws./T);
-  Wp = (2/T)*tan(pi*Wp./T);
+  Ws = (2/Fs)*tan(pi*Ws./Fs);
+  Wp = (2/Fs)*tan(pi*Wp./Fs);
 
   if (Wp(1) < Ws(1))
     ## low pass
