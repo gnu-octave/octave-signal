@@ -19,7 +19,10 @@
 ## Transform a s-plane filter specification into a z-plane
 ## specification. Filters can be specified in either zero-pole-gain or
 ## transfer function form. The input form does not have to match the
-## output form. T is the sampling frequency represented in the z plane.
+## output form. 1/T is the sampling frequency represented in the z plane.
+##
+## Note: this differs from the bilinear function in the signal processing
+## toolbox, which uses 1/T rather than T.
 ##
 ## Theory: Given a piecewise flat filter design, you can transform it
 ## from the s-plane to the z-plane while maintaining the band edges by
