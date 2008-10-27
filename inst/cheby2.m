@@ -13,7 +13,7 @@
 ## You should have received a copy of the GNU General Public License
 ## along with this program; If not, see <http://www.gnu.org/licenses/>.
 
-## Generate an Chebyshev type II filter with Rs dB of stop band ripple.
+## Generate an Chebyshev type II filter with Rs dB of stop band attenuation.
 ## 
 ## [b, a] = cheby2(n, Rs, Wc)
 ##    low pass filter with cutoff pi*Wc radians
@@ -90,8 +90,8 @@ function [a,b,c,d] = cheby2(n, Rs, W, varargin)
 
   ## Prewarp to the band edges to s plane
   if digital
-    Fs = 2;       # sampling frequency of 2 Hz
-    W = 2/Fs*tan(pi*W/Fs);
+    T = 2;       # sampling frequency of 2 Hz
+    W = 2/T*tan(pi*W/T);
   endif
 
   ## Generate splane poles and zeros for the chebyshev type 2 filter
@@ -123,7 +123,7 @@ function [a,b,c,d] = cheby2(n, Rs, W, varargin)
 
   ## Use bilinear transform to convert poles to the z plane
   if digital
-    [zero, pole, gain] = bilinear(zero, pole, gain, Fs);
+    [zero, pole, gain] = bilinear(zero, pole, gain, T);
   endif
 
   ## convert to the correct output form

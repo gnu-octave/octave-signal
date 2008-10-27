@@ -87,8 +87,8 @@ function [a, b, c, d] = butter (n, W, varargin)
 
   ## Prewarp to the band edges to s plane
   if digital
-    Fs = 2;       # sampling frequency of 2 Hz
-    W = 2/Fs*tan(pi*W/Fs);
+    T = 2;       # sampling frequency of 2 Hz
+    W = 2/T*tan(pi*W/T);
   endif
 
   ## Generate splane poles for the prototype butterworth filter
@@ -104,7 +104,7 @@ function [a, b, c, d] = butter (n, W, varargin)
 
   ## Use bilinear transform to convert poles to the z plane
   if digital
-     [zero, pole, gain] = bilinear(zero, pole, gain, Fs);
+     [zero, pole, gain] = bilinear(zero, pole, gain, T);
   endif
 
   ## convert to the correct output form
