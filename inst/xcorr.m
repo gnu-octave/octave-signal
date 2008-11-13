@@ -24,8 +24,9 @@
 ## Scale is one of:
 ##    'biased'   for correlation=raw/N, 
 ##    'unbiased' for correlation=raw/(N-|lag|), 
-##    'coeff'    for correlation=raw/(correlation at lag 0),
+##    'coeff'    for correlation=raw/(rms(x).rms(y)),
 ##    'none'     for correlation=raw
+##
 ## If Y is omitted, compute autocorrelation.  
 ## If maxlag is omitted, use N-1 where N=max(length(X),length(Y)).
 ## If scale is omitted, use 'none'.
@@ -44,6 +45,9 @@
 ## number of lags k that you need.  If you only need lags 0:k-1 for 
 ## vectors x and y, then the direct sum may be faster:
 ##
+## Ref: Stearns, SD and David, RA (1988). Signal Processing Algorithms.
+##      New Jersey: Prentice-Hall.
+
 ## unbiased:
 ##  ( hankel(x(1:k),[x(k:N); zeros(k-1,1)]) * y ) ./ [N:-1:N-k+1](:)
 ## biased:
@@ -52,9 +56,14 @@
 ## If length(x) == length(y) + k, then you can use the simpler
 ##    ( hankel(x(1:k),x(k:N-k)) * y ) ./ N
 ##
-## Ref: Stearns, SD and David, RA (1988). Signal Processing Algorithms.
-##      New Jersey: Prentice-Hall.
 
+## 2008-11-12  Peter Lanspeary, <pvl@mecheng.adelaide.edu.au>
+##       1) fix incorrectly shifted return value (when X and Y vectors have
+##          unequal length) - bug reported by <stephane.brunner@gmail.com>.
+##       2) scale='coeff' should give R=raw/(rms(x).rms(y)); fixed.
+##       3) restore use of autocorrelation code when isempty(Y).
+##       4) imaginary part of cross correlation had wrong sign; fixed.
+##       5) use R.' rather than R' to correct the shape of the result
 ## 2004-05 asbjorn dot sabo at broadpark dot no
 ##     - Changed definition of cross correlation from 
 ##       sum{x(i)y(y+k)} to sum(x(i)y(i-k)}  (Note sign change.)
@@ -97,7 +106,7 @@ function [R, lags] = xcorr (X, Y, maxlag, scale)
 
   ## assign defaults to arguments which were not passed in
   if isvector(X) 
-    if isempty(Y), Y=X; endif
+    ## if isempty(Y), Y=X; endif  ## this line disables code for autocorr'n
     N = max(length(X),length(Y));
   else
     N = rows(X);
@@ -138,25 +147,26 @@ function [R, lags] = xcorr (X, Y, maxlag, scale)
 
     ## For diagonal (i==j)
     cor = ifft (post .* pre);
-    R(:, 1:P+1:P^2) = conj (cor (1:2*maxlag+1,:));
+    R(:, 1:P+1:P^2) = cor (1:2*maxlag+1,:);
 
     ## For remaining i,j generate xcorr(i,j) and by symmetry xcorr(j,i).
     for i=1:P-1
       j = i+1:P;
-      cor = ifft (pre(:,i*ones(length(j),1)) .* post(:,j));
-      R(:,(i-1)*P+j) = conj (cor (1:2*maxlag+1, :));
-      R(:,(j-1)*P+i) = flipud (cor (1:2*maxlag+1, :));
+      cor = ifft( pre(:,i*ones(length(j),1)) .* post(:,j) );
+      R(:,(i-1)*P+j) = cor(1:2*maxlag+1,:);
+      R(:,(j-1)*P+i) = conj( flipud( cor(1:2*maxlag+1,:) ) );
     endfor
   elseif isempty(Y)
     ## compute autocorrelation of a single vector
-    post = fft (postpad(X,M));
-    cor = ifft (conj(post(:)) .* post(:));
+    post = fft( postpad(X(:),M) );
+    cor = ifft( post .* conj(post) );
     R = [ conj(cor(maxlag+1:-1:2)) ; cor(1:maxlag+1) ];
   else 
     ## compute cross-correlation of X and Y
-    post = fft (postpad(Y,M));
-    pre = fft (postpad(prepad(X,N+maxlag),M));
-    cor = conj (ifft (conj(post(:)) .* pre(:)));
+    ##  If one of X & Y is a row vector, the other can be a column vector.
+    pre  = fft( postpad( prepad( X(:), length(X)+maxlag ), M) );
+    post = fft( postpad( Y(:), M ) );
+    cor = ifft( pre .* conj(post) );
     R = cor(1:2*maxlag+1);
   endif
 
@@ -172,14 +182,26 @@ function [R, lags] = xcorr (X, Y, maxlag, scale)
   elseif strcmp(scale, 'unbiased')
     R = R ./ ( [ N-maxlag:N-1, N, N-1:-1:N-maxlag ]' * ones(1,columns(R)) );
   elseif strcmp(scale, 'coeff')
-    R = R ./ ( ones(rows(R),1) * R(maxlag+1, :) );
+    ## R = R ./ R(maxlag+1) works only for autocorrelation
+    ## For cross correlation coeff, divide by rms(X)*rms(Y).
+    if !isvector(X)
+      ## for matrix (more than 1 column) X
+      rms = sqrt( sumsq(X) );
+      R = R ./ ( ones(rows(R),1) * reshape(rms.'*rms,1,[]) );
+    elseif isempty(Y)
+      ##  for autocorrelation, R(zero-lag) is the mean square.
+      R = R / R(maxlag+1);
+    else
+      ##  for vectors X and Y
+      R = R / sqrt( sumsq(X)*sumsq(Y) );
+    endif
   elseif !strcmp(scale, 'none')
     error("xcorr: scale must be 'biased', 'unbiased', 'coeff' or 'none'");
   endif
     
-  ## correct the shape so that it is the same as the input vector
+  ## correct the shape so that it is the same as the first input vector
   if isvector(X) && P > 1
-    R = R'; 
+    R = R.'; 
   endif
   
   ## return the lag indices if desired
@@ -225,8 +247,8 @@ endfunction
 ##  R = zeros (2*maxlag + 1, 1);
 ##  R(maxlag+1) = X*Y;
 ##  for k=1:maxlag
-##  	R(maxlag+1-i) = X(k+1:N) * Y(1:N-k);
-##  	R(maxlag+1+i) = X(k:N-i) * Y(k+1:N);
+##  	R(maxlag+1-k) = X(k+1:N) * Y(1:N-k);
+##  	R(maxlag+1+k) = X(k:N-k) * Y(k+1:N);
 ##  endfor
 ##endif
 ##--------------------------------------------------------------
