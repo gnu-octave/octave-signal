@@ -85,7 +85,7 @@
 ## is converted to the FIR filter conv(b,fliplr(conj(a))).
 ## For further details, see 
 ## http://ccrma.stanford.edu/~jos/filters/Numerical_Computation_Group_Delay.html
-function [gd,w] = grpdelay(b,a,nfft,whole,Fs) 
+function [gd,w] = grpdelay(b,a=1,nfft=512,whole,Fs) 
 
   if (nargin<1 || nargin>5)
     usage("[g, w]=grpdelay(b [, a [, n [, 'whole' [, Fs]]]])");
