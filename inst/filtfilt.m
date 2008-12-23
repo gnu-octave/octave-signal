@@ -1,5 +1,6 @@
 ## Copyright (C) 1999 Paul Kienzle
-## Copyright (C) 2007 Francesco Potortì
+## Copyright (C) 2007 Francesco PotortÃ¬
+## Copyright (C) 2008 Luca Citi
 ##
 ## This program is free software; you can redistribute it and/or modify
 ## it under the terms of the GNU General Public License as published by
@@ -34,8 +35,13 @@
 ##      - pad with zeros to load up the state vector on filter reverse.
 ##      - add example
 ## 2007 12 pot@gnu.org
-##	- use filtic to compute initial and final states
+##	    - use filtic to compute initial and final states
 ##      - work for multiple columns as well
+## 2008 12 lciti@essex.ac.uk
+##      - fixed instability issues with IIR filters and noisy inputs
+##	    - initial states computed according to Likhterov & Kopeika, 2003
+##      - use of a "reflection method" to reduce end effects
+##      - added some basic tests
 
 ## TODO:  (pkienzle) My version seems to have similar quality to matlab,
 ##	but both are pretty bad.  They do remove gross lag errors, though.
@@ -49,18 +55,36 @@ function y = filtfilt(b, a, x)
   if ((rotate = (rows(x)==1)))	# a row vector
     x = x(:);			# make it a column vector
   endif
+  
+  lx = size(x,1);
+  a = a(:).';
+  b = b(:).';
+  lb = length(b);
+  la = length(a);
+  n = max(lb, la);
+  lrefl = 3 * (n - 1);
+  if la < n, a(n) = 0; end
+  if lb < n, b(n) = 0; end
+
+  ## Compute a the initial state taking inspiration from
+  ## Likhterov & Kopeika, 2003. "Hardware-efficient technique for
+  ##     minimizing startup transients in Direct Form II digital filters"
+  kdc = sum(b) / sum(a);
+  if (abs(kdc) < inf) # neither NaN nor +/- Inf
+    si = fliplr(cumsum(fliplr(b - kdc * a)));
+  else
+    si = zeros(size(a)); # fall back to zero initialization
+  end
+  si(1) = [];
 
   for (c = 1:columns(x))	# filter all columns, one by one
-    v = x(:,c);			# a column vector
-    ## Compute an approximate final state, use it to compute a
-    ## more precise initial state, iterate once.
-    sf = filtic(b,a,flipud(v)); # approximate final state
-    si = filtic(b,a,flipud(filter(b,a,flipud(v),sf)),v);
-    sf = filtic(b,a,flipud(filter(b,a,v,si)),flipud(v));
-    si = filtic(b,a,flipud(filter(b,a,flipud(v),sf)),v);
+    v = [2*x(1,c)-x((lrefl+1):-1:2,c); x(:,c);
+             2*x(end,c)-x((end-1):-1:end-lrefl,c)]; # a column vector
+
     ## Do forward and reverse filtering
-    v = filter(b,a,v,si);		       # forward filter
-    y(:,c) = flipud(filter(b,a,flipud(v),sf)); # reverse filter
+    v = filter(b,a,v,si*v(1));		       # forward filter
+    v = flipud(filter(b,a,flipud(v),si*v(end))); # reverse filter
+    y(:,c) = v((lrefl+1):(lx+lrefl));
   endfor
 
   if (rotate)			# x was a row vector
@@ -68,3 +92,46 @@ function y = filtfilt(b, a, x)
   endif
 
 endfunction
+
+%!error filtfilt ();
+
+%!error filtfilt (1, 2, 3, 4);
+
+%!test
+%! randn('state',0);
+%! r = randn(1,200);
+%! [b,a] = butter(10, [.2, .25]);
+%! yfb = filtfilt(b, a, r);
+%! assert (size(r), size(yfb));
+%! assert (mean(abs(yfb)) < 1e3);
+%! assert (mean(abs(yfb)) < mean(abs(r)));
+%! ybf = fliplr(filtfilt(b, a, fliplr(r)));
+%! assert (mean(abs(ybf)) < 1e3);
+%! assert (mean(abs(ybf)) < mean(abs(r)));
+
+%!test
+%! randn('state',0);
+%! r = randn(1,1000);
+%! s = 10 * sin(pi * 4e-2 * (1:length(r)));
+%! [b,a] = cheby1(2, .5, [4e-4 8e-2]);
+%! y = filtfilt(b, a, r+s);
+%! assert (size(r), size(y));
+%! assert (mean(abs(y)) < 1e3);
+%! assert (corrcoef(s(250:750), y(250:750)) > .95)
+%! [b,a] = butter(2, [4e-4 8e-2]);
+%! yb = filtfilt(b, a, r+s);
+%! assert (mean(abs(yb)) < 1e3);
+%! assert (corrcoef(y, yb) > .99)
+
+%!test
+%! randn('state',0);
+%! r = randn(1,1000);
+%! s = 10 * sin(pi * 4e-2 * (1:length(r)));
+%! [b,a] = butter(2, [4e-4 8e-2]);
+%! y = filtfilt(b, a, [r.' s.']);
+%! yr = filtfilt(b, a, r);
+%! ys = filtfilt(b, a, s);
+%! assert (y, [yr.' ys.']);
+%! y2 = filtfilt(b.', a.', [r.' s.']);
+%! assert (y, y2);
+
