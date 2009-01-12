@@ -100,9 +100,9 @@ function [gd,w] = grpdelay(b,a=1,nfft=512,whole,Fs)
     else % grpdelay(B,A,W)
       Fs = 1;
     end
-    Fs
     w = 2*pi*nfft/Fs;
-    nfft = length(w);
+    nfft = length(w)*2;
+    whole = '';
   else
     if nargin<5
       Fs=1; % return w in radians per sample
@@ -252,9 +252,10 @@ function [gd,w] = grpdelay(b,a=1,nfft=512,whole,Fs)
 
 % ------------------------ TESTS -----------------------
 
-% TEST 0A:a
-%! [gd,w] = grpdelay([0,1]);
-%! [gd,w] = grpdelay([0,1],1);
+%!test % 00
+%! [gd1,w] = grpdelay([0,1]);
+%! [gd2,w] = grpdelay([0,1],1);
+%! assert(gd1,gd2,10*eps);
 
 %!test % 0A
 %! [gd,w] = grpdelay([0,1],1,4);
@@ -282,8 +283,12 @@ function [gd,w] = grpdelay(b,a=1,nfft=512,whole,Fs)
 %! assert(gd,[gd0;-9;gd0;gdm1],20*eps);
 %! assert(f,1/4*[0:3]',10*eps);
 
-%!test % 1:
-%! gd= grpdelay(1,[1,.9],4);
+%!test % 1A:
+%! gd= grpdelay(1,[1,.9],2*pi*[0,0.125,0.25,0.375]);
+%! assert(gd, [-0.47368;-0.46918;-0.44751;-0.32316],1e-5);
+
+%!test % 1B:
+%! gd= grpdelay(1,[1,.9],[0,0.125,0.25,0.375],1);
 %! assert(gd, [-0.47368;-0.46918;-0.44751;-0.32316],1e-5);
 
 %!test % 2:
@@ -296,7 +301,7 @@ function [gd,w] = grpdelay(b,a=1,nfft=512,whole,Fs)
 %! gd=grpdelay(conv(b1,a1f),1,4)-2;
 %! assert(gd, [0.095238;0.239175;0.953846;1.759360],1e-5);
 
-%!test
+%!test % 4
 %! Fs = 8000;
 %! [b, a] = cheby1(3, 3, 2*[1000, 3000]/Fs, 'stop');
 %! [h, w] = grpdelay(b, a, 256, 'half', Fs);
@@ -308,3 +313,10 @@ function [gd,w] = grpdelay(b,a=1,nfft=512,whole,Fs)
 %! assert (h, h2(1:256));
 %! assert (w, w2(1:256));
 
+%!test % 5
+%! a = [1 0 0.9];
+%! b = [0.9 0 1];
+%! [dh, wf] = grpdelay(b, a, 512, 'whole');
+%! [da, wa] = grpdelay(1, a, 512, 'whole');
+%! [db, wb] = grpdelay(b, 1, 512, 'whole');
+%! assert(dh,db+da,1e-5);
