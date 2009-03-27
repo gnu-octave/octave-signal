@@ -715,7 +715,7 @@ else
       if ( rm_mean==1 ) % remove mean from segment
         yy(1:seg_len) = window .* ( ...
           y(start_seg:end_seg) - sum(y(start_seg:end_seg)) / seg_len);
-      elseif ( rm_mean ~= 2 ) % remove linear trend from segment
+      elseif ( rm_mean == 2 ) % remove linear trend from segment
         yy(1:seg_len) = window .* detrend( y(start_seg:end_seg) );
       else % rm_mean==0 or 3
         yy(1:seg_len) = window .* y(start_seg:end_seg);
