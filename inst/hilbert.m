@@ -45,7 +45,8 @@ function f=hilbert(f,N,dim)
   end;
 
   if ~isreal(f)
-    error('HILBERT only works for real-valued signals.');
+    warning ('HILBERT: ignoring imaginary part of signal');
+    f = real (f);
   end;
   
   if nargin<3
