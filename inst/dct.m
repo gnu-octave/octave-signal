@@ -23,7 +23,7 @@
 ## The discrete cosine transform X of x can be defined as follows:
 ##
 ##               N-1
-##   X[k] = w(k) sum x[n] cos (pi (2n-1) k / 2N ),  k = 0, ..., N-1
+##   X[k] = w(k) sum x[n] cos (pi (2n+1) k / 2N ),  k = 0, ..., N-1
 ##               n=0
 ##
 ## with w(0) = sqrt(1/N) and w(k) = sqrt(2/N), k = 1, ..., N-1.  There
@@ -37,7 +37,7 @@
 ## the discrete cosine transform of x at k is as follows:
 ##
 ##          N-1
-##   X[k] = sum 2 x[n] cos (pi (2n-1) k / 2N )
+##   X[k] = sum 2 x[n] cos (pi (2n+1) k / 2N )
 ##          n=0
 ##
 ## which can be computed using:
