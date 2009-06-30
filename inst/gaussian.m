@@ -21,7 +21,7 @@
 ##
 ##     w = exp ( -(a*x)^2/2 )
 ##
-## for x = linspace ( (n-1)/2, (n-1)/2, n ).
+## for x = linspace ( -(n-1)/2, (n-1)/2, n ).
 ##
 ## Width a is measured in frequency units (sample rate/num samples). 
 ## It should be f when multiplying in the time domain, but 1/f when 
