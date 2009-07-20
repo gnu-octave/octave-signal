@@ -69,7 +69,7 @@ function myfwhm = fwhm (x, y, opt)
 	    ind = ind(2:end);
 	end
 	[mx, imax] = max(yy); % protection against constant or (almost) monotonous functions
-	if length(ind) >= 2 && imax > ind(1) && imax < ind(end)
+	if length(ind) >= 2 && imax >= ind(1) && imax <= ind(end)
 	    ind1 = ind(1);
 	    ind2 = ind1 + 1;
     	    xx1 = x(ind1) - yy(ind1) * (x(ind2) - x(ind1)) / (yy(ind2) - yy(ind1));
@@ -85,10 +85,7 @@ function myfwhm = fwhm (x, y, opt)
 %! assert( abs(fwhm(x, y) - 2*pi/3) < 0.01 );
 %!
 %!test
-%! assert( fwhm(-10:10) == 0 );
-%!
-%!test
-%! assert( fwhm(ones(1,50)) == 0 );
+%! assert( fwhm(-10:10) == 0 && fwhm(ones(1,50)) == 0 );
 %!
 %!test
 %! x=-20:1:20;
@@ -98,10 +95,11 @@ function myfwhm = fwhm (x, y, opt)
 %! assert( max(abs(fwhm(x, [y1;y2;y3]') - [20.0/3,7.5,9.25])) < 0.01 );
 %!
 %!test
+%! x=1:3; y=[-1,3,-1]; assert(abs(fwhm(x,y)-0.75)<0.001 && abs(fwhm(x,y,'zero')-0.75)<0.001 && abs(fwhm(x,y,'min')-1.0)<0.001);
+%!
+%!test
 %! x=-10:10; assert( fwhm(x.*x) == 0 );
 %!
 %!test
-%! x=-5:5; assert( abs( fwhm(x, 18-x.*x, 'zero') - 6.0 ) < 0.01);
-%!
-%!test
-%! x=-5:5; assert( abs( fwhm(x, 18-x.*x, 'min') - 7.0 ) < 0.01);
+%! x=-5:5; y=18-x.*x; assert( abs(fwhm(x,y,'zero')-6.0) < 0.001 && abs(fwhm(x,y,'min')-7.0 ) < 0.001);
+
