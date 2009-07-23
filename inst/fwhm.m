@@ -1,41 +1,97 @@
-%% Compute full-width at half maximum (FWHM) for vector or matrix data y,
-%% optionally sampled as y(x). If y is a matrix, return fwhm for each column
-%% as a row vector.
+%% Compute peak full-width at half maximum (FWHM) or at another level of peak
+%% maximum for vector or matrix data y, optionally sampled as y(x). If y is
+%% a matrix, return FWHM for each column as a row vector.
+%%   Syntax:
+%%	f = fwhm({x, } y {, 'zero'|'min' {, 'rlevel', rlevel}})
+%%	f = fwhm({x, } y {, 'alevel', alevel})
+%%   Examples:
 %%	f = fwhm(y)
 %%	f = fwhm(x, y)
 %%	f = fwhm(x, y, 'zero')
 %%	f = fwhm(x, y, 'min')
+%%	f = fwhm(x, y, 'alevel', 15.3)
+%%	f = fwhm(x, y, 'zero', 'rlevel', 0.5)
+%%	f = fwhm(x, y, 'min',  'rlevel', 0.1)
 %%
-%% The default option 'zero' computes fwhm at half maximum, i.e. 0.5*max(y). 
+%% The default option 'zero' computes fwhm at half maximum, i.e. 0.5*max(y).
 %% The option 'min' computes fwhm at the middle curve, i.e. 0.5*(min(y)+max(y)).
 %%
+%% The option 'rlevel' computes full-width at the given relative level of peak
+%% profile, i.e. at rlevel*max(y) or rlevel*(min(y)+max(y)), respectively.
+%% For example, fwhm(..., 'rlevel', 0.1) computes full width at 10 % of peak
+%% maximum with respect to zero or minimum; FWHM is equivalent to
+%% fwhm(..., 'rlevel', 0.5).
+%%
+%% The option 'alevel' computes full-width at the given absolute level of y.
+%%
 %% Return 0 if FWHM does not exist (e.g. monotonous function or the function
-%% does not cut horizontal line at 0.5*max(y) or 0.5(max(y)+min(y)),
-%% respectively).
+%% does not cut horizontal line at rlevel*max(y) or rlevel*(max(y)+min(y)) or
+%% alevel, respectively).
 
 %% Compatibility: Octave 3.x, Matlab
 %% Author: Petr Mikulik
-%% Version: 20. 7. 2009
+%% Version: 23. 7. 2009
 %% This program is public domain.
 
 
-function myfwhm = fwhm (x, y, opt)
+function myfwhm = fwhm (y, varargin)
 
-    if nargin < 1 || nargin > 3
-	error('1, 2 or 3 input arguments required');
+    if nargin < 1 || nargin > 5
+	error('1 to 5 input arguments required');
     end
+    opt = 'zero';
+    is_alevel = 0;
+    level = 0.5;
     if nargin==1
-	y = x;
 	x = 1:length(y);
-	opt = 'zero';
-    elseif nargin==2
-	opt = 'zero';
+    else
+	if ischar(varargin{1})
+	    x = 1:length(y);
+	    k = 1;
+	else
+	    x = y;
+	    y = varargin{1};
+	    k = 2;
+	end
+	while k <= length(varargin)
+	    if strcmp(varargin{k}, 'alevel')
+		is_alevel = 1;
+		k = k+1;
+		if k > length(varargin)
+		    error('option "alevel" requires an argument');
+		end
+		level = varargin{k};
+		if ~isreal(level) || length(level) > 1
+		    error('argument of "alevel" must be real number');
+		end
+		k = k+1;
+		break
+	    end
+	    if any(strcmp(varargin{k}, {'zero', 'min'}))
+		opt = varargin{k};
+		k = k+1;
+	    end
+	    if k > length(varargin) break; end
+	    if strcmp(varargin{k}, 'rlevel')
+		k = k+1;
+		if k > length(varargin)
+		    error('option "rlevel" requires an argument');
+		end
+		level = varargin{k};
+		if ~isreal(level) || length(level) > 1 || level(1) < 0 || level(:) > 1
+		    error('argument of "rlevel" must be real number from 0 to 1 (it is 0.5 for fwhm)');
+		end
+		k = k+1;
+		break
+	    end
+	    break
+	end
+	if k ~= length(varargin)+1
+	    error('fwhm: extraneous option(s)');
+	end
     end
 
-    if ~ischar(opt) || ~any(strcmp(opt, {'zero', 'min'}))
-	error('opt must be "zero" or "min"');
-    end
-
+    % test the y matrix
     [nr, nc] = size(y);
     if (nr == 1 && nc > 1)
 	y = y'; nr = nc; nc = 1;
@@ -46,12 +102,17 @@ function myfwhm = fwhm (x, y, opt)
     end
 
     % Shift matrix columns so that y(+-xfwhm) = 0:
-    if strcmp(opt, 'zero')
-	% case: full-width at half maximum
-	y = y - 0.5 * repmat(max(y), nr, 1);
+    if is_alevel
+	    % case: full-width at the given absolute position
+	    y = y - level;
     else
-	% case: full-width above background
-	y = y - 0.5 * repmat((max(y) + min(y)), nr, 1);
+	if strcmp(opt, 'zero')
+	    % case: full-width at half maximum
+	    y = y - level * repmat(max(y), nr, 1);
+	else
+	    % case: full-width above background
+	    y = y - level * repmat((max(y) + min(y)), nr, 1);
+    	end
     end
 
     % Trial for a "vectorizing" calculation of fwhm (i.e. all
@@ -98,8 +159,14 @@ function myfwhm = fwhm (x, y, opt)
 %! x=1:3; y=[-1,3,-1]; assert(abs(fwhm(x,y)-0.75)<0.001 && abs(fwhm(x,y,'zero')-0.75)<0.001 && abs(fwhm(x,y,'min')-1.0)<0.001);
 %!
 %!test
+%! x=1:3; y=[-1,3,-1]; assert(abs(fwhm(x,y, 'rlevel', 0.1)-1.35)<0.001 && abs(fwhm(x,y,'zero', 'rlevel', 0.1)-1.35)<0.001 && abs(fwhm(x,y,'min', 'rlevel', 0.1)-1.40)<0.001);
+%!
+%!test
+%! x=1:3; y=[-1,3,-1]; assert(abs(fwhm(x,y, 'alevel', 2.5)-0.25)<0.001 && abs(fwhm(x,y,'alevel', -0.5)-1.75)<0.001);
+%!
+%!test
 %! x=-10:10; assert( fwhm(x.*x) == 0 );
 %!
 %!test
-%! x=-5:5; y=18-x.*x; assert( abs(fwhm(x,y,'zero')-6.0) < 0.001 && abs(fwhm(x,y,'min')-7.0 ) < 0.001);
+%! x=-5:5; y=18-x.*x; assert( abs(fwhm(y)-6.0) < 0.001 && abs(fwhm(x,y,'zero')-6.0) < 0.001 && abs(fwhm(x,y,'min')-7.0 ) < 0.001);
 
