@@ -23,7 +23,7 @@
 ## The inverse discrete cosine transform x of X can be defined as follows:
 ##
 ##          N-1
-##   x[n] = sum w(k) X[k] cos (pi (2n+1) k / 2N ),  k = 0, ..., N-1
+##   x[n] = sum w(k) X[k] cos (pi (2n+1) k / 2N ),  n = 0, ..., N-1
 ##          k=0
 ##
 ## with w(0) = sqrt(1/N) and w(k) = sqrt(2/N), k = 1, ..., N-1
