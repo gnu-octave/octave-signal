@@ -42,13 +42,12 @@ function T = cheb (n, x)
   endif
 				# avoid resizing latencies
   T = zeros(size(x));
-  
-  ind = x<=1;
+  ind = abs (x) <= 1;
   if (max(size(ind)))
     T(ind) = cos(n*acos(x(ind)));
   endif
 
-  ind = x>1;
+  ind = abs (x) > 1;
   if (max(size(ind)))
     T(ind) = cosh(n*acosh(x(ind)));
   endif
