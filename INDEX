@@ -85,6 +85,7 @@ FIR filter design
  remezord 
  sgolay 
  qp_kaiser
+ cl2bp
 Transforms
  czt 
  dctmtx 
