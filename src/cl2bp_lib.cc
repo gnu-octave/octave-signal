@@ -175,7 +175,7 @@ static void calcAx(MallocArray<double>& Ax, int m, int L) {
 }
 
 //-----------------------------------------------------------------------------------------------------------
-/*
+#ifdef CL2BP_LOGGING
 static double L2error(const MallocArray<double>& x, const MallocArray<double>& w, int L, double w1, double w2) {
   double xx, ww, sumerr, pi = M_PI;
   int i;
@@ -186,7 +186,7 @@ static double L2error(const MallocArray<double>& x, const MallocArray<double>& w
   }
   return sumerr;
 }
-*/
+#endif // CL2BP_LOGGING
 //-----------------------------------------------------------------------------------------------------------
 static double CHerror(double *wmin, const MallocArray<double>& x, const MallocArray<double>& w,
   int L, double w1, double w2) {
