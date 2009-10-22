@@ -127,8 +127,12 @@ function [R, lags] = xcorr (X, Y, maxlag, scale)
   if !isscalar(maxlag) && !isempty(maxlag) 
     error("xcorr: maxlag must be a scalar"); 
   endif
-  if maxlag>N-1, 
-    error("xcorr: maxlag must be less than length(X)"); 
+  if (maxlag > N-1)
+    pad_result = maxlag - (N - 1);
+    maxlag = N - 1;
+    %error("xcorr: maxlag must be less than length(X)"); 
+  else
+    pad_result = 0;
   endif
   if isvector(X) && isvector(Y) && length(X) != length(Y) && \
 	!strcmp(scale,'none')
@@ -204,8 +208,12 @@ function [R, lags] = xcorr (X, Y, maxlag, scale)
     R = R.'; 
   endif
   
+  ## Pad result if necesary
+  R = [zeros(1, pad_result), R, zeros(1, pad_result)];
+  
   ## return the lag indices if desired
   if nargout == 2
+    maxlag += pad_result;
     lags = [-maxlag:maxlag];
   endif
 
