@@ -102,11 +102,11 @@ function zplane(z, p)
   axis(1.05*[xmin, xmax, ymin, ymax]);
   if (!isempty(p))
     h = plot(real(p), imag(p), "bx");
-    set (h, 'MarkerSize', 2);
+    set (h, 'MarkerSize', 7);
   endif
   if (!isempty(z)) 
     h = plot(real(z), imag(z), "bo");
-    set (h, 'MarkerSize', 2);
+    set (h, 'MarkerSize', 7);
   endif
   hold off;
 endfunction
