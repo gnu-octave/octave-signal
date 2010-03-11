@@ -258,7 +258,7 @@ else
       %% complex data, polynomial method
       %%  user-defined and internally-generated frequencies
       psd = psd(1:freq_len)+psd(fft_len:-1:freq_len+1);
-      end
+    end
   %% 
   %% range='shift'
   %%   disabled for user-supplied frequencies
@@ -267,7 +267,7 @@ else
     len2 = fix((fft_len+1)/2);
     psd  = [psd(len2+1:fft_len); psd(1:len2)];
     freq = [freq(len2+1:fft_len)-Fs; freq(1:len2)];
-    end
+  end
   %%
   %% Plot the spectrum if there are no return variables.
   if ( nargout >= 2 )
@@ -286,7 +286,6 @@ else
       loglog(freq,psd);
     elseif ( plot_type == 5 )
       plot(freq,10*log10(psd));
-      end
     end
   end
 end
