@@ -32,12 +32,12 @@ function [w] = nuttallwin(L)
 	end
 	
 	N = L-1;
-	a0 = 0.3635819;
-	a1 = 0.4891775;
-	a2 = 0.1365995;
-	a3 = 0.0106411;
+	a0 = 0.355768;
+	a1 = 0.487396;
+	a2 = 0.144232;
+	a3 = 0.012604;
 	n = -N/2:N/2;
 	w = a0 + a1.*cos(2.*pi.*n./N) + a2.*cos(4.*pi.*n./N) + a3.*cos(6.*pi.*n./N);
 	w = w';
-endfunction;
+endfunction
 	
