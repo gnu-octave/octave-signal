@@ -32,4 +32,5 @@ function [w] = blackmannuttall(L)
 	a3 = 0.0106411;
         n = 0:N;
 	w = a0 - a1.*cos(2.*pi.*n./N) + a2.*cos(4.*pi.*n./N) - a3.*cos(6.*pi.*n./N);
+	w = w.';
 endfunction;
