@@ -57,6 +57,9 @@
 ##    ( hankel(x(1:k),x(k:N-k)) * y ) ./ N
 ##
 
+## 2010-04  Peter Lanspeary, <peter.lanspeary@.adelaide.edu.au>
+##       Fix failure to pad result with zeros when excess lags are required.
+##       Bug reported by Paul Ortyl <ortylp@3miasto.net.pl>
 ## 2008-11-12  Peter Lanspeary, <pvl@mecheng.adelaide.edu.au>
 ##       1) fix incorrectly shifted return value (when X and Y vectors have
 ##          unequal length) - bug reported by <stephane.brunner@gmail.com>.
@@ -90,7 +93,8 @@ function [R, lags] = xcorr (X, Y, maxlag, scale)
     usage ("[c, lags] = xcorr(x [, y] [, h] [, scale])");
   endif
 
-  ## assign arguments from list
+  ## assign arguments that are missing from the list
+  ## or reassign (right shift) them according to data type
   if nargin==1
     Y=[]; maxlag=[]; scale=[];
   elseif nargin==2
@@ -124,9 +128,16 @@ function [R, lags] = xcorr (X, Y, maxlag, scale)
   if !isvector(X) && !isempty(Y)
     error("xcorr: X must be a vector if Y is specified");
   endif
-  if !isscalar(maxlag) && !isempty(maxlag) 
-    error("xcorr: maxlag must be a scalar"); 
+  if !isempty(maxlag) && !isscalar(maxlag) && !isreal(maxlag) && \
+      fix(maxlag)!=maxlag
+    error("xcorr: maxlag must be a (scalar) non-negative integer"); 
   endif
+  ##
+  ## sanity check on number of requested lags
+  ##   Correlations for lags in excess of +/-(N-1)
+  ##    (a) are not calculated by the FFT algorithm,
+  ##    (b) are all zero; so provide them by padding
+  ##        the results (with zeros) before returning.
   if (maxlag > N-1)
     pad_result = maxlag - (N - 1);
     maxlag = N - 1;
@@ -203,13 +214,18 @@ function [R, lags] = xcorr (X, Y, maxlag, scale)
     error("xcorr: scale must be 'biased', 'unbiased', 'coeff' or 'none'");
   endif
     
-  ## correct the shape so that it is the same as the first input vector
+  ## Pad result if necessary
+  ##  (most likely is not required, use "if" to avoid uncessary code)
+  ## At this point, lag varies with the first index in R;
+  ##  so pad **before** the transpose.
+  if pad_result
+    R_pad = zeros(pad_result,columns(R));
+    R = [R_pad; R; R_pad];
+  endif
+  ## Correct the shape (transpose) so it is the same as the first input vector
   if isvector(X) && P > 1
     R = R.'; 
   endif
-  
-  ## Pad result if necesary
-  R = [zeros(1, pad_result), R, zeros(1, pad_result)];
   
   ## return the lag indices if desired
   if nargout == 2
