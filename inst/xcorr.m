@@ -15,35 +15,65 @@
 
 ## usage: [R, lag] = xcorr (X [, Y] [, maxlag] [, scale])
 ##
-## Compute correlation R_xy of X and Y for various lags k:  
+## Estimate the cross correlation R_xy(k) of vector arguments X and Y
+## or, if Y is omitted, estimate autocorrelation R_xx(k) of vector X,
+## for a range of lags k specified by  argument "maxlag".  If X is a
+## matrix, each column of X is correlated with itself and every other
+## column.
 ##
-##    R_xy(k) = sum_{i=1}^{N-k}{x_i y_{i-k}}/(N-k),  for k >= 0
-##    R_xy(k) = R_yx(-k),  for k <= 0
+## The cross-correlation estimate between vectors "x" and "y" (of
+## length N) for lag "k" is given by 
+##    R_xy(k) = sum_{i=1}^{N}{x_{i+k} conj(y_i),
+## where data not provided (for example x(-1), y(N+1)) is zero.
 ##
-## Returns R(k+maxlag+1)=Rxy(k) for lag k=[-maxlag:maxlag].
-## Scale is one of:
-##    'biased'   for correlation=raw/N, 
-##    'unbiased' for correlation=raw/(N-|lag|), 
-##    'coeff'    for correlation=raw/(rms(x).rms(y)),
-##    'none'     for correlation=raw
+## ARGUMENTS
+##  X       [non-empty; real or complex; vector or matrix] data
 ##
-## If Y is omitted, compute autocorrelation.  
-## If maxlag is omitted, use N-1 where N=max(length(X),length(Y)).
-## If scale is omitted, use 'none'.
+##  Y       [real or complex vector] data
+##          If X is a matrix (not a vector), Y must be omitted.
+##          Y may be omitted if X is a vector; in this case xcorr
+##          estimates the autocorrelation of X.
 ##
-## If X is a matrix, computes the cross correlation of each column
-## against every other column for every lag.  The resulting matrix has
-## 2*maxlag+1 rows and P^2 columns where P is columns(X). That is,
-##    R(k+maxlag+1,P*(i-1)+j) == Rij(k) for lag k=[-maxlag:maxlag],
-## so
-##    R(:,P*(i-1)+j) == xcorr(X(:,i),X(:,j))
-## and
-##    reshape(R(k,:),P,P) is the cross-correlation matrix for X(k,:).
+##  maxlag  [integer scalar] maximum correlation lag
+##          If omitted, the default value is N-1, where N is the
+##          greater of the lengths of X and Y or, if X is a matrix,
+##          the number of rows in X.
 ##
-## xcorr computes the cross correlation using an FFT, so the cost is
-## dependent on the length N of the vectors and independent of the
-## number of lags k that you need.  If you only need lags 0:k-1 for 
-## vectors x and y, then the direct sum may be faster:
+##  scale   [character string] specifies the type of scaling applied
+##          to the correlation vector (or matrix). is one of:
+##    'none'      return the unscaled correlation, R,
+##    'biased'    return the biased average, R/N, 
+##    'unbiased'  return the unbiassed average, R(k)/(N-|k|), 
+##    'coeff'     return the correlation coefficient, R/(rms(x).rms(y)),
+##          where "k" is the lag, and "N" is the length of X.
+##          If omitted, the default value is "none".
+##          If Y is supplied but does not have the ame length as X,
+##          scale must be "none".
+##          
+## RETURNED VARIABLES
+##  R       array of correlation estimates
+##  lag     row vector of correlation lags [-maxlag:maxlag]
+##
+##  The array of correlation estimates has one of the following forms.
+##    (1) Cross-correlation estimate if X and Y are vectors.
+##    (2) Autocorrelation estimate if is a vector and Y is omitted,
+##    (3) If X is a matrix, R is an matrix containing the cross-
+##        correlation estimate of each column with every other column.
+##        Lag varies with the first index so that R has 2*maxlag+1
+##        rows and P^2 columns where P is the number of columns in X.
+##        If Rij(k) is the correlation between columns i and j of X
+##             R(k+maxlag+1,P*(i-1)+j) == Rij(k)
+##        for lag k in [-maxlag:maxlag], or
+##             R(:,P*(i-1)+j) == xcorr(X(:,i),X(:,j)).
+##        "reshape(R(k,:),P,P)" is the cross-correlation matrix for X(k,:).
+##
+
+## The cross-correlation estimate is calculated by a "spectral" method
+## in which the FFT of the first vector is multiplied element-by-element
+## with the FFT of second vector.  The computational effort depends on
+## the length N of the vectors and is independent of the number of lags
+## requested.  If you only need a few lags, the "direct sum" method may
+## be faster:
 ##
 ## Ref: Stearns, SD and David, RA (1988). Signal Processing Algorithms.
 ##      New Jersey: Prentice-Hall.
@@ -58,8 +88,9 @@
 ##
 
 ## 2010-04  Peter Lanspeary, <peter.lanspeary@.adelaide.edu.au>
-##       Fix failure to pad result with zeros when excess lags are required.
-##       Bug reported by Paul Ortyl <ortylp@3miasto.net.pl>
+##       1) Fix failure to pad result with zeros when excess lags required.
+##       2) Improve documentation string.
+##       3) Fix argument checks.
 ## 2008-11-12  Peter Lanspeary, <pvl@mecheng.adelaide.edu.au>
 ##       1) fix incorrectly shifted return value (when X and Y vectors have
 ##          unequal length) - bug reported by <stephane.brunner@gmail.com>.
@@ -108,7 +139,7 @@ function [R, lags] = xcorr (X, Y, maxlag, scale)
     if isscalar(Y), maxlag=Y; Y=[]; endif
   endif
 
-  ## assign defaults to arguments which were not passed in
+  ## assign defaults to missing arguments
   if isvector(X) 
     ## if isempty(Y), Y=X; endif  ## this line disables code for autocorr'n
     N = max(length(X),length(Y));
@@ -119,18 +150,17 @@ function [R, lags] = xcorr (X, Y, maxlag, scale)
   if isempty(scale), scale='none'; endif
 
   ## check argument values
-  if isscalar(X) || ischar(X) || isempty(X)
+  if isempty(X) || isscalar(X) || ischar(Y) || ! ismatrix(X)
     error("xcorr: X must be a vector or matrix"); 
   endif
   if isscalar(Y) || ischar(Y) || (!isempty(Y) && !isvector(Y))
     error("xcorr: Y must be a vector");
   endif
-  if !isvector(X) && !isempty(Y)
+  if !isempty(Y) && !isvector(X)
     error("xcorr: X must be a vector if Y is specified");
   endif
-  if !isempty(maxlag) && !isscalar(maxlag) && !isreal(maxlag) && \
-      fix(maxlag)!=maxlag
-    error("xcorr: maxlag must be a (scalar) non-negative integer"); 
+  if !isscalar(maxlag) || !isreal(maxlag) || maxlag<0 || fix(maxlag)!=maxlag
+    error("xcorr: maxlag must be a single non-negative integer"); 
   endif
   ##
   ## sanity check on number of requested lags
@@ -153,18 +183,23 @@ function [R, lags] = xcorr (X, Y, maxlag, scale)
   P = columns(X);
   M = 2^nextpow2(N + maxlag);
   if !isvector(X) 
-    ## For matrix X, compute cross-correlation of all columns
+    ## For matrix X, correlate each column "i" with all other "j" columns
     R = zeros(2*maxlag+1,P^2);
 
-    ## Precompute the padded and transformed `X' vectors
+    ## do FFTs of padded column vectors
     pre = fft (postpad (prepad (X, N+maxlag), M) ); 
     post = conj (fft (postpad (X, M)));
 
-    ## For diagonal (i==j)
+    ## do autocorrelations (each column with itself)
+    ##  -- if result R is reshaped to 3D matrix (i.e. R=reshape(R,M,P,P))
+    ##     the autocorrelations are on leading diagonal columns of R,
+    ##     where i==j in R(:,i,j)
     cor = ifft (post .* pre);
     R(:, 1:P+1:P^2) = cor (1:2*maxlag+1,:);
 
-    ## For remaining i,j generate xcorr(i,j) and by symmetry xcorr(j,i).
+    ## do the cross correlations
+    ##   -- these are the off-diagonal colummn of the reshaped 3D result
+    ##      matrix -- i!=j in R(:,i,j)
     for i=1:P-1
       j = i+1:P;
       cor = ifft( pre(:,i*ones(length(j),1)) .* post(:,j) );
@@ -226,7 +261,7 @@ function [R, lags] = xcorr (X, Y, maxlag, scale)
   if isvector(X) && P > 1
     R = R.'; 
   endif
-  
+
   ## return the lag indices if desired
   if nargout == 2
     maxlag += pad_result;
