@@ -51,8 +51,8 @@ function y = filtfilt(b, a, x)
   if (nargin != 3)
     usage("y=filtfilt(b,a,x)");
   end
-
-  if ((rotate = (rows(x)==1)))	# a row vector
+  rotate = (size(x,1)==1);
+  if rotate,			# a row vector
     x = x(:);			# make it a column vector
   endif
   
@@ -77,7 +77,7 @@ function y = filtfilt(b, a, x)
   end
   si(1) = [];
 
-  for (c = 1:columns(x))	# filter all columns, one by one
+  for (c = 1:size(x,2))	# filter all columns, one by one
     v = [2*x(1,c)-x((lrefl+1):-1:2,c); x(:,c);
              2*x(end,c)-x((end-1):-1:end-lrefl,c)]; # a column vector
 
