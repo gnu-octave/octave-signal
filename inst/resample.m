@@ -97,7 +97,7 @@ if ~isvector(h)
   error("resample.m: the filter h should be a vector");
 endif
 
-Lx = length(x);
+Lx = rows(x);
 Lh = length(h);
 L = ( Lh - 1 )/2.0;
 Ly = ceil(Lx*p/q);
