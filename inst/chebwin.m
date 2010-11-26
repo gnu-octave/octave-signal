@@ -91,6 +91,8 @@ function w = chebwin (n, at)
       w = w/w(2);
       w = [w(M:-1:2) w(2:M)]';
     endif
-  endif  
+  endif 
+  
+  w = w ./ max (w (:)); 
 end
 
