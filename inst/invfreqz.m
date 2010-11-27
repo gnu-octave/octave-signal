@@ -44,9 +44,11 @@
 
 % TODO: check invfreq.m for todo's
 
-function [B,A] = invfreqz(H,F,nB,nA,W,iter,tol,tr)
+function [B, A, SigN] = invfreqz(H, F, nB, nA, W, iter, tol, tr, varargin)
 
-if nargin < 8
+if nargin < 9
+  varargin = {};
+  if nargin < 8
     tr = '';
     if nargin < 7
         tol = [];
@@ -57,26 +59,35 @@ if nargin < 8
             end
         end
     end
+  end
 end
 
 
-
 % now for the real work
-[B,A] = invfreq(H,F,nB,nA,W,iter,tol,tr,'z');
+[B, A, SigN] = invfreq(H, F, nB, nA, W, iter, tol, tr, 'z', varargin{:});
+
 endfunction
 
 %!demo
-%! order = 12; % order of test filter
+%! order = 9; % order of test filter
+%! % going to 10 or above leads to numerical instabilities and large errors
 %! fc = 1/2;   % sampling rate / 4
 %! n = 128;    % frequency grid size
-%! [B,A] = butter(order,fc);
-%! [H,w] = freqz(B,A,n);
-%! [Bh,Ah] = invfreqz(H,w,order,order);
-%! [Hh,wh] = freqz(Bh,Ah,n);
+%! [B0, A0] = butter(order, fc);
+%! [H0, w] = freqz(B0, A0, n);
+%! Nn = (randn(size(w))+j*randn(size(w)))/sqrt(2);
+%! [Bh, Ah, Sig0] = invfreqz(H0, w, order, order);
+%! [Hh, wh] = freqz(Bh, Ah, n);
+%! [BLS, ALS, SigLS] = invfreqz(H0+1e-5*Nn, w, order, order, [], [], [], [], "method", "LS");
+%! HLS = freqz(BLS, ALS, n);
+%! [BTLS, ATLS, SigTLS] = invfreqz(H0+1e-5*Nn, w, order, order, [], [], [], [], "method", "TLS");
+%! HTLS = freqz(BTLS, ATLS, n);
+%! [BMLS, AMLS, SigMLS] = invfreqz(H0+1e-5*Nn, w, order, order, [], [], [], [], "method", "QR");
+%! HMLS = freqz(BMLS, AMLS, n);
 %! xlabel("Frequency (rad/sample)");
 %! ylabel("Magnitude");
-%! plot(w,[abs(H);abs(Hh)])
+%! plot(w,[abs(H0) abs(Hh)])
 %! legend('Original','Measured');
-%! err = norm(H-Hh);
+%! err = norm(H0-Hh);
 %! disp(sprintf('L2 norm of frequency response error = %f',err));
 
