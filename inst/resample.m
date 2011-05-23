@@ -35,7 +35,7 @@ if nargchk(3,4,nargin)
   usage("resample.m: [y, h] = resample( x, p, q[, h] )");
 end;
 
-if any([p q]<=0)|any([p q]~=floor([p q])),
+if any([p q]<=0) || any([p q]~=floor([p q])),
   error("resample.m: p and q must be positive integers");
 endif
 
