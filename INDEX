@@ -71,6 +71,7 @@ IIR Filter design
  bilinear 
  impinvar 
  ellipdemo
+ iirlp2mb
 FIR filter design
  fir1 
  fir2 
