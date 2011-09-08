@@ -1,4 +1,4 @@
-## Copyright (C) 2001 Paulo Neis
+## Copyright (C) 2001 Paulo Neis <p_neis@yahoo.com.br>
 ##
 ## This program is free software; you can redistribute it and/or modify
 ## it under the terms of the GNU General Public License as published by
@@ -12,7 +12,6 @@
 ##
 ## You should have received a copy of the GNU General Public License
 ## along with this program; If not, see <http://www.gnu.org/licenses/>.
-## 
 
 ## usage: ws = __ellip_ws(n, rp, rs)
 ##
@@ -23,18 +22,14 @@
 ##
 ## - Serra, Celso Penteado, Teoria e Projeto de Filtros, Campinas: CARTGRAF, 
 ##   1983.
-## Author: Paulo Neis <p_neis@yahoo.com.br>
 
 function ws=__ellip_ws(n, rp, rs)
-##
-##
-kl0=((10^(0.1*rp)-1)/(10^(0.1*rs)-1));
-k0=(1-kl0);
-int=ellipke([kl0 ; k0]);
-ql0=int(1);
-q0=int(2);
-x=n*ql0/q0;
-kl=fminbnd(@(y) __ellip_ws_min(y,x) ,eps, 1-eps);
-ws=sqrt(1/kl);
-
+  kl0 = ((10^(0.1*rp)-1)/(10^(0.1*rs)-1));
+  k0  = (1-kl0);
+  int = ellipke([kl0 ; k0]);
+  ql0 = int(1);
+  q0  = int(2);
+  x   = n*ql0/q0;
+  kl  = fminbnd(@(y) __ellip_ws_min(y,x) ,eps, 1-eps);
+  ws  = sqrt(1/kl);
 endfunction
