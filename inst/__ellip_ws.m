@@ -34,7 +34,7 @@ int=ellipke([kl0 ; k0]);
 ql0=int(1);
 q0=int(2);
 x=n*ql0/q0;
-kl=fminbnd('__ellip_ws_min',eps, 1-eps, [], x);
+kl=fminbnd(@(y) __ellip_ws_min(y,x) ,eps, 1-eps);
 ws=sqrt(1/kl);
 
 endfunction
