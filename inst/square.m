@@ -3,25 +3,25 @@
 ## 
 ## This program is public domain.
 
-## s = square(t,duty)
-## 
+## -*- texinfo -*-
+## @deftypefn {Function File} {@var{s} =} square(@var{t}, @var{duty})
+## @deftypefnx {Function File} {@var{s} =} square(@var{t})
 ## Generate a square wave of period 2 pi with limits +1/-1.
 ##
-## If the duty cycle is specified, the square wave is +1 for
+## If @var{duty} is specified, the square wave is +1 for
 ## that portion of the time.
 ##
 ##                     on time
 ##    duty cycle = ------------------
 ##                 on time + off time
 ##
+## @seealso{cos, sawtooth, sin, tripuls}
+## @end deftypefn
 
+function v = square (t, duty = 0.5)
 
-function v = square (t,duty)
-
-  if nargin == 1,
-    duty = .5;
-  elseif nargin != 2,
-    usage('v = square(t [, duty])');
+  if (nargin < 1 || nargin > 2)
+    print_usage;
   endif
 
   t /= 2*pi;
