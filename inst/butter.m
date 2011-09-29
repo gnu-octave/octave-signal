@@ -45,6 +45,7 @@
 
 ## Author: Paul Kienzle <pkienzle@user.sf.net>
 ## Modified by: Doug Stewart <dastew@sympatico.ca> Feb, 2003
+## Tests and demos added: Alexander Klein <alexander.klein@math.uni-giessen.de>, Sep 2011
 
 function [a, b, c, d] = butter (n, W, varargin)
   
@@ -121,3 +122,57 @@ function [a, b, c, d] = butter (n, W, varargin)
   endif
 
 endfunction
+
+%!shared sf, sf2, off_db
+%! off_db = 0.5;
+%! ##Sampling frequency must be that high to make the low pass filters pass.
+%! sf = 6000; sf2 = sf/2;
+%! data=[sinetone(5,sf,10,1),sinetone(10,sf,10,1),sinetone(50,sf,10,1),sinetone(200,sf,10,1),sinetone(400,sf,10,1)];
+
+%!test
+%! ##Test low pass order 1 with 3dB @ 50Hz
+%! data=[sinetone(5,sf,10,1),sinetone(10,sf,10,1),sinetone(50,sf,10,1),sinetone(200,sf,10,1),sinetone(400,sf,10,1)];
+%! [b, a] = butter ( 1, 50 / sf2 );
+%! filtered = filter ( b, a, data );
+%! damp_db = 20 * log10 ( max ( filtered ( end - sf : end, : ) ) )
+%! assert ( [ damp_db( 4 ) - damp_db( 5 ), damp_db( 1 : 3 ) ], [ 6 0 0 -3 ], off_db )
+
+%!test
+%! ##Test low pass order 4 with 3dB @ 50Hz
+%! data=[sinetone(5,sf,10,1),sinetone(10,sf,10,1),sinetone(50,sf,10,1),sinetone(200,sf,10,1),sinetone(400,sf,10,1)];
+%! [b, a] = butter ( 4, 50 / sf2 );
+%! filtered = filter ( b, a, data );
+%! damp_db = 20 * log10 ( max ( filtered ( end - sf : end, : ) ) )
+%! assert ( [ damp_db( 4 ) - damp_db( 5 ), damp_db( 1 : 3 ) ], [ 24 0 0 -3 ], off_db )
+
+%!test
+%! ##Test high pass order 1 with 3dB @ 50Hz
+%! data=[sinetone(5,sf,10,1),sinetone(10,sf,10,1),sinetone(50,sf,10,1),sinetone(200,sf,10,1),sinetone(400,sf,10,1)];
+%! [b, a] = butter ( 1, 50 / sf2, "high" );
+%! filtered = filter ( b, a, data );
+%! damp_db = 20 * log10 ( max ( filtered ( end - sf : end, : ) ) )
+%! assert ( [ damp_db( 2 ) - damp_db( 1 ), damp_db( 3 : end ) ], [ 6 -3 0 0 ], off_db )
+
+%!test
+%! ##Test high pass order 4 with 3dB @ 50Hz
+%! data=[sinetone(5,sf,10,1),sinetone(10,sf,10,1),sinetone(50,sf,10,1),sinetone(200,sf,10,1),sinetone(400,sf,10,1)];
+%! [b, a] = butter ( 4, 50 / sf2, "high" );
+%! filtered = filter ( b, a, data );
+%! damp_db = 20 * log10 ( max ( filtered ( end - sf : end, : ) ) )
+%! assert ( [ damp_db( 2 ) - damp_db( 1 ), damp_db( 3 : end ) ], [ 24 -3 0 0 ], off_db )
+
+%!demo
+%! sf = 800; sf2 = sf/2;
+%! data=[[1;zeros(sf-1,1)],sinetone(25,sf,1,1),sinetone(50,sf,1,1),sinetone(100,sf,1,1)];
+%! [b,a]=butter ( 1, 50 / sf2 );
+%! filtered = filter(b,a,data);
+%!
+%! clf
+%! subplot ( columns ( filtered ), 1, 1) 
+%! plot(filtered(:,1),";Impulse response;")
+%! subplot ( columns ( filtered ), 1, 2 ) 
+%! plot(filtered(:,2),";25Hz response;")
+%! subplot ( columns ( filtered ), 1, 3 ) 
+%! plot(filtered(:,3),";50Hz response;")
+%! subplot ( columns ( filtered ), 1, 4 ) 
+%! plot(filtered(:,4),";100Hz response;")
