@@ -1,5 +1,5 @@
 ## Copyright (C) 2007   Muthiah Annamalai  <muthiah.annamalai@uta.edu>
-## Copyright (C) 2008   Mike Gross, Peter V. Lanspeary
+## Copyright (C) 2008   Mike Gross, Peter V. Lanspeary <mike@appl-tech.com>
 ##
 ## This program is free software; you can redistribute it and/or modify
 ## it under the terms of the GNU General Public License as published by

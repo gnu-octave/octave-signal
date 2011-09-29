@@ -1,4 +1,4 @@
-## Copyright (C) 2008 Eric Chassande-Mottin, CNRS (France)
+## Copyright (C) 2008 Eric Chassande-Mottin, CNRS (France) <ecm@apc.univ-paris7.fr>
 ##
 ## This program is free software; you can redistribute it and/or modify
 ## it under the terms of the GNU General Public License as published by

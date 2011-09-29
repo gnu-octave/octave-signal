@@ -1,4 +1,4 @@
-% Copyright (C) 1986,2003 Julius O. Smith III
+% Copyright (C) 1986,2003 Julius O. Smith III <jos@ccrma.stanford.edu>
 %
 % This program is free software; you can redistribute it and/or modify it
 % under the terms of the GNU General Public License as published by

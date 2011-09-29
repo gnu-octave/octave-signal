@@ -1,4 +1,4 @@
-## Copyright (C) 2011 Alexander Klein
+## Copyright (C) 2011 Alexander Klein <alexander.klein@math.uni-giessen.de>
 ## 
 ## This program is free software; you can redistribute it and/or modify
 ## it under the terms of the GNU General Public License as published by
@@ -13,9 +13,6 @@
 ## You should have received a copy of the GNU General Public License
 ## along with Octave; see the file COPYING.  If not, see
 ## <http://www.gnu.org/licenses/>.
-##
-## Author: Alexander Klein <alexander.klein@math.uni-giessen.de>
-## Created: 2011-08-30
 
 ## -*- texinfo -*-
 ## @deftypefn{Function File} { [ @var{b}, @var{a} ] } = pei_tseng_notch ( @var{frequencies}, @var{bandwidths}

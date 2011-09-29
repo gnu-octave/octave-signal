@@ -1,4 +1,4 @@
-## Copyright (C) 1994 Dept of Probability Theory and Statistics TU Wien
+## Copyright (C) 1994 Dept of Probability Theory and Statistics TU Wien <Andreas.Weingessel@ci.tuwien.ac.at>
 ##
 ## This program is free software; you can redistribute it and/or modify
 ## it under the terms of the GNU General Public License as published by

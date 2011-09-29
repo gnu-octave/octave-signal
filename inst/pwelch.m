@@ -1,4 +1,4 @@
-%% Copyright (C) 2006 Peter V. Lanspeary
+%% Copyright (C) 2006 Peter V. Lanspeary <pvl@mecheng.adelaide.edu.au>
 %%
 %% This program is free software; you can redistribute it and/or
 %% modify it under the terms of the GNU General Public License
@@ -134,6 +134,7 @@
 %%           %%       power of 2 by zero padding.  FFT length is adjusted
 %%           %%       after addition of padding by explicit Nfft argument.
 %%           %%       The default is to use exactly the FFT and window/
+
 %%           %%       segment lengths specified in argument list.
 %%
 %%   results %% specifies what results to return (in the order specified

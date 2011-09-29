@@ -1,4 +1,4 @@
-## Copyright (C) 2002 André Carezia
+## Copyright (C) 2002 André Carezia <andre@carezia.eng.br>
 ##
 ## This program is free software; you can redistribute it and/or modify
 ## it under the terms of the GNU General Public License as published by

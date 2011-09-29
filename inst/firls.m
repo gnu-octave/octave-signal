@@ -1,4 +1,4 @@
-## Copyright (C) 2006 Quentin Spencer
+## Copyright (C) 2006 Quentin Spencer <qspencer@ieee.org>
 ##
 ## This program is free software; you can redistribute it and/or modify
 ## it under the terms of the GNU General Public License as published by
@@ -29,7 +29,7 @@
 ##  W is an optional weighting function that contains one value for each
 ##  band that weights the mean squared error in that band. A must be the
 ##  same length as F, and W must be half the length of F.
-
+##
 ## The least squares optimization algorithm for computing FIR filter
 ## coefficients is derived in detail in:
 ##

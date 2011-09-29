@@ -1,3 +1,9 @@
+## Author: Paul Kienzle <pkienzle@users.sf.net>
+## 2006-12-05
+##   * initial release
+##
+## This program is public domain
+
 ## -*- texinfo -*-
 ## @deftypefn {Function File} @var{y} = idst (@var{x})
 ## @deftypefnx {Function File} @var{y} = idst (@var{x}, @var{n})
@@ -7,12 +13,6 @@
 ## columns of the the matrix.
 ## @end deftypefn
 ## @seealso{dst}
-
-## This program is public domain
-
-## Author: Paul Kienzle
-## 2006-12-05
-##   * initial release
 function x = idst (y, n)
 
   if (nargin < 1 || nargin > 2)
@@ -26,7 +26,6 @@ function x = idst (y, n)
   x = dst(y, n) * 2/(n+1);
 
 endfunction
-
 
 %!test
 %! x = log(gausswin(32));

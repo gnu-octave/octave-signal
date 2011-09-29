@@ -1,4 +1,4 @@
-## Copyright (C) 2008 Carlo de Falco
+## Copyright (C) 2008 Carlo de Falco <carlo.defalco@gmail.com>
 ## 
 ## This program is free software; you can redistribute it and/or modify
 ## it under the terms of the GNU General Public License as published by
@@ -22,10 +22,6 @@
 ## x-axis using linear interpolation.
 ## @seealso{fzero, roots}
 ## @end deftypefn
-
-
-## Author: Carlo de Falco <carlo.defalco@gmail.com>
-## Created: 2008-12-05
 
 function  retval  = zerocrossing (x,y)
 

@@ -1,5 +1,5 @@
 ## Copyright (C) 2009 Thomas Sailer
-## Copyright (C) 1999 Paul Kienzle
+## Copyright (C) 1999 Paul Kienzle <pkienzle@users.sf.net>
 ##
 ## This program is free software; you can redistribute it and/or modify
 ## it under the terms of the GNU General Public License as published by

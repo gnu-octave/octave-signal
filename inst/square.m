@@ -1,3 +1,8 @@
+## 2006-04-07 Paul Kienzle <paulkienzle@Avocado.local>
+## Author: Paul Kienzle <paulkienzle@Avocado.local>
+## 
+## This program is public domain.
+
 ## s = square(t,duty)
 ## 
 ## Generate a square wave of period 2 pi with limits +1/-1.
@@ -10,12 +15,6 @@
 ##                 on time + off time
 ##
 
-## Author: Paul Kienzle <paulkienzle@Avocado.local>
-## 
-## 2006-04-07 Paul Kienzle <paulkienzle@Avocado.local>
-## * Initial revision
-
-## This program is public domain.
 
 function v = square (t,duty)
 

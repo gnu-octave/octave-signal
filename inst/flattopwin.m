@@ -1,3 +1,5 @@
+## This program is public domain.
+
 ## flattopwin(n, [periodic|symmetric])
 ##
 ## Return the window f(w):
@@ -19,8 +21,6 @@
 ##
 ## [1] Gade, S; Herlufsen, H; (1987) "Use of weighting functions in DFT/FFT
 ## analysis (Part I)", Bruel & Kjaer Technical Review No.3.
-
-## This program is public domain.
 
 function w = flattopwin(n,sym)
   if nargin == 0 || nargin > 2

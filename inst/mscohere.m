@@ -1,4 +1,4 @@
-%% Copyright (C) 2006 Peter V. Lanspeary
+%% Copyright (C) 2006 Peter V. Lanspeary <pvl@mecheng.adelaide.edu.au>
 %%
 %% This program is free software; you can redistribute it and/or
 %% modify it under the terms of the GNU General Public License

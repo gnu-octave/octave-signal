@@ -1,3 +1,6 @@
+## Author: Paul Kienzle <pkienzle@users.sf.net>
+## This function is public domain
+
 ## -*- texinfo -*-
 ## @deftypefn {Function File} @var{y} = upsample(@var{x},@var{n})
 ## Upsample the signal, inserting n-1 zeros between every element.  
@@ -7,9 +10,6 @@
 ## Control the position of the inserted sample in the block of n zeros.
 ## @end deftypefn
 ## @seealso{decimate, downsample, interp, resample, upfirdn}
-
-## Author: Paul Kienzle
-## This function is public domain
 
 function y = upsample(x,n,phase)
   if nargin<2 || nargin>3, usage('upsample(x,n,[phase]'); end

@@ -1,4 +1,4 @@
-## Copyright (C) 2001 Paul Kienzle
+## Copyright (C) 2001 Paul Kienzle <pkienzle@users.sf.net>
 ##
 ## This program is free software; you can redistribute it and/or modify
 ## it under the terms of the GNU General Public License as published by
@@ -19,10 +19,6 @@
 ## y = idct2 (x, m, n) or y = idct2 (x, [m n])
 ##   Computes the 2-D inverse DCT of x after padding or trimming rows to m and
 ##   columns to n.
-
-## Author: Paul Kienzle
-## 2001-02-08
-##   * initial revision
 
 function y = idct2 (x, m, n)
 

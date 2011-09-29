@@ -1,23 +1,5 @@
-function  [y, h] = resample( x, p, q, h )
-
-## -*- texinfo -*-
-## @deftypefn {Function File}  {[@var{y} @var{h}]=} resample(@var{x},@var{p},@var{q})
-## @deftypefnx {Function File} {@var{y} =} resample(@var{x},@var{p},@var{q},@var{h})
-## Change the sample rate of @var{x} by a factor of @var{p}/@var{q}. This is
-## performed using a polyphase algorithm. The impulse response @var{h} of the antialiasing
-## filter is either specified or either designed with a Kaiser-windowed sinecard.
-## @end deftypefn
-
-## Ref [1] J. G. Proakis and D. G. Manolakis,
-## Digital Signal Processing: Principles, Algorithms, and Applications,
-## 4th ed., Prentice Hall, 2007. Chap. 6
+## Copyright (C) 2008 Eric Chassande-Mottin, CNRS (France) <ecm@apc.univ-paris7.fr>
 ##
-## Ref [2] A. V. Oppenheim, R. W. Schafer and J. R. Buck, 
-## Discrete-time signal processing, Signal processing series,
-## Prentice-Hall, 1999
-
-## Copyright (C) 2008 Eric Chassande-Mottin, CNRS (France)
-
 ## This program is free software; you can redistribute it and/or modify
 ## it under the terms of the GNU General Public License as published by
 ## the Free Software Foundation; either version 3 of the License, or
@@ -30,6 +12,24 @@ function  [y, h] = resample( x, p, q, h )
 ##
 ## You should have received a copy of the GNU General Public License
 ## along with this program; if not, see .
+
+## -*- texinfo -*-
+## @deftypefn {Function File}  {[@var{y} @var{h}]=} resample(@var{x},@var{p},@var{q})
+## @deftypefnx {Function File} {@var{y} =} resample(@var{x},@var{p},@var{q},@var{h})
+## Change the sample rate of @var{x} by a factor of @var{p}/@var{q}. This is
+## performed using a polyphase algorithm. The impulse response @var{h} of the antialiasing
+## filter is either specified or either designed with a Kaiser-windowed sinecard.
+##
+## Ref [1] J. G. Proakis and D. G. Manolakis,
+## Digital Signal Processing: Principles, Algorithms, and Applications,
+## 4th ed., Prentice Hall, 2007. Chap. 6
+##
+## Ref [2] A. V. Oppenheim, R. W. Schafer and J. R. Buck, 
+## Discrete-time signal processing, Signal processing series,
+## Prentice-Hall, 1999
+## @end deftypefn
+
+function  [y, h] = resample( x, p, q, h )
 
 if nargchk(3,4,nargin)
   usage("resample.m: [y, h] = resample( x, p, q[, h] )");

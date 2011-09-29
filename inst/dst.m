@@ -1,3 +1,8 @@
+## Author: Paul Kienzle <pkienzle@users.sf.net>
+## 2006-12-05
+##   * initial release
+## This program is public domain
+
 ## -*- texinfo -*-
 ## @deftypefn {Function File} @var{y} = dst (@var{x})
 ## @deftypefnx {Function File} @var{y} = dst (@var{x}, @var{n})
@@ -15,11 +20,6 @@
 ## @end deftypefn
 ## @seealso{idst}
 
-## This program is public domain
-
-## Author: Paul Kienzle
-## 2006-12-05
-##   * initial release
 function y = dst (x, n)
 
   if (nargin < 1 || nargin > 2)

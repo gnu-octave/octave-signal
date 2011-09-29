@@ -1,6 +1,6 @@
-## Copyright (C) 1999 Paul Kienzle
-## Copyright (C) 2007 Francesco Potortì
-## Copyright (C) 2008 Luca Citi
+## Copyright (C) 1999 Paul Kienzle <pkienzle@users.sf.net>
+## Copyright (C) 2007 Francesco Potortì <pot@gnu.org>
+## Copyright (C) 2008 Luca Citi <lciti@essex.ac.uk>
 ##
 ## This program is free software; you can redistribute it and/or modify
 ## it under the terms of the GNU General Public License as published by

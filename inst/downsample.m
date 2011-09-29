@@ -1,3 +1,6 @@
+## Author: Paul Kienzle <pkienzle@users.sf.net>
+## This function is public domain
+
 ## -*- texinfo -*-
 ## @deftypefn {Function File} @var{y} = downsample(@var{x},@var{n})
 ## Downsample the signal, selecting every nth element.  If @var{x}
@@ -11,9 +14,6 @@
 ## Select every nth element starting at sample @var{offset}.
 ## @end deftypefn
 ## @seealso{decimate, interp, resample, upfirdn, upsample}
-
-## Author: Paul Kienzle
-## This function is public domain
 
 function y = downsample(x,n,phase)
   if nargin<2 || nargin>3, usage('downsample(x,n,[offset]'); end

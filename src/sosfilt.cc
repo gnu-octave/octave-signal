@@ -1,6 +1,5 @@
-
-// Copyright (C) 2008 Eric Chassande-Mottin, CNRS (France)
-
+// Copyright (C) 2008 Eric Chassande-Mottin, CNRS (France) <ecm@apc.univ-paris7.fr>
+//
 // This program is free software; you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation; either version 3 of the License, or
@@ -13,7 +12,6 @@
 //
 // You should have received a copy of the GNU General Public License
 // along with this program; if not, see .
-
 
 #include <octave/config.h>
 #include <octave/defun-dld.h>
