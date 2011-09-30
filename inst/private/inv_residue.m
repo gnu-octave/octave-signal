@@ -49,9 +49,9 @@ function [b_out, a_out] = inv_residue(r_in, p_in, k_in, tol)
     while (i<n && abs(first_pole-p_in(i+1))<tol) % Multiple poles at p(i)
        i++; %Next residue
        m++;
-       mterm  = conv(mterm,term); % Next multiplicity to be factored out
-       p      = r_in(i)*deconv(a_out,mterm); % Resulting polynomial
-       p      = pad_poly(p,n+1); % Pad for proper length
+       mterm  = conv(mterm, term);              % Next multiplicity to be factored out
+       p      = r_in(i) * deconv(a_out, mterm); % Resulting polynomial
+       p      = pad_poly(p, n+1);               % Pad for proper length
        b_out += p;
     endwhile
   i++;
