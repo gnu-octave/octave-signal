@@ -1,5 +1,5 @@
 ## Copyright 2007 R.G.H. Eschauzier <reschauzier@yahoo.com>
-## Adapted by Carnë Draug on 2011 <carandraug+dev@gmail.com>
+## Copyright (c) 2011 Carnë Draug <carandraug+dev@gmail.com>
 ## 
 ## This program is free software; you can redistribute it and/or modify
 ## it under the terms of the GNU General Public License as published by

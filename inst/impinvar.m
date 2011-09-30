@@ -1,5 +1,6 @@
 ## Copyright 2007 R.G.H. Eschauzier <reschauzier@yahoo.com>
-## Adapted by Carnë Draug on 2011 <carandraug+dev@gmail.com>
+## Copyright (c) 2011 Carnë Draug <carandraug+dev@gmail.com>
+## Copyright (c) 2011 Juan Pablo Carbajal <carbajal@ifi.uzh.ch>
 ## 
 ## This program is free software; you can redistribute it and/or modify
 ## it under the terms of the GNU General Public License as published by
@@ -85,8 +86,8 @@ function [b_out, a_out] = impinvar (b_in, a_in, ts = 1, tol = 0.0001)
   b_out          = polyreduce(b_out);
 
   ## respect the required tolerance values
-  a_out = a_out(find ((a_out < tol) == (a_out > -tol)));
-  b_out = b_out(find ((b_out < tol) == (b_out > -tol)));
+  b_out(abs(b_out)<tol) = [];
+  a_out(abs(a_out)<tol) = [];
 
 endfunction
 
