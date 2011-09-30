@@ -18,9 +18,7 @@
 ## This function is necessary for impinvar and invimpinvar of the signal package
 
 ## Inverse of Octave residue function
-function [b_out, a_out] = inv_residue(r_in, p_in, k_in)
-
-  tol=0.0001;
+function [b_out, a_out] = inv_residue(r_in, p_in, k_in, tol)
 
   n = length(r_in); % Number of poles/residues
 

@@ -77,7 +77,7 @@ function [b_out, a_out] = impinvar (b_in, a_in, ts = 1, tol = 0.0001)
     i++; % Next s-domain residue/pole
   endwhile
 
-  [b_out, a_out] = inv_residue(r_out, p_out, k_out);
+  [b_out, a_out] = inv_residue(r_out, p_out, k_out, tol);
   a_out          = to_real(a_out); % Get rid of spurious imaginary part
   b_out          = to_real(b_out);
   b_out          = polyreduce(b_out);

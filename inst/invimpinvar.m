@@ -43,6 +43,12 @@ function [b_out, a_out] = invimpinvar (b_in, a_in, ts = 1, tol = 0.0001)
     print_usage;
   endif
 
+  ## to be compatible with the matlab implementation where an empty vector can
+  ## be used to get the default
+  if (isempty(ts))
+    ts = 1;
+  endif
+
   [r_in, p_in, k_in] = residue(b_in, a_in); % partial fraction expansion
 
   n = length(r_in); % Number of poles/residues
@@ -69,7 +75,7 @@ function [b_out, a_out] = invimpinvar (b_in, a_in, ts = 1, tol = 0.0001)
 
     i++; % Next z-domain residue/pole
   endwhile
-  [b_out, a_out] = inv_residue(r_out, sm_out ,0);
+  [b_out, a_out] = inv_residue(r_out, sm_out , 0, tol);
   a_out          = to_real(a_out);      % Get rid of spurious imaginary part
   b_out          = to_real(b_out);
   b_out          = polyreduce(b_out);
