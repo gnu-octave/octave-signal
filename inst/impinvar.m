@@ -84,6 +84,10 @@ function [b_out, a_out] = impinvar (b_in, a_in, ts = 1, tol = 0.0001)
   b_out          = to_real(b_out);
   b_out          = polyreduce(b_out);
 
+  ## respect the required tolerance values
+  a_out = a_out(find ((a_out < tol) == (a_out > -tol)));
+  b_out = b_out(find ((b_out < tol) == (b_out > -tol)));
+
 endfunction
 
 ## Convert residue vector for single and multiple poles in s-domain (located at sm) to
