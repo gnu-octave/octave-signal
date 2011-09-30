@@ -16,13 +16,13 @@
 ## Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 ## -*- texinfo -*-
-## @deftypefn{Function File} {[@var{b_out}, @var{a_out}] =} impinvar (@var{b}, @var{a}, @var{ts}, @var{tol})
-## @deftypefnx{Function File} {[@var{b_out}, @var{a_out}] =} impinvar (@var{b}, @var{a}, @var{ts})
+## @deftypefn{Function File} {[@var{b_out}, @var{a_out}] =} impinvar (@var{b}, @var{a}, @var{fs}, @var{tol})
+## @deftypefnx{Function File} {[@var{b_out}, @var{a_out}] =} impinvar (@var{b}, @var{a}, @var{fs})
 ## @deftypefnx{Function File} {[@var{b_out}, @var{a_out}] =} impinvar (@var{b}, @var{a})
 ## Converts analog filter with coefficients @var{b} and @var{a} to digital,
 ## conserving impulse response.
 ##
-## If @var{ts} is not specificied, or is an empty vector, it defaults to 1Hz.
+## If @var{fs} is not specificied, or is an empty vector, it defaults to 1Hz.
 ##
 ## If @var{tol} is not specified, it defaults to 0.0001 (0.1%)
 ## This function does the inverse of impinvar so that the following example should
@@ -47,6 +47,8 @@ function [b_out, a_out] = impinvar (b_in, a_in, ts = 1, tol = 0.0001)
   ## be used to get the default
   if (isempty(ts))
     ts = 1;
+  else
+    ts = 1/ts; # we should be using sampling frequencies to be compatible with Matlab
   endif
 
   [r_in, p_in, k_in] = residue(b_in, a_in); % partial fraction expansion
