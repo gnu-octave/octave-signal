@@ -19,8 +19,5 @@
 
 ## Reverse the coefficients of a polynomial
 function p_out = polyrev (p_in)
-  n = length(p_in);
-  for i=(1:n)
-    p_out(i) = p_in(n-i+1);
-  endfor
+  p_out = p_in(end:-1:1);
 endfunction
