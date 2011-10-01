@@ -33,6 +33,9 @@
 ##
 ## If @var{tol} is not specified, it defaults to 0.0001 (0.1%)
 ##
+## Reference: Thomas J. Cavicchi (1996) ``Impulse invariance and multiple-order
+## poles''. IEEE transactions on signal processing, Vol 40 (9): 2344--2347
+##
 ## @seealso{bilinear, impinvar}
 ## @end deftypefn
 
