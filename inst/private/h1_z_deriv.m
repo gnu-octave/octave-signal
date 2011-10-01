@@ -33,7 +33,7 @@ function b = h1_z_deriv(n, p, ts)
   %% Build output vector
   b = zeros(1,n+1);
   for i=(1:n)
-    b += d(i) * prepad(h1_deriv(n-i+1, ts), n+1, 0);
+    b += d(i) * prepad(h1_deriv(n-i+1), n+1, 0);
   endfor
 
   b *= ts^(n+1)/factorial(n);
@@ -47,7 +47,7 @@ endfunction
 ## p=exp(sm*ts) and sm is the s-domain pole with multiplicity n+1.
 ## The result is (ts^(n+1))*(b(1)*p/(z-p)^1 + b(2)*p^2/(z-p)^2 + b(n+1)*p^(n+1)/(z-p)^(n+1)),
 ## where b(i) is the binomial coefficient bincoeff(n,i) times n!. Works for n>0.
-function b = h1_deriv(n,ts)
+function b = h1_deriv(n)
   b  = factorial(n)*bincoeff(n,0:n); % Binomial coefficients: [1], [1 1], [1 2 1], [1 3 3 1], etc.
   b *= (-1)^n;
 endfunction
