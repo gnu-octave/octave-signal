@@ -40,7 +40,7 @@ function [b_out, a_out] = inv_residue(r_in, p_in, k_in, tol)
   while (i<=n)
     term   = [1 -p_in(i)];               % Term to be factored out
     p      = r_in(i)*deconv(a_out,term); % Residue times resulting polynomial
-    p      = pad_poly(p,n+1);            % Pad for proper length
+    p      = prepad(p, n+1, 0);          % Pad for proper length
     b_out += p;
 
     m          = 1;
@@ -51,7 +51,7 @@ function [b_out, a_out] = inv_residue(r_in, p_in, k_in, tol)
        m++;
        mterm  = conv(mterm, term);              % Next multiplicity to be factored out
        p      = r_in(i) * deconv(a_out, mterm); % Resulting polynomial
-       p      = pad_poly(p, n+1);               % Pad for proper length
+       p      = prepad(p, n+1, 0);              % Pad for proper length
        b_out += p;
     endwhile
   i++;

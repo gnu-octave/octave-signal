@@ -27,13 +27,13 @@ function b = h1_z_deriv(n, p, ts)
   d = (-1)^n; % Vector with the derivatives of H1(z)
   for i=(1:n-1)
     d  = conv(d,[1 0]);               % Shift result right (multiply by -z)
-    d += pad_poly(polyderiv(d),i+1);  % Add the derivative
+    d += prepad(polyderiv(d), i+1, 0) % Add the derivative
   endfor
 
   %% Build output vector
   b = zeros(1,n+1);
   for i=(1:n)
-    b += d(i) * pad_poly(h1_deriv(n-i+1, ts), n+1);
+    b += d(i) * prepad(h1_deriv(n-i+1, ts), n+1, 0);
   endfor
 
   b *= ts^(n+1)/factorial(n);

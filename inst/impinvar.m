@@ -1,4 +1,4 @@
-## Copyright 2007 R.G.H. Eschauzier <reschauzier@yahoo.com>
+## Copyright (c) 2007 R.G.H. Eschauzier <reschauzier@yahoo.com>
 ## Copyright (c) 2011 Carnë Draug <carandraug+dev@gmail.com>
 ## Copyright (c) 2011 Juan Pablo Carbajal <carbajal@ifi.uzh.ch>
 ## 
