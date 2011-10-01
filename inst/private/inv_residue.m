@@ -29,10 +29,7 @@ function [b_out, a_out] = inv_residue(r_in, p_in, k_in, tol)
     error("Order numerator > order denominator");
   endif
 
-  a_out = 1; % Calculate denominator
-  for i=(1:n)
-    a_out = conv(a_out,[1 -p_in(i)]);
-  endfor
+  a_out = poly(p_in);
 
   b_out  = zeros(1,n+1);
   b_out += k*a_out; % Constant term: add k times denominator to numerator
