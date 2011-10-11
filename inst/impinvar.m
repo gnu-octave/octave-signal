@@ -41,7 +41,7 @@
 ## @seealso{bilinear, invimpinvar}
 ## @end deftypefn
 
-function [b_out, a_out] = impinvar (b_in, a_in, ts = 1, tol = 0.0001)
+function [b_out, a_out] = impinvar (b_in, a_in, fs = 1, tol = 0.0001)
 
   if (nargin <2)
     print_usage;
@@ -49,10 +49,10 @@ function [b_out, a_out] = impinvar (b_in, a_in, ts = 1, tol = 0.0001)
 
   ## to be compatible with the matlab implementation where an empty vector can
   ## be used to get the default
-  if (isempty(ts))
+  if (isempty(fs))
     ts = 1;
   else
-    ts = 1/ts; # we should be using sampling frequencies to be compatible with Matlab
+    ts = 1/fs; # we should be using sampling frequencies to be compatible with Matlab
   endif
 
   [r_in, p_in, k_in] = residue(b_in, a_in); % partial fraction expansion
@@ -86,17 +86,19 @@ function [b_out, a_out] = impinvar (b_in, a_in, ts = 1, tol = 0.0001)
   [b_out, a_out] = inv_residue(r_out, p_out, k_out, tol);
   a_out          = to_real(a_out); % Get rid of spurious imaginary part
   b_out          = to_real(b_out);
-  b_out          = polyreduce(b_out);
+
+  % Shift results right to account for calculating in z instead of z^-1
+  b_out(end)=[];
 
   ## respect the required tolerance values
-  b_out(abs(b_out)<tol) = [];
-  a_out(abs(a_out)<tol) = [];
+  b_out(abs(b_out)<tol) = 0;
+  a_out(abs(a_out)<tol) = 0;
 
 endfunction
 
 ## Convert residue vector for single and multiple poles in s-domain (located at sm) to
 ## residue vector in z-domain. The variable k is the direct term of the result.
-function [r_out, p_out, k_out] = z_res (r_in, sm, ts);
+function [r_out, p_out, k_out] = z_res (r_in, sm, ts)
 
   p_out = exp(ts * sm); % z-domain pole
   n     = length(r_in); % Multiplicity of the pole
@@ -111,3 +113,39 @@ function [r_out, p_out, k_out] = z_res (r_in, sm, ts);
   endfor
 
 endfunction
+
+
+%!function err = stozerr(bs,as,fs)
+%!
+%!  % number of time steps
+%!  n=10;
+%!
+%!  % impulse invariant transform to z-domain
+%!  [bz az]=impinvar(bs,as,fs);
+%!
+%!  % create sys object of transfer function
+%!  s=tf(bs,as);
+%!
+%!  % calculate impulse response of continuous time system
+%!  % at discrete time intervals 1/fs
+%!  ys=impulse(s,1,(n-1)/fs,n);
+%!
+%!  % impulse response of discrete time system
+%!  yz=filter(bz,az,[1 zeros(1,n-1)]);
+%!
+%!  % find rms error
+%!  err=sqrt(sum((yz*fs.-ys).^2)/length(ys));
+%!  endfunction
+%!
+%!assert(stozerr([1],[1 1],0.1),0,0.0001);
+%!assert(stozerr([1],[1 2 1],0.1),0,0.0001);
+%!assert(stozerr([1 1],[1 2 1],0.1),0,0.0001);
+%!assert(stozerr([1],[1 3 3 1],0.1),0,0.0001);
+%!assert(stozerr([1 1],[1 3 3 1],0.1),0,0.0001);
+%!assert(stozerr([1 1 1],[1 3 3 1],0.1),0,0.0001);
+%!assert(stozerr([1],[1 0 1],0.1),0,0.0001);
+%!assert(stozerr([1 1],[1 0 1],0.1),0,0.0001);
+%!assert(stozerr([1],[1 0 2 0 1],0.1),0,0.0001);
+%!assert(stozerr([1 1],[1 0 2 0 1],0.1),0,0.0001);
+%!assert(stozerr([1 1 1],[1 0 2 0 1],0.1),0,0.0001);
+%!assert(stozerr([1 1 1 1],[1 0 2 0 1],0.1),0,0.0001);

@@ -17,7 +17,7 @@
 
 ## This function is necessary for impinvar and invimpinvar of the signal package
 
-## Find {-zd/dz}^n*H1(z). I.e., first multiply by -z, then diffentiate, then multiply by -z, etc.
+## Find {-zd/dz}^n*H1(z). I.e., first differentiate, then multiply by -z, then differentiate, etc.
 ## The result is (ts^(n+1))*(b(1)*p/(z-p)^1 + b(2)*p^2/(z-p)^2 + b(n+1)*p^(n+1)/(z-p)^(n+1)).
 ## Works for n>0.
 function b = h1_z_deriv(n, p, ts)
@@ -25,21 +25,21 @@ function b = h1_z_deriv(n, p, ts)
   %% Build the vector d that holds coefficients for all the derivatives of H1(z)
   %% The results reads d(n)*z^(1)*(d/dz)^(1)*H1(z) + d(n-1)*z^(2)*(d/dz)^(2)*H1(z) +...+ d(1)*z^(n)*(d/dz)^(n)*H1(z)
   d = (-1)^n; % Vector with the derivatives of H1(z)
-  for i=(1:n-1)
-    d  = conv(d,[1 0]);               % Shift result right (multiply by -z)
-    d += prepad(polyderiv(d), i+1, 0) % Add the derivative
+  for i= (1:n-1)
+    d  = [d 0];                           % Shift result right (multiply by -z)
+    d += prepad(polyderiv(d), i+1, 0, 2); % Add the derivative
   endfor
 
   %% Build output vector
-  b = zeros(1,n+1);
-  for i=(1:n)
-    b += d(i) * prepad(h1_deriv(n-i+1), n+1, 0);
+  b = zeros (1, n + 1);
+  for i = (1:n)
+    b += d(i) * prepad(h1_deriv(n-i+1), n+1, 0, 2);
   endfor
 
   b *= ts^(n+1)/factorial(n);
-  for i=(1:n+1)
-    b(n-i+2) *= p^i; % Multiply coefficients with p^i, where i is the index of the coeff.
-  endfor
+
+  %% Multiply coefficients with p^i, where i is the index of the coeff.
+  b.*=p.^(n+1:-1:1);
 
 endfunction
 

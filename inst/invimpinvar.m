@@ -40,7 +40,7 @@
 ## @end deftypefn
 
 ## Impulse invariant conversion from s to z domain
-function [b_out, a_out] = invimpinvar (b_in, a_in, ts = 1, tol = 0.0001)
+function [b_out, a_out] = invimpinvar (b_in, a_in, fs = 1, tol = 0.0001)
 
   if (nargin <2)
     print_usage;
@@ -48,11 +48,13 @@ function [b_out, a_out] = invimpinvar (b_in, a_in, ts = 1, tol = 0.0001)
 
   ## to be compatible with the matlab implementation where an empty vector can
   ## be used to get the default
-  if (isempty(ts))
+  if (isempty(fs))
     ts = 1;
   else
-    ts = 1/ts; # we should be using sampling frequencies to be compatible with Matlab
+    ts = 1/fs; # we should be using sampling frequencies to be compatible with Matlab
   endif
+
+  b_in = [b_in 0]; %so we can calculate in z instead of z^-1
 
   [r_in, p_in, k_in] = residue(b_in, a_in); % partial fraction expansion
 
@@ -83,6 +85,11 @@ function [b_out, a_out] = invimpinvar (b_in, a_in, ts = 1, tol = 0.0001)
   [b_out, a_out] = inv_residue(r_out, sm_out , 0, tol);
   a_out          = to_real(a_out);      % Get rid of spurious imaginary part
   b_out          = to_real(b_out);
+
+  ## respect the required tolerance values
+  b_out(abs(b_out)<tol) = 0;
+  a_out(abs(a_out)<tol) = 0;
+
   b_out          = polyreduce(b_out);
 
 endfunction
@@ -91,19 +98,57 @@ endfunction
 function [r_out sm_out k_out] = inv_z_res (r_in,p_in,ts)
 
   n    = length(r_in); % multiplicity of the pole
-  r_in = r_in';        % From column vector to row vector
+  r_in = r_in.';       % From column vector to row vector
 
-  i=n;
-  while (i>1) % Go through residues starting from highest order down
-    r_out(i)   = r_in(i) / ((ts * p_in)^i);                     % Back to binomial coefficient for highest order (always 1)
-    r_in(1:i) -= r_out(i) * polyrev(h1_z_deriv(i-1,p_in,ts)); % Subtract highest order result, leaving r_in(i) zero
-    i--;
+  j=n;
+  while (j>1) % Go through residues starting from highest order down
+    r_out(j)   = r_in(j) / ((ts * p_in)^j);                   % Back to binomial coefficient for highest order (always 1)
+    r_in(1:j) -= r_out(j) * polyrev(h1_z_deriv(j-1,p_in,ts)); % Subtract highest order result, leaving r_in(j) zero
+    j--;
   endwhile
 
   %% Single pole (no multiplicity)
   r_out(1) = r_in(1) / ((ts * p_in));
   k_out    = r_in(1) / p_in;
-
   sm_out   = log(p_in) / ts;
 
 endfunction
+
+
+%!function err = ztoserr(bz,az,fs)
+%!
+%!  % number of time steps
+%!  n=10;
+%!
+%!  % make sure system is realizable (no delays)
+%!  bz=prepad(bz,length(az)-1,0,2);
+%!
+%!  % inverse impulse invariant transform to s-domain
+%!  [bs as]=invimpinvar(bz,az,fs);
+%!
+%!  % create sys object of transfer function
+%!  s=tf(bs,as);
+%!
+%!  % calculate impulse response of continuous time system
+%!  % at discrete time intervals 1/fs
+%!  ys=impulse(s,1,(n-1)/fs,n);
+%!
+%!  % impulse response of discrete time system
+%!  yz=filter(bz,az,[1 zeros(1,n-1)]);
+%!
+%!  % find rms error
+%!  err=sqrt(sum((yz*fs.-ys).^2)/length(ys));
+%!  endfunction
+%!
+%!assert(ztoserr([1],[1 -0.5],10),0,0.0001);
+%!assert(ztoserr([1],[1 -1 0.25],10),0,0.0001);
+%!assert(ztoserr([1 1],[1 -1 0.25],10),0,0.0001);
+%!assert(ztoserr([1],[1 -1.5 0.75 -0.125],10),0,0.0001);
+%!assert(ztoserr([1 1],[1 -1.5 0.75 -0.125],10),0,0.0001);
+%!assert(ztoserr([1 1 1],[1 -1.5 0.75 -0.125],10),0,0.0001);
+%!assert(ztoserr([1],[1 0 0.25],10),0,0.0001);
+%!assert(ztoserr([1 1],[1 0 0.25],10),0,0.0001);
+%!assert(ztoserr([1],[1 0 0.5 0 0.0625],10),0,0.0001);
+%!assert(ztoserr([1 1],[1 0 0.5 0 0.0625],10),0,0.0001);
+%!assert(ztoserr([1 1 1],[1 0 0.5 0 0.0625],10),0,0.0001);
+%!assert(ztoserr([1 1 1 1],[1 0 0.5 0 0.0625],10),0,0.0001);
