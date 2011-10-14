@@ -90,10 +90,6 @@ function [b_out, a_out] = impinvar (b_in, a_in, fs = 1, tol = 0.0001)
   % Shift results right to account for calculating in z instead of z^-1
   b_out(end)=[];
 
-  ## respect the required tolerance values
-  b_out(abs(b_out)<tol) = 0;
-  a_out(abs(a_out)<tol) = 0;
-
 endfunction
 
 ## Convert residue vector for single and multiple poles in s-domain (located at sm) to
@@ -118,7 +114,7 @@ endfunction
 %!function err = stozerr(bs,as,fs)
 %!
 %!  % number of time steps
-%!  n=10;
+%!  n=100;
 %!
 %!  % impulse invariant transform to z-domain
 %!  [bz az]=impinvar(bs,as,fs);
@@ -137,15 +133,15 @@ endfunction
 %!  err=sqrt(sum((yz*fs.-ys).^2)/length(ys));
 %!  endfunction
 %!
-%!assert(stozerr([1],[1 1],0.1),0,0.0001);
-%!assert(stozerr([1],[1 2 1],0.1),0,0.0001);
-%!assert(stozerr([1 1],[1 2 1],0.1),0,0.0001);
-%!assert(stozerr([1],[1 3 3 1],0.1),0,0.0001);
-%!assert(stozerr([1 1],[1 3 3 1],0.1),0,0.0001);
-%!assert(stozerr([1 1 1],[1 3 3 1],0.1),0,0.0001);
-%!assert(stozerr([1],[1 0 1],0.1),0,0.0001);
-%!assert(stozerr([1 1],[1 0 1],0.1),0,0.0001);
-%!assert(stozerr([1],[1 0 2 0 1],0.1),0,0.0001);
-%!assert(stozerr([1 1],[1 0 2 0 1],0.1),0,0.0001);
-%!assert(stozerr([1 1 1],[1 0 2 0 1],0.1),0,0.0001);
-%!assert(stozerr([1 1 1 1],[1 0 2 0 1],0.1),0,0.0001);
+%!assert(stozerr([1],[1 1],100),0,0.0001);
+%!assert(stozerr([1],[1 2 1],100),0,0.0001);
+%!assert(stozerr([1 1],[1 2 1],100),0,0.0001);
+%!assert(stozerr([1],[1 3 3 1],100),0,0.0001);
+%!assert(stozerr([1 1],[1 3 3 1],100),0,0.0001);
+%!assert(stozerr([1 1 1],[1 3 3 1],100),0,0.0001);
+%!assert(stozerr([1],[1 0 1],100),0,0.0001);
+%!assert(stozerr([1 1],[1 0 1],100),0,0.0001);
+%!assert(stozerr([1],[1 0 2 0 1],100),0,0.0001);
+%!assert(stozerr([1 1],[1 0 2 0 1],100),0,0.0001);
+%!assert(stozerr([1 1 1],[1 0 2 0 1],100),0,0.0001);
+%!assert(stozerr([1 1 1 1],[1 0 2 0 1],100),0,0.0001);

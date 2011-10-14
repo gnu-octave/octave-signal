@@ -1,4 +1,4 @@
-## Copyright 2007 R.G.H. Eschauzier <reschauzier@yahoo.com>
+## Copyright (c) 2007 R.G.H. Eschauzier <reschauzier@yahoo.com>
 ## Copyright (c) 2011 Carnë Draug <carandraug+dev@gmail.com>
 ## 
 ## This program is free software; you can redistribute it and/or modify
@@ -86,10 +86,6 @@ function [b_out, a_out] = invimpinvar (b_in, a_in, fs = 1, tol = 0.0001)
   a_out          = to_real(a_out);      % Get rid of spurious imaginary part
   b_out          = to_real(b_out);
 
-  ## respect the required tolerance values
-  b_out(abs(b_out)<tol) = 0;
-  a_out(abs(a_out)<tol) = 0;
-
   b_out          = polyreduce(b_out);
 
 endfunction
@@ -118,7 +114,7 @@ endfunction
 %!function err = ztoserr(bz,az,fs)
 %!
 %!  % number of time steps
-%!  n=10;
+%!  n=100;
 %!
 %!  % make sure system is realizable (no delays)
 %!  bz=prepad(bz,length(az)-1,0,2);
@@ -140,15 +136,15 @@ endfunction
 %!  err=sqrt(sum((yz*fs.-ys).^2)/length(ys));
 %!  endfunction
 %!
-%!assert(ztoserr([1],[1 -0.5],10),0,0.0001);
-%!assert(ztoserr([1],[1 -1 0.25],10),0,0.0001);
-%!assert(ztoserr([1 1],[1 -1 0.25],10),0,0.0001);
-%!assert(ztoserr([1],[1 -1.5 0.75 -0.125],10),0,0.0001);
-%!assert(ztoserr([1 1],[1 -1.5 0.75 -0.125],10),0,0.0001);
-%!assert(ztoserr([1 1 1],[1 -1.5 0.75 -0.125],10),0,0.0001);
-%!assert(ztoserr([1],[1 0 0.25],10),0,0.0001);
-%!assert(ztoserr([1 1],[1 0 0.25],10),0,0.0001);
-%!assert(ztoserr([1],[1 0 0.5 0 0.0625],10),0,0.0001);
-%!assert(ztoserr([1 1],[1 0 0.5 0 0.0625],10),0,0.0001);
-%!assert(ztoserr([1 1 1],[1 0 0.5 0 0.0625],10),0,0.0001);
-%!assert(ztoserr([1 1 1 1],[1 0 0.5 0 0.0625],10),0,0.0001);
+%!assert(ztoserr([1],[1 -0.5],0.01),0,0.0001);
+%!assert(ztoserr([1],[1 -1 0.25],0.01),0,0.0001);
+%!assert(ztoserr([1 1],[1 -1 0.25],0.01),0,0.0001);
+%!assert(ztoserr([1],[1 -1.5 0.75 -0.125],0.01),0,0.0001);
+%!assert(ztoserr([1 1],[1 -1.5 0.75 -0.125],0.01),0,0.0001);
+%!assert(ztoserr([1 1 1],[1 -1.5 0.75 -0.125],0.01),0,0.0001);
+%!assert(ztoserr([1],[1 0 0.25],0.01),0,0.0001);
+%!assert(ztoserr([1 1],[1 0 0.25],0.01),0,0.0001);
+%!assert(ztoserr([1],[1 0 0.5 0 0.0625],0.01),0,0.0001);
+%!assert(ztoserr([1 1],[1 0 0.5 0 0.0625],0.01),0,0.0001);
+%!assert(ztoserr([1 1 1],[1 0 0.5 0 0.0625],0.01),0,0.0001);
+%!assert(ztoserr([1 1 1 1],[1 0 0.5 0 0.0625],0.01),0,0.0001);
