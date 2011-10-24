@@ -27,7 +27,6 @@
 %%
 %% Run @code{demo sigmoid_train} to some examples of the use of this function.
 %%
-%% @seealso{}
 %% @end deftypefn
 
 function envelope = sigmoid_train (t, range, timeconstant)
