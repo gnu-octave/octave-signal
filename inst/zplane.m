@@ -93,7 +93,7 @@ function zplane(z, p)
   text();
   plot_with_labels(z, "o");
   plot_with_labels(p, "x");
-  replot;
+  refresh;
 
   r = exp(2i*pi*[0:100]/100);
   plot(real(r), imag(r),'k'); hold on;
