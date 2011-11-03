@@ -117,4 +117,4 @@ end
 %! pyulear(skewed,7,user_freq,Fs,'semilogy');
 %! input('User-specified frequency values. Press ENTER', 's' );
 %! hold off
-%! clearplot
+%! clf

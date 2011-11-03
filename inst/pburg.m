@@ -146,4 +146,4 @@ end
 %! pburg(skewed,7,user_freq,Fs,'AKICc','semilogy');
 %! input('User-specified frequency values. Press ENTER', 's' );
 %! hold off
-%! clearplot
+%! clf
