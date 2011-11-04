@@ -21,12 +21,12 @@
 ## @end deftypefn
 ## @seealso{circshift}
 
-## Ref [1] A. V. Oppenheim, R. W. Schafer and J. R. Buck, 
+## Ref [1] A. V. Oppenheim, R. W. Schafer and J. R. Buck,
 ## Discrete-time signal processing, Signal processing series,
 ## Prentice-Hall, 1999
 ##
 ## Ref [2] T.I. Laakso, V. Valimaki, M. Karjalainen and U.K. Laine
-## Splitting the unit delay, IEEE Signal Processing Magazine, 
+## Splitting the unit delay, IEEE Signal Processing Magazine,
 ## vol. 13, no. 1, pp 30--59 Jan 1996
 
 function  [y, h] = fracshift( x, d, h )
@@ -47,35 +47,35 @@ endif;
 if (nargin < 4)
 
   ## properties of the interpolation filter
-  
+
   log10_rejection = -3.0;
   stopband_cutoff_f = 1.0 / 2.0;
   roll_off_width = stopband_cutoff_f / 10;
-  
+
   ## determine filter length
   ## use empirical formula from [1] Chap 7, Eq. (7.63) p 476
-  
+
   rejection_dB = -20.0*log10_rejection;
   L = ceil((rejection_dB-8.0) / (28.714 * roll_off_width));
-  
+
   ## ideal sinc filter
-  
+
   t=(-L:L)';
-  ideal_filter=2*stopband_cutoff_f*sinc(2*stopband_cutoff_f*(t-(d-fix(d))));  
-  
+  ideal_filter=2*stopband_cutoff_f*sinc(2*stopband_cutoff_f*(t-(d-fix(d))));
+
   ## determine parameter of Kaiser window
   ## use empirical formula from [1] Chap 7, Eq. (7.62) p 474
-  
-  if ((rejection_dB>=21)&(rejection_dB<=50))
+
+  if ((rejection_dB>=21) && (rejection_dB<=50))
     beta = 0.5842 * (rejection_dB-21.0)^0.4 + 0.07886 * (rejection_dB-21.0);
   elseif (rejection_dB>50)
     beta = 0.1102 * (rejection_dB-8.7);
   else
     beta = 0.0;
   endif
-  
+
   ## apodize ideal (sincard) filter response
-  
+
   m = 2*L;
   t = (0 : m)' - (d-fix(d));
   t = 2 * beta / m * sqrt (t .* (m - t));

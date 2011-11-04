@@ -23,7 +23,7 @@
 %% @item
 %% @var{sos} = matrix of series second-order sections, one per row:@*
 %% @var{sos} = [@var{B1}.' @var{A1}.'; ...; @var{BN}.' @var{AN}.'], where@*
-%% @code{@var{B1}.'==[b0 b1 b2] and @var{A1}.'==[1 a1 a2]} for 
+%% @code{@var{B1}.'==[b0 b1 b2] and @var{A1}.'==[1 a1 a2]} for
 %% section 1, etc.@*
 %% b0 must be nonzero for each section.@*
 %% See @code{filter()} for documentation of the
@@ -33,30 +33,48 @@
 %% @var{Bscale} is an overall gain factor that effectively scales
 %% the output @var{B} vector (or any one of the input @var{B}i vectors).
 %% @end itemize
-%% 
+%%
 %% RETURNED:
 %% @var{B} and @var{A} are vectors specifying the digital filter @math{H(z) = B(z)/A(z)}.
 %% See @code{filter()} for further details.
-%% 
+%%
 %% @seealso{tf2sos zp2sos sos2pz zp2tf tf2zp}
 %% @end deftypefn
 
 function [B,A] = sos2tf(sos,Bscale)
 
-if nargin<2, Bscale=1; end
-[N,M] = size(sos);
-if M~=6, error('sos2tf: sos matrix should be N by 6'); end
-A = 1;
-B = 1;
-for i=1:N
-  B = conv(B, sos(i,1:3));
-  A = conv(A, sos(i,4:6));
-end
-nB = length(B);
-while nB & B(nB)==0, B=B(1:nB-1); nB=length(B); end
-nA = length(A);
-while nA & A(nA)==0, A=A(1:nA-1); nA=length(A); end
-B = B * Bscale;
+  if nargin<2
+    Bscale=1;
+  end
+
+  [N,M] = size(sos);
+
+  if M~=6
+    error('sos2tf: sos matrix should be N by 6');
+  end
+
+  A = 1;
+  B = 1;
+
+  for i=1:N
+    B = conv(B, sos(i,1:3));
+    A = conv(A, sos(i,4:6));
+  end
+
+  nB = length(B);
+  while nB && B(nB)==0
+    B=B(1:nB-1);
+    nB=length(B);
+  end
+
+  nA = length(A);
+  while nA && A(nA)==0
+    A=A(1:nA-1);
+    nA=length(A);
+  end
+  B = B * Bscale;
+
+endfunction
 
 %!test
 %! B=[1   1];
@@ -66,7 +84,7 @@ B = B * Bscale;
 %! assert({Bh,Ah},{B,A},10*eps);
 
 %!test
-%! B=[1 0 0 0 0   1]; 
+%! B=[1 0 0 0 0   1];
 %! A=[1 0 0 0 0 0.9];
 %! [sos,g] = tf2sos(B,A);
 %! [Bh,Ah] = sos2tf(sos,g);

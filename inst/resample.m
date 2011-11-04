@@ -24,7 +24,7 @@
 ## Digital Signal Processing: Principles, Algorithms, and Applications,
 ## 4th ed., Prentice Hall, 2007. Chap. 6
 ##
-## Ref [2] A. V. Oppenheim, R. W. Schafer and J. R. Buck, 
+## Ref [2] A. V. Oppenheim, R. W. Schafer and J. R. Buck,
 ## Discrete-time signal processing, Signal processing series,
 ## Prentice-Hall, 1999
 ## @end deftypefn
@@ -52,42 +52,42 @@ endif
 if (nargin < 4)
 
   ## properties of the antialiasing filter
-  
+
   log10_rejection = -3.0;
   stopband_cutoff_f = 1.0/(2.0 * max(p,q));
   roll_off_width = stopband_cutoff_f / 10.0;
-  
+
   ## determine filter length
   ## use empirical formula from [2] Chap 7, Eq. (7.63) p 476
-  
+
   rejection_dB = -20.0*log10_rejection;
   L = ceil((rejection_dB-8.0) / (28.714 * roll_off_width));
-  
+
   ## ideal sinc filter
-  
+
   t=(-L:L)';
-  ideal_filter=2*p*stopband_cutoff_f*sinc(2*stopband_cutoff_f*t);  
-  
+  ideal_filter=2*p*stopband_cutoff_f*sinc(2*stopband_cutoff_f*t);
+
   ## determine parameter of Kaiser window
   ## use empirical formula from [2] Chap 7, Eq. (7.62) p 474
-  
-  if ((rejection_dB>=21)&(rejection_dB<=50))
+
+  if ((rejection_dB>=21) && (rejection_dB<=50))
     beta = 0.5842 * (rejection_dB-21.0)^0.4 + 0.07886 * (rejection_dB-21.0);
   elseif (rejection_dB>50)
     beta = 0.1102 * (rejection_dB-8.7);
   else
     beta = 0.0;
   endif
-  
+
   ## apodize ideal filter response
-  
+
   h=kaiser(2*L+1,beta).*ideal_filter;
-  
+
 endif
 
 ## check if input is a row vector
 isrowvector=false;
-if ((rows(x)==1)&(columns(x)>1))
+if ((rows(x)==1) && (columns(x)>1))
    x=x(:);
    isrowvector=true;
 endif
@@ -163,7 +163,7 @@ endfunction
 %!   xx=sin(2*pi*f0/r*tt' + phi0);
 %!   t0=ceil((length(h)-1)/2/q);
 %!   idx=t0+1:NN-t0;
-%!   reject(n+1)=max(abs(y(idx)));  
+%!   reject(n+1)=max(abs(y(idx)));
 %! endfor;
 %! rolloff=.1;
 %! rejection=10^-3;

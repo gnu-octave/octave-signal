@@ -39,7 +39,7 @@
 function coef = firls(N, frequencies, pass, weight, str);
 
 
-  if nargin<3 | nargin>6
+  if nargin<3 || nargin>6
     usage("");
   end
   if nargin==3

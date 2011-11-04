@@ -38,6 +38,8 @@
 %% @item interp
 %% Type of interpolation. See @code{interp1}.
 %%
+%% @end table
+%%
 %% @seealso{interp1}
 %% @end deftypefn
 
