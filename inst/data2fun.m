@@ -108,6 +108,24 @@ function [fhandle fullfname] = data2fun( t, y, varargin)
 
 endfunction
 
+function str = generate_function_str(name, oargs, iargs, bodystr)
+
+  striargs = cell2mat ( cellfun (@(x) [x ", "], iargs, "UniformOutput", false));
+  striargs = striargs(1:end-2);
+
+  stroargs = cell2mat ( cellfun (@(x) [x ", "], oargs, "UniformOutput", false));
+  stroargs = stroargs(1:end-2);
+
+  if !isempty (stroargs)
+    str = ["function [" stroargs "] = " name "(" striargs ")\n\n" bodystr ...
+           "\n\nendfunction"];
+  else
+    str = ["function " name "(" striargs ")\n\n" bodystr ...
+           "\n\nendfunction"];
+  end
+
+endfunction
+
 %!shared t, y
 %! t = linspace(0,1,10);
 %! y = t.^2 - 2*t + 1;
