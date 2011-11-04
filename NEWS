@@ -20,3 +20,6 @@ signal-1.1.0   Release Date: 2011-11-04   Release Manager: Juan Pablo Carbajal
  pei_tseng_notch.m
  iirlp2mb.m
 
+* Not implemented functions removed from the documentation.
+* All demos are now working!
+

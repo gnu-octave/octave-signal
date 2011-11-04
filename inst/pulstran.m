@@ -49,7 +49,7 @@
 ## as simple band-limited interpolation:
 ##     xf = 0:0.05:10; yf = sin(2*pi*xf/5);
 ##     xp = 0:10; yp = sin(2*pi*xp/5); # .2 Hz sine sampled every second
-##     s = pulstran(xf, [xp, yp],'sinc'); 
+##     s = pulstran(xf, [xp, yp],'sinc');
 ##     plot(f, yf, ";original;", xf, s, ";sinc;",xp,yp,"*;;");
 ## You wouldn't want to do this in practice since it is expensive, and
 ## since it works much better with a windowed sinc function, at least
@@ -63,12 +63,12 @@ function y = pulstran(t, d, pulse, varargin)
   y = zeros(size(t));
   if isempty(y), return; endif
   if rows(d) == 1, d=d'; endif
-  if columns(d) == 2, 
+  if columns(d) == 2,
     a=d(:,2);
   else
     a=ones(rows(d),1);
   endif
-  if ischar(pulse) 
+  if ischar(pulse)
     ## apply function t+d for all d
     for i=1:rows(d)
       y = y+a(i)*feval(pulse,t-d(i,1),varargin{:});
@@ -78,7 +78,7 @@ function y = pulstran(t, d, pulse, varargin)
     Fs = 1; method = 'linear';
     if nargin==4
       arg=varargin{1};
-      if ischar(arg), 
+      if ischar(arg),
 	method=arg;
       else
 	Fs = arg;
@@ -116,7 +116,7 @@ endfunction
 %! fs = 11025;                   # arbitrary sample rate
 %! f0 = 100;                     # pulse train sample rate
 %! w = 0.003;                    # pulse width of 3 milliseconds
-%! t = 0:1/fs:0.1; d=0:1/f0:0.1; # define sample times and pulse times 
+%! t = 0:1/fs:0.1; d=0:1/f0:0.1; # define sample times and pulse times
 %! a = hanning(length(d));       # define pulse amplitudes
 %!
 %! subplot(221); title("rectpuls");
@@ -136,7 +136,7 @@ endfunction
 %! pulse = sin(2*pi*[0:0.0001:w]/w).*[w:-0.0001:0];
 %! auplot(pulstran(t', [d', a], pulse', 10000), fs);
 %! hold on; plot(d*1000,a*w,'g*;pulse;'); hold off; title("");
-%! oneplot();
+%! 
 %! %----------------------------------------------------------
 %! % Should see (1) rectangular pulses centered on *,
 %! %            (2) rectangular pulses to the right of *,

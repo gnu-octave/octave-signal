@@ -39,7 +39,7 @@
 ##    the [0, 1], where 1 corresponds to the Nyquist frequency, fs/2.
 ##
 ## The Kaiser window parameters n and beta are computed from the
-## relation between ripple (A=-20*log10(dev)) and transition width 
+## relation between ripple (A=-20*log10(dev)) and transition width
 ## (dw in radians) discovered empirically by Kaiser:
 ##
 ##           / 0.1102(A-8.7)                        A > 50
@@ -65,7 +65,7 @@ function [n, w, beta, ftype] = kaiserord(f, m, dev, fs)
   if nargin<4, fs=2; endif
 
   ## parameter checking
-  if length(f)!=2*length(m)-2 
+  if length(f)!=2*length(m)-2
     error("kaiserord must have one magnitude for each frequency band");
   endif
   if any(m(1:length(m)-2)!=m(3:length(m)))
@@ -117,23 +117,23 @@ endfunction
 %!   elseif i==3
 %!     subplot(223); bands=[1000, 1200, 3000, 3500]; mag=[0, 1, 0]; dev=0.1;
 %!   elseif i==4
-%!     subplot(224); bands=100*[10, 13, 15, 20, 30, 33, 35, 40]; 
+%!     subplot(224); bands=100*[10, 13, 15, 20, 30, 33, 35, 40];
 %!     mag=[1, 0, 1, 0, 1]; dev=0.05;
 %!   endif
 %!   [n, w, beta, ftype] = kaiserord(bands, mag, dev, Fs);
-%!   d=max(1,fix(n/10)); 
+%!   d=max(1,fix(n/10));
 %!   if mag(length(mag))==1 && rem(d,2)==1, d=d+1; endif
 %!   [h, f] = freqz(fir1(n,w,ftype,kaiser(n+1,beta),'noscale'),1,[],Fs);
 %!   hm = freqz(fir1(n-d,w,ftype,kaiser(n-d+1,beta),'noscale'),1,[],Fs);
 %!   plot(f,abs(hm),sprintf("r;order %d;",n-d), ...
 %!	  f,abs(h), sprintf("b;order %d;",n));
 %!   b = [0, bands, Fs/2]; hold on;
-%!   for i=2:2:length(b), 
+%!   for i=2:2:length(b),
 %!     hi=mag(i/2)+dev(1); lo=max(mag(i/2)-dev(1),0);
 %!     plot([b(i-1), b(i), b(i), b(i-1), b(i-1)],[hi, hi, lo, lo, hi],"c;;");
 %!   endfor; hold off;
 %! endfor
-%! oneplot();
+%!
 %! %--------------------------------------------------------------
 %! % A filter meets the specifications if its frequency response
 %! % passes through the ends of the criteria boxes, and fails if
@@ -145,4 +145,3 @@ endfunction
 %! % the red line fails.
 
 %!# XXX FIXME XXX extend demo to show detail at criteria box corners
-

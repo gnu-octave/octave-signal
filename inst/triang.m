@@ -26,11 +26,11 @@
 ## * peak value of 1 at 0 for even n
 
 function w = triang(n)
-  if (nargin != 1) 
-    usage("w = triang(n)"); 
+  if (nargin != 1)
+    usage("w = triang(n)");
   endif
   if (!isscalar(n) || n != fix (n) || n < 1)
-    error("triang(n): n has to be an integer > 0"); 
+    error("triang(n): n has to be an integer > 0");
   endif
   w = 1 - abs ([-(n-1):2:(n-1)]' / (n+rem(n,2)));
 endfunction
@@ -49,11 +49,11 @@ endfunction
 %!demo
 %! subplot(221); axis([-1, 1, 0, 1.3]); grid("on");
 %! title("comparison with continuous for odd n");
-%! n=7; k=(n-1)/2; t=[-k:0.1:k]/(k+1); 
+%! n=7; k=(n-1)/2; t=[-k:0.1:k]/(k+1);
 %! plot(t,1-abs(t),";continuous;",[-k:k]/(k+1),triang(n),"g*;discrete;");
 %!
 %! subplot(222); axis([-1, 1, 0, 1.3]); grid("on");
-%! n=8; k=(n-1)/2; t=[-k:0.1:k]/(k+1/2); 
+%! n=8; k=(n-1)/2; t=[-k:0.1:k]/(k+1/2);
 %! title("note the higher peak for even n");
 %! plot(t,1+1/n-abs(t),";continuous;",[-k:k]/(k+1/2),triang(n),"g*;discrete;");
 %!
@@ -67,4 +67,4 @@ endfunction
 %! n=8;
 %! plot(0:n+1,bartlett(n+2),"g-*;bartlett;",triang(n),"r-+;triang;");
 %!
-%! oneplot; title("");
+%! subplot(111); title("");

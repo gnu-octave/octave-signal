@@ -14,7 +14,7 @@
 ## along with this program; see the file COPYING.  If not, see
 ## <http://www.gnu.org/licenses/>.
 ##
-## Plot, demos, and help info copied and adapted from 
+## Plot, demos, and help info copied and adapted from
 ## grpdelay.m, Copyright (C) 2000 Paul Kienzle
 
 ## Compute the group delay of a filter.
@@ -72,7 +72,7 @@
 ##        d/dw H(z) = -------------------------------
 ##                               A(z) A(z)
 ## Substituting into the expression above yields:
-##                A dB - B dA 
+##                A dB - B dA
 ##        g(w) =  ----------- = dB/B - dA/A
 ##                    A B
 ##
@@ -83,9 +83,9 @@
 ##
 ## As a further optimization when nfft>>length(a), the IIR filter (b,a)
 ## is converted to the FIR filter conv(b,fliplr(conj(a))).
-## For further details, see 
+## For further details, see
 ## http://ccrma.stanford.edu/~jos/filters/Numerical_Computation_Group_Delay.html
-function [gd,w] = grpdelay(b,a=1,nfft=512,whole,Fs) 
+function [gd,w] = grpdelay(b,a=1,nfft=512,whole,Fs)
 
   if (nargin<1 || nargin>5)
     usage("[g, w]=grpdelay(b [, a [, n [, 'whole' [, Fs]]]])");
@@ -106,7 +106,7 @@ function [gd,w] = grpdelay(b,a=1,nfft=512,whole,Fs)
   else
     if nargin<5
       Fs=1; % return w in radians per sample
-      if nargin<4, whole=''; 
+      if nargin<4, whole='';
       elseif ~ischar(whole)
 	Fs = whole;
 	HzFlag=1;
@@ -130,20 +130,20 @@ function [gd,w] = grpdelay(b,a=1,nfft=512,whole,Fs)
   ob = length(b)-1;             % order of b(z)
   if ob<0, b=1; ob=0; end       % b can be [] as well
   oc = oa + ob;                 % order of c(z)
-  
+
   c = conv(b,fliplr(conj(a)));	% c(z) = b(z)*conj(a)(1/z)*z^(-oa)
-  cr = c.*[0:oc];               % cr(z) = derivative of c wrt 1/z 
+  cr = c.*[0:oc];               % cr(z) = derivative of c wrt 1/z
   num = fft(cr,nfft);
   den = fft(c,nfft);
   minmag = 10*eps;
-  polebins = find(abs(den)<minmag); 
+  polebins = find(abs(den)<minmag);
   for b=polebins
     warning('grpdelay: setting group delay to 0 at singularity');
     num(b) = 0;
     den(b) = 1;
-    % try to preserve angle:    
+    % try to preserve angle:
     % db = den(b);
-    % den(b) = minmag*abs(num(b))*exp(j*atan2(imag(db),real(db))); 
+    % den(b) = minmag*abs(num(b))*exp(j*atan2(imag(db),real(db)));
     % warning(sprintf('grpdelay: den(b) changed from %f to %f',db,den(b)));
   end
   gd = real(num ./ den) - oa;
@@ -185,11 +185,11 @@ function [gd,w] = grpdelay(b,a=1,nfft=512,whole,Fs)
 %! %--------------------------------------------------------------
 %! title ('Zero at z = -0.9');
 %! grpdelay([1 0.9],[],512,'whole',1);
-%! hold on; 
+%! hold on;
 %! xlabel('Normalized Frequency (cycles/sample)');
 %! stem([0, 0.5, 1],[0.5, -9, 0.5],'*b;target;');
-%! hold off; 
-%! 
+%! hold off;
+%!
 %!demo % 2
 %! %--------------------------------------------------------------
 %! % confirm the group delays approximately meet the targets
@@ -200,9 +200,9 @@ function [gd,w] = grpdelay(b,a=1,nfft=512,whole,Fs)
 %! a = poly([0.9*exp(-1i*pi*0.6), 1/0.9*exp(-1i*pi*0.2)]);
 %! title ('Two Zeros and Two Poles');
 %! grpdelay(b,a,512,'whole',1);
-%! hold on; 
+%! hold on;
 %! xlabel('Normalized Frequency (cycles/sample)');
-%! stem([0.1, 0.3, 0.7, 0.9], [9, -9, 9, -9],'*b;target;'); 
+%! stem([0.1, 0.3, 0.7, 0.9], [9, -9, 9, -9],'*b;target;');
 %! hold off;
 
 %!demo % 3
@@ -214,21 +214,21 @@ function [gd,w] = grpdelay(b,a=1,nfft=512,whole,Fs)
 %! Fs = 8000;     % sampling rate
 %! Fc = 0.3*Fs/2; % lowpass cut-off frequency
 %! nb = 40;
-%! b = fir1(nb,2*Fc/Fs); % matlab freq normalization: 1=Fs/2 
+%! b = fir1(nb,2*Fc/Fs); % matlab freq normalization: 1=Fs/2
 %! [H,f] = freqz(b,1,[],1);
 %! [gd,f] = grpdelay(b,1,[],1);
 %! title(sprintf('b = fir1(%d,2*%d/%d);',nb,Fc,Fs));
 %! xlabel('Normalized Frequency (cycles/sample)');
-%! ylabel('Amplitude Response (dB)'); 
+%! ylabel('Amplitude Response (dB)');
 %! grid('on');
 %! plot(f,20*log10(abs(H)));
 %! subplot(212);
 %! del = nb/2; % should equal this
 %! title(sprintf('Group Delay in Pass-Band (Expect %d samples)',del));
-%! ylabel('Group Delay (samples)'); 
+%! ylabel('Group Delay (samples)');
 %! axis([0, 0.2, del-1, del+1]);
 %! plot(f,gd);
-%! axis(); oneplot();
+%! axis();
 
 %!demo % 4
 %! %--------------------------------------------------------------
@@ -241,14 +241,14 @@ function [gd,w] = grpdelay(b,a=1,nfft=512,whole,Fs)
 %! subplot(211);
 %! title('[b,a] = cheby1(3, 3, 2*[1000, 3000]/Fs, \'stop\');');
 %! xlabel('Frequency (Hz)');
-%! ylabel('Amplitude Response'); 
+%! ylabel('Amplitude Response');
 %! grid('on');
 %! plot(f,abs(H));
 %! subplot(212);
 %! title('[gd,f] = grpdelay(b,a,[],Fs);');
-%! ylabel('Group Delay (samples)'); 
+%! ylabel('Group Delay (samples)');
 %! plot(f,gd);
-%! oneplot();
+
 
 % ------------------------ TESTS -----------------------
 
@@ -307,9 +307,9 @@ function [gd,w] = grpdelay(b,a=1,nfft=512,whole,Fs)
 %! [h, w] = grpdelay(b, a, 256, 'half', Fs);
 %! [h2, w2] = grpdelay(b, a, 512, 'whole', Fs);
 %! assert (size(h), size(w));
-%! assert (length(h), 256); 
+%! assert (length(h), 256);
 %! assert (size(h2), size(w2));
-%! assert (length(h2), 512); 
+%! assert (length(h2), 512);
 %! assert (h, h2(1:256));
 %! assert (w, w2(1:256));
 

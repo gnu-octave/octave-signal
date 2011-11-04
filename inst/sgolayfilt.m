@@ -14,7 +14,7 @@
 ## along with this program; If not, see <http://www.gnu.org/licenses/>.
 
 ## y = sgolayfilt (x, p, n [, m [, ts]])
-##    Smooth the data in x with a Savitsky-Golay smoothing filter of 
+##    Smooth the data in x with a Savitsky-Golay smoothing filter of
 ##    polynomial order p and length n, n odd, n > p.  By default, p=3
 ##    and n=p+2 or n=p+3 if p is even.
 ##
@@ -42,8 +42,8 @@
 
 function y = sgolayfilt (x, p, n, m, ts)
 
-  if nargin < 1 || nargin > 5 
-    usage("y = sgolayfilt(x,p,n [, m [, ts]]) or y = sgolayfilt(x,F)"); 
+  if nargin < 1 || nargin > 5
+    usage("y = sgolayfilt(x,p,n [, m [, ts]]) or y = sgolayfilt(x,F)");
   endif
 
   if (nargin < 2)
@@ -122,5 +122,3 @@ endfunction
 %!      t,filtfilt(ones(1,5)/5,1,x),"g;5 sample average;",...
 %!      t,filtfilt(b,a,x),"c;order 5 butterworth;",...
 %!      t,x,"+b;original data;"); title("");
-%!
-%! oneplot();

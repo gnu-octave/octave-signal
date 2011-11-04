@@ -15,8 +15,8 @@
 
 ## usage: b = fir2(n, f, m [, grid_n [, ramp_n]] [, window])
 ##
-## Produce an FIR filter of order n with arbitrary frequency response, 
-## returning the n+1 filter coefficients in b.  
+## Produce an FIR filter of order n with arbitrary frequency response,
+## returning the n+1 filter coefficients in b.
 ##
 ## n: order of the filter (1 less than the length of the filter)
 ## f: frequency at band edges
@@ -91,13 +91,13 @@ function b = fir2(n, f, m, grid_n, ramp_n, window)
   if (ramp_n > 0)
     ## remember original frequency points prior to applying ramps
     basef = f(:); basem = m(:);
-    
+
     ## separate identical frequencies, but keep the midpoint
     idx = find (diff(f) == 0);
     f(idx) = f(idx) - ramp_n/grid_n/2;
     f(idx+1) = f(idx+1) + ramp_n/grid_n/2;
     f = [f(:);basef(idx)]';
-    
+
     ## make sure the grid points stay monotonic in [0,1]
     f(f<0) = 0;
     f(f>1) = 1;
@@ -142,7 +142,6 @@ endfunction
 %! subplot(122);
 %! plot(f,20*log10(m+1e-5),';target response (dB);',...
 %!      w/pi,20*log10(abs(h)),';filter response (dB);');
-%! oneplot;
 
 %!demo
 %! f=[0, 0.3, 0.3, 0.6, 0.6, 1]; m=[0, 0, 1, 1/2, 0, 0];
@@ -172,13 +171,13 @@ endfunction
 %! xlabel('Normalized frequency (Fs=2)');
 %! ylabel('Magnitude');
 %!
-%! plot(X,Y,'b;Target spectrum;'); 
+%! plot(X,Y,'b;Target spectrum;');
 %! hold on;
-%! [H,F]=freqz(fir2(20, X, Y));  
+%! [H,F]=freqz(fir2(20, X, Y));
 %! plot(F/pi,abs(H),'c;Synthesized spectrum (n=20);');
-%! [H,F]=freqz(fir2(50, X, Y));  
+%! [H,F]=freqz(fir2(50, X, Y));
 %! plot(F/pi,abs(H),'r;Synthesized spectrum (n=50);');
-%! [H,F]=freqz(fir2(200, X, Y)); 
+%! [H,F]=freqz(fir2(200, X, Y));
 %! plot(F/pi,abs(H),'g;Synthesized spectrum (n=200);');
 %! hold off;
 %! xlabel(''); ylabel(''); title('');

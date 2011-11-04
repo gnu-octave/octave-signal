@@ -48,7 +48,7 @@ function y = tripuls(t, w, skew)
     idx = find(t>=-w/2 & t <= peak);
     if (idx) y(idx) = ( t(idx) + w/2 ) / ( peak + w/2 ); endif
     idx = find(t>peak & t < w/2);
-    if (idx) y(idx) = ( t(idx) - w/2 ) / ( peak - w/2 ); endif 
+    if (idx) y(idx) = ( t(idx) - w/2 ) / ( peak - w/2 ); endif
   unwind_protect_cleanup
     warning(wfi);
   end_unwind_protect
@@ -62,9 +62,8 @@ endfunction
 %! w = 0.5/f0;  # pulse width 1/10th the distance between pulses
 %! subplot(211); ylabel("amplitude"); xlabel("time (ms)");
 %! title("graph shows 5 ms pulses at 0,10,20,30 and 40 ms");
-%! auplot(pulstran(0:1/fs:4/f0, 0:1/f0:4/f0, 'tripuls', w), fs); 
+%! auplot(pulstran(0:1/fs:4/f0, 0:1/f0:4/f0, 'tripuls', w), fs);
 %! subplot(212);
 %! title("graph shows 5 ms pulses at 0,10,20,30 and 40 ms, skew -0.5");
-%! auplot(pulstran(0:1/fs:4/f0, 0:1/f0:4/f0, 'tripuls', w, -0.5), fs); 
-%! oneplot(); title(""); xlabel(""); ylabel("");
-
+%! auplot(pulstran(0:1/fs:4/f0, 0:1/f0:4/f0, 'tripuls', w, -0.5), fs);
+%! title(""); xlabel(""); ylabel("");

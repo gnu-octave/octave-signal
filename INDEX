@@ -13,7 +13,6 @@ Signals
  square
  chirp
  vco modulate demod= $TFTB
- strips
  specgram
  buffer
  mexihat
@@ -25,33 +24,21 @@ Signals
 Filtering
  filtfilt
  filtic
- latcfilt
  sgolayfilt
  sosfilt
  medfilt1
 Filter analysis
  freqs freqs_plot
- freqspace
  grpdelay
  impz
  zplane
  fwhm
 Filter conversion
- ac2poly
- poly2ac
- ac2rc
- rc2ac
- poly2rc
- rc2poly
  convmtx
- latc2tf
  residuez
  residued
- sos2ss
  sos2tf
  sos2zp
- ss2sos
- tf2latc
  tf2sos
  zp2sos
  polystab
@@ -62,7 +49,6 @@ IIR Filter design
  cheby2
  ellip
  ncauer
- maxflat
  buttord
  cheb1ord
  cheb2ord
@@ -71,20 +57,13 @@ IIR Filter design
  sftrans
  bilinear
  impinvar
- ellipdemo
  iirlp2mb
 FIR filter design
  fir1
  fir2
- fircls
- fircls1
  firls
- firrcos
- intfilt
  kaiserord
- cremez
  remez
- remezord
  sgolay
  qp_kaiser
  cl2bp
@@ -101,7 +80,6 @@ Transforms
  hilbert
  rceps
  cceps
- icceps
  cplxreal
  bitrevorder
  dwt
@@ -150,9 +128,6 @@ System identification
  invfreqs
  invfreqz
  levinson
- lpc
- rlevinson
- stmcb
 Sample rate change
  decimate
  interp
