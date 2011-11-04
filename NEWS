@@ -1,0 +1,22 @@
+Summary of important user-visible changes for releases of the signal package
+
+===============================================================================
+signal-1.1.0   Release Date: 2011-11-04   Release Manager: Juan Pablo Carbajal
+===============================================================================
+
+* Minor bug fixes in:
+ blackmannuttall.m
+ xcorr.m
+ filtfilt.m
+ invfreq.m
+ invfreqs.m
+ resample.m
+
+* New functions added:
+ data2fun.m
+ impinvar.m
+ invimpinvar.m
+ sigmoid_train.m
+ pei_tseng_notch.m
+ iirlp2mb.m
+
