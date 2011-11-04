@@ -1,5 +1,5 @@
 %% Copyright (c) 2011 Juan Pablo Carbajal <carbajal@ifi.uzh.ch>
-%% 
+%%
 %%    This program is free software: you can redistribute it and/or modify
 %%    it under the terms of the GNU General Public License as published by
 %%    the Free Software Foundation, either version 3 of the License, or
@@ -22,7 +22,7 @@
 %% row of @var{ranges} represents a real interval, e.g. if sigmod @code{i} starts
 %% at @code{t=0.1} and ends at @code{t=0.5}, then @code{@var{ranges}(i,:) = [0.1
 %% 0.5]}.
-%% The input @var{rc} is a array that defines the rising and falling time 
+%% The input @var{rc} is a array that defines the rising and falling time
 %% constants of each sigmoids. Its size must equal the size of @var{ranges}.
 %%
 %% Run @code{demo sigmoid_train} to some examples of the use of this function.
@@ -54,10 +54,10 @@ function envelope = sigmoid_train (t, range, timeconstant)
   %% Make sure t is horizontal
   flag_transposed = false;
   if iscolumn (t)
-   t               = t';
-   [ncol nrow]     = size (t);
+   t               = t.';
    flag_transposed = true;
   end
+  [ncol nrow]     = size (t);
 
   % Compute arguments of each sigmoid
   T    = repmat (t, nRanges, 1);
@@ -71,42 +71,48 @@ function envelope = sigmoid_train (t, range, timeconstant)
   envelope = max(Y,[],1);
 
   if flag_transposed
-    envelope = envelope';
+    envelope = envelope.';
   end
 
 end
 
 %!demo
-%! % Vectorized 
+%! % Vectorized
 %! t = linspace (0, 2, 500);
 %! range = [0.1 0.4; 0.6 0.8; 1 2];
 %! rc = [1e-2 1e-2; 1e-3 1e-3; 2e-2 2e-2];
 %! y = sigmoid_train (t, range, rc);
 %!
 %! close all
-%! for i=1:3 
+%! for i=1:3
 %!     patch ([range(i,[2 2]) range(i,[1 1])], [0 1 1 0],...
 %!               'facecolor', [1 0.8 0.8],'edgecolor','none');
 %! end
 %! hold on; plot (t, y, 'b;Sigmoid train;','linewidth',2); hold off
 %! xlabel('time'); ylabel('S(t)')
-%! title ('Vectorized use of sigmoid_train')
+%! title ('Vectorized use of sigmoid train')
 %! axis tight
+%!
+%! %-------------------------------------------------------------------------
+%! % The colored regions show the limits defined in range.
 
 %!demo
-%! % On demand 
-%! tspan = [0 2];
+%! % On demand
+%! t = linspace(0,2,200).';
 %! ran = [0.5 1; 1.5 1.7];
 %! rc = 3e-2;
-%! dxdt = @(t_,x_) [ x_(2); sigmoid_train(t_, ran, rc) ];
-%! [t y] = ode45(dxdt,tspan,[0 0]);
+%! dxdt = @(x_,t_) [ x_(2); sigmoid_train(t_, ran, rc) ];
+%! y = lsode(dxdt,[0 0],t);
 %!
 %! close all
-%! for i=1:2 
+%! for i=1:2
 %!     patch ([ran(i,[2 2]) ran(i,[1 1])], [0 1 1 0],...
 %!               'facecolor', [1 0.8 0.8],'edgecolor','none');
 %! end
 %! hold on; plot (t, y(:,2), 'b;Speed;','linewidth',2); hold off
 %! xlabel('time'); ylabel('V(t)')
-%! title ('On demand use of sigmoid_train')
+%! title ('On demand use of sigmoid train')
 %! axis tight
+%!
+%! %-------------------------------------------------------------------------
+%! % The colored regions show periods when the force is active.
