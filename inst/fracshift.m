@@ -86,7 +86,7 @@ endif
 
 ## check if input is a row vector
 isrowvector=false;
-if ((rows(x)==1)&(columns(x)>1))
+if ((rows(x)==1) && (columns(x)>1))
    x=x(:);
    isrowvector=true;
 endif
