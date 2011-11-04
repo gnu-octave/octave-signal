@@ -21,6 +21,7 @@ Signals
  morlet
  shanwavf
  cmorwavf
+ sigmoid_train
 Filtering
  filtfilt
  filtic
