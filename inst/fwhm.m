@@ -1,7 +1,6 @@
-%% Compatibility: Octave 3.x, Matlab
-%% Author: Petr Mikulik
-%% Version: 23. 7. 2009
-%% This program is public domain.
+## Copyright (C) 2009 Petr Mikulik
+## This program is public domain
+
 
 %% Compute peak full-width at half maximum (FWHM) or at another level of peak
 %% maximum for vector or matrix data y, optionally sampled as y(x). If y is
@@ -32,6 +31,7 @@
 %% Return 0 if FWHM does not exist (e.g. monotonous function or the function
 %% does not cut horizontal line at rlevel*max(y) or rlevel*(max(y)+min(y)) or
 %% alevel, respectively).
+%% Compatibility: Octave 3.x, Matlab
 
 function myfwhm = fwhm (y, varargin)
 

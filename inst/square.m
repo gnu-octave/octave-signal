@@ -1,7 +1,5 @@
-## 2006-04-07 Paul Kienzle <paulkienzle@Avocado.local>
-## Author: Paul Kienzle <paulkienzle@Avocado.local>
-## 
-## This program is public domain.
+## Copyright (C) 2006 Paul Kienzle <paulkienzle@Avocado.local>
+## This function is public domain
 
 ## -*- texinfo -*-
 ## @deftypefn {Function File} {@var{s} =} square(@var{t}, @var{duty})
@@ -11,9 +9,11 @@
 ## If @var{duty} is specified, the square wave is +1 for
 ## that portion of the time.
 ##
+## @verbatim
 ##                     on time
 ##    duty cycle = ------------------
 ##                 on time + off time
+## @end verbatim
 ##
 ## @seealso{cos, sawtooth, sin, tripuls}
 ## @end deftypefn

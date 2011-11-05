@@ -1,5 +1,12 @@
 Summary of important user-visible changes for releases of the signal package
 
+ * Minor fixes on help text in:
+ dst
+ idst
+ flattopwin
+ downsample
+ upsample
+
 ===============================================================================
 signal-1.1.0   Release Date: 2011-11-04   Release Manager: Juan Pablo Carbajal
 ===============================================================================
