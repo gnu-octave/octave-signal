@@ -23,9 +23,9 @@
 ## [1] Gade, S; Herlufsen, H; (1987) "Use of weighting functions in DFT/FFT
 ## analysis (Part I)", Bruel & Kjaer Technical Review No.3.
 
-function w = flattopwin(n,sym)
+function w = flattopwin (n, sym)
   if nargin == 0 || nargin > 2
-    usage("flattopwin(n, [periodic|symmetric])"); 
+    print_usage;
   endif
 
   divisor = n-1;
@@ -42,3 +42,4 @@ function w = flattopwin(n,sym)
     
   x = 2*pi*[0:n-1]'/divisor;
   w = (1-1.93*cos(x)+1.29*cos(2*x)-0.388*cos(3*x)+0.0322*cos(4*x))/4.6402;
+endfunction
