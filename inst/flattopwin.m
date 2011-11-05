@@ -1,4 +1,5 @@
-## This program is public domain.
+## Copyright (C) 2004 Paul Kienzle <pkienzle@users.sf.net>
+## This function is public domain
 
 ## flattopwin(n, [periodic|symmetric])
 ##

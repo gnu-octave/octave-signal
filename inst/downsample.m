@@ -1,4 +1,4 @@
-## Author: Paul Kienzle <pkienzle@users.sf.net>
+## Copyright (C) 2007 Paul Kienzle <pkienzle@users.sf.net>
 ## This function is public domain
 
 ## -*- texinfo -*-
@@ -36,4 +36,3 @@ end
 %!assert(downsample([1,2;3,4;5,6;7,8;9,10],2),[1,2;5,6;9,10]);
 %!assert(downsample([1,2,3,4,5],2,1),[2,4]);
 %!assert(downsample([1,2;3,4;5,6;7,8;9,10],2,1),[3,4;7,8]);
-

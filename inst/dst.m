@@ -1,7 +1,5 @@
-## Author: Paul Kienzle <pkienzle@users.sf.net>
-## 2006-12-05
-##   * initial release
-## This program is public domain
+## Copyright (C) 2006 Paul Kienzle <pkienzle@users.sf.net>
+## This function is public domain
 
 ## -*- texinfo -*-
 ## @deftypefn {Function File} @var{y} = dst (@var{x})
