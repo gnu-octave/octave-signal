@@ -2,26 +2,27 @@
 ## This function is public domain
 
 ## -*- texinfo -*-
-## @deftypefn {Function File} @var{y} = downsample(@var{x},@var{n})
+## @deftypefn {Function File} {@var{y} =} downsample (@var{x}, @var{n})
+## @deftypefnx {Function File} {@var{y} =} downsample (@var{x}, @var{n}, @var{offset})
 ## Downsample the signal, selecting every nth element.  If @var{x}
 ## is a matrix, downsample every column.
 ##
-## For most signals you will want to use decimate() instead since
+## For most signals you will want to use @code{decimate} instead since
 ## it prefilters the high frequency components of the signal and
 ## avoids aliasing effects.
 ##
-## @deftypefnx {Function File} @var{y} = downsample(@var{x},@var{n},@var{offset})
-## Select every nth element starting at sample @var{offset}.
-## @end deftypefn
+## If @var{offset} is defined, select every nth element starting at
+## sample @var{offset}.
 ## @seealso{decimate, interp, resample, upfirdn, upsample}
+## @end deftypefn
 
-function y = downsample(x,n,phase)
-  if nargin<2 || nargin>3, usage('downsample(x,n,[offset]'); end
-  if nargin==2, phase = 0; end
+function y = downsample (x, n, phase = 0)
+
+  if nargin<2 || nargin>3, print_usage; end
 
   if phase > n - 1
-    warning("This is incompatible with Matlab (phase = 0:n-1). See\
-    octave-forge signal package release notes for details." )
+    warning("This is incompatible with Matlab (phase = 0:n-1). See ...
+    octave-forge signal package release notes for details.")
   end
 
   if isvector(x)

@@ -2,19 +2,19 @@
 ## This function is public domain
 
 ## -*- texinfo -*-
-## @deftypefn {Function File} @var{y} = idst (@var{x})
-## @deftypefnx {Function File} @var{y} = idst (@var{x}, @var{n})
+## @deftypefn {Function File} {@var{y} =} idst (@var{x})
+## @deftypefnx {Function File} {@var{y} =} idst (@var{x}, @var{n})
 ## Computes the inverse type I discrete sine transform of @var{y}.  If @var{n} is 
 ## given, then @var{y} is padded or trimmed to length @var{n} before computing 
 ## the transform.  If @var{y} is a matrix, compute the transform along the 
 ## columns of the the matrix.
-## @end deftypefn
 ## @seealso{dst}
+## @end deftypefn
 
 function x = idst (y, n)
 
   if (nargin < 1 || nargin > 2)
-    usage ("x = idst(y [, n])");
+    print_usage;
   endif
 
   if nargin == 1,

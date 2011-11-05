@@ -2,8 +2,8 @@
 ## This function is public domain
 
 ## -*- texinfo -*-
-## @deftypefn {Function File} @var{y} = dst (@var{x})
-## @deftypefnx {Function File} @var{y} = dst (@var{x}, @var{n})
+## @deftypefn {Function File} {@var{y} =} dst (@var{x})
+## @deftypefnx {Function File} {@var{y} =} dst (@var{x}, @var{n})
 ## Computes the type I discrete sine transform of @var{x}.  If @var{n} is given, 
 ## then @var{x} is padded or trimmed to length @var{n} before computing the transform.
 ## If @var{x} is a matrix, compute the transform along the columns of the
@@ -11,17 +11,19 @@
 ##
 ## The discrete sine transform X of x can be defined as follows:
 ##
+## @verbatim
 ##        N
 ## X[k] = sum x[n] sin (pi n k / (N+1) ),  k = 1, ..., N
 ##        n=1
+## @end verbatim
 ##
-## @end deftypefn
 ## @seealso{idst}
+## @end deftypefn
 
 function y = dst (x, n)
 
   if (nargin < 1 || nargin > 2)
-    usage ("y = dst(x [, n])");
+    print_usage;
   endif
 
   transpose = (rows (x) == 1);
@@ -48,9 +50,7 @@ function y = dst (x, n)
 
   if transpose, y = y.'; endif
 
-
 endfunction
-
 
 %!test
 %! x = log(linspace(0.1,1,32));
