@@ -31,7 +31,8 @@ Bluel Technologies Corporation
 #ifndef CL2BP_H
 #define CL2BP_H
 
-#include <assert.h>
+#include <cassert>
+#include <cstring> //for memset
 
 //-----------------------------------------------------------------------------------------------------------
 // If you want to debug the cl2bp algorithm, define the CL2BP_LOGGING symbol and provide an
@@ -63,7 +64,7 @@ public:
     assert(length_ >= 0 && length_ <= 512*1024*1024);  // verify that the array size is reasonable
     length = length_;
     ptr = (T *)realloc(ptr, length * sizeof(T));
-    memset(ptr, 0, length * sizeof(T));
+	  std::memset(ptr, 0, length * sizeof(T));
   }
 
   MallocArray(int length_=0) {
