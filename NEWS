@@ -1,5 +1,9 @@
 Summary of important user-visible changes for releases of the signal package
 
+===============================================================================
+signal-1.1.1   Release Date: 2011-11-06   Release Manager: Juan Pablo Carbajal
+===============================================================================
+
  * Following function now show help text correctly instead of copyright notice:
     downsample
     dst
@@ -8,6 +12,7 @@ Summary of important user-visible changes for releases of the signal package
     idst
     square
     upsample
+ * Apply pathc by Paul Dreik to cl2bp_lib.h.
 
 ===============================================================================
 signal-1.1.0   Release Date: 2011-11-04   Release Manager: Juan Pablo Carbajal
@@ -31,4 +36,3 @@ signal-1.1.0   Release Date: 2011-11-04   Release Manager: Juan Pablo Carbajal
 
 * Not implemented functions removed from the documentation.
 * All demos are now working!
-
