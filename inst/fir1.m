@@ -51,7 +51,7 @@
 function b = fir1(n, w, varargin)
 
   if nargin < 2 || nargin > 5
-    usage("b = fir1(n, w [, type] [, window] [, noscale])");
+    print_usage;
   endif
   
   ## Assign default window, filter type and scale.
@@ -59,9 +59,9 @@ function b = fir1(n, w, varargin)
   ## create a lowpass filter.  If multiple band edges, the first band 
   ## defaults to a stop band so that the two band case defaults to a 
   ## band pass filter.  Ick.
-  window = []; 
-  scale = 1;
-  ftype = (length(w)==1);       
+  window  = [];
+  scale   = 1;
+  ftype   = (length(w)==1);
 
   ## sort arglist, normalize any string
   for i=1:length(varargin)
@@ -69,11 +69,11 @@ function b = fir1(n, w, varargin)
     if ischar(arg), arg=lower(arg);end
     if isempty(arg) continue; end  # octave bug---can't switch on []
     switch arg
-      case {'low','stop','dc-1'}, ftype = 1;
-      case {'high','pass','bandpass','dc-0'}, ftype = 0;
-      case 'scale', scale = 1;
-      case 'noscale', scale = 0;
-      otherwise window = arg;
+      case {'low','stop','dc-1'},             ftype  = 1;
+      case {'high','pass','bandpass','dc-0'}, ftype  = 0;
+      case {'scale'},                         scale  = 1;
+      case {'noscale'},                       scale  = 0;
+      otherwise                               window = arg;
     end
   endfor
 
@@ -96,11 +96,11 @@ function b = fir1(n, w, varargin)
       ## Extend the window using interpolation
       M = length(window);
       if M == 1,
-	window = [window; window];
+        window = [window; window];
       elseif M < 4
-	window = interp1(linspace(0,1,M),window,linspace(0,1,M+1),'linear');
+        window = interp1(linspace(0,1,M),window,linspace(0,1,M+1),'linear');
       else
-	window = interp1(linspace(0,1,M),window,linspace(0,1,M+1),'spline');
+        window = interp1(linspace(0,1,M),window,linspace(0,1,M+1),'spline');
       endif
     endif
   endif
@@ -111,8 +111,18 @@ function b = fir1(n, w, varargin)
   ## normalize filter magnitude
   if scale == 1
     ## find the middle of the first band edge
-    if m(1) == 1, w_o = (f(2)-f(1))/2;
-    else w_o = f(3) + (f(4)-f(3))/2;
+    ## find the frequency of the normalizing gain
+    if m(1) == 1
+      ## if the first band is a passband, use DC gain
+      w_o = 0;
+    elseif f(4) == 1
+      ## for a highpass filter,
+      ## use the gain at half the sample frequency
+      w_o = 1;
+    else
+      ## otherwise, use the gain at the center
+      ## frequency of the first passband
+      w_o = f(3) + (f(4)-f(3))/2;
     endif
 
     ## compute |h(w_o)|^-1
@@ -140,4 +150,3 @@ endfunction
 %!assert(fir1(10,.5,'hanning','scale'), fir1(10,.5,'scale','hanning','low'));
 %!assert(fir1(10,.5,'haNNing','NOscale'), fir1(10,.5,'noscale','Hanning','LOW'));
 %!assert(fir1(10,.5,'boxcar',[]), fir1(10,.5,'boxcar'));
-
