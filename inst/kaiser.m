@@ -32,7 +32,7 @@
 ## Author:  Kurt Hornik <Kurt.Hornik@ci.tuwien.ac.at>
 ## Description:  Coefficients of the Kaiser window
 
-## 2000-02 Paul Kienzle (pkienzle@kienzle.powernet.co.uk)
+## 2000-02 Paul Kienzle (pkienzle@users.sf.net)
 ##    use besseli rather than jybess
 ##    note, although Oppenheim & Schafer, 2nd edition has a formula
 ##    which looks completely different than the one herein, it gives

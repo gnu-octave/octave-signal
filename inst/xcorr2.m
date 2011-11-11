@@ -29,7 +29,7 @@
 ##      none     - no scaling (this is the default).
 
 ## Author: Dave Cogdell <cogdelld@asme.org>
-## 2000-05-02 Paul Kienzle <pkienzle@kienzle.powernet.co.uk>
+## 2000-05-02 Paul Kienzle <pkienzle@users.sf.net>
 ##    * joined R. Johnson's xcorr2f.m and Dave Cogdell's xcorr2x.m
 ##    * adapted for Octave
 ## 2001-01-15 Paul Kienzle
@@ -60,7 +60,7 @@ function c = xcorr2(a,b,biasflag)
   c = conv2 (a, conj (b (mb:-1:1, nb:-1:1)));
 
   ## bias routines by Dave Cogdell (cogdelld@asme.org)
-  ## optimized by Paul Kienzle (pkienzle@kienzle.powernet.co.uk)
+  ## optimized by Paul Kienzle (pkienzle@users.sf.net)
   if strcmp(lower(biasflag), 'biased'),
     c = c / ( min ([ma, mb]) * min ([na, nb]) );
   elseif strcmp(lower(biasflag), 'unbiased'), 

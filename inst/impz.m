@@ -25,7 +25,7 @@
 ##
 ## See also: freqz, zplane
 
-## 1999 pkienzle@kienzle.powernet.co.uk
+## 1999 pkienzle@users.sf.net
 ##      - if nargout=0, produce plot and don't set return values
 
 ## TODO: Call equivalent function from control toolbox since it is

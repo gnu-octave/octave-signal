@@ -86,12 +86,12 @@
 
 ## Author: Paul Kienzle <pkienzle@users.sf.net>
 
-## 2000-03-01 pkienzle@kienzle.powernet.co.uk
+## 2000-03-01 pkienzle@users.sf.net
 ##       leave transformed Sg as a complex value since cheby2 blows up
 ##       otherwise (but only for odd-order low-pass filters).  bilinear
 ##       will return Zg as real, so there is no visible change to the
 ##       user of the IIR filter design functions.
-## 2001-03-09 pkienzle@kienzle.powernet.co.uk
+## 2001-03-09 pkienzle@users.sf.net
 ##       return real Sg; don't know what to do for imaginary filters
 function [Sz, Sp, Sg] = sftrans(Sz, Sp, Sg, W, stop)
 

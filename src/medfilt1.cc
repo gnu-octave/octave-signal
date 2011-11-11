@@ -8,7 +8,7 @@
  * Mar 2000 - Kai Habel (kahacjde@linux.zrz.tu-berlin.de)
  *      Change: ColumnVector x=arg(i).vector_value();
  *      to: ColumnVector x=ColumnVector(arg(i).vector_value());
- * Oct 2000 - Paul Kienzle (pkienzle@kienzle.powernet.co.uk)
+ * Oct 2000 - Paul Kienzle (pkienzle@users.sf.net)
  *      rewrite to ignore NaNs rather than replacing them with zero
  *      extend to handle matrix arguments
  */

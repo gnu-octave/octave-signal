@@ -104,12 +104,12 @@
 ##       Results are now returned in reverse order of before.
 ##       The function is now compatible with Matlab (and with f.i.
 ##       "Digital Signal Processing" by Proakis and Manolakis).
-## 2000-03 pkienzle@kienzle.powernet.co.uk
+## 2000-03 pkienzle@users.sf.net
 ##     - use fft instead of brute force to compute correlations
 ##     - allow row or column vectors as input, returning same
 ##     - compute cross-correlations on columns of matrix X
 ##     - compute complex correlations consitently with matlab
-## 2000-04 pkienzle@kienzle.powernet.co.uk
+## 2000-04 pkienzle@users.sf.net
 ##     - fix test for real return value
 ## 2001-02-24 Paul Kienzle
 ##     - remove all but one loop

@@ -31,7 +31,7 @@
 ##    plot(t,x,';data;',t,y,';filtfilt;',t,z,';filter;')
 
 ## Changelog:
-## 2000 02 pkienzle@kienzle.powernet.co.uk
+## 2000 02 pkienzle@users.sf.net
 ##      - pad with zeros to load up the state vector on filter reverse.
 ##      - add example
 ## 2007 12 pot@gnu.org
