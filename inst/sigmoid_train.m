@@ -38,9 +38,9 @@ function envelope = sigmoid_train (t, range, timeconstant)
   if isscalar (timeconstant)
     %% All bumps have the same time constant and are symmetric
     timeconstant = timeconstant * ones (nRanges,2);
-  end
 
-  if isvector (timeconstant)
+  elseif any( size(timeconstant) != [1 1])
+
     %% All bumps have different time constant but are symmetric
     if length(timeconstant) ~= nRanges
       error('signalError','Length of time constant must equal number of ranges.')
@@ -49,6 +49,7 @@ function envelope = sigmoid_train (t, range, timeconstant)
       timeconstant = timeconstant';
     end
     timeconstant = repmat (timeconstant,1,2);
+
   end
 
   %% Make sure t is horizontal

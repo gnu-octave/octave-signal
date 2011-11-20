@@ -31,6 +31,7 @@ Bluel Technologies Corporation
 #ifndef CL2BP_H
 #define CL2BP_H
 
+#include <cstdlib>
 #include <cassert>
 #include <cstring> //for memset
 
