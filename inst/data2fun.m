@@ -81,7 +81,7 @@ function [fhandle fullfname] = data2fun( t, y, varargin)
       end
   end
 
-  pp = interp1 (t, y, interp_args{:}, 'pp');
+  pp = interp1 (t, y, interp_args{end}, 'pp');
 
   if given.file
     fullfname = fullfile (DIR,[fname ".m"]);
