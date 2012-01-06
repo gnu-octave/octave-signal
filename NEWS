@@ -1,6 +1,18 @@
 Summary of important user-visible changes for releases of the signal package
 
 ===============================================================================
+signal-1.1.2   Release Date: 2012-xx-yy   Release Manager: xyz
+===============================================================================
+
+ * Added the following filter conversion functions:
+    ss2tf
+    ss2zp
+    tf2ss
+    tf2zp
+    zp2ss
+    zp2tf
+
+===============================================================================
 signal-1.1.1   Release Date: 2011-11-06   Release Manager: Juan Pablo Carbajal
 ===============================================================================
 

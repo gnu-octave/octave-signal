@@ -39,8 +39,14 @@ Filter conversion
  residued
  sos2tf
  sos2zp
+ ss2tf
+ ss2zp
  tf2sos
+ tf2ss
+ tf2zp
  zp2sos
+ zp2ss
+ zp2tf
  polystab
 IIR Filter design
  besself
