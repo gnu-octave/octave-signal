@@ -1,7 +1,7 @@
 Summary of important user-visible changes for releases of the signal package
 
 ===============================================================================
-signal-1.1.2   Release Date: 2012-xx-yy   Release Manager: xyz
+signal-1.1.2   Release Date: 2012-01-06   Release Manager: Lukas Reichlin
 ===============================================================================
 
  * Added the following filter conversion functions:
