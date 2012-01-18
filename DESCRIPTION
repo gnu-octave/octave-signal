@@ -1,11 +1,11 @@
 Name: Signal
 Version: 1.1.2
-Date: 2012-01-06
+Date: 2012-01-17
 Author: Various Authors
 Maintainer: The Octave Community
 Title: Signal Processing.
 Description: Signal processing tools, including filtering, windowing and display functions.
-Depends: octave (>= 3.4.0), optim (>= 1.0.0), specfun, control (>= 2.2.3), audio
+Depends: octave (>= 3.4.0), optim (>= 1.0.0), specfun, control (>= 2.2.3)
 Autoload: yes
 License: GPL version 2 or later
 Url: http://octave.sf.net
