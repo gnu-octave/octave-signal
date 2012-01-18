@@ -2,7 +2,7 @@
 ##
 ## This program is free software; you can redistribute it and/or modify
 ## it under the terms of the GNU General Public License as published by
-## the Free Software Foundation; either version 2 of the License, or
+## the Free Software Foundation; either version 3 of the License, or
 ## (at your option) any later version.
 ##
 ## This program is distributed in the hope that it will be useful,
@@ -22,14 +22,12 @@
 ##
 ## - Serra, Celso Penteado, Teoria e Projeto de Filtros, Campinas: CARTGRAF, 
 ##   1983.
-## Author: Paulo Neis <p_neis@yahoo.com.br>
 
 function err=__ellip_ws_min(kl, x)
-#
 
-int=ellipke([kl; 1-kl]);
-ql=int(1);
-q=int(2);
-err=abs((ql/q)-x);
+  int=ellipke([kl; 1-kl]);
+  ql=int(1);
+  q=int(2);
+  err=abs((ql/q)-x);
 
 endfunction

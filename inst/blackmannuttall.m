@@ -1,4 +1,4 @@
-## Copyright (C) 2007   Muthiah Annamalai  <muthiah.annamalai@uta.edu>
+## Copyright (C) 2007 Muthiah Annamalai <muthiah.annamalai@uta.edu>
 ##
 ## This program is free software; you can redistribute it and/or modify
 ## it under the terms of the GNU General Public License as published by
@@ -15,22 +15,23 @@
 
 ## -*- texinfo -*-
 ## @deftypefn {Function File} {[@var{w}] =} blackmannuttall(@var{L})
-##	Compute the Blackman-Nuttall window.
+## Compute the Blackman-Nuttall window.
 ## @seealso{nuttallwin,  kaiser}
 ## @end deftypefn
 
 function [w] = blackmannuttall(L)
-	if (nargin < 1); usage('blackmannuttall(L)'); end
-	if(! isscalar(L))
-		error("L must be a number");
-	endif
-	
-	N = L-1;
-	a0 = 0.3635819;
-	a1 = 0.4891775;
-	a2 = 0.1365995;
-	a3 = 0.0106411;
-        n = 0:N;
-	w = a0 - a1.*cos(2.*pi.*n./N) + a2.*cos(4.*pi.*n./N) - a3.*cos(6.*pi.*n./N);
-	w = w.';
-endfunction;
+  if (nargin < 1)
+    print_usage;
+  elseif (! isscalar(L))
+    error("L must be a number");
+  endif
+
+  N = L-1;
+  a0 = 0.3635819;
+  a1 = 0.4891775;
+  a2 = 0.1365995;
+  a3 = 0.0106411;
+  n = 0:N;
+  w = a0 - a1.*cos(2.*pi.*n./N) + a2.*cos(4.*pi.*n./N) - a3.*cos(6.*pi.*n./N);
+  w = w.';
+endfunction

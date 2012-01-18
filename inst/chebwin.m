@@ -2,7 +2,7 @@
 ##
 ## This program is free software; you can redistribute it and/or modify
 ## it under the terms of the GNU General Public License as published by
-## the Free Software Foundation; either version 2 of the License, or (at
+## the Free Software Foundation; either version 3 of the License, or (at
 ## your option) any later version.
 ##
 ## This program is distributed in the hope that it will be useful, but
@@ -48,21 +48,13 @@
 ##
 ## See also: kaiser
 
-## $Id$
-##
-## Author:  André Carezia <acarezia@uol.com.br>
-## Description:  Coefficients of the Dolph-Chebyshev window
-
 function w = chebwin (n, at)
 
   if (nargin != 2)
-    usage ("chebwin (n, at)");
-  endif
-  
-  if !(isscalar (n) && (n == round(n)) && (n > 0))
+    print_usage;
+  elseif !(isscalar (n) && (n == round(n)) && (n > 0))
     error ("chebwin: n has to be a positive integer");
-  endif
-  if !(isscalar (at) && (at == real (at)))
+  elseif !(isscalar (at) && (at == real (at)))
     error ("chebwin: at has to be a real scalar");
   endif
   
@@ -94,5 +86,4 @@ function w = chebwin (n, at)
   endif 
   
   w = w ./ max (w (:)); 
-end
-
+endfunction

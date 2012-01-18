@@ -70,8 +70,6 @@
 ## Proakis & Manolakis (1992). Digital Signal Processing. New York:
 ## Macmillan Publishing Company.
 
-## Author: Paul Kienzle <pkienzle@users.sf.net>
-
 function [Zz, Zp, Zg] = bilinear(Sz, Sp, Sg, T)
 
   if nargin==3

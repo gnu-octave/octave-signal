@@ -4,7 +4,7 @@
 ##
 ## This program is free software; you can redistribute it and/or modify
 ## it under the terms of the GNU General Public License as published by
-## the Free Software Foundation; either version 2 of the License, or
+## the Free Software Foundation; either version 3 of the License, or
 ## (at your option) any later version.
 ##
 ## This program is distributed in the hope that it will be useful,
@@ -30,18 +30,6 @@
 ##    y = filtfilt(b,a,x); z = filter(b,a,x); % apply filter
 ##    plot(t,x,';data;',t,y,';filtfilt;',t,z,';filter;')
 
-## Changelog:
-## 2000 02 pkienzle@users.sf.net
-##      - pad with zeros to load up the state vector on filter reverse.
-##      - add example
-## 2007 12 pot@gnu.org
-##	    - use filtic to compute initial and final states
-##      - work for multiple columns as well
-## 2008 12 lciti@essex.ac.uk
-##      - fixed instability issues with IIR filters and noisy inputs
-##	    - initial states computed according to Likhterov & Kopeika, 2003
-##      - use of a "reflection method" to reduce end effects
-##      - added some basic tests
 
 ## TODO:  (pkienzle) My version seems to have similar quality to matlab,
 ##	but both are pretty bad.  They do remove gross lag errors, though.
@@ -49,7 +37,7 @@
 
 function y = filtfilt(b, a, x)
   if (nargin != 3)
-    usage("y=filtfilt(b,a,x)");
+    print_usage;
   end
   rotate = (size(x,1)==1);
   if rotate,			# a row vector
@@ -134,4 +122,3 @@ endfunction
 %! assert (y, [yr.' ys.']);
 %! y2 = filtfilt(b.', a.', [r.' s.']);
 %! assert (y, y2);
-

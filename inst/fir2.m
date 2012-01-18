@@ -1,17 +1,17 @@
 ## Copyright (C) 2000 Paul Kienzle <pkienzle@users.sf.net>
 ##
-## This program is free software; you can redistribute it and/or modify
-## it under the terms of the GNU General Public License as published by
-## the Free Software Foundation; either version 2 of the License, or
-## (at your option) any later version.
+## This program is free software; you can redistribute it and/or modify it under
+## the terms of the GNU General Public License as published by the Free Software
+## Foundation; either version 3 of the License, or (at your option) any later
+## version.
 ##
-## This program is distributed in the hope that it will be useful,
-## but WITHOUT ANY WARRANTY; without even the implied warranty of
-## MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-## GNU General Public License for more details.
+## This program is distributed in the hope that it will be useful, but WITHOUT
+## ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+## FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
+## details.
 ##
-## You should have received a copy of the GNU General Public License
-## along with this program; If not, see <http://www.gnu.org/licenses/>.
+## You should have received a copy of the GNU General Public License along with
+## this program; if not, see <http://www.gnu.org/licenses/>.
 
 ## usage: b = fir2(n, f, m [, grid_n [, ramp_n]] [, window])
 ##
@@ -43,19 +43,10 @@
 ##   [h, w] = freqz(fir2(100,f,m));
 ##   plot(f,m,';target response;',w/pi,abs(h),';filter response;');
 
-## Feb 27, 2000 PAK
-##     use ramping on any transition less than ramp_n units
-##     use 2^nextpow2(n+1) for expanded grid size if grid is too small
-## 2001-01-30 PAK
-##     set default ramp length to grid_n/20 (i.e., pi/20 radians)
-##     use interp1 to interpolate the grid points
-##     better(?) handling of 0 and pi frequency points.
-##     added some demos
-
 function b = fir2(n, f, m, grid_n, ramp_n, window)
 
   if nargin < 3 || nargin > 6
-    usage("b = fir2(n, f, m [, grid_n [, ramp_n]] [, window])");
+    print_usage;
   endif
 
   ## verify frequency and magnitude vectors are reasonable

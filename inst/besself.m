@@ -1,5 +1,6 @@
-## Copyright (C) 2009 Thomas Sailer
 ## Copyright (C) 1999 Paul Kienzle <pkienzle@users.sf.net>
+## Copyright (C) 2003 Doug Stewart <dastew@sympatico.ca>
+## Copyright (C) 2009 Thomas Sailer <t.sailer@alumni.ethz.ch>
 ##
 ## This program is free software; you can redistribute it and/or modify
 ## it under the terms of the GNU General Public License as published by
@@ -43,9 +44,6 @@
 ##
 ## Proakis & Manolakis (1992). Digital Signal Processing. New York:
 ## Macmillan Publishing Company.
-
-## Author: Paul Kienzle <pkienzle@user.sf.net>
-## Modified by: Doug Stewart <dastew@sympatico.ca> Feb, 2003
 
 function [a, b, c, d] = besself (n, W, varargin)
   

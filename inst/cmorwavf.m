@@ -1,8 +1,8 @@
-## Copyright (C) 2007   Sylvain Pelissier   <sylvain.pelissier@gmail.com>
+## Copyright (C) 2007 Sylvain Pelissier <sylvain.pelissier@gmail.com>
 ##
 ## This program is free software; you can redistribute it and/or modify
 ## it under the terms of the GNU General Public License as published by
-## the Free Software Foundation; either version 2 of the License, or
+## the Free Software Foundation; either version 3 of the License, or
 ## (at your option) any later version.
 ##
 ## This program is distributed in the hope that it will be useful,
@@ -16,16 +16,15 @@
 
 ## -*- texinfo -*-
 ## @deftypefn {Function File} {[@var{psi,x}] =} cmorwavf (@var{lb,ub,n,fb,fc})
-##	Compute the Complex Morlet wavelet.
+## Compute the Complex Morlet wavelet.
 ## @end deftypefn
 
 function [psi,x] = cmorwavf (lb,ub,n,fb,fc)
-	if (nargin ~= 5); usage('[psi,x] = cmorwavf(lb,ub,n,fb,fc)'); end
-	
-	if (n <= 0 || floor(n) ~= n)
-		error("n must be an integer strictly positive");
-	endif
-	x = linspace(lb,ub,n);
-	psi =((pi*fb)^(-0.5))*exp(2*i*pi*fc.*x).*exp(-x.^2/fb);
+  if (nargin ~= 5)
+    print_usage;
+  elseif (n <= 0 || floor(n) ~= n)
+    error("n must be an integer strictly positive");
+  endif
+  x = linspace(lb,ub,n);
+  psi =((pi*fb)^(-0.5))*exp(2*i*pi*fc.*x).*exp(-x.^2/fb);
 endfunction
-

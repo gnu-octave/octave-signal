@@ -1,4 +1,4 @@
-## Copyright (C) 2007  Sylvain Pelissier   <sylvain.pelissier@gmail.com>
+## Copyright (C) 2007 Sylvain Pelissier <sylvain.pelissier@gmail.com>
 ##
 ## This program is free software; you can redistribute it and/or modify
 ## it under the terms of the GNU General Public License as published by
@@ -15,7 +15,7 @@
 
 ## -*- texinfo -*-
 ## @deftypefn {Function File} {[@var{y} @var{i}] =} bitrevorder(@var{x})
-##	Reorder x in the bit reversed order
+## Reorder x in the bit reversed order
 ## @seealso{fft,ifft}
 ## @end deftypefn
 

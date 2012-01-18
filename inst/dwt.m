@@ -1,4 +1,4 @@
-## Copyright (C) 2008   Sylvain Pelissier   <sylvain.pelissier@gmail.com>
+## Copyright (C) 2008 Sylvain Pelissier <sylvain.pelissier@gmail.com>
 ##
 ## This program is free software; you can redistribute it and/or modify
 ## it under the terms of the GNU General Public License as published by
@@ -15,19 +15,19 @@
 
 ## -*- texinfo -*-
 ## @deftypefn {Function File} {[@var{ca} @var{cd}] =} dwt(@var{x,lo_d,hi_d})
-##	Comupte de discrete wavelet transform of x with one level.
+## Comupte de discrete wavelet transform of x with one level.
 ## @end deftypefn
 
-
 function [ca cd] = dwt(x,lo_d,hi_d)
-	if (nargin < 3|| nargin > 3); usage("[ca cd] = dwt(x,lo_d,hi_d)"); end
-	
-	if(~isvector(x)  || ~isvector(lo_d) || ~isvector(hi_d))
-		error('x, hi_d and lo_d must be vectors');
-	end
-	
-	h = filter(hi_d,1,x);
-	g = filter(lo_d,1,x);
-	
-	cd = downsample(h,2);
-	ca = downsample(g,2);
+  if (nargin < 3|| nargin > 3)
+    print_usage;
+  elseif(~isvector(x)  || ~isvector(lo_d) || ~isvector(hi_d))
+    error('x, hi_d and lo_d must be vectors');
+  end
+
+  h = filter(hi_d,1,x);
+  g = filter(lo_d,1,x);
+
+  cd = downsample(h,2);
+  ca = downsample(g,2);
+endfunction

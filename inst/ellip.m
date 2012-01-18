@@ -1,8 +1,9 @@
 ## Copyright (C) 2001 Paulo Neis <p_neis@yahoo.com.br>
+## Copyright (C) 2003 Doug Stewart <dastew@sympatico.ca>
 ##
 ## This program is free software; you can redistribute it and/or modify
 ## it under the terms of the GNU General Public License as published by
-## the Free Software Foundation; either version 2 of the License, or
+## the Free Software Foundation; either version 3 of the License, or
 ## (at your option) any later version.
 ##
 ## This program is distributed in the hope that it will be useful,
@@ -12,7 +13,6 @@
 ##
 ## You should have received a copy of the GNU General Public License
 ## along with this program; If not, see <http://www.gnu.org/licenses/>.
-## 
 
 ## N-ellip 0.2.1
 ##usage: [Zz, Zp, Zg] = ellip(n, Rp, Rs, Wp, stype,'s')
@@ -47,15 +47,12 @@
 ## - Parente Ribeiro, E., Notas de aula da disciplina TE498 -  Processamento 
 ##   Digital de Sinais, UFPR, 2001/2002.
 ## - Kienzle, Paul, functions from Octave-Forge, 1999 (http://octave.sf.net).
-##
-## Author: Paulo Neis <p_neis@yahoo.com.br>
-## Modified: Doug Stewart Feb. 2003
 
 
 function [a,b,c,d] = ellip(n, Rp, Rs, W, varargin)
 
   if (nargin>6 || nargin<4) || (nargout>4 || nargout<2)
-    usage ("[b, a] or [z, p, g] or [a,b,c,d] = ellip (n, Rp, Rs, Wp, [, 'ftype'][,'s'])");
+    print_usage;
   endif
 
   ## interpret the input parameters

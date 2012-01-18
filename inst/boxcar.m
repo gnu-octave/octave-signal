@@ -18,15 +18,13 @@
 ## Returns the filter coefficients of a rectangular window of length n.
 
 function w = boxcar (n)
-  
+
   if (nargin != 1)
-    usage ("w = boxcar(n)");
-  endif
-  
-  if !isscalar(n) || n != floor(n) || n <= 0
+    print_usage;
+  elseif !isscalar(n) || n != floor(n) || n <= 0
     error ("boxcar:  n must be an integer > 0");
   endif
 
   w = ones(n, 1);
-  
+
 endfunction

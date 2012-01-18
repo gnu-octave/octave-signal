@@ -1,4 +1,4 @@
-## Copyright (C) 2007   Sylvain Pelissier   <sylvain.pelissier@gmail.com>
+## Copyright (C) 2007 Sylvain Pelissier <sylvain.pelissier@gmail.com>
 ##
 ## This program is free software; you can redistribute it and/or modify
 ## it under the terms of the GNU General Public License as published by
@@ -15,38 +15,37 @@
 
 ## -*- texinfo -*-
 ## @deftypefn {Function File} {[@var{w}] =} bohmanwin(@var{L})
-##	Compute the Bohman window of lenght L.
+## Compute the Bohman window of lenght L.
 ## @seealso{rectwin,  bartlett}
 ## @end deftypefn
 
 function [w] = bohmanwin(L)
-	if (nargin < 1); usage('bohmanwin(x)'); end
-	if(! isscalar(L))
-		error("L must be a number");
-	endif
-	
-	if(L < 0)
-		error('L must be positive');
-	end
-	
-	if(L ~= floor(L))
-		L = round(L);
-		warning('L rounded to the nearest integer.');
-	end
-	
-	if(L == 0)
-		w = [];
-	
-	elseif(L == 1)
-		w = 1;
-		
-	else
-		N = L-1;
-		n = -N/2:N/2;
-	
-		w = (1-2.*abs(n)./N).*cos(2.*pi.*abs(n)./N) + (1./pi).*sin(2.*pi.*abs(n)./N);
-		w(1) = 0;
-		w(length(w))=0;
-		w = w';
-	end
-endfunction;
+  if (nargin < 1)
+    print_usage
+  elseif(! isscalar(L))
+    error("L must be a number");
+  elseif(L < 0)
+    error('L must be positive');
+  end
+
+  if(L ~= floor(L))
+    L = round(L);
+    warning('L rounded to the nearest integer.');
+  end
+
+  if(L == 0)
+    w = [];
+
+  elseif(L == 1)
+    w = 1;
+
+  else
+    N = L-1;
+    n = -N/2:N/2;
+
+    w = (1-2.*abs(n)./N).*cos(2.*pi.*abs(n)./N) + (1./pi).*sin(2.*pi.*abs(n)./N);
+    w(1) = 0;
+    w(length(w))=0;
+    w = w';
+  end
+endfunction

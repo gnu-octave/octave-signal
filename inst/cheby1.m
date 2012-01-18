@@ -1,8 +1,9 @@
 ## Copyright (C) 1999 Paul Kienzle <pkienzle@users.sf.net>
+## Copyright (C) 2003 Doug Stewart <dastew@sympatico.ca>
 ##
 ## This program is free software; you can redistribute it and/or modify
 ## it under the terms of the GNU General Public License as published by
-## the Free Software Foundation; either version 2 of the License, or
+## the Free Software Foundation; either version 3 of the License, or
 ## (at your option) any later version.
 ##
 ## This program is distributed in the hope that it will be useful,
@@ -42,13 +43,10 @@
 ## Parks & Burrus (1987). Digital Filter Design. New York:
 ## John Wiley & Sons, Inc.
 
-## Author: Paul Kienzle <pkienzle@user.sf.net>
-## Modified: Doug Stewart Feb. 2003
-
 function [a,b,c,d] = cheby1(n, Rp, W, varargin)
 
   if (nargin>5 || nargin<3) || (nargout>4 || nargout<2)
-    usage ("[b, a] or [z, p, g] or [a,b,c,d]= cheby1 (n, Rp, W, [, 'ftype'][,'s'])");
+    print_usage;
   endif
 
   ## interpret the input parameters

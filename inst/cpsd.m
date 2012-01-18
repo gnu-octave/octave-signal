@@ -2,7 +2,7 @@
 %%
 %% This program is free software; you can redistribute it and/or
 %% modify it under the terms of the GNU General Public License
-%% as published by the Free Software Foundation; either version 2,
+%% as published by the Free Software Foundation; either version 3,
 %% or (at your option) any later version.
 %%
 %% This program is distributed in the hope that it will be useful,
@@ -19,8 +19,6 @@
 %%     Estimate cross power spectrum of data "x" and "y" by the Welch (1967)
 %%     periodogram/FFT method.
 %%     See "help pwelch" for description of arguments, hints and references
-%%
-
 
 function [varargout] = cpsd(varargin)
 %%

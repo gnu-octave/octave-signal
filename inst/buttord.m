@@ -2,7 +2,7 @@
 ##
 ## This program is free software; you can redistribute it and/or modify
 ## it under the terms of the GNU General Public License as published by
-## the Free Software Foundation; either version 2 of the License, or
+## the Free Software Foundation; either version 3 of the License, or
 ## (at your option) any later version.
 ##
 ## This program is distributed in the hope that it will be useful,
@@ -39,15 +39,12 @@
 
 function [n, Wc] = buttord(Wp, Ws, Rp, Rs)
   if nargin != 4
-    usage("[n, Wn] = buttord(Wp, Ws, Rp, Rs)");
-  end
-  if length(Wp) != length(Ws)
+    print_usage;
+  elseif length(Wp) != length(Ws)
     error("buttord: Wp and Ws must have the same length");
-  end
-  if length(Wp) != 1 && length(Wp) != 2
+  elseif length(Wp) != 1 && length(Wp) != 2
     error("buttord: Wp,Ws must have length 1 or 2");
-  end
-  if length(Wp) == 2 && (all(Wp>Ws) || all(Ws>Wp) || diff(Wp)<=0 || diff(Ws)<=0)
+  elseif length(Wp) == 2 && (all(Wp>Ws) || all(Ws>Wp) || diff(Wp)<=0 || diff(Ws)<=0)
     error("buttord: Wp(1)<Ws(1)<Ws(2)<Wp(2) or Ws(1)<Wp(1)<Wp(2)<Ws(2)");
   end
 
@@ -83,4 +80,3 @@ function [n, Wc] = buttord(Wp, Ws, Rp, Rs)
   Wc(stop) = 1-Wc(stop);
     
 endfunction
-

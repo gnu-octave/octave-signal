@@ -1,4 +1,4 @@
-## Copyright (C) 2006 Paul Kienzle <pkienzle@users.sf.net>
+## Author: Paul Kienzle <pkienzle@users.sf.net> 2006
 ## This function is public domain
 
 ## -*- texinfo -*-

@@ -2,7 +2,7 @@
 ##
 ## This program is free software; you can redistribute it and/or modify
 ## it under the terms of the GNU General Public License as published by
-## the Free Software Foundation; either version 2 of the License, or
+## the Free Software Foundation; either version 3 of the License, or
 ## (at your option) any later version.
 ##
 ## This program is distributed in the hope that it will be useful,
@@ -54,13 +54,11 @@
 ##
 ## Scaling the result by w(k)/2 will give us the desired output.
 
-## Author: Paul Kienzle
-## 2001-02-08
-##   * initial release
+
 function y = dct (x, n)
 
   if (nargin < 1 || nargin > 2)
-    usage ("y = dct(x [, n])");
+    print_usage;
   endif
 
   realx = isreal(x);

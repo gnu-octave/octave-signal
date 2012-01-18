@@ -1,8 +1,10 @@
 ## Copyright (C) 1999 Paul Kienzle <pkienzle@users.sf.net>
+## Copyright (C) 2003 Doug Stewart <dastew@sympatico.ca>
+## Copyright (C) 2011 Alexander Klein <alexander.klein@math.uni-giessen.de>
 ##
 ## This program is free software; you can redistribute it and/or modify
 ## it under the terms of the GNU General Public License as published by
-## the Free Software Foundation; either version 2 of the License, or
+## the Free Software Foundation; either version 3 of the License, or
 ## (at your option) any later version.
 ##
 ## This program is distributed in the hope that it will be useful,
@@ -43,14 +45,10 @@
 ## Proakis & Manolakis (1992). Digital Signal Processing. New York:
 ## Macmillan Publishing Company.
 
-## Author: Paul Kienzle <pkienzle@user.sf.net>
-## Modified by: Doug Stewart <dastew@sympatico.ca> Feb, 2003
-## Tests and demos added: Alexander Klein <alexander.klein@math.uni-giessen.de>, Sep 2011
-
 function [a, b, c, d] = butter (n, W, varargin)
   
   if (nargin>4 || nargin<2) || (nargout>4 || nargout<2)
-    usage ("[b, a] or [z, p, g] or [a,b,c,d] = butter (n, W [, 'ftype'][,'s'])");
+    print_usage;
   end
 
   ## interpret the input parameters
@@ -59,7 +57,7 @@ function [a, b, c, d] = butter (n, W, varargin)
   end
 
   stop = 0;
-  digital = 1;  
+  digital = 1;
   for i=1:length(varargin)
     switch varargin{i}
     case 's', digital = 0;

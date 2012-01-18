@@ -2,7 +2,7 @@
 ##
 ## This program is free software; you can redistribute it and/or modify
 ## it under the terms of the GNU General Public License as published by
-## the Free Software Foundation; either version 2 of the License, or (at
+## the Free Software Foundation; either version 3 of the License, or (at
 ## your option) any later version.
 ##
 ## This program is distributed in the hope that it will be useful, but
@@ -25,22 +25,17 @@
 ## If x is a vector, the output is a vector of the same size, where each
 ## element is calculated as y(i) = Tn(x(i)).
 
-## Author:  André Carezia <acarezia@uol.com.br>
-## Description:  Value of the Chebyshev polynomials
-
 function T = cheb (n, x)
   if (nargin != 2)
-    usage ("cheb (n, x)");
-  endif
-  
-  if !(isscalar (n) && (n == round(n)) && (n >= 0))
+    print_usage;
+  elseif !(isscalar (n) && (n == round(n)) && (n >= 0))
     error ("cheb: n has to be a positive integer");
   endif
 
   if (max(size(x)) == 0)
     T = [];
   endif
-				# avoid resizing latencies
+        # avoid resizing latencies
   T = zeros(size(x));
   ind = abs (x) <= 1;
   if (max(size(ind)))
@@ -53,5 +48,4 @@ function T = cheb (n, x)
   endif
 
   T = real(T);
-end
-
+endfunction

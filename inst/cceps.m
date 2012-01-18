@@ -2,7 +2,7 @@
 ##
 ## This program is free software; you can redistribute it and/or modify
 ## it under the terms of the GNU General Public License as published by
-## the Free Software Foundation; either version 2 of the License, or
+## the Free Software Foundation; either version 3 of the License, or
 ## (at your option) any later version.
 ##
 ## This program is distributed in the hope that it will be useful,
@@ -22,13 +22,13 @@
 ## Author: Andreas Weingessel <Andreas.Weingessel@ci.tuwien.ac.at>
 ## Apr 1, 1994
 ## Last modifified by AW on Nov 8, 1994
-  
+
 function cep = cceps (x, c)
 
   if (nargin == 1)
     c = 0;
   elseif (nargin != 2)
-    error ("usage: cceps (x [, correct])");
+    print_usage;
   endif
 
   [nr, nc] = size (x);
@@ -57,7 +57,7 @@ function cep = cceps (x, c)
     if (cor)
       F = fft (x(1:nr-1))
       if (min (abs (F)) == 0)
-	error (bad_signal_message);
+        error (bad_signal_message);
       endif
     endif
   endif
