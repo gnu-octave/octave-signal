@@ -1,17 +1,18 @@
-## Copyright (C) 2007   Peter L. Soendergaard   
+## Copyright (C) 2000 Paul Kienzle  <pkienzle@users.sf.net>
+## Copyright (C) 2007 Peter L. Soendergaard 
 ##
-## This program is free software; you can redistribute it and/or modify
-## it under the terms of the GNU General Public License as published by
-## the Free Software Foundation; either version 2 of the License, or
-## (at your option) any later version.
+## This program is free software; you can redistribute it and/or modify it under
+## the terms of the GNU General Public License as published by the Free Software
+## Foundation; either version 3 of the License, or (at your option) any later
+## version.
 ##
-## This program is distributed in the hope that it will be useful,
-## but WITHOUT ANY WARRANTY; without even the implied warranty of
-## MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-## GNU General Public License for more details.
+## This program is distributed in the hope that it will be useful, but WITHOUT
+## ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+## FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
+## details.
 ##
-## You should have received a copy of the GNU General Public License
-## along with this program; If not, see <http://www.gnu.org/licenses/>.
+## You should have received a copy of the GNU General Public License along with
+## this program; if not, see <http://www.gnu.org/licenses/>.
 
 ## -*- texinfo -*-
 ## @deftypefn {Function File} {@var{h} =} hilbert (@var{f},@var{N},@var{dim})
@@ -31,31 +32,20 @@
 ## @code{hilbert(@var{f},[],@var{dim})} or
 ## @code{hilbert(@var{f},@var{N},@var{dim})} does the same along
 ## dimension dim.
-##@end deftypefn
+## @end deftypefn
 
-## Authors: Peter L. Soendergaard, 2007
-##          Paul Kienzle, 2000
-
-function f=hilbert(f,N,dim)  
+function f=hilbert(f, N = [], dim = [])
   
   % ------ PRE: initialization and dimension shifting ---------
    
   if (nargin<1 || nargin>3)
-    usage('h = hilbert(f,N,dim);');
-  end;
+    print_usage;
+  end
 
   if ~isreal(f)
     warning ('HILBERT: ignoring imaginary part of signal');
     f = real (f);
-  end;
-  
-  if nargin<3
-    dim=[];
-  end;
-  
-  if nargin<2
-    N=[];
-  end;
+  end
   
   D=ndims(f);
   
@@ -68,28 +58,26 @@ function f=hilbert(f,N,dim)
     if sum(size(f)>1)==1
       % We have a vector, find the dimension where it lives.
       dim=find(size(f)>1);
-    end;
+    end
     
   else
     if (numel(dim)~=1 || ~isnumeric(dim))
       error('HILBERT: dim must be a scalar.');
-    end;
+    end
     if rem(dim,1)~=0
       error('HILBERT: dim must be an integer.');
-    end;
+    end
     if (dim<1) || (dim>D)
       error('HILBERT: dim must be in the range from 1 to %d.',D);
-    end;  
+    end
     
-  end;
+  end
 
   if (numel(N)>1 || ~isnumeric(N))
     error('N must be a scalar.');
-  end;
-  if (~isempty(N) && rem(N,1)~=0)
+  elseif (~isempty(N) && rem(N,1)~=0)
     error('N must be an integer.');
-  end;
-
+  end
   
   if dim>1
     order=[dim, 1:dim-1,dim+1:D];
@@ -97,14 +85,14 @@ function f=hilbert(f,N,dim)
     % Put the desired dimension first.
     f=permute(f,order);
     
-  end;
+  end
   
   Ls=size(f,1);
   
   % If N is empty it is set to be the length of the transform.
   if isempty(N)
     N=Ls;
-  end;  
+  end
   
   % Remember the exact size for later and modify it for the new length
   permutedsize=size(f);
@@ -116,7 +104,7 @@ function f=hilbert(f,N,dim)
   
   if ~isempty(N)
     f=postpad(f,N);
-  end;
+  end
   
   % ------- actual computation ----------------- 
   if N>2
@@ -131,10 +119,10 @@ function f=hilbert(f,N,dim)
       f=[f(1,:);
          2*f(2:(N+1)/2,:);
          zeros((N-1)/2,W)];    
-    end;
+    end
     
     f=ifft(f);
-  end;
+  end
   
   % ------- POST: Restoration of dimensions ------------
   
@@ -144,9 +132,9 @@ function f=hilbert(f,N,dim)
   if dim>1
     % Undo the permutation.
     f=ipermute(f,order);
-  end;
+  end
   
-endfunction;
+endfunction
 
 %!demo
 %! % notice that the imaginary signal is phase-shifted 90 degrees
@@ -159,4 +147,3 @@ endfunction;
 %! t=linspace(0,10,1024);
 %! x=5*cos(0.2*t).*sin(100*t);
 %! grid on; plot(t,x,'g;z;',t,abs(hilbert(x)),'b;|hilbert(z)|;');
-

@@ -1,33 +1,18 @@
-/*
-
-Copyright (c) 2008-2009, Evgeni A. Nurminski <nurmi@dvo.ru>
-Copyright (c) 2008-2009, Pete Gonzalez <pgonzalez@bluel.com>
-
-This program is free software; you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation; either version 3 of the License, or
-(at your option) any later version.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with this software; see the file COPYING.  If not, see
-<http://www.gnu.org/licenses/>.
-
-
-Authors:
-
-Evgeni A. Nurminski <nurmi@dvo.ru>
-Institute for Automation and Control Problems
-Far East branch of RAS, Vladivostok, Russia
-
-Pete Gonzalez <pgonzalez@bluel.com>
-Bluel Technologies Corporation
-
-*/
+// Copyright (c) 2008-2009, Evgeni A. Nurminski <nurmi@dvo.ru>
+// Copyright (c) 2008-2009, Pete Gonzalez <pgonzalez@bluel.com>
+//
+// This program is free software; you can redistribute it and/or modify it under
+// the terms of the GNU General Public License as published by the Free Software
+// Foundation; either version 3 of the License, or (at your option) any later
+// version.
+//
+// This program is distributed in the hope that it will be useful, but WITHOUT
+// ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+// FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
+// details.
+//
+// You should have received a copy of the GNU General Public License along with
+// this program; if not, see <http://www.gnu.org/licenses/>.
 
 #include <octave/oct.h>
 
@@ -163,5 +148,4 @@ IEEE Trans. on Signal Processing, 46(2):497-501, February 1998.\n\
 %!    0.0563980420304213
 %!    0.0000000000000000];
 %! assert(cl2bp(7, 0.25*pi, 0.75*pi, [0.01, 1.04, 0.01], [-0.01, 0.96, -0.01], 2^11), b, 1e-14);
-
 */

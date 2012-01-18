@@ -1,17 +1,17 @@
 ## Copyright (C) 2008 Eric Chassande-Mottin, CNRS (France) <ecm@apc.univ-paris7.fr>
 ##
-## This program is free software; you can redistribute it and/or modify
-## it under the terms of the GNU General Public License as published by
-## the Free Software Foundation; either version 3 of the License, or
-## (at your option) any later version.
+## This program is free software; you can redistribute it and/or modify it under
+## the terms of the GNU General Public License as published by the Free Software
+## Foundation; either version 3 of the License, or (at your option) any later
+## version.
 ##
-## This program is distributed in the hope that it will be useful,
-## but WITHOUT ANY WARRANTY; without even the implied warranty of
-## MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-## GNU General Public License for more details.
+## This program is distributed in the hope that it will be useful, but WITHOUT
+## ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+## FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
+## details.
 ##
-## You should have received a copy of the GNU General Public License
-## along with this program; if not, see .
+## You should have received a copy of the GNU General Public License along with
+## this program; if not, see <http://www.gnu.org/licenses/>.
 
 ## -*- texinfo -*-
 ## @deftypefn {Function File}  {[@var{y} @var{h}]=} fracshift(@var{x},@var{d})
@@ -31,90 +31,89 @@
 
 function  [y, h] = fracshift( x, d, h )
 
-if nargchk(2,3,nargin)
-  usage("fracshift.m: [y, h] = fracshift( x, d[, h] )");
-endif;
+  if nargchk(2,3,nargin)
+    print_usage;
+  endif;
 
+  ## if the delay is an exact integer, use circshift
+  if d==fix(d)
+    y=circshift(x,d);
+    return
+  endif;
 
-## if the delay is an exact integer, use circshift
-if d==fix(d)
-  y=circshift(x,d);
-  return
-endif;
+  ## filter design if required
 
-## filter design if required
+  if (nargin < 4)
 
-if (nargin < 4)
+    ## properties of the interpolation filter
 
-  ## properties of the interpolation filter
+    log10_rejection = -3.0;
+    stopband_cutoff_f = 1.0 / 2.0;
+    roll_off_width = stopband_cutoff_f / 10;
 
-  log10_rejection = -3.0;
-  stopband_cutoff_f = 1.0 / 2.0;
-  roll_off_width = stopband_cutoff_f / 10;
+    ## determine filter length
+    ## use empirical formula from [1] Chap 7, Eq. (7.63) p 476
 
-  ## determine filter length
-  ## use empirical formula from [1] Chap 7, Eq. (7.63) p 476
+    rejection_dB = -20.0*log10_rejection;
+    L = ceil((rejection_dB-8.0) / (28.714 * roll_off_width));
 
-  rejection_dB = -20.0*log10_rejection;
-  L = ceil((rejection_dB-8.0) / (28.714 * roll_off_width));
+    ## ideal sinc filter
 
-  ## ideal sinc filter
+    t=(-L:L)';
+    ideal_filter=2*stopband_cutoff_f*sinc(2*stopband_cutoff_f*(t-(d-fix(d))));
 
-  t=(-L:L)';
-  ideal_filter=2*stopband_cutoff_f*sinc(2*stopband_cutoff_f*(t-(d-fix(d))));
+    ## determine parameter of Kaiser window
+    ## use empirical formula from [1] Chap 7, Eq. (7.62) p 474
 
-  ## determine parameter of Kaiser window
-  ## use empirical formula from [1] Chap 7, Eq. (7.62) p 474
+    if ((rejection_dB>=21) && (rejection_dB<=50))
+      beta = 0.5842 * (rejection_dB-21.0)^0.4 + 0.07886 * (rejection_dB-21.0);
+    elseif (rejection_dB>50)
+      beta = 0.1102 * (rejection_dB-8.7);
+    else
+      beta = 0.0;
+    endif
 
-  if ((rejection_dB>=21) && (rejection_dB<=50))
-    beta = 0.5842 * (rejection_dB-21.0)^0.4 + 0.07886 * (rejection_dB-21.0);
-  elseif (rejection_dB>50)
-    beta = 0.1102 * (rejection_dB-8.7);
-  else
-    beta = 0.0;
+    ## apodize ideal (sincard) filter response
+
+    m = 2*L;
+    t = (0 : m)' - (d-fix(d));
+    t = 2 * beta / m * sqrt (t .* (m - t));
+    w = besseli (0, t) / besseli (0, beta);
+    h = w.*ideal_filter;
+
   endif
 
-  ## apodize ideal (sincard) filter response
+  ## check if input is a row vector
+  isrowvector=false;
+  if ((rows(x)==1) && (columns(x)>1))
+     x=x(:);
+     isrowvector=true;
+  endif
 
-  m = 2*L;
-  t = (0 : m)' - (d-fix(d));
-  t = 2 * beta / m * sqrt (t .* (m - t));
-  w = besseli (0, t) / besseli (0, beta);
-  h = w.*ideal_filter;
+  ## check if filter is a vector
+  if ~isvector(h)
+    error("fracshift.m: the filter h should be a vector");
+  endif
 
-endif
+  Lx = length(x);
+  Lh = length(h);
+  L = ( Lh - 1 )/2.0;
+  Ly = Lx;
 
-## check if input is a row vector
-isrowvector=false;
-if ((rows(x)==1) && (columns(x)>1))
-   x=x(:);
-   isrowvector=true;
-endif
+  ## pre and postpad filter response
+  hpad = prepad(h,Lh);
+  offset = floor(L);
+  hpad = postpad(hpad,Ly + offset);
 
-## check if filter is a vector
-if ~isvector(h)
-  error("fracshift.m: the filter h should be a vector");
-endif
+  ## filtering
+  xfilt = upfirdn(x,hpad,1,1);
+  y = xfilt(offset+1:offset+Ly,:);
 
-Lx = length(x);
-Lh = length(h);
-L = ( Lh - 1 )/2.0;
-Ly = Lx;
+  y=circshift(y,fix(d));
 
-## pre and postpad filter response
-hpad = prepad(h,Lh);
-offset = floor(L);
-hpad = postpad(hpad,Ly + offset);
-
-## filtering
-xfilt = upfirdn(x,hpad,1,1);
-y = xfilt(offset+1:offset+Ly,:);
-
-y=circshift(y,fix(d));
-
-if isrowvector,
-   y=y.';
-endif
+  if isrowvector,
+     y=y.';
+  endif
 
 endfunction
 

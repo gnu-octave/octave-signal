@@ -1,17 +1,18 @@
-## Copyright (C) 1999 Paul Kienzle <pkienzle@users.sf.net>
+## Copyright (C) 1999, 2001 Paul Kienzle <pkienzle@users.sf.net>
+## Copyright (C) 2004 Stefan van der Walt <stefan@sun.ac.za>
 ##
-## This program is free software; you can redistribute it and/or modify
-## it under the terms of the GNU General Public License as published by
-## the Free Software Foundation; either version 2 of the License, or
-## (at your option) any later version.
+## This program is free software; you can redistribute it and/or modify it under
+## the terms of the GNU General Public License as published by the Free Software
+## Foundation; either version 3 of the License, or (at your option) any later
+## version.
 ##
-## This program is distributed in the hope that it will be useful,
-## but WITHOUT ANY WARRANTY; without even the implied warranty of
-## MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-## GNU General Public License for more details.
+## This program is distributed in the hope that it will be useful, but WITHOUT
+## ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+## FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
+## details.
 ##
-## You should have received a copy of the GNU General Public License
-## along with this program; If not, see <http://www.gnu.org/licenses/>.
+## You should have received a copy of the GNU General Public License along with
+## this program; if not, see <http://www.gnu.org/licenses/>.
 
 ## usage: zplane(b [, a]) or zplane(z [, p])
 ##
@@ -42,26 +43,16 @@
 ##
 ## The denominator a defaults to 1, and the poles p defaults to [].
 
-## 2001-03-17 Paul Kienzle
-##     * extend axes to include all points outside the unit circle
-
-## 2004-04-20 Stefan van der Walt
-##     * plot correct nr of zeros at 0
-##     * label nr of zeros/poles at a point
-##     * use different colours for plotting each column (matrix zeros/poles)
-##     * set automatic_replot to 0 for duration of demo
-
 ## TODO: Consider a plot-like interface:
 ## TODO:       zplane(x1,y1,fmt1,x2,y2,fmt2,...)
 ## TODO:    with y_i or fmt_i optional as usual.  This would allow
 ## TODO:    legends and control over point colour and filters of
 ## TODO:    different orders.
-function zplane(z, p)
+function zplane(z, p = [])
 
   if (nargin < 1 || nargin > 2)
-    usage("zplane(b [, a]) or zplane(z [, p])");
+    print_usage;
   end
-  if nargin < 2, p=[]; endif
   if columns(z)>1 || columns(p)>1
     if rows(z)>1 || rows(p)>1
       ## matrix form: columns are already zeros/poles

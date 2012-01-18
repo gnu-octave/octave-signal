@@ -1,17 +1,17 @@
 ## Copyright (C) 2000 Paul Kienzle <pkienzle@users.sf.net>
 ##
-## This program is free software; you can redistribute it and/or modify
-## it under the terms of the GNU General Public License as published by
-## the Free Software Foundation; either version 3 of the License, or
-## (at your option) any later version.
+## This program is free software; you can redistribute it and/or modify it under
+## the terms of the GNU General Public License as published by the Free Software
+## Foundation; either version 3 of the License, or (at your option) any later
+## version.
 ##
-## This program is distributed in the hope that it will be useful,
-## but WITHOUT ANY WARRANTY; without even the implied warranty of
-## MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-## GNU General Public License for more details.
+## This program is distributed in the hope that it will be useful, but WITHOUT
+## ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+## FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
+## details.
 ##
-## You should have received a copy of the GNU General Public License
-## along with this program; If not, see <http://www.gnu.org/licenses/>.
+## You should have received a copy of the GNU General Public License along with
+## this program; if not, see <http://www.gnu.org/licenses/>.
 
 ## Compute chebyshev type II filter order and cutoff for the desired response
 ## characteristics. Rp is the allowable decibels of ripple in the pass 
@@ -34,13 +34,13 @@
 function [n, Wc] = cheb2ord(Wp, Ws, Rp, Rs)
 
   if nargin != 4
-    usage("[n, Wn] = cheb2ord(Wp, Ws, Rp, Rs)");
+    print_usage;
   elseif length(Wp) != length(Ws)
     error("cheb2ord: Wp and Ws must have the same length");
   elseif length(Wp) != 1 && length(Wp) != 2
     error("cheb2ord: Wp,Ws must have length 1 or 2");
   elseif length(Wp) == 2 && ...
-    	(all(Wp>Ws) || all(Ws>Wp) || diff(Wp)<=0 || diff(Ws)<=0)
+          (all(Wp>Ws) || all(Ws>Wp) || diff(Wp)<=0 || diff(Ws)<=0)
     error("cheb2ord: Wp(1)<Ws(1)<Ws(2)<Wp(2) or Ws(1)<Wp(1)<Wp(2)<Ws(2)");
   end
 

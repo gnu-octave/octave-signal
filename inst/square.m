@@ -1,5 +1,5 @@
-## Copyright (C) 2006 Paul Kienzle <paulkienzle@Avocado.local>
-## This function is public domain
+## Author: Paul Kienzle <paulkienzle@Avocado.local> (2006)
+## This program is granted to the public domain.
 
 ## -*- texinfo -*-
 ## @deftypefn {Function File} {@var{s} =} square(@var{t}, @var{duty})

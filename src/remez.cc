@@ -1,30 +1,21 @@
+// Copyright (c) 1995, 1998 Jake Janovetz <janovetz@uiuc.edu>
+// Copyright (c) 1999 Paul Kienzle <pkienzle@users.sf.net>
+// Copyright (c) 2000 Kai Habel <kahacjde@linux.zrz.tu-berlin.de>
+//
+// This program is free software; you can redistribute it and/or modify it under
+// the terms of the GNU General Public License as published by the Free Software
+// Foundation; either version 3 of the License, or (at your option) any later
+// version.
+//
+// This program is distributed in the hope that it will be useful, but WITHOUT
+// ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+// FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
+// details.
+//
+// You should have received a copy of the GNU General Public License along with
+// this program; if not, see <http://www.gnu.org/licenses/>.
+
 /**************************************************************************
- * Parks-McClellan algorithm for FIR filter design (C version)
- *-------------------------------------------------
- *  Copyright (c) 1995,1998  Jake Janovetz <janovetz@uiuc.edu>
- *
- *  This library is free software; you can redistribute it and/or
- *  modify it under the terms of the GNU Library General Public
- *  License as published by the Free Software Foundation; either
- *  version 2 of the License, or (at your option) any later version.
- *
- *  This library is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- *  Library General Public License for more details.
- *
- *  You should have received a copy of the GNU Library General Public
- *  License along with this library; if not, see <http://www.gnu.org/licenses/>.
- *
- *
- *  Sep 1999 - Paul Kienzle (pkienzle@cs.indiana.edu)
- *      Modified for use in octave as a replacement for the matlab function
- *      remez.mex.  In particular, magnitude responses are required for all
- *      band edges rather than one per band, griddensity is a parameter,
- *      and errors are returned rather than printed directly.
- *  Mar 2000 - Kai Habel (kahacjde@linux.zrz.tu-berlin.de)
- *      Change: ColumnVector x=arg(i).vector_value();
- *      to: ColumnVector x(arg(i).vector_value());
  *  There appear to be some problems with the routine Search. See comments
  *  therein [search for PAK:].  I haven't looked closely at the rest
  *  of the code---it may also have some problems.

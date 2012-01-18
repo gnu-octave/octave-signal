@@ -1,18 +1,19 @@
-## Copyright (C) 2007   Muthiah Annamalai  <muthiah.annamalai@uta.edu>
-## Copyright (C) 2008   Mike Gross, Peter V. Lanspeary <mike@appl-tech.com>
+## Copyright (C) 2007 Muthiah Annamalai <muthiah.annamalai@uta.edu>
+## Copyright (C) 2008-2009 Mike Gross <mike@appl-tech.com>
+## Copyright (C) 2008-2009 Peter V. Lanspeary <pvl@mecheng.adelaide.edu.au>
 ##
-## This program is free software; you can redistribute it and/or modify
-## it under the terms of the GNU General Public License as published by
-## the Free Software Foundation; either version 2 of the License, or
-## (at your option) any later version.
+## This program is free software; you can redistribute it and/or modify it under
+## the terms of the GNU General Public License as published by the Free Software
+## Foundation; either version 3 of the License, or (at your option) any later
+## version.
 ##
-## This program is distributed in the hope that it will be useful,
-## but WITHOUT ANY WARRANTY; without even the implied warranty of
-## MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-## GNU General Public License for more details.
+## This program is distributed in the hope that it will be useful, but WITHOUT
+## ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+## FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
+## details.
 ##
-## You should have received a copy of the GNU General Public License
-## along with this program; If not, see <http://www.gnu.org/licenses/>.
+## You should have received a copy of the GNU General Public License along with
+## this program; if not, see <http://www.gnu.org/licenses/>.
 
 ## -*- texinfo -*-
 ## @deftypefn {Function File} {[@var{w}] =} welchwin(@var{L},@var{c})
@@ -35,17 +36,9 @@
 ## @seealso{blackman, kaiser}
 ## @end deftypefn
 
-## changelog
-##  2007-  Muthiah Annamalai, <muthiah.annamalai@uta.edu>
-##       original code
-##  2009-01-02  Mike Gross, <mike@appl-tech.com>
-##       symmetric window
-##  2009-01-06  Peter Lanspeary, <pvl@mecheng.adelaide.edu.au>
-##       add 2nd arg and demo; update documentation string and arg checking
-
 function [w] = welchwin(L,c)
   if (nargin < 1 || nargin>2 )
-    usage('welchwin(L,[c])');
+    print_usage;
   endif
   symmetric=1;
   if ( nargin==2 && ! isempty(c) )
@@ -102,4 +95,3 @@ endfunction;
 %! f=[-0.5:1/n:0.5-1/n];
 %! printf( "%dx null-padded, power spectrum of %d-point window\n", n/L, L );
 %! semilogy(f,s)
-

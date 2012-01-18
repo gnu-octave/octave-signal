@@ -1,17 +1,17 @@
 %% Copyright (C) 2005 Julius O. Smith III <jos@ccrma.stanford.edu>
 %%
-%% This program is free software; you can redistribute it and/or modify
-%% it under the terms of the GNU General Public License as published by
-%% the Free Software Foundation; either version 2 of the License, or
-%% (at your option) any later version.
+%% This program is free software; you can redistribute it and/or modify it under
+%% the terms of the GNU General Public License as published by the Free Software
+%% Foundation; either version 3 of the License, or (at your option) any later
+%% version.
 %%
-%% This program is distributed in the hope that it will be useful,
-%% but WITHOUT ANY WARRANTY; without even the implied warranty of
-%% MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-%% GNU General Public License for more details.
+%% This program is distributed in the hope that it will be useful, but WITHOUT
+%% ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+%% FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
+%% details.
 %%
-%% You should have received a copy of the GNU General Public License
-%% along with this program; If not, see <http://www.gnu.org/licenses/>.
+%% You should have received a copy of the GNU General Public License along with
+%% this program; if not, see <http://www.gnu.org/licenses/>.
 
 %% -*- texinfo -*-
 %% @deftypefn {Function File} {[@var{z}, @var{p}, @var{g}] =} sos2zp (@var{sos}, @var{Bscale})
@@ -54,25 +54,29 @@
 %% @seealso{zp2sos sos2tf tf2sos zp2tf tf2zp}
 %% @end deftypefn
 
-function [z,p,g] = sos2zp(sos,Bscale)
+function [z,p,g] = sos2zp (sos, Bscale = 1)
 
-if nargin<2, Bscale=1; end
-gains = sos(:,1); % All b0 coeffs
-g = prod(gains)*Bscale; % pole-zero gain
-if g==0, error('sos2zp: one or more section gains is zero'); end
-sos(:,1:3) = sos(:,1:3)./ [gains gains gains];
+  if (nargin < 1 || nargin > 2)
+    print_usage;
+  endif
 
-[N,m] = size(sos);
-if m~=6, error('sos2zp: sos matrix should be N by 6'); end
+  gains = sos(:,1); % All b0 coeffs
+  g = prod(gains)*Bscale; % pole-zero gain
+  if g==0, error('sos2zp: one or more section gains is zero'); end
+  sos(:,1:3) = sos(:,1:3)./ [gains gains gains];
 
-z = zeros(2*N,1);
-p = zeros(2*N,1);
-for i=1:N
-  ndx = [2*i-1:2*i];
-  zi = roots(sos(i,1:3));
-  z(ndx) = zi;
-  pi = roots(sos(i,4:6));
-  p(ndx) = pi;
+  [N,m] = size(sos);
+  if m~=6, error('sos2zp: sos matrix should be N by 6'); end
+
+  z = zeros(2*N,1);
+  p = zeros(2*N,1);
+  for i=1:N
+    ndx = [2*i-1:2*i];
+    zi = roots(sos(i,1:3));
+    z(ndx) = zi;
+    pi = roots(sos(i,4:6));
+    p(ndx) = pi;
+  end
 end
 
 %!test 

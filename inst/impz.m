@@ -1,17 +1,17 @@
 ## Copyright (C) 1999 Paul Kienzle <pkienzle@users.sf.net>
 ##
-## This program is free software; you can redistribute it and/or modify
-## it under the terms of the GNU General Public License as published by
-## the Free Software Foundation; either version 2 of the License, or
-## (at your option) any later version.
+## This program is free software; you can redistribute it and/or modify it under
+## the terms of the GNU General Public License as published by the Free Software
+## Foundation; either version 3 of the License, or (at your option) any later
+## version.
 ##
-## This program is distributed in the hope that it will be useful,
-## but WITHOUT ANY WARRANTY; without even the implied warranty of
-## MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-## GNU General Public License for more details.
+## This program is distributed in the hope that it will be useful, but WITHOUT
+## ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+## FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
+## details.
 ##
-## You should have received a copy of the GNU General Public License
-## along with this program; If not, see <http://www.gnu.org/licenses/>.
+## You should have received a copy of the GNU General Public License along with
+## this program; if not, see <http://www.gnu.org/licenses/>.
 
 ## usage: [x, t] = impz(b [, a, n, fs])
 ##
@@ -25,21 +25,15 @@
 ##
 ## See also: freqz, zplane
 
-## 1999 pkienzle@users.sf.net
-##      - if nargout=0, produce plot and don't set return values
-
 ## TODO: Call equivalent function from control toolbox since it is
 ## TODO:    probably more sophisticated than this one, and since it
 ## TODO:    is silly to maintain two different versions of essentially
 ## TODO:    the same thing.
-function [x_r, t_r] = impz(b, a, n, fs)
+function [x_r, t_r] = impz(b, a = [1], n = [], fs = 1)
 
   if nargin == 0 || nargin > 4
-    usage("impz(b [, a, n, fs])");
+    print_usage;
   end
-  if nargin < 2, a = [1]; end
-  if nargin < 3, n = []; end
-  if nargin < 4, fs = 1; end
 
   if isempty(n) && length(a) > 1
     precision = 1e-6;
@@ -52,24 +46,24 @@ function [x_r, t_r] = impz(b, a, n, fs)
     else                        # periodic -- cutoff after 5 cycles
       n = 30;
       
-				# find longest period less than infinity
-				# cutoff after 5 cycles (w=10*pi)
+                                # find longest period less than infinity
+                                # cutoff after 5 cycles (w=10*pi)
       rperiodic = r(find(abs(r)>=1-precision & abs(arg(r))>0));
       if !isempty(rperiodic)
-	n_periodic = ceil(10*pi./min(abs(arg(rperiodic))));
-	if (n_periodic > n)
-	  n = n_periodic;
-	end
+        n_periodic = ceil(10*pi./min(abs(arg(rperiodic))));
+        if (n_periodic > n)
+          n = n_periodic;
+        end
       end
       
-				# find most damped pole
-				# cutoff at -60 dB
+                                # find most damped pole
+                                # cutoff at -60 dB
       rdamped = r(find(abs(r)<1-precision));
       if !isempty(rdamped)
-	n_damped = floor(-3/log10(max(abs(rdamped))));
-	if (n_damped > n)
-	  n = n_damped;
-	end
+        n_damped = floor(-3/log10(max(abs(rdamped))));
+        if (n_damped > n)
+          n = n_damped;
+        end
       end
     end
     n = n + length(b);
@@ -90,10 +84,10 @@ function [x_r, t_r] = impz(b, a, n, fs)
     unwind_protect
       title "Impulse Response";
       if (fs > 1000)
-      	t = t * 1000;
-      	xlabel("Time (msec)");
+        t = t * 1000;
+        xlabel("Time (msec)");
       else
-      	xlabel("Time (sec)");
+        xlabel("Time (sec)");
       end
       plot(t, x, "^r;;");
     unwind_protect_cleanup

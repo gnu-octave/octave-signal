@@ -1,17 +1,19 @@
 ## Copyright (C) 1999-2001 Paul Kienzle <pkienzle@users.sf.net>
+## Copyright (C) 2004 <asbjorn.sabo@broadpark.no>
+## Copyright (C) 2008,2010 Peter Lanspeary <peter.lanspeary@.adelaide.edu.au>
 ##
-## This program is free software; you can redistribute it and/or modify
-## it under the terms of the GNU General Public License as published by
-## the Free Software Foundation; either version 2 of the License, or
-## (at your option) any later version.
+## This program is free software; you can redistribute it and/or modify it under
+## the terms of the GNU General Public License as published by the Free Software
+## Foundation; either version 3 of the License, or (at your option) any later
+## version.
 ##
-## This program is distributed in the hope that it will be useful,
-## but WITHOUT ANY WARRANTY; without even the implied warranty of
-## MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-## GNU General Public License for more details.
+## This program is distributed in the hope that it will be useful, but WITHOUT
+## ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+## FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
+## details.
 ##
-## You should have received a copy of the GNU General Public License
-## along with this program; If not, see <http://www.gnu.org/licenses/>.
+## You should have received a copy of the GNU General Public License along with
+## this program; if not, see <http://www.gnu.org/licenses/>.
 
 ## usage: [R, lag] = xcorr (X [, Y] [, maxlag] [, scale])
 ##
@@ -85,43 +87,11 @@
 ##
 ## If length(x) == length(y) + k, then you can use the simpler
 ##    ( hankel(x(1:k),x(k:N-k)) * y ) ./ N
-##
-
-## 2010-04  Peter Lanspeary, <peter.lanspeary@.adelaide.edu.au>
-##       1) Fix failure to pad result with zeros when excess lags required.
-##       2) Improve documentation string.
-##       3) Fix argument checks.
-## 2008-11-12  Peter Lanspeary, <pvl@mecheng.adelaide.edu.au>
-##       1) fix incorrectly shifted return value (when X and Y vectors have
-##          unequal length) - bug reported by <stephane.brunner@gmail.com>.
-##       2) scale='coeff' should give R=raw/(rms(x).rms(y)); fixed.
-##       3) restore use of autocorrelation code when isempty(Y).
-##       4) imaginary part of cross correlation had wrong sign; fixed.
-##       5) use R.' rather than R' to correct the shape of the result
-## 2004-05 asbjorn dot sabo at broadpark dot no
-##     - Changed definition of cross correlation from 
-##       sum{x(i)y(y+k)} to sum(x(i)y(i-k)}  (Note sign change.)
-##       Results are now returned in reverse order of before.
-##       The function is now compatible with Matlab (and with f.i.
-##       "Digital Signal Processing" by Proakis and Manolakis).
-## 2000-03 pkienzle@users.sf.net
-##     - use fft instead of brute force to compute correlations
-##     - allow row or column vectors as input, returning same
-##     - compute cross-correlations on columns of matrix X
-##     - compute complex correlations consitently with matlab
-## 2000-04 pkienzle@users.sf.net
-##     - fix test for real return value
-## 2001-02-24 Paul Kienzle
-##     - remove all but one loop
-## 2001-10-30 Paul Kienzle <pkienzle@users.sf.net>
-##     - fix arg parsing for 3 args
-## 2001-12-05 Paul Kienzle <pkienzle@users.sf.net>
-##     - return lags as vector rather than range
 
 function [R, lags] = xcorr (X, Y, maxlag, scale)
   
   if (nargin < 1 || nargin > 4)
-    usage ("[c, lags] = xcorr(x [, y] [, h] [, scale])");
+    print_usage;
   endif
 
   ## assign arguments that are missing from the list

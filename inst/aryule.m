@@ -1,18 +1,18 @@
 ## Copyright (C) 1999 Paul Kienzle <pkienzle@users.sf.net>
+## Copyright (C) 2006 Peter Lanspeary
 ##
-## This program is free software; you can redistribute it and/or modify
-## it under the terms of the GNU General Public License as published by
-## the Free Software Foundation; either version 2 of the License, or
-## (at your option) any later version.
+## This program is free software; you can redistribute it and/or modify it under
+## the terms of the GNU General Public License as published by the Free Software
+## Foundation; either version 3 of the License, or (at your option) any later
+## version.
 ##
-## This program is distributed in the hope that it will be useful,
-## but WITHOUT ANY WARRANTY; without even the implied warranty of
-## MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-## GNU General Public License for more details.
+## This program is distributed in the hope that it will be useful, but WITHOUT
+## ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+## FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
+## details.
 ##
-## You should have received a copy of the GNU General Public License
-## along with this program; If not, see <http://www.gnu.org/licenses/>.
-
+## You should have received a copy of the GNU General Public License along with
+## this program; if not, see <http://www.gnu.org/licenses/>.
 
 ## usage:  [a, v, k] = aryule (x, p)
 ## 
@@ -36,20 +36,15 @@
 ## lacking a lattice filter processor, I haven't tested that the lattice
 ## filter coefficients are reasonable.
 
-## Changes (Peter Lanspeary, 6 Nov 2006):
-##  Add input checking;
-##  'biased' arg for xcorr fixes scaling problem;
-##  force real zero-lag autocorrelation - prevents warning from toeplitz;
-##  returns 'a' only if nargout==0 (rather than returning a, v, k).
-
 function [a, v, k] = aryule (x, p)
-if ( nargin~=2 )
-  error( 'usage: [a,v,k] = aryule(x,p)' );
-elseif ( ~isvector(x) || length(x)<3 )
-  error( 'aryule: arg 1 (x) must be vector of length >2' );
-elseif ( ~isscalar(p) || fix(p)~=p || p > length(x)-2 )
-  error( 'aryule: arg 2 (p) must be an integer >0 and <length(x)-1' );
-else
+  if ( nargin~=2 )
+    print_usage;
+  elseif ( ~isvector(x) || length(x)<3 )
+    error( 'aryule: arg 1 (x) must be vector of length >2' );
+  elseif ( ~isscalar(p) || fix(p)~=p || p > length(x)-2 )
+    error( 'aryule: arg 2 (p) must be an integer >0 and <length(x)-1' );
+  endif
+
   c = xcorr(x, p+1, 'biased');
   c(1:p+1) = [];     # remove negative autocorrelation lags
   c(1) = real(c(1)); # levinson/toeplitz requires exactly c(1)==conj(c(1))
@@ -60,7 +55,6 @@ else
   else
     [a, v, k] = levinson(c, p);
   endif
-endif
 endfunction
 
 %!demo

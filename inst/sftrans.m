@@ -1,17 +1,17 @@
-## Copyright (C) 1999 Paul Kienzle <pkienzle@users.sf.net>
+## Copyright (C) 1999-2001 Paul Kienzle <pkienzle@users.sf.net>
 ##
-## This program is free software; you can redistribute it and/or modify
-## it under the terms of the GNU General Public License as published by
-## the Free Software Foundation; either version 2 of the License, or
-## (at your option) any later version.
+## This program is free software; you can redistribute it and/or modify it under
+## the terms of the GNU General Public License as published by the Free Software
+## Foundation; either version 3 of the License, or (at your option) any later
+## version.
 ##
-## This program is distributed in the hope that it will be useful,
-## but WITHOUT ANY WARRANTY; without even the implied warranty of
-## MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-## GNU General Public License for more details.
+## This program is distributed in the hope that it will be useful, but WITHOUT
+## ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+## FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
+## details.
 ##
-## You should have received a copy of the GNU General Public License
-## along with this program; If not, see <http://www.gnu.org/licenses/>.
+## You should have received a copy of the GNU General Public License along with
+## this program; if not, see <http://www.gnu.org/licenses/>.
 
 ## usage: [Sz, Sp, Sg] = sftrans(Sz, Sp, Sg, W, stop)
 ##
@@ -84,20 +84,11 @@
 ## Proakis & Manolakis (1992). Digital Signal Processing. New York:
 ## Macmillan Publishing Company.
 
-## Author: Paul Kienzle <pkienzle@users.sf.net>
-
-## 2000-03-01 pkienzle@users.sf.net
-##       leave transformed Sg as a complex value since cheby2 blows up
-##       otherwise (but only for odd-order low-pass filters).  bilinear
-##       will return Zg as real, so there is no visible change to the
-##       user of the IIR filter design functions.
-## 2001-03-09 pkienzle@users.sf.net
-##       return real Sg; don't know what to do for imaginary filters
 function [Sz, Sp, Sg] = sftrans(Sz, Sp, Sg, W, stop)
 
   if (nargin != 5)
-    usage("[Sz, Sp, Sg] = sftrans(Sz, Sp, Sg, W, stop)");
-  end;
+    print_usage;
+  end
 
   C = 1;
   p = length(Sp);
@@ -117,23 +108,23 @@ function [Sz, Sp, Sg] = sftrans(Sz, Sp, Sg, W, stop)
 ##        S^2+FhFl   b=C/x (Fh-Fl)/2            b=C/x (Fh-Fl)/2
 ## ----------------  -------------------------  ------------------------
       if (isempty(Sz))
-	Sg = Sg * real (1./ prod(-Sp));
+        Sg = Sg * real (1./ prod(-Sp));
       elseif (isempty(Sp))
-	Sg = Sg * real(prod(-Sz));
+        Sg = Sg * real(prod(-Sz));
       else
-	Sg = Sg * real(prod(-Sz)/prod(-Sp));
+        Sg = Sg * real(prod(-Sz)/prod(-Sp));
       endif
       b = (C*(Fh-Fl)/2)./Sp;
       Sp = [b+sqrt(b.^2-Fh*Fl), b-sqrt(b.^2-Fh*Fl)];
       extend = [sqrt(-Fh*Fl), -sqrt(-Fh*Fl)];
       if isempty(Sz)
-	Sz = [extend(1+rem([1:2*p],2))];
+        Sz = [extend(1+rem([1:2*p],2))];
       else
-      	b = (C*(Fh-Fl)/2)./Sz;
-      	Sz = [b+sqrt(b.^2-Fh*Fl), b-sqrt(b.^2-Fh*Fl)];
-	if (p > z)
-	  Sz = [Sz, extend(1+rem([1:2*(p-z)],2))];
-	end
+        b = (C*(Fh-Fl)/2)./Sz;
+        Sz = [b+sqrt(b.^2-Fh*Fl), b-sqrt(b.^2-Fh*Fl)];
+        if (p > z)
+          Sz = [Sz, extend(1+rem([1:2*(p-z)],2))];
+        end
       end
     else
 ## ----------------  -------------------------  ------------------------
@@ -146,13 +137,13 @@ function [Sz, Sp, Sg] = sftrans(Sz, Sp, Sg, W, stop)
       b = Sp*((Fh-Fl)/(2*C));
       Sp = [b+sqrt(b.^2-Fh*Fl), b-sqrt(b.^2-Fh*Fl)];
       if isempty(Sz)
-	Sz = zeros(1,p);
+        Sz = zeros(1,p);
       else
-      	b = Sz*((Fh-Fl)/(2*C));
-      	Sz = [b+sqrt(b.^2-Fh*Fl), b-sqrt(b.^2-Fh*Fl)];
- 	if (p>z)
-	  Sz = [Sz, zeros(1, (p-z))];
-	end
+        b = Sz*((Fh-Fl)/(2*C));
+        Sz = [b+sqrt(b.^2-Fh*Fl), b-sqrt(b.^2-Fh*Fl)];
+        if (p>z)
+          Sz = [Sz, zeros(1, (p-z))];
+        end
       end
     end
   else
@@ -164,20 +155,20 @@ function [Sz, Sp, Sg] = sftrans(Sz, Sp, Sg, W, stop)
 ##                   gain: -x                   gain: -1/x
 ## ----------------  -------------------------  ------------------------
       if (isempty(Sz))
-	Sg = Sg * real (1./ prod(-Sp));
+        Sg = Sg * real (1./ prod(-Sp));
       elseif (isempty(Sp))
-	Sg = Sg * real(prod(-Sz));
+        Sg = Sg * real(prod(-Sz));
       else
-	Sg = Sg * real(prod(-Sz)/prod(-Sp));
+        Sg = Sg * real(prod(-Sz)/prod(-Sp));
       endif
       Sp = C * Fc ./ Sp;
       if isempty(Sz)
-	Sz = zeros(1,p);
+        Sz = zeros(1,p);
       else
-      	Sz = [C * Fc ./ Sz];
-  	if (p > z)
-	  Sz = [Sz, zeros(1,p-z)];
-	end
+        Sz = [C * Fc ./ Sz];
+        if (p > z)
+          Sz = [Sz, zeros(1,p-z)];
+        end
       end
     else
 ## ----------------  -------------------------  ------------------------
@@ -190,4 +181,3 @@ function [Sz, Sp, Sg] = sftrans(Sz, Sp, Sg, W, stop)
     end
   end
 endfunction
-      

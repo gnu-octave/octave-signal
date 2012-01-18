@@ -1,5 +1,5 @@
-## Copyright (C) 2006 Paul Kienzle <pkienzle@users.sf.net>
-## This function is public domain
+## Author: Paul Kienzle <pkienzle@users.sf.net> (2006)
+## This program is granted to the public domain.
 
 ## -*- texinfo -*-
 ## @deftypefn {Function File} {@var{y} =} idst (@var{x})

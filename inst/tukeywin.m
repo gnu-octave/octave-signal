@@ -1,17 +1,17 @@
 ## Copyright (C) 2007 Laurent Mazet <mazet@crm.mot.com>
 ##
-## This program is free software; you can redistribute it and/or modify
-## it under the terms of the GNU General Public License as published by
-## the Free Software Foundation; either version 2 of the License, or
-## (at your option) any later version.
+## This program is free software; you can redistribute it and/or modify it under
+## the terms of the GNU General Public License as published by the Free Software
+## Foundation; either version 3 of the License, or (at your option) any later
+## version.
 ##
-## This program is distributed in the hope that it will be useful,
-## but WITHOUT ANY WARRANTY; without even the implied warranty of
-## MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-## GNU General Public License for more details.
+## This program is distributed in the hope that it will be useful, but WITHOUT
+## ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+## FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
+## details.
 ##
-## You should have received a copy of the GNU General Public License
-## along with this program; If not, see <http://www.gnu.org/licenses/>.
+## You should have received a copy of the GNU General Public License along with
+## this program; if not, see <http://www.gnu.org/licenses/>.
 
 ## -*- texinfo -*-
 ## @deftypefn {Function File} {@var{w} =} tukeywin (@var{m}, @var{r})
@@ -28,49 +28,35 @@
 ## Page 67, Equation 38.
 ## @end deftypefn
 
-function w = tukeywin(m,r)
+function w = tukeywin (m, r = 1/2)
 
-  ## check arguments
-  switch nargin
-      
-    case 1,
-      ## default r value
-      r = 1/2;
-      
-    case 2,
+  if (nargin < 1 || nargin > 2)
+    print_usage;
+  elseif (nargin == 2)
       ## check that 0 < r < 1
       if r > 1
         r = 1;
       elseif r < 0
         r = 0;
       endif
-      
-    otherwise
-      ## usage message
-      usage ("y = tukeywin(m, [r])");
-  endswitch
-
+  endif
 
   ## generate window
   switch r
-      
     case 0,
       ## full box
       w = ones (m, 1);
-      
     case 1,
       ## Hanning window
       w = hanning (m);
-
     otherwise
       ## cosine-tapered window
       t = linspace(0,1,m)(1:end/2)';
       w = (1 + cos(pi*(2*t/r-1)))/2;
       w(floor(r*(m-1)/2)+2:end) = 1;
       w = [w; ones(mod(m,2)); flipud(w)];
-
   endswitch
-      
+
 endfunction
 
 %!demo

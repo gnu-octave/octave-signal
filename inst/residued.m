@@ -1,18 +1,17 @@
 %% Copyright (C) 2005 Julius O. Smith III <jos@ccrma.stanford.edu>
 %%
-%% This program is free software; you can redistribute it and/or modify it
-%% under the terms of the GNU General Public License as published by
-%% the Free Software Foundation; either version 2, or (at your option)
-%% any later version.
+%% This program is free software; you can redistribute it and/or modify it under
+%% the terms of the GNU General Public License as published by the Free Software
+%% Foundation; either version 3 of the License, or (at your option) any later
+%% version.
 %%
-%% This program is distributed in the hope that it will be useful, but
-%% WITHOUT ANY WARRANTY; without even the implied warranty of
-%% MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  The GNU
-%% General Public License has more details.
+%% This program is distributed in the hope that it will be useful, but WITHOUT
+%% ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+%% FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
+%% details.
 %%
-%% You should have received a copy of the GNU General Public License
-%% along with this program; see the file COPYING.  If not, see
-%% <http://www.gnu.org/licenses/>.
+%% You should have received a copy of the GNU General Public License along with
+%% this program; if not, see <http://www.gnu.org/licenses/>.
 
 %% -*- texinfo -*-
 %% @deftypefn {Function File} {[@var{r}, @var{p}, @var{f}, @var{m}] =} residued (@var{B}, @var{A})
@@ -50,46 +49,47 @@
 %% @end deftypefn
 
 function [r, p, f, m] = residued(b, a, toler)
-% RESIDUED - return residues, poles, and FIR part of B(z)/A(z)
-%
-% Let nb = length(b), na = length(a), and N=na-1 = no. of poles.
-% If nb<na, then f will be empty, and the returned filter is
-%
-%             r(1)                      r(N)
-% H(z) = ----------------  + ... + ----------------- = R(z)
-%        [ 1-p(1)/z ]^e(1)         [ 1-p(N)/z ]^e(N)
-%
-% This is the same result as returned by RESIDUEZ.
-% Otherwise, the FIR part f will be nonempty,
-% and the returned filter is 
-%
-% H(z) = f(1) + f(2)/z + f(3)/z^2 + ... + f(nf)/z^M + R(z)/z^M
-%
-% where R(z) is the parallel one-pole filter bank defined above,
-% and M is the order of F(z) = length(f)-1 = nb-na.
-% 
-% Note, in particular, that the impulse-response of the parallel
-% (complex) one-pole filter bank starts AFTER that of the the FIR part.
-% In the result returned by RESIDUEZ, R(z) is not divided by z^M,
-% so its impulse response starts at time 0 in parallel with f(n).
-%
-% J.O. Smith, 9/19/05
-  
-if nargin==3, 
-  warning("tolerance ignored");
+  % RESIDUED - return residues, poles, and FIR part of B(z)/A(z)
+  %
+  % Let nb = length(b), na = length(a), and N=na-1 = no. of poles.
+  % If nb<na, then f will be empty, and the returned filter is
+  %
+  %             r(1)                      r(N)
+  % H(z) = ----------------  + ... + ----------------- = R(z)
+  %        [ 1-p(1)/z ]^e(1)         [ 1-p(N)/z ]^e(N)
+  %
+  % This is the same result as returned by RESIDUEZ.
+  % Otherwise, the FIR part f will be nonempty,
+  % and the returned filter is 
+  %
+  % H(z) = f(1) + f(2)/z + f(3)/z^2 + ... + f(nf)/z^M + R(z)/z^M
+  %
+  % where R(z) is the parallel one-pole filter bank defined above,
+  % and M is the order of F(z) = length(f)-1 = nb-na.
+  % 
+  % Note, in particular, that the impulse-response of the parallel
+  % (complex) one-pole filter bank starts AFTER that of the the FIR part.
+  % In the result returned by RESIDUEZ, R(z) is not divided by z^M,
+  % so its impulse response starts at time 0 in parallel with f(n).
+  %
+  % J.O. Smith, 9/19/05
+    
+  if nargin==3, 
+    warning("tolerance ignored");
+  end
+  NUM = b(:)';
+  DEN = a(:)';
+  nb = length(NUM);
+  na = length(DEN);
+  f = [];
+  if na<=nb
+    f = filter(NUM,DEN,[1,zeros(nb-na)]);
+    NUM = NUM - conv(DEN,f);
+    NUM = NUM(nb-na+2:end);
+  end
+  [r,p,f2,m] = residuez(NUM,DEN);
+  if f2, error('f2 not empty as expected'); end
 end
-NUM = b(:)';
-DEN = a(:)';
-nb = length(NUM);
-na = length(DEN);
-f = [];
-if na<=nb
-  f = filter(NUM,DEN,[1,zeros(nb-na)]);
-  NUM = NUM - conv(DEN,f);
-  NUM = NUM(nb-na+2:end);
-end
-[r,p,f2,m] = residuez(NUM,DEN);
-if f2, error('f2 not empty as expected'); end
 
 %!test 
 %! B=1; A=[1 -1];

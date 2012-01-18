@@ -1,17 +1,17 @@
 ## Copyright (C) 2006 Quentin Spencer <qspencer@ieee.org>
 ##
-## This program is free software; you can redistribute it and/or modify
-## it under the terms of the GNU General Public License as published by
-## the Free Software Foundation; either version 2 of the License, or
-## (at your option) any later version.
+## This program is free software; you can redistribute it and/or modify it under
+## the terms of the GNU General Public License as published by the Free Software
+## Foundation; either version 3 of the License, or (at your option) any later
+## version.
 ##
-## This program is distributed in the hope that it will be useful,
-## but WITHOUT ANY WARRANTY; without even the implied warranty of
-## MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-## GNU General Public License for more details.
+## This program is distributed in the hope that it will be useful, but WITHOUT
+## ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+## FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
+## details.
 ##
-## You should have received a copy of the GNU General Public License
-## along with this program; If not, see <http://www.gnu.org/licenses/>.
+## You should have received a copy of the GNU General Public License along with
+## this program; if not, see <http://www.gnu.org/licenses/>.
 
 ## b = firls(N, F, A);
 ## b = firls(N, F, A, W);
@@ -38,15 +38,12 @@
 
 function coef = firls(N, frequencies, pass, weight, str);
 
-
   if nargin<3 || nargin>6
-    usage("");
-  end
-  if nargin==3
+    print_usage;
+  elseif nargin==3
     weight = ones(1, length(pass)/2);
     str = [];
-  end
-  if nargin==4
+  elseif nargin==4
     if ischar(weight)
       str = weight;
       weight = ones (size (pass));
@@ -56,12 +53,9 @@ function coef = firls(N, frequencies, pass, weight, str);
   end
   if length (frequencies) ~= length (pass)
     error("F and A must have equal lengths.");
-  end
-  if 2 * length (weight) ~= length (pass)
+  elseif 2 * length (weight) ~= length (pass)
     error("W must contain one weight per band.");
-  end
-
-  if ischar(str)
+  elseif ischar(str)
     error("This feature is implemented yet");
   else
 

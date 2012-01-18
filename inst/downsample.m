@@ -1,5 +1,5 @@
-## Author: Paul Kienzle <pkienzle@users.sf.net> 2007
-## This function is public domain
+## Author: Paul Kienzle <pkienzle@users.sf.net> (2007)
+## This program is granted to the public domain.
 
 ## -*- texinfo -*-
 ## @deftypefn {Function File} {@var{y} =} downsample (@var{x}, @var{n})
@@ -30,7 +30,7 @@ function y = downsample (x, n, phase = 0)
   else
     y = x(phase + 1:n:end,:);
   end
-end
+endfunction
 
 %!assert(downsample([1,2,3,4,5],2),[1,3,5]);
 %!assert(downsample([1;2;3;4;5],2),[1;3;5]);

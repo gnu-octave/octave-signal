@@ -1,21 +1,18 @@
+## Copyright (C) 2000 Paul Kienzle  <pkienzle@users.sf.net>
 ## Copyright (C) 2004 Julius O. Smith III <jos@ccrma.stanford.edu>
 ##
-## This program is free software; you can redistribute it and/or modify it
-## under the terms of the GNU General Public License as published by
-## the Free Software Foundation; either version 2, or (at your option)
-## any later version.
+## This program is free software; you can redistribute it and/or modify it under
+## the terms of the GNU General Public License as published by the Free Software
+## Foundation; either version 3 of the License, or (at your option) any later
+## version.
 ##
-## This program is distributed in the hope that it will be useful, but
-## WITHOUT ANY WARRANTY; without even the implied warranty of
-## MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  The GNU
-## General Public License has more details.
+## This program is distributed in the hope that it will be useful, but WITHOUT
+## ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+## FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
+## details.
 ##
-## You should have received a copy of the GNU General Public License
-## along with this program; see the file COPYING.  If not, see
-## <http://www.gnu.org/licenses/>.
-##
-## Plot, demos, and help info copied and adapted from
-## grpdelay.m, Copyright (C) 2000 Paul Kienzle
+## You should have received a copy of the GNU General Public License along with
+## this program; if not, see <http://www.gnu.org/licenses/>.
 
 ## Compute the group delay of a filter.
 ##
@@ -85,10 +82,11 @@
 ## is converted to the FIR filter conv(b,fliplr(conj(a))).
 ## For further details, see
 ## http://ccrma.stanford.edu/~jos/filters/Numerical_Computation_Group_Delay.html
+
 function [gd,w] = grpdelay(b,a=1,nfft=512,whole,Fs)
 
   if (nargin<1 || nargin>5)
-    usage("[g, w]=grpdelay(b [, a [, n [, 'whole' [, Fs]]]])");
+    print_usage;
   end
   HzFlag=0;
   if length(nfft)>1
@@ -108,9 +106,9 @@ function [gd,w] = grpdelay(b,a=1,nfft=512,whole,Fs)
       Fs=1; % return w in radians per sample
       if nargin<4, whole='';
       elseif ~ischar(whole)
-	Fs = whole;
-	HzFlag=1;
-	whole = '';
+        Fs = whole;
+        HzFlag=1;
+        whole = '';
       end
       if nargin<3, nfft=512; end
       if nargin<2, a=1; end
@@ -174,6 +172,7 @@ function [gd,w] = grpdelay(b,a=1,nfft=512,whole,Fs)
       grid('on');
     end_unwind_protect
   end
+end
 
 % ------------------------ DEMOS -----------------------
 

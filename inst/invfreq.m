@@ -1,72 +1,60 @@
-% Copyright (C) 1986,2003 Julius O. Smith III <jos@ccrma.stanford.edu>
-%
-% This program is free software; you can redistribute it and/or modify it
-% under the terms of the GNU General Public License as published by
-% the Free Software Foundation; either version 2, or (at your option)
-% any later version.
-%
-% This software is distributed in the hope that it will be useful, but
-% WITHOUT ANY WARRANTY; without even the implied warranty of
-% MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-% General Public License for more details.
-%
-% You should have received a copy of the GNU General Public License
-% along with this software; see the file COPYING.  If not, see
-% <http://www.gnu.org/licenses/>.
+%% Copyright (C) 1986, 2000, 2003 Julius O. Smith III <jos@ccrma.stanford.edu>
+%% Copyright (C) 2007 Rolf Schirmacher <Rolf.Schirmacher@MuellerBBM.de>
+%% Copyright (C) 2003 Andrew Fitting
+%% Copyright (C) 2010 Pascal Dupuis <Pascal.Dupuis@uclouvain.be>
+%%
+%% This program is free software; you can redistribute it and/or modify it under
+%% the terms of the GNU General Public License as published by the Free Software
+%% Foundation; either version 3 of the License, or (at your option) any later
+%% version.
+%%
+%% This program is distributed in the hope that it will be useful, but WITHOUT
+%% ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+%% FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
+%% details.
+%%
+%% You should have received a copy of the GNU General Public License along with
+%% this program; if not, see <http://www.gnu.org/licenses/>.
 
-% usage: [B,A] = invfreq(H,F,nB,nA)
-%        [B,A] = invfreq(H,F,nB,nA,W)
-%        [B,A] = invfreq(H,F,nB,nA,W,[],[],plane)
-%        [B,A] = invfreq(H,F,nB,nA,W,iter,tol,plane)
-%
-% Fit filter B(z)/A(z) or B(s)/A(s) to complex frequency response at 
-% frequency points F. A and B are real polynomial coefficients of order 
-% nA and nB respectively.  Optionally, the fit-errors can be weighted vs 
-% frequency according to the weights W. Also, the transform plane can be
-% specified as either 's' for continuous time or 'z' for discrete time. 'z'
-% is chosen by default.  Eventually, Steiglitz-McBride iterations will be
-% specified by iter and tol.
-%
-% H: desired complex frequency response
-%     It is assumed that A and B are real polynomials, hence H is one-sided.
-% F: vector of frequency samples in radians
-% nA: order of denominator polynomial A
-% nB: order of numerator polynomial B
-% plane='z': F on unit circle (discrete-time spectra, z-plane design)
-% plane='s': F on jw axis     (continuous-time spectra, s-plane design)
-% H(k) = spectral samples of filter frequency response at points zk,
-%  where zk=exp(sqrt(-1)*F(k)) when plane='z' (F(k) in [0,.5])
-%     and zk=(sqrt(-1)*F(k)) when plane='s' (F(k) nonnegative)
-% Example:
-%     [B,A] = butter(12,1/4);
-%     [H,w] = freqz(B,A,128);
-%     [Bh,Ah] = invfreq(H,F,4,4);
-%     Hh = freqz(Bh,Ah);
-%     disp(sprintf('||frequency response error|| = %f',norm(H-Hh)));
-%
-% References: J. O. Smith, "Techniques for Digital Filter Design and System 
-%  	Identification with Application to the Violin, Ph.D. Dissertation, 
-% 	Elec. Eng. Dept., Stanford University, June 1983, page 50; or,
-%
-% http://ccrma.stanford.edu/~jos/filters/FFT_Based_Equation_Error_Method.html
-% written by J.O. Smith, 4-23-1986
-% updated for Octave on 6-11-2000
-% original name: eqnerr2()
-% 2003-05-10 Andrew Fitting
-%    *generated invfreqz and invfreqs to better mimic matlab
-%    *reorganized documentation to conform to Paul Kienzle's
-%    *added 'trace' argument (doesn't work like matlab yet)
-%    *added demo feature, not debugged yet
-% 2003-05-16 Julius Smith <jos@ccrma.stanford.edu>
-%     *final debugging
-% 2007-08-03 Rolf Schirmacher <Rolf.Schirmacher@MuellerBBM.de>
-%     *replaced == by strcmp() for character string comparison
-% 2010-10-04 Pascal Dupuis <Pascal.Dupuis@uclouvain.be>
-%     *added the ability to specify zeroes in B
+%% usage: [B,A] = invfreq(H,F,nB,nA)
+%%        [B,A] = invfreq(H,F,nB,nA,W)
+%%        [B,A] = invfreq(H,F,nB,nA,W,[],[],plane)
+%%        [B,A] = invfreq(H,F,nB,nA,W,iter,tol,plane)
+%%
+%% Fit filter B(z)/A(z) or B(s)/A(s) to complex frequency response at 
+%% frequency points F. A and B are real polynomial coefficients of order 
+%% nA and nB respectively.  Optionally, the fit-errors can be weighted vs 
+%% frequency according to the weights W. Also, the transform plane can be
+%% specified as either 's' for continuous time or 'z' for discrete time. 'z'
+%% is chosen by default.  Eventually, Steiglitz-McBride iterations will be
+%% specified by iter and tol.
+%%
+%% H: desired complex frequency response
+%%     It is assumed that A and B are real polynomials, hence H is one-sided.
+%% F: vector of frequency samples in radians
+%% nA: order of denominator polynomial A
+%% nB: order of numerator polynomial B
+%% plane='z': F on unit circle (discrete-time spectra, z-plane design)
+%% plane='s': F on jw axis     (continuous-time spectra, s-plane design)
+%% H(k) = spectral samples of filter frequency response at points zk,
+%%  where zk=exp(sqrt(-1)*F(k)) when plane='z' (F(k) in [0,.5])
+%%     and zk=(sqrt(-1)*F(k)) when plane='s' (F(k) nonnegative)
+%% Example:
+%%     [B,A] = butter(12,1/4);
+%%     [H,w] = freqz(B,A,128);
+%%     [Bh,Ah] = invfreq(H,F,4,4);
+%%     Hh = freqz(Bh,Ah);
+%%     disp(sprintf('||frequency response error|| = %f',norm(H-Hh)));
+%%
+%% References: J. O. Smith, "Techniques for Digital Filter Design and System 
+%%  	Identification with Application to the Violin, Ph.D. Dissertation, 
+%% 	Elec. Eng. Dept., Stanford University, June 1983, page 50; or,
+%%
+%% http://ccrma.stanford.edu/~jos/filters/FFT_Based_Equation_Error_Method.html
 
-% TODO: implement Steiglitz-McBride iterations
-% TODO: improve numerical stability for high order filters (matlab is a bit better)
-% TODO: modify to accept more argument configurations
+%% TODO: implement Steiglitz-McBride iterations
+%% TODO: improve numerical stability for high order filters (matlab is a bit better)
+%% TODO: modify to accept more argument configurations
 
 function [B, A, SigN] = invfreq(H, F, nB, nA, W, iter, tol, tr, plane, varargin)
   if length(nB) > 1, zB = nB(2); nB = nB(1); else zB = 0; end
@@ -96,22 +84,22 @@ function [B, A, SigN] = invfreq(H, F, nB, nA, W, iter, tol, tr, plane, varargin)
           if indi < length(prop) && ~ischar(prop{indi+1}),
             norm = logical(prop{indi+1});
             prop(indi:indi+1) = [];
-	    continue
-	  else
+            continue
+          else
             norm = true; prop(indi) = []; 
             continue
            end
-	 case 'method'
-	   if indi < length(prop) && ischar(prop{indi+1}),
-	     method = prop{indi+1};
-	     prop(indi:indi+1) = [];
-	    continue
-	   else
-	     error('invfreq.m: incorrect/missing method argument');
-	   end
-	 otherwise %# FIXME: just skip it for now
-	   disp(sprintf("Ignoring unkown argument %s", varargin{indi}));
-	   indi = indi + 1;
+         case 'method'
+           if indi < length(prop) && ischar(prop{indi+1}),
+             method = prop{indi+1};
+             prop(indi:indi+1) = [];
+            continue
+           else
+             error('invfreq.m: incorrect/missing method argument');
+           end
+         otherwise %# FIXME: just skip it for now
+           disp(sprintf("Ignoring unkown argument %s", varargin{indi}));
+           indi = indi + 1;
       end
     end
   end
@@ -130,18 +118,18 @@ function [B, A, SigN] = invfreq(H, F, nB, nA, W, iter, tol, tr, plane, varargin)
     case 'z'
       if max(F) > pi || min(F) < 0
       disp('hey, you frequency is outside the range 0 to pi, making my own')
-	F = linspace(0, pi, length(H));
+        F = linspace(0, pi, length(H));
       s = sqrt(-1)*F;
     end
     s = exp(-s);
     case 's'
       if max(F) > 1e6 && n > 5,
-	if ~norm,
-	  disp('Be carefull, there are risks of generating singular matrices');
-	  disp('Call invfreqs as (..., "norm", true) to avoid it');
-	else
-	  Fmax = max(F); s = sqrt(-1)*F/Fmax;
-	end
+        if ~norm,
+          disp('Be carefull, there are risks of generating singular matrices');
+          disp('Call invfreqs as (..., "norm", true) to avoid it');
+        else
+          Fmax = max(F); s = sqrt(-1)*F/Fmax;
+        end
       end
   end
   
@@ -211,7 +199,7 @@ function [B, A, SigN] = invfreq(H, F, nB, nA, W, iter, tol, tr, plane, varargin)
       %# unnoised (B) part -- remove A contribution and back-substitute
       Theta = [R(1:eB, 1:eB)\(R(1:eB, end) - R(1:eB, sA:end-1)*Theta)
               Theta];
-      SigN = S(end, end);	      
+      SigN = S(end, end);
     otherwise
       error("invfreq: unknown method %s", method);
   end
@@ -226,7 +214,7 @@ function [B, A, SigN] = invfreq(H, F, nB, nA, W, iter, tol, tr, plane, varargin)
       Zk = Fmax.^[n:-1:0].';
       for k = nB:-1:1+zB, B(k) = B(k)/Zk(k); end
       for k = nA:-1:1, A(k) = A(k)/Zk(k); end
-    end 
+    end
   end
 endfunction
 
@@ -244,4 +232,3 @@ endfunction
 %! legend('Original','Measured');
 %! err = norm(H-Hh);
 %! disp(sprintf('L2 norm of frequency response error = %f',err));
-

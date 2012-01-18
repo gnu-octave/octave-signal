@@ -1,17 +1,17 @@
-## Copyright (C) 2000 Paul Kienzle <pkienzle@users.sf.net>
+## Copyright (C) 2000-2002 Paul Kienzle <pkienzle@users.sf.net>
 ##
-## This program is free software; you can redistribute it and/or modify
-## it under the terms of the GNU General Public License as published by
-## the Free Software Foundation; either version 2 of the License, or
-## (at your option) any later version.
+## This program is free software; you can redistribute it and/or modify it under
+## the terms of the GNU General Public License as published by the Free Software
+## Foundation; either version 3 of the License, or (at your option) any later
+## version.
 ##
-## This program is distributed in the hope that it will be useful,
-## but WITHOUT ANY WARRANTY; without even the implied warranty of
-## MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-## GNU General Public License for more details.
+## This program is distributed in the hope that it will be useful, but WITHOUT
+## ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+## FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
+## details.
 ##
-## You should have received a copy of the GNU General Public License
-## along with this program; If not, see <http://www.gnu.org/licenses/>.
+## You should have received a copy of the GNU General Public License along with
+## this program; if not, see <http://www.gnu.org/licenses/>.
 
 ## usage:  w = triang (n)
 ##
@@ -20,16 +20,10 @@
 ## of the window.  For odd n, triang(n) is equal to bartlett(n+2) except
 ## for the zeros at the edges of the window.
 
-## 2001-04-07  Paul Kienzle
-## * return column vector like other window functions.
-## 2002-04-22  Paul Kienzle
-## * peak value of 1 at 0 for even n
-
 function w = triang(n)
   if (nargin != 1)
-    usage("w = triang(n)");
-  endif
-  if (!isscalar(n) || n != fix (n) || n < 1)
+    print_usage;
+  elseif (!isscalar(n) || n != fix (n) || n < 1)
     error("triang(n): n has to be an integer > 0");
   endif
   w = 1 - abs ([-(n-1):2:(n-1)]' / (n+rem(n,2)));

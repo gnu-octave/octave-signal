@@ -1,5 +1,5 @@
-## Copyright (C) 2009 Petr Mikulik
-## This program is public domain
+%% Author: Petr Mikulik (2009)
+%% This program is granted to the public domain.
 
 %% Compute peak full-width at half maximum (FWHM) or at another level of peak
 %% maximum for vector or matrix data y, optionally sampled as y(x). If y is
@@ -140,6 +140,7 @@ function myfwhm = fwhm (y, varargin)
         end
     end
 end
+
 %!test
 %! x=-pi:0.001:pi; y=cos(x);
 %! assert( abs(fwhm(x, y) - 2*pi/3) < 0.01 );

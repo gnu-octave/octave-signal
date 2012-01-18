@@ -1,17 +1,18 @@
 ## Copyright (C) 2001 Paul Kienzle <pkienzle@users.sf.net>
+## Copyright (C) 2004 Pascal Dupuis <Pascal.Dupuis@esat.kuleuven.ac.be>
 ##
-## This program is free software; you can redistribute it and/or modify
-## it under the terms of the GNU General Public License as published by
-## the Free Software Foundation; either version 2 of the License, or
-## (at your option) any later version.
+## This program is free software; you can redistribute it and/or modify it under
+## the terms of the GNU General Public License as published by the Free Software
+## Foundation; either version 3 of the License, or (at your option) any later
+## version.
 ##
-## This program is distributed in the hope that it will be useful,
-## but WITHOUT ANY WARRANTY; without even the implied warranty of
-## MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-## GNU General Public License for more details.
+## This program is distributed in the hope that it will be useful, but WITHOUT
+## ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+## FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
+## details.
 ##
-## You should have received a copy of the GNU General Public License
-## along with this program; If not, see <http://www.gnu.org/licenses/>.
+## You should have received a copy of the GNU General Public License along with
+## this program; if not, see <http://www.gnu.org/licenses/>.
 
 ## y = sgolayfilt (x, p, n [, m [, ts]])
 ##    Smooth the data in x with a Savitsky-Golay smoothing filter of
@@ -35,22 +36,14 @@
 ##
 ## See also: sgolay
 
-## 15 Dec 2004 modified by Pascal Dupuis <Pascal.Dupuis@esat.kuleuven.ac.be>
-## Author: Paul Kienzle <pkienzle@users.sf.net>
-
 ## TODO: Patch filter.cc so that it accepts matrix arguments
 
-function y = sgolayfilt (x, p, n, m, ts)
+function y = sgolayfilt (x, p = 3, n, m = 0, ts = 1)
 
   if nargin < 1 || nargin > 5
-    usage("y = sgolayfilt(x,p,n [, m [, ts]]) or y = sgolayfilt(x,F)");
+    print_usage;
   endif
 
-  if (nargin < 2)
-    p = 3;
-  endif
-  if nargin < 4, m = 0; endif
-  if nargin < 5, ts = 1; endif
   if (nargin >= 3)
     F = sgolay(p, n, m, ts);
   elseif (prod(size(p)) == 1)

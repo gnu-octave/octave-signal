@@ -1,17 +1,17 @@
-## Copyright (C) 1999-2000 Paul Kienzle <pkienzle@users.sf.net>
+## Copyright (C) 1999-2001 Paul Kienzle <pkienzle@users.sf.net>
 ##
-## This program is free software; you can redistribute it and/or modify
-## it under the terms of the GNU General Public License as published by
-## the Free Software Foundation; either version 2 of the License, or
-## (at your option) any later version.
+## This program is free software; you can redistribute it and/or modify it under
+## the terms of the GNU General Public License as published by the Free Software
+## Foundation; either version 3 of the License, or (at your option) any later
+## version.
 ##
-## This program is distributed in the hope that it will be useful,
-## but WITHOUT ANY WARRANTY; without even the implied warranty of
-## MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-## GNU General Public License for more details.
+## This program is distributed in the hope that it will be useful, but WITHOUT
+## ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+## FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
+## details.
 ##
-## You should have received a copy of the GNU General Public License
-## along with this program; If not, see <http://www.gnu.org/licenses/>.
+## You should have received a copy of the GNU General Public License along with
+## this program; if not, see <http://www.gnu.org/licenses/>.
 
 ## usage: [S [, f [, t]]] = specgram(x [, n [, Fs [, window [, overlap]]]])
 ##
@@ -107,24 +107,12 @@
 ##
 ##     imagesc(t, f, flipud(log(S(idx,:))));
 
-## 2001-07-05 Paul Kienzle <pkienzle@users.sf.net>
-## * remove "See also spectrogram"
-## * add notes on selecting parameters for the spectrogram
+function [S_r, f_r, t_r] = specgram(x, n = min(256, length(x)), Fs = 2, window = hanning(n), overlap = ceil(length(window)/2))
 
-function [S_r, f_r, t_r] = specgram(x, n, Fs, window, overlap)
   if nargin < 1 || nargin > 5
-    usage ("[Y [, f [, t]]] = ", ...
-	   "specgram(x [, n [, Fs [, window [, overlap]]]])");
-  end
-
-  ## assign defaults
-  if nargin < 2 || isempty(n), n = min(256, length(x)); end
-  if nargin < 3 || isempty(Fs), Fs = 2; end
-  if nargin < 4 || isempty(window), window = hanning(n); end
-  if nargin < 5 || isempty(overlap), overlap = ceil(length(window)/2); end
-
+    print_usage;
   ## make sure x is a vector
-  if columns(x) != 1 && rows(x) != 1
+  elseif columns(x) != 1 && rows(x) != 1
     error ("specgram data must be a vector");
   end
   if columns(x) != 1, x = x'; end
@@ -178,7 +166,6 @@ function [S_r, f_r, t_r] = specgram(x, n, Fs, window, overlap)
   if nargout>2, t_r = t; endif
 
 endfunction
-
 
 %!shared S,f,t,x
 %! Fs=1000;

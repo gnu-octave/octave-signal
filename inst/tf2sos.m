@@ -1,17 +1,17 @@
 %% Copyright (C) 2005 Julius O. Smith III <jos@ccrma.stanford.edu>
 %%
-%% This program is free software; you can redistribute it and/or modify
-%% it under the terms of the GNU General Public License as published by
-%% the Free Software Foundation; either version 2 of the License, or
-%% (at your option) any later version.
+%% This program is free software; you can redistribute it and/or modify it under
+%% the terms of the GNU General Public License as published by the Free Software
+%% Foundation; either version 3 of the License, or (at your option) any later
+%% version.
 %%
-%% This program is distributed in the hope that it will be useful,
-%% but WITHOUT ANY WARRANTY; without even the implied warranty of
-%% MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-%% GNU General Public License for more details.
+%% This program is distributed in the hope that it will be useful, but WITHOUT
+%% ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+%% FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
+%% details.
 %%
-%% You should have received a copy of the GNU General Public License
-%% along with this program; If not, see <http://www.gnu.org/licenses/>.
+%% You should have received a copy of the GNU General Public License along with
+%% this program; if not, see <http://www.gnu.org/licenses/>.
 
 %% -*- texinfo -*-
 %% @deftypefn {Function File} {[@var{sos}, @var{g}] =} tf2sos (@var{B}, @var{A})
@@ -50,10 +50,12 @@
 %% @seealso{sos2tf zp2sos sos2pz zp2tf tf2zp}
 %% @end deftypefn
 
-function [sos,g] = tf2sos(B,A)
+function [sos,g] = tf2sos (B, A)
 
-[z,p,g] = tf2zp(B(:)',A(:)');
-sos = zp2sos(z,p,g);
+  [z,p,g] = tf2zp(B(:)',A(:)');
+  sos = zp2sos(z,p,g);
+
+endfunction
 
 %!test
 %! B=[1 0 0 0 0 1]; A=[1 0 0 0 0 .9];

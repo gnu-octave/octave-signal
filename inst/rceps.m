@@ -1,17 +1,17 @@
 ## Copyright (C) 1999 Paul Kienzle <pkienzle@users.sf.net>
 ##
-## This program is free software; you can redistribute it and/or modify
-## it under the terms of the GNU General Public License as published by
-## the Free Software Foundation; either version 2 of the License, or
-## (at your option) any later version.
+## This program is free software; you can redistribute it and/or modify it under
+## the terms of the GNU General Public License as published by the Free Software
+## Foundation; either version 3 of the License, or (at your option) any later
+## version.
 ##
-## This program is distributed in the hope that it will be useful,
-## but WITHOUT ANY WARRANTY; without even the implied warranty of
-## MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-## GNU General Public License for more details.
+## This program is distributed in the hope that it will be useful, but WITHOUT
+## ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+## FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
+## details.
 ##
-## You should have received a copy of the GNU General Public License
-## along with this program; If not, see <http://www.gnu.org/licenses/>.
+## You should have received a copy of the GNU General Public License along with
+## this program; if not, see <http://www.gnu.org/licenses/>.
 
 ## usage: [y, xm] = rceps(x)
 ##   Produce the cepstrum of the signal x, and if desired, the minimum
@@ -32,22 +32,22 @@
 
 function [y, ym] = rceps(x)
   if (nargin != 1)
-    usage("y = rceps(x)");
+    print_usage;
   end
   y = real(ifft(log(abs(fft(x)))));
   if nargout == 2
     n=length(x);
     if rows(x)==1
       if rem(n,2)==1
-      	ym = [y(1), 2*y(2:n/2), zeros(1,n/2-1)];
+        ym = [y(1), 2*y(2:n/2), zeros(1,n/2-1)];
       else
-	ym = [y(1), 2*y(2:n/2), y(n/2+1), zeros(1,n/2-1)];
+        ym = [y(1), 2*y(2:n/2), y(n/2+1), zeros(1,n/2-1)];
       endif
     else
       if rem(n,2)==1
-	ym = [y(1,:); 2*y(2:n/2,:); zeros(n/2-1,columns(y))];
+        ym = [y(1,:); 2*y(2:n/2,:); zeros(n/2-1,columns(y))];
       else
-	ym = [y(1,:); 2*y(2:n/2,:); y(n/2+1,:); zeros(n/2-1,columns(y))];
+        ym = [y(1,:); 2*y(2:n/2,:); y(n/2+1,:); zeros(n/2-1,columns(y))];
       endif
     endif
     ym = real(ifft(exp(fft(ym))));

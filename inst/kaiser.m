@@ -1,17 +1,18 @@
-## Copyright (C) 1995, 1996, 1997  Kurt Hornik <Kurt.Hornik@ci.tuwien.ac.at>
+## Copyright (C) 1995, 1996, 1997 Kurt Hornik <Kurt.Hornik@ci.tuwien.ac.at>
+## Copyright (C) 2000 Paul Kienzle <pkienzle@users.sf.net>
 ## 
-## This program is free software; you can redistribute it and/or modify
-## it under the terms of the GNU General Public License as published by
-## the Free Software Foundation; either version 2, or (at your option)
-## any later version.
-## 
-## This program is distributed in the hope that it will be useful, but
-## WITHOUT ANY WARRANTY; without even the implied warranty of
-## MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-## General Public License for more details. 
-## 
-## You should have received a copy of the GNU General Public License
-## along with this file.  If not, see <http://www.gnu.org/licenses/>.
+## This program is free software; you can redistribute it and/or modify it under
+## the terms of the GNU General Public License as published by the Free Software
+## Foundation; either version 3 of the License, or (at your option) any later
+## version.
+##
+## This program is distributed in the hope that it will be useful, but WITHOUT
+## ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+## FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
+## details.
+##
+## You should have received a copy of the GNU General Public License along with
+## this program; if not, see <http://www.gnu.org/licenses/>.
 
 ## usage:  kaiser (n, beta)
 ##
@@ -28,30 +29,14 @@
 ##                besseli(0, beta)
 ##
 ## See also: kaiserord
-  
-## Author:  Kurt Hornik <Kurt.Hornik@ci.tuwien.ac.at>
-## Description:  Coefficients of the Kaiser window
 
-## 2000-02 Paul Kienzle (pkienzle@users.sf.net)
-##    use besseli rather than jybess
-##    note, although Oppenheim & Schafer, 2nd edition has a formula
-##    which looks completely different than the one herein, it gives
-##    identical results
-  
-function w = kaiser (n, beta)
-  
+function w = kaiser (n, beta = 0.5)
+
   if (nargin < 1)
-    usage ("kaiser (n, beta)");
-  endif
-  
-  if (nargin < 2)
-	beta = 0.5;
-  endif
-
-  if !(isscalar (n) && (n == round (n)) && (n > 0))
+    print_usage;
+  elseif !(isscalar (n) && (n == round (n)) && (n > 0))
     error ("kaiser:  n has to be a positive integer");
-  endif
-  if !(isscalar (beta) && (beta == real (beta)))
+  elseif !(isscalar (beta) && (beta == real (beta)))
     error ("kaiser:  beta has to be a real scalar");
   endif
   
@@ -63,7 +48,7 @@ function w = kaiser (n, beta)
     k = 2 * beta / m * sqrt (k .* (m - k));
     w = besseli (0, k) / besseli (0, beta);
   endif
-    
+
 endfunction
 
 %!demo

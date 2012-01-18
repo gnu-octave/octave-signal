@@ -1,17 +1,17 @@
 ## Copyright (C) 2008 David Bateman <adb014@gmail.com>
 ##
-## This program is free software; you can redistribute it and/or modify
-## it under the terms of the GNU General Public License as published by
-## the Free Software Foundation; either version 3 of the License, or
-## (at your option) any later version.
+## This program is free software; you can redistribute it and/or modify it under
+## the terms of the GNU General Public License as published by the Free Software
+## Foundation; either version 3 of the License, or (at your option) any later
+## version.
 ##
-## This program is distributed in the hope that it will be useful,
-## but WITHOUT ANY WARRANTY; without even the implied warranty of
-## MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-## GNU General Public License for more details.
+## This program is distributed in the hope that it will be useful, but WITHOUT
+## ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+## FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
+## details.
 ##
-## You should have received a copy of the GNU General Public License
-## along with this program; If not, see <http://www.gnu.org/licenses/>.
+## You should have received a copy of the GNU General Public License along with
+## this program; if not, see <http://www.gnu.org/licenses/>.
 
 ## -*- texinfo -*-
 ## @deftypefn {Function File} {@var{y} = } buffer (@var{x}, @var{n}, @var{p}, @var{opt})
@@ -102,27 +102,27 @@ function [y, z, opt] = buffer (x, n, p, opt)
     if (ischar (opt))
       if (strcmp (opt, "nodelay"))
         y = [y ; zeros(p, m)]; 
-	if (p > n / 2)
-	  is = n - p + 1;
-	  in = n - p;
-	  ie = is + in - 1;
-	  off = 1;
-	  while (in > 0)
-	    y (is : ie, 1 : end - off) = y (1 : in, 1 + off : end);
+        if (p > n / 2)
+          is = n - p + 1;
+          in = n - p;
+          ie = is + in - 1;
+          off = 1;
+          while (in > 0)
+            y (is : ie, 1 : end - off) = y (1 : in, 1 + off : end);
             off++;
-	    is = ie + 1;
-	    ie = ie + in;
-	    if (ie > n)
-	      ie = n;
-	    endif
-	    in = ie - is + 1;
+            is = ie + 1;
+            ie = ie + in;
+            if (ie > n)
+              ie = n;
+            endif
+            in = ie - is + 1;
           endwhile
-	  [i, j] = ind2sub([n-p, m], l);
+          [i, j] = ind2sub([n-p, m], l);
           if (all ([i, j] == [n-p, m]))
             off --;
-	  endif
-	  y (:, end - off + 2 : end) = [];
-	else
+          endif
+          y (:, end - off + 2 : end) = [];
+        else
           y (end - p + 1 : end, 1 : end - 1) = y (1 : p, 2 : end);
           if (sub2ind([n-p, m], p, m) >= l)
             y (:, end) = [];
@@ -135,30 +135,30 @@ function [y, z, opt] = buffer (x, n, p, opt)
       if (length (opt) == p)
         lopt = p;
         y = [zeros(p, m); y]; 
-	in = p;
+        in = p;
         off = 1;
-	while (in > 0)
-	  y (1 : in, off) = opt(off:end);
-	  off++;
-	  in = in - n + p;
-	endwhile
-	if (p > n / 2)
-	  in = n - p;
-	  ie = p;
-	  is = p - in + 1;
-	  off = 1;
-	  while (ie > 0)
+        while (in > 0)
+          y (1 : in, off) = opt(off:end);
+          off++;
+          in = in - n + p;
+        endwhile
+        if (p > n / 2)
+          in = n - p;
+          ie = p;
+          is = p - in + 1;
+          off = 1;
+          while (ie > 0)
             y (is : ie, 1 + off : end) = ...
-	      y (end - in + 1 : end, 1 : end - off);
+              y (end - in + 1 : end, 1 : end - off);
             off++;
-	    ie = is - 1;
-	    is = is - in;
-	    if (is < 1)
-	      is = 1;
-	    endif
-	    in = ie - is + 1;
+            ie = is - 1;
+            is = is - in;
+            if (is < 1)
+              is = 1;
+            endif
+            in = ie - is + 1;
           endwhile
-	else
+        else
           y (1 : p, 2 : end) = y (end - p + 1 : end, 1 : end - 1);
         endif
       else
@@ -172,7 +172,7 @@ function [y, z, opt] = buffer (x, n, p, opt)
     if (p >= 0)
       [i, j] = ind2sub (size(y), l + lopt + p * (size (y, 2) - 1));
       if (any ([i, j] != size (y)))
-	z = y (1 + p : i, end);
+        z = y (1 + p : i, end);
         y (:, end) = [];
       else
         z = zeros (0, 1);
@@ -180,7 +180,7 @@ function [y, z, opt] = buffer (x, n, p, opt)
     else
       [i, j] = ind2sub (size (y) + [-p, 0], l - lopt);
       if (i < size (y, 1))
-	z = y (1: i, end);
+        z = y (1: i, end);
         y (:, end) = [];
       else
         z = zeros (0, 1);

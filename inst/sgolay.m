@@ -1,17 +1,18 @@
 ## Copyright (C) 2001 Paul Kienzle <pkienzle@users.sf.net>
+## Copyright (C) 2004 Pascal Dupuis <Pascal.Dupuis@esat.kuleuven.ac.be>
 ##
-## This program is free software; you can redistribute it and/or modify
-## it under the terms of the GNU General Public License as published by
-## the Free Software Foundation; either version 2 of the License, or
-## (at your option) any later version.
+## This program is free software; you can redistribute it and/or modify it under
+## the terms of the GNU General Public License as published by the Free Software
+## Foundation; either version 3 of the License, or (at your option) any later
+## version.
 ##
-## This program is distributed in the hope that it will be useful,
-## but WITHOUT ANY WARRANTY; without even the implied warranty of
-## MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-## GNU General Public License for more details.
+## This program is distributed in the hope that it will be useful, but WITHOUT
+## ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+## FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
+## details.
 ##
-## You should have received a copy of the GNU General Public License
-## along with this program; If not, see <http://www.gnu.org/licenses/>.
+## You should have received a copy of the GNU General Public License along with
+## this program; if not, see <http://www.gnu.org/licenses/>.
 
 ## F = sgolay (p, n [, m [, ts]])
 ##   Computes the filter coefficients for all Savitzsky-Golay smoothing
@@ -36,21 +37,17 @@
 ##
 ## See also: sgolayfilt
 
-## 15 Dec 2004 modified by Pascal Dupuis <Pascal.Dupuis@esat.kuleuven.ac.be>
-## Author: Paul Kienzle <pkienzle@users.sf.net>
 ## Based on smooth.m by E. Farhi <manuf@ldv.univ-montp2.fr>
 
-function F = sgolay (p, n, m, ts)
+function F = sgolay (p, n, m = 0, ts = 1)
 
   if (nargin < 2 || nargin > 4)
-    usage ("F = sgolay (p, n [, m [, ts]])");
+    print_usage;
   elseif rem(n,2) != 1
     error ("sgolay needs an odd filter length n");
   elseif p >= n
     error ("sgolay needs filter length n larger than polynomial order p");
-  else 
-    if nargin < 3, m = 0; endif
-    if nargin < 4, ts = 1; endif
+  else
     if length(m) > 1, error("weight vector unimplemented"); endif
 
     ## Construct a set of filters from complete causal to completely
