@@ -72,7 +72,7 @@ function b = fir2(n, f, m, grid_n, ramp_n, window)
   if length(ramp_n)>1, w=ramp_n; ramp_n=grid_n/20; endif
   if nargin < 6, window=w; endif
   if isempty(window), window=hamming(n+1); endif
-  if !isreal(window), window=feval(window, n+1); endif
+  if !isreal(window) || ischar(window), window=feval(window, n+1); endif
   if length(window) != n+1, usage("window must be of length n+1"); endif
 
   ## make sure grid is big enough for the window

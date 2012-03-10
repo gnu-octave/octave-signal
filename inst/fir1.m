@@ -92,7 +92,7 @@ function b = fir1(n, w, varargin)
   if rem(n,2)==1 && m(2*bands)==1, 
     warning("n must be even for highpass and bandstop filters. Incrementing.");
     n = n+1;
-    if isvector(window) && isreal(window)
+    if isvector(window) && isreal(window) && !ischar(window)
       ## Extend the window using interpolation
       M = length(window);
       if M == 1,

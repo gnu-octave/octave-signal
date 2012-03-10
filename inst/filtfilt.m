@@ -105,11 +105,11 @@ endfunction
 %! y = filtfilt(b, a, r+s);
 %! assert (size(r), size(y));
 %! assert (mean(abs(y)) < 1e3);
-%! assert (corrcoef(s(250:750), y(250:750)) > .95)
+%! assert (corr(s(250:750), y(250:750)) > .95)
 %! [b,a] = butter(2, [4e-4 8e-2]);
 %! yb = filtfilt(b, a, r+s);
 %! assert (mean(abs(yb)) < 1e3);
-%! assert (corrcoef(y, yb) > .99)
+%! assert (corr(y, yb) > .99)
 
 %!test
 %! randn('state',0);

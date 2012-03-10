@@ -123,7 +123,7 @@ endfunction
 %!
 %!  % calculate impulse response of continuous time system
 %!  % at discrete time intervals 1/fs
-%!  ys=impulse(s,1,(n-1)/fs,n);
+%!  ys=impulse(s,(n-1)/fs,1/fs)';
 %!
 %!  % impulse response of discrete time system
 %!  yz=filter(bz,az,[1 zeros(1,n-1)]);
