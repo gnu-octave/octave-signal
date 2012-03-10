@@ -73,8 +73,9 @@ endfunction
 %! x=randn(256,1);
 %! [y, xm] = rceps(x);
 %! [yt, xmt] = rceps(x.');
-%! assert(yt.', y); 
-%! assert(xmt.', xm);
+%! tol = 1e-14;
+%! assert(yt.', y, tol);
+%! assert(xmt.', xm, tol);
 
 %!demo
 %! f0=70; Fs=10000;           # 100 Hz fundamental, 10kHz sampling rate
@@ -87,7 +88,7 @@ endfunction
 %! figure(1);
 %! subplot(311);
 %!    auplot(x,Fs,'b',';signal;');
-%!    hold on; auplot(xm,Fs,'g',';reconstruction;'); 
+%!    hold on; auplot(xm,Fs,'g',';reconstruction;');
 %!    hold off;
 %! subplot(312);
 %!    axis("ticy");
