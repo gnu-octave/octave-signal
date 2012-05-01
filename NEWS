@@ -6,6 +6,9 @@ signal-x.y.z   Release Date: yyyy-mm-dd   Release Manager:
 
  ** Package is no longer automatically loaded
 
+ ** The functions `__ellip_ws' and `__ellip_ws_min' have been removed (they
+    are now subfunctions of `ncauer'.
+
 ===============================================================================
 signal-1.1.2   Release Date: 2012-01-06   Release Manager: Lukas Reichlin
 ===============================================================================

@@ -110,3 +110,24 @@ function [zer, pol, T0]=ncauer(Rp, Rs, n)
   zer=(sqrt(ws)).*zer;
 
 endfunction
+
+## usage: ws = __ellip_ws(n, rp, rs)
+## Calculate the stop band edge for the Cauer filter.
+function ws=__ellip_ws(n, rp, rs)
+  kl0 = ((10^(0.1*rp)-1)/(10^(0.1*rs)-1));
+  k0  = (1-kl0);
+  int = ellipke([kl0 ; k0]);
+  ql0 = int(1);
+  q0  = int(2);
+  x   = n*ql0/q0;
+  kl  = fminbnd(@(y) __ellip_ws_min(y,x) ,eps, 1-eps);
+  ws  = sqrt(1/kl);
+endfunction
+
+## usage: err = __ellip_ws_min(kl, x)
+function err=__ellip_ws_min(kl, x)
+  int=ellipke([kl; 1-kl]);
+  ql=int(1);
+  q=int(2);
+  err=abs((ql/q)-x);
+endfunction
