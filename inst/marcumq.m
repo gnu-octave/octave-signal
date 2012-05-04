@@ -1,70 +1,68 @@
 ## Copyright (C) 2012   Robert T. Short     <rtshort@ieee.org>
 ##
-## This is free software; you can redistribute it and/or modify
-## it under the terms of the GNU General Public License as published by
-## the Free Software Foundation; either version 2 of the License, or
-## (at your option) any later version.
+## This program is free software; you can redistribute it and/or modify it under
+## the terms of the GNU General Public License as published by the Free Software
+## Foundation; either version 3 of the License, or (at your option) any later
+## version.
 ##
-## This software is distributed in the hope that it will be useful,
-## but WITHOUT ANY WARRANTY; without even the implied warranty of
-## MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-## GNU General Public License for more details.
+## This program is distributed in the hope that it will be useful, but WITHOUT
+## ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+## FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
+## details.
 ##
-## You should have received a copy of the GNU General Public License
-## along with this program; If not, see <http://www.gnu.org/licenses/>.
+## You should have received a copy of the GNU General Public License along with
+## this program; if not, see <http://www.gnu.org/licenses/>.
 
 ## -*- texinfo -*-
-## @deftypefn {Function File} {[@var{Q}] =} marcumq (@var{a}, @var{b}, @var{m}, @var{tol}=eps)
+## @deftypefn  {Function File} {@var{Q} = } marcumq (@var{a}, @var{b})
+## @deftypefnx {Function File} {@var{Q} = } marcumq (@var{a}, @var{b}, @var{m})
+## @deftypefnx {Function File} {@var{Q} = } marcumq (@var{a}, @var{b}, @var{m}, @var{tol})
 ##
-## @noindent
 ## Compute the generalized Marcum Q function of order @var{M} with
-## noncentrality parameter @var{a} and argument @var{b}.  An optional
-## relative tolerance @var{tol} may be included.
+## noncentrality parameter @var{a} and argument @var{b}.  If the order
+## @var{M} is omitted it defaults to 1.  An optional relative tolerance
+## @var{tol} may be included, the default is @code{eps}.
 ##
-## @noindent
 ## If the input arguments are commensurate vectors, this function
-## will produce a table of values (see tablify).
+## will produce a table of values.
 ##
-## @noindent
 ## This function computes Marcum's Q function using the infinite
 ## Bessel series, truncated when the relative error is less than
 ## the specified tolerance.  The accuracy is limited by that of
 ## the Bessel functions, so reducing the tolerance is probably 
 ## not useful.
 ##
-## @noindent
 ## Reference: Marcum, "Tables of Q Functions", Rand Corporation.
 ##
-## @noindent
 ## Reference: R.T. Short, "Computation of Noncentral Chi-squared
 ## and Rice Random Variables", www.phaselockedsystems.com/publications
 ##
-## @seealso{imarcumq,tablify}
-##
 ## @end deftypefn
 
-## Author:  Robert T. Short (rtshort@ieee.org)
-## Description:  Generalized Marcum Q function.
-function [Q] = marcumq(a,b,M=1,tol=eps)
+function Q = marcumq(a,b,M=1,tol=eps)
 
   if ( (nargin<2) || (nargin>4) )
-    usage('[Q] = marcumq(a,b,M=1,tol=eps)');
+    print_usage();
   end
   if ( any(a<0) || any(b<0) )
-    error('Parameters to marcumq must be positive');
+    error("Parameters to marcumq must be positive");
   end
   if ( any(M<0) || any(floor(M)~=M) )
     error("M must be a positive integer");
   end
 
-  [a,b,M] = tablify(a,b,M);
+  nr = max([size(a,1) size(b,1) size(M,1)]);
+  nc = max([size(a,2) size(b,2) size(M,2)]);
+  a = padarray(a, [nr - size(a,1) nc - size(a,2)], "replicate", "post");
+  b = padarray(b, [nr - size(b,1) nc - size(b,2)], "replicate", "post");
+  M = padarray(M, [nr - size(M,1) nc - size(M,2)], "replicate", "post");
 
   Q = arrayfun(@mq, a,b,M,tol);
 
 end
 
 % Subfunction to compute the actual Marcum Q function.
-function [Q] = mq(a,b,M,tol)
+function Q = mq(a,b,M,tol)
   % Special cases.
   if (b==0)
     Q = 1;
