@@ -31,6 +31,6 @@ function [w] = blackmanharris (L)
   a1 = 0.48829;
   a2 = 0.14128;
   a3 = 0.01168;
-  n = -ceil(N/2):N/2;
-  w = a0 + a1.*cos(2.*pi.*n./N) + a2.*cos(4.*pi.*n./N) + a3.*cos(6.*pi.*n./N);
+  n = 0:N;
+  w = a0 - a1.*cos(2.*pi.*n./N) + a2.*cos(4.*pi.*n./N) - a3.*cos(6.*pi.*n./N);
 endfunction
