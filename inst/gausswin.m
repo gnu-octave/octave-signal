@@ -13,21 +13,21 @@
 ## You should have received a copy of the GNU General Public License along with
 ## this program; if not, see <http://www.gnu.org/licenses/>.
 
-## usage: w = gausswin(n, a)
+## usage: w = gausswin(L, a)
 ##
-## Generate an n-point gaussian window of the given width. Use larger a
-## for a narrow window.  Use larger n for a smoother curve. 
+## Generate an L-point gaussian window of the given width. Use larger a
+## for a narrow window.  Use larger L for a smoother curve. 
 ##
 ##     w = exp ( -(a*x)^2/2 )
 ##
-## for x = linspace(-(n-1)/n, (n-1)/n, n)
+## for x = linspace(-(L-1)/L, (L-1)/L, L)
 
-function x = gausswin(n, w)
+function x = gausswin(L, w)
 
   if nargin < 1 || nargin > 2
     print_usage;
   end
   if nargin == 1, w = 2.5; endif
-  x = exp ( -0.5 * ( w/n * [ -(n-1) : 2 : n-1 ]' ) .^ 2 );
+  x = exp ( -0.5 * ( w/L * [ -(L-1) : 2 : L-1 ]' ) .^ 2 );
 
 endfunction

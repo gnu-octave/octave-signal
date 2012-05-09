@@ -13,9 +13,9 @@
 ## You should have received a copy of the GNU General Public License along with
 ## this program; if not, see <http://www.gnu.org/licenses/>.
 
-## Usage:  chebwin (n, at)
+## Usage:  chebwin (L, at)
 ##
-## Returns the filter coefficients of the n-point Dolph-Chebyshev window
+## Returns the filter coefficients of the L-point Dolph-Chebyshev window
 ## with at dB of attenuation in the stop-band of the corresponding
 ## Fourier transform.
 ##
@@ -31,13 +31,13 @@
 ##
 ## The window is described in frequency domain by the expression:
 ##
-##          Cheb(n-1, beta * cos(pi * k/n))
+##          Cheb(L-1, beta * cos(pi * k/L))
 ##   W(k) = -------------------------------
-##                 Cheb(n-1, beta)
+##                 Cheb(L-1, beta)
 ##
 ## with
 ##
-##   beta = cosh(1/(n-1) * acosh(10^(at/20))
+##   beta = cosh(1/(L-1) * acosh(10^(at/20))
 ##
 ## and Cheb(m,x) denoting the m-th order Chebyshev polynomial calculated
 ## at the point x.
@@ -48,38 +48,38 @@
 ##
 ## See also: kaiser
 
-function w = chebwin (n, at)
+function w = chebwin (L, at)
 
   if (nargin != 2)
     print_usage;
-  elseif !(isscalar (n) && (n == round(n)) && (n > 0))
-    error ("chebwin: n has to be a positive integer");
+  elseif !(isscalar (L) && (L == round(L)) && (L > 0))
+    error ("chebwin: L has to be a positive integer");
   elseif !(isscalar (at) && (at == real (at)))
     error ("chebwin: at has to be a real scalar");
   endif
   
-  if (n == 1)
+  if (L == 1)
     w = 1;
   else
 				# beta calculation
     gamma = 10^(-at/20);
-    beta = cosh(1/(n-1) * acosh(1/gamma));
+    beta = cosh(1/(L-1) * acosh(1/gamma));
 				# freq. scale
-    k = (0:n-1);
-    x = beta*cos(pi*k/n);
+    k = (0:L-1);
+    x = beta*cos(pi*k/L);
 				# Chebyshev window (freq. domain)
-    p = cheb(n-1, x);
+    p = cheb(L-1, x);
 				# inverse Fourier transform
-    if (rem(n,2))
+    if (rem(L,2))
       w = real(fft(p));
-      M = (n+1)/2;
+      M = (L+1)/2;
       w = w(1:M)/w(1);
       w = [w(M:-1:2) w]';
     else
 				# half-sample delay (even order)
-      p = p.*exp(j*pi/n * (0:n-1));
+      p = p.*exp(j*pi/L * (0:L-1));
       w = real(fft(p));
-      M = n/2+1;
+      M = L/2+1;
       w = w/w(2);
       w = [w(M:-1:2) w(2:M)]';
     endif

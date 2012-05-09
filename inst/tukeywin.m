@@ -14,9 +14,9 @@
 ## this program; if not, see <http://www.gnu.org/licenses/>.
 
 ## -*- texinfo -*-
-## @deftypefn {Function File} {@var{w} =} tukeywin (@var{m}, @var{r})
+## @deftypefn {Function File} {@var{w} =} tukeywin (@var{L}, @var{r})
 ## Return the filter coefficients of a Tukey window (also known as the
-## cosine-tapered window) of length @var{m}. @var{r} defines the ratio
+## cosine-tapered window) of length @var{L}. @var{r} defines the ratio
 ## between the constant section and and the cosine section. It has to be
 ## between 0 and 1. The function returns a Hanning window for @var{r}
 ## egals 0 and a full box for @var{r} egals 1. By default @var{r} is set
@@ -28,7 +28,7 @@
 ## Page 67, Equation 38.
 ## @end deftypefn
 
-function w = tukeywin (m, r = 1/2)
+function w = tukeywin (L, r = 1/2)
 
   if (nargin < 1 || nargin > 2)
     print_usage;
@@ -45,23 +45,23 @@ function w = tukeywin (m, r = 1/2)
   switch r
     case 0,
       ## full box
-      w = ones (m, 1);
+      w = ones (L, 1);
     case 1,
       ## Hanning window
-      w = hanning (m);
+      w = hanning (L);
     otherwise
       ## cosine-tapered window
-      t = linspace(0,1,m)(1:end/2)';
+      t = linspace(0,1,L)(1:end/2)';
       w = (1 + cos(pi*(2*t/r-1)))/2;
-      w(floor(r*(m-1)/2)+2:end) = 1;
-      w = [w; ones(mod(m,2)); flipud(w)];
+      w(floor(r*(L-1)/2)+2:end) = 1;
+      w = [w; ones(mod(L,2)); flipud(w)];
   endswitch
 
 endfunction
 
 %!demo
-%! m = 100;
+%! L = 100;
 %! r = 1/3;
-%! w = tukeywin (m, r);
-%! title(sprintf("%d-point Tukey window, R = %d/%d", m, [p, q] = rat(r), q));
+%! w = tukeywin (L, r);
+%! title(sprintf("%d-point Tukey window, R = %d/%d", L, [p, q] = rat(r), q));
 %! plot(w);

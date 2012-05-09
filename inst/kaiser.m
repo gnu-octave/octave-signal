@@ -14,36 +14,36 @@
 ## You should have received a copy of the GNU General Public License along with
 ## this program; if not, see <http://www.gnu.org/licenses/>.
 
-## usage:  kaiser (n, beta)
+## usage:  kaiser (L, beta)
 ##
-## Returns the filter coefficients of the n-point Kaiser window with
+## Returns the filter coefficients of the L-point Kaiser window with
 ## parameter beta.
 ##
 ## For the definition of the Kaiser window, see A. V. Oppenheim &
 ## R. W. Schafer, "Discrete-Time Signal Processing".
 ##
-## The continuous version of width n centered about x=0 is:
+## The continuous version of width L centered about x=0 is:
 ##
-##         besseli(0, beta * sqrt(1-(2*x/n).^2))
-## k(x) =  -------------------------------------,  n/2 <= x <= n/2
+##         besseli(0, beta * sqrt(1-(2*x/L).^2))
+## k(x) =  -------------------------------------,  L/2 <= x <= L/2
 ##                besseli(0, beta)
 ##
 ## See also: kaiserord
 
-function w = kaiser (n, beta = 0.5)
+function w = kaiser (L, beta = 0.5)
 
   if (nargin < 1)
     print_usage;
-  elseif !(isscalar (n) && (n == round (n)) && (n > 0))
-    error ("kaiser:  n has to be a positive integer");
+  elseif !(isscalar (L) && (L == round (L)) && (L > 0))
+    error ("kaiser:  L has to be a positive integer");
   elseif !(isscalar (beta) && (beta == real (beta)))
     error ("kaiser:  beta has to be a real scalar");
   endif
   
-  if (n == 1)
+  if (L == 1)
     w = 1;
   else
-    m = n - 1;
+    m = L - 1;
     k = (0 : m)';
     k = 2 * beta / m * sqrt (k .* (m - k));
     w = besseli (0, k) / besseli (0, beta);

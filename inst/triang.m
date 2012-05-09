@@ -13,20 +13,20 @@
 ## You should have received a copy of the GNU General Public License along with
 ## this program; if not, see <http://www.gnu.org/licenses/>.
 
-## usage:  w = triang (n)
+## usage:  w = triang (L)
 ##
-## Returns the filter coefficients of a triangular window of length n.
+## Returns the filter coefficients of a triangular window of length L.
 ## Unlike the bartlett window, triang does not go to zero at the edges
-## of the window.  For odd n, triang(n) is equal to bartlett(n+2) except
+## of the window.  For odd L, triang(L) is equal to bartlett(L+2) except
 ## for the zeros at the edges of the window.
 
-function w = triang(n)
+function w = triang(L)
   if (nargin != 1)
     print_usage;
-  elseif (!isscalar(n) || n != fix (n) || n < 1)
-    error("triang(n): n has to be an integer > 0");
+  elseif (!isscalar(L) || L != fix (L) || L < 1)
+    error("triang: L has to be an integer > 0");
   endif
-  w = 1 - abs ([-(n-1):2:(n-1)]' / (n+rem(n,2)));
+  w = 1 - abs ([-(L-1):2:(L-1)]' / (L+rem(L,2)));
 endfunction
 
 %!error triang

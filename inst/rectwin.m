@@ -14,12 +14,12 @@
 ## this program; if not, see <http://www.gnu.org/licenses/>.
 
 ## -*- texinfo -*-
-## @deftypefn {Function File} {[@var{w}] =} rectwin(@var{n})
-## Return the filter coefficients of a rectangle window of length N.
+## @deftypefn {Function File} {[@var{w}] =} rectwin(@var{L})
+## Return the filter coefficients of a rectangle window of length L.
 ## @seealso{hamming, hanning}
 ## @end deftypefn
 
-function w = rectwin(n)
+function w = rectwin(L)
   if (nargin < 1); print_usage; end
-  w = ones(round(n),1);
+  w = ones(round(L),1);
 endfunction
