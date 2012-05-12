@@ -4,6 +4,8 @@ Summary of important user-visible changes for releases of the signal package
 signal-x.y.z   Release Date: yyyy-mm-dd   Release Manager: 
 ===============================================================================
 
+ ** The function `blackmanharris' was fixed to have even symmetry.
+
  ** The function `marcumq' was imported from the communications package and has
     been completely rewritten to improve performance and fix computational
     errors.
