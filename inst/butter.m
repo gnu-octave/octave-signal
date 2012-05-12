@@ -132,7 +132,7 @@ endfunction
 %! data=[sinetone(5,sf,10,1),sinetone(10,sf,10,1),sinetone(50,sf,10,1),sinetone(200,sf,10,1),sinetone(400,sf,10,1)];
 %! [b, a] = butter ( 1, 50 / sf2 );
 %! filtered = filter ( b, a, data );
-%! damp_db = 20 * log10 ( max ( filtered ( end - sf : end, : ) ) )
+%! damp_db = 20 * log10 ( max ( filtered ( end - sf : end, : ) ) );
 %! assert ( [ damp_db( 4 ) - damp_db( 5 ), damp_db( 1 : 3 ) ], [ 6 0 0 -3 ], off_db )
 
 %!test
@@ -140,7 +140,7 @@ endfunction
 %! data=[sinetone(5,sf,10,1),sinetone(10,sf,10,1),sinetone(50,sf,10,1),sinetone(200,sf,10,1),sinetone(400,sf,10,1)];
 %! [b, a] = butter ( 4, 50 / sf2 );
 %! filtered = filter ( b, a, data );
-%! damp_db = 20 * log10 ( max ( filtered ( end - sf : end, : ) ) )
+%! damp_db = 20 * log10 ( max ( filtered ( end - sf : end, : ) ) );
 %! assert ( [ damp_db( 4 ) - damp_db( 5 ), damp_db( 1 : 3 ) ], [ 24 0 0 -3 ], off_db )
 
 %!test
@@ -148,7 +148,7 @@ endfunction
 %! data=[sinetone(5,sf,10,1),sinetone(10,sf,10,1),sinetone(50,sf,10,1),sinetone(200,sf,10,1),sinetone(400,sf,10,1)];
 %! [b, a] = butter ( 1, 50 / sf2, "high" );
 %! filtered = filter ( b, a, data );
-%! damp_db = 20 * log10 ( max ( filtered ( end - sf : end, : ) ) )
+%! damp_db = 20 * log10 ( max ( filtered ( end - sf : end, : ) ) );
 %! assert ( [ damp_db( 2 ) - damp_db( 1 ), damp_db( 3 : end ) ], [ 6 -3 0 0 ], off_db )
 
 %!test
@@ -156,7 +156,7 @@ endfunction
 %! data=[sinetone(5,sf,10,1),sinetone(10,sf,10,1),sinetone(50,sf,10,1),sinetone(200,sf,10,1),sinetone(400,sf,10,1)];
 %! [b, a] = butter ( 4, 50 / sf2, "high" );
 %! filtered = filter ( b, a, data );
-%! damp_db = 20 * log10 ( max ( filtered ( end - sf : end, : ) ) )
+%! damp_db = 20 * log10 ( max ( filtered ( end - sf : end, : ) ) );
 %! assert ( [ damp_db( 2 ) - damp_db( 1 ), damp_db( 3 : end ) ], [ 24 -3 0 0 ], off_db )
 
 %!demo

@@ -90,7 +90,7 @@ endfunction
 %! data=[sinetone(49,sf,10,1),sinetone(50,sf,10,1),sinetone(51,sf,10,1)];
 %! [b, a] = pei_tseng_notch ( 50 / sf2, 2 / sf2 );
 %! filtered = filter ( b, a, data );
-%! damp_db = 20 * log10 ( max ( filtered ( end - 1000 : end, : ) ) )
+%! damp_db = 20 * log10 ( max ( filtered ( end - 1000 : end, : ) ) );
 %! assert ( damp_db, [ -3 -251.9 -3 ], 0.1 )
 
 %!test
@@ -99,9 +99,8 @@ endfunction
 %! data=[sinetone(49.5,sf,10,1),sinetone(50,sf,10,1),sinetone(50.5,sf,10,1)];
 %! [b, a] = pei_tseng_notch ( 50 / sf2, 1 / sf2 );
 %! filtered = filter ( b, a, data );
-%! damp_db = 20 * log10 ( max ( filtered ( end - 1000 : end, : ) ) )
+%! damp_db = 20 * log10 ( max ( filtered ( end - 1000 : end, : ) ) );
 %! assert ( damp_db, [ -3 -240.4 -3 ], 0.1 )
-
 
 %!demo
 %! sf = 800; sf2 = sf/2;
