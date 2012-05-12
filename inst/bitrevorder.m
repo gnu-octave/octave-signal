@@ -34,3 +34,65 @@ function [y i] = bitrevorder(x)
   y(old_ind+1) = x(i);
 
 endfunction
+
+## The following functions, de2bi and bi2de, are from the communications package.
+## However, the communications package is already dependent on the signal
+## package and to avoid circular dependencies their code was copied here. Anyway,
+## in the future bitrevorder should be rewritten as to not use this functions
+## at all (and pkg can be fixed to support circular dependencies on pkg load
+## as it already does for pkg install).
+
+## note that aside copying the code from the communication package, their input
+## check was removed since in this context they were always being called with
+## nargin == 1
+
+function b = de2bi (d, n, p, f)
+
+  p = 2;
+  n = floor ( log (max (max (d), 1)) ./ log (p) ) + 1;
+  f = 'right-msb';
+
+  d = d(:);
+  if ( any (d < 0) || any (d != floor (d)) )
+    error ("de2bi: d must only contain non-negative integers");
+  endif
+
+  if (isempty (n))
+    n = floor ( log (max (max (d), 1)) ./ log (p) ) + 1;
+  endif
+
+  power = ones (length (d), 1) * (p .^ [0 : n-1] );
+  d = d * ones (1, n);
+  b = floor (rem (d, p*power) ./ power);
+
+  if (strcmp (f, 'left-msb'))
+    b = b(:,columns(b):-1:1);
+  elseif (!strcmp (f, 'right-msb'))
+    error ("de2bi: unrecognized flag");
+  endif
+
+endfunction
+
+
+function d = bi2de (b, p, f)
+
+  p = 2;
+  f = 'right-msb';
+
+  if ( any (b(:) < 0) || any (b(:) != floor (b(:))) || any (b(:) > p - 1) )
+    error ("bi2de: d must only contain integers in the range [0, p-1]");
+  endif
+
+  if (strcmp (f, 'left-msb'))
+    b = b(:,size(b,2):-1:1);
+  elseif (!strcmp (f, 'right-msb'))
+    error ("bi2de: unrecognized flag");
+  endif
+
+  if (length (b) == 0)
+    d = [];
+  else
+    d = b * ( p .^ [ 0 : (columns(b)-1) ]' );
+  endif
+
+endfunction
