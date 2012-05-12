@@ -1,19 +1,23 @@
 Summary of important user-visible changes for releases of the signal package
 
 ===============================================================================
-signal-x.y.z   Release Date: yyyy-mm-dd   Release Manager: 
+signal-1.1.3   Release Date: 2012-05-12   Release Manager: 
 ===============================================================================
 
- ** The function `blackmanharris' was fixed to have even symmetry.
+ ** signal is no longer dependent on the audio package.
+
+ ** signal is now dependent on the communications package.
 
  ** The function `marcumq' was imported from the communications package and has
     been completely rewritten to improve performance and fix computational
     errors.
 
- ** Package is no longer automatically loaded
+ ** Package is no longer automatically loaded.
 
  ** The functions `__ellip_ws' and `__ellip_ws_min' have been removed (they
     are now subfunctions of `ncauer'.
+
+ ** The function `blackmanharris' was fixed to have even symmetry.
 
 ===============================================================================
 signal-1.1.2   Release Date: 2012-01-06   Release Manager: Lukas Reichlin
