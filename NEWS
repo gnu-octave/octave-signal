@@ -1,7 +1,7 @@
 Summary of important user-visible changes for releases of the signal package
 
 ===============================================================================
-signal-1.1.3   Release Date: 2012-05-12   Release Manager: 
+signal-1.1.3   Release Date: 2012-05-12   Release Manager: Carnë Draug
 ===============================================================================
 
  ** signal is no longer dependent on the audio package.
