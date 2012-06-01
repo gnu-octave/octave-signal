@@ -13,24 +13,42 @@
 ## You should have received a copy of the GNU General Public License along with
 ## this program; if not, see <http://www.gnu.org/licenses/>.
 
-## usage: [c, lag] = xcov (X [, Y] [, maxlag] [, scale])
-##
+## -*- texinfo -*-
+## @deftypefn {Function File} {[@var{R}, @var{lag}] =} xcov ( @var{X} )
+## @deftypefnx {Function File} {@dots{} =} xcov ( @var{X}, @var{Y} )
+## @deftypefnx {Function File} {@dots{} =} xcov ( @dots{}, @var{maxlag})
+## @deftypefnx {Function File} {@dots{} =} xcov ( @dots{}, @var{scale})
 ## Compute covariance at various lags [=correlation(x-mean(x),y-mean(y))].
 ##
-## X: input vector
-## Y: if specified, compute cross-covariance between X and Y,
+## @table @var
+## @item X
+## input vector
+## @item Y
+## if specified, compute cross-covariance between X and Y,
 ## otherwise compute autocovariance of X.
-## maxlag: is specified, use lag range [-maxlag:maxlag], 
+## @item maxlag
+## is specified, use lag range [-maxlag:maxlag],
 ## otherwise use range [-n+1:n-1].
-## Scale:
-##    'biased'   for covariance=raw/N, 
-##    'unbiased' for covariance=raw/(N-|lag|), 
-##    'coeff'    for covariance=raw/(covariance at lag 0),
-##    'none'     for covariance=raw
-## 'none' is the default.
+## @item scale:
+## @table @samp
+## @item biased
+## for covariance=raw/N,
+## @item unbiased
+## for covariance=raw/(N-|lag|),
+## @item coeff
+## for covariance=raw/(covariance at lag 0),
+## @item none
+## for covariance=raw
+## @item none
+## is the default.
+## @end table
+## @end table
 ##
-## Returns the covariance for each lag in the range, plus an 
+## Returns the covariance for each lag in the range, plus an
 ## optional vector of lags.
+##
+## @seealso{xcorr}
+## @end deftypefn
 
 function [retval, lags] = xcov (X, Y, maxlag, scale)
 
@@ -58,5 +76,5 @@ function [retval, lags] = xcov (X, Y, maxlag, scale)
   else
     [retval, lags] = xcorr(center(X), maxlag, scale);
   endif
-  
+
 endfunction

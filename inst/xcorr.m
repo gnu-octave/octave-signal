@@ -15,60 +15,106 @@
 ## You should have received a copy of the GNU General Public License along with
 ## this program; if not, see <http://www.gnu.org/licenses/>.
 
-## usage: [R, lag] = xcorr (X [, Y] [, maxlag] [, scale])
+## -*- texinfo -*-
+## @deftypefn {Function File} {[@var{R}, @var{lag}] =} xcorr ( @var{X} )
+## @deftypefnx {Function File} {@dots{} =} xcorr ( @var{X}, @var{Y} )
+## @deftypefnx {Function File} {@dots{} =} xcorr ( @dots{}, @var{maxlag})
+## @deftypefnx {Function File} {@dots{} =} xcorr ( @dots{}, @var{scale})
+## Estimates the cross-correlation.
 ##
-## Estimate the cross correlation R_xy(k) of vector arguments X and Y
-## or, if Y is omitted, estimate autocorrelation R_xx(k) of vector X,
-## for a range of lags k specified by  argument "maxlag".  If X is a
-## matrix, each column of X is correlated with itself and every other
+## Estimate the cross correlation R_xy(k) of vector arguments @var{X} and @var{Y}
+## or, if @var{Y} is omitted, estimate autocorrelation R_xx(k) of vector @var{X},
+## for a range of lags k specified by  argument "maxlag".  If @var{X} is a
+## matrix, each column of @var{X} is correlated with itself and every other
 ## column.
 ##
 ## The cross-correlation estimate between vectors "x" and "y" (of
-## length N) for lag "k" is given by 
-##    R_xy(k) = sum_{i=1}^{N}{x_{i+k} conj(y_i),
-## where data not provided (for example x(-1), y(N+1)) is zero.
+## length N) for lag "k" is given by
 ##
-## ARGUMENTS
-##  X       [non-empty; real or complex; vector or matrix] data
+## @iftex
+## @tex
+## $$   R_{xy}(k) = \sum_{i=1}^{N} x_{i+k} \conj(y_i),
+## @end tex
+## @end iftex
+## @ifnottex
+## @example
+##            N
+## R_xy(k) = sum x_@{i+k@} conj(y_i),
+##           i=1
+## @end example
+## @end ifnottex
 ##
-##  Y       [real or complex vector] data
-##          If X is a matrix (not a vector), Y must be omitted.
-##          Y may be omitted if X is a vector; in this case xcorr
-##          estimates the autocorrelation of X.
+## where data not provided (for example x(-1), y(N+1)) is zero. Note the
+## definition of cross-correlation given above. To compute a
+## cross-correlation consistent with the field of statistics, see @command{xcov}.
 ##
-##  maxlag  [integer scalar] maximum correlation lag
-##          If omitted, the default value is N-1, where N is the
-##          greater of the lengths of X and Y or, if X is a matrix,
-##          the number of rows in X.
+## @strong{ARGUMENTS}
+## @table @var
+## @item X
+## [non-empty; real or complex; vector or matrix] data
 ##
-##  scale   [character string] specifies the type of scaling applied
-##          to the correlation vector (or matrix). is one of:
-##    'none'      return the unscaled correlation, R,
-##    'biased'    return the biased average, R/N, 
-##    'unbiased'  return the unbiassed average, R(k)/(N-|k|), 
-##    'coeff'     return the correlation coefficient, R/(rms(x).rms(y)),
-##          where "k" is the lag, and "N" is the length of X.
-##          If omitted, the default value is "none".
-##          If Y is supplied but does not have the ame length as X,
-##          scale must be "none".
-##          
-## RETURNED VARIABLES
-##  R       array of correlation estimates
-##  lag     row vector of correlation lags [-maxlag:maxlag]
+## @item Y
+## [real or complex vector] data
 ##
-##  The array of correlation estimates has one of the following forms.
-##    (1) Cross-correlation estimate if X and Y are vectors.
-##    (2) Autocorrelation estimate if is a vector and Y is omitted,
-##    (3) If X is a matrix, R is an matrix containing the cross-
-##        correlation estimate of each column with every other column.
-##        Lag varies with the first index so that R has 2*maxlag+1
-##        rows and P^2 columns where P is the number of columns in X.
-##        If Rij(k) is the correlation between columns i and j of X
-##             R(k+maxlag+1,P*(i-1)+j) == Rij(k)
-##        for lag k in [-maxlag:maxlag], or
-##             R(:,P*(i-1)+j) == xcorr(X(:,i),X(:,j)).
-##        "reshape(R(k,:),P,P)" is the cross-correlation matrix for X(k,:).
+## If @var{X} is a matrix (not a vector), @var{Y} must be omitted.
+## @var{Y} may be omitted if @var{X} is a vector; in this case xcorr
+## estimates the autocorrelation of @var{X}.
 ##
+## @item maxlag
+## [integer scalar] maximum correlation lag
+## If omitted, the default value is N-1, where N is the
+## greater of the lengths of @var{X} and @var{Y} or, if @var{X} is a matrix,
+## the number of rows in @var{X}.
+##
+## @item scale
+## [character string] specifies the type of scaling applied
+## to the correlation vector (or matrix). is one of:
+## @table @samp
+## @item none
+## return the unscaled correlation, R,
+## @item biased
+## return the biased average, R/N,
+## @item unbiased
+## return the unbiassed average, R(k)/(N-|k|),
+## @item coeff
+## return the correlation coefficient, R/(rms(x).rms(y)),
+## where "k" is the lag, and "N" is the length of @var{X}.
+## If omitted, the default value is "none".
+## If @var{Y} is supplied but does not have the same length as @var{X},
+## scale must be "none".
+## @end table
+## @end table
+##
+## @strong{RETURNED VARIABLES}
+## @table @var
+## @item R
+## array of correlation estimates
+## @item lag
+## row vector of correlation lags [-maxlag:maxlag]
+## @end table
+##
+## The array of correlation estimates has one of the following forms:
+## (1) Cross-correlation estimate if @var{X} and @var{Y} are vectors.
+##
+## (2) Autocorrelation estimate if is a vector and @var{Y} is omitted.
+##
+## (3) If @var{X} is a matrix, R is an matrix containing the cross-correlation
+## estimate of each column with every other column. Lag varies with the first
+## index so that R has 2*maxlag+1 rows and P^2 columns where P is the number of
+## columns in @var{X}.
+##
+## If Rij(k) is the correlation between columns i and j of @var{X}
+##
+## @code{R(k+maxlag+1,P*(i-1)+j) == Rij(k)}
+##
+## for lag k in [-maxlag:maxlag], or
+##
+## @code{R(:,P*(i-1)+j) == xcorr(X(:,i),X(:,j))}.
+##
+## @code{reshape(R(k,:),P,P)} is the cross-correlation matrix for @code{X(k,:)}.
+##
+## @seealso{xcov}
+## @end deftypefn
 
 ## The cross-correlation estimate is calculated by a "spectral" method
 ## in which the FFT of the first vector is multiplied element-by-element
@@ -89,7 +135,7 @@
 ##    ( hankel(x(1:k),x(k:N-k)) * y ) ./ N
 
 function [R, lags] = xcorr (X, Y, maxlag, scale)
-  
+
   if (nargin < 1 || nargin > 4)
     print_usage;
   endif
@@ -110,7 +156,7 @@ function [R, lags] = xcorr (X, Y, maxlag, scale)
   endif
 
   ## assign defaults to missing arguments
-  if isvector(X) 
+  if isvector(X)
     ## if isempty(Y), Y=X; endif  ## this line disables code for autocorr'n
     N = max(length(X),length(Y));
   else
@@ -121,7 +167,7 @@ function [R, lags] = xcorr (X, Y, maxlag, scale)
 
   ## check argument values
   if isempty(X) || isscalar(X) || ischar(Y) || ! ismatrix(X)
-    error("xcorr: X must be a vector or matrix"); 
+    error("xcorr: X must be a vector or matrix");
   endif
   if isscalar(Y) || ischar(Y) || (!isempty(Y) && !isvector(Y))
     error("xcorr: Y must be a vector");
@@ -130,7 +176,7 @@ function [R, lags] = xcorr (X, Y, maxlag, scale)
     error("xcorr: X must be a vector if Y is specified");
   endif
   if !isscalar(maxlag) || !isreal(maxlag) || maxlag<0 || fix(maxlag)!=maxlag
-    error("xcorr: maxlag must be a single non-negative integer"); 
+    error("xcorr: maxlag must be a single non-negative integer");
   endif
   ##
   ## sanity check on number of requested lags
@@ -141,7 +187,7 @@ function [R, lags] = xcorr (X, Y, maxlag, scale)
   if (maxlag > N-1)
     pad_result = maxlag - (N - 1);
     maxlag = N - 1;
-    %error("xcorr: maxlag must be less than length(X)"); 
+    %error("xcorr: maxlag must be less than length(X)");
   else
     pad_result = 0;
   endif
@@ -149,15 +195,15 @@ function [R, lags] = xcorr (X, Y, maxlag, scale)
 	!strcmp(scale,'none')
     error("xcorr: scale must be 'none' if length(X) != length(Y)")
   endif
-    
+
   P = columns(X);
   M = 2^nextpow2(N + maxlag);
-  if !isvector(X) 
+  if !isvector(X)
     ## For matrix X, correlate each column "i" with all other "j" columns
     R = zeros(2*maxlag+1,P^2);
 
     ## do FFTs of padded column vectors
-    pre = fft (postpad (prepad (X, N+maxlag), M) ); 
+    pre = fft (postpad (prepad (X, N+maxlag), M) );
     post = conj (fft (postpad (X, M)));
 
     ## do autocorrelations (each column with itself)
@@ -181,7 +227,7 @@ function [R, lags] = xcorr (X, Y, maxlag, scale)
     post = fft( postpad(X(:),M) );
     cor = ifft( post .* conj(post) );
     R = [ conj(cor(maxlag+1:-1:2)) ; cor(1:maxlag+1) ];
-  else 
+  else
     ## compute cross-correlation of X and Y
     ##  If one of X & Y is a row vector, the other can be a column vector.
     pre  = fft( postpad( prepad( X(:), length(X)+maxlag ), M) );
@@ -193,7 +239,7 @@ function [R, lags] = xcorr (X, Y, maxlag, scale)
   ## if inputs are real, outputs should be real, so ignore the
   ## insignificant complex portion left over from the FFT
   if isreal(X) && (isempty(Y) || isreal(Y))
-    R=real(R); 
+    R=real(R);
   endif
 
   ## correct for bias
@@ -218,7 +264,7 @@ function [R, lags] = xcorr (X, Y, maxlag, scale)
   elseif !strcmp(scale, 'none')
     error("xcorr: scale must be 'biased', 'unbiased', 'coeff' or 'none'");
   endif
-    
+
   ## Pad result if necessary
   ##  (most likely is not required, use "if" to avoid uncessary code)
   ## At this point, lag varies with the first index in R;
@@ -229,7 +275,7 @@ function [R, lags] = xcorr (X, Y, maxlag, scale)
   endif
   ## Correct the shape (transpose) so it is the same as the first input vector
   if isvector(X) && P > 1
-    R = R.'; 
+    R = R.';
   endif
 
   ## return the lag indices if desired
@@ -241,7 +287,7 @@ function [R, lags] = xcorr (X, Y, maxlag, scale)
 endfunction
 
 ##------------ Use brute force to compute the correlation -------
-##if !isvector(X) 
+##if !isvector(X)
 ##  ## For matrix X, compute cross-correlation of all columns
 ##  R = zeros(2*maxlag+1,P^2);
 ##  for i=1:P
@@ -258,7 +304,7 @@ endfunction
 ##elseif isempty(Y)
 ##  ## reshape X so that dot product comes out right
 ##  X = reshape(X, 1, N);
-##    
+##
 ##  ## compute autocorrelation for 0:maxlag
 ##  R = zeros (2*maxlag + 1, 1);
 ##  for k=0:maxlag
@@ -271,7 +317,7 @@ endfunction
 ##  ## reshape and pad so X and Y are the same length
 ##  X = reshape(postpad(X,N), 1, N);
 ##  Y = reshape(postpad(Y,N), 1, N)';
-##  
+##
 ##  ## compute cross-correlation
 ##  R = zeros (2*maxlag + 1, 1);
 ##  R(maxlag+1) = X*Y;
