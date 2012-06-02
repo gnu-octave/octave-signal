@@ -1,6 +1,14 @@
 Summary of important user-visible changes for releases of the signal package
 
 ===============================================================================
+signal-1.1.4   Release Date: 2012-XX-XX   Release Manager:
+===============================================================================
+
+ ** signal is no longer dependent on the image package.
+
+ ** signal is now dependent on the general package.
+
+===============================================================================
 signal-1.1.3   Release Date: 2012-05-12   Release Manager: Carnë Draug
 ===============================================================================
 

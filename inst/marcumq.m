@@ -51,11 +51,7 @@ function Q = marcumq(a,b,M=1,tol=eps)
     error("M must be a positive integer");
   end
 
-  nr = max([size(a,1) size(b,1) size(M,1)]);
-  nc = max([size(a,2) size(b,2) size(M,2)]);
-  a = padarray(a, [nr - size(a,1) nc - size(a,2)], "replicate", "post");
-  b = padarray(b, [nr - size(b,1) nc - size(b,2)], "replicate", "post");
-  M = padarray(M, [nr - size(M,1) nc - size(M,2)], "replicate", "post");
+  [a,b,M] = tablify(a,b,M);
 
   Q = arrayfun(@mq, a,b,M,tol);
 
