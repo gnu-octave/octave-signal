@@ -59,11 +59,11 @@ endfunction
 
 %!demo
 %! xhi = [0 0 1 1 1 0 0 1 0 0 0 1 1];
-%! ranges = intervalSegment(xhi)
+%! ranges = clustersegment(xhi)
 %!
 %! % The first sequence of 1's in xhi is
 %!  xhi(ranges{1}(1,:))
 
 %!demo
 %! xhi = rand(3,10)>0.4
-%! ranges = intervalSegment(xhi)
+%! ranges = clustersegment(xhi)
