@@ -4,6 +4,9 @@ Summary of important user-visible changes for releases of the signal package
 signal-1.1.4   Release Date: 2012-XX-XX   Release Manager:
 ===============================================================================
 
+ ** The following functions are new:
+    movingrms  schtrig  clustersegment
+
  ** signal is no longer dependent on the image package.
 
  ** signal is now dependent on the general package.

@@ -27,6 +27,7 @@ Filtering
  sgolayfilt
  sosfilt
  medfilt1
+ movingrms
 Filter analysis
  freqs freqs_plot
  grpdelay
@@ -119,7 +120,8 @@ Window functions
  kaiser
  nuttallwin
  triang
- gaussian gausswin
+ gaussian
+ gausswin
  tukeywin
  rectwin
  welchwin
@@ -160,3 +162,5 @@ Utility
  wrev
  zerocrossing
  sampled2continuous
+ schtrig
+ clustersegment
