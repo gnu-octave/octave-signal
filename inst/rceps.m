@@ -34,18 +34,22 @@ function [y, ym] = rceps(x)
   if (nargin != 1)
     print_usage;
   end
-  y = real(ifft(log(abs(fft(x)))));
+  f = abs(fft(x));
+  if (any (f == 0))
+    error ("rceps: the spectrum of x contains zeros, unable to compute real cepstrum");
+  endif
+  y = real(ifft(log(f)));
   if nargout == 2
     n=length(x);
     if rows(x)==1
       if rem(n,2)==1
-        ym = [y(1), 2*y(2:n/2), zeros(1,n/2-1)];
+        ym = [y(1), 2*y(2:n/2+1), zeros(1,n/2)];
       else
         ym = [y(1), 2*y(2:n/2), y(n/2+1), zeros(1,n/2-1)];
       endif
     else
       if rem(n,2)==1
-        ym = [y(1,:); 2*y(2:n/2,:); zeros(n/2-1,columns(y))];
+        ym = [y(1,:); 2*y(2:n/2+1,:); zeros(n/2,columns(y))];
       else
         ym = [y(1,:); 2*y(2:n/2,:); y(n/2+1,:); zeros(n/2-1,columns(y))];
       endif
@@ -76,6 +80,13 @@ endfunction
 %! tol = 1e-14;
 %! assert(yt.', y, tol);
 %! assert(xmt.', xm, tol);
+
+%% Test that an odd-length input produces an odd-length output
+%!test
+%! x = randn(33, 4);
+%! [y, xm] = rceps(x);
+%! assert(size(y) == size(x));
+%! assert(size(xm) == size(x));
 
 %!demo
 %! f0=70; Fs=10000;           # 100 Hz fundamental, 10kHz sampling rate

@@ -4,6 +4,8 @@ Summary of important user-visible changes for releases of the signal package
 signal-1.1.4   Release Date: 2012-XX-XX   Release Manager:
 ===============================================================================
 
+ ** The function `rceps' was fixed to work correctly with odd-length inputs.
+
  ** The following functions are new:
     movingrms  schtrig  clustersegment
 
