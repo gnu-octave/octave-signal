@@ -157,5 +157,9 @@ end
 %!test
 %! B=[1 0 0 0 1]; A=[1 0 0 0 -1];
 %! [r,p,f,m] = residued(B,A);
-%! assert({r,p,f,m},{[-j/2;j/2;1/2;-1/2],[-j;j;1;-1],1,[1;1;1;1]},100*eps);
+%! [~,is] = sort(angle(p));
+%! assert(r(is),[-1/2;-j/2;1/2;j/2],100*eps);
+%! assert(p(is),[-1;-j;1;j],100*eps);
+%! assert(f,1,100*eps);
+%! assert(m,[1;1;1;1],100*eps);
 %  Verified in maxima: ratsimp(%I/2/(1-%I * d) - %I/2/(1+%I * d)); etc.
