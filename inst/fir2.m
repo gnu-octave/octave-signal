@@ -26,7 +26,7 @@
 ## m: magnitude at band edges
 ##    m is a vector of length(f)
 ## grid_n: length of ideal frequency response function
-##    defaults to 512, should be a power of 2 bigger than n
+##    defaults to 512, should be a power of 2 bigger than n/2
 ## ramp_n: transition width for jumps in filter response
 ##    defaults to grid_n/20; a wider ramp gives wider transitions
 ##    but has better stopband characteristics.
@@ -63,20 +63,29 @@ function b = fir2(n, f, m, grid_n, ramp_n, window)
 	(nargin>5 && (length(grid_n)>1 || length(ramp_n)>1))
     usage("grid_n and ramp_n must be integers");
   endif
-  if nargin < 4, grid_n=512; endif
-  if nargin < 5, ramp_n=grid_n/20; endif
+  if nargin < 4, grid_n=[]; endif
+  if nargin < 5, ramp_n=[]; endif
 
   ## find the window parameter, or default to hamming
   w=[];
-  if length(grid_n)>1, w=grid_n; grid_n=512; endif
-  if length(ramp_n)>1, w=ramp_n; ramp_n=grid_n/20; endif
+  if length(grid_n)>1, w=grid_n; grid_n=[]; endif
+  if length(ramp_n)>1, w=ramp_n; ramp_n=[]; endif
   if nargin < 6, window=w; endif
   if isempty(window), window=hamming(n+1); endif
   if !isreal(window) || ischar(window), window=feval(window, n+1); endif
   if length(window) != n+1, usage("window must be of length n+1"); endif
 
-  ## make sure grid is big enough for the window
-  if 2*grid_n < n+1, grid_n = 2^nextpow2(n+1); endif
+  if isempty (grid_n), grid_n = 512; endif
+
+  ## ML behavior appears to always round the grid size up to a power of 2
+  grid_n = 2 ^ nextpow2 (grid_n);
+
+  ## Error out if the grid size is not big enough for the window
+  if 2*grid_n < n+1
+    error ("fir2: grid size must be greater than half the filter order");
+  endif
+
+  if isempty (ramp_n), ramp_n = fix (grid_n / 20); endif
 
   ## Apply ramps to discontinuities
   if (ramp_n > 0)
@@ -124,6 +133,17 @@ function b = fir2(n, f, m, grid_n, ramp_n, window)
     b = b' .* window;
   endif
 endfunction
+
+%% Test that the grid size is rounded up to the next power of 2
+%!test
+%! f = [0 0.6 0.6 1]; m = [1 1 0 0];
+%! b9  = fir2 (30, f, m, 9);
+%! b16 = fir2 (30, f, m, 16);
+%! b17 = fir2 (30, f, m, 17);
+%! b32 = fir2 (30, f, m, 32);
+%! assert ( isequal (b9,  b16))
+%! assert ( isequal (b17, b32))
+%! assert (~isequal (b16, b17))
 
 %!demo
 %! f=[0, 0.3, 0.3, 0.6, 0.6, 1]; m=[0, 0, 1, 1/2, 0, 0];
