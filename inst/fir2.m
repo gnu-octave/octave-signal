@@ -28,7 +28,7 @@
 ## grid_n: length of ideal frequency response function
 ##    defaults to 512, should be a power of 2 bigger than n/2
 ## ramp_n: transition width for jumps in filter response
-##    defaults to grid_n/20; a wider ramp gives wider transitions
+##    defaults to grid_n/25; a wider ramp gives wider transitions
 ##    but has better stopband characteristics.
 ## window: smoothing window
 ##    defaults to hamming(n+1) row vector
@@ -75,7 +75,14 @@ function b = fir2(n, f, m, grid_n, ramp_n, window)
   if !isreal(window) || ischar(window), window=feval(window, n+1); endif
   if length(window) != n+1, usage("window must be of length n+1"); endif
 
-  if isempty (grid_n), grid_n = 512; endif
+  ## Default grid size is 512... unless n+1 >= 1024
+  if isempty (grid_n)
+    if n+1 < 1024
+      grid_n = 512;
+    else
+      grid_n = n+1;
+    endif
+  endif
 
   ## ML behavior appears to always round the grid size up to a power of 2
   grid_n = 2 ^ nextpow2 (grid_n);
@@ -85,7 +92,7 @@ function b = fir2(n, f, m, grid_n, ramp_n, window)
     error ("fir2: grid size must be greater than half the filter order");
   endif
 
-  if isempty (ramp_n), ramp_n = fix (grid_n / 20); endif
+  if isempty (ramp_n), ramp_n = fix (grid_n / 25); endif
 
   ## Apply ramps to discontinuities
   if (ramp_n > 0)
