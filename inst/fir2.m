@@ -70,7 +70,7 @@ function b = fir2(n, f, m, grid_n, ramp_n, window)
   if nargin < 6, window=w; endif
   if isempty(window), window=hamming(n+1); endif
   if !isreal(window) || ischar(window), window=feval(window, n+1); endif
-  if length(window) != n+1, usage("window must be of length n+1"); endif
+  if length(window) != n+1, error ("fir2: window must be of length n+1"); endif
 
   ## Default grid size is 512... unless n+1 >= 1024
   if isempty (grid_n)
@@ -136,6 +136,7 @@ function b = fir2(n, f, m, grid_n, ramp_n, window)
   else
     b = b' .* window;
   endif
+  b = b'
 endfunction
 
 %% Test that the grid size is rounded up to the next power of 2
