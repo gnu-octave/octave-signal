@@ -91,7 +91,7 @@ endfunction
 %! [b, a] = pei_tseng_notch ( 50 / sf2, 2 / sf2 );
 %! filtered = filter ( b, a, data );
 %! damp_db = 20 * log10 ( max ( filtered ( end - 1000 : end, : ) ) );
-%! assert ( damp_db, [ -3 -251.9 -3 ], 0.1 )
+%! assert ( damp_db, [ -3 -251.9 -3 ], -0.1 )
 
 %!test
 %! ##1Hz bandwidth
@@ -100,7 +100,7 @@ endfunction
 %! [b, a] = pei_tseng_notch ( 50 / sf2, 1 / sf2 );
 %! filtered = filter ( b, a, data );
 %! damp_db = 20 * log10 ( max ( filtered ( end - 1000 : end, : ) ) );
-%! assert ( damp_db, [ -3 -240.4 -3 ], 0.1 )
+%! assert ( damp_db, [ -3 -240.4 -3 ], -0.1 )
 
 %!demo
 %! sf = 800; sf2 = sf/2;

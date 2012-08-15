@@ -9,7 +9,9 @@ signal-1.1.4   Release Date: 2012-XX-XX   Release Manager:
     column), the default values for grid_n and ramp_n, and returning an error
     when invalid values are used (instead of silently adjusting them).
 
- ** Fixed failing test for the function `residued'.
+ ** Fixed failing tests for the following functions:
+    pei_tseng_notch
+    residued
 
  ** The function `rceps' was fixed to work correctly with odd-length inputs.
 
