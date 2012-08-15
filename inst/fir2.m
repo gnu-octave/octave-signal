@@ -52,16 +52,13 @@ function b = fir2(n, f, m, grid_n, ramp_n, window)
   ## verify frequency and magnitude vectors are reasonable
   t = length(f);
   if t<2 || f(1)!=0 || f(t)!=1 || any(diff(f)<0)
-    usage("frequency must be nondecreasing starting from 0 and ending at 1");
-  endif
-  if t != length(m)
-    usage("frequency and magnitude vectors must be the same length");
-  endif
-
+    error ("fir2: frequency must be nondecreasing starting from 0 and ending at 1");
+  elseif t != length(m)
+    error ("fir2: frequency and magnitude vectors must be the same length");
   ## find the grid spacing and ramp width
-  if (nargin>4 && length(grid_n)>1) || \
-	(nargin>5 && (length(grid_n)>1 || length(ramp_n)>1))
-    usage("grid_n and ramp_n must be integers");
+  elseif (nargin>4 && length(grid_n)>1) || \
+        (nargin>5 && (length(grid_n)>1 || length(ramp_n)>1))
+    error ("fir2: grid_n and ramp_n must be integers");
   endif
   if nargin < 4, grid_n=[]; endif
   if nargin < 5, ramp_n=[]; endif
