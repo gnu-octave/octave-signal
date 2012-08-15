@@ -129,14 +129,12 @@ function b = fir2(n, f, m, grid_n, ramp_n, window)
     b = ifft([grid ; zeros(grid_n*2,1) ;grid(grid_n:-1:2)]);
     b = 2 * real([ b([end-n+1:2:end]) ; b(2:2:(n+1))]);
   endif
+
   ## Multiplication in the time domain is convolution in frequency,
   ## so multiply by our window now to smooth the frequency response.
-  if rows(window) > 1
-    b = b .* window;
-  else
-    b = b' .* window;
-  endif
-  b = b'
+  ## Also, for matlab compatibility, we return return values in 1 row
+  b = b(:)' .* window(:)';
+
 endfunction
 
 %% Test that the grid size is rounded up to the next power of 2

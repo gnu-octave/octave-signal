@@ -4,7 +4,10 @@ Summary of important user-visible changes for releases of the signal package
 signal-1.1.4   Release Date: 2012-XX-XX   Release Manager:
 ===============================================================================
 
- ** Improved Matlab compability for the function `fir2'.
+ ** Improved Matlab compability for the function `fir2'. This changes include
+    always returning vaues in a row (even when the smoothing window is a single
+    column), the default values for grid_n and ramp_n, and returning an error
+    when invalid values are used (instead of silently adjusting them).
 
  ** Fixed failing test for the function `residued'.
 
