@@ -13,12 +13,12 @@
 ## You should have received a copy of the GNU General Public License along with
 ## this program; if not, see <http://www.gnu.org/licenses/>.
 
-## b = firls(N, F, A); b = firls(N, F, A, W);
+## b = firls(N, F, A); 
+## b = firls(N, F, A, W);
 ##
 ##  FIR filter design using least squares method. Returns a length N+1
 ##  linear phase filter such that the integral of the weighted mean
-##  squared error in the specified bands is minimized. N must be an even
-##  integer or
+##  squared error in the specified bands is minimized.
 ##
 ##  F specifies the frequencies of the band edges, normalized so that
 ##  half the sample frequency is equal to 1.  Each band is specified by
@@ -29,7 +29,7 @@
 ##  W is an optional weighting function that contains one value for each
 ##  band that weights the mean squared error in that band. A must be the
 ##  same length as F, and W must be half the length of F. N must be
-##  even. If you specify an odd value, firls increments it by 1.
+##  even. If given an odd value, firls increments it by 1.
 ##
 ## The least squares optimization algorithm for computing FIR filter
 ## coefficients is derived in detail in:
