@@ -38,32 +38,32 @@
 
 function coef = firls(N, frequencies, pass, weight, str);
 
-  if nargin<3 || nargin>6
+  if (nargin < 3 || nargin > 6)
     print_usage;
-  elseif nargin==3
-    weight = ones(1, length(pass)/2);
+  elseif (nargin == 3)
+    weight = ones (1, length(pass)/2);
     str = [];
-  elseif nargin==4
-    if ischar(weight)
+  elseif (nargin == 4)
+    if ischar (weight)
       str = weight;
       weight = ones (size (pass));
     else
       str = [];
-    end
-  end
+    endif
+  endif
   if length (frequencies) ~= length (pass)
     error("F and A must have equal lengths.");
   elseif 2 * length (weight) ~= length (pass)
     error("W must contain one weight per band.");
-  elseif ischar(str)
+  elseif ischar (str)
     error("This feature is implemented yet");
   else
 
     M = N/2;
-    w = kron(weight(:), [-1; 1]);
+    w = kron (weight(:), [-1; 1]);
     omega = frequencies * pi;
-    i1 = 1:2:length(omega);
-    i2 = 2:2:length(omega);
+    i1 = 1:2:length (omega);
+    i2 = 2:2:length (omega);
 
     ## Generate the matrix Q
     ## As illustrated in the above-cited reference, the matrix can be
@@ -94,8 +94,8 @@ function coef = firls(N, frequencies, pass, weight, str);
     ## -                             n
     ##
     cos_ints2 = [omega(i1).^2 - omega(i2).^2; ...
-		 cos((1:M)' * omega(i2)) - cos((1:M)' * omega(i1))] ./ ...
-                 ([2, 1:M]' * (omega(i2) - omega(i1)));
+		             cos((1:M)' * omega(i2)) - cos((1:M)' * omega(i1))] ./ ...
+        ([2, 1:M]' * (omega(i2) - omega(i1)));
     d = [-weight .* pass(i1); weight .* pass(i2)] (:);
     b = [1, 1./(1:M)]' .* ((kron (cos_ints2, [1, 1]) + cos_ints(1:M+1,:)) * d);
 
@@ -104,6 +104,6 @@ function coef = firls(N, frequencies, pass, weight, str);
     a = Q \ b;
     coef = [ a(end:-1:2); 2 * a(1); a(2:end) ];
 
-  end
+  endif
 
 endfunction
