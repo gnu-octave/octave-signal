@@ -65,23 +65,26 @@ function c = xcorr2 (a, b = a, biasflag = "none")
 
   ## bias routines by Dave Cogdell (cogdelld@asme.org)
   ## optimized by Paul Kienzle (pkienzle@users.sf.net)
-  if strcmp(lower(biasflag), 'biased'),
-    c = c / ( min ([ma, mb]) * min ([na, nb]) );
-  elseif strcmp(lower(biasflag), 'unbiased'), 
-    lo   = min ([na,nb]);
-    hi   = max ([na, nb]);
-    row  = [ 1:(lo-1), lo*ones(1,hi-lo+1), (lo-1):-1:1 ];
+  switch lower (biasflag)
+    case {"biased"}
+      c = c / ( min ([ma, mb]) * min ([na, nb]) );
+    case {"unbiased"}
+      lo   = min ([na,nb]);
+      hi   = max ([na, nb]);
+      row  = [ 1:(lo-1), lo*ones(1,hi-lo+1), (lo-1):-1:1 ];
 
-    lo   = min ([ma,mb]);
-    hi   = max ([ma, mb]);
-    col  = [ 1:(lo-1), lo*ones(1,hi-lo+1), (lo-1):-1:1 ]';
+      lo   = min ([ma,mb]);
+      hi   = max ([ma, mb]);
+      col  = [ 1:(lo-1), lo*ones(1,hi-lo+1), (lo-1):-1:1 ]';
 
-    bias = col*row;
-    c    = c./bias;
+      bias = col*row;
+      c    = c./bias;
 
-  elseif strcmp(lower(biasflag),'coeff'),
-    c = c/max(c(:))';
-  else
-    error ("invalid type of scale %s", biasflag);
-  endif
+    case {"coeff"}
+      c = c/max(c(:))';
+    case {"none"}
+      ## do nothing, it's all done
+    otherwise
+      error ("invalid type of scale %s", biasflag);
+  endswitch
 endfunction

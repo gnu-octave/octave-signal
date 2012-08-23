@@ -15,6 +15,9 @@ signal-1.1.4   Release Date: 2012-XX-XX   Release Manager:
 
  ** The function `rceps' was fixed to work correctly with odd-length inputs.
 
+ ** Bugfix in `xcorr2' introduced in 1.1.2 that would not accept "none" as
+    sacle option.
+
  ** The following functions are new:
     movingrms  schtrig  clustersegment
 
