@@ -16,7 +16,10 @@ signal-1.1.4   Release Date: 2012-XX-XX   Release Manager:
  ** The function `rceps' was fixed to work correctly with odd-length inputs.
 
  ** Bugfix in `xcorr2' introduced in 1.1.2 that would not accept "none" as
-    sacle option.
+    scale option.
+
+ ** `xcorr2' accepts a new scale option, "norm", to return the normalized
+    cross correlation.
 
  ** The following functions are new:
     movingrms  schtrig  clustersegment

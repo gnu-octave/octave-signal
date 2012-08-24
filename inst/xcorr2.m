@@ -1,5 +1,6 @@
 ## Copyright (C) 2000 Dave Cogdell <cogdelld@asme.org>
 ## Copyright (C) 2000 Paul Kienzle <pkienzle@users.sf.net>
+## Copyright (C) 2012 Carnë Draug <carandraug+dev@gmail.com>
 ##
 ## This program is free software; you can redistribute it and/or modify it under
 ## the terms of the GNU General Public License as published by the Free Software
@@ -31,6 +32,9 @@
 ## Scales the raw cross-correlation by the maximum number of elements of @var{a}
 ## and @var{b} involved in the generation of any element of @var{c}.
 ##
+## @item "none"
+## No scaling (this is the default).
+##
 ## @item "unbiased"
 ##
 ## Scales the raw correlation by dividing each element in the cross-correlation
@@ -42,9 +46,9 @@
 ## Normalizes the sequence so that the largest cross-correlation element is
 ## identically 1.0.
 ##
-## @item "none"
+## @item "norm"
 ##
-## No scaling (this is the default).
+## Returns the normalized cross-correlation.
 ## @end itemize
 ## @seealso{conv2, corr2, xcorr}
 ## @end deftypefn
@@ -66,6 +70,8 @@ function c = xcorr2 (a, b = a, biasflag = "none")
   ## bias routines by Dave Cogdell (cogdelld@asme.org)
   ## optimized by Paul Kienzle (pkienzle@users.sf.net)
   switch lower (biasflag)
+    case {"none"}
+      ## do nothing, it's all done
     case {"biased"}
       c = c / ( min ([ma, mb]) * min ([na, nb]) );
     case {"unbiased"}
@@ -82,10 +88,14 @@ function c = xcorr2 (a, b = a, biasflag = "none")
 
     case {"coeff"}
       c = c/max(c(:))';
-    case {"none"}
-      ## do nothing, it's all done
+
+    case {"norm"}
+      a = conv2 (a.^2, ones (size (b)));
+      b = dot (b(:), b(:));
+      c(:,:) = c(:,:) ./ sqrt (a(:,:) * b);
+
     otherwise
-      error ("invalid type of scale %s", biasflag);
+      error ("xcorr2: invalid type of scale %s", biasflag);
   endswitch
 endfunction
 
