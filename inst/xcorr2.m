@@ -22,34 +22,32 @@
 ## Compute the 2D cross-correlation of matrices @var{a} and @var{b}.
 ##
 ## If @var{b} is not specified, it defaults to the same matrix as @var{a}, i.e.,
-## it's the same as @code{xcorr(@var{a}, @var{a})}.
+## same as @code{xcorr(@var{a}, @var{a})}.
 ##
 ## The optional argument @var{scale}, defines the type of scaling applied to the
-## cross-correlation matrix (defaults to "none"). Possible values are:
-## @itemize @bullet
-## @item "biased"
+## cross-correlation matrix. Possible values are:
 ##
+## @table @asis
+## @item "none" (default)
+## No scaling.
+##
+## @item "biased"
 ## Scales the raw cross-correlation by the maximum number of elements of @var{a}
 ## and @var{b} involved in the generation of any element of @var{c}.
 ##
-## @item "none"
-## No scaling (this is the default).
-##
 ## @item "unbiased"
-##
 ## Scales the raw correlation by dividing each element in the cross-correlation
 ## matrix by the number of products @var{a} and @var{b} used to generate that
-## element 
+## element.
 ##
 ## @item "coeff"
-##
-## Normalizes the sequence so that the largest cross-correlation element is
-## identically 1.0.
+## Normalizes the sequence dividing by the max of the cross-correlation, so that
+## the largest cross-correlation element is 1.
 ##
 ## @item "norm"
-##
 ## Returns the normalized cross-correlation.
-## @end itemize
+## @end table
+##
 ## @seealso{conv2, corr2, xcorr}
 ## @end deftypefn
 
@@ -69,6 +67,7 @@ function c = xcorr2 (a, b = a, biasflag = "none")
 
   ## bias routines by Dave Cogdell (cogdelld@asme.org)
   ## optimized by Paul Kienzle (pkienzle@users.sf.net)
+  ## norm routine by Carnë Draug (carandraug+dev@gmail.com)
   switch lower (biasflag)
     case {"none"}
       ## do nothing, it's all done
