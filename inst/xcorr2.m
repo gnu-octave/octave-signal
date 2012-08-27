@@ -21,8 +21,8 @@
 ## @deftypefnx {Function File} {@var{c} =} xcorr2 (@dots{}, @var{scale})
 ## Compute the 2D cross-correlation of matrices @var{a} and @var{b}.
 ##
-## If @var{b} is not specified, it defaults to the same matrix as @var{a}, i.e.,
-## same as @code{xcorr(@var{a}, @var{a})}.
+## If @var{b} is not specified, computes autocorrelation of @var{a}, i.e.,
+## same as @code{xcorr (@var{a}, @var{a})}.
 ##
 ## The optional argument @var{scale}, defines the type of scaling applied to the
 ## cross-correlation matrix. Possible values are:
@@ -51,13 +51,18 @@
 ## @seealso{conv2, corr2, xcorr}
 ## @end deftypefn
 
-function c = xcorr2 (a, b = a, biasflag = "none")
+function c = xcorr2 (a, b, biasflag = "none")
 
   if (nargin < 1 || nargin > 3)
     print_usage;
   elseif (nargin == 2 && ischar (b))
     biasflag = b;
     b        = a;
+  elseif (nargin == 1)
+    ## we have to set this case here instead of the function line, because if
+    ## someone calls the function with zero argument, since a is never set, we
+    ## will fail with "`a' undefined" error rather that print_usage
+    b = a;
   endif
 
   ## compute correlation
