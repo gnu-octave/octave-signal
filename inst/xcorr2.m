@@ -94,6 +94,10 @@ function c = xcorr2 (a, b, biasflag = "none")
       c = c/max(c(:))';
 
     case {"norm"}
+      ## FIXME maybe these conversions for double can be removed when
+      ## https://savannah.gnu.org/bugs/?37199 gets fixed?
+      a = double (a);
+      b = double (b);
       a = conv2 (a.^2, ones (size (b)));
       b = dot (b(:), b(:));
       c(:,:) = c(:,:) ./ sqrt (a(:,:) * b);
