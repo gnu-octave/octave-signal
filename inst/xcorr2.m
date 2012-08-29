@@ -41,10 +41,6 @@
 ## element.
 ##
 ## @item "coeff"
-## Normalizes the sequence dividing by the max of the cross-correlation, so that
-## the largest cross-correlation element is 1.
-##
-## @item "norm"
 ## Returns the normalized cross-correlation.
 ## @end table
 ##
@@ -75,7 +71,7 @@ function c = xcorr2 (a, b, biasflag = "none")
 
   ## bias routines by Dave Cogdell (cogdelld@asme.org)
   ## optimized by Paul Kienzle (pkienzle@users.sf.net)
-  ## norm routine by Carnë Draug (carandraug+dev@gmail.com)
+  ## coeff routine by Carnë Draug (carandraug+dev@gmail.com)
   switch lower (biasflag)
     case {"none"}
       ## do nothing, it's all done
@@ -94,15 +90,10 @@ function c = xcorr2 (a, b, biasflag = "none")
       c    = c./bias;
 
     case {"coeff"}
-      c = c/max(c(:))';
-
-    case {"norm"}
-      ## FIXME maybe these conversions for double can be removed when
-      ## https://savannah.gnu.org/bugs/?37199 gets fixed?
       a = double (a);
       b = double (b);
       a = conv2 (a.^2, ones (size (b)));
-      b = dot (b(:), b(:));
+      b = sumsq (b(:));
       c(:,:) = c(:,:) ./ sqrt (a(:,:) * b);
 
     otherwise
@@ -110,7 +101,7 @@ function c = xcorr2 (a, b, biasflag = "none")
   endswitch
 endfunction
 
-%!test
+%!test  # basic usage
 %! a = magic (5);
 %! b = [6 13 22; 10 18 23; 8 15 23];
 %! c = [391  807  519  391  473  289 120
@@ -121,3 +112,22 @@ endfunction
 %!      473 1006 1643 1457  946  347 108
 %!      242  539  850  477  374  129  54];
 %! assert (xcorr2 (a, b), c);
+
+%!shared a, b, c, row_shift, col_shift
+%! row_shift = 18;
+%! col_shift = 20;
+%! a = randi (255, 30, 30);
+%! b = a(row_shift-10:row_shift, col_shift-7:col_shift);
+%! c = xcorr2 (a, b, "coeff");
+%!assert (nthargout ([1 2], @find, c == max (c(:))), {row_shift, col_shift});   # should return exact coordinates
+%! m = rand (size (b)) > 0.5;
+%! b(m)  = b(m)  * 0.95;
+%! b(!m) = b(!m) * 1.05;
+%! c = xcorr2 (a, b, "coeff");
+%!assert (nthargout ([1 2], @find, c == max (c(:))), {row_shift, col_shift});   # even with some small noise, should return exact coordinates
+
+%!test  # coeff of autocorrelation must be same as negavtive of correlation by additive inverse
+%! a = 10 * randn (100, 100);
+%! auto    = xcorr2 (a, "coeff");
+%! add_in  = xcorr2 (a, -a, "coeff");
+%! assert ([min(auto(:)), max(auto(:))], -[max(add_in(:)), min(add_in(:))]);

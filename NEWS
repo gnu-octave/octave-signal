@@ -18,8 +18,8 @@ signal-1.1.4   Release Date: 2012-XX-XX   Release Manager:
  ** Bugfix in `xcorr2' introduced in 1.1.2 that would not accept "none" as
     scale option.
 
- ** `xcorr2' accepts a new scale option, "norm", to return the normalized
-    cross correlation.
+ ** `xcorr2' scaling option "coeff" was changed to return the normalized
+    cross-correlation.
 
  ** The following functions are new:
     movingrms  schtrig  clustersegment
