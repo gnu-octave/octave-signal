@@ -140,9 +140,9 @@ endfunction
 %!demo
 %! freqz(fir1(15,[0.2, 0.5], 'stop', 'noscale'));
 
-%!assert(fir1(2, .5, 'low', @hanning, 'scale'), [0 1 0]');
-%!assert(fir1(2, .5, 'low', "hanning", 'scale'), [0 1 0]');
-%!assert(fir1(2, .5, 'low', hanning(3), 'scale'), [0 1 0]');
+%!assert(fir1(2, .5, 'low', @hanning, 'scale'), [0 1 0]);
+%!assert(fir1(2, .5, 'low', "hanning", 'scale'), [0 1 0]);
+%!assert(fir1(2, .5, 'low', hanning(3), 'scale'), [0 1 0]);
 
 %!assert(fir1(10,.5,'noscale'), fir1(10,.5,'low','hamming','noscale'));
 %!assert(fir1(10,.5,'high'), fir1(10,.5,'high','hamming','scale'));
