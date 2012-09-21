@@ -10,8 +10,8 @@ signal-1.1.4   Release Date: 2012-XX-XX   Release Manager:
     when invalid values are used (instead of silently adjusting them).
 
  ** Fixed failing tests for the following functions:
-    pei_tseng_notch
-    residued
+
+      fir1      pei_tseng_notch     residued
 
  ** The function `rceps' was fixed to work correctly with odd-length inputs.
 
@@ -22,7 +22,8 @@ signal-1.1.4   Release Date: 2012-XX-XX   Release Manager:
     cross-correlation.
 
  ** The following functions are new:
-    movingrms  schtrig  clustersegment
+
+      movingrms     schtrig     clustersegment
 
  ** signal is no longer dependent on the image package.
 
