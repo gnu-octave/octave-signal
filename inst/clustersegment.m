@@ -13,12 +13,19 @@
 ## You should have received a copy of the GNU General Public License
 ## along with this program; if not, see <http://www.gnu.org/licenses/>.
 
-%% contRange = clustersegment(xhi)
-% The function calculates the initial and end index values of the sequences of
-% 1's in the rows of xhi. The result is returned in a cell of size 1xNp, with Np
-% the numer of rows in xhi. Each element of the cell has two rows; the first row
-% is the inital index of a sequence of 1's and the second row is the end index
-% of that sequence.
+## -*- texinfo -*-
+## @deftypefn {Function File} {@var{clusteridx} =} clustersegment (@var{unos})
+## Calculate boundary indexes of clusters of 1's.
+##
+## The function calculates the initial index and end index of the sequences of
+## 1's in the rows of @var{unos}. The result is returned in a cell of size
+## 1-by-Np, being Np the numer of rows in @var{unos}. Each element of the cell
+## has two rows. The first row is the inital index of a sequence of 1's and the
+## second row is the end index of that sequence.
+##
+## If Np == 1 the output is a matrix with two rows.
+##
+## @end deftypefn
 
 function contRange = clustersegment(xhi)
 
@@ -55,14 +62,18 @@ function contRange = clustersegment(xhi)
 
   end
 
+  if Np == 1
+   contRange = cell2mat (contRange);
+  end
+
 endfunction
 
 %!demo
 %! xhi = [0 0 1 1 1 0 0 1 0 0 0 1 1];
-%! ranges = clustersegment(xhi)
+%! ranges = clustersegment (xhi)
 %!
-%! % The first sequence of 1's in xhi is
-%!  xhi(ranges{1}(1,:))
+%! % The first sequence of 1's in xhi lies in the interval
+%! ranges(1,1):ranges(2,1)
 
 %!demo
 %! xhi = rand(3,10)>0.4
