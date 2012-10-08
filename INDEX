@@ -156,6 +156,7 @@ Compatibility
  yulewalk=use <f>yulewalker</f>
 Utility
  buffer
+ findpeaks
  fracshift
  marcumq
  wkeep

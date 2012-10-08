@@ -1,6 +1,14 @@
 Summary of important user-visible changes for releases of the signal package
 
 ===============================================================================
+signal-1.2.X   Release Date: XXXX-XX-XX   Release Manager:
+===============================================================================
+
+ ** The following functions are new:
+
+      findpeaks
+
+===============================================================================
 signal-1.2.0   Release Date: 2012-09-21   Release Manager: Carnë Draug
 ===============================================================================
 
