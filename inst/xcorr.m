@@ -293,12 +293,12 @@ endfunction
 ##  for i=1:P
 ##    for j=i:P
 ##      idx = (i-1)*P+j;
-##      R(maxlag+1,idx) = X(i)*X(j)';
+##      R(maxlag+1,idx) = X(:,i)' * X(:,j);
 ##      for k = 1:maxlag
-##  	    R(maxlag+1-k,idx) = X(k+1:N,i) * X(1:N-k,j)';
-##  	    R(maxlag+1+k,idx) = X(k:N-k,i) * X(k+1:N,j)';
+##        R(maxlag+1-k,idx) = X(k+1:N,i)' * X(1:N-k,j);
+##        R(maxlag+1+k,idx) = X(1:N-k,i)' * X(k+1:N,j);
 ##      endfor
-##	if (i!=j), R(:,(j-1)*P+i) = conj(flipud(R(:,idx))); endif
+##      if (i!=j), R(:,(j-1)*P+i) = conj(flipud(R(:,idx))); endif
 ##    endfor
 ##  endfor
 ##elseif isempty(Y)
@@ -308,7 +308,7 @@ endfunction
 ##  ## compute autocorrelation for 0:maxlag
 ##  R = zeros (2*maxlag + 1, 1);
 ##  for k=0:maxlag
-##  	R(maxlag+1+k) = X(1:N-k) * X(k+1:N)';
+##    R(maxlag+1+k) = X(1:N-k) * X(k+1:N)';
 ##  endfor
 ##
 ##  ## use symmetry for -maxlag:-1
@@ -322,8 +322,8 @@ endfunction
 ##  R = zeros (2*maxlag + 1, 1);
 ##  R(maxlag+1) = X*Y;
 ##  for k=1:maxlag
-##  	R(maxlag+1-k) = X(k+1:N) * Y(1:N-k);
-##  	R(maxlag+1+k) = X(k:N-k) * Y(k+1:N);
+##    R(maxlag+1-k) = X(k+1:N) * Y(1:N-k);
+##    R(maxlag+1+k) = X(1:N-k) * Y(k+1:N);
 ##  endfor
 ##endif
 ##--------------------------------------------------------------
