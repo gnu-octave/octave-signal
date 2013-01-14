@@ -16,9 +16,9 @@
 ## this program; if not, see <http://www.gnu.org/licenses/>.
 
 ## -*- texinfo -*-
-## @deftypefn {Function File} {@var{c} =} xcorr2 (@var{a})
-## @deftypefnx {Function File} {@var{c} =} xcorr2 (@var{a}, @var{b})
-## @deftypefnx {Function File} {@var{c} =} xcorr2 (@dots{}, @var{scale})
+## @deftypefn  {Function File} {} xcorr2 (@var{a})
+## @deftypefnx {Function File} {} xcorr2 (@var{a}, @var{b})
+## @deftypefnx {Function File} {} xcorr2 (@dots{}, @var{scale})
 ## Compute the 2D cross-correlation of matrices @var{a} and @var{b}.
 ##
 ## If @var{b} is not specified, computes autocorrelation of @var{a}, i.e.,
@@ -41,7 +41,8 @@
 ## element.
 ##
 ## @item "coeff"
-## Returns the normalized cross-correlation.
+## Scales the normalized cross-correlation on the range of [0 1] so that a value
+## of 1 corresponds to a correlation coefficient of 1.
 ## @end table
 ##
 ## @seealso{conv2, corr2, xcorr}
