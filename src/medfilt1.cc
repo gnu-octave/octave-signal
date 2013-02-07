@@ -45,7 +45,16 @@ private:
   void print();
 
 public:
-  Median(int n) { max=hole=0; window = new double[n]; }
+  Median(int n)
+  {
+    max=hole=0;
+    window = new double[n];
+  }
+  Median::~Median(void)
+  {
+    delete [] window;
+  }
+
   void add(double v);          // add a new value
   void remove(double v);       // remove an existing value
   void clear() { max=hole=0; } // clear the window
