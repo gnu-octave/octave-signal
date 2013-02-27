@@ -8,6 +8,8 @@ signal-1.2.X   Release Date: XXXX-XX-XX   Release Manager:
 
       findpeaks
 
+ ** The function `blackmanharris' was fixed to return a column vector.
+
 ===============================================================================
 signal-1.2.0   Release Date: 2012-09-21   Release Manager: Carnë Draug
 ===============================================================================
