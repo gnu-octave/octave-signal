@@ -50,7 +50,7 @@ public:
     max=hole=0;
     window = new double[n];
   }
-  Median::~Median(void)
+  ~Median(void)
   {
     delete [] window;
   }
