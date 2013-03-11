@@ -1,6 +1,6 @@
 MKOCTFILE ?= mkoctfile
 
-all: cl2bp.oct remez.oct medfilt1.oct sosfilt.oct upfirdn.oct
+all: __fwht__.oct cl2bp.oct remez.oct medfilt1.oct sosfilt.oct upfirdn.oct
 
 %.oct: %.cc
 	$(MKOCTFILE) -Wall -s $<

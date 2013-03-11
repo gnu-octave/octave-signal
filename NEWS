@@ -7,6 +7,8 @@ signal-1.2.X   Release Date: XXXX-XX-XX   Release Manager:
  ** The following functions are new:
 
       findpeaks
+      fwht
+      ifwht
 
  ** The function `blackmanharris' was fixed to return a column vector.
 
