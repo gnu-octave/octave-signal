@@ -15,62 +15,69 @@
 
 ## -*- texinfo -*-
 ## @deftypefn {Function File} {[@var{pks} @var{loc} @var{extra}] =} findpeaks (@var{data})
-## @deftypefnx {Function File} {@dots{} =} findpeaks (@dots{},@var{property},@var{value})
-## @deftypefnx {Function File} {@dots{} =} findpeaks (@dots{},@asis{"DoubleSided"})
+## @deftypefnx {Function File} {@dots{} =} findpeaks (@dots{}, @var{property}, @var{value})
+## @deftypefnx {Function File} {@dots{} =} findpeaks (@dots{}, @asis{"DoubleSided"})
 ## Finds peaks on @var{data}.
 ##
-## Peaks of a positive array of data are defined as local maxima. For double-sided
-## data, they are maxima of the positive part and minima of the negative part.
-## @var{data} is expected to be a single column vector.
+## Peaks of a positive array of data are defined as local maxima. For
+## double-sided data, they are maxima of the positive part and minima of
+## the negative part. @var{data} is expected to be a single column
+## vector.
 ##
-## The function returns the value of @var{data} at the peaks in @var{pks}. The
-## index indicating they position in @var{loc}. The thrid output argument is a
-## structure with additional information:
+## The function returns the value of @var{data} at the peaks in
+## @var{pks}. The index indicating their position is returned in
+## @var{loc}.
+##
+## The third output argument is a structure with additional information:
+##
 ## @table @asis
 ## @item "parabol"
-## A structure containing the parabola fitted to each returned peak. The strcuture
-## has two fields, @asis{"x"} and @asis{"pp"}. The field @asis{"pp"} contains the
-## coefficients of the 2nd degree polynomial and @asis{"x"} the extrema of the
-## intercal here it was fitted.
+## A structure containing the parabola fitted to each returned peak. The
+## structure has two fields, @asis{"x"} and @asis{"pp"}. The field
+## @asis{"pp"} contains the coefficients of the 2nd degree polynomial
+## and @asis{"x"} the extrema of the intercal here it was fitted.
 ##
 ## @item "height"
 ## The estimated height of the returned peaks (in units of @var{data}).
 ##
 ## @item "baseline"
-## The height at which the roots were calculated. of the returned peaks (in units of @var{data}).
+## The height at which the roots of the returned peaks were calculated
+## (in units of @var{data}).
 ##
 ## @item "roots"
-## The abscisas values (in index units) at which the parabola fitted to each of
-## the returned peaks crosses the @asis{"baseline"} value. The width if the peak
-## is calculated by @command{diff(roots)}.
-##
+## The abscissa values (in index units) at which the parabola fitted to
+## each of the returned peaks crosses the @asis{"baseline"} value. The
+## width of the peak is calculated by @command{diff(roots)}.
 ## @end table
 ##
 ## This function accepts property-value pair given in the list below:
-## @table @asis
 ##
+## @table @asis
 ## @item "MinPeakHeight"
-## Minimum peak height (positive scalar). Only peaks that exceed this value
-## will be returned. For data taking positive and negative values use the
-## option "DoubleSided". Default value @code{2*std (abs (detrend (data,0)))}.
+## Minimum peak height (positive scalar). Only peaks that exceed this
+## value will be returned. For data taking positive and negative values
+## use the option "DoubleSided". Default value @code{2*std (abs (detrend
+## (data,0)))}.
 ##
 ## @item "MinPeakDistance"
-## Minimum separation between (positive integer). Peaks separated by less than
-## this distance are considered a single peak. This distance is also used to fit
-## a second order polynomial to the peaks to estimate their width, therefore it
-## acts as a smoothing parameter. Default value 4.
+## Minimum separation between (positive integer). Peaks separated by
+## less than this distance are considered a single peak. This distance
+## is also used to fit a second order polynomial to the peaks to
+## estimate their width, therefore it acts as a smoothing parameter.
+## Default value 4.
 ##
 ## @item "MinPeakWidth"
-## Minimum width of peaks (positive integer). The width of the peaks is estimated
-## using a parabola fitted to the neighborhood of each peak. The neighborhood size
-## is equal to the value of @asis{"MinPeakDistance"}. the width is evaluated at
-## the half height of the peak with baseline at "MinPeakHeight". Default value 2.
+## Minimum width of peaks (positive integer). The width of the peaks is
+## estimated using a parabola fitted to the neighborhood of each peak.
+## The neighborhood size is equal to the value of
+## @asis{"MinPeakDistance"}. The width is evaluated at the half height
+## of the peak with baseline at "MinPeakHeight". Default value 2.
 ##
 ## @item "DoubleSided"
 ## Tells the function that data takes positive and negative values. The
-## base-line for the peaks is taken as the mean value of the function. This is
-## equivalent as passing the absolute value of the data after removing the mean.
-##
+## base-line for the peaks is taken as the mean value of the function.
+## This is equivalent as passing the absolute value of the data after
+## removing the mean.
 ## @end table
 ##
 ## Run @command{demo findpeaks} to see some examples.
