@@ -26,7 +26,7 @@
 ## The function returns the value of @var{data} at the peaks in @var{pks}. The
 ## index indicating they position in @var{loc}. The thrid output argument is a
 ## structure with additional information:
-## table @asis
+## @table @asis
 ## @item "parabol"
 ## A structure containing the parabola fitted to each returned peak. The strcuture
 ## has two fields, @asis{"x"} and @asis{"pp"}. The field @asis{"pp"} contains the
@@ -42,12 +42,12 @@
 ## @item "roots"
 ## The abscisas values (in index units) at which the parabola fitted to each of
 ## the returned peaks crosses the @asis{"baseline"} value. The width if the peak
-## is calculated by @coomand{diff(roots)}.
+## is calculated by @command{diff(roots)}.
 ##
 ## @end table
 ##
 ## This function accepts property-value pair given in the list below:
-## table @asis
+## @table @asis
 ##
 ## @item "MinPeakHeight"
 ## Minimum peak height (positive scalar). Only peaks that exceed this value
