@@ -17,7 +17,7 @@
 ##
 ## Returns the filter coefficients of the L-point Dolph-Chebyshev window
 ## with at dB of attenuation in the stop-band of the corresponding
-## Fourier transform.
+## Fourier transform.  The default attenuation value is 100 dB.
 ##
 ## For the definition of the Chebyshev window, see
 ##
@@ -50,9 +50,13 @@
 
 function w = chebwin (L, at)
 
-  if (nargin != 2)
+  if (nargin < 1 || nargin > 2)
     print_usage;
-  elseif !(isscalar (L) && (L == round(L)) && (L > 0))
+  elseif (nargin == 1)
+    at = 100;
+  endif
+
+  if !(isscalar (L) && (L == round(L)) && (L > 0))
     error ("chebwin: L has to be a positive integer");
   elseif !(isscalar (at) && (at == real (at)))
     error ("chebwin: at has to be a real scalar");
