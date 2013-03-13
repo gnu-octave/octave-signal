@@ -10,7 +10,18 @@ signal-1.2.X   Release Date: XXXX-XX-XX   Release Manager:
       fwht
       ifwht
 
- ** The function `blackmanharris' was fixed to return a column vector.
+ ** Improved Matlab compatibility for the following window functions:
+
+      barthannwin
+      blackmanharris
+      blackmannuttall
+      chebwin
+      flattopwin
+      nuttallwin
+
+    The changes include always returning a column vector, returning a valid
+    window for a length argument of 1, and making all arguments after the
+    length optional.
 
  ** signal is no longer dependent on the optim package.
 

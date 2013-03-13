@@ -26,12 +26,16 @@ function [w] = blackmannuttall(L)
     error("L must be a number");
   endif
 
-  N = L-1;
-  a0 = 0.3635819;
-  a1 = 0.4891775;
-  a2 = 0.1365995;
-  a3 = 0.0106411;
-  n = 0:N;
-  w = a0 - a1.*cos(2.*pi.*n./N) + a2.*cos(4.*pi.*n./N) - a3.*cos(6.*pi.*n./N);
-  w = w.';
+  if (L == 1)
+    w = 1;
+  else
+    N = L-1;
+    a0 = 0.3635819;
+    a1 = 0.4891775;
+    a2 = 0.1365995;
+    a3 = 0.0106411;
+    n = 0:N;
+    w = a0 - a1.*cos(2.*pi.*n./N) + a2.*cos(4.*pi.*n./N) - a3.*cos(6.*pi.*n./N);
+    w = w.';
+  endif
 endfunction

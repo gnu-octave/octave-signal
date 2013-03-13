@@ -26,11 +26,15 @@ function [w] = blackmanharris (L)
     error("L must be a number");
   endif
 
-  N = L-1;
-  a0 = 0.35875;
-  a1 = 0.48829;
-  a2 = 0.14128;
-  a3 = 0.01168;
-  n = (0 : N)';
-  w = a0 - a1.*cos(2.*pi.*n./N) + a2.*cos(4.*pi.*n./N) - a3.*cos(6.*pi.*n./N);
+  if (L == 1)
+    w = 1;
+  else
+    N = L-1;
+    a0 = 0.35875;
+    a1 = 0.48829;
+    a2 = 0.14128;
+    a3 = 0.01168;
+    n = (0 : N)';
+    w = a0 - a1.*cos(2.*pi.*n./N) + a2.*cos(4.*pi.*n./N) - a3.*cos(6.*pi.*n./N);
+  endif
 endfunction

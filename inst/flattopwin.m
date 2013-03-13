@@ -40,6 +40,10 @@ function w = flattopwin (L, sym)
     endif
   endif
     
-  x = 2*pi*[0:L-1]'/divisor;
-  w = (1-1.93*cos(x)+1.29*cos(2*x)-0.388*cos(3*x)+0.0322*cos(4*x))/4.6402;
+  if (L == 1)
+    w = 1;
+  else
+    x = 2*pi*[0:L-1]'/divisor;
+    w = (1-1.93*cos(x)+1.29*cos(2*x)-0.388*cos(3*x)+0.0322*cos(4*x))/4.6402;
+  endif
 endfunction

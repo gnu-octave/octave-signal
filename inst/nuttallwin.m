@@ -31,12 +31,16 @@ function [w] = nuttallwin(L)
     warning('L rounded to the nearest integer.');
   end
 
-  N = L-1;
-  a0 = 0.355768;
-  a1 = 0.487396;
-  a2 = 0.144232;
-  a3 = 0.012604;
-  n = -N/2:N/2;
-  w = a0 + a1.*cos(2.*pi.*n./N) + a2.*cos(4.*pi.*n./N) + a3.*cos(6.*pi.*n./N);
-  w = w';
+  if (L == 1)
+    w = 1;
+  else
+    N = L-1;
+    a0 = 0.355768;
+    a1 = 0.487396;
+    a2 = 0.144232;
+    a3 = 0.012604;
+    n = -N/2:N/2;
+    w = a0 + a1.*cos(2.*pi.*n./N) + a2.*cos(4.*pi.*n./N) + a3.*cos(6.*pi.*n./N);
+    w = w';
+  endif
 endfunction
