@@ -1,6 +1,3 @@
-$SPCTOOLS= in spline directory of Dennis Brown's <a href="ftp://svr-ftp.eng.cam.ac.uk/pub/comp.speech/tools/spctools">SPCtools</a>
-$TFTB= try <a href="http://www-isis.enst.fr/Applications/tftb/iutsn.univ-nantes.fr/auger/tftb.html">Time-Frequency Tool box</a>
-
 signal >> Signal processing
 Signals
  diric
@@ -12,7 +9,6 @@ Signals
  sawtooth
  square
  chirp
- vco modulate demod= $TFTB
  specgram
  buffer
  mexihat
@@ -102,7 +98,6 @@ Power spectrum analysis
  cpsd
  mscohere
  pburg
- pcov pmcov pmtm pmusic= $SPCTOOLS
  pyulear
  xcorr
  xcorr2
@@ -128,9 +123,6 @@ Window functions
  parzenwin
 System identification
  arburg
- arcov= use <code>ar_covar</code> $SPCTOOLS
- armcov= use <code>ar_mdcov</code> $SPCTOOLS
- prony= use <code>ar_prony</code> $SPCTOOLS
  aryule
  invfreq
  invfreqs
