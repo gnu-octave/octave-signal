@@ -47,9 +47,13 @@ Filter conversion
  polystab
 IIR Filter design
  besself
+ buttap
  butter
+ cheb1ap
+ cheb2ap
  cheby1
  cheby2
+ ellipap
  ellip
  ncauer
  buttord
@@ -136,16 +140,6 @@ Sample rate change
  resample
  upfirdn
  data2fun
-Compatibility
- buttap= use <f>butter</f><code>(n,1,'s')</code>
- cheb1ap= use <f>cheby1</f><code>(n,Rp,1,'s')</code>
- cheb2ap= use <f>cheby2</f><code>(n,Rs,1,'s')</code>
- ellipap= use <f>ellip</f><code>(n,Rp,Rs,1,'s')</code>
- lp2bp= use <f>sftrans</f>
- lp2bs= use <f>sftrans</f>
- lp2hp= use <f>sftrans</f>
- lp2lp= use <f>sftrans</f>
- yulewalk=use <f>yulewalker</f>
 Utility
  buffer
  findpeaks

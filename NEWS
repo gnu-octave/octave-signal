@@ -6,6 +6,10 @@ signal-1.2.X   Release Date: XXXX-XX-XX   Release Manager:
 
  ** The following functions are new:
 
+      buttap
+      cheb1ap
+      cheb2ap
+      ellipap
       findpeaks
       fwht
       ifwht
