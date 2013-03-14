@@ -18,7 +18,7 @@
 ## Design lowpass analog elliptic filter.
 ##
 ## This function exists only for matlab compatibility and is equivalent to
-## @code{ellip (@var{n}, @var{Rp], @var{Rs}, 1, "s")}
+## @code{ellip (@var{n}, @var{Rp}, @var{Rs}, 1, "s")}
 ##
 ## @seealso{cheby1}
 ## @end deftypefn
@@ -33,7 +33,7 @@ function [z, p, g] = ellipap (n, Rp, Rs)
   elseif (! isscalar (Rs) || ! isnumeric (Rs) || Rs < 0)
     error ("ellipap: RS must be a positive scalar");
   elseif (Rp > Rs)
-    error ("ellipap: RS must be larger than RP);
+    error ("ellipap: RS must be larger than RP");
   endif
   [z, p, g] = ellip (n, Rp, Rs, 1, "s");
 endfunction

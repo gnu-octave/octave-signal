@@ -18,7 +18,7 @@
 ## Design lowpass analog Chebyshev type I filter.
 ##
 ## This function exists only for matlab compatibility and is equivalent to
-## @code{cheby1 (@var{n}, @var{Rp], 1, "s")}
+## @code{cheby1 (@var{n}, @var{Rp}, 1, "s")}
 ##
 ## @seealso{cheby1}
 ## @end deftypefn
