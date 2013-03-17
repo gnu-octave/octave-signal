@@ -14,7 +14,7 @@
 %% this program; if not, see <http://www.gnu.org/licenses/>.
 
 %% Usage:
-%%   [Pxx,freq] = cpsd(x,y,Nfft,Fs,window,overlap,range,plot_type,detrend)
+%%   [Pxx,freq] = cpsd(x,y,window,overlap,Nfft,Fs,range)
 %%
 %%     Estimate cross power spectrum of data "x" and "y" by the Welch (1967)
 %%     periodogram/FFT method.
@@ -23,8 +23,8 @@
 function [varargout] = cpsd(varargin)
 
   %% Check fixed argument
-  if ( nargin<2 )
-    error( 'cpsd: Need at least 2 args. Use help cpsd.' );
+  if (nargin < 2 || nargin > 7)
+    print_usage ();
   end
   nvarargin = length(varargin);
   %% remove any pwelch RESULT args and add 'cross'

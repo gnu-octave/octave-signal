@@ -14,7 +14,7 @@
 %% this program; if not, see <http://www.gnu.org/licenses/>.
 
 %% Usage:
-%%   [Pxx,freq]=mscohere(x,y,Nfft,Fs,window,overlap,range,plot_type,detrend)
+%%   [Pxx,freq]=mscohere(x,y,window,overlap,Nfft,Fs,range)
 %%
 %%     Estimate (mean square) coherence of signals "x" and "y".
 %%     Use the Welch (1967) periodogram/FFT method.
@@ -24,8 +24,8 @@
 function [varargout] = mscohere(varargin)
   %%
   %% Check fixed argument
-  if ( nargin<2 )
-    error( 'mscohere: Need at least 2 args. Use help mscohere' );
+  if (nargin < 2 || nargin > 7)
+    print_usage ();
   end
   nvarargin = length(varargin);
   %% remove any pwelch RESULT args and add 'cross'
