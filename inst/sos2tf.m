@@ -14,7 +14,8 @@
 %% this program; if not, see <http://www.gnu.org/licenses/>.
 
 %% -*- texinfo -*-
-%% @deftypefn {Function File} {[@var{B}, @var{A}] =} sos2tf (@var{sos}, @var{Bscale})
+%% @deftypefn {Function File} {[@var{B}, @var{A}] =} sos2tf (@var{sos})
+%% @deftypefnx {Function File} {[@var{B}, @var{A}] =} sos2tf (@var{sos}, @var{Bscale})
 %% Convert series second-order sections to direct form @math{H(z) = B(z)/A(z)}.
 %%
 %% INPUTS:
@@ -32,6 +33,7 @@
 %% @item
 %% @var{Bscale} is an overall gain factor that effectively scales
 %% the output @var{B} vector (or any one of the input @var{B}i vectors).
+%% If not given the gain is assumed to be 1.
 %% @end itemize
 %%
 %% RETURNED:

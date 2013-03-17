@@ -27,6 +27,12 @@ signal-1.2.X   Release Date: XXXX-XX-XX   Release Manager:
     window for a length argument of 1, and making all arguments after the
     length optional.
 
+ ** Documented the optional gain argument for the following functions:
+
+      sos2tf
+      sos2zp
+      zp2sos
+
  ** signal is no longer dependent on the optim package.
 
 ===============================================================================

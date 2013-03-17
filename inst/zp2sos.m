@@ -15,6 +15,7 @@
 
 %% -*- texinfo -*-
 %% @deftypefn {Function File} {[@var{sos}, @var{g}] =} zp2sos (@var{z}, @var{p})
+%% @deftypefnx {Function File} {[@var{sos}, @var{g}] =} zp2sos (@var{z}, @var{p}, @var{g})
 %% Convert filter poles and zeros to second-order sections.
 %%
 %% INPUTS:@*
@@ -25,6 +26,7 @@
 %%   @var{p} = column-vector containing the filter poles@*
 %% @item
 %%   @var{g} = overall filter gain factor
+%%   If not given the gain is assumed to be 1.
 %% @end itemize
 %%
 %% RETURNED:

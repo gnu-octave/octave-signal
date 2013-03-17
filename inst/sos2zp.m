@@ -14,7 +14,8 @@
 %% this program; if not, see <http://www.gnu.org/licenses/>.
 
 %% -*- texinfo -*-
-%% @deftypefn {Function File} {[@var{z}, @var{p}, @var{g}] =} sos2zp (@var{sos}, @var{Bscale})
+%% @deftypefn {Function File} {[@var{z}, @var{p}, @var{g}] =} sos2zp (@var{sos})
+%% @deftypefnx {Function File} {[@var{z}, @var{p}, @var{g}] =} sos2zp (@var{sos}, @var{Bscale})
 %% Convert series second-order sections to zeros, poles, and gains
 %% (pole residues).
 %%
@@ -33,6 +34,7 @@
 %% @item
 %% @var{Bscale} is an overall gain factor that effectively scales
 %% any one of the input @var{B}i vectors.
+%% If not given the gain is assumed to be 1.
 %% @end itemize
 %%
 %% RETURNED:
