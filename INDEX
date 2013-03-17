@@ -92,6 +92,8 @@ Transforms
  dwt
  fht
  ifht
+ fwht
+ ifwht
 Power spectrum analysis
  pwelch
  tfe
