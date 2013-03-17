@@ -49,6 +49,7 @@ IIR Filter design
  besself
  buttap
  butter
+ cheb
  cheb1ap
  cheb2ap
  cheby1
@@ -64,7 +65,9 @@ IIR Filter design
  sftrans
  bilinear
  impinvar
+ invimpinvar
  iirlp2mb
+ pei_tseng_notch
 FIR filter design
  fir1
  fir2
@@ -92,6 +95,8 @@ Transforms
  dwt
  fht
  ifht
+ fwht
+ ifwht
 Power spectrum analysis
  pwelch
  tfe
