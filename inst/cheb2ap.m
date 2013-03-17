@@ -20,7 +20,7 @@
 ## This function exists only for matlab compatibility and is equivalent to
 ## @code{cheby2 (@var{n}, @var{Rs}, 1, "s")}
 ##
-## @seealso{cheby1}
+## @seealso{cheby2}
 ## @end deftypefn
 
 function [z, p, g] = cheb2ap (n, Rp)

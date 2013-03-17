@@ -20,7 +20,7 @@
 ## This function exists only for matlab compatibility and is equivalent to
 ## @code{ellip (@var{n}, @var{Rp}, @var{Rs}, 1, "s")}
 ##
-## @seealso{cheby1}
+## @seealso{ellip}
 ## @end deftypefn
 
 function [z, p, g] = ellipap (n, Rp, Rs)
