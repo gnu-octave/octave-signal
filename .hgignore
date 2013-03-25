@@ -1,0 +1,3 @@
+syntax: regexp
+
+^src/\w+\.oct$
