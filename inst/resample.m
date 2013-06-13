@@ -41,8 +41,11 @@ function  [y, h] = resample( x, p, q, h )
 
   great_common_divisor=gcd(p,q);
   if (great_common_divisor>1)
-    p=p/great_common_divisor;
-    q=q/great_common_divisor;
+    p = double (p) / double (great_common_divisor);
+    q = double (q) / double (great_common_divisor);
+  else
+    p = double (p);
+    q = double (q);
   endif
 
   ## filter design if required
@@ -52,7 +55,7 @@ function  [y, h] = resample( x, p, q, h )
     ## properties of the antialiasing filter
 
     log10_rejection = -3.0;
-    stopband_cutoff_f = 1.0/(2.0 * max(p,q));
+    stopband_cutoff_f = 1 / (2 * max (p, q));
     roll_off_width = stopband_cutoff_f / 10.0;
 
     ## determine filter length
@@ -190,3 +193,12 @@ endfunction
 %! rejection=10^-3;
 %! idx_inband=1:ceil((1-rolloff/2)*r*N/2)-1;
 %! assert(max(err(idx_inband))<rejection);
+
+%% Test integer-type arguments
+%!test
+%! N = 512;
+%! f = 0.1;
+%! x = sin (2*pi*f*[0:N-1]);
+%! y1 = resample (x, 3, 2);
+%! y2 = resample (x, uint8 (3), 2);
+%! assert (y1, y2);
