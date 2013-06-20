@@ -1,4 +1,4 @@
-%% Copyright (c) 2011 Juan Pablo Carbajal <carbajal@ifi.uzh.ch>
+%% Copyright (c) 2011-2013 Juan Pablo Carbajal <carbajal@ifi.uzh.ch>
 %%
 %% This program is free software; you can redistribute it and/or modify it under
 %% the terms of the GNU General Public License as published by the Free Software

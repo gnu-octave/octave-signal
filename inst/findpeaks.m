@@ -53,6 +53,7 @@
 ## This function accepts property-value pair given in the list below:
 ##
 ## @table @asis
+##
 ## @item "MinPeakHeight"
 ## Minimum peak height (positive scalar). Only peaks that exceed this
 ## value will be returned. For data taking positive and negative values
@@ -114,13 +115,13 @@ function [pks idx varargout] = findpeaks (data, varargin)
     'Data contains negative values. You may want to "DoubleSided" option');
   end
 
-  % Rough stimates of first and second derivative
+  % Rough estimates of first and second derivative
   df1 = diff (data,1)([1; (1:end)']);
   df2 = diff (data,2)([1; 1; (1:end)']);
 
   % check for changes of sign of 1st derivative and negativity of 2nd
   % derivative.
-  idx = find (df1.*circshift(df1,1)<0 & df2<0)-1;
+  idx = find (df1.*[df1(2:end); 0]<0 & df2<0);
 
   % Get peaks that are beyond given height
   tf  = data(idx) > minH;
@@ -227,11 +228,12 @@ function [pks idx varargout] = findpeaks (data, varargin)
     pks = __data__(idx);
   else
     pks = data(idx);
-  end
+  endif
 
-  if nargout >=1
+  if nargout()>=1
     varargout{1} = extra;
-  end
+  endif
+
 endfunction
 
 %!demo
