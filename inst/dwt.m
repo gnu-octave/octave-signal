@@ -14,20 +14,24 @@
 ## this program; if not, see <http://www.gnu.org/licenses/>.
 
 ## -*- texinfo -*-
-## @deftypefn {Function File} {[@var{ca} @var{cd}] =} dwt(@var{x,lo_d,hi_d})
-## Comupte de discrete wavelet transform of x with one level.
+## @deftypefn {Function File} {[@var{ca}, @var{cd}] =} dwt (@var{x}, @var{lo_d}, @var{hi_d})
+## Compute the discrete wavelet transform of @var{x} with one level.
 ## @end deftypefn
 
-function [ca cd] = dwt(x,lo_d,hi_d)
-  if (nargin < 3|| nargin > 3)
-    print_usage;
-  elseif(~isvector(x)  || ~isvector(lo_d) || ~isvector(hi_d))
-    error('x, hi_d and lo_d must be vectors');
+function [ca, cd] = dwt (x, lo_d, hi_d)
+  if (nargin != 3)
+    print_usage ();
+  elseif (! isvector (x))
+    error ("dwt: X must be a vector");
+  elseif (! isvector (lo_d))
+    error ("dwt: LO_D must be a vector");
+  elseif (! isvector (hi_d))
+    error ("dwt: HI_D must be a vector");
   end
 
-  h = filter(hi_d,1,x);
-  g = filter(lo_d,1,x);
+  h = filter (hi_d, 1, x);
+  g = filter (lo_d, 1, x);
 
-  cd = downsample(h,2);
-  ca = downsample(g,2);
+  cd = downsample (h, 2);
+  ca = downsample (g, 2);
 endfunction
