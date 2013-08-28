@@ -56,7 +56,7 @@ function b = fir2(n, f, m, grid_n, ramp_n, window)
   elseif t != length(m)
     error ("fir2: frequency and magnitude vectors must be the same length");
   ## find the grid spacing and ramp width
-  elseif (nargin>4 && length(grid_n)>1) || \
+  elseif (nargin>4 && length(grid_n)>1) || ...
         (nargin>5 && (length(grid_n)>1 || length(ramp_n)>1))
     error ("fir2: grid_n and ramp_n must be integers");
   endif

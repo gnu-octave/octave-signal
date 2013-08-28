@@ -35,7 +35,7 @@ function T = dctmtx(n)
   endif
 
   if n > 1
-    T = [ sqrt(1/n)*ones(1,n) ; \
+    T = [ sqrt(1/n)*ones(1,n) ; ...
 	 sqrt(2/n)*cos((pi/2/n)*([1:n-1]'*[1:2:2*n])) ];
   elseif n == 1
     T = 1;
