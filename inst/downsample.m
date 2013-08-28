@@ -21,8 +21,7 @@ function y = downsample (x, n, phase = 0)
   if nargin<2 || nargin>3, print_usage; end
 
   if phase > n - 1
-    warning("This is incompatible with Matlab (phase = 0:n-1). See ...
-    octave-forge signal package release notes for details.")
+    warning("This is incompatible with Matlab (phase = 0:n-1). See octave-forge signal package release notes for details.")
   end
 
   if isvector(x)
