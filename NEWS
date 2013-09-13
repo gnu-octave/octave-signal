@@ -9,6 +9,11 @@ signal-1.3.0   Release Date: XXXX-XX-XX   Release Manager: TBD
       primitive
 
  ** The function `resample' was fixed to accept integer-type arguments.
+ 
+ ** Replaced line continuation marker "\" by "..." to avoid deprecated syntax
+    warning in Octave 4.0.
+
+ ** The signal package no longer depends on the specfun package.
 
 ===============================================================================
 signal-1.2.2   Release Date: 2013-03-25   Release Manager: Mike Miller
