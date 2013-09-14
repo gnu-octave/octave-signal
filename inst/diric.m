@@ -20,6 +20,7 @@
 ## @end deftypefn
 
 function [y] = diric(x,n)
+
   if (nargin < 2)
     print_usage;
   elseif (n <= 0 || floor(n) ~= n)

@@ -21,6 +21,7 @@
 %%     See "help pwelch" for description of arguments, hints and references.
 
 function [varargout] = tfestimate(varargin)
+
   %%
   %% Check fixed argument
   if (nargin < 2 || nargin > 7)
@@ -48,4 +49,5 @@ function [varargout] = tfestimate(varargin)
     varargout{1} = Pxx;
     varargout{2} = f;
   end
+
 end

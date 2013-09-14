@@ -50,6 +50,7 @@ function y = tripuls (t, w = 1, skew = 0)
   unwind_protect_cleanup
     warning(wfi);
   end_unwind_protect
+
 endfunction
 
 %!assert(tripuls(0:1/100:0.3,.1), tripuls([0:1/100:0.3]',.1)');

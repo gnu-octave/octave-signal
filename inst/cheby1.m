@@ -15,7 +15,7 @@
 ## this program; if not, see <http://www.gnu.org/licenses/>.
 
 ## Generate an Chebyshev type I filter with Rp dB of pass band ripple.
-## 
+##
 ## [b, a] = cheby1(n, Rp, Wc)
 ##    low pass filter with cutoff pi*Wc radians
 ##
@@ -34,11 +34,11 @@
 ##
 ## [...] = cheby1(...,'s')
 ##     return a Laplace space filter, W can be larger than 1.
-## 
+##
 ## [a,b,c,d] = cheby1(...)
-##  return  state-space matrices 
-## 
-## References: 
+##  return  state-space matrices
+##
+## References:
 ##
 ## Parks & Burrus (1987). Digital Filter Design. New York:
 ## John Wiley & Sons, Inc.
@@ -55,14 +55,14 @@ function [a,b,c,d] = cheby1(n, Rp, W, varargin)
   endif
 
   stop = 0;
-  digital = 1;  
+  digital = 1;
   for i=1:length(varargin)
     switch varargin{i}
-    case 's', digital = 0;
-    case 'z', digital = 1;
-    case { 'high', 'stop' }, stop = 1;
-    case { 'low',  'pass' }, stop = 0;
-    otherwise,  error ("cheby1: expected [high|stop] or [s|z]");
+      case 's', digital = 0;
+      case 'z', digital = 1;
+      case { 'high', 'stop' }, stop = 1;
+      case { 'low',  'pass' }, stop = 0;
+      otherwise,  error ("cheby1: expected [high|stop] or [s|z]");
     endswitch
   endfor
 
@@ -116,7 +116,7 @@ function [a,b,c,d] = cheby1(n, Rp, W, varargin)
   endif
 
   ## convert to the correct output form
-  if nargout==2, 
+  if nargout==2,
     a = real(gain*poly(zero));
     b = real(poly(pole));
   elseif nargout==3,
@@ -124,7 +124,7 @@ function [a,b,c,d] = cheby1(n, Rp, W, varargin)
     b = pole;
     c = gain;
   else
-    ## output ss results 
+    ## output ss results
     [a, b, c, d] = zp2ss (zero, pole, gain);
   endif
 

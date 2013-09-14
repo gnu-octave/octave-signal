@@ -49,36 +49,36 @@ function [fhandle fullfname] = data2fun( t, y, varargin)
   interp_args = {"spline"};
   given = struct("file",false);
   if ~isempty(varargin)
-      % Arguments
-      interp_args = varargin;
+    % Arguments
+    interp_args = varargin;
 
-      opt_args = fieldnames (given);
-      [tf idx] = ismember( opt_args, varargin);
-      for i=1:numel(opt_args)
+    opt_args = fieldnames (given);
+    [tf idx] = ismember( opt_args, varargin);
+    for i=1:numel(opt_args)
         given.(opt_args{i}) = tf(i);
-      end
+    end
 
-      if given.file
-        %% TODO: check that file will be in the path. Otherwise fhabdle(0) fails.
+    if given.file
+      %% TODO: check that file will be in the path. Otherwise fhabdle(0) fails.
 
-        if !isempty(varargin{idx(1)+1})
+      if !isempty(varargin{idx(1)+1})
 
-          [DIR fname] = fileparts(varargin{idx(1)+1});
+        [DIR fname] = fileparts(varargin{idx(1)+1});
 
-        else
+      else
 
-          [DIR fname] = fileparts (tmpnam (pwd (),"agen_"));
-
-        end
-
-        interp_args(idx(1)+[0 1]) = [];
-      end
-
-      if isempty(interp_args)
-
-        interp_args = {"spline"};
+        [DIR fname] = fileparts (tmpnam (pwd (),"agen_"));
 
       end
+
+      interp_args(idx(1)+[0 1]) = [];
+    end
+
+    if isempty(interp_args)
+
+      interp_args = {"spline"};
+
+    end
   end
 
   pp = interp1 (t, y, interp_args{end}, 'pp');

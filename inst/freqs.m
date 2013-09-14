@@ -15,7 +15,7 @@
 
 ## Usage: H = freqs(B,A,W);
 ##
-## Compute the s-plane frequency response of the IIR filter B(s)/A(s) as 
+## Compute the s-plane frequency response of the IIR filter B(s)/A(s) as
 ## H = polyval(B,j*W)./polyval(A,j*W).  If called with no output
 ## argument, a plot of magnitude and phase are displayed.
 ##

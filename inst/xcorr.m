@@ -192,7 +192,7 @@ function [R, lags] = xcorr (X, Y, maxlag, scale)
     pad_result = 0;
   endif
   if isvector(X) && isvector(Y) && length(X) != length(Y) && ...
-	!strcmp(scale,'none')
+        !strcmp(scale,'none')
     error("xcorr: scale must be 'none' if length(X) != length(Y)")
   endif
 

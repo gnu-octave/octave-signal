@@ -20,8 +20,8 @@
 %%     Use the Welch (1967) periodogram/FFT method.
 %%     See "help pwelch" for description of arguments, hints and references
 
-
 function [varargout] = mscohere(varargin)
+
   %%
   %% Check fixed argument
   if (nargin < 2 || nargin > 7)
@@ -49,4 +49,5 @@ function [varargout] = mscohere(varargin)
     varargout{1} = Pxx;
     varargout{2} = f;
   end
+
 end

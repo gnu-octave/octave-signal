@@ -123,8 +123,8 @@ function [S_r, f_r, t_r] = specgram(x, n = min(256, length(x)), Fs = 2, window =
   ## should be extended to accept a vector of frequencies at which to
   ## evaluate the fourier transform (via filterbank or chirp
   ## z-transform)
-  if length(n)>1, 
-    error("specgram doesn't handle frequency vectors yet"); 
+  if length(n)>1,
+    error("specgram doesn't handle frequency vectors yet");
   endif
 
   ## compute window offsets

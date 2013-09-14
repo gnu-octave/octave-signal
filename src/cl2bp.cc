@@ -111,7 +111,7 @@ IEEE Trans. on Signal Processing, 46(2):497-501, February 1998.\n\
     error("cl2bp: The \"gridsize\" parameter cannot exceed 1000000");
     return retval;
   }
-  
+
   MallocArray<double> h;
   try {
     cl2bp(h, m, w1, w2, up, lo, L, 1.e-5, 20, cancel_handler);

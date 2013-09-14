@@ -18,9 +18,9 @@
 ##usage: [Zz, Zp, Zg] = ellip(n, Rp, Rs, Wp, stype,'s')
 ##
 ## Generate an Elliptic or Cauer filter (discrete and contnuious).
-## 
+##
 ## [b,a] = ellip(n, Rp, Rs, Wp)
-##  low pass filter with order n, cutoff pi*Wp radians, Rp decibels 
+##  low pass filter with order n, cutoff pi*Wp radians, Rp decibels
 ##  of ripple in the passband and a stopband Rs decibels down.
 ##
 ## [b,a] = ellip(n, Rp, Rs, Wp, 'high')
@@ -37,17 +37,16 @@
 ##
 ## [...] = ellip(...,'s')
 ##     return a Laplace space filter, W can be larger than 1.
-## 
-## [a,b,c,d] = ellip(...)
-##  return  state-space matrices 
 ##
-## References: 
+## [a,b,c,d] = ellip(...)
+##  return  state-space matrices
+##
+## References:
 ##
 ## - Oppenheim, Alan V., Discrete Time Signal Processing, Hardcover, 1999.
-## - Parente Ribeiro, E., Notas de aula da disciplina TE498 -  Processamento 
+## - Parente Ribeiro, E., Notas de aula da disciplina TE498 -  Processamento
 ##   Digital de Sinais, UFPR, 2001/2002.
 ## - Kienzle, Paul, functions from Octave-Forge, 1999 (http://octave.sf.net).
-
 
 function [a,b,c,d] = ellip(n, Rp, Rs, W, varargin)
 
@@ -62,14 +61,14 @@ function [a,b,c,d] = ellip(n, Rp, Rs, W, varargin)
 
 
   stop = 0;
-  digital = 1;  
+  digital = 1;
   for i=1:length(varargin)
     switch varargin{i}
-    case 's', digital = 0;
-    case 'z', digital = 1;
-    case { 'high', 'stop' }, stop = 1;
-    case { 'low',  'pass' }, stop = 0;
-    otherwise,  error ("ellip: expected [high|stop] or [s|z]");
+      case 's', digital = 0;
+      case 'z', digital = 1;
+      case { 'high', 'stop' }, stop = 1;
+      case { 'low',  'pass' }, stop = 0;
+      otherwise,  error ("ellip: expected [high|stop] or [s|z]");
     endswitch
   endfor
 
@@ -116,7 +115,7 @@ function [a,b,c,d] = ellip(n, Rp, Rs, W, varargin)
 
 
   ## convert to the correct output form
-  if nargout==2, 
+  if nargout==2,
     a = real(gain*poly(zero));
     b = real(poly(pole));
   elseif nargout==3,
@@ -124,7 +123,7 @@ function [a,b,c,d] = ellip(n, Rp, Rs, W, varargin)
     b = pole;
     c = gain;
   else
-    ## output ss results 
+    ## output ss results
     [a, b, c, d] = zp2ss (zero, pole, gain);
   endif
 
@@ -147,18 +146,18 @@ endfunction
 %! disp("")
 %! x=input("[h,w]=freqz(b,a);  [ENTER]");
 %! [h,w]=freqz(b,a);
-%! 
+%!
 %! xlabel("Frequency");
 %! ylabel("abs(H[w])[dB]");
 %! axis([0,1,-100,0]);
 %! plot(w./pi, 20*log10(abs(h)), ';;')
-%! 
+%!
 %! hold('on');
 %! x=ones(1,length(h));
 %! plot(w./pi, x.*-1, ';-1 dB;')
 %! plot(w./pi, x.*-90, ';-90 dB;')
 %! hold('off');
-%! 
+%!
 %! xlabel("")
 %! ylabel("")
 %! clc

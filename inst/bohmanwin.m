@@ -20,6 +20,7 @@
 ## @end deftypefn
 
 function [w] = bohmanwin(L)
+
   if (nargin < 1)
     print_usage
   elseif(! isscalar(L))
@@ -48,4 +49,5 @@ function [w] = bohmanwin(L)
     w(length(w))=0;
     w = w';
   end
+
 endfunction

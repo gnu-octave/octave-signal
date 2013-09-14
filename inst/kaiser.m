@@ -1,6 +1,6 @@
 ## Copyright (C) 1995, 1996, 1997 Kurt Hornik <Kurt.Hornik@ci.tuwien.ac.at>
 ## Copyright (C) 2000 Paul Kienzle <pkienzle@users.sf.net>
-## 
+##
 ## This program is free software; you can redistribute it and/or modify it under
 ## the terms of the GNU General Public License as published by the Free Software
 ## Foundation; either version 3 of the License, or (at your option) any later
@@ -39,7 +39,7 @@ function w = kaiser (L, beta = 0.5)
   elseif !(isscalar (beta) && (beta == real (beta)))
     error ("kaiser:  beta has to be a real scalar");
   endif
-  
+
   if (L == 1)
     w = 1;
   else

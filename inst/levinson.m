@@ -20,12 +20,12 @@
 ##    toeplitz(acf(1:p)) * x = -acf(2:p+1).
 ## The solution [1, x'] is the denominator of an all pole filter
 ## approximation to the signal x which generated the autocorrelation
-## function acf.  
+## function acf.
 ##
 ## acf is the autocorrelation function for lags 0 to p.
 ## p defaults to length(acf)-1.
-## Returns 
-##   a=[1, x'] the denominator filter coefficients. 
+## Returns
+##   a=[1, x'] the denominator filter coefficients.
 ##   v= variance of the white noise = square of the numerator constant
 ##   ref = reflection coefficients = coefficients of the lattice
 ##         implementation of the filter
@@ -41,12 +41,13 @@
 ##    Copyright (C) 1995 Friedrich Leisch <Friedrich.Leisch@ci.tuwien.ac.at>
 ##    GPL license
 
-## TODO: Matlab doesn't return reflection coefficients and 
+## TODO: Matlab doesn't return reflection coefficients and
 ## TODO:    errors in addition to the polynomial a.
-## TODO: What is the difference between aryule, levinson, 
+## TODO: What is the difference between aryule, levinson,
 ## TODO:    ac2poly, ac2ar, lpc, etc.?
 
 function [a, v, ref] = levinson (acf, p)
+
   if ( nargin<1 )
     print_usage;
   elseif( ~isvector(acf) || length(acf)<2 )
@@ -81,4 +82,5 @@ function [a, v, ref] = levinson (acf, p)
       a = [1, a];
     endif
   endif
+
 endfunction

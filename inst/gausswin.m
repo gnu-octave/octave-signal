@@ -16,7 +16,7 @@
 ## usage: w = gausswin(L, a)
 ##
 ## Generate an L-point gaussian window of the given width. Use larger a
-## for a narrow window.  Use larger L for a smoother curve. 
+## for a narrow window.  Use larger L for a smoother curve.
 ##
 ##     w = exp ( -(a*x)^2/2 )
 ##

@@ -112,7 +112,7 @@ function [pks idx varargout] = findpeaks (data, varargin)
     [data __data__] = deal (__data__, data);
   elseif min(data)<0
     error ("findpeaks:InvalidArgument",
-    'Data contains negative values. You may want to "DoubleSided" option');
+           'Data contains negative values. You may want to "DoubleSided" option');
   end
 
   % Rough estimates of first and second derivative
@@ -205,7 +205,7 @@ function [pks idx varargout] = findpeaks (data, varargin)
       rz = roots ([pp(1:2) pp(3)-mean([H,minH])]);
       width = abs (diff (rz));
       if width < minW || pp(1) > 0 || H < minH || data(idx(i)) < 0.99*H
-          idx_pruned = setdiff (idx_pruned, idx(i));
+        idx_pruned = setdiff (idx_pruned, idx(i));
       elseif nargout >= 1
         struct_count++;
         extra.parabol(struct_count).x  = ind([1 end]);

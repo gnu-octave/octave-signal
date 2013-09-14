@@ -37,9 +37,9 @@ b0 must be nonzero for each section.\n\
 @end deftypefn\n")
 {
   octave_value_list retval;
-  
+
   int nargin = args.length ();
-  
+
   if (nargin != 2)
     {
       print_usage ();
@@ -48,10 +48,10 @@ b0 must be nonzero for each section.\n\
 
   Matrix sos( args(0).matrix_value() );
 
-  if (error_state) 
-    { 
+  if (error_state)
+    {
       gripe_wrong_type_arg("sosfilt",args(0));
-      return retval; 
+      return retval;
     }
 
   if (sos.columns() != 6)
@@ -59,13 +59,13 @@ b0 must be nonzero for each section.\n\
       error("Second-order section matrix must be a non-empty Lx6 matrix");
       return retval;
     }
- 
+
   Matrix x( args(1).matrix_value() );
 
-  if (error_state) 
-    { 
+  if (error_state)
+    {
       gripe_wrong_type_arg("sosfilt",args(1));
-      return retval; 
+      return retval;
     }
 
   int n=x.rows();
@@ -82,32 +82,32 @@ b0 must be nonzero for each section.\n\
     }
 
   Matrix y(n,m,0.0);
-  
+
   for (int k=0; k<m; k++)
     {
       for (int j=0; j<sos.rows(); j++)
-	{
-	  
-	  double v0=0.0, v1=0.0, v2=0.0;
-	  
-	  double a0 = sos(j,3);
-	  double a1 = sos(j,4)/a0;
-	  double a2 = sos(j,5)/a0;
-	  double b0 = sos(j,0)/a0;
-	  double b1 = sos(j,1)/a0;
-	  double b2 = sos(j,2)/a0;
-      
-	  for (int i=0; i<n; i++)
-	    {
-	      v0=x(i,k)-a1*v1-a2*v2;
-	      y(i,k)=b0*v0+b1*v1+b2*v2;
-	      v2=v1;
-	      v1=v0;
-	    }
-	  
-	  x.insert(y.column(k),0,k);
+        {
 
-	}
+          double v0=0.0, v1=0.0, v2=0.0;
+
+          double a0 = sos(j,3);
+          double a1 = sos(j,4)/a0;
+          double a2 = sos(j,5)/a0;
+          double b0 = sos(j,0)/a0;
+          double b1 = sos(j,1)/a0;
+          double b2 = sos(j,2)/a0;
+
+          for (int i=0; i<n; i++)
+            {
+              v0=x(i,k)-a1*v1-a2*v2;
+              y(i,k)=b0*v0+b1*v1+b2*v2;
+              v2=v1;
+              v1=v0;
+            }
+
+          x.insert(y.column(k),0,k);
+
+        }
     }
 
   if (isrowvector)
@@ -117,4 +117,3 @@ b0 must be nonzero for each section.\n\
 
   return retval;
 }
-

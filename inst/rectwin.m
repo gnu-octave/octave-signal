@@ -20,6 +20,8 @@
 ## @end deftypefn
 
 function w = rectwin(L)
+
   if (nargin < 1); print_usage; end
   w = ones(round(L),1);
+
 endfunction

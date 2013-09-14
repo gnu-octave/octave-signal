@@ -23,8 +23,8 @@
 ##
 ## for x = linspace ( -(n-1)/2, (n-1)/2, n ).
 ##
-## Width a is measured in frequency units (sample rate/num samples). 
-## It should be f when multiplying in the time domain, but 1/f when 
+## Width a is measured in frequency units (sample rate/num samples).
+## It should be f when multiplying in the time domain, but 1/f when
 ## multiplying in the frequency domain (for use in convolutions).
 
 function x = gaussian(n, w)

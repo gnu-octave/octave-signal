@@ -41,25 +41,25 @@
 
 function [B, A, SigN] = invfreqz(H, F, nB, nA, W, iter, tol, tr, varargin)
 
-if nargin < 9
-  varargin = {};
-  if nargin < 8
-    tr = '';
-    if nargin < 7
+  if nargin < 9
+    varargin = {};
+    if nargin < 8
+      tr = '';
+      if nargin < 7
         tol = [];
-        if nargin < 6 
-            iter = [];
-            if nargin < 5
-                W = ones(1,length(F));
-            end
+        if nargin < 6
+          iter = [];
+          if nargin < 5
+            W = ones(1,length(F));
+          end
         end
+      end
     end
   end
-end
 
 
-% now for the real work
-[B, A, SigN] = invfreq(H, F, nB, nA, W, iter, tol, tr, 'z', varargin{:});
+  % now for the real work
+  [B, A, SigN] = invfreq(H, F, nB, nA, W, iter, tol, tr, 'z', varargin{:});
 
 endfunction
 

@@ -35,35 +35,35 @@ function contRange = clustersegment(xhi)
   contRange = cell(1,Np);
 
   for i = 1:Np
-      idxUp = find(bool_discon(i,:)>0)+1;
-      idxDwn = find(bool_discon(i,:)<0);
-      tLen = length(idxUp) + length(idxDwn);
+    idxUp = find(bool_discon(i,:)>0)+1;
+    idxDwn = find(bool_discon(i,:)<0);
+    tLen = length(idxUp) + length(idxDwn);
 
-      if xhi(i,1)==1
+    if xhi(i,1)==1
       % first event was down
-          contRange{i}(1) = 1;
-          contRange{i}(2:2:tLen+1) = idxDwn;
-          contRange{i}(3:2:tLen+1) = idxUp;
-      else
+      contRange{i}(1) = 1;
+      contRange{i}(2:2:tLen+1) = idxDwn;
+      contRange{i}(3:2:tLen+1) = idxUp;
+    else
       % first event was up
-          contRange{i}(1:2:tLen) = idxUp;
-          contRange{i}(2:2:tLen) = idxDwn;
-      end
+      contRange{i}(1:2:tLen) = idxUp;
+      contRange{i}(2:2:tLen) = idxDwn;
+    end
 
-      if xhi(i,end)==1
+    if xhi(i,end)==1
       % last event was up
-         contRange{i}(end+1) = Na;
-      end
+      contRange{i}(end+1) = Na;
+    end
 
-      tLen = length(contRange{i});
-      if tLen ~=0
-        contRange{i}=reshape(contRange{i},2,tLen/2);
-      end
+    tLen = length(contRange{i});
+    if tLen ~=0
+      contRange{i}=reshape(contRange{i},2,tLen/2);
+    end
 
   end
 
   if Np == 1
-   contRange = cell2mat (contRange);
+    contRange = cell2mat (contRange);
   end
 
 endfunction

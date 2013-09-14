@@ -19,7 +19,7 @@
 %%
 %% INPUTS:
 %% @var{B} and @var{A} are vectors specifying the digital filter @math{H(z) = B(z)/A(z)}.
-%% Say @code{help filter} for documentation of the @var{B} and @var{A} 
+%% Say @code{help filter} for documentation of the @var{B} and @var{A}
 %% filter coefficients.
 %%
 %% RETURNED:
@@ -35,13 +35,14 @@
 %%   Say @code{test residuez verbose} to see a number of examples.
 %% @end example
 %%
-%% For the theory of operation, see 
+%% For the theory of operation, see
 %% @indicateurl{http://ccrma.stanford.edu/~jos/filters/residuez.html}
-%% 
+%%
 %% @seealso{residue residued}
 %% @end deftypefn
 
 function [r, p, f, m] = residuez(B, A, tol)
+
   % RESIDUEZ - return residues, poles, and FIR part of B(z)/A(z)
   %
   % Let nb = length(b), na = length(a), and N=na-1 = no. of poles.
@@ -49,7 +50,7 @@ function [r, p, f, m] = residuez(B, A, tol)
   %
   %             r(1)                      r(N)
   % H(z) = ----------------  + ... + ----------------- = R(z)
-  %        [ 1-p(1)/z ]^m(1)         [ 1-p(N)/z ]^m(N)   
+  %        [ 1-p(1)/z ]^m(1)         [ 1-p(N)/z ]^m(N)
   %
   % If, on the other hand, nb >= na, the FIR part f will not be empty.
   % Let M = nb-na+1 = order of f = length(f)-1). Then the returned filter is
@@ -65,7 +66,7 @@ function [r, p, f, m] = residuez(B, A, tol)
   % the IIR part R(z) starts after that of the FIR part F(z), use RESIDUED.
   %
   % J.O. Smith, 9/19/05
-    
+
   if nargin==3
     warning("tolerance ignored");
   end
@@ -75,9 +76,10 @@ function [r, p, f, m] = residuez(B, A, tol)
   p = 1 ./ p;
   r = r .* ((-p) .^m);
   if f, f = conj(fliplr(f)); end
+
 end
 
-%!test 
+%!test
 %! B=[1 -2 1]; A=[1 -1];
 %! [r,p,f,m] = residuez(B,A);
 %! assert(r,0,100*eps);
@@ -85,7 +87,7 @@ end
 %! assert(f,[1 -1],100*eps);
 %! assert(m,1,100*eps);
 
-%!test 
+%!test
 %! B=1; A=[1 -1j];
 %! [r,p,f,m] = residuez(B,A);
 %! assert(r,1,100*eps);
@@ -93,7 +95,7 @@ end
 %! assert(f,[],100*eps);
 %! assert(m,1,100*eps);
 
-%!test 
+%!test
 %! B=1; A=[1 -1 .25];
 %! [r,p,f,m] = residuez(B,A);
 %! [rs,is] = sort(r);
@@ -102,8 +104,8 @@ end
 %! assert(f,[],100*eps);
 %! assert(m(is),[1;2],100*eps);
 
-%!test 
-%! B=1; A=[1 -0.75 .125]; 
+%!test
+%! B=1; A=[1 -0.75 .125];
 %! [r,p,f,m] = residuez(B,A);
 %! [rs,is] = sort(r);
 %! assert(rs,[-1;2],100*eps);

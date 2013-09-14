@@ -20,6 +20,7 @@
 ## @end deftypefn
 
 function w = parzenwin (L)
+
   if(nargin != 1)
     print_usage;
   elseif(L < 0)
@@ -40,4 +41,5 @@ function w = parzenwin (L)
   w2 = 2.*(1-abs(n2)./(L/2)).^3;
   w3 = 2.*(1-abs(n3)./(L/2)).^3;
   w = [w3 w1 w2]';
+
 endfunction

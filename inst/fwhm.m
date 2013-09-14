@@ -35,110 +35,111 @@
 
 function myfwhm = fwhm (y, varargin)
 
-    if nargin < 1 || nargin > 5
+  if nargin < 1 || nargin > 5
         print_usage;
-    end
-    opt = 'zero';
-    is_alevel = 0;
-    level = 0.5;
-    if nargin==1
+  end
+  opt = 'zero';
+  is_alevel = 0;
+  level = 0.5;
+  if nargin==1
         x = 1:length(y);
+  else
+    if ischar(varargin{1})
+      x = 1:length(y);
+      k = 1;
     else
-        if ischar(varargin{1})
-            x = 1:length(y);
-            k = 1;
-        else
-            x = y;
-            y = varargin{1};
-            k = 2;
-        end
-        while k <= length(varargin)
-            if strcmp(varargin{k}, 'alevel')
-                is_alevel = 1;
-                k = k+1;
-                if k > length(varargin)
-                    error('option "alevel" requires an argument');
-                end
-                level = varargin{k};
-                if ~isreal(level) || length(level) > 1
-                    error('argument of "alevel" must be real number');
-                end
-                k = k+1;
-                break
-            end
-            if any(strcmp(varargin{k}, {'zero', 'min'}))
-                opt = varargin{k};
-                k = k+1;
-            end
-            if k > length(varargin) break; end
-            if strcmp(varargin{k}, 'rlevel')
-                k = k+1;
-                if k > length(varargin)
-                    error('option "rlevel" requires an argument');
-                end
-                level = varargin{k};
-                if ~isreal(level) || length(level) > 1 || level(1) < 0 || level(:) > 1
-                    error('argument of "rlevel" must be real number from 0 to 1 (it is 0.5 for fwhm)');
-                end
-                k = k+1;
-                break
-            end
-            break
-        end
-        if k ~= length(varargin)+1
-            error('fwhm: extraneous option(s)');
-        end
+      x = y;
+      y = varargin{1};
+      k = 2;
     end
-
-    % test the y matrix
-    [nr, nc] = size(y);
-    if (nr == 1 && nc > 1)
-        y = y'; nr = nc; nc = 1;
+    while k <= length(varargin)
+      if strcmp(varargin{k}, 'alevel')
+        is_alevel = 1;
+        k = k+1;
+        if k > length(varargin)
+          error('option "alevel" requires an argument');
+        end
+        level = varargin{k};
+        if ~isreal(level) || length(level) > 1
+          error('argument of "alevel" must be real number');
+        end
+        k = k+1;
+        break
+      end
+      if any(strcmp(varargin{k}, {'zero', 'min'}))
+        opt = varargin{k};
+        k = k+1;
+      end
+      if k > length(varargin) break; end
+      if strcmp(varargin{k}, 'rlevel')
+        k = k+1;
+        if k > length(varargin)
+          error('option "rlevel" requires an argument');
+        end
+        level = varargin{k};
+        if ~isreal(level) || length(level) > 1 || level(1) < 0 || level(:) > 1
+          error('argument of "rlevel" must be real number from 0 to 1 (it is 0.5 for fwhm)');
+        end
+        k = k+1;
+        break
+      end
+      break
     end
-
-    if length(x) ~= nr
-        error('dimension of input arguments do not match');
+    if k ~= length(varargin)+1
+      error('fwhm: extraneous option(s)');
     end
+  end
 
-    % Shift matrix columns so that y(+-xfwhm) = 0:
-    if is_alevel
-            % case: full-width at the given absolute position
-            y = y - level;
+  % test the y matrix
+  [nr, nc] = size(y);
+  if (nr == 1 && nc > 1)
+    y = y'; nr = nc; nc = 1;
+  end
+
+  if length(x) ~= nr
+    error('dimension of input arguments do not match');
+  end
+
+  % Shift matrix columns so that y(+-xfwhm) = 0:
+  if is_alevel
+    % case: full-width at the given absolute position
+    y = y - level;
+  else
+    if strcmp(opt, 'zero')
+      % case: full-width at half maximum
+      y = y - level * repmat(max(y), nr, 1);
     else
-        if strcmp(opt, 'zero')
-            % case: full-width at half maximum
-            y = y - level * repmat(max(y), nr, 1);
-        else
-            % case: full-width above background
-            y = y - level * repmat((max(y) + min(y)), nr, 1);
-        end
+      % case: full-width above background
+      y = y - level * repmat((max(y) + min(y)), nr, 1);
     end
+  end
 
-    % Trial for a "vectorizing" calculation of fwhm (i.e. all
-    % columns in one shot):
-    % myfwhm = zeros(1,nc); % default: 0 for fwhm undefined
-    % ind = find (y(1:end-1, :) .* y(2:end, :) <= 0);
-    % [r1,c1] = ind2sub(size(y), ind);
-    % ... difficult to proceed further.
-    % Thus calculate fwhm for each column independently:
-    myfwhm = zeros(1,nc); % default: 0 for fwhm undefined
-    for n=1:nc
-        yy = y(:, n);
-        ind = find((yy(1:end-1) .* yy(2:end)) <= 0);
-        if length(ind) >= 2 && yy(ind(1)) > 0 % must start ascending
-            ind = ind(2:end);
-        end
-        [mx, imax] = max(yy); % protection against constant or (almost) monotonous functions
-        if length(ind) >= 2 && imax >= ind(1) && imax <= ind(end)
-            ind1 = ind(1);
-            ind2 = ind1 + 1;
-            xx1 = x(ind1) - yy(ind1) * (x(ind2) - x(ind1)) / (yy(ind2) - yy(ind1));
-            ind1 = ind(end);
-            ind2 = ind1 + 1;
-            xx2 = x(ind1) - yy(ind1) * (x(ind2) - x(ind1)) / (yy(ind2) - yy(ind1));
-            myfwhm(n) = xx2 - xx1;
-        end
+  % Trial for a "vectorizing" calculation of fwhm (i.e. all
+  % columns in one shot):
+  % myfwhm = zeros(1,nc); % default: 0 for fwhm undefined
+  % ind = find (y(1:end-1, :) .* y(2:end, :) <= 0);
+  % [r1,c1] = ind2sub(size(y), ind);
+  % ... difficult to proceed further.
+  % Thus calculate fwhm for each column independently:
+  myfwhm = zeros(1,nc); % default: 0 for fwhm undefined
+  for n=1:nc
+    yy = y(:, n);
+    ind = find((yy(1:end-1) .* yy(2:end)) <= 0);
+    if length(ind) >= 2 && yy(ind(1)) > 0 % must start ascending
+      ind = ind(2:end);
     end
+    [mx, imax] = max(yy); % protection against constant or (almost) monotonous functions
+    if length(ind) >= 2 && imax >= ind(1) && imax <= ind(end)
+      ind1 = ind(1);
+      ind2 = ind1 + 1;
+      xx1 = x(ind1) - yy(ind1) * (x(ind2) - x(ind1)) / (yy(ind2) - yy(ind1));
+      ind1 = ind(end);
+      ind2 = ind1 + 1;
+      xx2 = x(ind1) - yy(ind1) * (x(ind2) - x(ind1)) / (yy(ind2) - yy(ind1));
+      myfwhm(n) = xx2 - xx1;
+    end
+  end
+
 end
 
 %!test

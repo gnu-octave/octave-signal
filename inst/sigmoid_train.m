@@ -55,8 +55,8 @@ function envelope = sigmoid_train (t, range, timeconstant)
   %% Make sure t is horizontal
   flag_transposed = false;
   if iscolumn (t)
-   t               = t.';
-   flag_transposed = true;
+    t               = t.';
+    flag_transposed = true;
   end
   [ncol nrow]     = size (t);
 

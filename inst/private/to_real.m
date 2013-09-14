@@ -18,6 +18,9 @@
 ## This function is necessary for impinvar and invimpinvar of the signal package
 
 ## Round complex number to nearest real number
+
 function p_out = to_real(p_in)
+
   p_out = abs(p_in) .* sign(real(p_in));
+
 endfunction

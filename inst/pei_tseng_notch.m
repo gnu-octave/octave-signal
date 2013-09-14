@@ -109,11 +109,11 @@ endfunction
 %! filtered = filter(b,a,data);
 %!
 %! clf
-%! subplot ( columns ( filtered ), 1, 1) 
+%! subplot ( columns ( filtered ), 1, 1)
 %! plot(filtered(:,1),";Impulse response;")
-%! subplot ( columns ( filtered ), 1, 2 ) 
+%! subplot ( columns ( filtered ), 1, 2 )
 %! plot(filtered(:,2),";49Hz response;")
-%! subplot ( columns ( filtered ), 1, 3 ) 
+%! subplot ( columns ( filtered ), 1, 3 )
 %! plot(filtered(:,3),";50Hz response;")
-%! subplot ( columns ( filtered ), 1, 4 ) 
+%! subplot ( columns ( filtered ), 1, 4 )
 %! plot(filtered(:,4),";51Hz response;")

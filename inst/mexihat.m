@@ -19,6 +19,7 @@
 ## @end deftypefn
 
 function [psi,x] = mexihat(lb,ub,n)
+
   if (nargin < 3); print_usage; end
 
   if (n <= 0)
@@ -26,4 +27,5 @@ function [psi,x] = mexihat(lb,ub,n)
   endif
   x = linspace(lb,ub,n);
   psi = (1-x.^2).*(2/(sqrt(3)*pi^0.25)) .* exp(-x.^2/2)  ;
+
 endfunction

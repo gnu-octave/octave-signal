@@ -21,9 +21,9 @@
 %%        [B,A] = invfreq(H,F,nB,nA,W,[],[],plane)
 %%        [B,A] = invfreq(H,F,nB,nA,W,iter,tol,plane)
 %%
-%% Fit filter B(z)/A(z) or B(s)/A(s) to complex frequency response at 
-%% frequency points F. A and B are real polynomial coefficients of order 
-%% nA and nB respectively.  Optionally, the fit-errors can be weighted vs 
+%% Fit filter B(z)/A(z) or B(s)/A(s) to complex frequency response at
+%% frequency points F. A and B are real polynomial coefficients of order
+%% nA and nB respectively.  Optionally, the fit-errors can be weighted vs
 %% frequency according to the weights W. Also, the transform plane can be
 %% specified as either 's' for continuous time or 'z' for discrete time. 'z'
 %% is chosen by default.  Eventually, Steiglitz-McBride iterations will be
@@ -46,9 +46,9 @@
 %%     Hh = freqz(Bh,Ah);
 %%     disp(sprintf('||frequency response error|| = %f',norm(H-Hh)));
 %%
-%% References: J. O. Smith, "Techniques for Digital Filter Design and System 
-%%  	Identification with Application to the Violin, Ph.D. Dissertation, 
-%% 	Elec. Eng. Dept., Stanford University, June 1983, page 50; or,
+%% References: J. O. Smith, "Techniques for Digital Filter Design and System
+%%      Identification with Application to the Violin, Ph.D. Dissertation,
+%%      Elec. Eng. Dept., Stanford University, June 1983, page 50; or,
 %%
 %% http://ccrma.stanford.edu/~jos/filters/FFT_Based_Equation_Error_Method.html
 
@@ -57,6 +57,7 @@
 %% TODO: modify to accept more argument configurations
 
 function [B, A, SigN] = invfreq(H, F, nB, nA, W, iter, tol, tr, plane, varargin)
+
   if length(nB) > 1, zB = nB(2); nB = nB(1); else zB = 0; end
   n = max(nA, nB);
   m = n+1; mA = nA+1; mB = nB+1;
@@ -74,7 +75,7 @@ function [B, A, SigN] = invfreq(H, F, nB, nA, W, iter, tol, tr, plane, varargin)
 
   [reg, prop ] = parseparams(varargin);
   %# should we normalise freqs to avoid matrices with rank deficiency ?
-  norm = false; 
+  norm = false;
   %# by default, use Ordinary Least Square to solve normal equations
   method = 'LS';
   if length(prop) > 0
@@ -86,20 +87,20 @@ function [B, A, SigN] = invfreq(H, F, nB, nA, W, iter, tol, tr, plane, varargin)
             prop(indi:indi+1) = [];
             continue
           else
-            norm = true; prop(indi) = []; 
+            norm = true; prop(indi) = [];
             continue
-           end
-         case 'method'
-           if indi < length(prop) && ischar(prop{indi+1}),
-             method = prop{indi+1};
-             prop(indi:indi+1) = [];
+          end
+        case 'method'
+          if indi < length(prop) && ischar(prop{indi+1}),
+            method = prop{indi+1};
+            prop(indi:indi+1) = [];
             continue
-           else
-             error('invfreq.m: incorrect/missing method argument');
-           end
-         otherwise %# FIXME: just skip it for now
-           disp(sprintf("Ignoring unkown argument %s", varargin{indi}));
-           indi = indi + 1;
+          else
+            error('invfreq.m: incorrect/missing method argument');
+          end
+        otherwise %# FIXME: just skip it for now
+          disp(sprintf("Ignoring unkown argument %s", varargin{indi}));
+          indi = indi + 1;
       end
     end
   end
@@ -107,21 +108,21 @@ function [B, A, SigN] = invfreq(H, F, nB, nA, W, iter, tol, tr, plane, varargin)
   Ruu = zeros(mB, mB); Ryy = zeros(nA, nA); Ryu = zeros(nA, mB);
   Pu = zeros(mB, 1);   Py = zeros(nA,1);
   if strcmp(tr,'trace')
-      disp(' ')
-      disp('Computing nonuniformly sampled, equation-error, rational filter.');
-      disp(['plane = ',plane]);
-      disp(' ')
+    disp(' ')
+    disp('Computing nonuniformly sampled, equation-error, rational filter.');
+    disp(['plane = ',plane]);
+    disp(' ')
   end
 
   s = sqrt(-1)*F;
   switch plane
     case 'z'
       if max(F) > pi || min(F) < 0
-      disp('hey, you frequency is outside the range 0 to pi, making my own')
+        disp('hey, you frequency is outside the range 0 to pi, making my own')
         F = linspace(0, pi, length(H));
-      s = sqrt(-1)*F;
-    end
-    s = exp(-s);
+        s = sqrt(-1)*F;
+      end
+      s = exp(-s);
     case 's'
       if max(F) > 1e6 && n > 5,
         if ~norm,
@@ -132,7 +133,7 @@ function [B, A, SigN] = invfreq(H, F, nB, nA, W, iter, tol, tr, plane, varargin)
         end
       end
   end
-  
+
   for k=1:nF,
     Zk = (s(k).^[0:n]).';
     Hk = H(k);
@@ -159,7 +160,7 @@ function [B, A, SigN] = invfreq(H, F, nB, nA, W, iter, tol, tr, plane, varargin)
   k = k+1;
   if k <= nB, Rr(:, 1+k) = Zk; end
   if k <= nA, Rr(:, mB+k) = -Zk.*H; end
-  
+
   %# complex to real equation system -- this ensures real solution
   Rr = Rr(:, 1+zB:end);
   Rr = [real(Rr); imag(Rr)]; Pr = [real(H(:)); imag(H(:))];
@@ -169,7 +170,7 @@ function [B, A, SigN] = invfreq(H, F, nB, nA, W, iter, tol, tr, plane, varargin)
 
   switch method
     case {'ls' 'LS'}
-      %# avoid scaling errors with Theta = R\P; 
+      %# avoid scaling errors with Theta = R\P;
       %# [Q, R] = qr([Rn Pn]); Theta = R(1:end, 1:end-1)\R(1:end, end);
       [Q, R] = qr([Rr Pr], 0); Theta = R(1:end-1, 1:end-1)\R(1:end-1, end);
       %# SigN = R(end, end-1);
@@ -198,7 +199,7 @@ function [B, A, SigN] = invfreq(H, F, nB, nA, W, iter, tol, tr, plane, varargin)
       Theta = -V(1:end-1, end)/V(end, end);
       %# unnoised (B) part -- remove A contribution and back-substitute
       Theta = [R(1:eB, 1:eB)\(R(1:eB, end) - R(1:eB, sA:end-1)*Theta)
-              Theta];
+               Theta];
       SigN = S(end, end);
     otherwise
       error("invfreq: unknown method %s", method);
@@ -216,6 +217,7 @@ function [B, A, SigN] = invfreq(H, F, nB, nA, W, iter, tol, tr, plane, varargin)
       for k = nA:-1:1, A(k) = A(k)/Zk(k); end
     end
   end
+
 endfunction
 
 %!demo

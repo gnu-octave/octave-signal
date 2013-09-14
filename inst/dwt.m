@@ -19,6 +19,7 @@
 ## @end deftypefn
 
 function [ca, cd] = dwt (x, lo_d, hi_d)
+
   if (nargin != 3)
     print_usage ();
   elseif (! isvector (x))
@@ -34,4 +35,5 @@ function [ca, cd] = dwt (x, lo_d, hi_d)
 
   cd = downsample (h, 2);
   ca = downsample (g, 2);
+
 endfunction

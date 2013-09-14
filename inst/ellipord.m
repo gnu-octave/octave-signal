@@ -21,9 +21,9 @@
 ## rp: decibels of ripple in the passband.
 ## rs: decibels of ripple in the stopband.
 ##
-## References: 
+## References:
 ##
-## - Lamar, Marcus Vinicius, Notas de aula da disciplina TE 456 - Circuitos 
+## - Lamar, Marcus Vinicius, Notas de aula da disciplina TE 456 - Circuitos
 ##   Analogicos II, UFPR, 2001/2002.
 
 function [n, Wp] = ellipord(Wp, Ws, Rp, Rs)
@@ -55,7 +55,7 @@ function [n, Wp] = ellipord(Wp, Ws, Rp, Rs)
   ##pass/stop band to low pass filter transform:
   if (length(Wpw)==2 && length(Wsw)==2)
     wp=1;
-    w02 = Wpw(1) * Wpw(2);	# Central frequency of stop/pass band (square)
+    w02 = Wpw(1) * Wpw(2);      # Central frequency of stop/pass band (square)
     w3 = w02/Wsw(2);
     w4 = w02/Wsw(1);
     if (w3 > Wsw(1))
@@ -87,4 +87,5 @@ function [n, Wp] = ellipord(Wp, Ws, Rp, Rs)
   D=(10^(0.1*Rs)-1)/(10^(0.1*Rp)-1);
 
   n=ceil(log10(16*D)/log10(1/q));
+
 endfunction

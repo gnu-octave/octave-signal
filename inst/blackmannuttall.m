@@ -20,6 +20,7 @@
 ## @end deftypefn
 
 function [w] = blackmannuttall(L)
+
   if (nargin < 1)
     print_usage;
   elseif (! isscalar(L))
@@ -38,4 +39,5 @@ function [w] = blackmannuttall(L)
     w = a0 - a1.*cos(2.*pi.*n./N) + a2.*cos(4.*pi.*n./N) - a3.*cos(6.*pi.*n./N);
     w = w.';
   endif
+
 endfunction

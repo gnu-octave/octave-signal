@@ -43,6 +43,7 @@ function y = rectpuls(t, w = 1)
   unwind_protect_cleanup
     warning(wfi);
   end_unwind_protect
+
 endfunction
 
 %!assert(rectpuls(0:1/100:0.3,.1), rectpuls([0:1/100:0.3]',.1)');

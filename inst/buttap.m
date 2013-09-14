@@ -24,10 +24,12 @@
 ## @end deftypefn
 
 function [z, p, g] = buttap (n)
+
   if (nargin != 1)
     print_usage();
   elseif (! isscalar (n) || ! isnumeric (n) || fix (n) != n || n <= 0)
     error ("buttap: N must be a positive integer")
   endif
   [z, p, g] = butter (n, 1, "s");
+
 endfunction

@@ -20,31 +20,33 @@
 ## @end deftypefn
 
 function freqs_plot(w,h)
-    n = length(w);
-    mag = 20*log10(abs(h));
-    phase = unwrap(arg(h));
-    maxmag = max(mag);
 
-    subplot(211);
-    plot(w, mag, ";Magnitude (dB);");
-    title('Frequency response plot by freqs');
-    axis("labely");
-    ylabel("dB");
-    xlabel("");
-    grid("on");
-    if (maxmag - min(mag) > 100) % make 100 a parameter?
-      axis([w(1), w(n), maxmag-100, maxmag]);
-    else
-      axis("autoy");
-    endif
+  n = length(w);
+  mag = 20*log10(abs(h));
+  phase = unwrap(arg(h));
+  maxmag = max(mag);
 
-    subplot(212);
-    plot(w, phase/(2*pi), ";Phase (radians/2pi);");
-    axis("label");
-    title("");
-    grid("on");
+  subplot(211);
+  plot(w, mag, ";Magnitude (dB);");
+  title('Frequency response plot by freqs');
+  axis("labely");
+  ylabel("dB");
+  xlabel("");
+  grid("on");
+  if (maxmag - min(mag) > 100) % make 100 a parameter?
+    axis([w(1), w(n), maxmag-100, maxmag]);
+  else
     axis("autoy");
-    xlabel("Frequency (rad/sec)");
-    ylabel("Cycles");
-    axis([w(1), w(n)]);
+  endif
+
+  subplot(212);
+  plot(w, phase/(2*pi), ";Phase (radians/2pi);");
+  axis("label");
+  title("");
+  grid("on");
+  axis("autoy");
+  xlabel("Frequency (rad/sec)");
+  ylabel("Cycles");
+  axis([w(1), w(n)]);
+
 endfunction

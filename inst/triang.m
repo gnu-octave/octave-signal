@@ -21,12 +21,14 @@
 ## for the zeros at the edges of the window.
 
 function w = triang(L)
+
   if (nargin != 1)
     print_usage;
   elseif (!isscalar(L) || L != fix (L) || L < 1)
     error("triang: L has to be an integer > 0");
   endif
   w = 1 - abs ([-(L-1):2:(L-1)]' / (L+rem(L,2)));
+
 endfunction
 
 %!error triang

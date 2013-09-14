@@ -89,8 +89,8 @@ function  [y, h] = resample( x, p, q, h )
   ## check if input is a row vector
   isrowvector=false;
   if ((rows(x)==1) && (columns(x)>1))
-     x=x(:);
-     isrowvector=true;
+    x=x(:);
+    isrowvector=true;
   endif
 
   ## check if filter is a vector
@@ -111,7 +111,7 @@ function  [y, h] = resample( x, p, q, h )
   offset = floor((L+nz_pre)/q);
   nz_post = 0;
   while ceil( ( (Lx-1)*p + nz_pre + Lh + nz_post )/q ) - offset < Ly
-      nz_post++;
+    nz_post++;
   endwhile
   hpad = postpad(hpad,Lh + nz_pre + nz_post);
 
@@ -120,7 +120,7 @@ function  [y, h] = resample( x, p, q, h )
   y = xfilt(offset+1:offset+Ly,:);
 
   if isrowvector,
-     y=y.';
+    y=y.';
   endif
 
 endfunction

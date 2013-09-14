@@ -61,33 +61,34 @@ function w = chebwin (L, at)
   elseif !(isscalar (at) && (at == real (at)))
     error ("chebwin: at has to be a real scalar");
   endif
-  
+
   if (L == 1)
     w = 1;
   else
-				# beta calculation
+    # beta calculation
     gamma = 10^(-at/20);
     beta = cosh(1/(L-1) * acosh(1/gamma));
-				# freq. scale
+    # freq. scale
     k = (0:L-1);
     x = beta*cos(pi*k/L);
-				# Chebyshev window (freq. domain)
+    # Chebyshev window (freq. domain)
     p = cheb(L-1, x);
-				# inverse Fourier transform
+    # inverse Fourier transform
     if (rem(L,2))
       w = real(fft(p));
       M = (L+1)/2;
       w = w(1:M)/w(1);
       w = [w(M:-1:2) w]';
     else
-				# half-sample delay (even order)
+      # half-sample delay (even order)
       p = p.*exp(j*pi/L * (0:L-1));
       w = real(fft(p));
       M = L/2+1;
       w = w/w(2);
       w = [w(M:-1:2) w(2:M)]';
     endif
-  endif 
-  
-  w = w ./ max (w (:)); 
+  endif
+
+  w = w ./ max (w (:));
+
 endfunction

@@ -32,7 +32,7 @@
 ## point.
 ##
 ## The transfer function is
-##                         
+##
 ##        B(z)   b0 + b1 z^(-1) + b2 z^(-2) + ... + bM z^(-M)
 ## H(z) = ---- = --------------------------------------------
 ##        A(z)   a0 + a1 z^(-1) + a2 z^(-2) + ... + aN z^(-N)
@@ -48,6 +48,7 @@
 ## TODO:    with y_i or fmt_i optional as usual.  This would allow
 ## TODO:    legends and control over point colour and filters of
 ## TODO:    different orders.
+
 function zplane(z, p = [])
 
   if (nargin < 1 || nargin > 2)
@@ -58,10 +59,10 @@ function zplane(z, p = [])
       ## matrix form: columns are already zeros/poles
     else
       ## z -> b
-      ## p -> a      
+      ## p -> a
       if isempty(z), z=1; endif
       if isempty(p), p=1; endif
-          
+
       M = length(z) - 1;
       N = length(p) - 1;
       z = [ roots(z); zeros(N - M, 1) ];
@@ -95,31 +96,34 @@ function zplane(z, p = [])
     h = plot(real(p), imag(p), "bx");
     set (h, 'MarkerSize', 7);
   endif
-  if (!isempty(z)) 
+  if (!isempty(z))
     h = plot(real(z), imag(z), "bo");
     set (h, 'MarkerSize', 7);
   endif
   hold off;
+
 endfunction
 
 function plot_with_labels(x, symbol)
+
   if ( !isempty(x) )
 
     x_u = unique(x(:));
-    
+
     for i = 1:length(x_u)
       n = sum(x_u(i) == x(:));
       if (n > 1)
         text(real(x_u(i)), imag(x_u(i)), [" " num2str(n)]);
-       endif
+      endif
     endfor
-    
+
     col = "rgbcmy";
     for c = 1:columns(x)
       plot(real( x(:,c) ), imag( x(:,c) ), [col(mod(c,6)),symbol ";;"]);
     endfor
-    
+
   endif
+
 endfunction
 
 %!demo
@@ -132,7 +136,7 @@ endfunction
 %! zw=[0.3];  # zw=[];
 %! zr=[0.95]; # zr=[];
 %! zs=[];
-%! 
+%!
 %! ## system function for target system
 %! p=[[pr, pr].*exp(1i*pi*[pw, -pw]), ps]';
 %! z=[[zr, zr].*exp(1i*pi*[zw, -zw]), zs]';
@@ -146,7 +150,7 @@ endfunction
 %! disp("with reflection across the horizontal plane");
 %! subplot(231); title("transfer function form"); zplane(sys_b, sys_a);
 %! subplot(232); title("pole-zero form"); zplane(z,p);
-%! subplot(233); title("empty p"); zplane(z); 
+%! subplot(233); title("empty p"); zplane(z);
 %! subplot(234); title("empty a"); zplane(sys_b);
 %! disp("The matrix plot has 2 sets of points, one inside the other");
 %! subplot(235); title("matrix"); zplane([z, 0.7*z], [p, 0.7*p]);

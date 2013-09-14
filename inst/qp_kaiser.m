@@ -38,22 +38,22 @@ function h = qp_kaiser (nb, at, linear = 0)
     error ("qp_kaiser: at has to be a real constant");
   endif
 
-				# Bandwidth
+  # Bandwidth
   bandwidth = pi/nb;
 
-				# Attenuation correction (empirically
-				# determined by M. Gerken
-				# <mgk@lcs.poli.usp.br>)
+  # Attenuation correction (empirically
+  # determined by M. Gerken
+  # <mgk@lcs.poli.usp.br>)
   corr = (1.4+0.6*(at-20)/80)^(20/at);
   at = corr * at;
 
-				# size of window (rounded to next odd
-				# integer)
+  # size of window (rounded to next odd
+  # integer)
   N = (at - 8) / (2.285*bandwidth);
   M = fix(N/2);
   N = 2*M + 1;
 
-				# Kaiser window
+  # Kaiser window
   if (at>50)
     beta = 0.1102 * (at - 8.7);
   elseif (at>21)
@@ -62,16 +62,16 @@ function h = qp_kaiser (nb, at, linear = 0)
     beta = 0;
   endif
   w = kaiser(N,beta);
-				# squared in freq. domain
+  # squared in freq. domain
   wsquared = conv(w,w);
 
-				# multiplied by ideal lowpass filter
+  # multiplied by ideal lowpass filter
   n = -(N-1):(N-1);
   hideal = 1/nb * sinc(n/nb);
   hcomp = wsquared .* hideal;
 
-				# extract square-root of response and
-				# compute minimum-phase version
+  # extract square-root of response and
+  # compute minimum-phase version
   Ndft = 2^15;
   Hsqr = sqrt(abs(fft(hcomp,Ndft)));
   if (linear)
@@ -83,8 +83,8 @@ function h = qp_kaiser (nb, at, linear = 0)
     h = real(ifft(Hmin));
     h = h(1:N);
   endif
-				# truncate and fix amplitude scale
-				# (H(0)=1)
+  # truncate and fix amplitude scale
+  # (H(0)=1)
   h = h / sum(h);
 
 endfunction

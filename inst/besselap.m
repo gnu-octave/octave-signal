@@ -15,7 +15,7 @@
 
 ## Return bessel analog filter prototype.
 ##
-## References: 
+## References:
 ##
 ## http://en.wikipedia.org/wiki/Bessel_polynomials
 

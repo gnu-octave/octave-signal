@@ -105,6 +105,7 @@ function [n, w, beta, ftype] = kaiserord(f, m, dev, fs)
 
   ## if last band is high, make sure the order of the filter is even.
   if ((m(1)>m(2)) == (rem(length(w),2)==0)) && rem(n,2)==1, n = n+1; endif
+
 endfunction
 
 %!demo
@@ -126,7 +127,7 @@ endfunction
 %!   [h, f] = freqz(fir1(n,w,ftype,kaiser(n+1,beta),'noscale'),1,[],Fs);
 %!   hm = freqz(fir1(n-d,w,ftype,kaiser(n-d+1,beta),'noscale'),1,[],Fs);
 %!   plot(f,abs(hm),sprintf("r;order %d;",n-d), ...
-%!	  f,abs(h), sprintf("b;order %d;",n));
+%!        f,abs(h), sprintf("b;order %d;",n));
 %!   b = [0, bands, Fs/2]; hold on;
 %!   for i=2:2:length(b),
 %!     hi=mag(i/2)+dev(1); lo=max(mag(i/2)-dev(1),0);

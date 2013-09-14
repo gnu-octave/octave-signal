@@ -86,8 +86,8 @@ function  [y, h] = fracshift( x, d, h )
   ## check if input is a row vector
   isrowvector=false;
   if ((rows(x)==1) && (columns(x)>1))
-     x=x(:);
-     isrowvector=true;
+    x=x(:);
+    isrowvector=true;
   endif
 
   ## check if filter is a vector
@@ -112,7 +112,7 @@ function  [y, h] = fracshift( x, d, h )
   y=circshift(y,fix(d));
 
   if isrowvector,
-     y=y.';
+    y=y.';
   endif
 
 endfunction

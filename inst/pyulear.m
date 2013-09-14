@@ -61,7 +61,7 @@
 %%           %% N.B. this argument is ignored if the "freq" argument is a
 %%           %%      vector.  The default is 'poly' unless the "freq"
 %%           %%      argument is an integer power of 2.
-%%   
+%%
 %% plot_type %% 'plot', 'semilogx', 'semilogy', 'loglog', 'squared' or 'db':
 %%           %% specifies the type of plot.  The default is 'plot', which
 %%           %% means linear-linear axes. 'squared' is the same as 'plot'.
@@ -72,14 +72,15 @@
 %% RETURNED VALUES:
 %%     If return values are not required by the caller, the spectrum
 %%     is plotted and nothing is returned.
-%%   psd     %% [real vector] power-spectrum estimate 
-%%   f_out   %% [real vector] frequency values 
+%%   psd     %% [real vector] power-spectrum estimate
+%%   f_out   %% [real vector] frequency values
 %%
 %% HINTS
 %%   This function is a wrapper for aryule and ar_psd.
 %%   See "help aryule", "help ar_psd".
 
 function [psd,f_out]=pyulear(x,poles,varargin)
+
   %%
   if ( nargin<2 )
     error( 'pburg: need at least 2 args. Use "help pburg"' );
@@ -93,6 +94,7 @@ function [psd,f_out]=pyulear(x,poles,varargin)
   elseif ( nargout>=2 )
     [psd,f_out] = ar_psd(ar_coeffs,residual,varargin{:});
   end
+
 end
 
 %!demo
@@ -100,7 +102,7 @@ end
 %! rand('seed',2038014164);
 %! a = [ 1.0 -1.6216505 1.1102795 -0.4621741 0.2075552 -0.018756746 ];
 %! signal = detrend(filter(0.70181,a,rand(1,16384)));
-%! % frequency shift by modulating with exp(j.omega.t) 
+%! % frequency shift by modulating with exp(j.omega.t)
 %! skewed = signal.*exp(2*pi*i*2/25*[1:16384]);
 %! Fs = 25;
 %! hold on

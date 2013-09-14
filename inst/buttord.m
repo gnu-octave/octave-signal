@@ -14,14 +14,14 @@
 ## this program; if not, see <http://www.gnu.org/licenses/>.
 
 ## Compute butterworth filter order and cutoff for the desired response
-## characteristics. Rp is the allowable decibels of ripple in the pass 
+## characteristics. Rp is the allowable decibels of ripple in the pass
 ## band. Rs is the minimum attenuation in the stop band.
 ##
 ## [n, Wc] = buttord(Wp, Ws, Rp, Rs)
 ##     Low pass (Wp<Ws) or high pass (Wp>Ws) filter design.  Wp is the
 ##     pass band edge and Ws is the stop band edge.  Frequencies are
 ##     normalized to [0,1], corresponding to the range [0,Fs/2].
-## 
+##
 ## [n, Wc] = buttord([Wp1, Wp2], [Ws1, Ws2], Rp, Rs)
 ##     Band pass (Ws1<Wp1<Wp2<Ws2) or band reject (Wp1<Ws1<Ws2<Wp2)
 ##     filter design. Wp gives the edges of the pass band, and Ws gives
@@ -38,6 +38,7 @@
 ## See also: butter
 
 function [n, Wc] = buttord(Wp, Ws, Rp, Rs)
+
   if nargin != 4
     print_usage;
   elseif length(Wp) != length(Ws)
@@ -53,16 +54,16 @@ function [n, Wc] = buttord(Wp, Ws, Rp, Rs)
   end
 
   T = 2;
-  
+
   ## if high pass, reverse the sense of the test
   stop = find(Wp > Ws);
   Wp(stop) = 1-Wp(stop); # stop will be at most length 1, so no need to
   Ws(stop) = 1-Ws(stop); # subtract from ones(1,length(stop))
-  
+
   ## warp the target frequencies according to the bilinear transform
   Ws = (2/T)*tan(pi*Ws./T);
   Wp = (2/T)*tan(pi*Wp./T);
-  
+
   ## compute minimum n which satisfies all band edge conditions
   ## the factor 1/length(Wp) is an artificial correction for the
   ## band pass/stop case, which otherwise significantly overdesigns.
@@ -75,8 +76,8 @@ function [n, Wc] = buttord(Wp, Ws, Rp, Rs)
 
   ## unwarp the returned frequency
   Wc = atan(T/2*Wc)*T/pi;
-  
+
   ## if high pass, reverse the sense of the test
   Wc(stop) = 1-Wc(stop);
-    
+
 endfunction

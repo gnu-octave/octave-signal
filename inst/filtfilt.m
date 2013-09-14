@@ -32,18 +32,18 @@
 
 
 ## TODO:  (pkienzle) My version seems to have similar quality to matlab,
-##	but both are pretty bad.  They do remove gross lag errors, though.
-
+##      but both are pretty bad.  They do remove gross lag errors, though.
 
 function y = filtfilt(b, a, x)
+
   if (nargin != 3)
     print_usage;
   end
   rotate = (size(x,1)==1);
-  if rotate,			# a row vector
-    x = x(:);			# make it a column vector
+  if rotate,                    # a row vector
+    x = x(:);                   # make it a column vector
   endif
-  
+
   lx = size(x,1);
   a = a(:).';
   b = b(:).';
@@ -65,18 +65,18 @@ function y = filtfilt(b, a, x)
   end
   si(1) = [];
 
-  for (c = 1:size(x,2))	# filter all columns, one by one
+  for (c = 1:size(x,2)) # filter all columns, one by one
     v = [2*x(1,c)-x((lrefl+1):-1:2,c); x(:,c);
-             2*x(end,c)-x((end-1):-1:end-lrefl,c)]; # a column vector
+         2*x(end,c)-x((end-1):-1:end-lrefl,c)]; # a column vector
 
     ## Do forward and reverse filtering
-    v = filter(b,a,v,si*v(1));		       # forward filter
+    v = filter(b,a,v,si*v(1));                   # forward filter
     v = flipud(filter(b,a,flipud(v),si*v(end))); # reverse filter
     y(:,c) = v((lrefl+1):(lx+lrefl));
   endfor
 
-  if (rotate)			# x was a row vector
-    y = rot90(y);		# rotate it back
+  if (rotate)                   # x was a row vector
+    y = rot90(y);               # rotate it back
   endif
 
 endfunction

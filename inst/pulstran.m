@@ -95,6 +95,7 @@ function y = pulstran(t, d, pulse, varargin)
       y(idx) = y(idx) + a(i)*interp1(t_pulse, pulse, dt(idx), method);
     endfor
   endif
+
 endfunction
 
 %!error pulstran
@@ -136,7 +137,7 @@ endfunction
 %! pulse = sin(2*pi*[0:0.0001:w]/w).*[w:-0.0001:0];
 %! auplot(pulstran(t', [d', a], pulse', 10000), fs);
 %! hold on; plot(d*1000,a*w,'g*;pulse;'); hold off; title("");
-%! 
+%!
 %! %----------------------------------------------------------
 %! % Should see (1) rectangular pulses centered on *,
 %! %            (2) rectangular pulses to the right of *,

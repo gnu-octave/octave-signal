@@ -31,6 +31,7 @@
 ##    New York: John Wiley & Sons. 1979.
 
 function [y, ym] = rceps(x)
+
   if (nargin != 1)
     print_usage;
   end
@@ -56,6 +57,7 @@ function [y, ym] = rceps(x)
     endif
     ym = real(ifft(exp(fft(ym))));
   endif
+
 endfunction
 
 %!error rceps
@@ -108,7 +110,7 @@ endfunction
 %! subplot(313);
 %!    axis("on");
 %!    plot(w,unwrap(arg(hx))/(2*pi), ";phase;",...
-%!	   w,unwrap(arg(hxm))/(2*pi),";reconstruction;");
+%!         w,unwrap(arg(hxm))/(2*pi),";reconstruction;");
 %! figure(2); auplot(y,Fs,';cepstrum;');
 %! %-------------------------------------------------------------
 %! % confirm the magnitude spectrum is identical in the signal

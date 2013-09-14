@@ -17,7 +17,7 @@
 
 ## -*- texinfo -*-
 ## @deftypefn {Function File} {[@var{w}] =} welchwin(@var{L},@var{c})
-## Returns a row vector containing a Welch window, given by 
+## Returns a row vector containing a Welch window, given by
 ## @var{w}(n)=1-(n/N-1)^2,   n=[0,1, ... @var{L}-1].
 ## Argument @var{L} is the length of the window.
 ## Optional argument @var{c} specifies a "symmetric" window (the default),
@@ -37,6 +37,7 @@
 ## @end deftypefn
 
 function [w] = welchwin(L,c)
+
   if (nargin < 1 || nargin>2 )
     print_usage;
   endif
@@ -58,6 +59,7 @@ function [w] = welchwin(L,c)
   N = (L-symmetric)/2;
   n = 0:L-1;
   w = 1 - ((n-N)./N).^2;
+
 endfunction;
 
 %!demo

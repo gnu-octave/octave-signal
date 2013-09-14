@@ -18,6 +18,7 @@
 ## This function is necessary for impinvar and invimpinvar of the signal package
 
 ## Inverse of Octave residue function
+
 function [b_out, a_out] = inv_residue(r_in, p_in, k_in, tol)
 
   n = length(r_in); % Number of poles/residues
@@ -44,13 +45,14 @@ function [b_out, a_out] = inv_residue(r_in, p_in, k_in, tol)
     mterm      = term;
     first_pole = p_in(i);
     while (i<n && abs(first_pole-p_in(i+1))<tol) % Multiple poles at p(i)
-       i++; %Next residue
-       m++;
-       mterm  = conv(mterm, term);              % Next multiplicity to be factored out
-       p      = r_in(i) * deconv(a_out, mterm); % Resulting polynomial
-       p      = prepad(p, n+1, 0, 2);           % Pad for proper length
-       b_out += p;
+      i++; %Next residue
+      m++;
+      mterm  = conv(mterm, term);              % Next multiplicity to be factored out
+      p      = r_in(i) * deconv(a_out, mterm); % Resulting polynomial
+      p      = prepad(p, n+1, 0, 2);           % Pad for proper length
+      b_out += p;
     endwhile
   i++;
   endwhile
+
 endfunction

@@ -20,10 +20,10 @@
 
 function b = polystab(a)
 
-   r = roots(a);
-   v = find(abs(r)>1);
-   r(v) = 1./conj(r(v));
-   b = a(1) * poly ( r );
-   if isreal(a), b = real(b); endif
+  r = roots(a);
+  v = find(abs(r)>1);
+  r(v) = 1./conj(r(v));
+  b = a(1) * poly ( r );
+  if isreal(a), b = real(b); endif
 
 endfunction

@@ -21,8 +21,8 @@
 ##
 ## @var{width} is a real number between @code{0} and @code{1} which specifies
 ## the point between @code{0} and @code{2 * pi} where the maximum is. The
-## function increases linearly from @code{-1} to @code{1} in  @code{[0, 2 * 
-## pi * @var{width}]} interval, and decreases linearly from @code{1} to 
+## function increases linearly from @code{-1} to @code{1} in  @code{[0, 2 *
+## pi * @var{width}]} interval, and decreases linearly from @code{1} to
 ## @code{-1} in the interval @code{[2 * pi * @var{width}, 2 * pi]}.
 ##
 ## If @var{width} is 0.5, the function generates a standard triangular wave.

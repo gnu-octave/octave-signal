@@ -27,7 +27,7 @@
 ##     a = exp(j*2*pi*f1/Fs);                ## starting at frequency f1
 ##     y = czt(x, m, w, a);
 ##
-## If you don't specify them, then the parameters default to a fourier 
+## If you don't specify them, then the parameters default to a fourier
 ## transform:
 ##     m=length(x), w=exp(-j*2*pi/m), a=1
 ##
@@ -44,6 +44,7 @@
 ##   multiply gg by M-elements of chirp and call it done
 
 function y = czt(x, m, w, a)
+
   if nargin < 1 || nargin > 4, print_usage; endif
 
   [row, col] = size(x);
@@ -74,6 +75,7 @@ function y = czt(x, m, w, a)
   endfor
 
   if row == 1, y = y.'; endif
+
 endfunction
 
 %!shared x

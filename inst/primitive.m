@@ -41,8 +41,10 @@
 ## @end deftypefn
 
 function F = primitive (f,t,C=0)
+
   i_chunk(0,0,[]);
   F = arrayfun (@(x)i_chunk(f,x,C),t);
+
 endfunction
 
 function F_prev = i_chunk (f,t,init)

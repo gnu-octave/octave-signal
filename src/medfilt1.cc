@@ -1,7 +1,7 @@
 /*
  * Copyright 2000 Paul Kienzle <pkienzle@users.sf.net>
  * This source code is freely redistributable and may be used for
- * any purpose.  This copyright notice must be maintained. 
+ * any purpose.  This copyright notice must be maintained.
  * Paul Kienzle is not responsible for the consequences of using
  * this software.
  *
@@ -29,7 +29,7 @@ using namespace std;
 // hole and open a new one in the sorted position.
 class Median {
 private:
-  double *window; // window data 
+  double *window; // window data
   int max;        // length of window used
   int hole;       // position of hole, or max if no hole
   void close_hole() // close existing hole
@@ -68,14 +68,14 @@ void Median::print()
   for (int i=0; i < max; i++)
     {
       if (i == hole)
-	octave_stdout << "x ";
+        octave_stdout << "x ";
       else
-	octave_stdout << window[i] << " ";
+        octave_stdout << window[i] << " ";
     }
   octave_stdout << " ]";
 }
 
-    
+
 // Remove a value from the sorted window, leaving a hole.  The caller
 // must promise to only remove values that they have added.
 void Median::remove(double v)
@@ -105,8 +105,8 @@ void Median::remove(double v)
   if (v != window[hole]) {
     for (hole = 0; hole < max-1; hole++)
       if (fabs(v-window[hole]) < fabs(v-window[hole+1])) break;
-    warning ("medfilt1: value %f not found---removing %f instead", 
-	     v, window[hole]);
+    warning ("medfilt1: value %f not found---removing %f instead",
+             v, window[hole]);
     print(); octave_stdout << endl;
   }
 
@@ -149,9 +149,9 @@ void Median::add(double v)
 }
 
 // Compute the median value from the sorted window
-// Return the central value if there is one or the average of the 
+// Return the central value if there is one or the average of the
 // two central values.  Return NaN if there are no values.
-double Median::operator()() 
+double Median::operator()()
 {
   close_hole();
 
@@ -177,13 +177,13 @@ the remaining values.")
   octave_value_list retval;
 
   int nargin = args.length();
-  if (nargin < 1 || nargin > 3) 
+  if (nargin < 1 || nargin > 3)
     {
       print_usage ();
       return retval;
     }
 
-  if (args(0).is_complex_type()) 
+  if (args(0).is_complex_type())
     {
       error("medfilt1 cannot process complex vectors");
       return retval;
@@ -191,7 +191,7 @@ the remaining values.")
 
   int n=3;    // length of the filter (default 3)
   if (nargin > 1) n = NINT(args(1).double_value());
-  if (n < 1) 
+  if (n < 1)
     {
       error ("medfilt1 filter length must be at least 1");
       return retval;
@@ -201,7 +201,7 @@ the remaining values.")
   Median median(n);
   int mid = n/2;             // mid-point of the window
 
-  Matrix signal(args(0).matrix_value()); 
+  Matrix signal(args(0).matrix_value());
   int nr = signal.rows();    // number of points to process
   int nc = signal.columns(); // number of points to process
   Matrix filter(nr,nc);      // filtered signal to return
@@ -209,28 +209,28 @@ the remaining values.")
   if (nr == 1) // row vector
     {
       int start = -n, end = 0, pos=-(n-mid)+1;
-      while (pos < nc) 
-	{
-	  if (start >= 0) median.remove(signal(0,start));
-	  if (end < nc)   median.add(signal(0,end));
-	  if (pos >= 0)   filter(0,pos) = median();
-	  start++, end++, pos++;
-	}
+      while (pos < nc)
+        {
+          if (start >= 0) median.remove(signal(0,start));
+          if (end < nc)   median.add(signal(0,end));
+          if (pos >= 0)   filter(0,pos) = median();
+          start++, end++, pos++;
+        }
     }
   else // column vector or matrix
     {
       for (int column=0; column < nc; column++)
-	{
-	  median.clear();
-	  int start = -n, end = 0, pos=-(n-mid)+1;
-	  while (pos < nr) 
-	    {
-	      if (start >= 0) median.remove(signal(start,column));
-	      if (end < nr)   median.add(signal(end,column));
-	      if (pos >= 0)   filter(pos,column) = median();
-	      start++, end++, pos++;
-	    }
-	}
+        {
+          median.clear();
+          int start = -n, end = 0, pos=-(n-mid)+1;
+          while (pos < nr)
+            {
+              if (start >= 0) median.remove(signal(start,column));
+              if (end < nr)   median.add(signal(end,column));
+              if (pos >= 0)   filter(pos,column) = median();
+              start++, end++, pos++;
+            }
+        }
     }
 
   retval(0) = filter;

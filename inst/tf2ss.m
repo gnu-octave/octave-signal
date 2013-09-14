@@ -45,7 +45,7 @@
 ## @end example
 ## @end ifinfo
 ##
-## The state space system matrices obtained from this function 
+## The state space system matrices obtained from this function
 ## will be in observable companion form as Wolovich's Observable
 ## Structure Theorem is used.
 ## @end deftypefn

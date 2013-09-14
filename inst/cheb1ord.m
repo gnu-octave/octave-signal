@@ -15,14 +15,14 @@
 ## this program; if not, see <http://www.gnu.org/licenses/>.
 
 ## Compute chebyshev type I filter order and cutoff for the desired response
-## characteristics. Rp is the allowable decibels of ripple in the pass 
+## characteristics. Rp is the allowable decibels of ripple in the pass
 ## band. Rs is the minimum attenuation in the stop band.
 ##
 ## [n, Wc] = cheb1ord(Wp, Ws, Rp, Rs)
 ##     Low pass (Wp<Ws) or high pass (Wp>Ws) filter design.  Wp is the
 ##     pass band edge and Ws is the stop band edge.  Frequencies are
 ##     normalized to [0,1], corresponding to the range [0,Fs/2].
-## 
+##
 ## [n, Wc] = cheb1ord([Wp1, Wp2], [Ws1, Ws2], Rp, Rs)
 ##     Band pass (Ws1<Wp1<Wp2<Ws2) or band reject (Wp1<Ws1<Ws2<Wp2)
 ##     filter design. Wp gives the edges of the pass band, and Ws gives
@@ -39,7 +39,7 @@ function [n, Wc] = cheb1ord(Wp, Ws, Rp, Rs)
   elseif length(Wp) != 1 && length(Wp) != 2
     error("cheb1ord: Wp,Ws must have length 1 or 2");
   elseif length(Wp) == 2 && ...
-        (all(Wp>Ws) || all(Ws>Wp) || diff(Wp)<=0 || diff(Ws)<=0)
+          (all(Wp>Ws) || all(Ws>Wp) || diff(Wp)<=0 || diff(Ws)<=0)
     error("cheb1ord: Wp(1)<Ws(1)<Ws(2)<Wp(2) or Ws(1)<Wp(1)<Wp(2)<Ws(2)");
   end
 
@@ -61,16 +61,16 @@ function [n, Wc] = cheb1ord(Wp, Ws, Rp, Rs)
       error ("band reject is not implement yet.");
     endif;
   else
-   ## if high pass, reverse the sense of the test
-   if (length(Wp) == 1)
+    ## if high pass, reverse the sense of the test
+    if (length(Wp) == 1)
       Wa = Wp/Ws;
     else
-      ## band pass 
+      ## band pass
       Wa=(Ws.^2 - Wp(1)*Wp(2))./(Ws*(Wp(1)-Wp(2)));
     endif;
   endif;
   Wa = min(abs(Wa));
-  
+
   ## compute minimum n which satisfies all band edge conditions
   stop_atten = 10^(abs(Rs)/10);
   pass_atten = 10^(abs(Rp)/10);
@@ -79,7 +79,7 @@ function [n, Wc] = cheb1ord(Wp, Ws, Rp, Rs)
 endfunction
 
 %!demo
-%! Fs = 10000; 
+%! Fs = 10000;
 %! [n, Wc] = cheb1ord (1000/(Fs/2), 1200/(Fs/2), 0.5, 29);
 %!
 %! subplot (221);

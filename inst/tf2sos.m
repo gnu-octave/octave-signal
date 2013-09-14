@@ -19,13 +19,13 @@
 %%
 %% INPUTS:
 %% @var{B} and @var{A} are vectors specifying the digital filter @math{H(z) = B(z)/A(z)}.
-%% See @code{filter()} for documentation of the @var{B} and @var{A} 
+%% See @code{filter()} for documentation of the @var{B} and @var{A}
 %% filter coefficients.
 %%
 %% RETURNED:
 %% @var{sos} = matrix of series second-order sections, one per row:@*
 %% @var{sos} = [@var{B1}.' @var{A1}.'; ...; @var{BN}.' @var{AN}.'], where@*
-%% @code{@var{B1}.'==[b0 b1 b2] and @var{A1}.'==[1 a1 a2]} for 
+%% @code{@var{B1}.'==[b0 b1 b2] and @var{A1}.'==[1 a1 a2]} for
 %% section 1, etc.@*
 %% b0 must be nonzero for each section (zeros at infinity not supported).
 %% @var{Bscale} is an overall gain factor that effectively scales
@@ -33,7 +33,7 @@
 %%
 %% EXAMPLE:
 %% @example
-%% B=[1 0 0 0 0 1]; 
+%% B=[1 0 0 0 0 1];
 %% A=[1 0 0 0 0 .9];
 %% [sos,g] = tf2sos(B,A)
 %%

@@ -48,4 +48,5 @@ function [varargout] = cpsd(varargin)
     varargout{1} = Pxx;
     varargout{2} = f;
   end
+
 end

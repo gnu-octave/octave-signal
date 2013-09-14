@@ -60,14 +60,15 @@ function [zc,zr] = cplxreal (z, thresh = 100*eps)
     end
     nzsect2 = nz-nzrsec;
     if mod(nzsect2,2)~=0
-      error('cplxreal: Odd number of complex values!'); 
+      error('cplxreal: Odd number of complex values!');
     end
     nzsec = nzsect2/2;
     zc = zcp(2:2:nzsect2);
     zr = zcp(nzsect2+1:nz);
   end
+
 endfunction
 
-%!test 
+%!test
 %! [zc,zr] = cplxreal(roots([1 0 0 1]));
 %! assert({zc,zr},{0.5+i*sin(pi/3),-1},10*eps);

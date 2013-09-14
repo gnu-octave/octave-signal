@@ -29,6 +29,7 @@
 ## TODO:    probably more sophisticated than this one, and since it
 ## TODO:    is silly to maintain two different versions of essentially
 ## TODO:    the same thing.
+
 function [x_r, t_r] = impz(b, a = [1], n = [], fs = 1)
 
   if nargin == 0 || nargin > 4
@@ -45,7 +46,7 @@ function [x_r, t_r] = impz(b, a = [1], n = [], fs = 1)
       n = floor(-6/log10(maxpole));
     else                        # periodic -- cutoff after 5 cycles
       n = 30;
-      
+
                                 # find longest period less than infinity
                                 # cutoff after 5 cycles (w=10*pi)
       rperiodic = r(find(abs(r)>=1-precision & abs(arg(r))>0));
@@ -55,7 +56,7 @@ function [x_r, t_r] = impz(b, a = [1], n = [], fs = 1)
           n = n_periodic;
         end
       end
-      
+
                                 # find most damped pole
                                 # cutoff at -60 dB
       rdamped = r(find(abs(r)<1-precision));

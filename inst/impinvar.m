@@ -1,7 +1,7 @@
 ## Copyright (c) 2007 R.G.H. Eschauzier <reschauzier@yahoo.com>
 ## Copyright (c) 2011 Carnë Draug <carandraug+dev@gmail.com>
 ## Copyright (c) 2011 Juan Pablo Carbajal <carbajal@ifi.uzh.ch>
-## 
+##
 ## This program is free software; you can redistribute it and/or modify it under
 ## the terms of the GNU General Public License as published by the Free Software
 ## Foundation; either version 3 of the License, or (at your option) any later
@@ -71,8 +71,8 @@ function [b_out, a_out] = impinvar (b_in, a_in, fs = 1, tol = 0.0001)
     m = 1;
     first_pole = p_in(i); % Pole in the s-domain
     while (i<n && abs(first_pole-p_in(i+1))<tol) % Multiple poles at p(i)
-       i++; % Next residue
-       m++; % Next multiplicity
+      i++; % Next residue
+      m++; % Next multiplicity
     endwhile
     [r, p, k]        = z_res(r_in(i-m+1:i), first_pole, ts); % Find z-domain residues
     k_out           += k;                                    % Add direct term to output
@@ -93,6 +93,7 @@ endfunction
 
 ## Convert residue vector for single and multiple poles in s-domain (located at sm) to
 ## residue vector in z-domain. The variable k is the direct term of the result.
+
 function [r_out, p_out, k_out] = z_res (r_in, sm, ts)
 
   p_out = exp(ts * sm); % z-domain pole

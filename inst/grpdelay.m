@@ -129,7 +129,7 @@ function [gd,w] = grpdelay(b,a=1,nfft=512,whole,Fs)
   if ob<0, b=1; ob=0; end       % b can be [] as well
   oc = oa + ob;                 % order of c(z)
 
-  c = conv(b,fliplr(conj(a)));	% c(z) = b(z)*conj(a)(1/z)*z^(-oa)
+  c = conv(b,fliplr(conj(a)));  % c(z) = b(z)*conj(a)(1/z)*z^(-oa)
   cr = c.*[0:oc];               % cr(z) = derivative of c wrt 1/z
   num = fft(cr,nfft);
   den = fft(c,nfft);
@@ -172,6 +172,7 @@ function [gd,w] = grpdelay(b,a=1,nfft=512,whole,Fs)
       grid('on');
     end_unwind_protect
   end
+
 end
 
 % ------------------------ DEMOS -----------------------

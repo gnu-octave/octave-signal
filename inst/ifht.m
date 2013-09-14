@@ -15,13 +15,13 @@
 
 ## -*- texinfo -*-
 ## @deftypefn{Function File} {m = } ifht ( d, n, dim )
-## @cindex linear algebra 
+## @cindex linear algebra
 ##  The function ifht calculates  Fast Hartley Transform
 ##  where @var{d} is the real input vector (matrix), and @var{m}
 ## is the real-transform vector. For matrices the hartley transform
 ## is calculated along the columns by default. The options @var{n},
 ## and @var{dim} are similar to the options of FFT function.
-## 
+##
 ## The forward and inverse hartley transforms are the same (except for a
 ## scale factor of 1/N for the inverse hartley transform), but
 ## implemented using different functions .
@@ -30,7 +30,7 @@
 ## @math{
 ## m[K] = 1/N \sum_{i=0}^{N-1} d[i]*(cos[K*2*pi*i/N] + sin[K*2*pi*i/N]), for  0 <= K < N.
 ## m[K] = 1/N \sum_{i=0}^{N-1} d[i]*CAS[K*i], for  0 <= K < N. }
-## 
+##
 ## @example
 ## ifht(1:4)
 ## @end example
@@ -50,7 +50,7 @@ function m = ifht( d, n, dim )
   else
     Y = ifft(d);
   end
-  
+
   m = real(Y) + imag(Y);
 
 #   -- Traditional --

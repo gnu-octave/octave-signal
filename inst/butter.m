@@ -17,7 +17,7 @@
 
 ## Generate a butterworth filter.
 ## Default is a discrete space (Z) filter.
-## 
+##
 ## [b,a] = butter(n, Wc)
 ##    low pass filter with cutoff pi*Wc radians
 ##
@@ -33,20 +33,20 @@
 ## [z,p,g] = butter(...)
 ##    return filter as zero-pole-gain rather than coefficients of the
 ##    numerator and denominator polynomials.
-## 
+##
 ## [...] = butter(...,'s')
 ##     return a Laplace space filter, W can be larger than 1.
-## 
-## [a,b,c,d] = butter(...)
-##  return  state-space matrices 
 ##
-## References: 
+## [a,b,c,d] = butter(...)
+##  return  state-space matrices
+##
+## References:
 ##
 ## Proakis & Manolakis (1992). Digital Signal Processing. New York:
 ## Macmillan Publishing Company.
 
 function [a, b, c, d] = butter (n, W, varargin)
-  
+
   if (nargin>4 || nargin<2) || (nargout>4 || nargout<2)
     print_usage;
   end
@@ -60,11 +60,11 @@ function [a, b, c, d] = butter (n, W, varargin)
   digital = 1;
   for i=1:length(varargin)
     switch varargin{i}
-    case 's', digital = 0;
-    case 'z', digital = 1;
-    case { 'high', 'stop' }, stop = 1;
-    case { 'low',  'pass' }, stop = 0;
-    otherwise,  error ("butter: expected [high|stop] or [s|z]");
+      case 's', digital = 0;
+      case 'z', digital = 1;
+      case { 'high', 'stop' }, stop = 1;
+      case { 'low',  'pass' }, stop = 0;
+      otherwise,  error ("butter: expected [high|stop] or [s|z]");
     endswitch
   endfor
 
@@ -103,11 +103,11 @@ function [a, b, c, d] = butter (n, W, varargin)
 
   ## Use bilinear transform to convert poles to the z plane
   if digital
-     [zero, pole, gain] = bilinear(zero, pole, gain, T);
+    [zero, pole, gain] = bilinear(zero, pole, gain, T);
   endif
 
   ## convert to the correct output form
-  if nargout==2, 
+  if nargout==2,
     a = real(gain*poly(zero));
     b = real(poly(pole));
   elseif nargout==3,
@@ -115,7 +115,7 @@ function [a, b, c, d] = butter (n, W, varargin)
     b = pole;
     c = gain;
   else
-    ## output ss results 
+    ## output ss results
     [a, b, c, d] = zp2ss (zero, pole, gain);
   endif
 
@@ -166,11 +166,11 @@ endfunction
 %! filtered = filter(b,a,data);
 %!
 %! clf
-%! subplot ( columns ( filtered ), 1, 1) 
+%! subplot ( columns ( filtered ), 1, 1)
 %! plot(filtered(:,1),";Impulse response;")
-%! subplot ( columns ( filtered ), 1, 2 ) 
+%! subplot ( columns ( filtered ), 1, 2 )
 %! plot(filtered(:,2),";25Hz response;")
-%! subplot ( columns ( filtered ), 1, 3 ) 
+%! subplot ( columns ( filtered ), 1, 3 )
 %! plot(filtered(:,3),";50Hz response;")
-%! subplot ( columns ( filtered ), 1, 4 ) 
+%! subplot ( columns ( filtered ), 1, 4 )
 %! plot(filtered(:,4),";100Hz response;")

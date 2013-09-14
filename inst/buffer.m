@@ -20,7 +20,7 @@
 ##
 ## @table @asis
 ## @item @var{x}
-## The data to be buffered. 
+## The data to be buffered.
 ##
 ## @item @var{n}
 ## The number of rows in the produced data buffer. This is an positive
@@ -35,8 +35,8 @@
 ## @var{p} or the string 'nodelay'. If @var{opt} is a vector, then the
 ## first @var{p} entries in @var{y} will be filled with these values. If
 ## @var{opt} is the string 'nodelay', then the first value of @var{y}
-## corresponds to the first value of @var{x}. 
-## 
+## corresponds to the first value of @var{x}.
+##
 ## In the can of an underlap, @var{opt} must be an integer between 0 and
 ## @code{-@var{p}}. The represents the initial underlap of the first
 ## column of @var{y}.
@@ -101,7 +101,7 @@ function [y, z, opt] = buffer (x, n, p, opt)
   elseif (p > 0)
     if (ischar (opt))
       if (strcmp (opt, "nodelay"))
-        y = [y ; zeros(p, m)]; 
+        y = [y ; zeros(p, m)];
         if (p > n / 2)
           is = n - p + 1;
           in = n - p;
@@ -134,7 +134,7 @@ function [y, z, opt] = buffer (x, n, p, opt)
     elseif (isvector (opt))
       if (length (opt) == p)
         lopt = p;
-        y = [zeros(p, m); y]; 
+        y = [zeros(p, m); y];
         in = p;
         off = 1;
         while (in > 0)
@@ -195,14 +195,15 @@ function [y, z, opt] = buffer (x, n, p, opt)
       opt = y(end-p+1:end)(:);
     else
       opt = [];
-    endif 
+    endif
   endif
+
 endfunction
 
 %!error (buffer(1:10, 4.1))
 %!assert (buffer(1:10, 4), reshape([1:10,0,0],[4,3]))
 %!assert (buffer(1:10, 4, 1), reshape([0:3,3:6,6:9,9,10,0,0],[4,4]))
-%!assert (buffer(1:10, 4, 2), reshape ([0,0:2,1:4,3:6,5:8,7:10],[4,5])) 
+%!assert (buffer(1:10, 4, 2), reshape ([0,0:2,1:4,3:6,5:8,7:10],[4,5]))
 %!assert (buffer(1:10, 4, 3), [0,0,0:7;0,0:8;0:9;1:10])
 %!error (buffer(1:10, 4, 3.1))
 %!error (buffer(1:10, 4, 4))
@@ -262,13 +263,13 @@ endfunction
 %! assert (z, zeros (0, 1));
 %! assert (opt, 2);
 
-%!test 
+%!test
 %! [y,z,opt] = buffer([1:11],5,2,[-1,0]);
 %! assert (y, reshape ([-1:3,2:6,5:9],[5,3]));
 %! assert (z, [10, 11]);
 %! assert (opt, [8; 9]);
 
-%!test 
+%!test
 %! [y,z,opt] = buffer([1:11]',5,2,[-1,0]);
 %! assert (y, reshape ([-1:3,2:6,5:9],[5,3]));
 %! assert (z, [10; 11]);

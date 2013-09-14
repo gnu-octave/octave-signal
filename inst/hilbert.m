@@ -1,5 +1,5 @@
 ## Copyright (C) 2000 Paul Kienzle  <pkienzle@users.sf.net>
-## Copyright (C) 2007 Peter L. Soendergaard 
+## Copyright (C) 2007 Peter L. Soendergaard
 ##
 ## This program is free software; you can redistribute it and/or modify it under
 ## the terms of the GNU General Public License as published by the Free Software
@@ -35,9 +35,9 @@
 ## @end deftypefn
 
 function f=hilbert(f, N = [], dim = [])
-  
+
   % ------ PRE: initialization and dimension shifting ---------
-   
+
   if (nargin<1 || nargin>3)
     print_usage;
   end
@@ -46,20 +46,20 @@ function f=hilbert(f, N = [], dim = [])
     warning ('HILBERT: ignoring imaginary part of signal');
     f = real (f);
   end
-  
+
   D=ndims(f);
-  
+
   % Dummy assignment.
   order=1;
-  
+
   if isempty(dim)
     dim=1;
-    
+
     if sum(size(f)>1)==1
       % We have a vector, find the dimension where it lives.
       dim=find(size(f)>1);
     end
-    
+
   else
     if (numel(dim)~=1 || ~isnumeric(dim))
       error('HILBERT: dim must be a scalar.');
@@ -70,7 +70,7 @@ function f=hilbert(f, N = [], dim = [])
     if (dim<1) || (dim>D)
       error('HILBERT: dim must be in the range from 1 to %d.',D);
     end
-    
+
   end
 
   if (numel(N)>1 || ~isnumeric(N))
@@ -78,38 +78,38 @@ function f=hilbert(f, N = [], dim = [])
   elseif (~isempty(N) && rem(N,1)~=0)
     error('N must be an integer.');
   end
-  
+
   if dim>1
     order=[dim, 1:dim-1,dim+1:D];
-    
+
     % Put the desired dimension first.
     f=permute(f,order);
-    
+
   end
-  
+
   Ls=size(f,1);
-  
+
   % If N is empty it is set to be the length of the transform.
   if isempty(N)
     N=Ls;
   end
-  
+
   % Remember the exact size for later and modify it for the new length
   permutedsize=size(f);
   permutedsize(1)=N;
-  
+
   % Reshape f to a matrix.
   f=reshape(f,size(f,1),numel(f)/size(f,1));
   W=size(f,2);
-  
+
   if ~isempty(N)
     f=postpad(f,N);
   end
-  
-  % ------- actual computation ----------------- 
+
+  % ------- actual computation -----------------
   if N>2
     f=fft(f);
-    
+
     if rem(N,2)==0
       f=[f(1,:);
          2*f(2:N/2,:);
@@ -118,22 +118,22 @@ function f=hilbert(f, N = [], dim = [])
     else
       f=[f(1,:);
          2*f(2:(N+1)/2,:);
-         zeros((N-1)/2,W)];    
+         zeros((N-1)/2,W)];
     end
-    
+
     f=ifft(f);
   end
-  
+
   % ------- POST: Restoration of dimensions ------------
-  
+
   % Restore the original, permuted shape.
   f=reshape(f,permutedsize);
-  
+
   if dim>1
     % Undo the permutation.
     f=ipermute(f,order);
   end
-  
+
 endfunction
 
 %!demo

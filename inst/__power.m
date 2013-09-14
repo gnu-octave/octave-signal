@@ -14,7 +14,7 @@
 ## this program; if not, see <http://www.gnu.org/licenses/>.
 
 ## usage:  [P, w] = __power (b, a, [, nfft [, Fs]] [, range] [, units])
-## 
+##
 ## Plot the power spectrum of the given ARMA model.
 ##
 ## b, a: filter coefficients (b=numerator, a=denominator)
@@ -33,6 +33,7 @@
 ## TODO:    distinguish between 'linear', 'log', 'logsquared' and 'squared'
 
 function [varargout] = __power (b, a, varargin)
+
   if (nargin < 2 || nargin > 6) print_usage; endif
 
   nfft = [];
@@ -64,14 +65,14 @@ function [varargout] = __power (b, a, varargin)
       usage(usagestr);
     endif
   endfor
-  
+
   if isempty(nfft); nfft = 256; endif
   if isempty(Fs); Fs = 2; endif
   if isempty(range)
     range = 'half';
     range_fact = 2.0;
-    endif
-  
+  endif
+
   [P, w] = freqz(b, a, nfft, range, Fs);
 
   P = (range_fact/Fs)*(P.*conj(P));
@@ -86,4 +87,3 @@ function [varargout] = __power (b, a, varargin)
   if nargout >= 2, varargout{2} = w; endif
 
 endfunction
-

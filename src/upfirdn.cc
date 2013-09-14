@@ -34,17 +34,17 @@ MT upfirdn (MT &x, ColumnVector &h, octave_idx_type p, octave_idx_type q)
       x = x.transpose ();
       rx = x.rows ();
       cx = x.columns ();
-      isrowvector = true;      
+      isrowvector = true;
     }
 
   octave_idx_type Lh = h.length ();
   const double r = p/(static_cast<double> (q));
 
-  const octave_idx_type Ly = ceil (static_cast<double> ((rx-1)*p + Lh) / 
+  const octave_idx_type Ly = ceil (static_cast<double> ((rx-1)*p + Lh) /
                                    static_cast<double> (q));
 
   MT y (Ly, cx, 0.0);
-  
+
   for (octave_idx_type c = 0; c < cx; c++)
     {
       octave_idx_type m = 0;
@@ -63,22 +63,22 @@ MT upfirdn (MT &x, ColumnVector &h, octave_idx_type p, octave_idx_type q)
                   k ++;
                   continue;
                 }
-              
+
               const octave_idx_type ih = k * p + lm;
               if ((ih >= Lh) | (ix < 0))
                 break;
-              
+
               accum += h (ih) * x (ix, c);
               k++;
             }
           while (1);
-          
+
           y (m, c) = accum;
           m ++;
         }
 
     }
-    
+
   if (isrowvector)
     y = y.transpose ();
 
@@ -92,9 +92,9 @@ Upsample, FIR filtering and downsample.@*\n\
 @end deftypefn\n")
 {
   octave_value_list retval;
-  
+
   const int nargin = args.length ();
-  
+
   if (nargin < 4)
     {
       print_usage ();
@@ -103,24 +103,24 @@ Upsample, FIR filtering and downsample.@*\n\
 
   ColumnVector h (args (1).vector_value ());
 
-  if (error_state) 
-    { 
+  if (error_state)
+    {
       gripe_wrong_type_arg ("upfirdn", args (1));
-      return retval; 
+      return retval;
     }
 
   octave_idx_type p = args (2).idx_type_value ();
 
-  if (error_state) 
-    { 
+  if (error_state)
+    {
       gripe_wrong_type_arg ("upfirdn", args (2));
-      return retval; 
+      return retval;
     }
 
   octave_idx_type q = args (3).idx_type_value ();
 
-  if (error_state) 
-    { 
+  if (error_state)
+    {
       gripe_wrong_type_arg ("upfirdn", args (3));
       return retval;
     }
@@ -129,10 +129,10 @@ Upsample, FIR filtering and downsample.@*\n\
   if (args (0).is_real_matrix ())
     {
       Matrix x = args (0).matrix_value ();
-      if (error_state) 
-        { 
+      if (error_state)
+        {
           gripe_wrong_type_arg ("upfirdn", args (0));
-          return retval; 
+          return retval;
         }
 
       Matrix y = upfirdn (x, h, p, q);
@@ -141,16 +141,15 @@ Upsample, FIR filtering and downsample.@*\n\
   else if (args (0).is_complex_matrix ())
     {
       ComplexMatrix x = args (0).complex_matrix_value ();
-      if (error_state) 
-        { 
+      if (error_state)
+        {
           gripe_wrong_type_arg ("upfirdn", args (0));
-          return retval; 
+          return retval;
         }
 
       ComplexMatrix y = upfirdn (x, h, p, q);
       retval (0) = y;
     }
- 
-  return retval;
-}  
 
+  return retval;
+}

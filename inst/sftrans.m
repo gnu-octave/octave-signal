@@ -23,14 +23,14 @@
 ## nyquist frequency).
 ##
 ## Theory: Given a low pass filter represented by poles and zeros in the
-## splane, you can convert it to a low pass, high pass, band pass or 
+## splane, you can convert it to a low pass, high pass, band pass or
 ## band stop by transforming each of the poles and zeros individually.
 ## The following table summarizes the transformation:
 ##
 ## Transform         Zero at x                  Pole at x
 ## ----------------  -------------------------  ------------------------
 ## Low Pass          zero: Fc x/C               pole: Fc x/C
-## S -> C S/Fc       gain: C/Fc                 gain: Fc/C 
+## S -> C S/Fc       gain: C/Fc                 gain: Fc/C
 ## ----------------  -------------------------  ------------------------
 ## High Pass         zero: Fc C/x               pole: Fc C/x
 ## S -> C Fc/S       pole: 0                    zero: 0
@@ -67,7 +67,7 @@
 ## Please note that a pole and a zero at the same place exactly cancel.
 ## This is significant for High Pass, Band Pass and Band Stop filters
 ## which create numerous extra poles and zeros, most of which cancel.
-## Those which do not cancel have a "fill-in" effect, extending the 
+## Those which do not cancel have a "fill-in" effect, extending the
 ## shorter of the sets to have the same number of as the longer of the
 ## sets of poles and zeros (or at least split the difference in the case
 ## of the band pass filter).  There may be other opportunistic
@@ -78,8 +78,8 @@
 ## if the number of poles is smaller than the number of zeros and the
 ## filter is high pass or band pass.  The analytic design methods all
 ## yield more poles than zeros, so this will not be a problem.
-## 
-## References: 
+##
+## References:
 ##
 ## Proakis & Manolakis (1992). Digital Signal Processing. New York:
 ## Macmillan Publishing Company.
@@ -173,11 +173,12 @@ function [Sz, Sp, Sg] = sftrans(Sz, Sp, Sg, W, stop)
     else
 ## ----------------  -------------------------  ------------------------
 ## Low Pass          zero: Fc x/C               pole: Fc x/C
-## S -> C S/Fc       gain: C/Fc                 gain: Fc/C 
+## S -> C S/Fc       gain: C/Fc                 gain: Fc/C
 ## ----------------  -------------------------  ------------------------
       Sg = Sg * (C/Fc)^(z-p);
       Sp = Fc * Sp / C;
       Sz = Fc * Sz / C;
     end
   end
+
 endfunction

@@ -24,6 +24,7 @@
 %%
 
 function [varargout] = cohere(varargin)
+
 %%
   if ( nargin<2 )
     error( 'cohere: Need at least 2 args. Use help cohere.' );
@@ -53,4 +54,5 @@ function [varargout] = cohere(varargin)
   end
   pwelch(saved_compatib);
   saved_compatib = 0;
+
 end

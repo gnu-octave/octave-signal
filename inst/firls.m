@@ -13,7 +13,7 @@
 ## You should have received a copy of the GNU General Public License along with
 ## this program; if not, see <http://www.gnu.org/licenses/>.
 
-## b = firls(N, F, A); 
+## b = firls(N, F, A);
 ## b = firls(N, F, A, W);
 ##
 ##  FIR filter design using least squares method. Returns a length N+1
@@ -97,8 +97,8 @@ function coef = firls(N, frequencies, pass, weight, str);
     ## -                             n
     ##
     cos_ints2 = [omega(i1).^2 - omega(i2).^2; ...
-		             cos((1:M)' * omega(i2)) - cos((1:M)' * omega(i1))] ./ ...
-        ([2, 1:M]' * (omega(i2) - omega(i1)));
+                 cos((1:M)' * omega(i2)) - cos((1:M)' * omega(i1))] ./ ...
+                ([2, 1:M]' * (omega(i2) - omega(i1)));
     d = [-weight .* pass(i1); weight .* pass(i2)] (:);
     b = [1, 1./(1:M)]' .* ((kron (cos_ints2, [1, 1]) + cos_ints(1:M+1,:)) * d);
 

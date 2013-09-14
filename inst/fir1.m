@@ -16,7 +16,7 @@
 ## usage: b = fir1(n, w [, type] [, window] [, noscale])
 ##
 ## Produce an order n FIR filter with the given frequency cutoff,
-## returning the n+1 filter coefficients in b.  
+## returning the n+1 filter coefficients in b.
 ##
 ## n: order of the filter (1 less than the length of the filter)
 ## w: band edges
@@ -48,16 +48,17 @@
 ## TODO: Find reference to the requirement that order be even for
 ## TODO:    filters that end high.  Figure out what to do with the
 ## TODO:    window in these cases
+
 function b = fir1(n, w, varargin)
 
   if nargin < 2 || nargin > 5
     print_usage;
   endif
-  
+
   ## Assign default window, filter type and scale.
-  ## If single band edge, the first band defaults to a pass band to 
-  ## create a lowpass filter.  If multiple band edges, the first band 
-  ## defaults to a stop band so that the two band case defaults to a 
+  ## If single band edge, the first band defaults to a pass band to
+  ## create a lowpass filter.  If multiple band edges, the first band
+  ## defaults to a stop band so that the two band case defaults to a
   ## band pass filter.  Ick.
   window  = [];
   scale   = 1;
@@ -65,7 +66,7 @@ function b = fir1(n, w, varargin)
 
   ## sort arglist, normalize any string
   for i=1:length(varargin)
-    arg = varargin{i}; 
+    arg = varargin{i};
     if ischar(arg), arg=lower(arg);end
     if isempty(arg) continue; end  # octave bug---can't switch on []
     switch arg
@@ -89,7 +90,7 @@ function b = fir1(n, w, varargin)
 
   ## Increment the order if the final band is a pass band.  Something
   ## about having a nyquist frequency of zero causing problems.
-  if rem(n,2)==1 && m(2*bands)==1, 
+  if rem(n,2)==1 && m(2*bands)==1,
     warning("n must be even for highpass and bandstop filters. Incrementing.");
     n = n+1;
     if isvector(window) && isreal(window) && !ischar(window)
@@ -131,6 +132,7 @@ function b = fir1(n, w, varargin)
     ## normalize the filter
     b = renorm*b;
   endif
+
 endfunction
 
 %!demo

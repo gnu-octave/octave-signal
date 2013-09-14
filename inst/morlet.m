@@ -19,6 +19,7 @@
 ## @end deftypefn
 
 function [psi,x] = morlet(lb,ub,n)
+
   if (nargin < 3); print_usage; end
 
   if (n <= 0)
@@ -26,4 +27,5 @@ function [psi,x] = morlet(lb,ub,n)
   endif
   x = linspace(lb,ub,n);
   psi = cos(5.*x) .* exp(-x.^2/2) ;
+
 endfunction

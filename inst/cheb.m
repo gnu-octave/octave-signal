@@ -26,6 +26,7 @@
 ## element is calculated as y(i) = Tn(x(i)).
 
 function T = cheb (n, x)
+
   if (nargin != 2)
     print_usage;
   elseif !(isscalar (n) && (n == round(n)) && (n >= 0))
@@ -48,4 +49,5 @@ function T = cheb (n, x)
   endif
 
   T = real(T);
+
 endfunction

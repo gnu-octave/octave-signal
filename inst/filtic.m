@@ -14,7 +14,7 @@
 ## this program; if not, see <http://www.gnu.org/licenses/>.
 
 ## Set initial condition vector for filter function
-## The vector zf has the same values that would be obtained 
+## The vector zf has the same values that would be obtained
 ## from function filter given past inputs x and outputs y
 ##
 ## The vectors x and y contain the most recent inputs and outputs
@@ -46,17 +46,17 @@ function zf = filtic(b,a,y,x)
 
   # Pad arrays a and b to length nz+1 if required
   if length(a)<(nz+1)
-     a(length(a)+1:nz+1)=0;
+    a(length(a)+1:nz+1)=0;
   endif
   if length(b)<(nz+1)
-     b(length(b)+1:nz+1)=0;
+    b(length(b)+1:nz+1)=0;
   endif
   # Pad arrays x and y to length nz if required
   if length(x) < nz
-     x(length(x)+1:nz)=0;
+    x(length(x)+1:nz)=0;
   endif
   if length(y) < nz
-     y(length(y)+1:nz)=0;
+    y(length(y)+1:nz)=0;
   endif
 
   for i=nz:-1:1
@@ -78,7 +78,7 @@ endfunction
 %!
 %!test
 %! ## Simple high pass filter
-%! b=[0.25 -0.25]; 
+%! b=[0.25 -0.25];
 %! a=[1.0 0.5];
 %! zf_ref = [-0.25];
 %! zf=filtic(b,a,[0.0],[1.0]);
@@ -86,9 +86,9 @@ endfunction
 %!
 %!test
 %! ## Second order cases
-%! [b,a]=butter(2,0.4); 
+%! [b,a]=butter(2,0.4);
 %! N=1000; ## Long enough for filter to settle
-%! xx=ones(1,N); 
+%! xx=ones(1,N);
 %! [yy,zf_ref] = filter(b,a,xx);
 %! x=xx(N:-1:N-1);
 %! y=yy(N:-1:N-1);
@@ -133,4 +133,3 @@ endfunction
 %! y=[yy(N+2) yy(N+1)];
 %! zf=filtic(b,a,y);
 %! assert(zf,zf_ref,8*eps);
-

@@ -23,6 +23,7 @@
 %%     --- especially hint (7) for Matlab R11 defaults.
 
 function [varargout] = tfe(varargin)
+
   %%
   %% Check fixed argument
   if ( nargin<2 )
@@ -52,4 +53,5 @@ function [varargout] = tfe(varargin)
     varargout{2} = f;
   end
   pwelch(saved_compatib);
+
 end

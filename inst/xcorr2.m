@@ -100,6 +100,7 @@ function c = xcorr2 (a, b, biasflag = "none")
     otherwise
       error ("xcorr2: invalid type of scale %s", biasflag);
   endswitch
+
 endfunction
 
 %!test  # basic usage

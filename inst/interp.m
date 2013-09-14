@@ -21,7 +21,7 @@
 ##
 ## Example
 ##                                          # Generate a signal.
-##    t=0:0.01:2; x=chirp(t,2,.5,10,'quadratic')+sin(2*pi*t*0.4); 
+##    t=0:0.01:2; x=chirp(t,2,.5,10,'quadratic')+sin(2*pi*t*0.4);
 ##    y = interp(x(1:4:length(x)),4,4,1);   # interpolate a sub-sample
 ##    stem(t(1:121)*1000,x(1:121),"-g;Original;"); hold on;
 ##    stem(t(1:121)*1000,y(1:121),"-r;Interpolated;");
@@ -31,7 +31,7 @@
 
 function y = interp(x, q, n = 4, Wc = 0.5)
 
-  if nargin < 1 || nargin > 4, 
+  if nargin < 1 || nargin > 4,
     print_usage;
   endif
   if q != fix(q), error("decimate only works with integer q."); endif
@@ -45,11 +45,12 @@ function y = interp(x, q, n = 4, Wc = 0.5)
   b = fir1(2*q*n+1, Wc/q);
   y=q*fftfilt(b, y);
   y(1:q*n+1) = [];  # adjust for zero filter delay
+
 endfunction
 
 %!demo
 %! ## Generate a signal.
-%! t=0:0.01:2; x=chirp(t,2,.5,10,'quadratic')+sin(2*pi*t*0.4); 
+%! t=0:0.01:2; x=chirp(t,2,.5,10,'quadratic')+sin(2*pi*t*0.4);
 %! y = interp(x(1:4:length(x)),4,4,1);   # interpolate a sub-sample
 %! plot(t(1:121)*1000,y(1:121),"r-+;Interpolated;"); hold on;
 %! stem(t(1:4:121)*1000,x(1:4:121),"ob;Original;"); hold off;

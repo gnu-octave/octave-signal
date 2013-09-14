@@ -15,7 +15,7 @@
 ## this program; if not, see <http://www.gnu.org/licenses/>.
 
 ## Generate an Chebyshev type II filter with Rs dB of stop band attenuation.
-## 
+##
 ## [b, a] = cheby2(n, Rs, Wc)
 ##    low pass filter with cutoff pi*Wc radians
 ##
@@ -34,11 +34,11 @@
 ##
 ## [...] = cheby2(...,'s')
 ##     return a Laplace space filter, W can be larger than 1.
-## 
+##
 ## [a,b,c,d] = cheby2(...)
-##  return  state-space matrices 
-## 
-## References: 
+##  return  state-space matrices
+##
+## References:
 ##
 ## Parks & Burrus (1987). Digital Filter Design. New York:
 ## John Wiley & Sons, Inc.
@@ -56,14 +56,14 @@ function [a,b,c,d] = cheby2(n, Rs, W, varargin)
 
 
   stop = 0;
-  digital = 1;  
+  digital = 1;
   for i=1:length(varargin)
     switch varargin{i}
-    case 's', digital = 0;
-    case 'z', digital = 1;
-    case { 'high', 'stop' }, stop = 1;
-    case { 'low',  'pass' }, stop = 0;
-    otherwise,  error ("cheby2: expected [high|stop] or [s|z]");
+      case 's', digital = 0;
+      case 'z', digital = 1;
+      case { 'high', 'stop' }, stop = 1;
+      case { 'low',  'pass' }, stop = 0;
+      otherwise,  error ("cheby2: expected [high|stop] or [s|z]");
     endswitch
   endfor
 
@@ -93,9 +93,9 @@ function [a,b,c,d] = cheby2(n, Rs, W, varargin)
   endif
 
   ## Generate splane poles and zeros for the chebyshev type 2 filter
-  ## From: Stearns, SD; David, RA; (1988). Signal Processing Algorithms. 
+  ## From: Stearns, SD; David, RA; (1988). Signal Processing Algorithms.
   ##       New Jersey: Prentice-Hall.
-  C = 1;			# default cutoff frequency
+  C = 1;                        # default cutoff frequency
   lambda = 10^(Rs/20);
   phi = log(lambda + sqrt(lambda^2-1))/n;
   theta = pi*([1:n]-0.5)/n;
@@ -105,7 +105,7 @@ function [a,b,c,d] = cheby2(n, Rs, W, varargin)
     ## drop theta==pi/2 since it results in a zero at infinity
     zero = 1i*C./cos(theta([1:(n-1)/2, (n+3)/2:n]));
   else
-   zero = 1i*C./cos(theta);
+    zero = 1i*C./cos(theta);
   endif
   pole = C./(alpha.^2+beta.^2).*(alpha-1i*beta);
 
@@ -125,7 +125,7 @@ function [a,b,c,d] = cheby2(n, Rs, W, varargin)
   endif
 
   ## convert to the correct output form
-  if nargout==2, 
+  if nargout==2,
     a = real(gain*poly(zero));
     b = real(poly(pole));
   elseif nargout==3,
@@ -133,7 +133,7 @@ function [a,b,c,d] = cheby2(n, Rs, W, varargin)
     b = pole;
     c = gain;
   else
-    ## output ss results 
+    ## output ss results
     [a, b, c, d] = zp2ss (zero, pole, gain);
   endif
 

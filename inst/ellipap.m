@@ -24,6 +24,7 @@
 ## @end deftypefn
 
 function [z, p, g] = ellipap (n, Rp, Rs)
+
   if (nargin != 3)
     print_usage();
   elseif (! isscalar (n) || ! isnumeric (n) || fix (n) != n || n <= 0)
@@ -36,4 +37,5 @@ function [z, p, g] = ellipap (n, Rp, Rs)
     error ("ellipap: RS must be larger than RP");
   endif
   [z, p, g] = ellip (n, Rp, Rs, 1, "s");
+
 endfunction

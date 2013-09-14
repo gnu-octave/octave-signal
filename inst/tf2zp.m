@@ -18,7 +18,7 @@
 ## @deftypefn {Function File} {[@var{zer}, @var{pol}, @var{k}] =} tf2zp (@var{num}, @var{den})
 ## Converts transfer functions to poles-and-zero representations.
 ##
-## Returns the zeros and poles of the system defined 
+## Returns the zeros and poles of the system defined
 ## by @var{num}/@var{den}.
 ## @var{k} is a gain associated with the system zeros.
 ## @end deftypefn

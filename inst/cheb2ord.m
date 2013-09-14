@@ -14,20 +14,20 @@
 ## this program; if not, see <http://www.gnu.org/licenses/>.
 
 ## Compute chebyshev type II filter order and cutoff for the desired response
-## characteristics. Rp is the allowable decibels of ripple in the pass 
+## characteristics. Rp is the allowable decibels of ripple in the pass
 ## band. Rs is the minimum attenuation in the stop band.
 ##
 ## [n, Wc] = cheb2ord(Wp, Ws, Rp, Rs)
 ##     Low pass (Wp<Ws) or high pass (Wp>Ws) filter design.  Wp is the
 ##     pass band edge and Ws is the stop band edge.  Frequencies are
 ##     normalized to [0,1], corresponding to the range [0,Fs/2].
-## 
+##
 ## [n, Wc] = cheb2ord([Wp1, Wp2], [Ws1, Ws2], Rp, Rs)
 ##     Band pass (Ws1<Wp1<Wp2<Ws2) or band reject (Wp1<Ws1<Ws2<Wp2)
 ##     filter design. Wp gives the edges of the pass band, and Ws gives
 ##     the edges of the stop band.
 ##
-## Theory: 
+## Theory:
 ##
 ## See also: cheby2
 
@@ -66,7 +66,7 @@ function [n, Wc] = cheb2ord(Wp, Ws, Rp, Rs)
    if (length(Wp) == 1)
       Wa = Ws/Wp;
     else
-      ## band pass 
+      ## band pass
       Wa=(Wp.^2 - Ws(1)*Ws(2))./(Wp*(Ws(1)-Ws(2)));
     endif;
   endif;
@@ -76,11 +76,11 @@ function [n, Wc] = cheb2ord(Wp, Ws, Rp, Rs)
   stop_atten = 10^(abs(Rs)/10);
   pass_atten = 10^(abs(Rp)/10);
   n = ceil(acosh(sqrt((stop_atten-1)/(pass_atten-1)))/acosh(1/Wa));
-    
+
 endfunction
 
 %!demo
-%! Fs = 10000; 
+%! Fs = 10000;
 %! [n, Wc] = cheb2ord (1000/(Fs/2), 1200/(Fs/2), 0.5, 29);
 %!
 %! subplot (221);

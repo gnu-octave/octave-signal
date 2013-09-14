@@ -20,6 +20,7 @@
 ## @end deftypefn
 
 function [w] = barthannwin(L)
+
   if (nargin < 1)
     print_usage;
   elseif (! isscalar(L) || L < 0)
@@ -36,4 +37,5 @@ function [w] = barthannwin(L)
     w = 0.62 -0.48.*abs(n./(L-1) - 0.5)+0.38*cos(2.*pi*(n./(L-1)-0.5));
     w = w';
   endif
+
 endfunction

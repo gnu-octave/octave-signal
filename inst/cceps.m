@@ -42,8 +42,8 @@ function cep = cceps (x, c)
   endif
 
   bad_signal_message = ["cceps:  bad signal x, ", ...
-      "some Fourier coefficients are zero."];
-  
+                        "some Fourier coefficients are zero."];
+
   F = fft (x);
   if (min (abs (F)) == 0)
     error (bad_signal_message);
@@ -67,7 +67,7 @@ function cep = cceps (x, c)
   # make result real
   if (c)
     cep = real (cep);
-    if (cor)      
+    if (cor)
       # make cepstrum of same length as input vector
       cep (nr) = 0;
     endif

@@ -24,6 +24,7 @@
 ## @end deftypefn
 
 function [z, p, g] = cheb2ap (n, Rp)
+
   if (nargin != 2)
     print_usage();
   elseif (! isscalar (n) || ! isnumeric (n) || fix (n) != n || n <= 0)
@@ -32,4 +33,5 @@ function [z, p, g] = cheb2ap (n, Rp)
     error ("cheb2ap: RS must be a non-negative scalar")
   endif
   [z, p, g] = cheby2 (n, Rs, 1, "s");
+
 endfunction

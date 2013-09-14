@@ -15,12 +15,12 @@
 ## this program; if not, see <http://www.gnu.org/licenses/>.
 
 ## usage:  [a, v, k] = aryule (x, p)
-## 
+##
 ## fits an AR (p)-model with Yule-Walker estimates.
 ## x = data vector to estimate
 ## a: AR coefficients
 ## v: variance of white noise
-## k: reflection coeffients for use in lattice filter 
+## k: reflection coeffients for use in lattice filter
 ##
 ## The power spectrum of the resulting filter can be plotted with
 ## pyulear(x, p), or you can plot it directly with ar_psd(a,v,...).
@@ -31,12 +31,13 @@
 ##
 ## Example: Use example from arburg, but substitute aryule for arburg.
 ##
-## Note: Orphanidis '85 claims lattice filters are more tolerant of 
+## Note: Orphanidis '85 claims lattice filters are more tolerant of
 ## truncation errors, which is why you might want to use them.  However,
 ## lacking a lattice filter processor, I haven't tested that the lattice
 ## filter coefficients are reasonable.
 
 function [a, v, k] = aryule (x, p)
+
   if ( nargin~=2 )
     print_usage;
   elseif ( ~isvector(x) || length(x)<3 )
@@ -55,6 +56,7 @@ function [a, v, k] = aryule (x, p)
   else
     [a, v, k] = levinson(c, p);
   endif
+
 endfunction
 
 %!demo

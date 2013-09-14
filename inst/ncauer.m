@@ -21,11 +21,11 @@
 ## Rs = Stopband ripple
 ## Ws = Desired order
 ##
-## References: 
+## References:
 ##
-## - Serra, Celso Penteado, Teoria e Projeto de Filtros, Campinas: CARTGRAF, 
+## - Serra, Celso Penteado, Teoria e Projeto de Filtros, Campinas: CARTGRAF,
 ##   1983.
-## - Lamar, Marcus Vinicius, Notas de aula da disciplina TE 456 - Circuitos 
+## - Lamar, Marcus Vinicius, Notas de aula da disciplina TE 456 - Circuitos
 ##   Analogicos II, UFPR, 2001/2002.
 
 function [zer, pol, T0]=ncauer(Rp, Rs, n)
@@ -102,7 +102,7 @@ function [zer, pol, T0]=ncauer(Rp, Rs, n)
 
   ##If n odd, there is a real pole  -sig0:
   if rem(n,2)
-          pol=[pol, -sig0];
+    pol=[pol, -sig0];
   end
 
   ##
@@ -113,7 +113,9 @@ endfunction
 
 ## usage: ws = __ellip_ws(n, rp, rs)
 ## Calculate the stop band edge for the Cauer filter.
+
 function ws=__ellip_ws(n, rp, rs)
+
   kl0 = ((10^(0.1*rp)-1)/(10^(0.1*rs)-1));
   k0  = (1-kl0);
   int = ellipke([kl0 ; k0]);
@@ -122,12 +124,16 @@ function ws=__ellip_ws(n, rp, rs)
   x   = n*ql0/q0;
   kl  = fminbnd(@(y) __ellip_ws_min(y,x) ,eps, 1-eps);
   ws  = sqrt(1/kl);
+
 endfunction
 
 ## usage: err = __ellip_ws_min(kl, x)
+
 function err=__ellip_ws_min(kl, x)
+
   int=ellipke([kl; 1-kl]);
   ql=int(1);
   q=int(2);
   err=abs((ql/q)-x);
+
 endfunction

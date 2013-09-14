@@ -49,6 +49,7 @@
 %% @end deftypefn
 
 function [r, p, f, m] = residued(b, a, toler)
+
   % RESIDUED - return residues, poles, and FIR part of B(z)/A(z)
   %
   % Let nb = length(b), na = length(a), and N=na-1 = no. of poles.
@@ -89,6 +90,7 @@ function [r, p, f, m] = residued(b, a, toler)
   end
   [r,p,f2,m] = residuez(NUM,DEN);
   if f2, error('f2 not empty as expected'); end
+
 end
 
 %!test

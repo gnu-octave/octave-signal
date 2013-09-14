@@ -1,6 +1,6 @@
 ## Copyright (c) 2007 R.G.H. Eschauzier <reschauzier@yahoo.com>
 ## Copyright (c) 2011 Carnë Draug <carandraug+dev@gmail.com>
-## 
+##
 ## This program is free software; you can redistribute it and/or modify it under
 ## the terms of the GNU General Public License as published by the Free Software
 ## Foundation; either version 3 of the License, or (at your option) any later
@@ -39,6 +39,7 @@
 ## @end deftypefn
 
 ## Impulse invariant conversion from s to z domain
+
 function [b_out, a_out] = invimpinvar (b_in, a_in, fs = 1, tol = 0.0001)
 
   if (nargin <2)
@@ -71,8 +72,8 @@ function [b_out, a_out] = invimpinvar (b_in, a_in, fs = 1, tol = 0.0001)
     m=1;
     first_pole = p_in(i); % Pole in the z-domain
     while (i<n && abs(first_pole-p_in(i+1))<tol) % Multiple poles at p(i)
-       i++; % Next residue
-       m++; % Next multiplicity
+      i++; % Next residue
+      m++; % Next multiplicity
     endwhile
     [r, sm, k]      = inv_z_res(r_in(i-m+1:i), first_pole, ts); % Find s-domain residues
     k_in           -= k;                                        % Just to check, should end up zero for physical system
@@ -90,6 +91,7 @@ function [b_out, a_out] = invimpinvar (b_in, a_in, fs = 1, tol = 0.0001)
 endfunction
 
 ## Inverse function of z_res (see impinvar source)
+
 function [r_out sm_out k_out] = inv_z_res (r_in,p_in,ts)
 
   n    = length(r_in); % multiplicity of the pole

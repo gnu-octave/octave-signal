@@ -33,12 +33,12 @@ function w = tukeywin (L, r = 1/2)
   if (nargin < 1 || nargin > 2)
     print_usage;
   elseif (nargin == 2)
-      ## check that 0 < r < 1
-      if r > 1
-        r = 1;
-      elseif r < 0
-        r = 0;
-      endif
+    ## check that 0 < r < 1
+    if r > 1
+      r = 1;
+    elseif r < 0
+      r = 0;
+    endif
   endif
 
   ## generate window

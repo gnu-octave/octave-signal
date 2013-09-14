@@ -17,7 +17,7 @@
 ## F = sgolay (p, n [, m [, ts]])
 ##   Computes the filter coefficients for all Savitzsky-Golay smoothing
 ##   filters of order p for length n (odd). m can be used in order to
-##   get directly the mth derivative. In this case, ts is a scaling factor. 
+##   get directly the mth derivative. In this case, ts is a scaling factor.
 ##
 ## The early rows of F smooth based on future values and later rows
 ## smooth based on past values, with the middle row using half future
@@ -61,7 +61,7 @@ function F = sgolay (p, n, m = 0, ts = 1)
       ## equally spaced on the unit grid, with past points using negative
       ## values and future points using positive values.
       C = ( [(1:n)-row]'*ones(1,p+1) ) .^ ( ones(n,1)*[0:p] );
-      ## A = pseudo-inverse (C), so C*A = I; this is constructed from the SVD 
+      ## A = pseudo-inverse (C), so C*A = I; this is constructed from the SVD
       A = pinv(C);
       ## Take the row of the matrix corresponding to the derivative
       ## you want to compute.
@@ -72,6 +72,7 @@ function F = sgolay (p, n, m = 0, ts = 1)
 
   endif
   F =  F * ( prod(1:m) / (ts^m) );
+
 endfunction
 
 %!test
@@ -96,9 +97,9 @@ endfunction
 %!
 %! y = sgolayfilt(x,sgolay(8,41,1,dt));
 %! assert(norm(y-dx)/norm(dx),0,5e-6);
-%! 
+%!
 %! y = sgolayfilt(x,sgolay(8,41,2,dt));
 %! assert(norm(y-d2x)/norm(d2x),0,1e-5);
-%! 
+%!
 %! y = sgolayfilt(x,sgolay(8,41,3,dt));
 %! assert(norm(y-d3x)/norm(d3x),0,1e-4);

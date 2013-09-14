@@ -17,7 +17,7 @@
 
 ## Generate a bessel filter.
 ## Default is a Laplace space (s) filter.
-## 
+##
 ## [b,a] = besself(n, Wc)
 ##    low pass filter with cutoff pi*Wc radians
 ##
@@ -33,20 +33,20 @@
 ## [z,p,g] = besself(...)
 ##    return filter as zero-pole-gain rather than coefficients of the
 ##    numerator and denominator polynomials.
-## 
+##
 ## [...] = besself(...,'z')
 ##     return a discrete space (Z) filter, W must be less than 1.
-## 
-## [a,b,c,d] = besself(...)
-##  return  state-space matrices 
 ##
-## References: 
+## [a,b,c,d] = besself(...)
+##  return  state-space matrices
+##
+## References:
 ##
 ## Proakis & Manolakis (1992). Digital Signal Processing. New York:
 ## Macmillan Publishing Company.
 
 function [a, b, c, d] = besself (n, W, varargin)
-  
+
   if (nargin>4 || nargin<2) || (nargout>4 || nargout<2)
     print_usage;
   end
@@ -57,14 +57,14 @@ function [a, b, c, d] = besself (n, W, varargin)
   end
 
   stop = 0;
-  digital = 0;  
+  digital = 0;
   for i=1:length(varargin)
     switch varargin{i}
-    case 's', digital = 0;
-    case 'z', digital = 1;
-    case { 'high', 'stop' }, stop = 1;
-    case { 'low',  'pass' }, stop = 0;
-    otherwise,  error ("besself: expected [high|stop] or [s|z]");
+      case 's', digital = 0;
+      case 'z', digital = 1;
+      case { 'high', 'stop' }, stop = 1;
+      case { 'low',  'pass' }, stop = 0;
+      otherwise,  error ("besself: expected [high|stop] or [s|z]");
     endswitch
   endfor
 
@@ -102,7 +102,7 @@ function [a, b, c, d] = besself (n, W, varargin)
   endif
 
   ## convert to the correct output form
-  if nargout==2, 
+  if nargout==2,
     a = real(gain*poly(zero));
     b = real(poly(pole));
   elseif nargout==3,
@@ -110,7 +110,7 @@ function [a, b, c, d] = besself (n, W, varargin)
     b = pole;
     c = gain;
   else
-    ## output ss results 
+    ## output ss results
     [a, b, c, d] = zp2ss (zero, pole, gain);
   endif
 

@@ -38,7 +38,7 @@
 %%       pwelch treats the second argument as "y" if there is a control-string
 %%     argument "cross", "trans", "coher" or "ypower"; "power" does not force
 %%     the 2nd argument to be treated as "y".  All other arguments are
-%%     optional.  All spectra are returned in matrix "spectra". 
+%%     optional.  All spectra are returned in matrix "spectra".
 %%
 %%  [spectra,Pxx_ci,freq] = pwelch(x,window,overlap,Nfft,Fs,conf,
 %%                                 range,plot_type,detrend,sloppy)
@@ -46,7 +46,7 @@
 %%                                 range,plot_type,detrend,sloppy,results)
 %%     Estimates confidence intervals for the spectral density.
 %%     See Hint (7) below for compatibility options.  Confidence level "conf"
-%%     is the 6th or 7th numeric argument.  If "results" control-string 
+%%     is the 6th or 7th numeric argument.  If "results" control-string
 %%     arguments are used, one of them must be "power" when the "conf"
 %%     argument is present; pwelch can estimate confidence intervals only for
 %%     the power spectrum of the "x" data.  It does not know how to estimate
@@ -89,14 +89,14 @@
 %%             %%       are three return values, or conf is an empty matrix,
 %%             %%       confidence intervals are calculated for conf=0.95 .
 %%             %%       If conf is zero or is not given, confidence intervals
-%%             %%       are not calculated. Confidence intervals can be 
+%%             %%       are not calculated. Confidence intervals can be
 %%             %%       obtained only for the power spectral density of x;
 %%             %%       nothing else.
 %%
 %% CONTROL-STRING ARGUMENTS -- each of these arguments is a character string.
 %%   Control-string arguments must be after the other arguments but can be in
 %%   any order.
-%%  
+%%
 %% range     %% 'half',  'onesided' : frequency range of the spectrum is
 %%           %%       zero up to but not including Fs/2.  Power from
 %%           %%       negative frequencies is added to the positive side of
@@ -145,7 +145,7 @@
 %%           %%         input "x" and output "y"
 %%           %% 'coher' calculate coherence function of "x" and "y"
 %%           %% 'ypower' calculate power spectral density of "y"
-%%           %%  The default is 'power', with argument "y" omitted. 
+%%           %%  The default is 'power', with argument "y" omitted.
 %%
 %% RETURNED VALUES:
 %%   If return values are not required by the caller, the results are
@@ -159,7 +159,7 @@
 %%           %%        spectral density of x.  First column is the lower
 %%           %%        bound.  Second column is the upper bound.
 %%
-%%   freq    %% [real column vector] frequency values 
+%%   freq    %% [real column vector] frequency values
 %%
 %% HINTS
 %% 1) EMPTY ARGS:
@@ -194,7 +194,7 @@
 %%    adjacent PSD (power spectral density) values are not independent;
 %%    adjacent PSD values are independent if "Nfft=length(window)", which is
 %%    the default value of Nfft.
-%% 5) REMOVING MEAN FROM SIGNAL: 
+%% 5) REMOVING MEAN FROM SIGNAL:
 %%    If the mean is not removed from the signal there is a large spectral
 %%    peak at zero frequency and the sidelobes of this peak are likely to
 %%    swamp the rest of the spectrum.  For this reason, the default behaviour
@@ -205,7 +205,7 @@
 %%    probability distribution.  This assumption is not accurate.  If, for
 %%    example, the data (x) is Gaussian, the periodogram has a Rayleigh
 %%    distribution.  However, the confidence intervals may still be  useful.
-%%    
+%%
 %% 7) COMPATIBILITY WITH Matlab R11, R12, etc
 %%    When used without the second data (y) argument, arguments are compatible
 %%    with the pwelch of Matlab R12, R13, R14, 2006a and 2006b except that
@@ -254,7 +254,7 @@
 %%
 %%
 %% REFERENCES
-%%  [1] Peter D. Welch (June 1967): 
+%%  [1] Peter D. Welch (June 1967):
 %%   "The use of fast Fourier transform for the estimation of power spectra:
 %%   a method based on time averaging over short, modified periodograms."
 %%   IEEE Transactions on Audio Electroacoustics, Vol AU-15(6), pp 70-73
@@ -266,6 +266,7 @@
 %%  [3] Paul Kienzle (1999-2001): "pwelch", http://octave.sourceforge.net/
 
 function [varargout] = pwelch(x,varargin)
+
   %%
   %% COMPATIBILITY LEVEL
   %% Argument positions and defaults depend on compatibility level selected
@@ -348,7 +349,7 @@ function [varargout] = pwelch(x,varargin)
     %%  Use compatib as array index.
     %%  Fs = sampling frequency
     Fs        = [ 1.0 2*pi 2*pi 2*pi ];
-    Fs        = Fs(compatib);            
+    Fs        = Fs(compatib);
     %%  plot_type: 1='plot'|'squared'; 5='db'|'dB'
     plot_type = [ 1 5 5 5 ];
     plot_type = plot_type(compatib);
@@ -370,7 +371,7 @@ function [varargout] = pwelch(x,varargin)
     range     = ~isreal(x) || ( arg2_is_y && ~isreal(y) );
     is_sloppy = 0;
     n_results = 0;
-    do_power  = 0;   
+    do_power  = 0;
     do_cross  = 0;
     do_trans  = 0;
     do_coher  = 0;
@@ -438,7 +439,7 @@ function [varargout] = pwelch(x,varargin)
             do_ypower = n_results;
           end
         else
-          error( 'pwelch: string arg %d illegal value: %s', iarg+1, arg ); 
+          error( 'pwelch: string arg %d illegal value: %s', iarg+1, arg );
         end
         %% end of processing string args
         %%
@@ -485,7 +486,7 @@ function [varargout] = pwelch(x,varargin)
           if ( size(arg,2)>1 )  %% vector must be COLUMN vector
             arg = arg(:);
           end
-        else 
+        else
           is_win = 0;
         end
         if ( ~is_win )
@@ -670,7 +671,7 @@ function [varargout] = pwelch(x,varargin)
       end
     %% end SETUP REMAINING PARAMETERS
     %%
-    %% 
+    %%
     %% MAIN CALCULATIONS
     %% Remove mean from the data
     if ( rm_mean == 3 )
@@ -762,7 +763,7 @@ function [varargout] = pwelch(x,varargin)
     end
     %%
     %% Convert two-sided spectra to one-sided spectra (if range == 0).
-    %% For one-sided spectra, contributions from negative frequencies are added 
+    %% For one-sided spectra, contributions from negative frequencies are added
     %% to the positive side of the spectrum -- but not at zero or Nyquist
     %% (half sampling) frequencies.  This keeps power equal in time and spectral
     %% domains, as required by Parseval theorem.
@@ -899,8 +900,9 @@ function [varargout] = pwelch(x,varargin)
           ylabel( 'phase' );
         end
       end %for
-    end 
+    end
   end
+
 end
 
 %!demo
@@ -909,7 +911,7 @@ end
 %! a = [ 1.0 -1.6216505 1.1102795 -0.4621741 0.2075552 -0.018756746 ];
 %! white = rand(1,16384);
 %! signal = detrend(filter(0.70181,a,white));
-%! % frequency shift by modulating with exp(j.omega.t) 
+%! % frequency shift by modulating with exp(j.omega.t)
 %! skewed = signal.*exp(2*pi*i*2/25*[1:16384]);
 %! Fs = 25; % sampling frequency
 %! hold off

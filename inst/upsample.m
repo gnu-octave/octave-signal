@@ -29,6 +29,7 @@ function y = upsample (x, n, phase = 0)
     y = zeros(n*nr,nc);
     y(phase + 1:n:end,:) = x;
   end
+
 end
 
 %!assert(upsample([1,3,5],2),[1,0,3,0,5,0]);

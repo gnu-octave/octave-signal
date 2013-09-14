@@ -19,6 +19,7 @@
 ## @end deftypefn
 
 function [psi,x] = shanwavf (lb,ub,n,fb,fc)
+
   if (nargin < 5)
     print_usage;
   elseif (n <= 0 || floor(n) ~= n)
@@ -29,4 +30,5 @@ function [psi,x] = shanwavf (lb,ub,n,fb,fc)
 
   x = linspace(lb,ub,n);
   psi = (fb.^0.5).*(sinc(fb.*x).*exp(2.*i.*pi.*fc.*x));
+
 endfunction

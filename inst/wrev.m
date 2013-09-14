@@ -20,6 +20,7 @@
 ## @end deftypefn
 
 function y = wrev(x)
+
   if (nargin < 1|| nargin > 1); print_usage; end
   if(~isvector(x))
     error('x must be a vector');
@@ -27,4 +28,5 @@ function y = wrev(x)
   l = length(x);
   k = 0:l-1;
   y = x(l-k);
+
 endfunction

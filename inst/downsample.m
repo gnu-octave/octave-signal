@@ -29,6 +29,7 @@ function y = downsample (x, n, phase = 0)
   else
     y = x(phase + 1:n:end,:);
   end
+
 endfunction
 
 %!assert(downsample([1,2,3,4,5],2),[1,3,5]);

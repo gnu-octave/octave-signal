@@ -101,4 +101,5 @@ function [Zz, Zp, Zg] = bilinear(Sz, Sp, Sg, T)
   end
 
   if nargout==2, [Zz, Zp] = zp2tf(Zz, Zp, Zg); endif
+
 endfunction

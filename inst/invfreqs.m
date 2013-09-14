@@ -51,19 +51,20 @@ function [B, A, SigN] = invfreqs(H,F,nB,nA,W,iter,tol,tr, varargin)
     if nargin < 8
       tr = '';
       if nargin < 7
-          tol = [];
-          if nargin < 6 
-              iter = [];
-              if nargin < 5
-                  W = ones(1,length(F));
-              end
+        tol = [];
+        if nargin < 6
+          iter = [];
+          if nargin < 5
+            W = ones(1,length(F));
           end
+        end
       end
     end
   end
 
   % now for the real work
   [B, A, SigN] = invfreq(H, F,nB, nA, W, iter, tol, tr, 's', varargin{:});
+
 endfunction
 
 %!demo

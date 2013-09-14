@@ -25,7 +25,7 @@
 %% @item
 %% @var{sos} = matrix of series second-order sections, one per row:@*
 %% @var{sos} = [@var{B1}.' @var{A1}.'; ...; @var{BN}.' @var{AN}.'], where@*
-%% @code{@var{B1}.'==[b0 b1 b2] and @var{A1}.'==[1 a1 a2]} for 
+%% @code{@var{B1}.'==[b0 b1 b2] and @var{A1}.'==[1 a1 a2]} for
 %% section 1, etc.@*
 %% b0 must be nonzero for each section.
 %% See @code{filter()} for documentation of the
@@ -46,7 +46,7 @@
 %%   @item
 %%   @var{g} = overall gain = @var{B}(Inf)
 %%   @end itemize
-%% 
+%%
 %% EXAMPLE:
 %% @example
 %%   [z,p,g] = sos2zp([1 0 1, 1 0 -0.81; 1 0 0, 1 0 0.49])
@@ -79,10 +79,11 @@ function [z,p,g] = sos2zp (sos, Bscale = 1)
     pi = roots(sos(i,4:6));
     p(ndx) = pi;
   end
+
 end
 
-%!test 
-%! b1t=[1 2 3]; a1t=[1 .2 .3]; 
+%!test
+%! b1t=[1 2 3]; a1t=[1 .2 .3];
 %! b2t=[4 5 6]; a2t=[1 .4 .5];
 %! sos=[b1t a1t; b2t a2t];
 %! z = [-1-1.41421356237310i;-1+1.41421356237310i;...

@@ -19,6 +19,7 @@
 ## @end deftypefn
 
 function [psi,x] = cmorwavf (lb,ub,n,fb,fc)
+
   if (nargin ~= 5)
     print_usage;
   elseif (n <= 0 || floor(n) ~= n)
@@ -26,4 +27,5 @@ function [psi,x] = cmorwavf (lb,ub,n,fb,fc)
   endif
   x = linspace(lb,ub,n);
   psi =((pi*fb)^(-0.5))*exp(2*i*pi*fc.*x).*exp(-x.^2/fb);
+
 endfunction

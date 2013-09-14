@@ -29,7 +29,7 @@ function [y, len] = __fwht_opts__ (caller, x, n, order)
   endif
 
   [nr, nc] = size (x);
-  
+
   if (isempty (n))
     if (nr == 1)
       n = 2^nextpow2 (nc);

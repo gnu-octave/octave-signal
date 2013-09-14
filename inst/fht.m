@@ -1,5 +1,5 @@
 ## Copyright (C) 2008 Muthiah Annamalai <muthiah.annamalai@uta.edu>
-## 
+##
 ## This program is free software; you can redistribute it and/or modify it under
 ## the terms of the GNU General Public License as published by the Free Software
 ## Foundation; either version 3 of the License, or (at your option) any later
@@ -15,13 +15,13 @@
 
 ## -*- texinfo -*-
 ## @deftypefn{Function File} {m = } fht ( d, n, dim )
-## @cindex linear algebra 
+## @cindex linear algebra
 ##  The function fht calculates  Fast Hartley Transform
 ##  where @var{d} is the real input vector (matrix), and @var{m}
 ## is the real-transform vector. For matrices the hartley transform
 ## is calculated along the columns by default. The options
 ## @var{n},and @var{dim} are similar to the options of FFT function.
-## 
+##
 ## The forward and inverse hartley transforms are the same (except for a
 ## scale factor of 1/N for the inverse hartley transform), but
 ## implemented using different functions .
@@ -30,7 +30,7 @@
 ## @math{
 ## m[K] = \sum_{i=0}^{N-1} d[i]*(cos[K*2*pi*i/N] + sin[K*2*pi*i/N]), for  0 <= K < N.
 ## m[K] = \sum_{i=0}^{N-1} d[i]*CAS[K*i], for  0 <= K < N. }
-## 
+##
 ## @example
 ## fht(1:4)
 ## @end example
@@ -38,7 +38,7 @@
 ## @end deftypefn
 
 function m = fht( d, n, dim )
-  
+
   if ( nargin < 1 )
     print_usage();
   end
@@ -47,10 +47,10 @@ function m = fht( d, n, dim )
     Y = fft(d,n,dim);
   elseif ( nargin == 2 )
     Y = fft(d,n);
-  else 
+  else
     Y = fft(d);
   end
-  
+
   m = real(Y) - imag(Y);
 
 #   -- Traditional --
@@ -64,6 +64,7 @@ function m = fht( d, n, dim )
 #   end
 
 end
+
 %!
 %!assert( fht([1 2 3 4]),[10 -4 -2 0] )
 %!

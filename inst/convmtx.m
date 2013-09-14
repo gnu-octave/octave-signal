@@ -16,7 +16,7 @@
 ## -*- texinfo -*-
 ## @deftypefn {Function File} {} convmtx (@var{a}, @var{n})
 ## If @var{a} is a column vector and @var{x} is a column vector
-## of length @var{n}, then 
+## of length @var{n}, then
 ##
 ## @code{convmtx(@var{a}, @var{n}) * @var{x}}
 ##
@@ -25,7 +25,7 @@
 ## many vectors are to be convolved with the same vector, then
 ## this technique is possibly faster.
 ##
-## Similarly, if @var{a} is a row vector and @var{x} is a row 
+## Similarly, if @var{a} is a row vector and @var{x} is a row
 ## vector of length @var{n}, then
 ##
 ## @code{@var{x} * convmtx(@var{a}, @var{n})}
@@ -39,13 +39,13 @@ function b = convmtx (a, n)
   if (nargin != 2)
     print_usage;
   endif
-   
+
   [r, c] = size(a);
-  
+
   if ((r != 1) && (c != 1)) || (r*c == 0)
     error("convmtx: expecting vector argument");
   endif
-  
+
   b = toeplitz([a(:); zeros(n-1,1)],[a(1); zeros(n-1,1)]);
   if (c > r)
     b = b.';

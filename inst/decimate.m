@@ -28,7 +28,7 @@
 ##    ## how it follows the curve nicely in the slowly varying early
 ##    ## part of the signal, but averages the curve in the quickly
 ##    ## varying late part of the signal.
-##    t=0:0.01:2; x=chirp(t,2,.5,10,'quadratic')+sin(2*pi*t*0.4); 
+##    t=0:0.01:2; x=chirp(t,2,.5,10,'quadratic')+sin(2*pi*t*0.4);
 ##    y = decimate(x,4);   # factor of 4 decimation
 ##    stem(t(1:121)*1000,x(1:121),"-g;Original;"); hold on; # plot original
 ##    stem(t(1:4:121)*1000,y(1:31),"-r;Decimated;"); hold off; # decimated
@@ -46,9 +46,9 @@ function y = decimate(x, q, n, ftype)
     n=[];
   elseif nargin==3
     if ischar(n)
-      ftype=n; 
+      ftype=n;
       n=[];
-    else 
+    else
       ftype='iir';
     endif
   endif
@@ -66,10 +66,11 @@ function y = decimate(x, q, n, ftype)
     y=filtfilt(b,a,x);
   endif
   y = y(1:q:length(x));
+
 endfunction
 
 %!demo
-%! t=0:0.01:2; x=chirp(t,2,.5,10,'quadratic')+sin(2*pi*t*0.4); 
+%! t=0:0.01:2; x=chirp(t,2,.5,10,'quadratic')+sin(2*pi*t*0.4);
 %! y = decimate(x,4);   # factor of 4 decimation
 %! stem(t(1:121)*1000,x(1:121),"-g;Original;"); hold on; # plot original
 %! stem(t(1:4:121)*1000,y(1:31),"-r;Decimated;"); hold off; # decimated

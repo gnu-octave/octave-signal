@@ -18,6 +18,9 @@
 ## This function is necessary for impinvar and invimpinvar of the signal package
 
 ## Reverse the coefficients of a polynomial
+
 function p_out = polyrev (p_in)
+
   p_out = p_in(end:-1:1);
+
 endfunction

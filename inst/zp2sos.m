@@ -34,7 +34,7 @@
 %% @item
 %% @var{sos} = matrix of series second-order sections, one per row:@*
 %% @var{sos} = [@var{B1}.' @var{A1}.'; ...; @var{BN}.' @var{AN}.'], where@*
-%% @code{@var{B1}.'==[b0 b1 b2] and @var{A1}.'==[1 a1 a2]} for 
+%% @code{@var{B1}.'==[b0 b1 b2] and @var{A1}.'==[1 a1 a2]} for
 %% section 1, etc.@*
 %% b0 must be nonzero for each section.@*
 %% See @code{filter()} for documentation of the
@@ -45,12 +45,12 @@
 %% @var{Bscale} is an overall gain factor that effectively scales
 %% any one of the @var{B}i vectors.
 %% @end itemize
-%% 
+%%
 %% EXAMPLE:
 %% @example
 %%   [z,p,g] = tf2zp([1 0 0 0 0 1],[1 0 0 0 0 .9]);
 %%   [sos,g] = zp2sos(z,p,g)
-%% 
+%%
 %% sos =
 %%    1.0000    0.6180    1.0000    1.0000    0.6051    0.9587
 %%    1.0000   -1.6180    1.0000    1.0000   -1.5843    0.9587
@@ -128,6 +128,7 @@ function [sos,g] = zp2sos(z,p,g)
       sos(i,5:6) = [prms(i-npc) prp(i-npc)];
     end
   end
+
 end
 
 %!test

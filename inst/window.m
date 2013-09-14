@@ -18,9 +18,10 @@
 ## Create a @var{n}-point windowing from the function @var{f}. The
 ## function @var{f} can be for example @code{@@blackman}. Any additional
 ## arguments @var{opt} are passed to the windowing function.
-## @end deftypefn 
+## @end deftypefn
 
 function wout = window (f, n, varargin)
+
   if (nargin == 0)
     error ("window: UI tool not supported");
   elseif (nargin > 1)
@@ -31,4 +32,5 @@ function wout = window (f, n, varargin)
   else
     print_usage ();
   endif
+
 endfunction
