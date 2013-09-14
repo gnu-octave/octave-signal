@@ -24,14 +24,14 @@ Filtering
   movingrms
   sgolayfilt
   sosfilt
-Filter analysis
+Filter Analysis
   freqs
   freqs_plot
   fwhm
   grpdelay
   impz
   zplane
-Filter conversion
+Filter Conversion
   convmtx
   polystab
   residuez
@@ -46,7 +46,7 @@ Filter conversion
   zp2sos
   zp2ss
   zp2tf
-IIR Filter design
+IIR Filter Design
   besselap
   besself
   bilinear
@@ -69,7 +69,7 @@ IIR Filter design
   ncauer
   pei_tseng_notch
   sftrans
-FIR filter design
+FIR Filter Design
   cl2bp
   fir1
   fir2
@@ -98,7 +98,7 @@ Transforms
   ifht
   ifwht
   rceps
-Power spectrum analysis
+Power Spectrum Analysis
   ar_psd
   cohere
   cpsd
@@ -113,7 +113,7 @@ Power spectrum analysis
   xcorr2
   xcov
   __power
-Window functions
+Window Functions
   barthannwin
   blackmanharris
   blackmannuttall
@@ -132,14 +132,14 @@ Window functions
   tukeywin
   welchwin
   window
-System identification
+System Identification
   arburg
   aryule
   invfreq
   invfreqs
   invfreqz
   levinson
-Sample rate change
+Sample Rate Change
   data2fun
   decimate
   downsample
