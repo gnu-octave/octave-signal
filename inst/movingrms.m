@@ -43,7 +43,7 @@ function [rmsx w]= movingrms (x,width, risetime, Fs=1)
   rmsx (rmsx < eps*max(rmsx(:))) = 0;
 
   rmsx  = circshift (sqrt (rmsx), round(mean(idx)));
-%  w     = circshift (w, -idx(1));
+  ##w     = circshift (w, -idx(1));
 
 endfunction
 
@@ -66,10 +66,10 @@ endfunction
 %! set (h, 'linewidth', 2);
 %! hold off
 %!
-%! % ---------------------------------------------------------------------------
-%! % The shaded plot shows the local RMS of the Data: white noise with onset at
-%! % aprox. t== 0.4.
-%! % The observation window is also shown.
+%! # ---------------------------------------------------------------------------
+%! # The shaded plot shows the local RMS of the Data: white noise with onset at
+%! # aprox. t== 0.4.
+%! # The observation window is also shown.
 
 %!demo
 %! N = 128;
@@ -90,7 +90,7 @@ endfunction
 %! set (h, 'linewidth', 2);
 %! hold off
 %!
-%! % ---------------------------------------------------------------------------
-%! % The shaded plot shows the local RMS of the Data: Gausian with centered at
-%! % aprox. t== 0.5.
-%! % The observation window is also shown.
+%! # ---------------------------------------------------------------------------
+%! # The shaded plot shows the local RMS of the Data: Gausian with centered at
+%! # aprox. t== 0.5.
+%! # The observation window is also shown.

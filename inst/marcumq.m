@@ -57,11 +57,11 @@ function Q = marcumq(a,b,M=1,tol=eps)
 
 endfunction
 
-% Subfunction to compute the actual Marcum Q function.
+## Subfunction to compute the actual Marcum Q function.
 
 function Q = mq(a,b,M,tol)
 
-  % Special cases.
+  ## Special cases.
   if (b==0)
     Q = 1;
     N = 0;
@@ -74,8 +74,8 @@ function Q = mq(a,b,M,tol)
     return;
   endif
 
-  % The basic iteration.  If a<b compute Q_M, otherwise
-  % compute 1-Q_M.
+  ## The basic iteration.  If a<b compute Q_M, otherwise
+  ## compute 1-Q_M.
   k = M;
   z = a*b;
   t = 1;
@@ -112,8 +112,7 @@ function Q = mq(a,b,M,tol)
 
 endfunction
 
-%  Tests for number and validity of arguments.
-%
+%% Tests for number and validity of arguments.
 %!error
 %! fail(marcumq(1))
 %!error
@@ -127,21 +126,21 @@ endfunction
 %!error
 %! fail(marcumq(1,1,1.1))
 
-%  Notes on tests and accuracy.
-%  -----------------------------------
-%  The numbers used as the reference (Q) in the tables below are
-%  from J.I. Marcum, "Table of Q Functions", Rand Technical Report
-%  RM-339, 1950/1/1.
-%
-%  There is one discrepency in the tables.  Marcum has
-%    Q(14.00,17.10) = 0.001078
-%  while we compute
-%    Q(14.00,17.10) = 0.0010785053 = 0.001079
-%  This is obviously a non-problem.
-%
-%  As further tests, I created several different versions of the
-%  Q function computation, including a Bessel series expansion and
-%  numerical integration.  All of them agree to with 10^(-16).
+## Notes on tests and accuracy.
+## -----------------------------------
+## The numbers used as the reference (Q) in the tables below are
+## from J.I. Marcum, "Table of Q Functions", Rand Technical Report
+## RM-339, 1950/1/1.
+##
+## There is one discrepency in the tables.  Marcum has
+##   Q(14.00,17.10) = 0.001078
+## while we compute
+##   Q(14.00,17.10) = 0.0010785053 = 0.001079
+## This is obviously a non-problem.
+##
+## As further tests, I created several different versions of the
+## Q function computation, including a Bessel series expansion and
+## numerical integration.  All of them agree to with 10^(-16).
 
 %!test
 %! a = [0.00;0.05;1.00;2.00;3.00;4.00;5.00;6.00;7.00;8.00;9.00;10.00;
@@ -281,10 +280,10 @@ endfunction
 %! q = marcumq(a,b);
 %! assert(q,Q,1e-6);
 
-%  The tests for M>1 were generating from Marcum's tables by
-%  using the formula
-%    Q_M(a,b) = Q(a,b) + exp(-(a-b)^2/2)*sum_{k=1}^{M-1}(b/a)^k*exp(-ab)*I_k(ab)
-%
+## The tests for M>1 were generating from Marcum's tables by
+## using the formula
+##   Q_M(a,b) = Q(a,b) + exp(-(a-b)^2/2)*sum_{k=1}^{M-1}(b/a)^k*exp(-ab)*I_k(ab)
+
 %!test
 %! M = 2;
 %! a = [0.00;0.05;1.00;2.00;3.00;4.00;5.00;6.00;7.00;8.00;9.00;10.00;11.00;12.00;13.00;14.00;15.00;16.00;17.00;18.00;19.00;20.00;21.00;22.00;23.00;24.000000];

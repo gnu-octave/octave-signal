@@ -29,7 +29,7 @@
 
 function contRange = clustersegment(xhi)
 
-  % Find discontinuities
+  ## Find discontinuities
   bool_discon = diff(xhi,1,2);
   [Np Na] = size(xhi);
   contRange = cell(1,Np);
@@ -40,18 +40,18 @@ function contRange = clustersegment(xhi)
     tLen = length(idxUp) + length(idxDwn);
 
     if xhi(i,1)==1
-      % first event was down
+      ## first event was down
       contRange{i}(1) = 1;
       contRange{i}(2:2:tLen+1) = idxDwn;
       contRange{i}(3:2:tLen+1) = idxUp;
     else
-      % first event was up
+      ## first event was up
       contRange{i}(1:2:tLen) = idxUp;
       contRange{i}(2:2:tLen) = idxDwn;
     endif
 
     if xhi(i,end)==1
-      % last event was up
+      ## last event was up
       contRange{i}(end+1) = Na;
     endif
 

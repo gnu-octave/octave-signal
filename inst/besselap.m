@@ -40,9 +40,9 @@ function [zero, pole, gain] = besselap (n)
     p0=p1;
     p1=px+py;
   endfor;
-  % p1 now contains the reverse bessel polynomial for n
+  ## p1 now contains the reverse bessel polynomial for n
 
-  % scale it by replacing s->s/w0 so that the gain becomes 1
+  ## scale it by replacing s->s/w0 so that the gain becomes 1
   p1=p1.*p1(length(p1)).^((length(p1)-1:-1:0)/(length(p1)-1));
 
   zero=[];

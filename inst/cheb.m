@@ -36,7 +36,7 @@ function T = cheb (n, x)
   if (max(size(x)) == 0)
     T = [];
   endif
-        # avoid resizing latencies
+  ## avoid resizing latencies
   T = zeros(size(x));
   ind = abs (x) <= 1;
   if (max(size(ind)))

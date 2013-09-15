@@ -92,10 +92,10 @@ function [gd,w] = grpdelay(b,a=1,nfft=512,whole,Fs)
   if length(nfft)>1
     if nargin>4
       print_usage();
-    elseif nargin>3  % grpdelay(B,A,F,Fs)
+    elseif nargin>3  # grpdelay(B,A,F,Fs)
       Fs = whole;
       HzFlag=1;
-    else % grpdelay(B,A,W)
+    else # grpdelay(B,A,W)
       Fs = 1;
     endif
     w = 2*pi*nfft/Fs;
@@ -103,7 +103,7 @@ function [gd,w] = grpdelay(b,a=1,nfft=512,whole,Fs)
     whole = '';
   else
     if nargin<5
-      Fs=1; % return w in radians per sample
+      Fs=1; # return w in radians per sample
       if nargin<4, whole='';
       elseif ~ischar(whole)
         Fs = whole;
@@ -123,14 +123,14 @@ function [gd,w] = grpdelay(b,a=1,nfft=512,whole,Fs)
 
   if ~HzFlag, w = w * 2*pi; endif
 
-  oa = length(a)-1;             % order of a(z)
-  if oa<0, a=1; oa=0; endif     % a can be []
-  ob = length(b)-1;             % order of b(z)
-  if ob<0, b=1; ob=0; endif     % b can be [] as well
-  oc = oa + ob;                 % order of c(z)
+  oa = length(a)-1;             # order of a(z)
+  if oa<0, a=1; oa=0; endif     # a can be []
+  ob = length(b)-1;             # order of b(z)
+  if ob<0, b=1; ob=0; endif     # b can be [] as well
+  oc = oa + ob;                 # order of c(z)
 
-  c = conv(b,fliplr(conj(a)));  % c(z) = b(z)*conj(a)(1/z)*z^(-oa)
-  cr = c.*[0:oc];               % cr(z) = derivative of c wrt 1/z
+  c = conv(b,fliplr(conj(a)));  # c(z) = b(z)*conj(a)(1/z)*z^(-oa)
+  cr = c.*[0:oc];               # cr(z) = derivative of c wrt 1/z
   num = fft(cr,nfft);
   den = fft(c,nfft);
   minmag = 10*eps;
@@ -139,27 +139,27 @@ function [gd,w] = grpdelay(b,a=1,nfft=512,whole,Fs)
     warning('grpdelay: setting group delay to 0 at singularity');
     num(b) = 0;
     den(b) = 1;
-    % try to preserve angle:
-    % db = den(b);
-    % den(b) = minmag*abs(num(b))*exp(j*atan2(imag(db),real(db)));
-    % warning(sprintf('grpdelay: den(b) changed from %f to %f',db,den(b)));
+    ## try to preserve angle:
+    ## db = den(b);
+    ## den(b) = minmag*abs(num(b))*exp(j*atan2(imag(db),real(db)));
+    ## warning(sprintf('grpdelay: den(b) changed from %f to %f',db,den(b)));
   endfor
   gd = real(num ./ den) - oa;
 
   if strcmp(whole,'whole')==0
-    ns = nfft/2; % Matlab convention ... should be nfft/2 + 1
+    ns = nfft/2; # Matlab convention ... should be nfft/2 + 1
     gd = gd(1:ns);
     w = w(1:ns);
   else
-    ns = nfft; % used in plot below
+    ns = nfft; # used in plot below
   endif
 
-  % compatibility
+  ## compatibility
   gd = gd(:); w = w(:);
 
   if nargout==0
     unwind_protect
-      grid('on'); % grid() should return its previous state
+      grid('on'); # grid() should return its previous state
       if HzFlag
         funits = 'Hz';
       else
@@ -175,7 +175,7 @@ function [gd,w] = grpdelay(b,a=1,nfft=512,whole,Fs)
 
 endfunction
 
-% ------------------------ DEMOS -----------------------
+## ------------------------ DEMOS -----------------------
 
 %!demo % 1
 %! %--------------------------------------------------------------

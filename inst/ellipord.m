@@ -46,13 +46,13 @@ function [n, Wp] = ellipord(Wp, Ws, Rp, Rs)
     error ("ellipord: Ws must be out of interval ( Wp(1), Wp(2) )");
   endif
 
-  # sampling frequency of 2 Hz
+  ## sampling frequency of 2 Hz
   T = 2;
 
   Wpw = tan(pi.*Wp./T); # prewarp
   Wsw = tan(pi.*Ws./T); # prewarp
 
-  ##pass/stop band to low pass filter transform:
+  ## pass/stop band to low pass filter transform:
   if (length(Wpw)==2 && length(Wsw)==2)
     wp=1;
     w02 = Wpw(1) * Wpw(2);      # Central frequency of stop/pass band (square)
@@ -83,7 +83,7 @@ function [n, Wp] = ellipord(Wp, Ws, Rp, Rs)
   k=wp/ws;
   k1=sqrt(1-k^2);
   q0=(1/2)*((1-sqrt(k1))/(1+sqrt(k1)));
-  q= q0 + 2*q0^5 + 15*q0^9 + 150*q0^13; %(....)
+  q= q0 + 2*q0^5 + 15*q0^9 + 150*q0^13; #(....)
   D=(10^(0.1*Rs)-1)/(10^(0.1*Rp)-1);
 
   n=ceil(log10(16*D)/log10(1/q));

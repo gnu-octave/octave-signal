@@ -47,27 +47,27 @@ function v = schtrig (x, lvl, rst = 1)
 
   v(1,:) = st0;
 
-  % Signal is above up level
+  ## Signal is above up level
   up    = x > lvl(1);
   v(up) = 1;
 
-  % Signal is below down level
+  ## Signal is below down level
   dw    = x < lvl(2);
   v(dw) = 0;
 
-  % Resolve intermediate states
-  % Find data between the levels
+  ## Resolve intermediate states
+  ## Find data between the levels
   idx = isnan (v);
   ranges = clustersegment (idx');
 
   for i=1:nc
-    % Record the state at the begining of the interval between levels
+    ## Record the state at the begining of the interval between levels
     if !isempty (ranges{i})
       prev         = ranges{i}(1,:)-1;
       prev(prev<1) = 1;
       st0          = v(prev,i);
 
-      % Copy the initial state to the interval
+      ## Copy the initial state to the interval
       ini_idx = ranges{i}(1,:);
       end_idx = ranges{i}(2,:);
       for j =1:length(ini_idx)

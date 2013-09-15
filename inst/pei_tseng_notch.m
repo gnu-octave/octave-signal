@@ -46,25 +46,25 @@ function [ b, a ] = pei_tseng_notch ( frequencies, bandwidths )
     error ( "All bandwidths must be in (0, 1)!" )
   endif
 
-  ##Ensure row vectors
+  ## Ensure row vectors
   frequencies = frequencies (:)';
   bandwidths  = bandwidths (:)';
 
 
-  ##Normalise appropriately
+  ## Normalise appropriately
   frequencies *= pi;
   bandwidths  *= pi;
   M2           = 2 * length ( frequencies );
 
 
-  ##Splice centre and offset frequencies ( Equation 11 )
+  ## Splice centre and offset frequencies ( Equation 11 )
   omega = vec ( [ frequencies - bandwidths / 2; frequencies ] );
 
-  ##Splice centre and offset phases ( Equations 12 )
+  ## Splice centre and offset phases ( Equations 12 )
   factors = ( 1 : 2 : M2 );
   phi     = vec ( [ -pi * factors + pi / 2; -pi * factors ] );
 
-  ##Create linear equation
+  ## Create linear equation
   t_beta = tan ( ( phi + M2 * omega ) / 2 );
 
   Q = zeros ( M2 );
@@ -73,19 +73,19 @@ function [ b, a ] = pei_tseng_notch ( frequencies, bandwidths )
     Q ( : ,k ) = sin ( k .* omega ) - t_beta .* cos ( k .* omega );
   endfor
 
-  ##Compute coefficients of system function ( Equations 19, 20 ) ...
+  ## Compute coefficients of system function ( Equations 19, 20 ) ...
   h_a   = ( Q \ t_beta )' ;
   denom = [ 1, h_a ];
   num   = [ fliplr( h_a ), 1 ];
 
-  ##... and transform them to coefficients for difference equations
+  ## ... and transform them to coefficients for difference equations
   a = denom;
   b = ( num + denom ) / 2;
 
 endfunction
 
 %!test
-%! ##2Hz bandwidth
+%! ## 2Hz bandwidth
 %! sf = 800; sf2 = sf/2;
 %! data=[sinetone(49,sf,10,1),sinetone(50,sf,10,1),sinetone(51,sf,10,1)];
 %! [b, a] = pei_tseng_notch ( 50 / sf2, 2 / sf2 );
@@ -94,7 +94,7 @@ endfunction
 %! assert ( damp_db, [ -3 -251.9 -3 ], -0.1 )
 
 %!test
-%! ##1Hz bandwidth
+%! ## 1Hz bandwidth
 %! sf = 800; sf2 = sf/2;
 %! data=[sinetone(49.5,sf,10,1),sinetone(50,sf,10,1),sinetone(50.5,sf,10,1)];
 %! [b, a] = pei_tseng_notch ( 50 / sf2, 1 / sf2 );

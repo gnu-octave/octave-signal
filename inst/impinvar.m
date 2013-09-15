@@ -54,39 +54,39 @@ function [b_out, a_out] = impinvar (b_in, a_in, fs = 1, tol = 0.0001)
     ts = 1/fs; # we should be using sampling frequencies to be compatible with Matlab
   endif
 
-  [r_in, p_in, k_in] = residue(b_in, a_in); % partial fraction expansion
+  [r_in, p_in, k_in] = residue(b_in, a_in); # partial fraction expansion
 
-  n = length(r_in); % Number of poles/residues
+  n = length(r_in); # Number of poles/residues
 
-  if (length(k_in)>0) % Greater than zero means we cannot do impulse invariance
+  if (length(k_in)>0) # Greater than zero means we cannot do impulse invariance
     error("Order numerator >= order denominator");
   endif
 
-  r_out = zeros(1,n); % Residues of H(z)
-  p_out = zeros(1,n); % Poles of H(z)
-  k_out = 0;          % Contstant term of H(z)
+  r_out = zeros(1,n); # Residues of H(z)
+  p_out = zeros(1,n); # Poles of H(z)
+  k_out = 0;          # Contstant term of H(z)
 
   i=1;
   while (i<=n)
     m = 1;
-    first_pole = p_in(i); % Pole in the s-domain
-    while (i<n && abs(first_pole-p_in(i+1))<tol) % Multiple poles at p(i)
-      i++; % Next residue
-      m++; % Next multiplicity
+    first_pole = p_in(i); # Pole in the s-domain
+    while (i<n && abs(first_pole-p_in(i+1))<tol) # Multiple poles at p(i)
+      i++; # Next residue
+      m++; # Next multiplicity
     endwhile
-    [r, p, k]        = z_res(r_in(i-m+1:i), first_pole, ts); % Find z-domain residues
-    k_out           += k;                                    % Add direct term to output
-    p_out(i-m+1:i)   = p;                                    % Copy z-domain pole(s) to output
-    r_out(i-m+1:i)   = r;                                    % Copy z-domain residue(s) to output
+    [r, p, k]        = z_res(r_in(i-m+1:i), first_pole, ts); # Find z-domain residues
+    k_out           += k;                                    # Add direct term to output
+    p_out(i-m+1:i)   = p;                                    # Copy z-domain pole(s) to output
+    r_out(i-m+1:i)   = r;                                    # Copy z-domain residue(s) to output
 
-    i++; % Next s-domain residue/pole
+    i++; # Next s-domain residue/pole
   endwhile
 
   [b_out, a_out] = inv_residue(r_out, p_out, k_out, tol);
-  a_out          = to_real(a_out); % Get rid of spurious imaginary part
+  a_out          = to_real(a_out); # Get rid of spurious imaginary part
   b_out          = to_real(b_out);
 
-  % Shift results right to account for calculating in z instead of z^-1
+  ## Shift results right to account for calculating in z instead of z^-1
   b_out(end)=[];
 
 endfunction
@@ -96,16 +96,16 @@ endfunction
 
 function [r_out, p_out, k_out] = z_res (r_in, sm, ts)
 
-  p_out = exp(ts * sm); % z-domain pole
-  n     = length(r_in); % Multiplicity of the pole
-  r_out = zeros(1,n);   % Residue vector
+  p_out = exp(ts * sm); # z-domain pole
+  n     = length(r_in); # Multiplicity of the pole
+  r_out = zeros(1,n);   # Residue vector
 
-  %% First pole (no multiplicity)
-  k_out    = r_in(1) * ts;         % PFE of z/(z-p) = p/(z-p)+1; direct part
-  r_out(1) = r_in(1) * ts * p_out; % pole part of PFE
+  ## First pole (no multiplicity)
+  k_out    = r_in(1) * ts;         # PFE of z/(z-p) = p/(z-p)+1; direct part
+  r_out(1) = r_in(1) * ts * p_out; # pole part of PFE
 
-  for i=(2:n) % Go through s-domain residues for multiple pole
-    r_out(1:i) += r_in(i) * polyrev(h1_z_deriv(i-1, p_out, ts)); % Add z-domain residues
+  for i=(2:n) # Go through s-domain residues for multiple pole
+    r_out(1:i) += r_in(i) * polyrev(h1_z_deriv(i-1, p_out, ts)); # Add z-domain residues
   endfor
 
 endfunction
@@ -113,23 +113,23 @@ endfunction
 
 %!function err = stozerr(bs,as,fs)
 %!
-%!  % number of time steps
+%!  # number of time steps
 %!  n=100;
 %!
-%!  % impulse invariant transform to z-domain
+%!  # impulse invariant transform to z-domain
 %!  [bz az]=impinvar(bs,as,fs);
 %!
-%!  % create sys object of transfer function
+%!  # create sys object of transfer function
 %!  s=tf(bs,as);
 %!
-%!  % calculate impulse response of continuous time system
-%!  % at discrete time intervals 1/fs
+%!  # calculate impulse response of continuous time system
+%!  # at discrete time intervals 1/fs
 %!  ys=impulse(s,(n-1)/fs,1/fs)';
 %!
-%!  % impulse response of discrete time system
+%!  # impulse response of discrete time system
 %!  yz=filter(bz,az,[1 zeros(1,n-1)]);
 %!
-%!  % find rms error
+%!  # find rms error
 %!  err=sqrt(sum((yz*fs.-ys).^2)/length(ys));
 %!  endfunction
 %!

@@ -1,60 +1,60 @@
-%% Copyright (C) 2005 Julius O. Smith III <jos@ccrma.stanford.edu>
-%%
-%% This program is free software; you can redistribute it and/or modify it under
-%% the terms of the GNU General Public License as published by the Free Software
-%% Foundation; either version 3 of the License, or (at your option) any later
-%% version.
-%%
-%% This program is distributed in the hope that it will be useful, but WITHOUT
-%% ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
-%% FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
-%% details.
-%%
-%% You should have received a copy of the GNU General Public License along with
-%% this program; if not, see <http://www.gnu.org/licenses/>.
+## Copyright (C) 2005 Julius O. Smith III <jos@ccrma.stanford.edu>
+##
+## This program is free software; you can redistribute it and/or modify it under
+## the terms of the GNU General Public License as published by the Free Software
+## Foundation; either version 3 of the License, or (at your option) any later
+## version.
+##
+## This program is distributed in the hope that it will be useful, but WITHOUT
+## ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+## FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
+## details.
+##
+## You should have received a copy of the GNU General Public License along with
+## this program; if not, see <http://www.gnu.org/licenses/>.
 
-%% -*- texinfo -*-
-%% @deftypefn {Function File} {[@var{z}, @var{p}, @var{g}] =} sos2zp (@var{sos})
-%% @deftypefnx {Function File} {[@var{z}, @var{p}, @var{g}] =} sos2zp (@var{sos}, @var{Bscale})
-%% Convert series second-order sections to zeros, poles, and gains
-%% (pole residues).
-%%
-%% INPUTS:@*
-%% @itemize
-%%
-%% @item
-%% @var{sos} = matrix of series second-order sections, one per row:@*
-%% @var{sos} = [@var{B1}.' @var{A1}.'; ...; @var{BN}.' @var{AN}.'], where@*
-%% @code{@var{B1}.'==[b0 b1 b2] and @var{A1}.'==[1 a1 a2]} for
-%% section 1, etc.@*
-%% b0 must be nonzero for each section.
-%% See @code{filter()} for documentation of the
-%% second-order direct-form filter coefficients @var{B}i and @var{A}i.
-%%
-%% @item
-%% @var{Bscale} is an overall gain factor that effectively scales
-%% any one of the input @var{B}i vectors.
-%% If not given the gain is assumed to be 1.
-%% @end itemize
-%%
-%% RETURNED:
-%%   @itemize
-%%   @item
-%%   @var{z} = column-vector containing all zeros (roots of B(z))@*
-%%   @item
-%%   @var{p} = column-vector containing all poles (roots of A(z))@*
-%%   @item
-%%   @var{g} = overall gain = @var{B}(Inf)
-%%   @end itemize
-%%
-%% EXAMPLE:
-%% @example
-%%   [z,p,g] = sos2zp([1 0 1, 1 0 -0.81; 1 0 0, 1 0 0.49])
-%%   => z = [i; -i; 0; 0], p = [0.9, -0.9, 0.7i, -0.7i], g=1
-%% @end example
-%%
-%% @seealso{zp2sos sos2tf tf2sos zp2tf tf2zp}
-%% @end deftypefn
+## -*- texinfo -*-
+## @deftypefn {Function File} {[@var{z}, @var{p}, @var{g}] =} sos2zp (@var{sos})
+## @deftypefnx {Function File} {[@var{z}, @var{p}, @var{g}] =} sos2zp (@var{sos}, @var{Bscale})
+## Convert series second-order sections to zeros, poles, and gains
+## (pole residues).
+##
+## INPUTS:@*
+## @itemize
+##
+## @item
+## @var{sos} = matrix of series second-order sections, one per row:@*
+## @var{sos} = [@var{B1}.' @var{A1}.'; ...; @var{BN}.' @var{AN}.'], where@*
+## @code{@var{B1}.'==[b0 b1 b2] and @var{A1}.'==[1 a1 a2]} for
+## section 1, etc.@*
+## b0 must be nonzero for each section.
+## See @code{filter()} for documentation of the
+## second-order direct-form filter coefficients @var{B}i and @var{A}i.
+##
+## @item
+## @var{Bscale} is an overall gain factor that effectively scales
+## any one of the input @var{B}i vectors.
+## If not given the gain is assumed to be 1.
+## @end itemize
+##
+## RETURNED:
+##   @itemize
+##   @item
+##   @var{z} = column-vector containing all zeros (roots of B(z))@*
+##   @item
+##   @var{p} = column-vector containing all poles (roots of A(z))@*
+##   @item
+##   @var{g} = overall gain = @var{B}(Inf)
+##   @end itemize
+##
+## EXAMPLE:
+## @example
+##   [z,p,g] = sos2zp([1 0 1, 1 0 -0.81; 1 0 0, 1 0 0.49])
+##   => z = [i; -i; 0; 0], p = [0.9, -0.9, 0.7i, -0.7i], g=1
+## @end example
+##
+## @seealso{zp2sos sos2tf tf2sos zp2tf tf2zp}
+## @end deftypefn
 
 function [z,p,g] = sos2zp (sos, Bscale = 1)
 
@@ -62,8 +62,8 @@ function [z,p,g] = sos2zp (sos, Bscale = 1)
     print_usage;
   endif
 
-  gains = sos(:,1); % All b0 coeffs
-  g = prod(gains)*Bscale; % pole-zero gain
+  gains = sos(:,1); # All b0 coeffs
+  g = prod(gains)*Bscale; # pole-zero gain
   if g==0, error('sos2zp: one or more section gains is zero'); endif
   sos(:,1:3) = sos(:,1:3)./ [gains gains gains];
 

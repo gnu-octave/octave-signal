@@ -44,14 +44,14 @@ function zf = filtic(b,a,y,x)
   nz = max(length(a)-1,length(b)-1);
   zf=zeros(nz,1);
 
-  # Pad arrays a and b to length nz+1 if required
+  ## Pad arrays a and b to length nz+1 if required
   if length(a)<(nz+1)
     a(length(a)+1:nz+1)=0;
   endif
   if length(b)<(nz+1)
     b(length(b)+1:nz+1)=0;
   endif
-  # Pad arrays x and y to length nz if required
+  ## Pad arrays x and y to length nz if required
   if length(x) < nz
     x(length(x)+1:nz)=0;
   endif

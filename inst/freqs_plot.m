@@ -33,7 +33,7 @@ function freqs_plot(w,h)
   ylabel("dB");
   xlabel("");
   grid("on");
-  if (maxmag - min(mag) > 100) % make 100 a parameter?
+  if (maxmag - min(mag) > 100) # make 100 a parameter?
     axis([w(1), w(n), maxmag-100, maxmag]);
   else
     axis("autoy");

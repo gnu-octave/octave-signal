@@ -53,15 +53,15 @@ function m = fht( d, n, dim )
 
   m = real(Y) - imag(Y);
 
-#   -- Traditional --
-#   N = length(d);
-#   for K = 1:N
-#     i = 0:N-1;
-#     t = 2*pi*(K-1).*i/N;
-#     ker = (cos(t) + sin(t));
-#     val = dot(d,ker);
-#     m(K) = val;
-#   endfor
+##   -- Traditional --
+##   N = length(d);
+##   for K = 1:N
+##     i = 0:N-1;
+##     t = 2*pi*(K-1).*i/N;
+##     ker = (cos(t) + sin(t));
+##     val = dot(d,ker);
+##     m(K) = val;
+##   endfor
 
 endfunction
 

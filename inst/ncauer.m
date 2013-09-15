@@ -39,11 +39,11 @@ function [zer, pol, T0]=ncauer(Rp, Rs, n)
   k=wp/ws;
   k1=sqrt(1-k^2);
   q0=(1/2)*((1-sqrt(k1))/(1+sqrt(k1)));
-  q= q0 + 2*q0^5 + 15*q0^9 + 150*q0^13; %(....)
+  q= q0 + 2*q0^5 + 15*q0^9 + 150*q0^13; #(....)
   D=(10^(0.1*Rs)-1)/(10^(0.1*Rp)-1);
 
-  ##Filter order maybe this, but not used now:
-  ##n=ceil(log10(16*D)/log10(1/q))
+  ## Filter order maybe this, but not used now:
+  ## n=ceil(log10(16*D)/log10(1/q))
 
   l=(1/(2*n))*log((10^(0.05*Rp)+1)/(10^(0.05*Rp)-1));
   sig01=0; sig02=0;
@@ -56,13 +56,13 @@ function [zer, pol, T0]=ncauer(Rp, Rs, n)
   sig0=abs((2*q^(1/4)*sig01)/(1+2*sig02));
 
   w=sqrt((1+k*sig0^2)*(1+sig0^2/k));
-  #
+  ##
   if rem(n,2)
     r=(n-1)/2;
   else
     r=n/2;
   endif
-  #
+  ##
   wi=zeros(1,r);
   for ii=1 : r
     if rem(n,2)
@@ -80,27 +80,27 @@ function [zer, pol, T0]=ncauer(Rp, Rs, n)
     endfor
     wi(ii)=(soma1/(1+soma2));
   endfor
-  #
+  ##
   Vi=sqrt((1-(k.*(wi.^2))).*(1-(wi.^2)/k));
   A0i=1./(wi.^2);
   sqrA0i=1./(wi);
   B0i=((sig0.*Vi).^2 + (w.*wi).^2)./((1+sig0^2.*wi.^2).^2);
   B1i=(2 * sig0.*Vi)./(1 + sig0^2 * wi.^2);
 
-  ##Gain T0:
+  ## Gain T0:
   if rem(n,2)
     T0=sig0*prod(B0i./A0i)*sqrt(ws);
   else
     T0=10^(-0.05*Rp)*prod(B0i./A0i);
   endif
 
-  ##zeros:
+  ## zeros:
   zer=[i*sqrA0i, -i*sqrA0i];
 
-  ##poles:
+  ## poles:
   pol=[(-2*sig0*Vi+2*i*wi.*w)./(2*(1+sig0^2*wi.^2)), (-2*sig0*Vi-2*i*wi.*w)./(2*(1+sig0^2*wi.^2))];
 
-  ##If n odd, there is a real pole  -sig0:
+  ## If n odd, there is a real pole  -sig0:
   if rem(n,2)
     pol=[pol, -sig0];
   endif

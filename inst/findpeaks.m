@@ -86,7 +86,7 @@
 
 function [pks idx varargout] = findpeaks (data, varargin)
 
-  # --- Parse arguments --- #
+  ## --- Parse arguments --- #
   __data__ = abs (detrend (data,0));
 
   posscal = @(x)isscalar (x) && x >= 0;
@@ -106,7 +106,7 @@ function [pks idx varargout] = findpeaks (data, varargin)
   dSided    = parser.Results.DoubleSided;
 
   clear parser posscal
-  # ------ #
+  ## ------ #
 
   if dSided
     [data __data__] = deal (__data__, data);
@@ -115,23 +115,23 @@ function [pks idx varargout] = findpeaks (data, varargin)
            'Data contains negative values. You may want to "DoubleSided" option');
   endif
 
-  % Rough estimates of first and second derivative
+  ## Rough estimates of first and second derivative
   df1 = diff (data,1)([1; (1:end)']);
   df2 = diff (data,2)([1; 1; (1:end)']);
 
-  % check for changes of sign of 1st derivative and negativity of 2nd
-  % derivative.
+  ## check for changes of sign of 1st derivative and negativity of 2nd
+  ## derivative.
   idx = find (df1.*[df1(2:end); 0]<0 & df2<0);
 
-  % Get peaks that are beyond given height
+  ## Get peaks that are beyond given height
   tf  = data(idx) > minH;
   idx = idx(tf);
 
-  % sort according to magnitude
+  ## sort according to magnitude
   [~,tmp] = sort(data(idx),"descend");
   idx_s = idx(tmp);
 
-  % Treat peaks separated less than minD as one
+  ## Treat peaks separated less than minD as one
   D = abs (idx_s - idx_s');
   if any(D(:) < minD)
 
@@ -141,7 +141,7 @@ function [pks idx varargout] = findpeaks (data, varargin)
     visited = [];
     idx_pruned = idx_s;
 
-    %% debug
+    ## debug
 ##    h = plot(1:length(data),data,"-",idx_s,data(idx_s),'.r',idx_s,data(idx_s),'.g');
 ##    set(h(3),"visible","off");
 
@@ -154,7 +154,7 @@ function [pks idx varargout] = findpeaks (data, varargin)
 
       neighs  = setdiff (find (d < minD), visited);
       if ~isempty (neighs)
-        %% debug
+        ## debug
 ##        set(h(3),"xdata",idx_s(neighs),"ydata",data(idx_s(neighs)),"visible","on")
 ##        pause(0.2)
 ##        set(h(3),"visible","off");
@@ -164,7 +164,7 @@ function [pks idx varargout] = findpeaks (data, varargin)
         visited    = [visited neighs];
         node2visit = setdiff (node2visit,visited);
 
-        %% debug
+        ## debug
 ##        set(h(2),"xdata",idx_pruned,"ydata",data(idx_pruned))
 ##        pause
       endif
@@ -173,17 +173,17 @@ function [pks idx varargout] = findpeaks (data, varargin)
     idx = idx_pruned;
   endif
 
-  % Estimate widths of peaks and filter for:
-  % width smaller than given.
-  % wrong concavity.
-  % not high enough
-  % data at peak is lower than parabola by 1%
+  ## Estimate widths of peaks and filter for:
+  ## width smaller than given.
+  ## wrong concavity.
+  ## not high enough
+  ## data at peak is lower than parabola by 1%
   if minW > 0
-    %% debug
-#    h = plot(1:length(data),data,"-",idx,data(idx),'.r',...
-#          idx,data(idx),'og',idx,data(idx),'-m');
-#    set(h(4),"linewidth",2)
-#    set(h(3:4),"visible","off");
+    ## debug
+##    h = plot(1:length(data),data,"-",idx,data(idx),'.r',...
+##          idx,data(idx),'og',idx,data(idx),'-m');
+##    set(h(4),"linewidth",2)
+##    set(h(3:4),"visible","off");
 
     idx_pruned = idx;
     n  = length(idx);
@@ -195,12 +195,12 @@ function [pks idx varargout] = findpeaks (data, varargin)
       pp = polyfit (ind,data(ind),2);
       H  = pp(3) - pp(2)^2/(4*pp(1));
 
-      %% debug
-#      x = linspace(ind(1)-1,ind(end)+1,10);
-#      set(h(4),"xdata",x,"ydata",polyval(pp,x),"visible","on")
-#      set(h(3),"xdata",ind,"ydata",data(ind),"visible","on")
-#      pause(0.2)
-#      set(h(3:4),"visible","off");
+      ## debug
+##      x = linspace(ind(1)-1,ind(end)+1,10);
+##      set(h(4),"xdata",x,"ydata",polyval(pp,x),"visible","on")
+##      set(h(3),"xdata",ind,"ydata",data(ind),"visible","on")
+##      pause(0.2)
+##      set(h(3:4),"visible","off");
 
       rz = roots ([pp(1:2) pp(3)-mean([H,minH])]);
       width = abs (diff (rz));
@@ -216,9 +216,9 @@ function [pks idx varargout] = findpeaks (data, varargin)
         extra.baseline(struct_count) = mean([H,minH]);
       endif
 
-      %% debug
-#      set(h(2),"xdata",idx_pruned,"ydata",data(idx_pruned))
-#      pause(0.2)
+      ## debug
+##      set(h(2),"xdata",idx_pruned,"ydata",data(idx_pruned))
+##      pause(0.2)
 
     endfor
   endif
@@ -240,10 +240,10 @@ endfunction
 %! t = 2*pi*linspace(0,1,1024)';
 %! y = sin(3.14*t) + 0.5*cos(6.09*t) + 0.1*sin(10.11*t+1/6) + 0.1*sin(15.3*t+1/3);
 %!
-%! data1 = abs(y); % Positive values
+%! data1 = abs(y); # Positive values
 %! [pks idx] = findpeaks(data1);
 %!
-%! data2 = y; % Double-sided
+%! data2 = y; # Double-sided
 %! [pks2 idx2] = findpeaks(data2,"DoubleSided");
 %! [pks3 idx3] = findpeaks(data2,"DoubleSided","MinPeakHeight",0.5);
 %!
@@ -260,7 +260,7 @@ endfunction
 %! t = 2*pi*linspace(0,1,1024)';
 %! y = sin(3.14*t) + 0.5*cos(6.09*t) + 0.1*sin(10.11*t+1/6) + 0.1*sin(15.3*t+1/3);
 %!
-%! data = abs(y + 0.1*randn(length(y),1)); % Positive values + noise
+%! data = abs(y + 0.1*randn(length(y),1)); # Positive values + noise
 %! [pks idx] = findpeaks(data,"MinPeakHeight",1);
 %!
 %! dt = t(2)-t(1);

@@ -44,11 +44,11 @@ function [x_r, t_r] = impz(b, a = [1], n = [], fs = 1)
       n = floor(6/log10(maxpole));
     elseif (maxpole < 1-precision) # stable -- cutoff at -120 dB
       n = floor(-6/log10(maxpole));
-    else                        # periodic -- cutoff after 5 cycles
+    else                           # periodic -- cutoff after 5 cycles
       n = 30;
 
-                                # find longest period less than infinity
-                                # cutoff after 5 cycles (w=10*pi)
+      ## find longest period less than infinity
+      ## cutoff after 5 cycles (w=10*pi)
       rperiodic = r(find(abs(r)>=1-precision & abs(arg(r))>0));
       if !isempty(rperiodic)
         n_periodic = ceil(10*pi./min(abs(arg(rperiodic))));
@@ -57,8 +57,8 @@ function [x_r, t_r] = impz(b, a = [1], n = [], fs = 1)
         endif
       endif
 
-                                # find most damped pole
-                                # cutoff at -60 dB
+      ## find most damped pole
+      ## cutoff at -60 dB
       rdamped = r(find(abs(r)<1-precision));
       if !isempty(rdamped)
         n_damped = floor(-3/log10(max(abs(rdamped))));

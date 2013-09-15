@@ -110,13 +110,13 @@ function b = fir2(n, f, m, grid_n, ramp_n, window)
     ## preserve window shape even though f may have changed
     m = interp1(basef, basem, f);
 
-    # axis([-.1 1.1 -.1 1.1])
-    # plot(f,m,'-xb;ramped;',basef,basem,'-or;original;'); pause;
+    ## axis([-.1 1.1 -.1 1.1])
+    ## plot(f,m,'-xb;ramped;',basef,basem,'-or;original;'); pause;
   endif
 
   ## interpolate between grid points
   grid = interp1(f,m,linspace(0,1,grid_n+1)');
-  # hold on; plot(linspace(0,1,grid_n+1),grid,'-+g;grid;'); hold off; pause;
+  ## hold on; plot(linspace(0,1,grid_n+1),grid,'-+g;grid;'); hold off; pause;
 
   ## Transform frequency response into time response and
   ## center the response about n/2, truncating the excess

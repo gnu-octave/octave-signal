@@ -36,7 +36,7 @@
 
 function f=hilbert(f, N = [], dim = [])
 
-  % ------ PRE: initialization and dimension shifting ---------
+  ## ------ PRE: initialization and dimension shifting ---------
 
   if (nargin<1 || nargin>3)
     print_usage;
@@ -49,14 +49,14 @@ function f=hilbert(f, N = [], dim = [])
 
   D=ndims(f);
 
-  % Dummy assignment.
+  ## Dummy assignment.
   order=1;
 
   if isempty(dim)
     dim=1;
 
     if sum(size(f)>1)==1
-      % We have a vector, find the dimension where it lives.
+      ## We have a vector, find the dimension where it lives.
       dim=find(size(f)>1);
     endif
 
@@ -82,23 +82,23 @@ function f=hilbert(f, N = [], dim = [])
   if dim>1
     order=[dim, 1:dim-1,dim+1:D];
 
-    % Put the desired dimension first.
+    ## Put the desired dimension first.
     f=permute(f,order);
 
   endif
 
   Ls=size(f,1);
 
-  % If N is empty it is set to be the length of the transform.
+  ## If N is empty it is set to be the length of the transform.
   if isempty(N)
     N=Ls;
   endif
 
-  % Remember the exact size for later and modify it for the new length
+  ## Remember the exact size for later and modify it for the new length
   permutedsize=size(f);
   permutedsize(1)=N;
 
-  % Reshape f to a matrix.
+  ## Reshape f to a matrix.
   f=reshape(f,size(f,1),numel(f)/size(f,1));
   W=size(f,2);
 
@@ -106,7 +106,7 @@ function f=hilbert(f, N = [], dim = [])
     f=postpad(f,N);
   endif
 
-  % ------- actual computation -----------------
+  ## ------- actual computation -----------------
   if N>2
     f=fft(f);
 
@@ -124,26 +124,26 @@ function f=hilbert(f, N = [], dim = [])
     f=ifft(f);
   endif
 
-  % ------- POST: Restoration of dimensions ------------
+  ## ------- POST: Restoration of dimensions ------------
 
-  % Restore the original, permuted shape.
+  ## Restore the original, permuted shape.
   f=reshape(f,permutedsize);
 
   if dim>1
-    % Undo the permutation.
+    ## Undo the permutation.
     f=ipermute(f,order);
   endif
 
 endfunction
 
 %!demo
-%! % notice that the imaginary signal is phase-shifted 90 degrees
+%! ## notice that the imaginary signal is phase-shifted 90 degrees
 %! t=linspace(0,10,256);
 %! z = hilbert(sin(2*pi*0.5*t));
 %! grid on; plot(t,real(z),';real;',t,imag(z),';imag;');
 
 %!demo
-%! % the magnitude of the hilbert transform eliminates the carrier
+%! ## the magnitude of the hilbert transform eliminates the carrier
 %! t=linspace(0,10,1024);
 %! x=5*cos(0.2*t).*sin(100*t);
 %! grid on; plot(t,x,'g;z;',t,abs(hilbert(x)),'b;|hilbert(z)|;');

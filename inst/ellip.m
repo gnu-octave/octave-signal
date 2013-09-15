@@ -96,13 +96,13 @@ function [a,b,c,d] = ellip(n, Rp, Rs, W, varargin)
   endif
 
 
-  ##Prewarp the digital frequencies
+  ## Prewarp the digital frequencies
   if digital
     T = 2;       # sampling frequency of 2 Hz
     W = tan(pi*W/T);
   endif
 
-  ##Generate s-plane poles, zeros and gain
+  ## Generate s-plane poles, zeros and gain
   [zero, pole, gain] = ncauer(Rp, Rs, n);
 
   ## splane frequency transform

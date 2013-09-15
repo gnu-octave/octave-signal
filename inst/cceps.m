@@ -49,7 +49,7 @@ function cep = cceps (x, c)
     error (bad_signal_message);
   endif
 
-  # determine if correction necessary
+  ## determine if correction necessary
   half = fix (nr / 2);
   cor = 0;
   if (2 * half == nr)
@@ -64,11 +64,11 @@ function cep = cceps (x, c)
 
   cep = fftshift (ifft (log (F)));
 
-  # make result real
+  ## make result real
   if (c)
     cep = real (cep);
     if (cor)
-      # make cepstrum of same length as input vector
+      ## make cepstrum of same length as input vector
       cep (nr) = 0;
     endif
   endif

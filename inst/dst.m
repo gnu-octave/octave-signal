@@ -43,10 +43,10 @@ function y = dst (x, n)
   if isreal(x), y = real (y); endif
 
   ## Compare directly against the slow transform
-  # y2 = x;
-  # w = pi*[1:n]'/(n+1);
-  # for k = 1:n, y2(k) = sum(x(:).*sin(k*w)); endfor
-  # y = [y,y2];
+  ## y2 = x;
+  ## w = pi*[1:n]'/(n+1);
+  ## for k = 1:n, y2(k) = sum(x(:).*sin(k*w)); endfor
+  ## y = [y,y2];
 
   if transpose, y = y.'; endif
 

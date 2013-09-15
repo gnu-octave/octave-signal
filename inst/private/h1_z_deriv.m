@@ -23,15 +23,15 @@
 
 function b = h1_z_deriv(n, p, ts)
 
-  %% Build the vector d that holds coefficients for all the derivatives of H1(z)
-  %% The results reads d(n)*z^(1)*(d/dz)^(1)*H1(z) + d(n-1)*z^(2)*(d/dz)^(2)*H1(z) +...+ d(1)*z^(n)*(d/dz)^(n)*H1(z)
-  d = (-1)^n; % Vector with the derivatives of H1(z)
+  ## Build the vector d that holds coefficients for all the derivatives of H1(z)
+  ## The results reads d(n)*z^(1)*(d/dz)^(1)*H1(z) + d(n-1)*z^(2)*(d/dz)^(2)*H1(z) +...+ d(1)*z^(n)*(d/dz)^(n)*H1(z)
+  d = (-1)^n; # Vector with the derivatives of H1(z)
   for i= (1:n-1)
-    d  = [d 0];                           % Shift result right (multiply by -z)
-    d += prepad(polyder(d), i+1, 0, 2); % Add the derivative
+    d  = [d 0];                           # Shift result right (multiply by -z)
+    d += prepad(polyder(d), i+1, 0, 2); # Add the derivative
   endfor
 
-  %% Build output vector
+  ## Build output vector
   b = zeros (1, n + 1);
   for i = (1:n)
     b += d(i) * prepad(h1_deriv(n-i+1), n+1, 0, 2);
@@ -39,7 +39,7 @@ function b = h1_z_deriv(n, p, ts)
 
   b *= ts^(n+1)/factorial(n);
 
-  %% Multiply coefficients with p^i, where i is the index of the coeff.
+  ## Multiply coefficients with p^i, where i is the index of the coeff.
   b.*=p.^(n+1:-1:1);
 
 endfunction
@@ -51,7 +51,7 @@ endfunction
 
 function b = h1_deriv(n)
 
-  b  = factorial(n)*bincoeff(n,0:n); % Binomial coefficients: [1], [1 1], [1 2 1], [1 3 3 1], etc.
+  b  = factorial(n)*bincoeff(n,0:n); # Binomial coefficients: [1], [1 1], [1 2 1], [1 3 3 1], etc.
   b *= (-1)^n;
 
 endfunction
