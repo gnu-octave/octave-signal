@@ -289,3 +289,5 @@ function [varargout]=ar_psd(a,v,varargin)
       endif
     endif
   endif
+
+endfunction
