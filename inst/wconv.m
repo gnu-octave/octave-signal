@@ -14,29 +14,26 @@
 ## along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 ## -*- texinfo -*-
-## @deftypefn {Function File} {[@var{u}, @var{v}] =} dwt (@var{x}, @var{wname})
-## @deftypefnx {Function File} {[@var{u}, @var{v}] =} dwt (@var{x}, @var{Hp}, @var{Gp})
-## @deftypefnx {Function File} {[@var{u}, @var{v}] =} dwt (@var{x}, @var{Hp}, @var{Gp}, @dots{})
-## Discrete wavelet transform (1D).
+## @deftypefn {Function File} {@var{y} =} wconv (@var{type}, @var{x}, @var{f})
+## @deftypefnx {Function File} {@var{y} =} wconv (@var{type}, @var{x}, @var{f}, @var{shape})
+## 1-D or 2-D convolution.
 ## 
 ## @strong{Inputs}
 ## @table @var
+## @item type
+## Type of convolution.
 ## @item x
-## Signal vector.
-## @item wname
-## Wavelet name.
-## @item Hp
-## Coefficients of low-pass decomposition @acronym{FIR} filter.
-## @item Gp
-## Coefficients of high-pass decomposition @acronym{FIR} filter.
+## Signal vector or matrix.
+## @item f
+## Coefficients of @acronym{FIR} filter.
+## @item shape
+## Shape.
 ## @end table
 ##
 ## @strong{Outputs}
 ## @table @var
-## @item u
-## Signal vector of average, approximation.
-## @item v
-## Signal vector of difference, detail.
+## @item y
+## Convoluted signal.
 ## @end table
 ## @end deftypefn
 
@@ -44,22 +41,27 @@
 ## Created: April 2013
 ## Version: 0.1
 
-function [u, v] = dwt (x, varargin)
+function y = wconv (type, x, f, shape = "full")
 
-  if (nargin == 2)
-    wname = varargin{1};
-    [Hp, Gp] = wfilters (wname, "d");
-  elseif (nargin == 3)
-    Hp = varargin{1};
-    Gp = varargin{2};
-  else
+  if (nargin < 3 || nargin > 4)
     print_usage ();
   endif
 
-  tmp = wconv (1, x, Hp, "valid");
-  u = tmp(1:2:end);
-  
-  tmp = wconv (1, x, Gp, "valid");
-  v = tmp(1:2:end);
+  switch (type)
+    case {1, "1", "1d", "1D"}
+      y = conv2 (x(:).', f(:).', shape);
+      if (rows (x) > 1)
+        y = y.';
+      endif
+    case {2, "2", "2d", "2D"}
+      y = conv2 (x, f, shape);
+    case {"r", "row"}
+      y = conv2 (x, f(:).', shape);
+    case {"c", "col"}
+      y = conv2 (x.', f(:).', shape);
+      y = y.';
+    otherwise
+      print_usage ();
+  endswitch
 
 endfunction
