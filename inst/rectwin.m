@@ -21,7 +21,7 @@
 
 function w = rectwin(L)
 
-  if (nargin < 1); print_usage; end
+  if (nargin < 1); print_usage; endif
   w = ones(round(L),1);
 
 endfunction

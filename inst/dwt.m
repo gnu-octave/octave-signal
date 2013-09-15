@@ -28,7 +28,7 @@ function [ca, cd] = dwt (x, lo_d, hi_d)
     error ("dwt: LO_D must be a vector");
   elseif (! isvector (hi_d))
     error ("dwt: HI_D must be a vector");
-  end
+  endif
 
   h = filter (hi_d, 1, x);
   g = filter (lo_d, 1, x);

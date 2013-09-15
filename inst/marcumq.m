@@ -43,19 +43,19 @@ function Q = marcumq(a,b,M=1,tol=eps)
 
   if ( (nargin<2) || (nargin>4) )
     print_usage();
-  end
+  endif
   if ( any(a<0) || any(b<0) )
     error("Parameters to marcumq must be positive");
-  end
+  endif
   if ( any(M<0) || any(floor(M)~=M) )
     error("M must be a positive integer");
-  end
+  endif
 
   [a,b,M] = tablify(a,b,M);
 
   Q = arrayfun(@mq, a,b,M,tol);
 
-end
+endfunction
 
 % Subfunction to compute the actual Marcum Q function.
 
@@ -66,13 +66,13 @@ function Q = mq(a,b,M,tol)
     Q = 1;
     N = 0;
     return;
-  end
+  endif
   if (a==0)
     k = 0:(M-1);
     Q = exp(-b^2/2)*sum(b.^(2*k)./(2.^k .* factorial(k)));
     N = 0;
     return;
-  end
+  endif
 
   % The basic iteration.  If a<b compute Q_M, otherwise
   % compute 1-Q_M.
@@ -90,7 +90,7 @@ function Q = mq(a,b,M,tol)
       t = (d+1/d)*besseli(k,z,1);
       S = S + t;
       d = d*x;
-    end
+    endfor
     N=k++;
   else
     s = -1;
@@ -100,7 +100,7 @@ function Q = mq(a,b,M,tol)
     d = x^M;
     S = 0;
     N = 0;
-  end
+  endif
 
   do
     t = d*besseli(abs(k),z,1);
@@ -110,7 +110,7 @@ function Q = mq(a,b,M,tol)
   until (abs(t/S)<tol)
   Q = c + s*exp( -(a-b)^2/2 )*S;
 
-end
+endfunction
 
 %  Tests for number and validity of arguments.
 %

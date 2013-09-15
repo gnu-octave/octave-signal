@@ -58,20 +58,20 @@
 
 function [B, A, SigN] = invfreq(H, F, nB, nA, W, iter, tol, tr, plane, varargin)
 
-  if length(nB) > 1, zB = nB(2); nB = nB(1); else zB = 0; end
+  if length(nB) > 1, zB = nB(2); nB = nB(1); else zB = 0; endif
   n = max(nA, nB);
   m = n+1; mA = nA+1; mB = nB+1;
   nF = length(F);
-  if nF ~= length(H), disp('invfreqz: length of H and F must be the same'); end;
-  if nargin < 5 || isempty(W), W = ones(1, nF); end;
-  if nargin < 6, iter = []; end
-  if nargin < 7  tol = []; end
-  if nargin < 8 || isempty(tr), tr = ''; end
-  if nargin < 9, plane = 'z'; end
-  if nargin < 10, varargin = {}; end
-  if iter~=[], disp('no implementation for iter yet'),end
-  if tol ~=[], disp('no implementation for tol yet'),end
-  if (plane ~= 'z' && plane ~= 's'), disp('invfreqz: Error in plane argument'), end
+  if nF ~= length(H), disp('invfreqz: length of H and F must be the same'); endif
+  if nargin < 5 || isempty(W), W = ones(1, nF); endif
+  if nargin < 6, iter = []; endif
+  if nargin < 7  tol = []; endif
+  if nargin < 8 || isempty(tr), tr = ''; endif
+  if nargin < 9, plane = 'z'; endif
+  if nargin < 10, varargin = {}; endif
+  if iter~=[], disp('no implementation for iter yet'),endif
+  if tol ~=[], disp('no implementation for tol yet'),endif
+  if (plane ~= 'z' && plane ~= 's'), disp('invfreqz: Error in plane argument'), endif
 
   [reg, prop ] = parseparams(varargin);
   %# should we normalise freqs to avoid matrices with rank deficiency ?
@@ -89,7 +89,7 @@ function [B, A, SigN] = invfreq(H, F, nB, nA, W, iter, tol, tr, plane, varargin)
           else
             norm = true; prop(indi) = [];
             continue
-          end
+          endif
         case 'method'
           if indi < length(prop) && ischar(prop{indi+1}),
             method = prop{indi+1};
@@ -97,13 +97,13 @@ function [B, A, SigN] = invfreq(H, F, nB, nA, W, iter, tol, tr, plane, varargin)
             continue
           else
             error('invfreq.m: incorrect/missing method argument');
-          end
+          endif
         otherwise %# FIXME: just skip it for now
           disp(sprintf("Ignoring unkown argument %s", varargin{indi}));
           indi = indi + 1;
-      end
-    end
-  end
+      endswitch
+    endwhile
+  endif
 
   Ruu = zeros(mB, mB); Ryy = zeros(nA, nA); Ryu = zeros(nA, mB);
   Pu = zeros(mB, 1);   Py = zeros(nA,1);
@@ -112,7 +112,7 @@ function [B, A, SigN] = invfreq(H, F, nB, nA, W, iter, tol, tr, plane, varargin)
     disp('Computing nonuniformly sampled, equation-error, rational filter.');
     disp(['plane = ',plane]);
     disp(' ')
-  end
+  endif
 
   s = sqrt(-1)*F;
   switch plane
@@ -121,7 +121,7 @@ function [B, A, SigN] = invfreq(H, F, nB, nA, W, iter, tol, tr, plane, varargin)
         disp('hey, you frequency is outside the range 0 to pi, making my own')
         F = linspace(0, pi, length(H));
         s = sqrt(-1)*F;
-      end
+      endif
       s = exp(-s);
     case 's'
       if max(F) > 1e6 && n > 5,
@@ -130,9 +130,9 @@ function [B, A, SigN] = invfreq(H, F, nB, nA, W, iter, tol, tr, plane, varargin)
           disp('Call invfreqs as (..., "norm", true) to avoid it');
         else
           Fmax = max(F); s = sqrt(-1)*F/Fmax;
-        end
-      end
-  end
+        endif
+      endif
+  endswitch
 
   for k=1:nF,
     Zk = (s(k).^[0:n]).';
@@ -145,21 +145,21 @@ function [B, A, SigN] = invfreq(H, F, nB, nA, W, iter, tol, tr, plane, varargin)
     Ryu = Ryu + real(Hk*Rk(2:mA, 1:mB));
     Pu = Pu + W(k)*real(conj(Hk)*Zk(1:mB));
     Py = Py + (W(k)*aHks)*real(Zk(2:mA));
-  end;
+  endfor
   Rr = ones(length(s), mB+nA); Zk = s;
   for k = 1:min(nA, nB),
     Rr(:, 1+k) = Zk;
     Rr(:, mB+k) = -Zk.*H;
     Zk = Zk.*s;
-  end
+  endfor
   for k = 1+min(nA, nB):max(nA, nB)-1,
-    if k <= nB, Rr(:, 1+k) = Zk; end
-    if k <= nA, Rr(:, mB+k) = -Zk.*H; end
+    if k <= nB, Rr(:, 1+k) = Zk; endif
+    if k <= nA, Rr(:, mB+k) = -Zk.*H; endif
     Zk = Zk.*s;
-  end
+  endfor
   k = k+1;
-  if k <= nB, Rr(:, 1+k) = Zk; end
-  if k <= nA, Rr(:, mB+k) = -Zk.*H; end
+  if k <= nB, Rr(:, 1+k) = Zk; endif
+  if k <= nA, Rr(:, mB+k) = -Zk.*H; endif
 
   %# complex to real equation system -- this ensures real solution
   Rr = Rr(:, 1+zB:end);
@@ -203,7 +203,7 @@ function [B, A, SigN] = invfreq(H, F, nB, nA, W, iter, tol, tr, plane, varargin)
       SigN = S(end, end);
     otherwise
       error("invfreq: unknown method %s", method);
-  end
+  endswitch
 
   B = [zeros(zB, 1); Theta(1:mB-zB)].';
   A = [1; Theta(mB-zB+(1:nA))].';
@@ -213,10 +213,10 @@ function [B, A, SigN] = invfreq(H, F, nB, nA, W, iter, tol, tr, plane, varargin)
     A = A(mA:-1:1);
     if norm, %# Frequencies were normalised -- unscale coefficients
       Zk = Fmax.^[n:-1:0].';
-      for k = nB:-1:1+zB, B(k) = B(k)/Zk(k); end
-      for k = nA:-1:1, A(k) = A(k)/Zk(k); end
-    end
-  end
+      for k = nB:-1:1+zB, B(k) = B(k)/Zk(k); endfor
+      for k = nA:-1:1, A(k) = A(k)/Zk(k); endfor
+    endif
+  endif
 
 endfunction
 

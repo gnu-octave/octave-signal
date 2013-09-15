@@ -153,19 +153,19 @@ function [varargout]=ar_psd(a,v,varargin)
             error('ar_psd: arg 3 (freq) must be integer >=2, <=1048576' );
           elseif ( user_freqs && ~isreal(arg) )
             error( 'ar_psd: arg 3 (freq) vector must be real.' );
-          end
+          endif
           freq = arg(:); % -> column vector
         %%
         %% second optional numeric arg is  "Fs" - sampling frequency
         elseif ( iarg == 2 )
           if ( ~isscalar(arg) || ~isreal(arg) || arg<=0 )
             error( 'ar_psd: arg 4 (Fs) must be real positive scalar.' );
-          end
+          endif
           Fs = arg;
         %%
         else
           error( 'ar_psd: control arg must be string.' );
-        end
+        endif
     %%
     %% decode control-string arguments
       elseif ( strcmp(arg,'plot') || strcmp(arg,'squared') )
@@ -195,8 +195,8 @@ function [varargout]=ar_psd(a,v,varargin)
         do_shift = 1;
       else
         error( 'ar_psd: string arg: illegal value: %s', arg );
-      end
-    end
+      endif
+    endfor
   %%  end of decoding and checking args
   %%
     if ( user_freqs )
@@ -205,7 +205,7 @@ function [varargout]=ar_psd(a,v,varargin)
         error( 'ar_psd: arg 3 (freq) cannot exceed half sampling frequency.' );
       elseif ( pad_fact==2 && any(freq<0) )
         error( 'ar_psd: arg 3 (freq) must be positive in onesided spectrum' );
-      end
+      endif
       freq_len = length(freq);
       fft_len  = freq_len;
       use_FFT  = 0;
@@ -218,8 +218,7 @@ function [varargout]=ar_psd(a,v,varargin)
       is_power_of_2 = rem(log(freq_len),log(2))<10.*eps;
       use_FFT = ( ~ force_poly && is_power_of_2 ) || force_FFT;
       fft_len = freq_len * pad_fact;
-      end
-    end
+    endif
     %%
     %% calculate denominator of Equation 2.28, Kay and Marple, ref [1]Jr.:
     len_coeffs = length(a);
@@ -232,9 +231,9 @@ function [varargout]=ar_psd(a,v,varargin)
       if ( pad_fact==2 && ~real_model )
         freq = [freq; -freq(freq_len:-1:1)];
         fft_len = 2*freq_len;
-      end
+      endif
       fft_out = polyval( a(len_coeffs:-1:1), exp( (-i*2*pi/Fs) * freq ) );
-    end
+    endif
     %%
     %% The power spectrum (PSD) is the scaled squared reciprocal of amplitude
     %% of the FFT/polynomial. This is NOT the reciprocal of the periodogram.
@@ -259,7 +258,7 @@ function [varargout]=ar_psd(a,v,varargin)
         %% complex data, polynomial method
         %%  user-defined and internally-generated frequencies
         psd = psd(1:freq_len)+psd(fft_len:-1:freq_len+1);
-      end
+      endif
     %%
     %% range='shift'
     %%   disabled for user-supplied frequencies
@@ -268,7 +267,7 @@ function [varargout]=ar_psd(a,v,varargin)
       len2 = fix((fft_len+1)/2);
       psd  = [psd(len2+1:fft_len); psd(1:len2)];
       freq = [freq(len2+1:fft_len)-Fs; freq(1:len2)];
-    end
+    endif
     %%
     %% Plot the spectrum if there are no return variables.
     if ( nargout >= 2 )
@@ -287,6 +286,6 @@ function [varargout]=ar_psd(a,v,varargin)
         loglog(freq,psd);
       elseif ( plot_type == 5 )
         plot(freq,10*log10(psd));
-      end
-    end
-  end
+      endif
+    endif
+  endif

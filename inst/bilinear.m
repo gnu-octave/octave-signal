@@ -77,13 +77,13 @@ function [Zz, Zp, Zg] = bilinear(Sz, Sp, Sg, T)
     [Sz, Sp, Sg] = tf2zp(Sz, Sp);
   elseif nargin!=4
     print_usage;
-  end
+  endif
 
   p = length(Sp);
   z = length(Sz);
   if z > p || p==0
     error("bilinear: must have at least as many poles as zeros in s-plane");
-  end
+  endif
 
 ## ----------------  -------------------------  ------------------------
 ## Bilinear          zero: (2+xT)/(2-xT)        pole: (2+xT)/(2-xT)
@@ -98,7 +98,7 @@ function [Zz, Zp, Zg] = bilinear(Sz, Sp, Sg, T)
   else
     Zz = [(2+Sz*T)./(2-Sz*T)];
     Zz = postpad(Zz, p, -1);
-  end
+  endif
 
   if nargout==2, [Zz, Zp] = zp2tf(Zz, Zp, Zg); endif
 

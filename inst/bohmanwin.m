@@ -27,12 +27,12 @@ function [w] = bohmanwin(L)
     error("L must be a number");
   elseif(L < 0)
     error('L must be positive');
-  end
+  endif
 
   if(L ~= floor(L))
     L = round(L);
     warning('L rounded to the nearest integer.');
-  end
+  endif
 
   if(L == 0)
     w = [];
@@ -48,6 +48,6 @@ function [w] = bohmanwin(L)
     w(1) = 0;
     w(length(w))=0;
     w = w';
-  end
+  endif
 
 endfunction

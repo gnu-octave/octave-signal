@@ -35,7 +35,7 @@ function [rmsx w]= movingrms (x,width, risetime, Fs=1)
   else
     idx   = round ((N + width*Fs*[-1 1])/2);
     w     = sigmoid_train ((1:N)', idx, risetime*Fs);
-  end
+  endif
   fw    = fft (w.^2);
   fx    = fft (x.^2);
   rmsx  = real(ifft (fx.*fw)/(N-1));

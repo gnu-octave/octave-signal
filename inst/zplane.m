@@ -53,7 +53,7 @@ function zplane(z, p = [])
 
   if (nargin < 1 || nargin > 2)
     print_usage;
-  end
+  endif
   if columns(z)>1 || columns(p)>1
     if rows(z)>1 || rows(p)>1
       ## matrix form: columns are already zeros/poles

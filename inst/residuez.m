@@ -69,15 +69,15 @@ function [r, p, f, m] = residuez(B, A, tol)
 
   if nargin==3
     warning("tolerance ignored");
-  end
+  endif
   NUM = B(:)'; DEN = A(:)';
   % Matlab's residue does not return m (since it is implied by p):
   [r,p,f,m]=residue(conj(fliplr(NUM)),conj(fliplr(DEN)));
   p = 1 ./ p;
   r = r .* ((-p) .^m);
-  if f, f = conj(fliplr(f)); end
+  if f, f = conj(fliplr(f)); endif
 
-end
+endfunction
 
 %!test
 %! B=[1 -2 1]; A=[1 -1];

@@ -20,9 +20,9 @@
 
 function [y] = gauspuls(t, fc = 1e3, bw = 0.5)
 
-  if nargin<1, print_usage; end
-  if fc < 0 , error("fc must be positive"); end
-  if bw <= 0, error("bw must be stricltly positive"); end
+  if nargin<1, print_usage; endif
+  if fc < 0 , error("fc must be positive"); endif
+  if bw <= 0, error("bw must be stricltly positive"); endif
 
   fv = -(bw.^2.*fc.^2)/(8.*log(10.^(-6/20)));
   tv = 1/(4.*pi.^2.*fv);

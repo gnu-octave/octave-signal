@@ -34,7 +34,7 @@ function [x_r, t_r] = impz(b, a = [1], n = [], fs = 1)
 
   if nargin == 0 || nargin > 4
     print_usage;
-  end
+  endif
 
   if isempty(n) && length(a) > 1
     precision = 1e-6;
@@ -54,8 +54,8 @@ function [x_r, t_r] = impz(b, a = [1], n = [], fs = 1)
         n_periodic = ceil(10*pi./min(abs(arg(rperiodic))));
         if (n_periodic > n)
           n = n_periodic;
-        end
-      end
+        endif
+      endif
 
                                 # find most damped pole
                                 # cutoff at -60 dB
@@ -64,23 +64,23 @@ function [x_r, t_r] = impz(b, a = [1], n = [], fs = 1)
         n_damped = floor(-3/log10(max(abs(rdamped))));
         if (n_damped > n)
           n = n_damped;
-        end
-      end
-    end
+        endif
+      endif
+    endif
     n = n + length(b);
   elseif isempty(n)
     n = length(b);
-  end
+  endif
 
   if length(a) == 1
     x = fftfilt(b/a, [1, zeros(1,n-1)]);
   else
     x = filter(b, a, [1, zeros(1,n-1)]);
-  end
+  endif
   t = [0:n-1]/fs;
 
-  if nargout >= 1 x_r = x; end;
-  if nargout >= 2 t_r = t; end;
+  if nargout >= 1 x_r = x; endif
+  if nargout >= 2 t_r = t; endif
   if nargout == 0
     unwind_protect
       title "Impulse Response";
@@ -89,12 +89,12 @@ function [x_r, t_r] = impz(b, a = [1], n = [], fs = 1)
         xlabel("Time (msec)");
       else
         xlabel("Time (sec)");
-      end
+      endif
       plot(t, x, "^r;;");
     unwind_protect_cleanup
       title ("")
       xlabel ("")
     end_unwind_protect
-  end
+  endif
 
 endfunction

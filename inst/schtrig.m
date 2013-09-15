@@ -33,7 +33,7 @@ function v = schtrig (x, lvl, rst = 1)
     lvl = abs (lvl)*[1 -1];
   else
     lvl = sort(lvl,'descend');
-  end
+  endif
 
   [nT nc] = size(x);
 
@@ -43,7 +43,7 @@ function v = schtrig (x, lvl, rst = 1)
     st0 = zeros(1,nc);
     printf ("Trigger initialized!\n");
     flush (stdout);
-  end
+  endif
 
   v(1,:) = st0;
 
@@ -72,9 +72,9 @@ function v = schtrig (x, lvl, rst = 1)
       end_idx = ranges{i}(2,:);
       for j =1:length(ini_idx)
         v(ini_idx(j):end_idx(j),i) = st0(j);
-      end
-    end
-  end
+      endfor
+    endif
+  endfor
 
   st0 = v(end,:);
 

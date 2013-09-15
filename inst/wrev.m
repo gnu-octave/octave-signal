@@ -21,10 +21,10 @@
 
 function y = wrev(x)
 
-  if (nargin < 1|| nargin > 1); print_usage; end
+  if (nargin < 1|| nargin > 1); print_usage; endif
   if(~isvector(x))
     error('x must be a vector');
-  end
+  endif
   l = length(x);
   k = 0:l-1;
   y = x(l-k);

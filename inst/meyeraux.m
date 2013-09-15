@@ -20,7 +20,7 @@
 
 function [y] = meyeraux(x)
 
-  if (nargin < 1); print_usage; end
+  if (nargin < 1); print_usage; endif
 
   y = 35.*x.^4-84.*x.^5+70.*x.^6-20.*x.^7;
 

@@ -283,7 +283,7 @@ function [varargout] = pwelch(x,varargin)
     %% legal values are 1, 2, 3, 4
 
     compatib = 1;
-  end
+  endif
   if ( nargin <= 0 )
     error( 'pwelch: Need at least 1 arg. Use "help pwelch".' );
   elseif ( nargin==1 && (ischar(x) || isempty(x)) )
@@ -298,7 +298,7 @@ function [varargout] = pwelch(x,varargin)
       compatib = 4;
     else
       error( 'pwelch: compatibility arg must be empty, R11-, R12+ or psd' );
-    end
+    endif
     %% return
   %%
   %% Check fixed argument
@@ -308,7 +308,7 @@ function [varargout] = pwelch(x,varargin)
     %%  force x to be COLUMN vector
     if ( size(x,1)==1 )
       x=x(:);
-    end
+    endif
     %%
     %% Look through all args to check if  cross PSD, transfer function or
     %% coherence is required.  If yes, the second arg is data vector "y".
@@ -324,13 +324,13 @@ function [varargout] = pwelch(x,varargin)
         arg = varargin{1};
         if ( nargin<2 || isempty(arg) || ~isvector(arg) || length(arg)~=x_len )
           error( 'pwelch: arg 2 (y) must be vector, same length as x.' );
-        end
+        endif
         %% force  COLUMN vector
         y = varargin{1}(:);
         arg2_is_y = 1;
         break;
-      end
-    end
+      endif
+    endfor
     %%
     %% COMPATIBILITY
     %% To select default argument values, "compatib" is used as an array index.
@@ -417,37 +417,37 @@ function [varargout] = pwelch(x,varargin)
           if ( ~do_power )
             n_results = n_results+1;
             do_power = n_results;
-          end
+          endif
         elseif ( strcmp(arg, 'cross' ) )
           if ( ~do_cross )
             n_results = n_results+1;
             do_cross = n_results;
-          end
+          endif
         elseif ( strcmp(arg, 'trans' ) )
           if ( ~do_trans )
             n_results = n_results+1;
             do_trans = n_results;
-          end
+          endif
         elseif ( strcmp(arg, 'coher' ) )
           if ( ~do_coher )
             n_results = n_results+1;
             do_coher = n_results;
-          end
+          endif
         elseif ( strcmp(arg, 'ypower' ) )
           if ( ~do_ypower )
             n_results = n_results+1;
             do_ypower = n_results;
-          end
+          endif
         else
           error( 'pwelch: string arg %d illegal value: %s', iarg+1, arg );
-        end
+        endif
         %% end of processing string args
         %%
       elseif ( end_numeric_args )
         if ( ~isempty(arg) )
           %% found non-string arg after a string arg ... oops
           error( 'pwelch: control arg must be string' );
-        end
+        endif
       %%
       %% first 4 optional arguments are numeric -- in fixed order
       %%
@@ -460,7 +460,7 @@ function [varargout] = pwelch(x,varargin)
           error( 'pwelch: arg %d (Fs) must be real scalar >0', iarg+1 );
         else
           Fs = arg;
-        end
+        endif
       %%
       %%  -- "conf" arg -- confidence level
       %%    guard against the "it cannot happen" iarg==0
@@ -471,7 +471,7 @@ function [varargout] = pwelch(x,varargin)
           error( 'pwelch: arg %d (conf) must be real scalar, >=0, <1',iarg+1 );
         else
           conf = arg;
-        end
+        endif
       %%
       %% skip all empty args from this point onward
       elseif ( isempty(arg) )
@@ -485,17 +485,17 @@ function [varargout] = pwelch(x,varargin)
           is_win = length(arg);
           if ( size(arg,2)>1 )  %% vector must be COLUMN vector
             arg = arg(:);
-          end
+          endif
         else
           is_win = 0;
-        end
+        endif
         if ( ~is_win )
           error( 'pwelch: arg %d (window) must be scalar or vector', iarg+1 );
         elseif ( is_win==1 && ( ~isreal(arg) || fix(arg)~=arg || arg<=3 ) )
           error( 'pwelch: arg %d (window) must be integer >3', iarg+1 );
         elseif ( is_win>1 && ( ~isreal(arg) || any(arg<0) ) )
           error( 'pwelch: arg %d (window) vector must be real and >=0',iarg+1);
-        end
+        endif
         window = arg;
         is_sloppy = 0;
       %%
@@ -504,23 +504,23 @@ function [varargout] = pwelch(x,varargin)
         if (~isscalar(arg) || ~isreal(arg) || arg<0 || arg>max_overlap )
           error( 'pwelch: arg %d (overlap) must be real from 0 to %f', ...
                  iarg+1, max_overlap );
-        end
+        endif
         overlap = arg;
       %%
       %% -- "Nfft" arg -- FFT length
       elseif ( iarg == arg_posn(3) )
         if ( ~isscalar(arg) || ~isreal(arg) || fix(arg)~=arg || arg<0 )
           error( 'pwelch: arg %d (Nfft) must be integer >=0', iarg+1 );
-        end
+        endif
         Nfft = arg;
       %%
       else
         error( 'pwelch: arg %d  must be string', iarg+1 );
-      end
-    end
+      endif
+    endfor
     if ( conf>0 && (n_results && ~do_power ) )
-     error('pwelch: can give confidence interval for x power spectrum only' );
-      end
+      error('pwelch: can give confidence interval for x power spectrum only' );
+    endif
     %%
     %% end DECODE AND CHECK OPTIONAL ARGUMENTS.
     %%
@@ -529,7 +529,7 @@ function [varargout] = pwelch(x,varargin)
     if ( ~n_results )
       n_results = 1;
       do_power = 1;
-    end
+    endif
     need_Pxx = do_power || do_trans || do_coher;
     need_Pxy = do_cross || do_trans || do_coher;
     need_Pyy = do_coher || do_ypower;
@@ -543,7 +543,7 @@ function [varargout] = pwelch(x,varargin)
     if ( compatib==2 )
       if ( isempty(Nfft) )
         Nfft = min( 256, x_len );
-      end
+      endif
       if ( is_win > 1 )
         seg_len = min( length(window), Nfft );
         window = window(1:seg_len);
@@ -553,11 +553,11 @@ function [varargout] = pwelch(x,varargin)
           seg_len = window;
         else
           seg_len = Nfft;
-        end
+        endif
         %% make Hann window (don't depend on sigproc)
         xx = seg_len - 1;
         window = 0.5 - 0.5 * cos( (2*pi/xx)*[0:xx].' );
-      end
+      endif
     %%
     %% Matlab R12 compatibility
     elseif ( compatib==3 )
@@ -574,14 +574,14 @@ function [varargout] = pwelch(x,varargin)
           %% ignore overlap arg; use overlap=50% -- only choice that makes sense
           %% this is the magic formula for 8 segments with 50% overlap
           seg_len = fix( (x_len-3)*2/9 );
-        end
+        endif
         %% make Hamming window (don't depend on sigproc)
         xx = seg_len - 1;
         window = 0.54 - 0.46 * cos( (2*pi/xx)*[0:xx].' );
-        end
+      endif
       if ( isempty(Nfft) )
         Nfft = max( 256, 2^ceil(log(seg_len)*nearly_one/log_two) );
-      end
+      endif
     %%
     %% Matlab R14 psd(spectrum.welch) defaults
     elseif ( compatib==4 )
@@ -596,19 +596,19 @@ function [varargout] = pwelch(x,varargin)
         else
           %% window arg not available; use default seg_len = 64
           seg_len = 64;
-        end
+        endif
         %% make Hamming window (don't depend on sigproc)
         xx = seg_len - 1;
         window = 0.54 - 0.46 * cos( (2*pi/xx)*[0:xx].' );
-        end
+      endif
       %% Now we know segment length,
       %% so we can set default overlap as number of samples
       if ( ~isempty(overlap) )
         overlap = fix(seg_len * overlap / 100 );
-        end
+      endif
       if ( isempty(Nfft) )
         Nfft = max( 256, 2^ceil(log(seg_len)*nearly_one/log_two) );
-      end
+      endif
     %%
     %% default compatibility level
     else %if ( compatib==1 )
@@ -625,27 +625,27 @@ function [varargout] = pwelch(x,varargin)
           %% = sqrt(length(x)) rounded up to nearest integer power of 2
           if ( isempty(overlap) )
             overlap=0.5;
-          end
+          endif
           seg_len = 2 ^ ceil( log(sqrt(x_len/(1-overlap)))*nearly_one/log_two );
-        end
+        endif
         %% make Hamming window (don't depend on sigproc)
         xx = seg_len - 1;
         window = 0.54 - 0.46 * cos( (2*pi/xx)*[0:xx].' );
-        end
+      endif
       %% Now we know segment length,
       %% so we can set default overlap as number of samples
       if ( ~isempty(overlap) )
         overlap = fix(seg_len * overlap);
-        end
+      endif
       %%
       %% calculate FFT length
       if ( isempty(Nfft) )
         Nfft = seg_len;
-      end
+      endif
       if ( is_sloppy )
         Nfft = 2 ^ ceil( log(Nfft) * nearly_one / log_two );
-      end
-    end
+      endif
+    endif
     %% end of compatibility options
     %%
     %% minimum FFT length is seg_len
@@ -659,16 +659,16 @@ function [varargout] = pwelch(x,varargin)
     elseif ( overlap >= seg_len )
       error( 'pwelch: arg (overlap=%d) too big. Must be <length(window)=%d',...
              overlap, seg_len );
-    end
+    endif
     %%
     %% Pad data with zeros if shorter than segment. This should not happen.
     if ( x_len < seg_len )
       x = [x; zeros(seg_len-x_len,1)];
       if ( arg2_is_y )
         y = [y; zeros(seg_len-x_len,1)];
-        end
+      endif
       x_len = seg_len;
-      end
+    endif
     %% end SETUP REMAINING PARAMETERS
     %%
     %%
@@ -679,11 +679,11 @@ function [varargout] = pwelch(x,varargin)
       x_len  = min( x_len, (seg_len-overlap)*(n_ffts-1)+seg_len );
       if ( need_Pxx || need_Pxy )
         x = x - sum( x(1:x_len) ) / x_len;
-      end
+      endif
       if ( arg2_is_y || need_Pxy)
         y = y - sum( y(1:x_len) ) / x_len;
-      end
-    end
+      endif
+    endif
     %%
     %% Calculate and accumulate periodograms
     %%   xx and yy are padded data segments
@@ -697,7 +697,7 @@ function [varargout] = pwelch(x,varargin)
       Vxx = xx;
     else
       Vxx = [];
-    end
+    endif
     n_ffts = 0;
     for start_seg = [1:seg_len-overlap:x_len-seg_len+1]
       end_seg = start_seg+seg_len-1;
@@ -710,9 +710,9 @@ function [varargout] = pwelch(x,varargin)
           xx(1:seg_len) = window .* detrend( x(start_seg:end_seg) );
         else % rm_mean==0 or 3
           xx(1:seg_len) = window .* x(start_seg:end_seg);
-        end
+        endif
         fft_x = fft(xx);
-      end
+      endif
       if ( need_Pxy || need_Pyy )
         if ( rm_mean==1 ) % remove mean from segment
           yy(1:seg_len) = window .* ( ...
@@ -721,9 +721,9 @@ function [varargout] = pwelch(x,varargin)
           yy(1:seg_len) = window .* detrend( y(start_seg:end_seg) );
         else % rm_mean==0 or 3
           yy(1:seg_len) = window .* y(start_seg:end_seg);
-        end
+        endif
         fft_y = fft(yy);
-      end
+      endif
       if ( need_Pxx )
         %% force Pxx to be real; pgram = periodogram
         pgram = real(fft_x .* conj(fft_x));
@@ -731,18 +731,18 @@ function [varargout] = pwelch(x,varargin)
         %% sum of squared periodograms is required for confidence interval
         if ( conf>0 )
           Vxx = Vxx + pgram .^2;
-          end
-      end
+        endif
+      endif
       if ( need_Pxy )
         %% Pxy (cross power spectrum) is complex. Do not force to be real.
         Pxy = Pxy + fft_y .* conj(fft_x);
-      end
+      endif
       if ( need_Pyy )
         %% force Pyy to be real
         Pyy = Pyy + real(fft_y .* conj(fft_y));
-      end
+      endif
       n_ffts = n_ffts +1;
-    end
+    endfor
     %%
     %% Calculate confidence interval
     %%    -- incorrectly assumes that the periodogram has Gaussian probability
@@ -759,8 +759,8 @@ function [varargout] = pwelch(x,varargin)
         %% Should use student distribution here (for unknown variance), but tinv
         %% is not a core Matlab function (is in statistics toolbox. Grrr)
         Vxx = (erfinv(conf)*sqrt(2*n_ffts/(n_ffts-1))) * sqrt(Vxx-Pxx.^2/n_ffts);
-      end
-    end
+      endif
+    endif
     %%
     %% Convert two-sided spectra to one-sided spectra (if range == 0).
     %% For one-sided spectra, contributions from negative frequencies are added
@@ -775,32 +775,32 @@ function [varargout] = pwelch(x,varargin)
           Pxx = Pxx(1:psd_len) + [0; Pxx(Nfft:-1:psd_len+1); 0];
           if ( conf>0 )
             Vxx = Vxx(1:psd_len) + [0; Vxx(Nfft:-1:psd_len+1); 0];
-          end
-        end
+          endif
+        endif
         if ( need_Pxy )
           Pxy = Pxy(1:psd_len) + conj([0; Pxy(Nfft:-1:psd_len+1); 0]);
-        end
+        endif
         if ( need_Pyy )
           Pyy = Pyy(1:psd_len) + [0; Pyy(Nfft:-1:psd_len+1); 0];
-        end
+        endif
       else                    %% one-sided, Nfft is odd
         psd_len = (Nfft+1)/2;
         if ( need_Pxx )
           Pxx = Pxx(1:psd_len) + [0; Pxx(Nfft:-1:psd_len+1)];
           if ( conf>0 )
             Vxx = Vxx(1:psd_len) + [0; Vxx(Nfft:-1:psd_len+1)];
-          end
-        end
+          endif
+        endif
         if ( need_Pxy )
           Pxy = Pxy(1:psd_len) + conj([0; Pxy(Nfft:-1:psd_len+1)]);
-        end
+        endif
         if ( need_Pyy )
           Pyy = Pyy(1:psd_len) + [0; Pyy(Nfft:-1:psd_len+1)];
-        end
-      end
+        endif
+      endif
     else                      %% two-sided (and shifted)
       psd_len = Nfft;
-    end
+    endif
     %% end MAIN CALCULATIONS
     %%
     %% SCALING AND OUTPUT
@@ -815,25 +815,25 @@ function [varargout] = pwelch(x,varargin)
       spect_type(do_power) = 1;
       if ( conf>0 )
         Vxx = [Pxx-Vxx Pxx+Vxx]/scale;
-      end
-    end
+      endif
+    endif
     if ( do_cross )
       spectra(:,do_cross) = Pxy / scale;
       spect_type(do_cross) = 2;
-    end
+    endif
     if ( do_trans )
       spectra(:,do_trans) = Pxy ./ Pxx;
       spect_type(do_trans) = 3;
-    end
+    endif
     if ( do_coher )
       %% force coherence to be real
       spectra(:,do_coher) = real(Pxy .* conj(Pxy)) ./ Pxx ./ Pyy;
       spect_type(do_coher) = 4;
-    end
+    endif
     if ( do_ypower )
       spectra(:,do_ypower) = Pyy / scale;
       spect_type(do_ypower) = 5;
-    end
+    endif
     freq = [0:psd_len-1].' * ( Fs / Nfft );
     %%
     %% range='shift': Shift zero-frequency to the middle
@@ -843,18 +843,18 @@ function [varargout] = pwelch(x,varargin)
       freq    = [ freq(len2+1:Nfft)-Fs; freq(1:len2)];
       if ( conf>0 )
         Vxx = [ Vxx(len2+1:Nfft,:); Vxx(1:len2,:)];
-      end
-    end
+      endif
+    endif
     %%
     %%  RETURN RESULTS or PLOT
     if ( nargout>=2 && conf>0 )
       varargout{2} = Vxx;
-    end
+    endif
     if ( nargout>=(2+(conf>0)) )
       %% frequency is 2nd or 3rd return value,
       %% depends on if 2nd is confidence interval
       varargout{2+(conf>0)} = freq;
-    end
+    endif
     if ( nargout>=1 )
       varargout{1} = spectra;
     else
@@ -870,10 +870,10 @@ function [varargout] = pwelch(x,varargin)
           Vxxxx = Vxx;
         else
           Vxxxx = [];
-        end
+        endif
         if ( n_results > 1 )
           figure();
-          end
+        endif
         if ( plot_type == 1 )
           plot(freq,[abs(spectra(:,ii)) Vxxxx]);
         elseif ( plot_type == 2 )
@@ -885,7 +885,7 @@ function [varargout] = pwelch(x,varargin)
         elseif ( plot_type == 5 )  % db
           ylabel( 'amplitude (dB)' );
           plot(freq,[10*log10(abs(spectra(:,ii))) 10*log10(abs(Vxxxx))]);
-        end
+        endif
         title( char(plot_title(spect_type(ii),:)) );
         ylabel( 'amplitude' );
         %% Plot phase of cross spectrum and transfer function
@@ -895,15 +895,15 @@ function [varargout] = pwelch(x,varargin)
             semilogx(freq,180/pi*angle(spectra(:,ii)));
           else
             plot(freq,180/pi*angle(spectra(:,ii)));
-          end
+          endif
           title( char(plot_title(spect_type(ii),:)) );
           ylabel( 'phase' );
-        end
-      end %for
-    end
-  end
+        endif
+      endfor
+    endif
+  endif
 
-end
+endfunction
 
 %!demo
 %! fflush(stdout);

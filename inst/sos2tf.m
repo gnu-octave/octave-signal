@@ -53,7 +53,7 @@ function [B,A] = sos2tf(sos, Bscale = 1)
 
   if M~=6
     error('sos2tf: sos matrix should be N by 6');
-  end
+  endif
 
   A = 1;
   B = 1;
@@ -61,19 +61,19 @@ function [B,A] = sos2tf(sos, Bscale = 1)
   for i=1:N
     B = conv(B, sos(i,1:3));
     A = conv(A, sos(i,4:6));
-  end
+  endfor
 
   nB = length(B);
   while nB && B(nB)==0
     B=B(1:nB-1);
     nB=length(B);
-  end
+  endwhile
 
   nA = length(A);
   while nA && A(nA)==0
     A=A(1:nA-1);
     nA=length(A);
-  end
+  endwhile
   B = B * Bscale;
 
 endfunction

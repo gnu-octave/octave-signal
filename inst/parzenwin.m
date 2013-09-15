@@ -25,11 +25,11 @@ function w = parzenwin (L)
     print_usage;
   elseif(L < 0)
     error('L must be positive');
-  end
+  endif
 
   if(L ~= floor(L))
     L = round(L);
-  end
+  endif
 
   N = L-1;
   n = -(N/2):N/2;

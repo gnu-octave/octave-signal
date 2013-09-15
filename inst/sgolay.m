@@ -66,7 +66,7 @@ function F = sgolay (p, n, m = 0, ts = 1)
       ## Take the row of the matrix corresponding to the derivative
       ## you want to compute.
       F(row,:) = A(1+m,:);
-    end
+    endfor
     ## The filters shifted to the right are symmetric with those to the left.
     F(k+2:n,:) = (-1)^m*F(k:-1:1,n:-1:1);
 

@@ -28,7 +28,7 @@ function [varargout] = tfe(varargin)
   %% Check fixed argument
   if ( nargin<2 )
     error( 'tfe: Need at least 2 args. Use help tfe.' );
-  end
+  endif
   nvarargin = length(varargin);
   %% remove any pwelch RESULT args and add 'trans'
   for iarg=1:nvarargin
@@ -37,8 +37,8 @@ function [varargout] = tfe(varargin)
            strcmp(arg,'cross') || strcmp(arg,'trans') || ...
            strcmp(arg,'coher') || strcmp(arg,'ypower') ))
       varargin{iarg} = [];
-    end
-  end
+    endif
+  endfor
   varargin{nvarargin+1} = 'trans';
   %%
   saved_compatib = pwelch('R11-');
@@ -51,7 +51,7 @@ function [varargout] = tfe(varargin)
     [Pxx,f] = pwelch(varargin{:});
     varargout{1} = Pxx;
     varargout{2} = f;
-  end
+  endif
   pwelch(saved_compatib);
 
-end
+endfunction

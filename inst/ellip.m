@@ -93,7 +93,7 @@ function [a,b,c,d] = ellip(n, Rp, Rs, W, varargin)
 
   if (Rs < 0)
     error("ellip: stopband ripple must be positive decibels");
-  end
+  endif
 
 
   ##Prewarp the digital frequencies

@@ -14,23 +14,23 @@
 ## @end deftypefn
 
 function y = upsample (x, n, phase = 0)
-  if nargin<2 || nargin>3, print_usage; end
+  if nargin<2 || nargin>3, print_usage; endif
 
   if phase > n - 1
     warning("This is incompatible with Matlab (phase = 0:n-1). See octave-forge signal package release notes for details." )
-  end
+  endif
 
   [nr,nc] = size(x);
   if any([nr,nc]==1),
     y = zeros(n*nr*nc,1);
     y(phase + 1:n:end) = x;
-    if nr==1, y = y.'; end
+    if nr==1, y = y.'; endif
   else
     y = zeros(n*nr,nc);
     y(phase + 1:n:end,:) = x;
-  end
+  endif
 
-end
+endfunction
 
 %!assert(upsample([1,3,5],2),[1,0,3,0,5,0]);
 %!assert(upsample([1;3;5],2),[1;0;3;0;5;0]);

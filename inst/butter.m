@@ -49,12 +49,12 @@ function [a, b, c, d] = butter (n, W, varargin)
 
   if (nargin>4 || nargin<2) || (nargout>4 || nargout<2)
     print_usage;
-  end
+  endif
 
   ## interpret the input parameters
   if (!(length(n)==1 && n == round(n) && n > 0))
     error ("butter: filter order n must be a positive integer");
-  end
+  endif
 
   stop = 0;
   digital = 1;
@@ -94,7 +94,7 @@ function [a, b, c, d] = butter (n, W, varargin)
   ## source: Kuc
   C = 1; # default cutoff frequency
   pole = C*exp(1i*pi*(2*[1:n] + n - 1)/(2*n));
-  if mod(n,2) == 1, pole((n+1)/2) = -1; end  # pure real value at exp(i*pi)
+  if mod(n,2) == 1, pole((n+1)/2) = -1; endif  # pure real value at exp(i*pi)
   zero = [];
   gain = C^n;
 

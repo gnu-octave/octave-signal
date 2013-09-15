@@ -47,12 +47,12 @@ function [a,b,c,d] = cheby2(n, Rs, W, varargin)
 
   if (nargin>5 || nargin<3) || (nargout>4 || nargout<2)
     print_usage;
-  end
+  endif
 
   ## interpret the input parameters
   if (!(length(n)==1 && n == round(n) && n > 0))
     error ("cheby2: filter order n must be a positive integer");
-  end
+  endif
 
 
   stop = 0;
@@ -84,7 +84,7 @@ function [a,b,c,d] = cheby2(n, Rs, W, varargin)
 
   if (Rs < 0)
     error("cheby2: stopband attenuation must be positive decibels");
-  end
+  endif
 
   ## Prewarp to the band edges to s plane
   if digital

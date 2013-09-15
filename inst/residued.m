@@ -77,7 +77,7 @@ function [r, p, f, m] = residued(b, a, toler)
 
   if nargin==3,
     warning("tolerance ignored");
-  end
+  endif
   NUM = b(:)';
   DEN = a(:)';
   nb = length(NUM);
@@ -87,11 +87,11 @@ function [r, p, f, m] = residued(b, a, toler)
     f = filter(NUM,DEN,[1,zeros(nb-na)]);
     NUM = NUM - conv(DEN,f);
     NUM = NUM(nb-na+2:end);
-  end
+  endif
   [r,p,f2,m] = residuez(NUM,DEN);
-  if f2, error('f2 not empty as expected'); end
+  if f2, error('f2 not empty as expected'); endif
 
-end
+endfunction
 
 %!test
 %! B=1; A=[1 -1];

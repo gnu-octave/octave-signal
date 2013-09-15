@@ -20,12 +20,12 @@
 
 function y = wkeep(x,l,opt = 'c')
 
-  if (nargin < 2|| nargin > 3); print_usage; end
+  if (nargin < 2|| nargin > 3); print_usage; endif
   if(isvector(x))
 
     if(l > length(x))
       error('l must be or equal the size of x');
-    end
+    endif
 
     if(opt=='c')
       s = (length(x)-l)./2;
@@ -39,14 +39,14 @@ function y = wkeep(x,l,opt = 'c')
 
     else
       error('opt must be equal to c, l or r');
-    end
+    endif
   else
     if(length(l) == 2)
       s1 = (length(x)-l(1))./2;
       s2 = (length(x)-l(2))./2;
     else
       error('For a matrix l must be a 1x2 vector');
-    end
+    endif
 
     if(nargin==2)
       y = x(1+floor(s1):end-ceil(s1),1+floor(s2):end-ceil(s2));
@@ -56,11 +56,11 @@ function y = wkeep(x,l,opt = 'c')
         firstc=opt(2);
       else
         error('For a matrix l must be a 1x2 vector');
-      end
+      endif
 
       y=x(firstr:firstr+l(1)-1,firstc:firstc+l(2)-1);
-    end
+    endif
 
-  end
+  endif
 
-end
+endfunction

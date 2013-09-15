@@ -49,12 +49,12 @@ function [a, b, c, d] = besself (n, W, varargin)
 
   if (nargin>4 || nargin<2) || (nargout>4 || nargout<2)
     print_usage;
-  end
+  endif
 
   ## interpret the input parameters
   if (!(length(n)==1 && n == round(n) && n > 0))
     error ("besself: filter order n must be a positive integer");
-  end
+  endif
 
   stop = 0;
   digital = 0;

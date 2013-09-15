@@ -23,12 +23,12 @@ function [zero, pole, gain] = besselap (n)
 
   if (nargin>1 || nargin<1)
     print_usage;
-  end
+  endif
 
   ## interpret the input parameters
   if (!(length(n)==1 && n == round(n) && n > 0))
     error ("besselap: filter order n must be a positive integer");
-  end
+  endif
 
   p0=1;
   p1=[1 1];

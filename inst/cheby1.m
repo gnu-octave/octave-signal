@@ -83,7 +83,7 @@ function [a,b,c,d] = cheby1(n, Rp, W, varargin)
 
   if (Rp < 0)
     error("cheby1: passband ripple must be positive decibels");
-  end
+  endif
 
   ## Prewarp to the band edges to s plane
   if digital

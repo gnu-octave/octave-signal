@@ -129,11 +129,11 @@ function [varargout] = arburg( x, poles, criterion )
       use_FPE = strcmp(criterion,'FPE');
       if ( ~use_inf_crit && ~use_FPE )
         error( 'arburg: value of arg 3 (criterion) not recognised' );
-      end
+      endif
     else
       use_inf_crit = 0;
       use_FPE = 0;
-    end
+    endif
     %%
     %% f(n) = forward prediction error
     %% b(n) = backward prediction error
@@ -154,7 +154,7 @@ function [varargout] = arburg( x, poles, criterion )
       f = x(2:N).';
       b = x(1:N-1).';
       v = real(x*x') / N;
-    end
+    endif
     %% new_crit/old_crit is the mode-selection criterion
     new_crit = abs(v);
     old_crit = 2 * new_crit;
@@ -185,7 +185,7 @@ function [varargout] = arburg( x, poles, criterion )
                      (2+isa_KIC-is_AKICc*(p+2)/N) * (p+1) / (N-is_corrected*(p+2));
           if ( new_crit > old_crit )
             break;
-          end
+          endif
         %%
         %% (FPE) Final prediction error
         elseif ( use_FPE )
@@ -193,14 +193,14 @@ function [varargout] = arburg( x, poles, criterion )
           new_crit = new_v * (N+p+1)/(N-p-1);
           if ( new_crit > old_crit )
             break;
-          end
-        end
+          endif
+        endif
         %% Update model "a" and "v".
         %% Use Levinson-Durbin recursion formula (for complex data).
         a = [ prev_a + last_k .* conj(prev_a(p-1:-1:1))  last_k ];
       else %% if( p==1 )
         a = last_k;
-      end
+      endif
       k = [ k; last_k ];
       v = new_v;
       if ( p < poles )
@@ -214,17 +214,16 @@ function [varargout] = arburg( x, poles, criterion )
         new_f = f(2:nn) + last_k * b(2:nn);
         b = b(1:nn-1) + conj(last_k) * f(1:nn-1);
         f = new_f;
-      end
-    end
-    %% end of for loop
-    %%
+      endif
+    endfor
+
     varargout{1} = [1 a];
     varargout{2} = v;
     if ( nargout>=3 )
       varargout{3} = k;
-    end
-  end
+    endif
+  endif
 
-end
+endfunction
 
 %%

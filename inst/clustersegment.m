@@ -48,23 +48,23 @@ function contRange = clustersegment(xhi)
       % first event was up
       contRange{i}(1:2:tLen) = idxUp;
       contRange{i}(2:2:tLen) = idxDwn;
-    end
+    endif
 
     if xhi(i,end)==1
       % last event was up
       contRange{i}(end+1) = Na;
-    end
+    endif
 
     tLen = length(contRange{i});
     if tLen ~=0
       contRange{i}=reshape(contRange{i},2,tLen/2);
-    end
+    endif
 
-  end
+  endfor
 
   if Np == 1
     contRange = cell2mat (contRange);
-  end
+  endif
 
 endfunction
 

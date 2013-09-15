@@ -38,7 +38,7 @@ function y = filtfilt(b, a, x)
 
   if (nargin != 3)
     print_usage;
-  end
+  endif
   rotate = (size(x,1)==1);
   if rotate,                    # a row vector
     x = x(:);                   # make it a column vector
@@ -51,8 +51,8 @@ function y = filtfilt(b, a, x)
   la = length(a);
   n = max(lb, la);
   lrefl = 3 * (n - 1);
-  if la < n, a(n) = 0; end
-  if lb < n, b(n) = 0; end
+  if la < n, a(n) = 0; endif
+  if lb < n, b(n) = 0; endif
 
   ## Compute a the initial state taking inspiration from
   ## Likhterov & Kopeika, 2003. "Hardware-efficient technique for
@@ -62,7 +62,7 @@ function y = filtfilt(b, a, x)
     si = fliplr(cumsum(fliplr(b - kdc * a)));
   else
     si = zeros(size(a)); # fall back to zero initialization
-  end
+  endif
   si(1) = [];
 
   for (c = 1:size(x,2)) # filter all columns, one by one

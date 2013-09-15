@@ -40,12 +40,12 @@ function f=hilbert(f, N = [], dim = [])
 
   if (nargin<1 || nargin>3)
     print_usage;
-  end
+  endif
 
   if ~isreal(f)
     warning ('HILBERT: ignoring imaginary part of signal');
     f = real (f);
-  end
+  endif
 
   D=ndims(f);
 
@@ -58,26 +58,26 @@ function f=hilbert(f, N = [], dim = [])
     if sum(size(f)>1)==1
       % We have a vector, find the dimension where it lives.
       dim=find(size(f)>1);
-    end
+    endif
 
   else
     if (numel(dim)~=1 || ~isnumeric(dim))
       error('HILBERT: dim must be a scalar.');
-    end
+    endif
     if rem(dim,1)~=0
       error('HILBERT: dim must be an integer.');
-    end
+    endif
     if (dim<1) || (dim>D)
       error('HILBERT: dim must be in the range from 1 to %d.',D);
-    end
+    endif
 
-  end
+  endif
 
   if (numel(N)>1 || ~isnumeric(N))
     error('N must be a scalar.');
   elseif (~isempty(N) && rem(N,1)~=0)
     error('N must be an integer.');
-  end
+  endif
 
   if dim>1
     order=[dim, 1:dim-1,dim+1:D];
@@ -85,14 +85,14 @@ function f=hilbert(f, N = [], dim = [])
     % Put the desired dimension first.
     f=permute(f,order);
 
-  end
+  endif
 
   Ls=size(f,1);
 
   % If N is empty it is set to be the length of the transform.
   if isempty(N)
     N=Ls;
-  end
+  endif
 
   % Remember the exact size for later and modify it for the new length
   permutedsize=size(f);
@@ -104,7 +104,7 @@ function f=hilbert(f, N = [], dim = [])
 
   if ~isempty(N)
     f=postpad(f,N);
-  end
+  endif
 
   % ------- actual computation -----------------
   if N>2
@@ -119,10 +119,10 @@ function f=hilbert(f, N = [], dim = [])
       f=[f(1,:);
          2*f(2:(N+1)/2,:);
          zeros((N-1)/2,W)];
-    end
+    endif
 
     f=ifft(f);
-  end
+  endif
 
   % ------- POST: Restoration of dimensions ------------
 
@@ -132,7 +132,7 @@ function f=hilbert(f, N = [], dim = [])
   if dim>1
     % Undo the permutation.
     f=ipermute(f,order);
-  end
+  endif
 
 endfunction
 

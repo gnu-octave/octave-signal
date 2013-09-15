@@ -28,13 +28,13 @@ function [H] = freqs(B,A,W)
 
   if (nargin ~= 3 || nargout>1)
     print_usage;
-  end
+  endif
 
   H = polyval(B,j*W)./polyval(A,j*W);
 
   if nargout<1
     freqs_plot(W,H);
-  end
+  endif
 
 endfunction
 

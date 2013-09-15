@@ -51,11 +51,11 @@ function [B, A, SigN] = invfreqz(H, F, nB, nA, W, iter, tol, tr, varargin)
           iter = [];
           if nargin < 5
             W = ones(1,length(F));
-          end
-        end
-      end
-    end
-  end
+          endif
+        endif
+      endif
+    endif
+  endif
 
 
   % now for the real work

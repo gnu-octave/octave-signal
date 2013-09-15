@@ -41,7 +41,7 @@ function [n, Wc] = cheb1ord(Wp, Ws, Rp, Rs)
   elseif length(Wp) == 2 && ...
           (all(Wp>Ws) || all(Ws>Wp) || diff(Wp)<=0 || diff(Ws)<=0)
     error("cheb1ord: Wp(1)<Ws(1)<Ws(2)<Wp(2) or Ws(1)<Wp(1)<Wp(2)<Ws(2)");
-  end
+  endif
 
   T = 2;
 

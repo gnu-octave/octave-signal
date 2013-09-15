@@ -20,7 +20,7 @@
 
 function [psi,x] = mexihat(lb,ub,n)
 
-  if (nargin < 3); print_usage; end
+  if (nargin < 3); print_usage; endif
 
   if (n <= 0)
     error("n must be strictly positive");

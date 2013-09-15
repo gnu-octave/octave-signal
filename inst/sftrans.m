@@ -88,14 +88,14 @@ function [Sz, Sp, Sg] = sftrans(Sz, Sp, Sg, W, stop)
 
   if (nargin != 5)
     print_usage;
-  end
+  endif
 
   C = 1;
   p = length(Sp);
   z = length(Sz);
   if z > p || p == 0
     error("sftrans: must have at least as many poles as zeros in s-plane");
-  end
+  endif
 
   if length(W)==2
     Fl = W(1);
@@ -124,8 +124,8 @@ function [Sz, Sp, Sg] = sftrans(Sz, Sp, Sg, W, stop)
         Sz = [b+sqrt(b.^2-Fh*Fl), b-sqrt(b.^2-Fh*Fl)];
         if (p > z)
           Sz = [Sz, extend(1+rem([1:2*(p-z)],2))];
-        end
-      end
+        endif
+      endif
     else
 ## ----------------  -------------------------  ------------------------
 ## Band Pass         zero: b ± sqrt(b^2-FhFl)   pole: b ± sqrt(b^2-FhFl)
@@ -143,9 +143,9 @@ function [Sz, Sp, Sg] = sftrans(Sz, Sp, Sg, W, stop)
         Sz = [b+sqrt(b.^2-Fh*Fl), b-sqrt(b.^2-Fh*Fl)];
         if (p>z)
           Sz = [Sz, zeros(1, (p-z))];
-        end
-      end
-    end
+        endif
+      endif
+    endif
   else
     Fc = W;
     if stop
@@ -168,8 +168,8 @@ function [Sz, Sp, Sg] = sftrans(Sz, Sp, Sg, W, stop)
         Sz = [C * Fc ./ Sz];
         if (p > z)
           Sz = [Sz, zeros(1,p-z)];
-        end
-      end
+        endif
+      endif
     else
 ## ----------------  -------------------------  ------------------------
 ## Low Pass          zero: Fc x/C               pole: Fc x/C
@@ -178,7 +178,7 @@ function [Sz, Sp, Sg] = sftrans(Sz, Sp, Sg, W, stop)
       Sg = Sg * (C/Fc)^(z-p);
       Sp = Fc * Sp / C;
       Sz = Fc * Sz / C;
-    end
-  end
+    endif
+  endif
 
 endfunction

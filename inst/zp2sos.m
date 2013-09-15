@@ -65,8 +65,8 @@
 
 function [sos,g] = zp2sos(z,p,g)
 
-  if nargin<3, g=1; end
-  if nargin<2, p=[]; end
+  if nargin<3, g=1; endif
+  if nargin<2, p=[]; endif
 
   [zc,zr] = cplxreal(z);
   [pc,pr] = cplxreal(p);
@@ -81,23 +81,23 @@ function [sos,g] = zp2sos(z,p,g)
 
   % Pair up real zeros:
   if nzr
-    if mod(nzr,2)==1, zr=[zr;0]; nzr=nzr+1; end
+    if mod(nzr,2)==1, zr=[zr;0]; nzr=nzr+1; endif
     nzrsec = nzr/2;
     zrms = -zr(1:2:nzr-1)-zr(2:2:nzr);
     zrp = zr(1:2:nzr-1).*zr(2:2:nzr);
   else
     nzrsec = 0;
-  end
+  endif
 
   % Pair up real poles:
   if npr
-    if mod(npr,2)==1, pr=[pr;0]; npr=npr+1; end
+    if mod(npr,2)==1, pr=[pr;0]; npr=npr+1; endif
     nprsec = npr/2;
     prms = -pr(1:2:npr-1)-pr(2:2:npr);
     prp = pr(1:2:npr-1).*pr(2:2:npr);
   else
     nprsec = 0;
-  end
+  endif
 
   nsecs = max(nzc+nzrsec,npc+nprsec);
 
@@ -120,16 +120,16 @@ function [sos,g] = zp2sos(z,p,g)
       sos(i,2:3) = [zcm2r(i) zca2(i)];
     elseif i<=nzrl % lay down a pair of real zeros:
       sos(i,2:3) = [zrms(i-nzc) zrp(i-nzc)];
-    end
+    endif
 
     if i<=npc % lay down a complex pole pair:
       sos(i,5:6) = [pcm2r(i) pca2(i)];
     elseif i<=nprl % lay down a pair of real poles:
       sos(i,5:6) = [prms(i-npc) prp(i-npc)];
-    end
-  end
+    endif
+  endfor
 
-end
+endfunction
 
 %!test
 %! B=[1 0 0 0 0 1]; A=[1 0 0 0 0 .9];

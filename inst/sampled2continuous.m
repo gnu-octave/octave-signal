@@ -42,4 +42,4 @@ function xt = sampled2continuous( xn , T, t )
   xt = S*xn;
   return
 
-end
+endfunction

@@ -56,7 +56,7 @@ function [fhandle fullfname] = data2fun( t, y, varargin)
     [tf idx] = ismember( opt_args, varargin);
     for i=1:numel(opt_args)
         given.(opt_args{i}) = tf(i);
-    end
+    endfor
 
     if given.file
       %% TODO: check that file will be in the path. Otherwise fhabdle(0) fails.
@@ -69,17 +69,17 @@ function [fhandle fullfname] = data2fun( t, y, varargin)
 
         [DIR fname] = fileparts (tmpnam (pwd (),"agen_"));
 
-      end
+      endif
 
       interp_args(idx(1)+[0 1]) = [];
-    end
+    endif
 
     if isempty(interp_args)
 
       interp_args = {"spline"};
 
-    end
-  end
+    endif
+  endif
 
   pp = interp1 (t, y, interp_args{end}, 'pp');
 
@@ -106,7 +106,7 @@ function [fhandle fullfname] = data2fun( t, y, varargin)
     fullfname = "";
     fhandle = @(t_) ppval (pp, t_);
 
-  end
+  endif
 
 endfunction
 
@@ -124,7 +124,7 @@ function str = generate_function_str(name, oargs, iargs, bodystr)
   else
     str = ["function " name "(" striargs ")\n\n" bodystr ...
            "\n\nendfunction"];
-  end
+  endif
 
 endfunction
 

@@ -64,11 +64,11 @@ function [z,p,g] = sos2zp (sos, Bscale = 1)
 
   gains = sos(:,1); % All b0 coeffs
   g = prod(gains)*Bscale; % pole-zero gain
-  if g==0, error('sos2zp: one or more section gains is zero'); end
+  if g==0, error('sos2zp: one or more section gains is zero'); endif
   sos(:,1:3) = sos(:,1:3)./ [gains gains gains];
 
   [N,m] = size(sos);
-  if m~=6, error('sos2zp: sos matrix should be N by 6'); end
+  if m~=6, error('sos2zp: sos matrix should be N by 6'); endif
 
   z = zeros(2*N,1);
   p = zeros(2*N,1);
@@ -78,9 +78,9 @@ function [z,p,g] = sos2zp (sos, Bscale = 1)
     z(ndx) = zi;
     pi = roots(sos(i,4:6));
     p(ndx) = pi;
-  end
+  endfor
 
-end
+endfunction
 
 %!test
 %! b1t=[1 2 3]; a1t=[1 .2 .3];

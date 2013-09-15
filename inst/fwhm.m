@@ -37,7 +37,7 @@ function myfwhm = fwhm (y, varargin)
 
   if nargin < 1 || nargin > 5
         print_usage;
-  end
+  endif
   opt = 'zero';
   is_alevel = 0;
   level = 0.5;
@@ -51,54 +51,54 @@ function myfwhm = fwhm (y, varargin)
       x = y;
       y = varargin{1};
       k = 2;
-    end
+    endif
     while k <= length(varargin)
       if strcmp(varargin{k}, 'alevel')
         is_alevel = 1;
         k = k+1;
         if k > length(varargin)
           error('option "alevel" requires an argument');
-        end
+        endif
         level = varargin{k};
         if ~isreal(level) || length(level) > 1
           error('argument of "alevel" must be real number');
-        end
+        endif
         k = k+1;
         break
-      end
+      endif
       if any(strcmp(varargin{k}, {'zero', 'min'}))
         opt = varargin{k};
         k = k+1;
-      end
-      if k > length(varargin) break; end
+      endif
+      if k > length(varargin) break; endif
       if strcmp(varargin{k}, 'rlevel')
         k = k+1;
         if k > length(varargin)
           error('option "rlevel" requires an argument');
-        end
+        endif
         level = varargin{k};
         if ~isreal(level) || length(level) > 1 || level(1) < 0 || level(:) > 1
           error('argument of "rlevel" must be real number from 0 to 1 (it is 0.5 for fwhm)');
-        end
+        endif
         k = k+1;
         break
-      end
+      endif
       break
-    end
+    endwhile
     if k ~= length(varargin)+1
       error('fwhm: extraneous option(s)');
-    end
-  end
+    endif
+  endif
 
   % test the y matrix
   [nr, nc] = size(y);
   if (nr == 1 && nc > 1)
     y = y'; nr = nc; nc = 1;
-  end
+  endif
 
   if length(x) ~= nr
     error('dimension of input arguments do not match');
-  end
+  endif
 
   % Shift matrix columns so that y(+-xfwhm) = 0:
   if is_alevel
@@ -111,8 +111,8 @@ function myfwhm = fwhm (y, varargin)
     else
       % case: full-width above background
       y = y - level * repmat((max(y) + min(y)), nr, 1);
-    end
-  end
+    endif
+  endif
 
   % Trial for a "vectorizing" calculation of fwhm (i.e. all
   % columns in one shot):
@@ -127,7 +127,7 @@ function myfwhm = fwhm (y, varargin)
     ind = find((yy(1:end-1) .* yy(2:end)) <= 0);
     if length(ind) >= 2 && yy(ind(1)) > 0 % must start ascending
       ind = ind(2:end);
-    end
+    endif
     [mx, imax] = max(yy); % protection against constant or (almost) monotonous functions
     if length(ind) >= 2 && imax >= ind(1) && imax <= ind(end)
       ind1 = ind(1);
@@ -137,10 +137,10 @@ function myfwhm = fwhm (y, varargin)
       ind2 = ind1 + 1;
       xx2 = x(ind1) - yy(ind1) * (x(ind2) - x(ind1)) / (yy(ind2) - yy(ind1));
       myfwhm(n) = xx2 - xx1;
-    end
-  end
+    endif
+  endfor
 
-end
+endfunction
 
 %!test
 %! x=-pi:0.001:pi; y=cos(x);

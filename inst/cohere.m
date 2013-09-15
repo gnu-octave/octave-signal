@@ -28,7 +28,7 @@ function [varargout] = cohere(varargin)
 %%
   if ( nargin<2 )
     error( 'cohere: Need at least 2 args. Use help cohere.' );
-  end
+  endif
   nvarargin = length(varargin);
   %% remove any pwelch RESULT args and add 'trans'
   for iarg=1:nvarargin
@@ -37,8 +37,8 @@ function [varargout] = cohere(varargin)
            strcmp(arg,'cross') || strcmp(arg,'trans') || ...
            strcmp(arg,'coher') || strcmp(arg,'ypower') ))
       varargin{iarg} = [];
-    end
-  end
+    endif
+  endfor
   varargin{nvarargin+1} = 'coher';
   %%
   saved_compatib = pwelch('R11-');
@@ -51,8 +51,8 @@ function [varargout] = cohere(varargin)
     [Pxx,f] = pwelch(varargin{:});
     varargout{1} = Pxx;
     varargout{2} = f;
-  end
+  endif
   pwelch(saved_compatib);
   saved_compatib = 0;
 
-end
+endfunction

@@ -26,7 +26,7 @@ function x = gausswin(L, w)
 
   if nargin < 1 || nargin > 2
     print_usage;
-  end
+  endif
   if nargin == 1, w = 2.5; endif
   x = exp ( -0.5 * ( w/L * [ -(L-1) : 2 : L-1 ]' ) .^ 2 );
 

@@ -34,7 +34,7 @@ function [y, ym] = rceps(x)
 
   if (nargin != 1)
     print_usage;
-  end
+  endif
   f = abs(fft(x));
   if (any (f == 0))
     error ("rceps: the spectrum of x contains zeros, unable to compute real cepstrum");

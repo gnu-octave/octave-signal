@@ -44,20 +44,20 @@ function envelope = sigmoid_train (t, range, timeconstant)
     %% All bumps have different time constant but are symmetric
     if length(timeconstant) ~= nRanges
       error('signalError','Length of time constant must equal number of ranges.')
-    end
+    endif
     if isrow (timeconstant)
       timeconstant = timeconstant';
-    end
+    endif
     timeconstant = repmat (timeconstant,1,2);
 
-  end
+  endif
 
   %% Make sure t is horizontal
   flag_transposed = false;
   if iscolumn (t)
     t               = t.';
     flag_transposed = true;
-  end
+  endif
   [ncol nrow]     = size (t);
 
   % Compute arguments of each sigmoid
@@ -73,9 +73,9 @@ function envelope = sigmoid_train (t, range, timeconstant)
 
   if flag_transposed
     envelope = envelope.';
-  end
+  endif
 
-end
+endfunction
 
 %!demo
 %! % Vectorized
@@ -88,7 +88,7 @@ end
 %! for i=1:3
 %!     patch ([range(i,[2 2]) range(i,[1 1])], [0 1 1 0],...
 %!               'facecolor', [1 0.8 0.8],'edgecolor','none');
-%! end
+%! endfor
 %! hold on; plot (t, y, 'b;Sigmoid train;','linewidth',2); hold off
 %! xlabel('time'); ylabel('S(t)')
 %! title ('Vectorized use of sigmoid train')
@@ -109,7 +109,7 @@ end
 %! for i=1:2
 %!     patch ([ran(i,[2 2]) ran(i,[1 1])], [0 1 1 0],...
 %!               'facecolor', [1 0.8 0.8],'edgecolor','none');
-%! end
+%! endfor
 %! hold on; plot (t, y(:,2), 'b;Speed;','linewidth',2); hold off
 %! xlabel('time'); ylabel('V(t)')
 %! title ('On demand use of sigmoid train')

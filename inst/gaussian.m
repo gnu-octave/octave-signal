@@ -31,7 +31,7 @@ function x = gaussian(n, w)
 
   if nargin < 1 || nargin > 2
     print_usage;
-  end
+  endif
   if nargin == 1, w = 1; endif
   x = exp(-0.5*(([0:n-1]'-(n-1)/2)*w).^2);
 

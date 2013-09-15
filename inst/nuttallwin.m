@@ -21,16 +21,16 @@
 
 function [w] = nuttallwin(L)
 
-  if (nargin != 1); print_usage; end
+  if (nargin != 1); print_usage; endif
 
   if(L < 0)
     error('L must be positive');
-  end
+  endif
 
   if(L ~= floor(L))
     L = round(L);
     warning('L rounded to the nearest integer.');
-  end
+  endif
 
   if (L == 1)
     w = 1;

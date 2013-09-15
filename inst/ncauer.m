@@ -49,10 +49,10 @@ function [zer, pol, T0]=ncauer(Rp, Rs, n)
   sig01=0; sig02=0;
   for m=0 : 30
     sig01=sig01+(-1)^m * q^(m*(m+1)) * sinh((2*m+1)*l);
-  end
+  endfor
   for m=1 : 30
     sig02=sig02+(-1)^m * q^(m^2) * cosh(2*m*l);
-  end
+  endfor
   sig0=abs((2*q^(1/4)*sig01)/(1+2*sig02));
 
   w=sqrt((1+k*sig0^2)*(1+sig0^2/k));
@@ -61,7 +61,7 @@ function [zer, pol, T0]=ncauer(Rp, Rs, n)
     r=(n-1)/2;
   else
     r=n/2;
-  end
+  endif
   #
   wi=zeros(1,r);
   for ii=1 : r
@@ -69,17 +69,17 @@ function [zer, pol, T0]=ncauer(Rp, Rs, n)
       mu=ii;
     else
       mu=ii-1/2;
-    end
+    endif
     soma1=0;
     for m=0 : 30
       soma1 = soma1 + 2*q^(1/4) * ((-1)^m * q^(m*(m+1)) * sin(((2*m+1)*pi*mu)/n));
-    end
+    endfor
     soma2=0;
     for m=1 : 30
       soma2 = soma2 + 2*((-1)^m * q^(m^2) * cos((2*m*pi*mu)/n));
-    end
+    endfor
     wi(ii)=(soma1/(1+soma2));
-  end
+  endfor
   #
   Vi=sqrt((1-(k.*(wi.^2))).*(1-(wi.^2)/k));
   A0i=1./(wi.^2);
@@ -92,7 +92,7 @@ function [zer, pol, T0]=ncauer(Rp, Rs, n)
     T0=sig0*prod(B0i./A0i)*sqrt(ws);
   else
     T0=10^(-0.05*Rp)*prod(B0i./A0i);
-  end
+  endif
 
   ##zeros:
   zer=[i*sqrA0i, -i*sqrA0i];
@@ -103,7 +103,7 @@ function [zer, pol, T0]=ncauer(Rp, Rs, n)
   ##If n odd, there is a real pole  -sig0:
   if rem(n,2)
     pol=[pol, -sig0];
-  end
+  endif
 
   ##
   pol=(sqrt(ws)).*pol;

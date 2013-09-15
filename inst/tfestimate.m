@@ -26,7 +26,7 @@ function [varargout] = tfestimate(varargin)
   %% Check fixed argument
   if (nargin < 2 || nargin > 7)
     print_usage ();
-  end
+  endif
   nvarargin = length(varargin);
   %% remove any pwelch RESULT args and add 'cross'
   for iarg=1:nvarargin
@@ -35,8 +35,8 @@ function [varargout] = tfestimate(varargin)
            strcmp(arg,'cross') || strcmp(arg,'trans') || ...
            strcmp(arg,'coher') || strcmp(arg,'ypower') ))
       varargin{iarg} = [];
-    end
-  end
+    endif
+  endfor
   varargin{nvarargin+1} = 'trans';
   %%
   if ( nargout==0 )
@@ -48,6 +48,6 @@ function [varargout] = tfestimate(varargin)
     [Pxx,f] = pwelch(varargin{:});
     varargout{1} = Pxx;
     varargout{2} = f;
-  end
+  endif
 
-end
+endfunction

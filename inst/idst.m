@@ -19,8 +19,8 @@ function x = idst (y, n)
 
   if nargin == 1,
     n = size(y,1);
-    if n==1, n = size(y,2); end
-  end
+    if n==1, n = size(y,2); endif
+  endif
   x = dst(y, n) * 2/(n+1);
 
 endfunction

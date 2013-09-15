@@ -41,7 +41,7 @@ function m = fht( d, n, dim )
 
   if ( nargin < 1 )
     print_usage();
-  end
+  endif
 
   if ( nargin == 3 )
     Y = fft(d,n,dim);
@@ -49,7 +49,7 @@ function m = fht( d, n, dim )
     Y = fft(d,n);
   else
     Y = fft(d);
-  end
+  endif
 
   m = real(Y) - imag(Y);
 
@@ -61,9 +61,9 @@ function m = fht( d, n, dim )
 #     ker = (cos(t) + sin(t));
 #     val = dot(d,ker);
 #     m(K) = val;
-#   end
+#   endfor
 
-end
+endfunction
 
 %!
 %!assert( fht([1 2 3 4]),[10 -4 -2 0] )

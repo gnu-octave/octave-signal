@@ -43,7 +43,7 @@
 
 function [zc,zr] = cplxreal (z, thresh = 100*eps)
 
-  % interesting for testing: if nargin<2, thresh=1E-3; end
+  % interesting for testing: if nargin<2, thresh=1E-3; endif
 
   if isempty(z)
     zc=[];
@@ -57,15 +57,15 @@ function [zc,zr] = cplxreal (z, thresh = 100*eps)
       zcp(i) = real(zcp(i));
       nzrsec = nzrsec+1;
       i=i-1;
-    end
+    endwhile
     nzsect2 = nz-nzrsec;
     if mod(nzsect2,2)~=0
       error('cplxreal: Odd number of complex values!');
-    end
+    endif
     nzsec = nzsect2/2;
     zc = zcp(2:2:nzsect2);
     zr = zcp(nzsect2+1:nz);
-  end
+  endif
 
 endfunction
 

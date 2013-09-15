@@ -114,11 +114,11 @@ function [S_r, f_r, t_r] = specgram(x, n = min(256, length(x)), Fs = 2, window =
   ## make sure x is a vector
   elseif columns(x) != 1 && rows(x) != 1
     error ("specgram data must be a vector");
-  end
-  if columns(x) != 1, x = x'; end
+  endif
+  if columns(x) != 1, x = x'; endif
 
   ## if only the window length is given, generate hanning window
-  if length(window) == 1, window = hanning(window); end
+  if length(window) == 1, window = hanning(window); endif
 
   ## should be extended to accept a vector of frequencies at which to
   ## evaluate the fourier transform (via filterbank or chirp
@@ -132,7 +132,7 @@ function [S_r, f_r, t_r] = specgram(x, n = min(256, length(x)), Fs = 2, window =
   if (win_size > n)
     n = win_size;
     warning ("specgram fft size adjusted to %d", n);
-  end
+  endif
   step = win_size - overlap;
 
   ## build matrix of windowed data slices
@@ -150,7 +150,7 @@ function [S_r, f_r, t_r] = specgram(x, n = min(256, length(x)), Fs = 2, window =
     ret_n = (n+1)/2;
   else
     ret_n = n/2;
-  end
+  endif
   S = S(1:ret_n, :);
 
   f = [0:ret_n-1]*Fs/n;

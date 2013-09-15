@@ -87,7 +87,7 @@ function [gd,w] = grpdelay(b,a=1,nfft=512,whole,Fs)
 
   if (nargin<1 || nargin>5)
     print_usage;
-  end
+  endif
   HzFlag=0;
   if length(nfft)>1
     if nargin>4
@@ -97,7 +97,7 @@ function [gd,w] = grpdelay(b,a=1,nfft=512,whole,Fs)
       HzFlag=1;
     else % grpdelay(B,A,W)
       Fs = 1;
-    end
+    endif
     w = 2*pi*nfft/Fs;
     nfft = length(w)*2;
     whole = '';
@@ -109,24 +109,24 @@ function [gd,w] = grpdelay(b,a=1,nfft=512,whole,Fs)
         Fs = whole;
         HzFlag=1;
         whole = '';
-      end
-      if nargin<3, nfft=512; end
-      if nargin<2, a=1; end
+      endif
+      if nargin<3, nfft=512; endif
+      if nargin<2, a=1; endif
     else
       HzFlag=1;
-    end
+    endif
 
-    if isempty(nfft), nfft = 512; end
-    if ~strcmp(whole,'whole'), nfft = 2*nfft; end
+    if isempty(nfft), nfft = 512; endif
+    if ~strcmp(whole,'whole'), nfft = 2*nfft; endif
     w = Fs*[0:nfft-1]/nfft;
-  end
+  endif
 
-  if ~HzFlag, w = w * 2*pi; end
+  if ~HzFlag, w = w * 2*pi; endif
 
   oa = length(a)-1;             % order of a(z)
-  if oa<0, a=1; oa=0; end       % a can be []
+  if oa<0, a=1; oa=0; endif     % a can be []
   ob = length(b)-1;             % order of b(z)
-  if ob<0, b=1; ob=0; end       % b can be [] as well
+  if ob<0, b=1; ob=0; endif     % b can be [] as well
   oc = oa + ob;                 % order of c(z)
 
   c = conv(b,fliplr(conj(a)));  % c(z) = b(z)*conj(a)(1/z)*z^(-oa)
@@ -143,7 +143,7 @@ function [gd,w] = grpdelay(b,a=1,nfft=512,whole,Fs)
     % db = den(b);
     % den(b) = minmag*abs(num(b))*exp(j*atan2(imag(db),real(db)));
     % warning(sprintf('grpdelay: den(b) changed from %f to %f',db,den(b)));
-  end
+  endfor
   gd = real(num ./ den) - oa;
 
   if strcmp(whole,'whole')==0
@@ -152,7 +152,7 @@ function [gd,w] = grpdelay(b,a=1,nfft=512,whole,Fs)
     w = w(1:ns);
   else
     ns = nfft; % used in plot below
-  end
+  endif
 
   % compatibility
   gd = gd(:); w = w(:);
@@ -164,16 +164,16 @@ function [gd,w] = grpdelay(b,a=1,nfft=512,whole,Fs)
         funits = 'Hz';
       else
         funits = 'radian/sample';
-      end
+      endif
       xlabel(['Frequency (', funits, ')']);
       ylabel('Group delay (samples)');
       plot(w(1:ns), gd(1:ns), ';;');
     unwind_protect_cleanup
       grid('on');
     end_unwind_protect
-  end
+  endif
 
-end
+endfunction
 
 % ------------------------ DEMOS -----------------------
 

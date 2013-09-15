@@ -95,7 +95,7 @@ function [psd,f_out]=pburg(x,poles,varargin)
   %%
   if ( nargin<2 )
     error( 'pburg: need at least 2 args. Use "help pburg"' );
-  end
+  endif
   nvarargin=length(varargin);
   criterion=[];
   %%
@@ -111,9 +111,9 @@ function [psd,f_out]=pburg(x,poles,varargin)
         varargin{iarg}= [];
       else
         varargin={};
-        end
-      end
-    end
+      endif
+    endif
+  endfor
   %%
   [ar_coeffs,residual]=arburg(x,poles,criterion);
   if ( nargout==0 )
@@ -122,9 +122,9 @@ function [psd,f_out]=pburg(x,poles,varargin)
     psd = ar_psd(ar_coeffs,residual,varargin{:});
   elseif ( nargout>=2 )
     [psd,f_out] = ar_psd(ar_coeffs,residual,varargin{:});
-  end
+  endif
 
-end
+endfunction
 
 %!demo
 %! fflush(stdout);

@@ -41,7 +41,7 @@ function y = tripuls (t, w = 1, skew = 0)
   peak = skew*w/2;
   try wfi = warning("off", "Octave:fortran-indexing");
   catch wfi = 0;
-  end
+  end_try_catch
   unwind_protect
     idx = find(t>=-w/2 & t <= peak);
     if (idx) y(idx) = ( t(idx) + w/2 ) / ( peak + w/2 ); endif

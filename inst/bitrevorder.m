@@ -25,7 +25,7 @@ function [y i] = bitrevorder(x)
     print_usage;
   elseif(log2(length(x)) ~= floor(log2(length(x))))
     error('x must have a length equal to a power of 2');
-  end
+  endif
 
   old_ind = 0:length(x)-1;
   new_ind = bi2de(fliplr(de2bi(old_ind)));

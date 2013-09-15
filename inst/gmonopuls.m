@@ -20,8 +20,8 @@
 
 function [y] = gmonopuls(t, fc = 1e3)
 
-  if (nargin<1 || nargin > 2), print_usage; end
-  if fc < 0 , error("fc must be positive"); end
+  if (nargin<1 || nargin > 2), print_usage; endif
+  if fc < 0 , error("fc must be positive"); endif
   y = 2*sqrt(exp(1)) .* pi.*t.*fc.*exp(-2 .* (pi.*t.*fc).^2);
 
 endfunction

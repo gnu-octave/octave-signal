@@ -37,7 +37,7 @@ function y = rectpuls(t, w = 1)
   idx = find(t>=-w/2 & t < w/2);
   try wfi = warning("off", "Octave:fortran-indexing");
   catch wfi = 0;
-  end
+  end_try_catch
   unwind_protect
     y(idx) = ones(size(idx));
   unwind_protect_cleanup

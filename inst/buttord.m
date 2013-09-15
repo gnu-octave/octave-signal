@@ -47,11 +47,11 @@ function [n, Wc] = buttord(Wp, Ws, Rp, Rs)
     error("buttord: Wp,Ws must have length 1 or 2");
   elseif length(Wp) == 2 && (all(Wp>Ws) || all(Ws>Wp) || diff(Wp)<=0 || diff(Ws)<=0)
     error("buttord: Wp(1)<Ws(1)<Ws(2)<Wp(2) or Ws(1)<Wp(1)<Wp(2)<Ws(2)");
-  end
+  endif
 
   if length(Wp) == 2
     warning("buttord: seems to overdesign bandpass and bandreject filters");
-  end
+  endif
 
   T = 2;
 

@@ -26,7 +26,7 @@ function [varargout] = csd(varargin)
   %% Check fixed argument
   if ( nargin<2 )
     error( 'csd: Need at least 2 args. Use help csd.' );
-  end
+  endif
   nvarargin = length(varargin);
   %% remove any pwelch RESULT args and add 'cross'
   for iarg=1:nvarargin
@@ -35,8 +35,8 @@ function [varargout] = csd(varargin)
            strcmp(arg,'cross') || strcmp(arg,'trans') || ...
            strcmp(arg,'coher') || strcmp(arg,'ypower') ))
       varargin{iarg} = [];
-    end
-  end
+    endif
+  endfor
   varargin{nvarargin+1} = 'cross';
   %%
   saved_compatib = pwelch('R11-');
@@ -49,7 +49,7 @@ function [varargout] = csd(varargin)
     [Pxx,f] = pwelch(varargin{:});
     varargout{1} = Pxx;
     varargout{2} = f;
-  end
+  endif
   pwelch(saved_compatib);
 
-end
+endfunction

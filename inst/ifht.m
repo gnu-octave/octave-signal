@@ -41,7 +41,7 @@ function m = ifht( d, n, dim )
 
   if ( nargin < 1 )
     print_usage();
-  end
+  endif
 
   if ( nargin == 3 )
     Y = ifft(d,n,dim);
@@ -49,7 +49,7 @@ function m = ifht( d, n, dim )
     Y = ifft(d,n);
   else
     Y = ifft(d);
-  end
+  endif
 
   m = real(Y) + imag(Y);
 
@@ -61,8 +61,8 @@ function m = ifht( d, n, dim )
 #     ker = (cos(t) + sin(t));
 #     val = dot(d,ker)./N;
 #     m(K) = val;
-#   end
+#   endfor
 
-end
+endfunction
 
 %!assert(ifht(fht(1:4)),[1 2 3 4])

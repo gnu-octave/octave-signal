@@ -67,15 +67,15 @@ function b = fir1(n, w, varargin)
   ## sort arglist, normalize any string
   for i=1:length(varargin)
     arg = varargin{i};
-    if ischar(arg), arg=lower(arg);end
-    if isempty(arg) continue; end  # octave bug---can't switch on []
+    if ischar(arg), arg=lower(arg);endif
+    if isempty(arg) continue; endif  # octave bug---can't switch on []
     switch arg
       case {'low','stop','dc-1'},             ftype  = 1;
       case {'high','pass','bandpass','dc-0'}, ftype  = 0;
       case {'scale'},                         scale  = 1;
       case {'noscale'},                       scale  = 0;
       otherwise                               window = arg;
-    end
+    endswitch
   endfor
 
   ## build response function according to fir2 requirements

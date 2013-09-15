@@ -113,7 +113,7 @@ function [pks idx varargout] = findpeaks (data, varargin)
   elseif min(data)<0
     error ("findpeaks:InvalidArgument",
            'Data contains negative values. You may want to "DoubleSided" option');
-  end
+  endif
 
   % Rough estimates of first and second derivative
   df1 = diff (data,1)([1; (1:end)']);
@@ -167,11 +167,11 @@ function [pks idx varargout] = findpeaks (data, varargin)
         %% debug
 ##        set(h(2),"xdata",idx_pruned,"ydata",data(idx_pruned))
 ##        pause
-      end
+      endif
 
     endwhile
     idx = idx_pruned;
-  end
+  endif
 
   % Estimate widths of peaks and filter for:
   % width smaller than given.
@@ -214,14 +214,14 @@ function [pks idx varargout] = findpeaks (data, varargin)
         extra.roots(struct_count,1:2)    = rz;
         extra.height(struct_count)   = H;
         extra.baseline(struct_count) = mean([H,minH]);
-      end
+      endif
 
       %% debug
 #      set(h(2),"xdata",idx_pruned,"ydata",data(idx_pruned))
 #      pause(0.2)
 
-    end
-  end
+    endfor
+  endif
   idx = idx_pruned;
 
   if dSided
