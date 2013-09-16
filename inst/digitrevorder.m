@@ -44,8 +44,9 @@ function [y, i] = digitrevorder (x, r)
   y(old_ind + 1) = x(i);
 
   if (columns (x) == 1)
-    i = i';
     y = y';
+  else
+    i = i';
   endif
 
 endfunction
