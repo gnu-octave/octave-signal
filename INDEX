@@ -87,6 +87,7 @@ Transforms
   dctmtx
   dct2
   dftmtx
+  digitrevorder
   dst
   dwt
   fht
