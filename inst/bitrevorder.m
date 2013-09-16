@@ -1,4 +1,5 @@
 ## Copyright (C) 2007 Sylvain Pelissier <sylvain.pelissier@gmail.com>
+## Copyright (C) 2013 Mike Miller
 ##
 ## This program is free software; you can redistribute it and/or modify it under
 ## the terms of the GNU General Public License as published by the Free Software
@@ -14,85 +15,35 @@
 ## this program; if not, see <http://www.gnu.org/licenses/>.
 
 ## -*- texinfo -*-
-## @deftypefn {Function File} {[@var{y} @var{i}] =} bitrevorder(@var{x})
-## Reorder x in the bit reversed order
-## @seealso{fft,ifft}
+## @deftypefn  {Function File} {@var{y} =} bitrevorder (@var{x})
+## @deftypefnx {Function File} {[@var{y} @var{i}] =} bitrevorder (@var{x})
+## Reorder the elements of the vector @var{x} in bit-reversed order.
+## Equivalent to calling @code{digitrevorder (@var{x}, 2)}.
+## @seealso{digitrevorder, fft, ifft}
 ## @end deftypefn
 
-function [y i] = bitrevorder(x)
+function [y, i] = bitrevorder (x)
 
-  if(nargin < 1 || nargin >1)
-    print_usage;
-  elseif(log2(length(x)) ~= floor(log2(length(x))))
-    error('x must have a length equal to a power of 2');
+  if (nargin != 1)
+    print_usage ();
+  elseif (! isvector (x))
+    error ("bitrevorder: X must be a vector");
+  elseif (fix (log2 (numel (x))) != log2 (numel (x)))
+    error ("bitrevorder: X must have length equal to an integer power of 2");
   endif
 
-  old_ind = 0:length(x)-1;
-  new_ind = bi2de(fliplr(de2bi(old_ind)));
-  i = new_ind + 1;
-
-  y(old_ind+1) = x(i);
+  [y, i] = digitrevorder (x, 2);
 
 endfunction
 
-## The following functions, de2bi and bi2de, are from the communications package.
-## However, the communications package is already dependent on the signal
-## package and to avoid circular dependencies their code was copied here. Anyway,
-## in the future bitrevorder should be rewritten as to not use this functions
-## at all (and pkg can be fixed to support circular dependencies on pkg load
-## as it already does for pkg install).
+%!assert (bitrevorder (0), 0);
+%!assert (bitrevorder (0:1), 0:1);
+%!assert (bitrevorder ([0:1]'), [0:1]');
+%!assert (bitrevorder (0:7), [0 4 2 6 1 5 3 7]);
+%!assert (bitrevorder (0:15), [0 8 4 12 2 10 6 14 1 9 5 13 3 11 7 15]);
 
-## note that aside copying the code from the communication package, their input
-## check was removed since in this context they were always being called with
-## nargin == 1
-
-function b = de2bi (d, n, p, f)
-
-  p = 2;
-  n = floor ( log (max (max (d), 1)) ./ log (p) ) + 1;
-  f = 'right-msb';
-
-  d = d(:);
-  if ( any (d < 0) || any (d != floor (d)) )
-    error ("de2bi: d must only contain non-negative integers");
-  endif
-
-  if (isempty (n))
-    n = floor ( log (max (max (d), 1)) ./ log (p) ) + 1;
-  endif
-
-  power = ones (length (d), 1) * (p .^ [0 : n-1] );
-  d = d * ones (1, n);
-  b = floor (rem (d, p*power) ./ power);
-
-  if (strcmp (f, 'left-msb'))
-    b = b(:,columns(b):-1:1);
-  elseif (!strcmp (f, 'right-msb'))
-    error ("de2bi: unrecognized flag");
-  endif
-
-endfunction
-
-
-function d = bi2de (b, p, f)
-
-  p = 2;
-  f = 'right-msb';
-
-  if ( any (b(:) < 0) || any (b(:) != floor (b(:))) || any (b(:) > p - 1) )
-    error ("bi2de: d must only contain integers in the range [0, p-1]");
-  endif
-
-  if (strcmp (f, 'left-msb'))
-    b = b(:,size(b,2):-1:1);
-  elseif (!strcmp (f, 'right-msb'))
-    error ("bi2de: unrecognized flag");
-  endif
-
-  if (length (b) == 0)
-    d = [];
-  else
-    d = b * ( p .^ [ 0 : (columns(b)-1) ]' );
-  endif
-
-endfunction
+%% Test input validation
+%!error bitrevorder ();
+%!error bitrevorder (1, 2);
+%!error bitrevorder ([]);
+%!error bitrevorder (0:2);
