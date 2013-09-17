@@ -6,8 +6,8 @@ signal-1.3.0   Release Date: XXXX-XX-XX   Release Manager: TBD
 
  ** The following functions are new:
 
-      digitrevorder
-      primitive
+      digitrevorder         test_signal
+      primitive             wconv
 
  ** The function `resample' was fixed to accept integer-type arguments.
  
