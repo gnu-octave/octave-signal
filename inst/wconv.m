@@ -47,17 +47,17 @@ function y = wconv (type, x, f, shape = "full")
     print_usage ();
   endif
 
-  switch (type)
-    case {1, "1", "1d", "1D"}
+  switch (type(1))
+    case {1, "1"}
       y = conv2 (x(:).', f(:).', shape);
       if (rows (x) > 1)
         y = y.';
       endif
-    case {2, "2", "2d", "2D"}
+    case {2, "2"}
       y = conv2 (x, f, shape);
-    case {"r", "row"}
+    case "r"
       y = conv2 (x, f(:).', shape);
-    case {"c", "col"}
+    case "c"
       y = conv2 (x.', f(:).', shape);
       y = y.';
     otherwise
