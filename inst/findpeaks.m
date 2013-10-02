@@ -121,7 +121,7 @@ function [pks idx varargout] = findpeaks (data, varargin)
 
   ## check for changes of sign of 1st derivative and negativity of 2nd
   ## derivative.
-  idx = find (df1.*[df1(2:end); 0]<0 & df2<0);
+  idx = find (df1.*[df1(2:end); 0]<0 & [df2(2:end); 0]<0);
 
   ## Get peaks that are beyond given height
   tf  = data(idx) > minH;
@@ -206,7 +206,7 @@ function [pks idx varargout] = findpeaks (data, varargin)
       width = abs (diff (rz));
       if width < minW || pp(1) > 0 || H < minH || data(idx(i)) < 0.99*H
         idx_pruned = setdiff (idx_pruned, idx(i));
-      elseif nargout >= 1
+      elseif nargout > 2
         struct_count++;
         extra.parabol(struct_count).x  = ind([1 end]);
         extra.parabol(struct_count).pp = pp;
@@ -221,8 +221,9 @@ function [pks idx varargout] = findpeaks (data, varargin)
 ##      pause(0.2)
 
     endfor
-  endif
   idx = idx_pruned;
+  endif
+
 
   if dSided
     pks = __data__(idx);
@@ -230,7 +231,7 @@ function [pks idx varargout] = findpeaks (data, varargin)
     pks = data(idx);
   endif
 
-  if nargout()>=1
+  if nargout()>2
     varargout{1} = extra;
   endif
 
