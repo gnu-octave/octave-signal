@@ -83,60 +83,84 @@
 ## For further details, see
 ## http://ccrma.stanford.edu/~jos/filters/Numerical_Computation_Group_Delay.html
 
-function [gd,w] = grpdelay(b,a=1,nfft=512,whole,Fs)
+function [gd, w] = grpdelay (b, a = 1, nfft = 512, whole, Fs)
 
-  if (nargin<1 || nargin>5)
-    print_usage;
+  if (nargin < 1 || nargin > 5)
+    print_usage ();
   endif
-  HzFlag=0;
-  if length(nfft)>1
-    if nargin>4
-      print_usage();
-    elseif nargin>3  # grpdelay(B,A,F,Fs)
-      Fs = whole;
-      HzFlag=1;
-    else # grpdelay(B,A,W)
+
+  HzFlag = false;
+  if (length (nfft) > 1)
+    if (nargin > 4)
+      print_usage ();
+    elseif (nargin > 3)
+      ## grpdelay (B, A, F, Fs)
+      Fs     = whole;
+      HzFlag = true;
+    else
+      ## grpdelay (B, A, W)
       Fs = 1;
     endif
-    w = 2*pi*nfft/Fs;
-    nfft = length(w)*2;
-    whole = '';
+    w     = 2*pi*nfft/Fs;
+    nfft  = length (w) * 2;
+    whole = "";
   else
-    if nargin<5
-      Fs=1; # return w in radians per sample
-      if nargin<4, whole='';
-      elseif ~ischar(whole)
-        Fs = whole;
-        HzFlag=1;
-        whole = '';
+    if (nargin < 5)
+      Fs = 1; # return w in radians per sample
+      if (nargin < 4)
+        whole = "";
+      elseif (! ischar (whole))
+        Fs      = whole;
+        HzFlag  = true;
+        whole   = "";
       endif
-      if nargin<3, nfft=512; endif
-      if nargin<2, a=1; endif
+      if (nargin < 3)
+        nfft = 512;
+      endif
+      if (nargin < 2)
+        a = 1;
+      endif
     else
-      HzFlag=1;
+      HzFlag = true;
     endif
 
-    if isempty(nfft), nfft = 512; endif
-    if ~strcmp(whole,'whole'), nfft = 2*nfft; endif
+    if (isempty (nfft))
+      nfft = 512;
+    endif
+    if (! strcmp (whole, "whole"))
+      nfft = 2*nfft;
+    endif
     w = Fs*[0:nfft-1]/nfft;
   endif
 
-  if ~HzFlag, w = w * 2*pi; endif
+  if (! HzFlag)
+    w = w * 2 * pi;
+  endif
 
-  oa = length(a)-1;             # order of a(z)
-  if oa<0, a=1; oa=0; endif     # a can be []
-  ob = length(b)-1;             # order of b(z)
-  if ob<0, b=1; ob=0; endif     # b can be [] as well
-  oc = oa + ob;                 # order of c(z)
+  ## Make sure both are row vector
+  a = a(:).';
+  b = b(:).';
 
-  c = conv(b,fliplr(conj(a)));  # c(z) = b(z)*conj(a)(1/z)*z^(-oa)
-  cr = c.*[0:oc];               # cr(z) = derivative of c wrt 1/z
-  num = fft(cr,nfft);
-  den = fft(c,nfft);
-  minmag = 10*eps;
-  polebins = find(abs(den)<minmag);
-  for b=polebins
-    warning('grpdelay: setting group delay to 0 at singularity');
+  oa = length (a) -1;     # order of a(z)
+  if (oa < 0)             # a can be []
+    a  = 1;
+    oa = 0;
+  endif
+  ob = length (b) -1;     # order of b(z)
+  if (ob < 0)             # b can be [] as well
+    b  = 1;
+    ob = 0;
+  endif
+  oc = oa + ob;           # order of c(z)
+
+  c   = conv (b, fliplr (conj (a)));  # c(z) = b(z)*conj(a)(1/z)*z^(-oa)
+  cr  = c.*(0:oc);                    # cr(z) = derivative of c wrt 1/z
+  num = fft (cr, nfft);
+  den = fft (c, nfft);
+  minmag    = 10*eps;
+  polebins  = find (abs (den) < minmag);
+  for b = polebins
+    warning ("grpdelay: setting group delay to 0 at singularity");
     num(b) = 0;
     den(b) = 1;
     ## try to preserve angle:
@@ -144,32 +168,33 @@ function [gd,w] = grpdelay(b,a=1,nfft=512,whole,Fs)
     ## den(b) = minmag*abs(num(b))*exp(j*atan2(imag(db),real(db)));
     ## warning(sprintf('grpdelay: den(b) changed from %f to %f',db,den(b)));
   endfor
-  gd = real(num ./ den) - oa;
+  gd = real (num ./ den) - oa;
 
-  if strcmp(whole,'whole')==0
+  if (! strcmp (whole, "whole"))
     ns = nfft/2; # Matlab convention ... should be nfft/2 + 1
     gd = gd(1:ns);
-    w = w(1:ns);
+    w  = w(1:ns);
   else
     ns = nfft; # used in plot below
   endif
 
   ## compatibility
-  gd = gd(:); w = w(:);
+  gd = gd(:);
+  w  = w(:);
 
-  if nargout==0
+  if (nargout == 0)
     unwind_protect
-      grid('on'); # grid() should return its previous state
-      if HzFlag
-        funits = 'Hz';
+      grid ("on"); # grid() should return its previous state
+      if (HzFlag)
+        funits = "Hz";
       else
-        funits = 'radian/sample';
+        funits = "radian/sample";
       endif
-      xlabel(['Frequency (', funits, ')']);
-      ylabel('Group delay (samples)');
-      plot(w(1:ns), gd(1:ns), ';;');
+      xlabel (["Frequency (" funits ")"]);
+      ylabel ("Group delay (samples)");
+      plot (w(1:ns), gd(1:ns), ";;");
     unwind_protect_cleanup
-      grid('on');
+      grid ("on");
     end_unwind_protect
   endif
 
@@ -320,3 +345,14 @@ endfunction
 %! [da, wa] = grpdelay(1, a, 512, 'whole');
 %! [db, wb] = grpdelay(b, 1, 512, 'whole');
 %! assert(dh,db+da,1e-5);
+
+## test for bug #39133 (do not fail for row or column vector)
+%!test
+%! DR= [1.00000 -0.00000 -3.37219 0.00000 ...
+%!      5.45710 -0.00000 -5.24394 0.00000 ...
+%!      3.12049 -0.00000 -1.08770 0.00000 0.17404];
+%! N = [-0.0139469 -0.0222376 0.0178631 0.0451737 ...
+%!       0.0013962 -0.0259712 0.0016338 0.0165189 ...
+%!       0.0115098 0.0095051 0.0043874];
+%! assert (nthargout (1:2, @grpdelay, N,  DR,  1024),
+%!         nthargout (1:2, @grpdelay, N', DR', 1024));
