@@ -153,6 +153,7 @@ Utility
   clustersegment
   findpeaks
   fracshift
+  interleave
   marcumq
   sampled2continuous
   schtrig
