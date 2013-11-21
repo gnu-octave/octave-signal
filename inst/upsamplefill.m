@@ -16,9 +16,9 @@
 ## Author: Juan Pablo Carbajal <ajuanpi+dev@gmail.com>
 
 ## -*- texinfo -*-
-## @deftypefn {Function File} {@var{y} =} interleave (@var{x}, @var{v})
-## @deftypefnx {Function File} {@var{y} =} interleave (@dots{}, @var{copy})
-## Interleaves values into a vector.
+## @deftypefn {Function File} {@var{y} =} upsamplefill (@var{x}, @var{v})
+## @deftypefnx {Function File} {@var{y} =} upsamplefill (@dots{}, @var{copy})
+## Upsamples a vector interleaving given values or copies of the vector elements.
 ##
 ## The values in the vector @var{v} are placed between the elements of @var{x}.
 ##
@@ -27,7 +27,7 @@
 ##
 ## Example
 ## @example
-## > interleave(eye(2),2,true)
+## > upsamplefill(eye(2),2,true)
 ## ans =
 ##   1   0
 ##   1   0
@@ -35,7 +35,7 @@
 ##   0   1
 ##   0   1
 ##   0   1
-## > interleave(eye(2),[-1 -1 -1])
+## > upsamplefill(eye(2),[-1 -1 -1])
 ## ans =
 ##   1   0
 ##  -1  -1
@@ -50,7 +50,7 @@
 ## @seealso{upsample}
 ## @end deftypefn
 
-function y = interleave (x, v, copy=false)
+function y = upsamplefill (x, v, copy=false)
 
   if nargin<2
     print_usage;
@@ -107,9 +107,9 @@ function y = interleave (x, v, copy=false)
 
 endfunction
 
-%!assert(interleave([1,3,5],2),[1,2,3,2,5,2]);
-%!assert(interleave([1;3;5],2),[1;2;3;2;5;2]);
-%!assert(interleave([1,2,5],[2 -2]),[1,2,-2,2,2,-2,5,2,-2]);
-%!assert(interleave(eye(2),2,true),[1,0;1,0;1,0;0,1;0,1;0,1]);
-%!assert(interleave([1,3,5],2,true),[1,1,1,3,3,3,5,5,5]);
-%!assert(interleave([1;3;5],2,true),[1;1;1;3;3;3;;5;5;5]);
+%!assert(upsamplefill([1,3,5],2),[1,2,3,2,5,2]);
+%!assert(upsamplefill([1;3;5],2),[1;2;3;2;5;2]);
+%!assert(upsamplefill([1,2,5],[2 -2]),[1,2,-2,2,2,-2,5,2,-2]);
+%!assert(upsamplefill(eye(2),2,true),[1,0;1,0;1,0;0,1;0,1;0,1]);
+%!assert(upsamplefill([1,3,5],2,true),[1,1,1,3,3,3,5,5,5]);
+%!assert(upsamplefill([1;3;5],2,true),[1;1;1;3;3;3;;5;5;5]);
