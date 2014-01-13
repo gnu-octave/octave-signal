@@ -39,10 +39,10 @@ static void do_fwht (T *x, octave_idx_type n)
 }
 
 DEFUN_DLD (__fwht__, args, ,
-  "-*- texinfo -*-\n"
-"@deftypefn {Loadable Function} {} __fwht__ (@var{x})\n"
-"Undocumented internal function.\n"
-"@end deftypefn\n")
+  "-*- texinfo -*-\n\
+@deftypefn {Loadable Function} {} __fwht__ (@var{x})\n\
+Undocumented internal function.\n\
+@end deftypefn")
 {
   int nargin = args.length ();
   if (nargin != 1)
@@ -60,3 +60,8 @@ DEFUN_DLD (__fwht__, args, ,
     }
   return octave_value ();
 }
+
+/*
+## No test needed for internal helper function.
+%!assert (1)
+*/
