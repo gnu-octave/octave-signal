@@ -13,9 +13,13 @@
 ## You should have received a copy of the GNU General Public License along with
 ## this program; if not, see <http://www.gnu.org/licenses/>.
 
-## Adapted by Carnë Draug on 2011 <carandraug+dev@gmail.com>
+## -*- texinfo -*-
+## @deftypefn {Function File} {@var{b} =} h1_z_deriv (@var{n}, @var{p}, @var{ts})
+## Undocumented internal function.  This function is used by the impinvar
+## and invimpinvar functions in the signal package.
+## @end deftypefn
 
-## This function is necessary for impinvar and invimpinvar of the signal package
+## Adapted by Carnë Draug on 2011 <carandraug+dev@gmail.com>
 
 ## Find {-zd/dz}^n*H1(z). I.e., first differentiate, then multiply by -z, then differentiate, etc.
 ## The result is (ts^(n+1))*(b(1)*p/(z-p)^1 + b(2)*p^2/(z-p)^2 + b(n+1)*p^(n+1)/(z-p)^(n+1)).

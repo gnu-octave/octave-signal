@@ -13,9 +13,13 @@
 ## You should have received a copy of the GNU General Public License along with
 ## this program; if not, see <http://www.gnu.org/licenses/>.
 
-## Adapted by Carnë Draug on 2011 <carandraug+dev@gmail.com>
+## -*- texinfo -*-
+## @deftypefn {Function File} {@var{p_out} =} to_real (@var{p_in})
+## Undocumented internal function.  This function is used by the impinvar
+## and invimpinvar functions in the signal package.
+## @end deftypefn
 
-## This function is necessary for impinvar and invimpinvar of the signal package
+## Adapted by Carnë Draug on 2011 <carandraug+dev@gmail.com>
 
 ## Round complex number to nearest real number
 
