@@ -13,6 +13,9 @@
 ## You should have received a copy of the GNU General Public License along with
 ## this program; if not, see <http://www.gnu.org/licenses/>.
 
+## -*- texinfo -*-
+## @deftypefn  {Function File} {[@var{n}, @var{Wc}] =} cheb2ord (@var{Wp}, @var{Ws}, @var{Rp}, @var{Rs})
+## @deftypefnx {Function File} {[@var{n}, @var{Wc}] =} cheb2ord ([@var{Wp1}, @var{Wp2}], [@var{Ws1}, @var{Ws2}], @var{Rp}, @var{Rs})
 ## Compute chebyshev type II filter order and cutoff for the desired response
 ## characteristics. Rp is the allowable decibels of ripple in the pass
 ## band. Rs is the minimum attenuation in the stop band.
@@ -29,7 +32,8 @@
 ##
 ## Theory:
 ##
-## See also: cheby2
+## @seealso{cheby2}
+## @end deftypefn
 
 function [n, Wc] = cheb2ord(Wp, Ws, Rp, Rs)
 

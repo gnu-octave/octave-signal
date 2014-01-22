@@ -15,6 +15,14 @@
 ## You should have received a copy of the GNU General Public License along with
 ## this program; if not, see <http://www.gnu.org/licenses/>.
 
+## -*- texinfo -*-
+## @deftypefn  {Function File} {[@var{a}, @var{b}] =} besself (@var{n}, @var{W})
+## @deftypefnx {Function File} {[@var{a}, @var{b}] =} besself (@var{n}, @var{W}, "high")
+## @deftypefnx {Function File} {[@var{a}, @var{b}] =} besself (@var{n}, [@var{Wl}, @var{Wh}])
+## @deftypefnx {Function File} {[@var{a}, @var{b}] =} besself (@var{n}, [@var{Wl}, @var{Wh}], "stop")
+## @deftypefnx {Function File} {[@var{z}, @var{p}, @var{g}] =} besself (@dots{})
+## @deftypefnx {Function File} {[@var{a}, @var{b}, @var{c}, @var{d}] =} besself (@dots{})
+## @deftypefnx {Function File} {[@dots{}] =} besself (@dots{}, "z")
 ## Generate a bessel filter.
 ## Default is a Laplace space (s) filter.
 ##
@@ -44,6 +52,7 @@
 ##
 ## Proakis & Manolakis (1992). Digital Signal Processing. New York:
 ## Macmillan Publishing Company.
+## @end deftypefn
 
 function [a, b, c, d] = besself (n, W, varargin)
 

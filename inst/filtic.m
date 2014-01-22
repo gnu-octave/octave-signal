@@ -13,6 +13,10 @@
 ## You should have received a copy of the GNU General Public License along with
 ## this program; if not, see <http://www.gnu.org/licenses/>.
 
+## -*- texinfo -*-
+## @deftypefn  {Function File} {@var{zf} =} filtic (@var{b}, @var{a}, @var{y})
+## @deftypefnx {Function File} {@var{zf} =} filtic (@var{b}, @var{a}, @var{y}, @var{x})
+##
 ## Set initial condition vector for filter function
 ## The vector zf has the same values that would be obtained
 ## from function filter given past inputs x and outputs y
@@ -33,6 +37,7 @@
 ## zf = filtic(b, a, y, x)
 ##    Initial conditions for filter with coefficients a and b
 ##    input vector x and output vector y
+## @end deftypefn
 
 function zf = filtic(b,a,y,x)
 

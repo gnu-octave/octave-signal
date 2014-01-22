@@ -14,10 +14,13 @@
 ## You should have received a copy of the GNU General Public License along with
 ## this program; if not, see <http://www.gnu.org/licenses/>.
 
-## F = sgolay (p, n [, m [, ts]])
-##   Computes the filter coefficients for all Savitzsky-Golay smoothing
-##   filters of order p for length n (odd). m can be used in order to
-##   get directly the mth derivative. In this case, ts is a scaling factor.
+## -*- texinfo -*-
+## @deftypefn  {Function File} {@var{f} =} sgolay (@var{p}, @var{n})
+## @deftypefnx {Function File} {@var{f} =} sgolay (@var{p}, @var{n}, @var{m})
+## @deftypefnx {Function File} {@var{f} =} sgolay (@var{p}, @var{n}, @var{m}, @var{ts})
+## Computes the filter coefficients for all Savitzsky-Golay smoothing
+## filters of order p for length n (odd). m can be used in order to
+## get directly the mth derivative. In this case, ts is a scaling factor.
 ##
 ## The early rows of F smooth based on future values and later rows
 ## smooth based on past values, with the middle row using half future
@@ -35,7 +38,8 @@
 ##
 ## Reference: Numerical recipes in C. p 650
 ##
-## See also: sgolayfilt
+## @seealso{sgolayfilt}
+## @end deftypefn
 
 ## Based on smooth.m by E. Farhi <manuf@ldv.univ-montp2.fr>
 

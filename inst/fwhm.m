@@ -1,6 +1,14 @@
 ## Author: Petr Mikulik (2009)
 ## This program is granted to the public domain.
 
+## -*- texinfo -*-
+## @deftypefn  {Function File} {@var{f} =} fwhm (@var{y})
+## @deftypefnx {Function File} {@var{f} =} fwhm (@var{x}, @var{y})
+## @deftypefnx {Function File} {@var{f} =} fwhm (@dots{}, "zero")
+## @deftypefnx {Function File} {@var{f} =} fwhm (@dots{}, "min")
+## @deftypefnx {Function File} {@var{f} =} fwhm (@dots{}, "alevel", @var{level})
+## @deftypefnx {Function File} {@var{f} =} fwhm (@dots{}, "rlevel", @var{level})
+##
 ## Compute peak full-width at half maximum (FWHM) or at another level of peak
 ## maximum for vector or matrix data y, optionally sampled as y(x). If y is
 ## a matrix, return FWHM for each column as a row vector.
@@ -32,6 +40,7 @@
 ## alevel, respectively).
 ##
 ## Compatibility: Octave 3.x, Matlab
+## @end deftypefn
 
 function myfwhm = fwhm (y, varargin)
 

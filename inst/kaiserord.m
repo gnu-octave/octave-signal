@@ -13,7 +13,9 @@
 ## You should have received a copy of the GNU General Public License along with
 ## this program; if not, see <http://www.gnu.org/licenses/>.
 
-## usage: [n, Wn, beta, ftype] = kaiserord(f, m, dev [, fs])
+## -*- texinfo -*-
+## @deftypefn  {Function File} {[@var{n, @var{Wn}, @var{beta}, @var{ftype}] =} kaiserord (@var{f}, @var{m}, @var{dev})
+## @deftypefnx {Function File} {[@dots{}] =} kaiserord (@var{f}, @var{m}, @var{dev}, @var{fs})
 ##
 ## Returns the parameters needed for fir1 to produce a filter of the
 ## desired specification from a kaiser window:
@@ -51,6 +53,7 @@
 ## Example
 ##    [n, w, beta, ftype] = kaiserord([1000,1200], [1,0], [0.05,0.05], 11025);
 ##    freqz(fir1(n,w,kaiser(n+1,beta),ftype,'noscale'),1,[],11025);
+## @end deftypefn
 
 ## TODO: order is underestimated for the final test case: 2 stop bands.
 ## TODO:     octave> ftest("kaiserord") # shows test cases

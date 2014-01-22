@@ -13,7 +13,9 @@
 ## You should have received a copy of the GNU General Public License along with
 ## this program; if not, see <http://www.gnu.org/licenses/>.
 
-## Usage:  chebwin (L, at)
+## -*- texinfo -*-
+## @deftypefn  {Function File} {} chebwin (@var{L})
+## @deftypefnx {Function File} {} chebwin (@var{L}, @var{at})
 ##
 ## Returns the filter coefficients of the L-point Dolph-Chebyshev window
 ## with at dB of attenuation in the stop-band of the corresponding
@@ -46,7 +48,8 @@
 ## the inverse Fourier transform the window is scaled by making its
 ## maximum value unitary.
 ##
-## See also: kaiser
+## @seealso{kaiser}
+## @end deftypefn
 
 function w = chebwin (L, at)
 

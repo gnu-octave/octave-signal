@@ -14,7 +14,9 @@
 ## You should have received a copy of the GNU General Public License along with
 ## this program; if not, see <http://www.gnu.org/licenses/>.
 
-## usage:  [a, v, ref] = levinson (acf [, p])
+## -*- texinfo -*-
+## @deftypefn  {Function File} {[@var{a}, @var{v}, @var{ref}] =} levinson (@var{acf})
+## @deftypefnx {Function File} {[@dots{}] =} levinson (@var{acf}, @var{p})
 ##
 ## Use the Durbin-Levinson algorithm to solve:
 ##    toeplitz(acf(1:p)) * x = -acf(2:p+1).
@@ -35,6 +37,7 @@
 ## [1] Steven M. Kay and Stanley Lawrence Marple Jr.:
 ##   "Spectrum analysis -- a modern perspective",
 ##   Proceedings of the IEEE, Vol 69, pp 1380-1419, Nov., 1981
+## @end deftypefn
 
 ## Based on:
 ##    yulewalker.m

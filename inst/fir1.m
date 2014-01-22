@@ -13,7 +13,11 @@
 ## You should have received a copy of the GNU General Public License along with
 ## this program; if not, see <http://www.gnu.org/licenses/>.
 
-## usage: b = fir1(n, w [, type] [, window] [, noscale])
+## -*- texinfo -*-
+## @deftypefn  {Function File} {@var{b} =} fir1 (@var{n}, @var{w})
+## @deftypefnx {Function File} {@var{b} =} fir1 (@var{n}, @var{w}, @var{type})
+## @deftypefnx {Function File} {@var{b} =} fir1 (@var{n}, @var{w}, @var{type}, @var{window})
+## @deftypefnx {Function File} {@var{b} =} fir1 (@var{n}, @var{w}, @var{type}, @var{window}, @var{noscale})
 ##
 ## Produce an order n FIR filter with the given frequency cutoff,
 ## returning the n+1 filter coefficients in b.
@@ -42,6 +46,7 @@
 ##   freqz(fir1(40,0.3));
 ##   freqz(fir1(15,[0.2, 0.5], 'stop'));  # note the zero-crossing at 0.1
 ##   freqz(fir1(15,[0.2, 0.5], 'stop', 'noscale'));
+## @end deftypefn
 
 ## TODO: Consider using exact expression (in terms of sinc) for the
 ## TODO:    impulse response rather than relying on fir2.

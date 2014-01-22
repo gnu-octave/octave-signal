@@ -13,20 +13,34 @@
 ## You should have received a copy of the GNU General Public License along with
 ## this program; if not, see <http://www.gnu.org/licenses/>.
 
-## usage: y = chirp(t [, f0 [, t1 [, f1 [, form [, phase]]]]])
+## -*- texinfo -*-
+## @deftypefn  {Function File} {} chirp (@var{t})
+## @deftypefnx {Function File} {} chirp (@var{t}, @var{f0})
+## @deftypefnx {Function File} {} chirp (@var{t}, @var{f0}, @var{t1})
+## @deftypefnx {Function File} {} chirp (@var{t}, @var{f0}, @var{t1}, @var{f1})
+## @deftypefnx {Function File} {} chirp (@var{t}, @var{f0}, @var{t1}, @var{f1}, @var{form})
+## @deftypefnx {Function File} {} chirp (@var{t}, @var{f0}, @var{t1}, @var{f1}, @var{form}, @var{phase})
 ##
-## Evaluate a chirp signal at time t.  A chirp signal is a frequency
+## Evaluate a chirp signal at time @var{t}.  A chirp signal is a frequency
 ## swept cosine wave.
 ##
-## t: vector of times to evaluate the chirp signal
-## f0: frequency at time t=0 [ 0 Hz ]
-## t1: time t1 [ 1 sec ]
-## f1: frequency at time t=t1 [ 100 Hz ]
-## form: shape of frequency sweep
+## @table @var
+## @item t
+## vector of times to evaluate the chirp signal
+## @item f0
+## frequency at time t=0 [ 0 Hz ]
+## @item t1
+## time t1 [ 1 sec ]
+## @item f1
+## frequency at time t=t1 [ 100 Hz ]
+## @item form
+## shape of frequency sweep
 ##    'linear'      f(t) = (f1-f0)*(t/t1) + f0
 ##    'quadratic'   f(t) = (f1-f0)*(t/t1)^2 + f0
 ##    'logarithmic' f(t) = (f1-f0)^(t/t1) + f0
-## phase: phase shift at t=0
+## @item phase
+## phase shift at t=0
+## @end table
 ##
 ## Example
 ##    specgram(chirp([0:0.001:5])); # linear, 0-100Hz in 1 sec
@@ -35,6 +49,7 @@
 ##
 ## If you want a different sweep shape f(t), use the following:
 ##    y = cos(2*pi*integral(f(t)) + 2*pi*f0*t + phase);
+## @end deftypefn
 
 function y = chirp(t, f0, t1, f1, form, phase)
 

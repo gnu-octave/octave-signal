@@ -14,7 +14,9 @@
 ## You should have received a copy of the GNU General Public License along with
 ## this program; if not, see <http://www.gnu.org/licenses/>.
 
-## usage: zplane(b [, a]) or zplane(z [, p])
+## -*- texinfo -*-
+## @deftypefn  {Function File} {} zplane (@var{z}, @var{p})
+## @deftypefnx {Function File} {} zplane (@var{b}, @var{a})
 ##
 ## Plot the poles and zeros.  If the arguments are row vectors then they
 ## represent filter coefficients (numerator polynomial b and denominator
@@ -42,6 +44,7 @@
 ##               a0          (z - p1) (z - p2) ... (z - pN)
 ##
 ## The denominator a defaults to 1, and the poles p defaults to [].
+## @end deftypefn
 
 ## TODO: Consider a plot-like interface:
 ## TODO:       zplane(x1,y1,fmt1,x2,y2,fmt2,...)

@@ -13,7 +13,10 @@
 ## You should have received a copy of the GNU General Public License along with
 ## this program; if not, see <http://www.gnu.org/licenses/>.
 
-## usage: y = interp(x, q [, n [, Wc]])
+## -*- texinfo -*-
+## @deftypefn  {Function File} {@var{y} =} interp (@var{x}, @var{q})
+## @deftypefnx {Function File} {@var{y} =} interp (@var{x}, @var{q}, @var{n})
+## @deftypefnx {Function File} {@var{y} =} interp (@var{x}, @var{q}, @var{n}, @var{Wc})
 ##
 ## Upsample the signal x by a factor of q, using an order 2*q*n+1 FIR
 ## filter. Note that q must be an integer for this rate change method.
@@ -27,7 +30,8 @@
 ##    stem(t(1:121)*1000,y(1:121),"-r;Interpolated;");
 ##    stem(t(1:4:121)*1000,x(1:4:121),"-b;Subsampled;"); hold off;
 ##
-## See also: decimate, resample
+## @seealso{decimate, resample}
+## @end deftypefn
 
 function y = interp(x, q, n = 4, Wc = 0.5)
 

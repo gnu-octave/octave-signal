@@ -13,7 +13,10 @@
 ## You should have received a copy of the GNU General Public License along with
 ## this program; if not, see <http://www.gnu.org/licenses/>.
 
-## usage: y = tripuls(t, w, skew)
+## -*- texinfo -*-
+## @deftypefn  {Function File} {@var{y} =} tripuls (@var{t})
+## @deftypefnx {Function File} {@var{y} =} tripuls (@var{t}, @var{w})
+## @deftypefnx {Function File} {@var{y} =} tripuls (@var{t}, @var{w}, @var{skew})
 ##
 ## Generate a triangular pulse over the interval [-w/2,w/2), sampled at
 ## times t.  This is useful with the function pulstran for generating a
@@ -29,7 +32,8 @@
 ##   w = 0.3/f0;  # pulse width 3/10th the distance between pulses
 ##   auplot(pulstran(0:1/fs:4/f0, 0:1/f0:4/f0, 'tripuls', w), fs);
 ##
-## See also: pulstran
+## @seealso{pulstran}
+## @end deftypefn
 
 function y = tripuls (t, w = 1, skew = 0)
 

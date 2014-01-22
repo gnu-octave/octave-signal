@@ -13,8 +13,11 @@
 ## You should have received a copy of the GNU General Public License along with
 ## this program; if not, see <http://www.gnu.org/licenses/>.
 
-## usage y=czt(x, m, w, a)
-##
+## -*- texinfo -*-
+## @deftypefn  {Function File} {} czt (@var{x})
+## @deftypefnx {Function File} {} czt (@var{x}, @var{m})
+## @deftypefnx {Function File} {} czt (@var{x}, @var{m}, @var{w})
+## @deftypefnx {Function File} {} czt (@var{x}, @var{m}, @var{w}, @var{a})
 ## Chirp z-transform.  Compute the frequency response starting at a and
 ## stepping by w for m steps.  a is a point in the complex plane, and
 ## w is the ratio between points in each step (i.e., radius increases
@@ -32,6 +35,7 @@
 ##     m=length(x), w=exp(-j*2*pi/m), a=1
 ##
 ## If x is a matrix, the transform will be performed column-by-column.
+## @end deftypefn
 
 ## Algorithm (based on Oppenheim and Schafer, "Discrete-Time Signal
 ## Processing", pp. 623-628):

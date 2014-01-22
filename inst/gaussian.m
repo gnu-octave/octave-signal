@@ -13,7 +13,8 @@
 ## You should have received a copy of the GNU General Public License along with
 ## this program; if not, see <http://www.gnu.org/licenses/>.
 
-## usage: w = gaussian(n, a)
+## -*- texinfo -*-
+## @deftypefn {Function File} {@var{w} =} gaussian (@var{n}, @var{a})
 ##
 ## Generate an n-point gaussian convolution window of the given
 ## width.  Use larger a for a narrower window.  Use larger n for
@@ -26,6 +27,7 @@
 ## Width a is measured in frequency units (sample rate/num samples).
 ## It should be f when multiplying in the time domain, but 1/f when
 ## multiplying in the frequency domain (for use in convolutions).
+## @end deftypefn
 
 function x = gaussian(n, w)
 

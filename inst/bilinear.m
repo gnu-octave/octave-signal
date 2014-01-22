@@ -13,9 +13,10 @@
 ## You should have received a copy of the GNU General Public License along with
 ## this program; if not, see <http://www.gnu.org/licenses/>.
 
-## usage: [Zz, Zp, Zg] = bilinear(Sz, Sp, Sg, T)
-##        [Zb, Za] = bilinear(Sb, Sa, T)
-##
+## -*- texinfo -*-
+## @deftypefn  {Function File} {[@var{Zb}, @var{Za}] =} bilinear (@var{Sb}, @var{Sa}, @var{T})
+## @deftypefnx {Function File} {[@var{Zb}, @var{Za}] =} bilinear (@var{Sz}, @var{Sp}, @var{Sg}, @var{T})
+## @deftypefnx {Function File} {[@var{Zz}, @var{Zp}, @var{Zg}] =} bilinear (@dots{})
 ## Transform a s-plane filter specification into a z-plane
 ## specification. Filters can be specified in either zero-pole-gain or
 ## transfer function form. The input form does not have to match the
@@ -69,6 +70,7 @@
 ##
 ## Proakis & Manolakis (1992). Digital Signal Processing. New York:
 ## Macmillan Publishing Company.
+## @end deftypefn
 
 function [Zz, Zp, Zg] = bilinear(Sz, Sp, Sg, T)
 

@@ -13,7 +13,11 @@
 ## You should have received a copy of the GNU General Public License along with
 ## this program; if not, see <http://www.gnu.org/licenses/>.
 
-## usage: b = fir2(n, f, m [, grid_n [, ramp_n]] [, window])
+## -*- texinfo -*-
+## @deftypefn  {Function File} {@var{b} =} fir2 (@var{n}, @var{f}, @var{m})
+## @deftypefnx {Function File} {@var{b} =} fir2 (@var{n}, @var{f}, @var{m}, @var{grid_n})
+## @deftypefnx {Function File} {@var{b} =} fir2 (@var{n}, @var{f}, @var{m}, @var{grid_n}, @var{ramp_n})
+## @deftypefnx {Function File} {@var{b} =} fir2 (@var{n}, @var{f}, @var{m}, @var{grid_n}, @var{ramp_n}, @var{window})
 ##
 ## Produce an FIR filter of order n with arbitrary frequency response,
 ## returning the n+1 filter coefficients in b.
@@ -42,6 +46,7 @@
 ##   f=[0, 0.3, 0.3, 0.6, 0.6, 1]; m=[0, 0, 1, 1/2, 0, 0];
 ##   [h, w] = freqz(fir2(100,f,m));
 ##   plot(f,m,';target response;',w/pi,abs(h),';filter response;');
+## @end deftypefn
 
 function b = fir2(n, f, m, grid_n, ramp_n, window)
 

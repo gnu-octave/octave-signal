@@ -1,7 +1,10 @@
 ## Author: Paul Kienzle <pkienzle@users.sf.net> (2004)
 ## This program is granted to the public domain.
 
-## flattopwin(L, [periodic|symmetric])
+## -*- texinfo -*-
+## @deftypefn  {Function File} {} flattopwin (@var{L})
+## @deftypefnx {Function File} {} flattopwin (@var{L}, "symmetric")
+## @deftypefnx {Function File} {} flattopwin (@var{L}, "periodic")
 ##
 ## Return the window f(w):
 ##
@@ -22,6 +25,7 @@
 ##
 ## [1] Gade, S; Herlufsen, H; (1987) "Use of weighting functions in DFT/FFT
 ## analysis (Part I)", Bruel & Kjaer Technical Review No.3.
+## @end deftypefn
 
 function w = flattopwin (L, sym)
 

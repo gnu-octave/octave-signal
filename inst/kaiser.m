@@ -14,7 +14,9 @@
 ## You should have received a copy of the GNU General Public License along with
 ## this program; if not, see <http://www.gnu.org/licenses/>.
 
-## usage:  kaiser (L, beta)
+## -*- texinfo -*-
+## @deftypefn  {Function File} {} kaiser (@var{L})
+## @deftypefnx {Function File} {} kaiser (@var{L}, @var{beta})
 ##
 ## Returns the filter coefficients of the L-point Kaiser window with
 ## parameter beta.
@@ -28,7 +30,8 @@
 ## k(x) =  -------------------------------------,  L/2 <= x <= L/2
 ##                besseli(0, beta)
 ##
-## See also: kaiserord
+## @seealso{kaiserord}
+## @end deftypefn
 
 function w = kaiser (L, beta = 0.5)
 

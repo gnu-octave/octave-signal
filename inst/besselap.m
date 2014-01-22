@@ -13,11 +13,14 @@
 ## You should have received a copy of the GNU General Public License along with
 ## this program; if not, see <http://www.gnu.org/licenses/>.
 
+## -*- texinfo -*-
+## @deftypefn {Function File} {[@var{zero}, @var{pole}, @var{gain}] =} besselap (@var{n})
 ## Return bessel analog filter prototype.
 ##
 ## References:
 ##
 ## http://en.wikipedia.org/wiki/Bessel_polynomials
+## @end deftypefn
 
 function [zero, pole, gain] = besselap (n)
 

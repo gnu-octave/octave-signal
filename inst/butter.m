@@ -15,6 +15,14 @@
 ## You should have received a copy of the GNU General Public License along with
 ## this program; if not, see <http://www.gnu.org/licenses/>.
 
+## -*- texinfo -*-
+## @deftypefn  {Function File} {[@var{b}, @var{a}] =} butter (@var{n}, @var{Wc})
+## @deftypefnx {Function File} {[@var{b}, @var{a}] =} butter (@var{n}, @var{Wc}, "high")
+## @deftypefnx {Function File} {[@var{b}, @var{a}] =} butter (@var{n}, [@var{Wl}, @var{Wh}])
+## @deftypefnx {Function File} {[@var{b}, @var{a}] =} butter (@var{n}, [@var{Wl}, @var{Wh}], "stop")
+## @deftypefnx {Function File} {[@var{z}, @var{p}, @var{g}] =} butter (@dots{})
+## @deftypefnx {Function File} {[@var{a}, @var{b}, @var{c}, @var{d}] =} butter (@dots{})
+## @deftypefnx {Function File} {[@dots{}] =} butter (@dots{}, "s")
 ## Generate a butterworth filter.
 ## Default is a discrete space (Z) filter.
 ##
@@ -44,6 +52,7 @@
 ##
 ## Proakis & Manolakis (1992). Digital Signal Processing. New York:
 ## Macmillan Publishing Company.
+## @end deftypefn
 
 function [a, b, c, d] = butter (n, W, varargin)
 

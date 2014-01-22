@@ -13,7 +13,8 @@
 ## You should have received a copy of the GNU General Public License along with
 ## this program; if not, see <http://www.gnu.org/licenses/>.
 
-## usage: [Sz, Sp, Sg] = sftrans(Sz, Sp, Sg, W, stop)
+## -*- texinfo -*-
+## @deftypefn {Function File} {[@var{Sz}, @var{Sp}, @var{Sg}] =} sftrans (@var{Sz}, @var{Sp}, @var{Sg}, @var{W}, @var{stop})
 ##
 ## Transform band edges of a generic lowpass filter (cutoff at W=1)
 ## represented in splane zero-pole-gain form.  W is the edge of the
@@ -83,6 +84,7 @@
 ##
 ## Proakis & Manolakis (1992). Digital Signal Processing. New York:
 ## Macmillan Publishing Company.
+## @end deftypefn
 
 function [Sz, Sp, Sg] = sftrans(Sz, Sp, Sg, W, stop)
 

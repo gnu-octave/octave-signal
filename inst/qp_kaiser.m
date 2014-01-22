@@ -13,7 +13,9 @@
 ## You should have received a copy of the GNU General Public License along with
 ## this program; if not, see <http://www.gnu.org/licenses/>.
 
-## Usage:  qp_kaiser (nb, at, linear)
+## -*- texinfo -*-
+## @deftypefn  {Function File} {} qp_kaiser (@var{nb}, @var{at})
+## @deftypefnx {Function File} {} qp_kaiser (@var{nb}, @var{at}, @var{linear})
 ##
 ## Computes a finite impulse response (FIR) filter for use with a
 ## quasi-perfect reconstruction polyphase-network filter bank. This
@@ -27,6 +29,7 @@
 ##
 ## By using a third non-null argument, the minimum-phase calculation is
 ## ommited at all.
+## @end deftypefn
 
 function h = qp_kaiser (nb, at, linear = 0)
 

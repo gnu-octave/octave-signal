@@ -13,9 +13,8 @@
 ## You should have received a copy of the GNU General Public License along with
 ## this program; if not, see <http://www.gnu.org/licenses/>.
 
-## Usage:
-##
-## xt = sampled2continuous( xn , T, t )
+## -*- texinfo -*-
+## @deftypefn {Function File} {@var{xt} =} sampled2continuous (@var{xn}, @var{T}, @var{t})
 ##
 ## Calculate the x(t) reconstructed
 ## from samples x[n] sampled at a rate 1/T samples
@@ -28,6 +27,7 @@
 ## This function can be used to calculate sampling rate
 ## effects on aliasing, actual signal reconstruction
 ## from discrete samples.
+## @end deftypefn
 
 function xt = sampled2continuous( xn , T, t )
 

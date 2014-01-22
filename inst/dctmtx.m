@@ -13,7 +13,8 @@
 ## You should have received a copy of the GNU General Public License along with
 ## this program; if not, see <http://www.gnu.org/licenses/>.
 
-## T = dctmtx (n)
+## -*- texinfo -*-
+## @deftypefn {Function File} {} dctmtx (@var{n})
 ## Return the DCT transformation matrix of size n x n.
 ##
 ## If A is an n x n matrix, then the following are true:
@@ -27,7 +28,8 @@
 ## the block is filled with zeros and the inverse transform is applied
 ## to the block.
 ##
-## See also: dct, idct, dct2, idct2
+## @seealso{dct, idct, dct2, idct2}
+## @end deftypefn
 
 function T = dctmtx(n)
 

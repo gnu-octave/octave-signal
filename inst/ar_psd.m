@@ -13,8 +13,14 @@
 ## You should have received a copy of the GNU General Public License along with
 ## this program; if not, see <http://www.gnu.org/licenses/>.
 
-## Usage:
-##   [psd,f_out] = ar_psd(a,v,freq,Fs,range,method,plot_type)
+## -*- texinfo -*-
+## @deftypefn  {Function File} {} ar_psd (@var{a}, @var{v})
+## @deftypefnx {Function File} {} ar_psd (@var{a}, @var{v}, @var{freq})
+## @deftypefnx {Function File} {} ar_psd (@var{a}, @var{v}, @var{freq}, @var{Fs})
+## @deftypefnx {Function File} {} ar_psd (@dots{}, @var{range})
+## @deftypefnx {Function File} {} ar_psd (@dots{}, @var{method})
+## @deftypefnx {Function File} {} ar_psd (@dots{}, @var{plottype})
+## @deftypefnx {Function File} {[@var{psd}, @var{f_out}] =} ar_psd (@dots{})
 ##
 ##  Calculate the power spectrum of the autoregressive model
 ##
@@ -101,6 +107,7 @@
 ##   "Spectrum analysis -- a modern perspective",
 ##   Proceedings of the IEEE, Vol 69, pp 1380-1419, Nov., 1981
 ##
+## @end deftypefn
 
 function [varargout]=ar_psd(a,v,varargin)
 

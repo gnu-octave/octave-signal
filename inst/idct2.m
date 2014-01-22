@@ -13,12 +13,14 @@
 ## You should have received a copy of the GNU General Public License along with
 ## this program; if not, see <http://www.gnu.org/licenses/>.
 
-## y = idct2 (x)
-##   Computes the inverse 2-D discrete cosine transform of matrix x
-##
-## y = idct2 (x, m, n) or y = idct2 (x, [m n])
-##   Computes the 2-D inverse DCT of x after padding or trimming rows to m and
-##   columns to n.
+## -*- texinfo -*-
+## @deftypefn  {Function File} {@var{y} =} idct2 (@var{x})
+## @deftypefnx {Function File} {@var{y} =} idct2 (@var{x}, @var{m}, @var{n})
+## @deftypefnx {Function File} {@var{y} =} idct2 (@var{x}, [@var{m}, @var{n}])
+## Compute the inverse 2-D discrete cosine transform of matrix @var{x}.
+## If @var{m} and @var{n} are specified, the input is either padded or truncated
+## to have @var{m} rows and @var{n} columns.
+## @end deftypefn
 
 function y = idct2 (x, m, n)
 

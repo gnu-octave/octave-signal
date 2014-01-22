@@ -13,7 +13,9 @@
 ## You should have received a copy of the GNU General Public License along with
 ## this program; if not, see <http://www.gnu.org/licenses/>.
 
-## [a,v,k] = arburg(x,poles,criterion)
+## -*- texinfo -*-
+## @deftypefn  {Function File} {[@var{a}, @var{v}, @var{k}] =} arburg (@var{x}, @var{poles})
+## @deftypefnx {Function File} {[@var{a}, @var{v}, @var{k}] =} arburg (@var{x}, @var{poles}, @var{criterion})
 ##
 ## Calculate coefficients of an autoregressive (AR) model of complex data
 ## "x" using the whitening lattice-filter method of Burg (1968).  The inverse
@@ -98,7 +100,7 @@
 ##   "A small sample model selection criterion based on Kullback's symmetric
 ##   divergence", IEEE Transactions on Signal Processing,
 ##   Vol. 52(12), pp 3314-3323, Dec. 2004
-
+## @end deftypefn
 
 function [varargout] = arburg( x, poles, criterion )
 

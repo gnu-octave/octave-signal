@@ -13,9 +13,10 @@
 ## You should have received a copy of the GNU General Public License along with
 ## this program; if not, see <http://www.gnu.org/licenses/>.
 
-## usage:  w = boxcar (n)
-##
-## Returns the filter coefficients of a rectangular window of length n.
+## -*- texinfo -*-
+## @deftypefn {Function File} {} boxcar (@var{n})
+## Return the filter coefficients of a rectangular window of length @var{n}.
+## @end deftypefn
 
 function w = boxcar (n)
 

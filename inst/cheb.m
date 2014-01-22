@@ -13,8 +13,8 @@
 ## You should have received a copy of the GNU General Public License along with
 ## this program; if not, see <http://www.gnu.org/licenses/>.
 
-## Usage:  cheb (n, x)
-##
+## -*- texinfo -*-
+## @deftypefn {Function File} {} cheb (@var{n}, @var{x})
 ## Returns the value of the nth-order Chebyshev polynomial calculated at
 ## the point x. The Chebyshev polynomials are defined by the equations:
 ##
@@ -24,6 +24,7 @@
 ##
 ## If x is a vector, the output is a vector of the same size, where each
 ## element is calculated as y(i) = Tn(x(i)).
+## @end deftypefn
 
 function T = cheb (n, x)
 

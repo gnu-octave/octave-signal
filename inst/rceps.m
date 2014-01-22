@@ -13,10 +13,11 @@
 ## You should have received a copy of the GNU General Public License along with
 ## this program; if not, see <http://www.gnu.org/licenses/>.
 
-## usage: [y, xm] = rceps(x)
-##   Produce the cepstrum of the signal x, and if desired, the minimum
-##   phase reconstruction of the signal x.  If x is a matrix, do so
-##   for each column of the matrix.
+## -*- texinfo -*-
+## @deftypefn {Function File} {[@var{y}, @var{xm}] =} rceps (@var{x})
+## Produce the cepstrum of the signal x, and if desired, the minimum
+## phase reconstruction of the signal x.  If x is a matrix, do so
+## for each column of the matrix.
 ##
 ## Example
 ##   f0=70; Fs=10000;           # 100 Hz fundamental, 10kHz sampling rate
@@ -29,6 +30,7 @@
 ## Reference
 ##    Programs for digital signal processing. IEEE Press.
 ##    New York: John Wiley & Sons. 1979.
+## @end deftypefn
 
 function [y, ym] = rceps(x)
 

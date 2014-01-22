@@ -13,7 +13,13 @@
 ## You should have received a copy of the GNU General Public License along with
 ## this program; if not, see <http://www.gnu.org/licenses/>.
 
-## usage:  [P, w] = __power (b, a, [, nfft [, Fs]] [, range] [, units])
+## -*- texinfo -*-
+## @deftypefn  {Function File} {[@var{P}, @var{w}] =} __power (@var{b}, @var{a})
+## @deftypefnx {Function File} {[@dots{}] =} __power (@var{b}, @var{a}, @var{nfft})
+## @deftypefnx {Function File} {[@dots{}] =} __power (@var{b}, @var{a}, @var{nfft}, @var{Fs})
+## @deftypefnx {Function File} {[@dots{}] =} __power (@var{b}, @var{a}, @var{nfft}, @var{Fs}, @var{range})
+## @deftypefnx {Function File} {[@dots{}] =} __power (@var{b}, @var{a}, @var{nfft}, @var{Fs}, @var{range}, @var{units})
+## @deftypefnx {Function File} {} __power (@dots{})
 ##
 ## Plot the power spectrum of the given ARMA model.
 ##
@@ -28,6 +34,7 @@
 ## Returns P, the magnitude vector, and w, the frequencies at which it
 ## is sampled.  If there are no return values requested, then plot the power
 ## spectrum and don't return anything.
+## @end deftypefn
 
 ## TODO: consider folding this into freqz --- just one more parameter to
 ## TODO:    distinguish between 'linear', 'log', 'logsquared' and 'squared'

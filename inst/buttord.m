@@ -13,6 +13,9 @@
 ## You should have received a copy of the GNU General Public License along with
 ## this program; if not, see <http://www.gnu.org/licenses/>.
 
+## -*- texinfo -*-
+## @deftypefn  {Function File} {[@var{n}, @var{Wc}] =} buttord (@var{Wp}, @var{Ws}, @var{Rp}, @var{Rs})
+## @deftypefnx {Function File} {[@var{n}, @var{Wc}] =} buttord ([@var{Wp1}, @var{Wp2}], [@var{Ws1}, @var{Ws2}], @var{Rp}, @var{Rs})
 ## Compute butterworth filter order and cutoff for the desired response
 ## characteristics. Rp is the allowable decibels of ripple in the pass
 ## band. Rs is the minimum attenuation in the stop band.
@@ -35,7 +38,8 @@
 ## significantly overdesigns.  Artificially dividing N by 2 in this case
 ## helps a lot, but it still overdesigns.
 ##
-## See also: butter
+## @seealso{butter}
+## @end deftypefn
 
 function [n, Wc] = buttord(Wp, Ws, Rp, Rs)
 

@@ -13,7 +13,9 @@
 ## You should have received a copy of the GNU General Public License along with
 ## this program; if not, see <http://www.gnu.org/licenses/>.
 
-## Usage: H = freqs(B,A,W);
+## -*- texinfo -*-
+## @deftypefn  {Function File} {@var{h} =} freqs (@var{b}, @var{a}, @var{w})
+## @deftypefnx {Function File} {} freqs (@var{b}, @var{a}, @var{w})
 ##
 ## Compute the s-plane frequency response of the IIR filter B(s)/A(s) as
 ## H = polyval(B,j*W)./polyval(A,j*W).  If called with no output
@@ -23,6 +25,7 @@
 ##    B = [1 2]; A = [1 1];
 ##    w = linspace(0,4,128);
 ##    freqs(B,A,w);
+## @end deftypefn
 
 function [H] = freqs(B,A,W)
 

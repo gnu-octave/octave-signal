@@ -13,7 +13,13 @@
 ## You should have received a copy of the GNU General Public License along with
 ## this program; if not, see <http://www.gnu.org/licenses/>.
 
-## usage: [S [, f [, t]]] = specgram(x [, n [, Fs [, window [, overlap]]]])
+## -*- texinfo -*-
+## @deftypefn  {Function File} {} specgram (@var{x})
+## @deftypefnx {Function File} {} specgram (@var{x}, @var{n})
+## @deftypefnx {Function File} {} specgram (@var{x}, @var{n}, @var{Fs})
+## @deftypefnx {Function File} {} specgram (@var{x}, @var{n}, @var{Fs}, @var{window})
+## @deftypefnx {Function File} {} specgram (@var{x}, @var{n}, @var{Fs}, @var{window}, @var{overlap})
+## @deftypefnx {Function File} {[@var{S}, @var{f}, @var{t}] =} specgram (@dots{})
 ##
 ## Generate a spectrogram for the signal. This chops the signal into
 ## overlapping slices, windows each slice and applies a Fourier
@@ -106,6 +112,7 @@
 ## the image:
 ##
 ##     imagesc(t, f, flipud(log(S(idx,:))));
+## @end deftypefn
 
 function [S_r, f_r, t_r] = specgram(x, n = min(256, length(x)), Fs = 2, window = hanning(n), overlap = ceil(length(window)/2))
 

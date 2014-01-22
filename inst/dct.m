@@ -13,7 +13,9 @@
 ## You should have received a copy of the GNU General Public License along with
 ## this program; if not, see <http://www.gnu.org/licenses/>.
 
-## y = dct (x, n)
+## -*- texinfo -*-
+## @deftypefn  {Function File} {} dct (@var{x})
+## @deftypefnx {Function File} {} dct (@var{x}, @var{n})
 ##    Computes the discrete cosine transform of x.  If n is given, then
 ##    x is padded or trimmed to length n before computing the transform.
 ##    If x is a matrix, compute the transform along the columns of the
@@ -30,7 +32,8 @@
 ## are other definitions with different scaling of X[k], but this form
 ## is common in image processing.
 ##
-## See also: idct, dct2, idct2, dctmtx
+## @seealso{idct, dct2, idct2, dctmtx}
+## @end deftypefn
 
 ## From Discrete Cosine Transform notes by Brian Evans at UT Austin,
 ## http://www.ece.utexas.edu/~bevans/courses/ee381k/lectures/09_DCT/lecture9/

@@ -13,7 +13,10 @@
 ## You should have received a copy of the GNU General Public License along with
 ## this program; if not, see <http://www.gnu.org/licenses/>.
 
-## usage: y = decimate(x, q [, n] [, ftype])
+## -*- texinfo -*-
+## @deftypefn  {Function File} {@var{y} =} decimate (@var{x}, @var{q})
+## @deftypefnx {Function File} {@var{y} =} decimate (@var{x}, @var{q}, @var{n})
+## @deftypefnx {Function File} {@var{y} =} decimate (@var{x}, @var{q}, @var{n}, @var{ftype})
 ##
 ## Downsample the signal x by a factor of q, using an order n filter
 ## of ftype 'fir' or 'iir'.  By default, an order 8 Chebyshev type I
@@ -32,6 +35,7 @@
 ##    y = decimate(x,4);   # factor of 4 decimation
 ##    stem(t(1:121)*1000,x(1:121),"-g;Original;"); hold on; # plot original
 ##    stem(t(1:4:121)*1000,y(1:31),"-r;Decimated;"); hold off; # decimated
+## @end deftypefn
 
 function y = decimate(x, q, n, ftype)
 

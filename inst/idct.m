@@ -13,12 +13,14 @@
 ## You should have received a copy of the GNU General Public License along with
 ## this program; if not, see <http://www.gnu.org/licenses/>.
 
-## y = dct (x, n)
-##    Computes the inverse discrete cosine transform of x.  If n is
-##    given, then x is padded or trimmed to length n before computing
-##    the transform. If x is a matrix, compute the transform along the
-##    columns of the the matrix. The transform is faster if x is
-##    real-valued and even length.
+## -*- texinfo -*-
+## @deftypefn  {Function File} {@var{y} =} dct (@var{x})
+## @deftypefnx {Function File} {@var{y} =} dct (@var{x}, @var{n})
+## Compute the inverse discrete cosine transform of @var{x}.  If @var{n} is
+## given, then @var{x} is padded or trimmed to length @var{n} before computing
+## the transform. If @var{x} is a matrix, compute the transform along the
+## columns of the the matrix. The transform is faster if @var{x} is
+## real-valued and even length.
 ##
 ## The inverse discrete cosine transform x of X can be defined as follows:
 ##
@@ -28,7 +30,8 @@
 ##
 ## with w(0) = sqrt(1/N) and w(k) = sqrt(2/N), k = 1, ..., N-1
 ##
-## See also: idct, dct2, idct2, dctmtx
+## @seealso{idct, dct2, idct2, dctmtx}
+## @end deftypefn
 
 function y = idct (x, n)
 

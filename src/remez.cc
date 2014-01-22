@@ -747,18 +747,31 @@ int remez(double h[], int numtaps,
 /* == Octave interface starts here ====================================== */
 
 DEFUN_DLD (remez, args, ,
-  "b = remez(n, f, a [, w] [, ftype] [, griddensity])\n\
+  "-*- texinfo -*-\n\
+@deftypefn  {Loadable Function} {@var{b} =} remez (@var{n}, @var{f}, @var{a})\n\
+@deftypefnx {Loadable Function} {@var{b} =} remez (@var{n}, @var{f}, @var{a}, @var{w})\n\
+@deftypefnx {Loadable Function} {@var{b} =} remez (@var{n}, @var{f}, @var{a}, @var{w}, @var{ftype})\n\
+@deftypefnx {Loadable Function} {@var{b} =} remez (@var{n}, @var{f}, @var{a}, @var{w}, @var{ftype}, @var{griddensity})\n\
 Parks-McClellan optimal FIR filter design.\n\
-n gives the number of taps in the returned filter\n\
-f gives frequency at the band edges [ b1 e1 b2 e2 b3 e3 ...]\n\
-a gives amplitude at the band edges [ a(b1) a(e1) a(b2) a(e2) ...]\n\
-w gives weighting applied to each band\n\
-ftype is 'bandpass', 'hilbert' or 'differentiator'\n\
-griddensity determines how accurately the filter will be\n\
-    constructed. The minimum value is 16, but higher numbers are\n\
-    slower to compute.\n\
+@table @var\n\
+@item n\n\
+gives the number of taps in the returned filter\n\
+@item f\n\
+gives frequency at the band edges [b1 e1 b2 e2 b3 e3 @dots{}]\n\
+@item a\n\
+gives amplitude at the band edges [a(b1) a(e1) a(b2) a(e2) @dots{}]\n\
+@item w\n\
+gives weighting applied to each band\n\
+@item ftype\n\
+is \"bandpass\", \"hilbert\" or \"differentiator\"\n\
+@item griddensity\n\
+determines how accurately the filter will be\n\
+constructed. The minimum value is 16, but higher numbers are\n\
+slower to compute.\n\
+@end table\n\
 \n\
-Frequency is in the range (0, 1), with 1 being the nyquist frequency")
+Frequency is in the range (0, 1), with 1 being the Nyquist frequency.\n\
+@end deftypefn")
 {
   octave_value_list retval;
   int i;

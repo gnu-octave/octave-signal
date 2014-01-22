@@ -13,7 +13,8 @@
 ## You should have received a copy of the GNU General Public License along with
 ## this program; if not, see <http://www.gnu.org/licenses/>.
 
-## usage: w = gausswin(L, a)
+## -*- texinfo -*-
+## @deftypefn {Function File} {@var{w} =} gausswin (@var{L}, @var{a})
 ##
 ## Generate an L-point gaussian window of the given width. Use larger a
 ## for a narrow window.  Use larger L for a smoother curve.
@@ -21,6 +22,7 @@
 ##     w = exp ( -(a*x)^2/2 )
 ##
 ## for x = linspace(-(L-1)/L, (L-1)/L, L)
+## @end deftypefn
 
 function x = gausswin(L, w)
 

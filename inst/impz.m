@@ -13,7 +13,12 @@
 ## You should have received a copy of the GNU General Public License along with
 ## this program; if not, see <http://www.gnu.org/licenses/>.
 
-## usage: [x, t] = impz(b [, a, n, fs])
+## -*- texinfo -*-
+## @deftypefn  {Function File} {[@var{x}, @var{t}] =} impz (@var{b})
+## @deftypefnx {Function File} {[@var{x}, @var{t}] =} impz (@var{b}, @var{a})
+## @deftypefnx {Function File} {[@var{x}, @var{t}] =} impz (@var{b}, @var{a}, @var{n})
+## @deftypefnx {Function File} {[@var{x}, @var{t}] =} impz (@var{b}, @var{a}, @var{n}, @var{fs})
+## @deftypefnx {Function File} {} impz (@dots{})
 ##
 ## Generate impulse-response characteristics of the filter. The filter
 ## coefficients correspond to the the z-plane rational function with
@@ -23,7 +28,8 @@
 ## beyond 120dB, or to show five periods if there is no significant
 ## damping. If no return arguments are requested, plot the results.
 ##
-## See also: freqz, zplane
+## @seealso{freqz, zplane}
+## @end deftypefn
 
 ## TODO: Call equivalent function from control toolbox since it is
 ## TODO:    probably more sophisticated than this one, and since it

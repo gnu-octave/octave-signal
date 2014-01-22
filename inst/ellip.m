@@ -14,8 +14,14 @@
 ## You should have received a copy of the GNU General Public License along with
 ## this program; if not, see <http://www.gnu.org/licenses/>.
 
-## N-ellip 0.2.1
-##usage: [Zz, Zp, Zg] = ellip(n, Rp, Rs, Wp, stype,'s')
+## -*- texinfo -*-
+## @deftypefn  {Function File} {[@var{b}, @var{a}] =} ellip (@var{n}, @var{Rp}, @var{Rs}, @var{Wp})
+## @deftypefnx {Function File} {[@var{b}, @var{a}] =} ellip (@var{n}, @var{Rp}, @var{Rs}, @var{Wp}, "high")
+## @deftypefnx {Function File} {[@var{b}, @var{a}] =} ellip (@var{n}, @var{Rp}, @var{Rs}, @var{[Wl}, @var{Wh}])
+## @deftypefnx {Function File} {[@var{b}, @var{a}] =} ellip (@var{n}, @var{Rp}, @var{Rs}, @var{[Wl}, @var{Wh}], "stop")
+## @deftypefnx {Function File} {[@var{z}, @var{p}, @var{g}] =} ellip (@dots{})
+## @deftypefnx {Function File} {[@var{a}, @var{b}, @var{c}, @var{d}] =} ellip (@dots{})
+## @deftypefnx {Function File} {[@dots{}] =} ellip (@dots{}, "s")
 ##
 ## Generate an Elliptic or Cauer filter (discrete and contnuious).
 ##
@@ -47,6 +53,7 @@
 ## - Parente Ribeiro, E., Notas de aula da disciplina TE498 -  Processamento
 ##   Digital de Sinais, UFPR, 2001/2002.
 ## - Kienzle, Paul, functions from Octave-Forge, 1999 (http://octave.sf.net).
+## @end deftypefn
 
 function [a,b,c,d] = ellip(n, Rp, Rs, W, varargin)
 

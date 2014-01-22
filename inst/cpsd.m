@@ -13,12 +13,18 @@
 ## You should have received a copy of the GNU General Public License along with
 ## this program; if not, see <http://www.gnu.org/licenses/>.
 
-## Usage:
-##   [Pxx,freq] = cpsd(x,y,window,overlap,Nfft,Fs,range)
-##
-##     Estimate cross power spectrum of data "x" and "y" by the Welch (1967)
-##     periodogram/FFT method.
-##     See "help pwelch" for description of arguments, hints and references
+## -*- texinfo -*-
+## @deftypefn  {Function File} {[@var{Pxx}, @var{freq}] =} cpsd (@var{x}, @var{y})
+## @deftypefnx {Function File} {[@dots{}] =} cpsd (@var{x}, @var{y}, @var{window})
+## @deftypefnx {Function File} {[@dots{}] =} cpsd (@var{x}, @var{y}, @var{window}, @var{overlap})
+## @deftypefnx {Function File} {[@dots{}] =} cpsd (@var{x}, @var{y}, @var{window}, @var{overlap}, @var{Nfft})
+## @deftypefnx {Function File} {[@dots{}] =} cpsd (@var{x}, @var{y}, @var{window}, @var{overlap}, @var{Nfft}, @var{Fs})
+## @deftypefnx {Function File} {[@dots{}] =} cpsd (@var{x}, @var{y}, @var{window}, @var{overlap}, @var{Nfft}, @var{Fs}, @var{range})
+## @deftypefnx {Function File} {} cpsd (@dots{})
+## Estimate cross power spectrum of data "x" and "y" by the Welch (1967)
+## periodogram/FFT method.
+## @seealso{pwelch}
+## @end deftypefn
 
 function [varargout] = cpsd(varargin)
 

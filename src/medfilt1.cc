@@ -164,15 +164,18 @@ double Median::operator()()
 }
 
 DEFUN_DLD (medfilt1, args, ,
-  "y = medfilt1(x [, n])\n\
-\n\
-Apply a median filter of length n to the signal x.  A sliding window is\n\
-applied to the data, and for each step the median value in the window is\n\
-returned.  If n is odd then the window for y(i) is x(i-(n-1)/2:i+(n-1)/2).\n\
-If n is even then the window is x(i-n/2:i+n/2-1) and the two values in the\n\
-center of the sorted window are averaged. If n is not given, then 3 is used.\n\
-NaNs are ignored, as are values beyond the ends, by taking the median of\n\
-the remaining values.")
+  "-*- texinfo -*-\n\
+@deftypefn  {Loadable Function} {@var{y} =} medfilt1 (@var{x})\n\
+@deftypefnx {Loadable Function} {@var{y} =} medfilt1 (@var{x}, @var{n})\n\
+Apply a median filter of length @var{n} to the signal @var{x}.  A sliding\n\
+window is applied to the data, and for each step the median value in the\n\
+window is returned.  If @var{n} is odd then the window for y(i) is\n\
+x(i-(n-1)/2:i+(n-1)/2).  If @var{n} is even then the window is\n\
+x(i-n/2:i+n/2-1) and the two values in the center of the sorted window are\n\
+averaged.  If @var{n} is not given, then 3 is used.  NaNs are ignored,\n\
+as are values beyond the ends, by taking the median of the remaining\n\
+values.\n\
+@end deftypefn")
 {
   octave_value_list retval;
 

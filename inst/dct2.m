@@ -13,12 +13,17 @@
 ## You should have received a copy of the GNU General Public License along with
 ## this program; if not, see <http://www.gnu.org/licenses/>.
 
+## -*- texinfo -*-
+## @deftypefn  {Function File} {} dct2 (@var{x})
+## @deftypefnx {Function File} {} dct2 (@var{x}, @var{m}, @var{n})
+## @deftypefnx {Function File} {} dct2 (@var{x}, [@var{m}, @var{n}])
 ## y = dct2 (x)
 ##   Computes the 2-D discrete cosine transform of matrix x
 ##
 ## y = dct2 (x, m, n) or y = dct2 (x, [m n])
 ##   Computes the 2-D DCT of x after padding or trimming rows to m and
 ##   columns to n.
+## @end deftypefn
 
 function y = dct2 (x, m, n)
 

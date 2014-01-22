@@ -14,13 +14,20 @@
 ## You should have received a copy of the GNU General Public License along with
 ## this program; if not, see <http://www.gnu.org/licenses/>.
 
-## y = sgolayfilt (x, p, n [, m [, ts]])
-##    Smooth the data in x with a Savitsky-Golay smoothing filter of
-##    polynomial order p and length n, n odd, n > p.  By default, p=3
-##    and n=p+2 or n=p+3 if p is even.
+## -*- texinfo -*-
+## @deftypefn  {Function File} {@var{y} =} sgolayfilt (@var{x})
+## @deftypefnx {Function File} {@var{y} =} sgolayfilt (@var{x}, @var{p})
+## @deftypefnx {Function File} {@var{y} =} sgolayfilt (@var{x}, @var{p}, @var{n})
+## @deftypefnx {Function File} {@var{y} =} sgolayfilt (@var{x}, @var{p}, @var{n}, @var{m})
+## @deftypefnx {Function File} {@var{y} =} sgolayfilt (@var{x}, @var{p}, @var{n}, @var{m}, @var{ts})
+## @deftypefnx {Function File} {@var{y} =} sgolayfilt (@var{x}, @var{p}, @var{n}, @var{m}, @var{ts})
+## @deftypefnx {Function File} {@var{y} =} sgolayfilt (@var{x}, @var{f})
+## Smooth the data in x with a Savitsky-Golay smoothing filter of
+## polynomial order p and length n, n odd, n > p.  By default, p=3
+## and n=p+2 or n=p+3 if p is even.
 ##
-## y = sgolayfilt (x, F)
-##    Smooth the data in x with smoothing filter F computed by sgolay.
+## If @var{f} is given as a matrix, it is expected to be a filter as
+## computed by @code{sgolay}.
 ##
 ## These filters are particularly good at preserving lineshape while
 ## removing high frequency squiggles. Particularly, compare a 5 sample
@@ -34,7 +41,8 @@
 ##         filtfilt(b,a,x),"c;order 5 butterworth;",...
 ##         x,"+b;original data;");
 ##
-## See also: sgolay
+## @seealso{sgolay}
+## @end deftypefn
 
 ## TODO: Patch filter.cc so that it accepts matrix arguments
 

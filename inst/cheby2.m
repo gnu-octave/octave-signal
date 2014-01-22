@@ -14,6 +14,14 @@
 ## You should have received a copy of the GNU General Public License along with
 ## this program; if not, see <http://www.gnu.org/licenses/>.
 
+## -*- texinfo -*-
+## @deftypefn  {Function File} {[@var{b}, @var{a}] =} cheby2 (@var{n}, @var{Rs}, @var{Wc})
+## @deftypefnx {Function File} {[@var{b}, @var{a}] =} cheby2 (@var{n}, @var{Rs}, @var{Wc}, "high")
+## @deftypefnx {Function File} {[@var{b}, @var{a}] =} cheby2 (@var{n}, @var{Rs}, [@var{Wl}, @var{Wh}])
+## @deftypefnx {Function File} {[@var{b}, @var{a}] =} cheby2 (@var{n}, @var{Rs}, [@var{Wl}, @var{Wh}], "stop")
+## @deftypefnx {Function File} {[@var{z}, @var{p}, @var{g}] =} cheby2 (@dots{})
+## @deftypefnx {Function File} {[@var{a}, @var{b}, @var{c}, @var{d}] =} cheby2 (@dots{})
+## @deftypefnx {Function File} {[@dots{}] =} cheby2 (@dots{}, "s")
 ## Generate an Chebyshev type II filter with Rs dB of stop band attenuation.
 ##
 ## [b, a] = cheby2(n, Rs, Wc)
@@ -42,6 +50,7 @@
 ##
 ## Parks & Burrus (1987). Digital Filter Design. New York:
 ## John Wiley & Sons, Inc.
+## @end deftypefn
 
 function [a,b,c,d] = cheby2(n, Rs, W, varargin)
 

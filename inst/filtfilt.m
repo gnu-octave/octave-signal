@@ -15,21 +15,22 @@
 ## You should have received a copy of the GNU General Public License along with
 ## this program; if not, see <http://www.gnu.org/licenses/>.
 
-## usage: y = filtfilt(b, a, x)
+## -*- texinfo -*-
+## @deftypefn {Function File} {@var{y} =} filtfilt (@var{b}, @var{a}, @var{x})
 ##
 ## Forward and reverse filter the signal. This corrects for phase
 ## distortion introduced by a one-pass filter, though it does square the
 ## magnitude response in the process. That's the theory at least.  In
 ## practice the phase correction is not perfect, and magnitude response
 ## is distorted, particularly in the stop band.
-####
+##
 ## Example
 ##    [b, a]=butter(3, 0.1);                  # 10 Hz low-pass filter
 ##    t = 0:0.01:1.0;                         # 1 second sample
 ##    x=sin(2*pi*t*2.3)+0.25*randn(size(t));  # 2.3 Hz sinusoid+noise
 ##    y = filtfilt(b,a,x); z = filter(b,a,x); # apply filter
 ##    plot(t,x,';data;',t,y,';filtfilt;',t,z,';filter;')
-
+## @end deftypefn
 
 ## TODO:  (pkienzle) My version seems to have similar quality to matlab,
 ##      but both are pretty bad.  They do remove gross lag errors, though.

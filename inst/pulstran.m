@@ -13,8 +13,11 @@
 ## You should have received a copy of the GNU General Public License along with
 ## this program; if not, see <http://www.gnu.org/licenses/>.
 
-## usage: y=pulstran(t,d,'func',...)
-##        y=pulstran(t,d,p,Fs,'interp')
+## -*- texinfo -*-
+## @deftypefn  {Function File} {@var{y} =} pulstran (@var{t}, @var{d}, @var{func}, @dots{})
+## @deftypefnx {Function File} {@var{y} =} pulstran (@var{t}, @var{d}, @var{p})
+## @deftypefnx {Function File} {@var{y} =} pulstran (@var{t}, @var{d}, @var{p}, @var{Fs})
+## @deftypefnx {Function File} {@var{y} =} pulstran (@var{t}, @var{d}, @var{p}, @var{Fs}, @var{method})
 ##
 ## Generate the signal y=sum(func(t+d,...)) for each d.  If d is a
 ## matrix of two columns, the first column is the delay d and the second
@@ -40,6 +43,7 @@
 ##   f0 = 100;    # pulse train sample rate
 ##   w = boxcar(10);  # pulse width of 1 millisecond at 10 kHz
 ##   auplot(pulstran(0:1/fs:0.1, 0:1/f0:0.1, w, 10000), fs);
+## @end deftypefn
 
 ## TODO: Make it faster.  It is currently unusable for anything real.
 ## TODO: It may not be possible to speed it up with the present interface.

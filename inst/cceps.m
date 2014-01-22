@@ -13,11 +13,13 @@
 ## You should have received a copy of the GNU General Public License along with
 ## this program; if not, see <http://www.gnu.org/licenses/>.
 
-## usage:  cceps (x [, correct])
-##
-## Returns the complex cepstrum of the vector x.
-## If the optional argument correct has the value 1, a correction
+## -*- texinfo -*-
+## @deftypefn  {Function File} {} cceps (@var{x})
+## @deftypefnx {Function File} {} cceps (@var{x}, @var{correct})
+## Return the complex cepstrum of the vector @var{x}.
+## If the optional argument @var{correct} has the value 1, a correction
 ## method is applied.  The default is not to do this.
+## @end deftypefn
 
 ## Author: Andreas Weingessel <Andreas.Weingessel@ci.tuwien.ac.at>
 ## Apr 1, 1994

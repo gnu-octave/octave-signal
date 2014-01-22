@@ -14,13 +14,20 @@
 ## You should have received a copy of the GNU General Public License along with
 ## this program; if not, see <http://www.gnu.org/licenses/>.
 
-## usage:  [a, v, k] = aryule (x, p)
-##
-## fits an AR (p)-model with Yule-Walker estimates.
-## x = data vector to estimate
-## a: AR coefficients
-## v: variance of white noise
-## k: reflection coeffients for use in lattice filter
+## -*- texinfo -*-
+## @deftypefn  {Function File} {@var{a} =} aryule (@var{x}, @var{p})
+## @deftypefnx {Function File} {[@var{a}, @var{v}, @var{k}] =} aryule (@var{x}, @var{p})
+## Fit an AR (@var{p})-model with Yule-Walker estimates.
+## @table @var
+## @item x
+## data vector to estimate
+## @item a
+## AR coefficients
+## @item v
+## variance of white noise
+## @item k
+## reflection coeffients for use in lattice filter
+## @end table
 ##
 ## The power spectrum of the resulting filter can be plotted with
 ## pyulear(x, p), or you can plot it directly with ar_psd(a,v,...).
@@ -35,6 +42,7 @@
 ## truncation errors, which is why you might want to use them.  However,
 ## lacking a lattice filter processor, I haven't tested that the lattice
 ## filter coefficients are reasonable.
+## @end deftypefn
 
 function [a, v, k] = aryule (x, p)
 

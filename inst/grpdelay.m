@@ -14,6 +14,16 @@
 ## You should have received a copy of the GNU General Public License along with
 ## this program; if not, see <http://www.gnu.org/licenses/>.
 
+## -*- texinfo -*-
+## @deftypefn  {Function File} {[@var{g}, @var{w}] =} grpdelay (@var{b})
+## @deftypefnx {Function File} {[@var{g}, @var{w}] =} grpdelay (@var{b}, @var{a})
+## @deftypefnx {Function File} {[@var{g}, @var{w}] =} grpdelay (@dots{}, @var{n})
+## @deftypefnx {Function File} {[@var{g}, @var{w}] =} grpdelay (@dots{}, @var{n}, "whole")
+## @deftypefnx {Function File} {[@var{g}, @var{f}] =} grpdelay (@dots{}, @var{n}, @var{Fs})
+## @deftypefnx {Function File} {[@var{g}, @var{f}] =} grpdelay (@dots{}, @var{n}, "whole", @var{Fs})
+## @deftypefnx {Function File} {[@var{g}, @var{w}] =} grpdelay (@dots{}, @var{w})
+## @deftypefnx {Function File} {[@var{g}, @var{f}] =} grpdelay (@dots{}, @var{f}, @var{Fs})
+## @deftypefnx {Function File} {} grpdelay (@dots{})
 ## Compute the group delay of a filter.
 ##
 ## [g, w] = grpdelay(b)
@@ -82,6 +92,7 @@
 ## is converted to the FIR filter conv(b,fliplr(conj(a))).
 ## For further details, see
 ## http://ccrma.stanford.edu/~jos/filters/Numerical_Computation_Group_Delay.html
+## @end deftypefn
 
 function [gd, w] = grpdelay (b, a = 1, nfft = 512, whole, Fs)
 
