@@ -2,7 +2,7 @@
 ## This program is granted to the public domain.
 
 ## -*- texinfo -*-
-## @deftypefn {Function File} {@var{y} =} dst (@var{x})
+## @deftypefn  {Function File} {@var{y} =} dst (@var{x})
 ## @deftypefnx {Function File} {@var{y} =} dst (@var{x}, @var{n})
 ## Computes the type I discrete sine transform of @var{x}.  If @var{n} is given,
 ## then @var{x} is padded or trimmed to length @var{n} before computing the transform.

@@ -14,7 +14,7 @@
 ## along with this program; if not, see <http://www.gnu.org/licenses/>.
 
 ## -*- texinfo -*-
-## @deftypefn {Function File} {[@var{pks} @var{loc} @var{extra}] =} findpeaks (@var{data})
+## @deftypefn  {Function File} {[@var{pks}, @var{loc}, @var{extra}] =} findpeaks (@var{data})
 ## @deftypefnx {Function File} {@dots{} =} findpeaks (@dots{}, @var{property}, @var{value})
 ## @deftypefnx {Function File} {@dots{} =} findpeaks (@dots{}, @asis{"DoubleSided"})
 ## Finds peaks on @var{data}.

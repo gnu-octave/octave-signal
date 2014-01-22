@@ -14,7 +14,7 @@
 ## this program; if not, see <http://www.gnu.org/licenses/>.
 
 ## -*- texinfo -*-
-## @deftypefn {Function File} {[@var{w}] =} barthannwin(@var{L})
+## @deftypefn {Function File} {[@var{w}] =} barthannwin (@var{L})
 ## Compute the modified Bartlett-Hann window of lenght L.
 ## @seealso{rectwin,  bartlett}
 ## @end deftypefn

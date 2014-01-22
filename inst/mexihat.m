@@ -14,7 +14,7 @@
 ## this program; if not, see <http://www.gnu.org/licenses/>.
 
 ## -*- texinfo -*-
-## @deftypefn {Function File} {[@var{psi,x}] =} mexihat(@var{lb,ub,n})
+## @deftypefn {Function File} {[@var{psi,x}] =} mexihat (@var{lb,ub,n})
 ## Compute the Mexican hat wavelet.
 ## @end deftypefn
 

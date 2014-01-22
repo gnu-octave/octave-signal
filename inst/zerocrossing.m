@@ -14,8 +14,7 @@
 ## this program; if not, see <http://www.gnu.org/licenses/>.
 
 ## -*- texinfo -*-
-## @deftypefn {Function File} {@var{x0}} = zerocrossing (@var{x}, @
-## @var{y})
+## @deftypefn {Function File} {@var{x0} =} zerocrossing (@var{x}, @var{y})
 ## Estimates the points at which a given waveform y=y(x) crosses the
 ## x-axis using linear interpolation.
 ## @seealso{fzero, roots}

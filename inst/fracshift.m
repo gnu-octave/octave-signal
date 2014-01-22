@@ -14,12 +14,12 @@
 ## this program; if not, see <http://www.gnu.org/licenses/>.
 
 ## -*- texinfo -*-
-## @deftypefn {Function File}  {[@var{y} @var{h}]=} fracshift(@var{x},@var{d})
-## @deftypefnx {Function File} {@var{y} =} fracshift(@var{x},@var{d},@var{h})
+## @deftypefn  {Function File} {[@var{y}, @var{h}] =} fracshift (@var{x}, @var{d})
+## @deftypefnx {Function File} {@var{y} =} fracshift (@var{x}, @var{d}, @var{h})
 ## Shift the series @var{x} by a (possibly fractional) number of samples @var{d}.
 ## The interpolator @var{h} is either specified or either designed with a Kaiser-windowed sinecard.
-## @end deftypefn
 ## @seealso{circshift}
+## @end deftypefn
 
 ## Ref [1] A. V. Oppenheim, R. W. Schafer and J. R. Buck,
 ## Discrete-time signal processing, Signal processing series,

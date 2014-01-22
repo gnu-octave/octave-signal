@@ -14,7 +14,7 @@
 ## this program; if not, see <http://www.gnu.org/licenses/>.
 
 ## -*- texinfo -*-
-## @deftypefn {Function File} {[@var{z}, @var{p}, @var{g}] =} sos2zp (@var{sos})
+## @deftypefn  {Function File} {[@var{z}, @var{p}, @var{g}] =} sos2zp (@var{sos})
 ## @deftypefnx {Function File} {[@var{z}, @var{p}, @var{g}] =} sos2zp (@var{sos}, @var{Bscale})
 ## Convert series second-order sections to zeros, poles, and gains
 ## (pole residues).

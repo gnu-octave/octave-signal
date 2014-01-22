@@ -14,7 +14,7 @@
 ## this program; if not, see <http://www.gnu.org/licenses/>.
 
 ## -*- texinfo -*-
-## @deftypefn {Function File} {[@var{w}] =} blackmannuttall(@var{L})
+## @deftypefn {Function File} {[@var{w}] =} blackmannuttall (@var{L})
 ## Compute the Blackman-Nuttall window.
 ## @seealso{nuttallwin,  kaiser}
 ## @end deftypefn

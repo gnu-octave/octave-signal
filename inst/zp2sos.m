@@ -14,7 +14,7 @@
 ## this program; if not, see <http://www.gnu.org/licenses/>.
 
 ## -*- texinfo -*-
-## @deftypefn {Function File} {[@var{sos}, @var{g}] =} zp2sos (@var{z}, @var{p})
+## @deftypefn  {Function File} {[@var{sos}, @var{g}] =} zp2sos (@var{z}, @var{p})
 ## @deftypefnx {Function File} {[@var{sos}, @var{g}] =} zp2sos (@var{z}, @var{p}, @var{g})
 ## Convert filter poles and zeros to second-order sections.
 ##

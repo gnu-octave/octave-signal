@@ -14,7 +14,7 @@
 ## this program; if not, see <http://www.gnu.org/licenses/>.
 
 ## -*- texinfo -*-
-## @deftypefn {Function File} {[@var{w}] =} rectwin(@var{L})
+## @deftypefn {Function File} {[@var{w}] =} rectwin (@var{L})
 ## Return the filter coefficients of a rectangle window of length L.
 ## @seealso{hamming, hanning}
 ## @end deftypefn

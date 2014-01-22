@@ -14,7 +14,7 @@
 ## this program; if not, see <http://www.gnu.org/licenses/>.
 
 ## -*- texinfo -*-
-## @deftypefn {Function File} {[@var{R}, @var{lag}] =} xcov ( @var{X} )
+## @deftypefn  {Function File} {[@var{R}, @var{lag}] =} xcov ( @var{X} )
 ## @deftypefnx {Function File} {@dots{} =} xcov ( @var{X}, @var{Y} )
 ## @deftypefnx {Function File} {@dots{} =} xcov ( @dots{}, @var{maxlag})
 ## @deftypefnx {Function File} {@dots{} =} xcov ( @dots{}, @var{scale})

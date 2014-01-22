@@ -14,7 +14,7 @@
 ## this program; if not, see <http://www.gnu.org/licenses/>.
 
 ## -*- texinfo -*-
-## @deftypefn {Function File} {[@var{y}] =} meyeraux(@var{x})
+## @deftypefn {Function File} {[@var{y}] =} meyeraux (@var{x})
 ## Compute the Meyer wavelet auxiliary function.
 ## @end deftypefn
 

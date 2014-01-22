@@ -14,8 +14,8 @@
 ## this program; if not, see <http://www.gnu.org/licenses/>.
 
 ## -*- texinfo -*-
-## @deftypefn {Function File} {[@var{fhandle}, @var{fullname}] = } data2fun (@var{ti}, @var{yi})
-## @deftypefnx {Function File} {[ @dots{} ] = } data2fun (@var{ti}, @var{yi},@var{property},@var{value})
+## @deftypefn  {Function File} {[@var{fhandle}, @var{fullname}] =} data2fun (@var{ti}, @var{yi})
+## @deftypefnx {Function File} {[@dots{}] =} data2fun (@var{ti}, @var{yi},@var{property},@var{value})
 ## Creates a vectorized function based on data samples using interpolation.
 ##
 ## The values given in @var{yi} (N-by-k matrix) correspond to evaluations of the

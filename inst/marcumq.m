@@ -14,9 +14,9 @@
 ## this program; if not, see <http://www.gnu.org/licenses/>.
 
 ## -*- texinfo -*-
-## @deftypefn  {Function File} {@var{Q} = } marcumq (@var{a}, @var{b})
-## @deftypefnx {Function File} {@var{Q} = } marcumq (@var{a}, @var{b}, @var{m})
-## @deftypefnx {Function File} {@var{Q} = } marcumq (@var{a}, @var{b}, @var{m}, @var{tol})
+## @deftypefn  {Function File} {@var{Q} =} marcumq (@var{a}, @var{b})
+## @deftypefnx {Function File} {@var{Q} =} marcumq (@var{a}, @var{b}, @var{m})
+## @deftypefnx {Function File} {@var{Q} =} marcumq (@var{a}, @var{b}, @var{m}, @var{tol})
 ##
 ## Compute the generalized Marcum Q function of order @var{M} with
 ## noncentrality parameter @var{a} and argument @var{b}.  If the order

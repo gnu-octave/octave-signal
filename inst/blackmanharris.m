@@ -14,7 +14,7 @@
 ## this program; if not, see <http://www.gnu.org/licenses/>.
 
 ## -*- texinfo -*-
-## @deftypefn {Function File} {[@var{w}] =} blackmanharris(@var{L})
+## @deftypefn {Function File} {[@var{w}] =} blackmanharris (@var{L})
 ## Compute the Blackman-Harris window.
 ## @seealso{rectwin,  bartlett}
 ## @end deftypefn

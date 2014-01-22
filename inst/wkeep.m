@@ -14,7 +14,7 @@
 ## this program; if not, see <http://www.gnu.org/licenses/>.
 
 ## -*- texinfo -*-
-## @deftypefn {Function File} {[@var{y}] =} wkeep(@var{x,l,opt})
+## @deftypefn {Function File} {[@var{y}] =} wkeep (@var{x,l,opt})
 ## Extract the elements of x of size l from the center, the right or the left.
 ## @end deftypefn
 

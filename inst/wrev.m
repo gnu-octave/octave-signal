@@ -14,7 +14,7 @@
 ## this program; if not, see <http://www.gnu.org/licenses/>.
 
 ## -*- texinfo -*-
-## @deftypefn {Function File} {[@var{y}] =} wrev(@var{x})
+## @deftypefn {Function File} {[@var{y}] =} wrev (@var{x})
 ## Reverse the order of the element of the vector x.
 ## @seealso{flipud, fliplr}
 ## @end deftypefn

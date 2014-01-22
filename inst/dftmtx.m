@@ -14,7 +14,7 @@
 ## this program; if not, see <http://www.gnu.org/licenses/>.
 
 ## -*- texinfo -*-
-## @deftypefn {Function File} {@var{d} = } dftmtx (@var{n})
+## @deftypefn {Function File} {@var{d} =} dftmtx (@var{n})
 ##
 ## If @var{n} is a scalar, produces a @var{n}-by-@var{n} matrix @var{d}
 ## such that the Fourier transform of a column vector of length @var{n}

@@ -14,7 +14,7 @@
 ## this program; if not, see <http://www.gnu.org/licenses/>.
 
 ## -*- texinfo -*-
-## @deftypefn {Function File} {[@var{B}, @var{A}] =} sos2tf (@var{sos})
+## @deftypefn  {Function File} {[@var{B}, @var{A}] =} sos2tf (@var{sos})
 ## @deftypefnx {Function File} {[@var{B}, @var{A}] =} sos2tf (@var{sos}, @var{Bscale})
 ## Convert series second-order sections to direct form @math{H(z) = B(z)/A(z)}.
 ##

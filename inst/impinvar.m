@@ -16,9 +16,9 @@
 ## this program; if not, see <http://www.gnu.org/licenses/>.
 
 ## -*- texinfo -*-
-## @deftypefn{Function File} {[@var{b_out}, @var{a_out}] =} impinvar (@var{b}, @var{a}, @var{fs}, @var{tol})
-## @deftypefnx{Function File} {[@var{b_out}, @var{a_out}] =} impinvar (@var{b}, @var{a}, @var{fs})
-## @deftypefnx{Function File} {[@var{b_out}, @var{a_out}] =} impinvar (@var{b}, @var{a})
+## @deftypefn  {Function File} {[@var{b_out}, @var{a_out}] =} impinvar (@var{b}, @var{a}, @var{fs}, @var{tol})
+## @deftypefnx {Function File} {[@var{b_out}, @var{a_out}] =} impinvar (@var{b}, @var{a}, @var{fs})
+## @deftypefnx {Function File} {[@var{b_out}, @var{a_out}] =} impinvar (@var{b}, @var{a})
 ## Converts analog filter with coefficients @var{b} and @var{a} to digital,
 ## conserving impulse response.
 ##

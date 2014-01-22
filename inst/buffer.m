@@ -14,8 +14,8 @@
 ## this program; if not, see <http://www.gnu.org/licenses/>.
 
 ## -*- texinfo -*-
-## @deftypefn {Function File} {@var{y} = } buffer (@var{x}, @var{n}, @var{p}, @var{opt})
-## @deftypefnx {Function File} {[@var{y}, @var{z}, @var{opt}] = } buffer (@dots{})
+## @deftypefn  {Function File} {@var{y} =} buffer (@var{x}, @var{n}, @var{p}, @var{opt})
+## @deftypefnx {Function File} {[@var{y}, @var{z}, @var{opt}] =} buffer (@dots{})
 ## Buffer a signal into a data frame. The arguments to @code{buffer} are
 ##
 ## @table @asis

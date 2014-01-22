@@ -14,7 +14,7 @@
 ## this program; if not, see <http://www.gnu.org/licenses/>.
 
 ## -*- texinfo -*-
-## @deftypefn {Function File} @var{y} = sigmoid_train(@var{t}, @var{ranges}, @var{rc})
+## @deftypefn {Function File} {@var{y} =} sigmoid_train (@var{t}, @var{ranges}, @var{rc})
 ##
 ## Evaluates a train of sigmoid functions at @var{t}.
 ##

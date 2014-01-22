@@ -14,7 +14,7 @@
 ## along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 ## -*- texinfo -*-
-## @deftypefn {Function File} {@var{y} =} wconv (@var{type}, @var{x}, @var{f})
+## @deftypefn  {Function File} {@var{y} =} wconv (@var{type}, @var{x}, @var{f})
 ## @deftypefnx {Function File} {@var{y} =} wconv (@var{type}, @var{x}, @var{f}, @var{shape})
 ## 1-D or 2-D convolution.
 ## 

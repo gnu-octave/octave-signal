@@ -13,10 +13,8 @@
 ## You should have received a copy of the GNU General Public License
 ## along with this program. If not, see <http://www.gnu.org/licenses/>.
 
-## Author: Juan Pablo Carbajal <ajuanpi+dev@gmail.com>
-
 ## -*- texinfo -*-
-## @deftypefn {Function File} {@var{y} =} upsamplefill (@var{x}, @var{v})
+## @deftypefn  {Function File} {@var{y} =} upsamplefill (@var{x}, @var{v})
 ## @deftypefnx {Function File} {@var{y} =} upsamplefill (@dots{}, @var{copy})
 ## Upsamples a vector interleaving given values or copies of the vector elements.
 ##
@@ -49,6 +47,8 @@
 ##
 ## @seealso{upsample}
 ## @end deftypefn
+
+## Author: Juan Pablo Carbajal <ajuanpi+dev@gmail.com>
 
 function y = upsamplefill (x, v, copy=false)
 

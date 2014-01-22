@@ -14,7 +14,7 @@
 ## along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 ## -*- texinfo -*-
-## @deftypefn {Function File} {[@var{u}, @var{v}] =} dwt (@var{x}, @var{wname})
+## @deftypefn  {Function File} {[@var{u}, @var{v}] =} dwt (@var{x}, @var{wname})
 ## @deftypefnx {Function File} {[@var{u}, @var{v}] =} dwt (@var{x}, @var{Hp}, @var{Gp})
 ## @deftypefnx {Function File} {[@var{u}, @var{v}] =} dwt (@var{x}, @var{Hp}, @var{Gp}, @dots{})
 ## Discrete wavelet transform (1D).

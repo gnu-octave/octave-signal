@@ -2,7 +2,7 @@
 ## This program is granted to the public domain.
 
 ## -*- texinfo -*-
-## @deftypefn {Function File} {@var{y} =} upsample (@var{x}, @var{n})
+## @deftypefn  {Function File} {@var{y} =} upsample (@var{x}, @var{n})
 ## @deftypefnx {Function File} {@var{y} =} upsample (@var{x}, @var{n}, @var{offset})
 ## Upsample the signal, inserting n-1 zeros between every element.
 ##

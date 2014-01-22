@@ -2,7 +2,7 @@
 ## This program is granted to the public domain.
 
 ## -*- texinfo -*-
-## @deftypefn {Function File} {@var{y} =} idst (@var{x})
+## @deftypefn  {Function File} {@var{y} =} idst (@var{x})
 ## @deftypefnx {Function File} {@var{y} =} idst (@var{x}, @var{n})
 ## Computes the inverse type I discrete sine transform of @var{y}.  If @var{n} is
 ## given, then @var{y} is padded or trimmed to length @var{n} before computing

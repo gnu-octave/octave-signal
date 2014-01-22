@@ -14,7 +14,7 @@
 ## this program; if not, see <http://www.gnu.org/licenses/>.
 
 ## -*- texinfo -*-
-## @deftypefn {Function File} {[@var{y}] =} gmonopuls(@var{t},@var{fc})
+## @deftypefn {Function File} {[@var{y}] =} gmonopuls (@var{t},@var{fc})
 ## Return the gaussian monopulse.
 ## @end deftypefn
 

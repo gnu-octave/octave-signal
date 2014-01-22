@@ -14,7 +14,7 @@
 ## this program; if not, see <http://www.gnu.org/licenses/>.
 
 ## -*- texinfo -*-
-## @deftypefn {Function File} {[@var{w}] =} parzenwin(@var{L})
+## @deftypefn {Function File} {[@var{w}] =} parzenwin (@var{L})
 ## Compute the Parzen window of lenght L.
 ## @seealso{rectwin,  bartlett}
 ## @end deftypefn

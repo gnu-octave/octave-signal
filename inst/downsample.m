@@ -2,7 +2,7 @@
 ## This program is granted to the public domain.
 
 ## -*- texinfo -*-
-## @deftypefn {Function File} {@var{y} =} downsample (@var{x}, @var{n})
+## @deftypefn  {Function File} {@var{y} =} downsample (@var{x}, @var{n})
 ## @deftypefnx {Function File} {@var{y} =} downsample (@var{x}, @var{n}, @var{offset})
 ## Downsample the signal, selecting every nth element.  If @var{x}
 ## is a matrix, downsample every column.

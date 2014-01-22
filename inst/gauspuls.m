@@ -14,7 +14,7 @@
 ## this program; if not, see <http://www.gnu.org/licenses/>.
 
 ## -*- texinfo -*-
-## @deftypefn {Function File} {[@var{y}] =} gauspuls(@var{t},@var{fc},@var{bw})
+## @deftypefn {Function File} {[@var{y}] =} gauspuls (@var{t},@var{fc},@var{bw})
 ## Return the Gaussian modulated sinusoidal pulse.
 ## @end deftypefn
 

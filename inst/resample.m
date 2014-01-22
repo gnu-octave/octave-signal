@@ -14,8 +14,8 @@
 ## this program; if not, see <http://www.gnu.org/licenses/>.
 
 ## -*- texinfo -*-
-## @deftypefn {Function File}  {[@var{y} @var{h}]=} resample(@var{x},@var{p},@var{q})
-## @deftypefnx {Function File} {@var{y} =} resample(@var{x},@var{p},@var{q},@var{h})
+## @deftypefn  {Function File} {[@var{y}, @var{h}] =} resample (@var{x}, @var{p}, @var{q})
+## @deftypefnx {Function File} {@var{y} =} resample (@var{x}, @var{p}, @var{q}, @var{h})
 ## Change the sample rate of @var{x} by a factor of @var{p}/@var{q}. This is
 ## performed using a polyphase algorithm. The impulse response @var{h} of the antialiasing
 ## filter is either specified or either designed with a Kaiser-windowed sinecard.

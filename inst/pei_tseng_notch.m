@@ -14,7 +14,7 @@
 ## this program; if not, see <http://www.gnu.org/licenses/>.
 
 ## -*- texinfo -*-
-## @deftypefn{Function File} { [ @var{b}, @var{a} ] } = pei_tseng_notch ( @var{frequencies}, @var{bandwidths}
+## @deftypefn {Function File} {[@var{b}, @var{a}] =} pei_tseng_notch (@var{frequencies}, @var{bandwidths})
 ## Return coefficients for an IIR notch-filter with one or more filter frequencies and according (very narrow) bandwidths
 ## to be used with @code{filter} or @code{filtfilt}.
 ## The filter construction is based on an allpass which performs a reversal of phase at the filter frequencies.

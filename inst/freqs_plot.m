@@ -14,9 +14,8 @@
 ## this program; if not, see <http://www.gnu.org/licenses/>.
 
 ## -*- texinfo -*-
-## @deftypefn {Function File} freqs_plot (@var{w}, @var{h})
+## @deftypefn {Function File} {} freqs_plot (@var{w}, @var{h})
 ## Plot the amplitude and phase of the vector @var{h}.
-##
 ## @end deftypefn
 
 function freqs_plot(w,h)

@@ -14,7 +14,7 @@
 ## this program; if not, see <http://www.gnu.org/licenses/>.
 
 ## -*- texinfo -*-
-## @deftypefn{Function File} {m = } ifht ( d, n, dim )
+## @deftypefn {Function File} {@var{m} =} ifht (@var{d}, @var{n}, @var{dim})
 ## @cindex linear algebra
 ##  The function ifht calculates  Fast Hartley Transform
 ##  where @var{d} is the real input vector (matrix), and @var{m}

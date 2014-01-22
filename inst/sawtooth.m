@@ -14,8 +14,8 @@
 ## this program; if not, see <http://www.gnu.org/licenses/>.
 
 ## -*- texinfo -*-
-## @deftypefn {Function File} {[@var{y}] =} sawtooth(@var{t})
-## @deftypefnx {Function File} {[@var{y}] =} sawtooth(@var{t},@var{width})
+## @deftypefn  {Function File} {[@var{y}] =} sawtooth (@var{t})
+## @deftypefnx {Function File} {[@var{y}] =} sawtooth (@var{t}, @var{width})
 ## Generates a sawtooth wave of period @code{2 * pi} with limits @code{+1/-1}
 ##  for the elements of @var{t}.
 ##
