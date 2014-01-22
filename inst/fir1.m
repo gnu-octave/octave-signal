@@ -112,7 +112,7 @@ function b = fir1(n, w, varargin)
   endif
 
   ## compute the filter
-  b = fir2(n, f, m, 512, 2, window);
+  b = fir2(n, f, m, [], 2, window);
 
   ## normalize filter magnitude
   if scale == 1
