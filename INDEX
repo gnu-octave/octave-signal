@@ -131,6 +131,7 @@ Window Functions
   rectwin
   triang
   tukeywin
+  ultrwin
   welchwin
   window
 System Identification
