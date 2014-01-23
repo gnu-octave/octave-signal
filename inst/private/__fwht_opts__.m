@@ -72,7 +72,7 @@ function [y, len] = __fwht_opts__ (caller, x, n, order)
   idx_bin = char (idx_bin + "0");
 
   if (strncmp (order, "dyadic", 6))
-    idx = bin2dec (idx_bin) + 1;
+    idx = bin2dec (fliplr (dec2bin (idx))) + 1;
   elseif (strncmp (order, "sequency", 8))
     idx = bin2dec (fliplr (idx_bin)) + 1;
   else

@@ -70,6 +70,15 @@ endfunction
 %!test
 %! x = randi (16, 16);
 %! assert (ifwht (fwht (x)), x);
+%!test
+%! x = randi (16, 16);
+%! assert (ifwht (fwht (x, [], "sequency"), [], "sequency"), x);
+%!test
+%! x = randi (16, 16);
+%! assert (ifwht (fwht (x, [], "hadamard"), [], "hadamard"), x);
+%!test
+%! x = randi (16, 16);
+%! assert (ifwht (fwht (x, [], "dyadic"), [], "dyadic"), x);
 
 %% Test input validation
 %!error fwht ();
