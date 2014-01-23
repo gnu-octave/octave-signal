@@ -45,24 +45,26 @@ endfunction
 %! assert (triang(3), x(2:4));
 
 %!demo
-%! subplot(221); axis([-1, 1, 0, 1.3]); grid("on");
-%! title("comparison with continuous for odd n");
+%! subplot(221);
 %! n=7; k=(n-1)/2; t=[-k:0.1:k]/(k+1);
 %! plot(t,1-abs(t),";continuous;",[-k:k]/(k+1),triang(n),"g*;discrete;");
+%! axis([-1, 1, 0, 1.3]); grid("on");
+%! title("comparison with continuous for odd n");
 %!
-%! subplot(222); axis([-1, 1, 0, 1.3]); grid("on");
+%! subplot(222);
 %! n=8; k=(n-1)/2; t=[-k:0.1:k]/(k+1/2);
-%! title("note the higher peak for even n");
 %! plot(t,1+1/n-abs(t),";continuous;",[-k:k]/(k+1/2),triang(n),"g*;discrete;");
+%! axis([-1, 1, 0, 1.3]); grid("on");
+%! title("note the higher peak for even n");
 %!
-%! subplot(223); axis; grid("off");
-%! title("n odd, triang(n)==bartlett(n+2)");
+%! subplot(223);
 %! n=7;
 %! plot(0:n+1,bartlett(n+2),"g-*;bartlett;",triang(n),"r-+;triang;");
+%! axis; grid("off");
+%! title("n odd, triang(n)==bartlett(n+2)");
 %!
-%! subplot(224); axis; grid("off");
-%! title("n even, triang(n)!=bartlett(n+2)");
+%! subplot(224);
 %! n=8;
 %! plot(0:n+1,bartlett(n+2),"g-*;bartlett;",triang(n),"r-+;triang;");
-%!
-%! subplot(111); title("");
+%! axis; grid("off");
+%! title("n even, triang(n)!=bartlett(n+2)");

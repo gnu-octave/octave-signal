@@ -92,34 +92,40 @@ endfunction
 %!demo
 %! [b, a] = butter(5,1/3);
 %! x=[zeros(1,15), 10*ones(1,10), zeros(1,15)];
-%! subplot(121); title("boxcar");
-%! axis([1 40 -2 15]);
+%! subplot(121);
 %! plot(sgolayfilt(x),"r;sgolay(3,5);",...
 %!      filtfilt(ones(1,5)/5,1,x),"g;5 sample average;",...
 %!      filtfilt(b,a,x),"c;order 5 butterworth;",...
-%!      x,"+b;original data;"); title("");
+%!      x,"+b;original data;");
+%! axis([1 40 -2 15]);
+%! title("boxcar");
 %!
 %! x=x+randn(size(x))/2;
-%! subplot(122); title("boxcar+noise");
+%! subplot(122);
 %! plot(sgolayfilt(x,3,5),"r;sgolay(3,5);",...
 %!      filtfilt(ones(1,5)/5,1,x),"g;5 sample average;",...
 %!      filtfilt(b,a,x),"c;order 5 butterworth;",...
-%!      x,"+b;original data;"); title("");
+%!      x,"+b;original data;");
+%! axis([1 40 -2 15]);
+%! title("boxcar+noise");
 
 %!demo
 %! [b, a] = butter(5,1/3);
 %! t = 0:0.01:1.0;                         % 1 second sample
 %! x=cos(2*pi*t*3);                        % 3 Hz sinusoid
-%! subplot(121); title("sinusoid");
-%! axis([0 1 -1.5 2.5]);
+%! subplot(121);
 %! plot(t,sgolayfilt(x,3,5),"r;sgolay(3,5);",...
 %!      t,filtfilt(ones(1,5)/5,1,x),"g;5 sample average;",...
 %!      t,filtfilt(b,a,x),"c;order 5 butterworth;",...
-%!      t,x,"+b;original data;"); title("");
+%!      t,x,"+b;original data;");
+%! axis([0 1 -1.5 2.5]);
+%! title("sinusoid");
 %!
 %! x=x+0.2*randn(size(x));                % signal+noise
-%! subplot(122); title("sinusoid+noise");
+%! subplot(122);
 %! plot(t,sgolayfilt(x',3,5),"r;sgolay(3,5);",...
 %!      t,filtfilt(ones(1,5)/5,1,x),"g;5 sample average;",...
 %!      t,filtfilt(b,a,x),"c;order 5 butterworth;",...
-%!      t,x,"+b;original data;"); title("");
+%!      t,x,"+b;original data;");
+%! axis([0 1 -1.5 2.5]);
+%! title("sinusoid+noise");

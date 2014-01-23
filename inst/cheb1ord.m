@@ -87,39 +87,39 @@ endfunction
 %! [n, Wc] = cheb1ord (1000/(Fs/2), 1200/(Fs/2), 0.5, 29);
 %!
 %! subplot (221);
+%! plot ([0, 1000, 1000, 0, 0], [0, 0, -0.5, -0.5, 0], ";;");
+%! hold on;
 %! axis ([ 0, 1500, -1, 0]);
 %! title("Pass band Wp=1000 Rp=0.5");
 %! xlabel("Frequency (Hz)");
 %! ylabel("Attenuation (dB)");
 %! grid;
-%! plot ([0, 1000, 1000, 0, 0], [0, 0, -0.5, -0.5, 0], ";;");
-%! hold on;
 %! [b, a] = cheby1 (n, 0.5, Wc);
 %! [h, w] = freqz (b, a, [], Fs);
 %! plot (w, 20*log10(abs(h)), ";;");
 %! hold off;
 %!
 %! subplot (222);
+%! plot ([1200, Fs/2, Fs/2, 1200, 1200], [-29, -29, -500, -500, -29], ";;");
+%! hold on;
 %! axis ([ 0, Fs/2, -250, 0]);
 %! title("Stop band Ws=1200 Rs=29");
 %! xlabel("Frequency (Hz)");
 %! ylabel("Attenuation (dB)");
 %! grid;
-%! plot ([1200, Fs/2, Fs/2, 1200, 1200], [-29, -29, -500, -500, -29], ";;");
-%! hold on;
 %! [b, a] = cheby1 (n, 0.5, Wc);
 %! [h, w] = freqz (b, a, [], Fs);
 %! plot (w, 20*log10(abs(h)), ";;");
 %! hold off;
 %!
 %! subplot (223);
+%! plot ([0, 1000, 1000, 0, 0], [0, 0, -0.5, -0.5, 0], ";;");
+%! hold on;
 %! axis ([ 990, 1010, -0.6, -0.4]);
 %! title("Pass band detail Wp=1000 Rp=0.5");
 %! xlabel("Frequency (Hz)");
 %! ylabel("Attenuation (dB)");
 %! grid;
-%! plot ([0, 1000, 1000, 0, 0], [0, 0, -0.5, -0.5, 0], ";;");
-%! hold on;
 %! [b, a] = cheby1 (n, 0.5, Wc);
 %! [h, w] = freqz (b, a, [990:1010], Fs);
 %! plot (w, 20*log10(abs(h)), ";filter n;");
@@ -132,13 +132,13 @@ endfunction
 %! hold off;
 %!
 %! subplot (224);
+%! plot ([1200, Fs/2, Fs/2, 1200, 1200], [-29, -29, -500, -500, -29], ";;");
+%! hold on;
 %! axis ([ 1190, 1210, -40, -20]);
 %! title("Stop band detail Wp=1200 Rp=29");
 %! xlabel("Frequency (Hz)");
 %! ylabel("Attenuation (dB)");
 %! grid;
-%! plot ([1200, Fs/2, Fs/2, 1200, 1200], [-29, -29, -500, -500, -29], ";;");
-%! hold on;
 %! [b, a] = cheby1 (n, 0.5, Wc);
 %! [h, w] = freqz (b, a, [1190:1210], Fs);
 %! plot (w, 20*log10(abs(h)), ";filter n;");

@@ -86,9 +86,9 @@ endfunction
 %! HTLS = freqs(BTLS, ATLS, w);
 %! [BMLS, AMLS, SigMLS] = invfreqs(H0+1e-5*Nn, w, [2 2], order, [], [], [], [], "method", "QR");
 %! HMLS = freqs(BMLS, AMLS, w);
+%! plot(w,[abs(H0); abs(Hh)])
 %! xlabel("Frequency (rad/sec)");
 %! ylabel("Magnitude");
-%! plot(w,[abs(H0); abs(Hh)])
 %! legend('Original','Measured');
 %! err = norm(H0-Hh);
 %! disp(sprintf('L2 norm of frequency response error = %f',err));

@@ -228,9 +228,9 @@ endfunction
 %! [H, w] = freqz(B,A,n);
 %! [Bh, Ah] = invfreq(H,w,order,order);
 %! [Hh, wh] = freqz(Bh,Ah,n);
+%! plot(w,[abs(H), abs(Hh)])
 %! xlabel("Frequency (rad/sample)");
 %! ylabel("Magnitude");
-%! plot(w,[abs(H), abs(Hh)])
 %! legend('Original','Measured');
 %! err = norm(H-Hh);
 %! disp(sprintf('L2 norm of frequency response error = %f',err));

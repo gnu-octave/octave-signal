@@ -186,10 +186,6 @@ endfunction
 %! X = [X, asymptote, 1];
 %! Y = [Y, 0, 0];
 %!
-%! title('Theoretical/Synthesized CLASS spectrum');
-%! xlabel('Normalized frequency (Fs=2)');
-%! ylabel('Magnitude');
-%!
 %! plot(X,Y,'b;Target spectrum;');
 %! hold on;
 %! [H,F]=freqz(fir2(20, X, Y));
@@ -199,4 +195,6 @@ endfunction
 %! [H,F]=freqz(fir2(200, X, Y));
 %! plot(F/pi,abs(H),'g;Synthesized spectrum (n=200);');
 %! hold off;
-%! xlabel(''); ylabel(''); title('');
+%! title('Theoretical/Synthesized CLASS spectrum');
+%! xlabel('Normalized frequency (Fs=2)');
+%! ylabel('Magnitude');

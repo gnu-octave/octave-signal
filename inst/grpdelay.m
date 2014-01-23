@@ -219,12 +219,12 @@ endfunction
 %! % angle pi should have a group delay of about -9 at 1 and 1/2
 %! % at zero and 2*pi.
 %! %--------------------------------------------------------------
-%! title ('Zero at z = -0.9');
 %! grpdelay([1 0.9],[],512,'whole',1);
 %! hold on;
 %! xlabel('Normalized Frequency (cycles/sample)');
 %! stem([0, 0.5, 1],[0.5, -9, 0.5],'*b;target;');
 %! hold off;
+%! title ('Zero at z = -0.9');
 %!
 %!demo % 2
 %! %--------------------------------------------------------------
@@ -234,12 +234,12 @@ endfunction
 %! %--------------------------------------------------------------
 %! b = poly([1/0.9*exp(1i*pi*0.2), 0.9*exp(1i*pi*0.6)]);
 %! a = poly([0.9*exp(-1i*pi*0.6), 1/0.9*exp(-1i*pi*0.2)]);
-%! title ('Two Zeros and Two Poles');
 %! grpdelay(b,a,512,'whole',1);
 %! hold on;
 %! xlabel('Normalized Frequency (cycles/sample)');
 %! stem([0.1, 0.3, 0.7, 0.9], [9, -9, 9, -9],'*b;target;');
 %! hold off;
+%! title ('Two Zeros and Two Poles');
 
 %!demo % 3
 %! %--------------------------------------------------------------
@@ -253,18 +253,17 @@ endfunction
 %! b = fir1(nb,2*Fc/Fs); % matlab freq normalization: 1=Fs/2
 %! [H,f] = freqz(b,1,[],1);
 %! [gd,f] = grpdelay(b,1,[],1);
+%! plot(f,20*log10(abs(H)));
 %! title(sprintf('b = fir1(%d,2*%d/%d);',nb,Fc,Fs));
 %! xlabel('Normalized Frequency (cycles/sample)');
 %! ylabel('Amplitude Response (dB)');
 %! grid('on');
-%! plot(f,20*log10(abs(H)));
 %! subplot(212);
 %! del = nb/2; % should equal this
+%! plot(f,gd);
 %! title(sprintf('Group Delay in Pass-Band (Expect %d samples)',del));
 %! ylabel('Group Delay (samples)');
 %! axis([0, 0.2, del-1, del+1]);
-%! plot(f,gd);
-%! axis();
 
 %!demo % 4
 %! %--------------------------------------------------------------
@@ -275,15 +274,15 @@ endfunction
 %! [H,f] = freqz(b,a,[],Fs);
 %! [gd,f] = grpdelay(b,a,[],Fs);
 %! subplot(211);
-%! title('[b,a] = cheby1(3, 3, 2*[1000, 3000]/Fs, \'stop\');');
+%! plot(f,abs(H));
+%! title('[b,a] = cheby1(3, 3, 2*[1000, 3000]/Fs, "stop");');
 %! xlabel('Frequency (Hz)');
 %! ylabel('Amplitude Response');
 %! grid('on');
-%! plot(f,abs(H));
 %! subplot(212);
+%! plot(f,gd);
 %! title('[gd,f] = grpdelay(b,a,[],Fs);');
 %! ylabel('Group Delay (samples)');
-%! plot(f,gd);
 
 
 % ------------------------ TESTS -----------------------

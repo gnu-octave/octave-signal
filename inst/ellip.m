@@ -137,7 +137,6 @@ function [a,b,c,d] = ellip(n, Rp, Rs, W, varargin)
 endfunction
 
 %!demo
-%! clc
 %! disp('---------------------------> NELLIP 0.2 EXAMPLE <-------------------------')
 %! x=input("Let's calculate the filter order: [ENTER]");
 %! disp("")
@@ -154,17 +153,13 @@ endfunction
 %! x=input("[h,w]=freqz(b,a);  [ENTER]");
 %! [h,w]=freqz(b,a);
 %!
+%! plot(w./pi, 20*log10(abs(h)), ';;')
 %! xlabel("Frequency");
 %! ylabel("abs(H[w])[dB]");
 %! axis([0,1,-100,0]);
-%! plot(w./pi, 20*log10(abs(h)), ';;')
 %!
 %! hold('on');
 %! x=ones(1,length(h));
 %! plot(w./pi, x.*-1, ';-1 dB;')
 %! plot(w./pi, x.*-90, ';-90 dB;')
 %! hold('off');
-%!
-%! xlabel("")
-%! ylabel("")
-%! clc
