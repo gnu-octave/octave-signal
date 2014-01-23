@@ -90,7 +90,7 @@ function y = chirp(t, f0, t1, f1, form, phase)
 endfunction
 
 %!demo
-%! specgram(chirp([0:0.001:5]),[],1000); # linear, 0-100Hz in 1 sec
+%! specgram(chirp([0:0.001:5]), 256, 1000); # linear, 0-100Hz in 1 sec
 %! %------------------------------------------------------------
 %! % Shows linear sweep of 100 Hz/sec starting at zero for 5 sec
 %! % since the sample rate is 1000 Hz, this should be a diagonal
@@ -103,7 +103,7 @@ endfunction
 %! % Time goes from -2 to 15 seconds.
 
 %!demo
-%! specgram(chirp([0:1/8000:5], 200, 2, 500, "logarithmic"),[],8000);
+%! specgram(chirp([0:1/8000:5], 200, 2, 500, "logarithmic"), 256, 8000);
 %! %------------------------------------------------------------
 %! % Shows a logarithmic chirp of 200 Hz at t=0 and 500 Hz at t=2
 %! % Time goes from 0 to 5 seconds at 8000 Hz.
