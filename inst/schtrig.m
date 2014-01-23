@@ -41,8 +41,6 @@ function v = schtrig (x, lvl, rst = 1)
 
   if rst || isempty(st0)
     st0 = zeros(1,nc);
-    printf ("Trigger initialized!\n");
-    flush (stdout);
   endif
 
   v(1,:) = st0;
