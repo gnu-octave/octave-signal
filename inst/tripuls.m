@@ -63,10 +63,13 @@ endfunction
 %! fs = 11025;  # arbitrary sample rate
 %! f0 = 100;    # pulse train sample rate
 %! w = 0.5/f0;  # pulse width 1/10th the distance between pulses
-%! subplot(211); ylabel("amplitude"); xlabel("time (ms)");
+%! subplot(211);
+%! x = pulstran(0:1/fs:4/f0, 0:1/f0:4/f0, 'tripuls', w);
+%! plot([0:length(x)-1]*1000/fs, x);
+%! ylabel("amplitude"); xlabel("time (ms)");
 %! title("graph shows 5 ms pulses at 0,10,20,30 and 40 ms");
-%! auplot(pulstran(0:1/fs:4/f0, 0:1/f0:4/f0, 'tripuls', w), fs);
 %! subplot(212);
+%! x = pulstran(0:1/fs:4/f0, 0:1/f0:4/f0, 'tripuls', w, -0.5);
+%! plot([0:length(x)-1]*1000/fs, x);
+%! ylabel("amplitude"); xlabel("time (ms)");
 %! title("graph shows 5 ms pulses at 0,10,20,30 and 40 ms, skew -0.5");
-%! auplot(pulstran(0:1/fs:4/f0, 0:1/f0:4/f0, 'tripuls', w, -0.5), fs);
-%! title(""); xlabel(""); ylabel("");

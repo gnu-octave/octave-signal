@@ -124,23 +124,35 @@ endfunction
 %! t = 0:1/fs:0.1; d=0:1/f0:0.1; # define sample times and pulse times
 %! a = hanning(length(d));       # define pulse amplitudes
 %!
-%! subplot(221); title("rectpuls");
-%! auplot(pulstran(t', d', 'rectpuls', w), fs);
+%! subplot(221);
+%! x = pulstran(t', d', 'rectpuls', w);
+%! plot([0:length(x)-1]*1000/fs, x);
 %! hold on; plot(d*1000,ones(size(d)),'g*;pulse;'); hold off;
+%! ylabel("amplitude"); xlabel("time (ms)");
+%! title("rectpuls");
 %!
-%! subplot(223); title("sinc => band limited interpolation");
-%! auplot(pulstran(f0*t, [f0*d', a], 'sinc'), fs);
+%! subplot(223);
+%! x = pulstran(f0*t, [f0*d', a], 'sinc');
+%! plot([0:length(x)-1]*1000/fs, x);
 %! hold on; plot(d*1000,a,'g*;pulse;'); hold off;
+%! ylabel("amplitude"); xlabel("time (ms)");
+%! title("sinc => band limited interpolation");
 %!
-%! subplot(222); title("interpolated boxcar");
+%! subplot(222);
 %! pulse = boxcar(30);  # pulse width of 3 ms at 10 kHz
-%! auplot(pulstran(t, d', pulse, 10000), fs);
+%! x = pulstran(t, d', pulse, 10000);
+%! plot([0:length(x)-1]*1000/fs, x);
 %! hold on; plot(d*1000,ones(size(d)),'g*;pulse;'); hold off;
+%! ylabel("amplitude"); xlabel("time (ms)");
+%! title("interpolated boxcar");
 %!
-%! subplot(224); title("interpolated asymmetric sin");
+%! subplot(224);
 %! pulse = sin(2*pi*[0:0.0001:w]/w).*[w:-0.0001:0];
-%! auplot(pulstran(t', [d', a], pulse', 10000), fs);
+%! x = pulstran(t', [d', a], pulse', 10000);
+%! plot([0:length(x)-1]*1000/fs, x);
 %! hold on; plot(d*1000,a*w,'g*;pulse;'); hold off; title("");
+%! ylabel("amplitude"); xlabel("time (ms)");
+%! title("interpolated asymmetric sin");
 %!
 %! %----------------------------------------------------------
 %! % Should see (1) rectangular pulses centered on *,

@@ -210,7 +210,7 @@ endfunction
 %! imagesc(20*log10(flipud(abs(S))));
 %! disp("same again, but this time using returned value");
 
-%!demo
+%!#demo  # FIXME: Enable once we have an audio file to demo
 %! ## Speech spectrogram
 %! [x, Fs] = auload(file_in_loadpath("sample.wav")); # audio file
 %! step = fix(5*Fs/1000);     # one spectral slice every 5 ms

@@ -102,18 +102,24 @@ endfunction
 %! [hx, w] = freqz(x,1,[],Fs); hxm = freqz(xm);
 %! figure(1);
 %! subplot(311);
-%!    auplot(x,Fs,'b',';signal;');
-%!    hold on; auplot(xm,Fs,'g',';reconstruction;');
+%!    len = 1000 * fix (min (length (x), length (xm)) / 1000);
+%!    plot([0:len-1]*1000/Fs,x(1:len),'b;signal;');
+%!    hold on; plot([0:len-1]*1000/Fs,xm(1:len),'g;reconstruction;');
+%!    ylabel("amplitude"); xlabel("time (ms)");
 %!    hold off;
 %! subplot(312);
 %!    axis("ticy");
 %!    plot(w,log(abs(hx)), ";magnitude;", ...
 %!         w,log(abs(hxm)),";reconstruction;");
+%!    xlabel("frequency (Hz)");
 %! subplot(313);
 %!    axis("on");
 %!    plot(w,unwrap(arg(hx))/(2*pi), ";phase;",...
 %!         w,unwrap(arg(hxm))/(2*pi),";reconstruction;");
-%! figure(2); auplot(y,Fs,';cepstrum;');
+%!    xlabel("frequency (Hz)");
+%! len = 1000 * fix (length (y) / 1000);
+%! figure(2); plot([0:len-1]*1000/Fs,y(1:len),';cepstrum;');
+%! ylabel("amplitude"); xlabel("quefrency (ms)");
 %! %-------------------------------------------------------------
 %! % confirm the magnitude spectrum is identical in the signal
 %! % and the reconstruction and that there are peaks in the

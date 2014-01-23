@@ -55,7 +55,7 @@ endfunction
 %! fs = 11025;  # arbitrary sample rate
 %! f0 = 100;    # pulse train sample rate
 %! w = 0.3/f0;  # pulse width 1/10th the distance between pulses
+%! x = pulstran(0:1/fs:4/f0, 0:1/f0:4/f0, 'rectpuls', w);
+%! plot([0:length(x)-1]*1000/fs, x);
 %! ylabel("amplitude"); xlabel("time (ms)");
 %! title("graph shows 3 ms pulses at 0,10,20,30 and 40 ms");
-%! auplot(pulstran(0:1/fs:4/f0, 0:1/f0:4/f0, 'rectpuls', w), fs);
-%! title(""); xlabel(""); ylabel("");
