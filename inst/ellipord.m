@@ -75,6 +75,9 @@ function [n, Wp] = ellipord(Wp, Ws, Rp, Rs)
       w4 = w02/Wsw;
       ws = (w4 - Wsw)/(Wpw(2) - Wpw(1));
     endif
+  elseif (Wpw > Wsw)
+    wp = Wsw;
+    ws = Wpw;
   else
     wp = Wpw;
     ws = Wsw;
