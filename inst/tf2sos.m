@@ -14,7 +14,8 @@
 ## this program; if not, see <http://www.gnu.org/licenses/>.
 
 ## -*- texinfo -*-
-## @deftypefn {Function File} {[@var{sos}, @var{g}] =} tf2sos (@var{b}, @var{a})
+## @deftypefn  {Function File} {[@var{sos}, @var{g}] =} tf2sos (@var{b}, @var{a})
+## @deftypefnx {Function File} {@var{sos} =} tf2sos (@var{b}, @var{a})
 ## Convert direct-form filter coefficients to series second-order sections.
 ##
 ## INPUTS:
@@ -35,9 +36,12 @@
 ## section 1, etc.  The b0 entry must be nonzero for each section (zeros at
 ## infinity not supported).
 ## @item
-## @var{Bscale} is an overall gain factor that effectively scales
+## @var{g} is an overall gain factor that effectively scales
 ## any one of the @var{B}i vectors.
 ## @end itemize
+##
+## If called with only one output argument, the overall filter gain is
+## applied to the first second-order section in the matrix @var{sos}.
 ##
 ## EXAMPLE:
 ## @example
@@ -59,8 +63,12 @@
 
 function [sos,g] = tf2sos (B, A)
 
-  [z,p,g] = tf2zp(B(:)',A(:)');
-  sos = zp2sos(z,p,g);
+  [z,p,k] = tf2zp(B(:)',A(:)');
+  if (nargout < 2)
+    sos = zp2sos(z,p,k);
+  else
+    [sos,g] = zp2sos(z,p,k);
+  endif
 
 endfunction
 

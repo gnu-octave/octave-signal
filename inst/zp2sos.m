@@ -14,8 +14,10 @@
 ## this program; if not, see <http://www.gnu.org/licenses/>.
 
 ## -*- texinfo -*-
-## @deftypefn  {Function File} {[@var{sos}, @var{g}] =} zp2sos (@var{z}, @var{p})
-## @deftypefnx {Function File} {[@var{sos}, @var{g}] =} zp2sos (@var{z}, @var{p}, @var{g})
+## @deftypefn  {Function File} {[@var{sos}, @var{g}] =} zp2sos (@var{z})
+## @deftypefnx {Function File} {[@var{sos}, @var{g}] =} zp2sos (@var{z}, @var{p})
+## @deftypefnx {Function File} {[@var{sos}, @var{g}] =} zp2sos (@var{z}, @var{p}, @var{k})
+## @deftypefnx {Function File} {@var{sos} =} zp2sos (@dots{})
 ## Convert filter poles and zeros to second-order sections.
 ##
 ## INPUTS:
@@ -25,7 +27,7 @@
 ## @item
 ## @var{p} = column-vector containing the filter poles
 ## @item
-## @var{g} = overall filter gain factor
+## @var{k} = overall filter gain factor
 ## If not given the gain is assumed to be 1.
 ## @end itemize
 ##
@@ -43,14 +45,17 @@
 ## coefficients @var{B}i and %@var{A}i, i=1:N.
 ##
 ## @item
-## @var{Bscale} is an overall gain factor that effectively scales
+## @var{g} is the overall gain factor that effectively scales
 ## any one of the @var{B}i vectors.
 ## @end itemize
 ##
+## If called with only one output argument, the overall filter gain is
+## applied to the first second-order section in the matrix @var{sos}.
+##
 ## EXAMPLE:
 ## @example
-##   [z, p, g] = tf2zp ([1 0 0 0 0 1], [1 0 0 0 0 .9]);
-##   [sos, g] = zp2sos (z, p, g)
+##   [z, p, k] = tf2zp ([1 0 0 0 0 1], [1 0 0 0 0 .9]);
+##   [sos, g] = zp2sos (z, p, k)
 ##
 ## sos =
 ##    1.0000    0.6180    1.0000    1.0000    0.6051    0.9587
@@ -64,13 +69,13 @@
 ## @seealso{sos2pz, sos2tf, tf2sos, zp2tf, tf2zp}
 ## @end deftypefn
 
-function [sos,g] = zp2sos(z,p,g)
+function [sos,g] = zp2sos(z,p,k)
 
-  if nargin<3, g=1; endif
+  if nargin<3, k=1; endif
   if nargin<2, p=[]; endif
 
-  [zc,zr] = cplxreal(z);
-  [pc,pr] = cplxreal(p);
+  [zc,zr] = cplxreal(z(:));
+  [pc,pr] = cplxreal(p(:));
 
   ## zc,zr,pc,pr
 
@@ -130,11 +135,19 @@ function [sos,g] = zp2sos(z,p,g)
     endif
   endfor
 
+  ## If no output argument for the overall gain, combine it into the
+  ## first section.
+  if (nargout < 2)
+    sos(1,1:3) *= k;
+  else
+    g = k;
+  endif
+
 endfunction
 
 %!test
 %! B=[1 0 0 0 0 1]; A=[1 0 0 0 0 .9];
-%! [z,p,g] = tf2zp(B,A);
-%! [sos,g] = zp2sos(z,p,g);
+%! [z,p,k] = tf2zp(B,A);
+%! [sos,g] = zp2sos(z,p,k);
 %! [Bh,Ah] = sos2tf(sos,g);
 %! assert({Bh,Ah},{B,A},100*eps);
