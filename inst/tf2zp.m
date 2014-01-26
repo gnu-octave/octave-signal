@@ -15,7 +15,7 @@
 ## this program; if not, see <http://www.gnu.org/licenses/>.
 
 ## -*- texinfo -*-
-## @deftypefn {Function File} {[@var{zer}, @var{pol}, @var{k}] =} tf2zp (@var{num}, @var{den})
+## @deftypefn {Function File} {[@var{z}, @var{p}, @var{k}] =} tf2zp (@var{num}, @var{den})
 ## Convert transfer functions to poles-and-zero representations.
 ##
 ## Returns the zeros and poles of the system defined

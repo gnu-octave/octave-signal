@@ -14,8 +14,8 @@
 ## this program; if not, see <http://www.gnu.org/licenses/>.
 
 ## -*- texinfo -*-
-## @deftypefn  {Function File} {[@var{z}, @var{p}, @var{g}] =} sos2zp (@var{sos})
-## @deftypefnx {Function File} {[@var{z}, @var{p}, @var{g}] =} sos2zp (@var{sos}, @var{Bscale})
+## @deftypefn  {Function File} {[@var{z}, @var{p}, @var{k}] =} sos2zp (@var{sos})
+## @deftypefnx {Function File} {[@var{z}, @var{p}, @var{k}] =} sos2zp (@var{sos}, @var{g})
 ## Convert series second-order sections to zeros, poles, and gains
 ## (pole residues).
 ##
@@ -34,7 +34,7 @@
 ## coefficients @var{B}i and @var{A}i.
 ##
 ## @item
-## @var{Bscale} is an overall gain factor that effectively scales
+## @var{g} is an overall gain factor that effectively scales
 ## any one of the input @var{B}i vectors.
 ## If not given the gain is assumed to be 1.
 ## @end itemize
@@ -46,29 +46,29 @@
 ## @item
 ## @var{p} = column-vector containing all poles (roots of A(z))
 ## @item
-## @var{g} = overall gain = @var{B}(Inf)
+## @var{k} = overall gain = @var{B}(Inf)
 ## @end itemize
 ##
 ## EXAMPLE:
 ## @example
-## [z, p, g] = sos2zp ([1 0 1, 1 0 -0.81; 1 0 0, 1 0 0.49])
+## [z, p, k] = sos2zp ([1 0 1, 1 0 -0.81; 1 0 0, 1 0 0.49])
 ##     @result{} z = [i; -i; 0; 0]
 ##     @result{} p = [0.9, -0.9, 0.7i, -0.7i]
-##     @result{} g = 1
+##     @result{} k = 1
 ## @end example
 ##
 ## @seealso{zp2sos, sos2tf, tf2sos, zp2tf, tf2zp}
 ## @end deftypefn
 
-function [z,p,g] = sos2zp (sos, Bscale = 1)
+function [z,p,k] = sos2zp (sos, g = 1)
 
   if (nargin < 1 || nargin > 2)
     print_usage;
   endif
 
   gains = sos(:,1); # All b0 coeffs
-  g = prod(gains)*Bscale; # pole-zero gain
-  if g==0, error('sos2zp: one or more section gains is zero'); endif
+  k = prod(gains)*g; # pole-zero gain
+  if k==0, error('sos2zp: one or more section gains is zero'); endif
   sos(:,1:3) = sos(:,1:3)./ [gains gains gains];
 
   [N,m] = size(sos);

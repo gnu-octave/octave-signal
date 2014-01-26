@@ -15,13 +15,13 @@
 ## this program; if not, see <http://www.gnu.org/licenses/>.
 
 ## -*- texinfo -*-
-## @deftypefn {Function File} {[@var{num}, @var{den}] =} zp2tf (@var{zer}, @var{pol}, @var{k})
+## @deftypefn {Function File} {[@var{num}, @var{den}] =} zp2tf (@var{z}, @var{p}, @var{k})
 ## Converts zeros / poles to a transfer function.
 ##
 ## @strong{Inputs}
 ## @table @var
-## @item zer
-## @itemx pol
+## @item  z
+## @itemx p
 ## Vectors of (possibly complex) poles and zeros of a transfer
 ## function.  Complex values must appear in conjugate pairs.
 ## @item k

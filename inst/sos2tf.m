@@ -15,7 +15,7 @@
 
 ## -*- texinfo -*-
 ## @deftypefn  {Function File} {[@var{b}, @var{a}] =} sos2tf (@var{sos})
-## @deftypefnx {Function File} {[@var{b}, @var{a}] =} sos2tf (@var{sos}, @var{Bscale})
+## @deftypefnx {Function File} {[@var{b}, @var{a}] =} sos2tf (@var{sos}, @var{g})
 ## Convert series second-order sections to direct form @math{H(z) = B(z)/A(z)}.
 ##
 ## INPUTS:
@@ -33,7 +33,7 @@
 ## coefficients @var{B}i and @var{A}i.
 ##
 ## @item
-## @var{Bscale} is an overall gain factor that effectively scales
+## @var{g} is an overall gain factor that effectively scales
 ## the output @var{b} vector (or any one of the input @var{B}i vectors).
 ## If not given the gain is assumed to be 1.
 ## @end itemize
@@ -45,7 +45,7 @@
 ## @seealso{tf2sos, zp2sos, sos2pz, zp2tf, tf2zp}
 ## @end deftypefn
 
-function [B,A] = sos2tf(sos, Bscale = 1)
+function [B,A] = sos2tf(sos, g = 1)
 
   if (nargin < 1 || nargin > 2)
     print_usage;
@@ -76,7 +76,7 @@ function [B,A] = sos2tf(sos, Bscale = 1)
     A=A(1:nA-1);
     nA=length(A);
   endwhile
-  B = B * Bscale;
+  B = B * g;
 
 endfunction
 

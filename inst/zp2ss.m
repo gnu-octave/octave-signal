@@ -15,16 +15,16 @@
 ## this program; if not, see <http://www.gnu.org/licenses/>.
 
 ## -*- texinfo -*-
-## @deftypefn {Function File} {[@var{a}, @var{b}, @var{c}, @var{d}] =} zp2ss (@var{zer}, @var{pol}, @var{k})
+## @deftypefn {Function File} {[@var{a}, @var{b}, @var{c}, @var{d}] =} zp2ss (@var{z}, @var{p}, @var{k})
 ## Conversion from zero / pole to state space.
 ##
 ## @strong{Inputs}
 ## @table @var
-## @item zer
-## @itemx pol
+## @item  z
+## @itemx p
 ## Vectors of (possibly) complex poles and zeros of a transfer
 ## function. Complex values must come in conjugate pairs
-## (i.e., @math{x+jy} in @var{zer} means that @math{x-jy} is also in @var{zer}).
+## (i.e., @math{x+jy} in @var{z} means that @math{x-jy} is also in @var{z}).
 ## @item k
 ## Real scalar (leading coefficient).
 ## @end table
