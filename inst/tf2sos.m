@@ -14,28 +14,36 @@
 ## this program; if not, see <http://www.gnu.org/licenses/>.
 
 ## -*- texinfo -*-
-## @deftypefn {Function File} {[@var{sos}, @var{g}] =} tf2sos (@var{B}, @var{A})
+## @deftypefn {Function File} {[@var{sos}, @var{g}] =} tf2sos (@var{b}, @var{a})
 ## Convert direct-form filter coefficients to series second-order sections.
 ##
 ## INPUTS:
-## @var{B} and @var{A} are vectors specifying the digital filter @math{H(z) = B(z)/A(z)}.
-## See @code{filter()} for documentation of the @var{B} and @var{A}
-## filter coefficients.
+##
+## @var{b} and @var{a} are vectors specifying the digital filter
+## @math{H(z) = B(z)/A(z)}.  See @code{filter} for documentation of the @var{b}
+## and @var{a} filter coefficients.
 ##
 ## RETURNED:
-## @var{sos} = matrix of series second-order sections, one per row:@*
-## @var{sos} = [@var{B1}.' @var{A1}.'; ...; @var{BN}.' @var{AN}.'], where@*
-## @code{@var{B1}.'==[b0 b1 b2] and @var{A1}.'==[1 a1 a2]} for
-## section 1, etc.@*
-## b0 must be nonzero for each section (zeros at infinity not supported).
+## @itemize
+## @item
+## @var{sos} = matrix of series second-order sections, one per row:
+## @example
+## @var{sos} = [@var{b1}.' @var{a1}.'; ...; @var{bn}.' @var{an}.']
+## @end example
+## where
+## @code{@var{B1}.' = [b0 b1 b2] and @var{A1}.' = [1 a1 a2]} for
+## section 1, etc.  The b0 entry must be nonzero for each section (zeros at
+## infinity not supported).
+## @item
 ## @var{Bscale} is an overall gain factor that effectively scales
 ## any one of the @var{B}i vectors.
+## @end itemize
 ##
 ## EXAMPLE:
 ## @example
-## B=[1 0 0 0 0 1];
-## A=[1 0 0 0 0 .9];
-## [sos,g] = tf2sos(B,A)
+## B = [1 0 0 0 0 1];
+## A = [1 0 0 0 0 .9];
+## [sos, g] = tf2sos (B, A)
 ##
 ## sos =
 ##
@@ -44,10 +52,9 @@
 ##    1.00000   1.00000  -0.00000   1.00000   0.97915  -0.00000
 ##
 ## g = 1
-##
 ## @end example
 ##
-## @seealso{sos2tf zp2sos sos2pz zp2tf tf2zp}
+## @seealso{sos2tf, zp2sos, sos2pz, zp2tf, tf2zp}
 ## @end deftypefn
 
 function [sos,g] = tf2sos (B, A)

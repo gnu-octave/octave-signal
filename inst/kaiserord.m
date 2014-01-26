@@ -14,45 +14,48 @@
 ## this program; if not, see <http://www.gnu.org/licenses/>.
 
 ## -*- texinfo -*-
-## @deftypefn  {Function File} {[@var{n, @var{Wn}, @var{beta}, @var{ftype}] =} kaiserord (@var{f}, @var{m}, @var{dev})
+## @deftypefn  {Function File} {[@var{n}, @var{Wn}, @var{beta}, @var{ftype}] =} kaiserord (@var{f}, @var{m}, @var{dev})
 ## @deftypefnx {Function File} {[@dots{}] =} kaiserord (@var{f}, @var{m}, @var{dev}, @var{fs})
 ##
-## Returns the parameters needed for fir1 to produce a filter of the
-## desired specification from a kaiser window:
-##       n: order of the filter (length of filter minus 1)
-##       Wn: band edges for use in fir1
-##       beta: parameter for kaiser window of length n+1
-##       ftype: choose between pass and stop bands
-##       b = fir1(n,Wn,kaiser(n+1,beta),ftype,'noscale');
+## Return the parameters needed to produce a filter of the desired
+## specification from a Kaiser window.  The vector @var{f} contains pairs of
+## frequency band edges in the range [0,1].  The vector @var{m} specifies the
+## magnitude response for each band.  The values of @var{m} must be zero for
+## all stop bands and must have the same magnitude for all pass bands. The
+## deviation of the filter @var{dev} can be specified as a scalar or a vector
+## of the same length as @var{m}.  The optional sampling rate @var{fs} can be
+## used to indicate that @var{f} is in Hz in the range [0,@var{fs}/2].
 ##
-## f: frequency bands, given as pairs, with the first half of the
-##    first pair assumed to start at 0 and the last half of the last
-##    pair assumed to end at 1.  It is important to separate the
-##    band edges, since narrow transition regions require large order
-##    filters.
-## m: magnitude within each band.  Should be non-zero for pass band
-##    and zero for stop band.  All passbands must have the same
-##    magnitude, or you will get the error that pass and stop bands
-##    must be strictly alternating.
-## dev: deviation within each band.  Since all bands in the resulting
-##    filter have the same deviation, only the minimum deviation is
-##    used.  In this version, a single scalar will work just as well.
-## fs: sampling rate.  Used to convert the frequency specification into
-##    the [0, 1], where 1 corresponds to the Nyquist frequency, fs/2.
+## The returned value @var{n} is the required order of the filter (the length
+## of the filter minus 1).  The vector @var{Wn} contains the band edges of
+## the filter suitable for passing to @code{fir1}.  The value @var{beta} is
+## the parameter of the Kaiser window of length @var{n}+1 to shape the filter.
+## The string @var{ftype} contains the type of filter to specify to
+## @code{fir1}.
 ##
 ## The Kaiser window parameters n and beta are computed from the
 ## relation between ripple (A=-20*log10(dev)) and transition width
 ## (dw in radians) discovered empirically by Kaiser:
 ##
+## @example
+## @group
 ##           / 0.1102(A-8.7)                        A > 50
 ##    beta = | 0.5842(A-21)^0.4 + 0.07886(A-21)     21 <= A <= 50
 ##           \ 0.0                                  A < 21
 ##
 ##    n = (A-8)/(2.285 dw)
+## @end group
+## @end example
 ##
-## Example
-##    [n, w, beta, ftype] = kaiserord([1000,1200], [1,0], [0.05,0.05], 11025);
-##    freqz(fir1(n,w,kaiser(n+1,beta),ftype,'noscale'),1,[],11025);
+## Example:
+## @example
+## @group
+## [n, w, beta, ftype] = kaiserord ([1000, 1200], [1, 0], [0.05, 0.05], 11025);
+## b = fir1 (n, w, kaiser (n+1, beta), ftype, "noscale");
+## freqz (b, 1, [], 11025);
+## @end group
+## @end example
+## @seealso{fir1, kaiser}
 ## @end deftypefn
 
 ## TODO: order is underestimated for the final test case: 2 stop bands.

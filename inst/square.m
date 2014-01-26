@@ -6,8 +6,8 @@
 ## @deftypefnx {Function File} {@var{s} =} square (@var{t})
 ## Generate a square wave of period 2 pi with limits +1/-1.
 ##
-## If @var{duty} is specified, the square wave is +1 for
-## that portion of the time.
+## If @var{duty} is specified, the square wave is +1 for that portion of the
+## time.
 ##
 ## @verbatim
 ##                     on time

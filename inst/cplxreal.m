@@ -18,21 +18,21 @@
 ## Split the vector z into its complex (@var{zc}) and real (@var{zr}) elements,
 ## eliminating one of each complex-conjugate pair.
 ##
-## INPUTS:@*
-##   @itemize
-##   @item
-##   @var{z}      = row- or column-vector of complex numbers@*
-##   @item
-##   @var{thresh} = tolerance threshold for numerical comparisons (default = 100*eps)
-##   @end itemize
+## INPUTS:
+## @itemize
+## @item
+## @var{z} = row- or column-vector of complex numbers
+## @item
+## @var{thresh} = tolerance threshold for numerical comparisons (default = 100*eps)
+## @end itemize
 ##
-## RETURNED:@*
-##   @itemize
-##   @item
-## @var{zc} = elements of @var{z} having positive imaginary parts@*
-##   @item
-## @var{zr} = elements of @var{z} having zero imaginary part@*
-##   @end itemize
+## RETURNED:
+## @itemize
+## @item
+## @var{zc} = elements of @var{z} having positive imaginary parts
+## @item
+## @var{zr} = elements of @var{z} having zero imaginary part
+## @end itemize
 ##
 ## Each complex element of @var{z} is assumed to have a complex-conjugate
 ## counterpart elsewhere in @var{z} as well.  Elements are declared real

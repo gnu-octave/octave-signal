@@ -25,11 +25,15 @@
 ## is distorted, particularly in the stop band.
 ##
 ## Example
-##    [b, a]=butter(3, 0.1);                  # 10 Hz low-pass filter
-##    t = 0:0.01:1.0;                         # 1 second sample
-##    x=sin(2*pi*t*2.3)+0.25*randn(size(t));  # 2.3 Hz sinusoid+noise
-##    y = filtfilt(b,a,x); z = filter(b,a,x); # apply filter
-##    plot(t,x,';data;',t,y,';filtfilt;',t,z,';filter;')
+## @example
+## @group
+## [b, a]=butter(3, 0.1);                  # 10 Hz low-pass filter
+## t = 0:0.01:1.0;                         # 1 second sample
+## x=sin(2*pi*t*2.3)+0.25*randn(size(t));  # 2.3 Hz sinusoid+noise
+## y = filtfilt(b,a,x); z = filter(b,a,x); # apply filter
+## plot(t,x,';data;',t,y,';filtfilt;',t,z,';filter;')
+## @end group
+## @end example
 ## @end deftypefn
 
 ## TODO:  (pkienzle) My version seems to have similar quality to matlab,

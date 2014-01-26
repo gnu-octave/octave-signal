@@ -19,17 +19,19 @@
 ## Convert series second-order sections to zeros, poles, and gains
 ## (pole residues).
 ##
-## INPUTS:@*
+## INPUTS:
 ## @itemize
 ##
 ## @item
-## @var{sos} = matrix of series second-order sections, one per row:@*
-## @var{sos} = [@var{B1}.' @var{A1}.'; ...; @var{BN}.' @var{AN}.'], where@*
-## @code{@var{B1}.'==[b0 b1 b2] and @var{A1}.'==[1 a1 a2]} for
-## section 1, etc.@*
-## b0 must be nonzero for each section.
-## See @code{filter()} for documentation of the
-## second-order direct-form filter coefficients @var{B}i and @var{A}i.
+## @var{sos} = matrix of series second-order sections, one per row:
+## @example
+## @var{sos} = [@var{B1}.' @var{A1}.'; ...; @var{BN}.' @var{AN}.']
+## @end example
+## where
+## @code{@var{B1}.' = [b0 b1 b2] and @var{A1}.' = [1 a1 a2]} for
+## section 1, etc.  The b0 entry must be nonzero for each section.
+## See @code{filter} for documentation of the second-order direct-form filter
+## coefficients @var{B}i and @var{A}i.
 ##
 ## @item
 ## @var{Bscale} is an overall gain factor that effectively scales
@@ -38,22 +40,24 @@
 ## @end itemize
 ##
 ## RETURNED:
-##   @itemize
-##   @item
-##   @var{z} = column-vector containing all zeros (roots of B(z))@*
-##   @item
-##   @var{p} = column-vector containing all poles (roots of A(z))@*
-##   @item
-##   @var{g} = overall gain = @var{B}(Inf)
-##   @end itemize
+## @itemize
+## @item
+## @var{z} = column-vector containing all zeros (roots of B(z))
+## @item
+## @var{p} = column-vector containing all poles (roots of A(z))
+## @item
+## @var{g} = overall gain = @var{B}(Inf)
+## @end itemize
 ##
 ## EXAMPLE:
 ## @example
-##   [z,p,g] = sos2zp([1 0 1, 1 0 -0.81; 1 0 0, 1 0 0.49])
-##   => z = [i; -i; 0; 0], p = [0.9, -0.9, 0.7i, -0.7i], g=1
+## [z, p, g] = sos2zp ([1 0 1, 1 0 -0.81; 1 0 0, 1 0 0.49])
+##     @result{} z = [i; -i; 0; 0]
+##     @result{} p = [0.9, -0.9, 0.7i, -0.7i]
+##     @result{} g = 1
 ## @end example
 ##
-## @seealso{zp2sos sos2tf tf2sos zp2tf tf2zp}
+## @seealso{zp2sos, sos2tf, tf2sos, zp2tf, tf2zp}
 ## @end deftypefn
 
 function [z,p,g] = sos2zp (sos, Bscale = 1)

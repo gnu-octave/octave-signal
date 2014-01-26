@@ -15,23 +15,23 @@
 ## this program; if not, see <http://www.gnu.org/licenses/>.
 
 ## -*- texinfo -*-
-## @deftypefn {Function File} {@var{h} =} hilbert (@var{f},@var{N},@var{dim})
-## Analytic extension of real valued signal
+## @deftypefn {Function File} {@var{h} =} hilbert (@var{f}, @var{N}, @var{dim})
+## Analytic extension of real valued signal.
 ##
-## @code{@var{h}=hilbert(@var{f})} computes the extension of the real
+## @code{@var{h} = hilbert (@var{f})} computes the extension of the real
 ## valued signal @var{f} to an analytic signal. If @var{f} is a matrix,
 ## the transformation is applied to each column. For N-D arrays,
 ## the transformation is applied to the first non-singleton dimension.
 ##
-## @code{real(@var{h})} contains the original signal @var{f}.
-## @code{imag(@var{h})} contains the Hilbert transform of @var{f}.
+## @code{real (@var{h})} contains the original signal @var{f}.
+## @code{imag (@var{h})} contains the Hilbert transform of @var{f}.
 ##
-## @code{hilbert(@var{f},@var{N})} does the same using a length @var{N}
+## @code{hilbert (@var{f}, @var{N})} does the same using a length @var{N}
 ## Hilbert transform. The result will also have length @var{N}.
 ##
-## @code{hilbert(@var{f},[],@var{dim})} or
-## @code{hilbert(@var{f},@var{N},@var{dim})} does the same along
-## dimension dim.
+## @code{hilbert (@var{f}, [], @var{dim})} or
+## @code{hilbert (@var{f}, @var{N}, @var{dim})} does the same along
+## dimension @var{dim}.
 ## @end deftypefn
 
 function f=hilbert(f, N = [], dim = [])

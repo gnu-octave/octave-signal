@@ -17,20 +17,23 @@
 ## @deftypefn  {Function File} {@var{b} =} firls (@var{n}, @var{f}, @var{a})
 ## @deftypefnx {Function File} {@var{b} =} firls (@var{n}, @var{f}, @var{a}, @var{w})
 ##
-## FIR filter design using least squares method. Returns a length N+1
+## FIR filter design using least squares method. Returns a length @var{n}+1
 ## linear phase filter such that the integral of the weighted mean
 ## squared error in the specified bands is minimized.
 ##
-## F specifies the frequencies of the band edges, normalized so that
-## half the sample frequency is equal to 1.  Each band is specified by
+## The vector @var{f} specifies the frequencies of the band edges, normalized
+## so that half the sample frequency is equal to 1.  Each band is specified by
 ## two frequencies, to the vector must have an even length.
 ##
-## A specifies the amplitude of the desired response at each band edge.
+## The vector @var{a} specifies the amplitude of the desired response at each
+## band edge.
 ##
-## W is an optional weighting function that contains one value for each
-## band that weights the mean squared error in that band. A must be the
-## same length as F, and W must be half the length of F. N must be
-## even. If given an odd value, firls increments it by 1.
+## The optional argument @var{w} is a weighting function that contains one
+## value for each band that weights the mean squared error in that band.
+##
+## @var{a} must be the same length as @var{f}, and @var{w} must be half the
+## length of @var{f}.  @var{n} must be even.  If given an odd value,
+## @code{firls} increments it by 1.
 ##
 ## The least squares optimization algorithm for computing FIR filter
 ## coefficients is derived in detail in:

@@ -17,12 +17,10 @@
 ## @deftypefn  {Function File} {} dct2 (@var{x})
 ## @deftypefnx {Function File} {} dct2 (@var{x}, @var{m}, @var{n})
 ## @deftypefnx {Function File} {} dct2 (@var{x}, [@var{m}, @var{n}])
-## y = dct2 (x)
-##   Computes the 2-D discrete cosine transform of matrix x
-##
-## y = dct2 (x, m, n) or y = dct2 (x, [m n])
-##   Computes the 2-D DCT of x after padding or trimming rows to m and
-##   columns to n.
+## Compute the 2-D discrete cosine transform of matrix @var{x}.  If
+## @var{m} and @var{n} are specified, the input is padded or trimmed
+## to the desired size.
+## @seealso{dct, idct, idct2}
 ## @end deftypefn
 
 function y = dct2 (x, m, n)

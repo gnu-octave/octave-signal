@@ -16,8 +16,8 @@
 ## -*- texinfo -*-
 ## @deftypefn {Function File} {@var{w} =} gausswin (@var{L}, @var{a})
 ##
-## Generate an L-point gaussian window of the given width. Use larger a
-## for a narrow window.  Use larger L for a smoother curve.
+## Generate an @var{L}-point gaussian window of the given width.  Use larger
+## @var{a} for a narrow window.  Use larger @var{L} for a smoother curve.
 ##
 ##     w = exp ( -(a*x)^2/2 )
 ##

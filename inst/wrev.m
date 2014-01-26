@@ -15,7 +15,7 @@
 
 ## -*- texinfo -*-
 ## @deftypefn {Function File} {[@var{y}] =} wrev (@var{x})
-## Reverse the order of the element of the vector x.
+## Reverse the order of the element of the vector @var{x}.
 ## @seealso{flipud, fliplr}
 ## @end deftypefn
 

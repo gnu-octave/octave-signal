@@ -14,33 +14,35 @@
 ## this program; if not, see <http://www.gnu.org/licenses/>.
 
 ## -*- texinfo -*-
-## @deftypefn  {Function File} {[@var{B}, @var{A}] =} sos2tf (@var{sos})
-## @deftypefnx {Function File} {[@var{B}, @var{A}] =} sos2tf (@var{sos}, @var{Bscale})
+## @deftypefn  {Function File} {[@var{b}, @var{a}] =} sos2tf (@var{sos})
+## @deftypefnx {Function File} {[@var{b}, @var{a}] =} sos2tf (@var{sos}, @var{Bscale})
 ## Convert series second-order sections to direct form @math{H(z) = B(z)/A(z)}.
 ##
 ## INPUTS:
 ## @itemize
 ##
 ## @item
-## @var{sos} = matrix of series second-order sections, one per row:@*
-## @var{sos} = [@var{B1}.' @var{A1}.'; ...; @var{BN}.' @var{AN}.'], where@*
-## @code{@var{B1}.'==[b0 b1 b2] and @var{A1}.'==[1 a1 a2]} for
-## section 1, etc.@*
-## b0 must be nonzero for each section.@*
-## See @code{filter()} for documentation of the
-## second-order direct-form filter coefficients @var{B}i and @var{A}i.
+## @var{sos} = matrix of series second-order sections, one per row:
+## @example
+## @var{sos} = [@var{B1}.' @var{A1}.'; ...; @var{BN}.' @var{AN}.']
+## @end example
+## where
+## @code{@var{B1}.' = [b0 b1 b2] and @var{A1}.' = [1 a1 a2]} for
+## section 1, etc.  The b0 entry must be nonzero for each section.
+## See @code{filter} for documentation of the second-order direct-form filter
+## coefficients @var{B}i and @var{A}i.
 ##
 ## @item
 ## @var{Bscale} is an overall gain factor that effectively scales
-## the output @var{B} vector (or any one of the input @var{B}i vectors).
+## the output @var{b} vector (or any one of the input @var{B}i vectors).
 ## If not given the gain is assumed to be 1.
 ## @end itemize
 ##
 ## RETURNED:
-## @var{B} and @var{A} are vectors specifying the digital filter @math{H(z) = B(z)/A(z)}.
-## See @code{filter()} for further details.
+## @var{b} and @var{a} are vectors specifying the digital filter @math{H(z) = B(z)/A(z)}.
+## See @code{filter} for further details.
 ##
-## @seealso{tf2sos zp2sos sos2pz zp2tf tf2zp}
+## @seealso{tf2sos, zp2sos, sos2pz, zp2tf, tf2zp}
 ## @end deftypefn
 
 function [B,A] = sos2tf(sos, Bscale = 1)

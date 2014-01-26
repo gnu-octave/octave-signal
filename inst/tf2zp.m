@@ -16,7 +16,7 @@
 
 ## -*- texinfo -*-
 ## @deftypefn {Function File} {[@var{zer}, @var{pol}, @var{k}] =} tf2zp (@var{num}, @var{den})
-## Converts transfer functions to poles-and-zero representations.
+## Convert transfer functions to poles-and-zero representations.
 ##
 ## Returns the zeros and poles of the system defined
 ## by @var{num}/@var{den}.

@@ -16,7 +16,7 @@
 ## -*- texinfo -*-
 ## @deftypefn {Function File} {[@var{w}] =} blackmannuttall (@var{L})
 ## Compute the Blackman-Nuttall window.
-## @seealso{nuttallwin,  kaiser}
+## @seealso{nuttallwin, kaiser}
 ## @end deftypefn
 
 function [w] = blackmannuttall(L)

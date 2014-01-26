@@ -18,46 +18,59 @@
 ## @deftypefnx {Function File} {[@var{a}, @var{v}, @var{k}] =} arburg (@var{x}, @var{poles}, @var{criterion})
 ##
 ## Calculate coefficients of an autoregressive (AR) model of complex data
-## "x" using the whitening lattice-filter method of Burg (1968).  The inverse
-## of the model is a moving-average filter which reduces "x" to white noise.
-## The power spectrum of the AR model is an estimate of the maximum
-## entropy power spectrum of the data.  The function "ar_psd" calculates the
-## power spectrum of the AR model.
+## @var{x} using the whitening lattice-filter method of Burg (1968).  The
+## inverse of the model is a moving-average filter which reduces @var{x} to
+## white noise.  The power spectrum of the AR model is an estimate of the
+## maximum entropy power spectrum of the data.  The function @code{ar_psd}
+## calculates the power spectrum of the AR model.
 ##
 ## ARGUMENTS:
-##   x         %% [vector] sampled data
-##
-##   poles     %% [integer scalar] number of poles in the AR model or
-##             %%       limit to the number of poles if a
-##             %%       valid "stop_crit" is provided.
-##
-##   criterion %% [optional string arg]  model-selection criterion.  Limits
-##             %%       the number of poles so that spurious poles are not
-##             %%       added when the whitened data has no more information
-##             %%       in it (see Kay & Marple, 1981). Recognised values are
-##             %%  'AKICc' -- approximate corrected Kullback information
-##             %%             criterion (recommended),
-##             %%   'KIC'  -- Kullback information criterion
-##             %%   'AICc' -- corrected Akaike information criterion
-##             %%   'AIC'  -- Akaike information criterion
-##             %%   'FPE'  -- final prediction error" criterion
-##             %% The default is to NOT use a model-selection criterion
+## @itemize
+## @item
+## @var{x}
+## sampled data
+## @item
+## @var{poles}
+## number of poles in the AR model or limit to the number of poles if a
+## valid @var{criterion} is provided.
+## @item
+## @var{criterion}
+## model-selection criterion.  Limits the number of poles so that spurious
+## poles are not added when the whitened data has no more information
+## in it (see Kay & Marple, 1981). Recognised values are
+## 'AKICc' -- approximate corrected Kullback information criterion (recommended),
+## 'KIC'  -- Kullback information criterion
+## 'AICc' -- corrected Akaike information criterion
+## 'AIC'  -- Akaike information criterion
+## 'FPE'  -- final prediction error" criterion
+## The default is to NOT use a model-selection criterion
+## @end itemize
 ##
 ## RETURNED VALUES:
-##   a         %% [polynomial/vector] list of (P+1) autoregression coeffic-
-##             %%       ients; for data input x(n) and  white noise e(n),
-##             %%       the model is
-##             %%                             P+1
-##             %%       x(n) = sqrt(v).e(n) + SUM a(k).x(n-k)
-##             %%                             k=1
+## @itemize
+## @item
+## @var{a}
+## list of (P+1) autoregression coefficients; for data input @math{x(n)} and
+## white noise @math{e(n)}, the model is
 ##
-##   v         %% [real scalar] mean square of residual noise from the
-##             %%       whitening operation of the Burg lattice filter.
+## @example
+## @group
+##                       P+1
+## x(n) = sqrt(v).e(n) + SUM a(k).x(n-k)
+##                       k=1
+## @end group
+## @end example
 ##
-##   k         %% [column vector] reflection coefficients defining the
-##             %%       lattice-filter embodiment of the model
+## @var{v}
+## mean square of residual noise from the whitening operation of the Burg
+## lattice filter.
+## @item
+## @var{k}
+## reflection coefficients defining the lattice-filter embodiment of the model
+## @end itemize
 ##
 ## HINTS:
+##
 ##  (1) arburg does not remove the mean from the data.  You should remove
 ##      the mean from the data if you want a power spectrum.  A non-zero mean
 ##      can produce large errors in a power-spectrum estimate.  See
@@ -68,12 +81,11 @@
 ##      E.g. arburg(x,64,'AKICc')
 ##      The AKICc has the least bias and best resolution of the available
 ##      model-selection criteria.
-##  (3) arburg runs in octave and matlab, does not depend on octave forge
-##      or signal-processing-toolbox functions.
-##  (4) Autoregressive and moving-average filters are stored as polynomials
+##  (3) Autoregressive and moving-average filters are stored as polynomials
 ##      which, in matlab, are row vectors.
 ##
-## NOTE ON SELECTION CRITERION
+## NOTE ON SELECTION CRITERION:
+##
 ##   AIC, AICc, KIC and AKICc are based on information theory.  They  attempt
 ##   to balance the complexity (or length) of the model against how well the
 ##   model fits the data.  AIC and KIC are biassed estimates of the asymmetric
@@ -81,7 +93,8 @@
 ##   AKICc attempt to correct the bias. See reference [4].
 ##
 ##
-## REFERENCES
+## REFERENCES:
+##
 ## [1] John Parker Burg (1968)
 ##   "A new analysis technique for time series data",
 ##   NATO advanced study Institute on Signal Processing with Emphasis on
@@ -100,6 +113,8 @@
 ##   "A small sample model selection criterion based on Kullback's symmetric
 ##   divergence", IEEE Transactions on Signal Processing,
 ##   Vol. 52(12), pp 3314-3323, Dec. 2004
+##
+## @seealso{ar_psd}
 ## @end deftypefn
 
 function [varargout] = arburg( x, poles, criterion )

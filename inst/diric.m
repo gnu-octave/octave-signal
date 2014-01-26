@@ -16,7 +16,7 @@
 ## -*- texinfo -*-
 ## @deftypefn {Function File} {[@var{y}] =} diric (@var{x},@var{n})
 ## Compute the dirichlet function.
-## @seealso{sinc,  gauspuls, sawtooth}
+## @seealso{sinc, gauspuls, sawtooth}
 ## @end deftypefn
 
 function [y] = diric(x,n)

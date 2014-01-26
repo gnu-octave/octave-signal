@@ -25,11 +25,13 @@
 ## Clearly, func must be a function which accepts a vector of times.
 ## Any extra arguments needed for the function must be tagged on the end.
 ##
-## Example
-##   fs = 11025;  # arbitrary sample rate
-##   f0 = 100;    # pulse train sample rate
-##   w = 0.001;   # pulse width of 1 millisecond
-##   auplot(pulstran(0:1/fs:0.1, 0:1/f0:0.1, 'rectpuls', w), fs);
+## Example:
+## @example
+## fs = 11025;  # arbitrary sample rate
+## f0 = 100;    # pulse train sample rate
+## w = 0.001;   # pulse width of 1 millisecond
+## auplot (pulstran (0:1/fs:0.1, 0:1/f0:0.1, "rectpuls", w), fs);
+## @end example
 ##
 ## If instead of a function name you supply a pulse shape sampled at
 ## frequency Fs (default 1 Hz),  an interpolated version of the pulse
@@ -38,11 +40,13 @@
 ## to linear, but it can be any interpolation method accepted by the
 ## function interp1.
 ##
-## Example
-##   fs = 11025;  # arbitrary sample rate
-##   f0 = 100;    # pulse train sample rate
-##   w = boxcar(10);  # pulse width of 1 millisecond at 10 kHz
-##   auplot(pulstran(0:1/fs:0.1, 0:1/f0:0.1, w, 10000), fs);
+## Example:
+## @example
+## fs = 11025;      # arbitrary sample rate
+## f0 = 100;        # pulse train sample rate
+## w = boxcar(10);  # pulse width of 1 millisecond at 10 kHz
+## auplot (pulstran (0:1/fs:0.1, 0:1/f0:0.1, w, 10000), fs);
+## @end example
 ## @end deftypefn
 
 ## TODO: Make it faster.  It is currently unusable for anything real.

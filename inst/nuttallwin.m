@@ -15,7 +15,7 @@
 
 ## -*- texinfo -*-
 ## @deftypefn {Function File} {[@var{w}] =} nuttallwin (@var{L})
-## Compute the Blackman-Harris window defined by Nuttall of length L.
+## Compute the Blackman-Harris window defined by Nuttall of length @var{L}.
 ## @seealso{blackman, blackmanharris}
 ## @end deftypefn
 

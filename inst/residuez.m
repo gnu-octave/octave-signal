@@ -14,31 +14,31 @@
 ## this program; if not, see <http://www.gnu.org/licenses/>.
 
 ## -*- texinfo -*-
-## @deftypefn {Function File} {[@var{r}, @var{p}, @var{f}, @var{m}] =} residuez (@var{B}, @var{A})
+## @deftypefn {Function File} {[@var{r}, @var{p}, @var{f}, @var{m}] =} residuez (@var{b}, @var{a})
 ## Compute the partial fraction expansion of filter @math{H(z) = B(z)/A(z)}.
 ##
 ## INPUTS:
-## @var{B} and @var{A} are vectors specifying the digital filter @math{H(z) = B(z)/A(z)}.
-## Say @code{help filter} for documentation of the @var{B} and @var{A}
-## filter coefficients.
+## @var{b} and @var{a} are vectors specifying the digital filter
+## @math{H(z) = B(z)/A(z)}. See @code{help filter} for documentation of the
+## @var{b} and @var{a} filter coefficients.
 ##
 ## RETURNED:
-##   @itemize
-##   @item @var{r} = column vector containing the filter-pole residues@*
-##   @item @var{p} = column vector containing the filter poles@*
-##   @item @var{f} = row vector containing the FIR part, if any@*
-##   @item @var{m} = column vector of pole multiplicities
-##   @end itemize
+## @itemize
+## @item @var{r} = column vector containing the filter-pole residues
+## @item @var{p} = column vector containing the filter poles
+## @item @var{f} = row vector containing the FIR part, if any
+## @item @var{m} = column vector of pole multiplicities
+## @end itemize
 ##
 ## EXAMPLES:
 ## @example
-##   Say @code{test residuez verbose} to see a number of examples.
+## See @code{test residuez verbose} to see a number of examples.
 ## @end example
 ##
 ## For the theory of operation, see
 ## @indicateurl{http://ccrma.stanford.edu/~jos/filters/residuez.html}
 ##
-## @seealso{residue residued}
+## @seealso{residue, residued}
 ## @end deftypefn
 
 function [r, p, f, m] = residuez(B, A, tol)

@@ -15,11 +15,11 @@
 
 ## -*- texinfo -*-
 ## @deftypefn {Function File} {[@var{rmsx},@var{w}] =} movingrms (@var{x},@var{w},@var{rc},@var{Fs}=1)
-## Calculates moving RMS value of the signal in @var{x}.
+## Calculate moving RMS value of the signal in @var{x}.
 ##
-## The signla is convoluted against a sigmoid window of width @var{w} and risetime
-## @var{rc}. The units of these to parameters are relative ot the vlaue of the sampling
-## frequency given in @var{Fs} (Default value = 1).
+## The signal is convoluted against a sigmoid window of width @var{w} and
+## risetime @var{rc}. The units of these parameters are relative to the value
+## of the sampling frequency given in @var{Fs} (Default value = 1).
 ##
 ## Run @code{demo movingrms} to see an example.
 ##

@@ -24,16 +24,18 @@
 
 DEFUN_DLD (sosfilt, args, ,
   "-*- texinfo -*-\n\
-@deftypefn {Loadable Function} {@var{y} =} sosfilt (@var{sos},@var{x})\n\
-Second order section IIR filtering of @var{x}.@*\n\
-The second order section filter is described by the matrix @var{sos} with:@*\n\
+@deftypefn {Loadable Function} {@var{y} =} sosfilt (@var{sos}, @var{x})\n\
+Second order section IIR filtering of @var{x}.  The second order section\n\
+filter is described by the matrix @var{sos} with:\n\
+\n\
 @multitable {col 1} {this is column two}\n\
 @item @tab [ @var{B1} @var{A1} ]@*\n\
-@item @var{sos} = @tab [  ...  ],@*\n\
+@item @var{sos} = @tab [ @dots{} ],@*\n\
 @item @tab [ @var{BN} @var{AN} ]@*\n\
 @end multitable\n\
-where @code{@var{B1}=[b0 b1 b2]} and @code{@var{A1}=[1 a1 a2]} for section 1, etc.@*\n\
-b0 must be nonzero for each section.\n\
+\n\
+where @code{@var{B1} = [b0 b1 b2]} and @code{@var{A1} = [1 a1 a2]} for\n\
+section 1, etc.  The b0 entry must be nonzero for each section.\n\
 @end deftypefn\n")
 {
   octave_value_list retval;

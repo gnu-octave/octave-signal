@@ -64,28 +64,44 @@
 ## is set to zero.  (The group delay approaches infinity when
 ## there are poles or zeros very close to the unit circle in the z plane.)
 ##
-## Theory: group delay, g(w) = -d/dw [arg{H(e^jw)}],  is the rate of change of
+## Theory: group delay, g(w) = -d/dw [arg@{H(e^jw)@}],  is the rate of change of
 ## phase with respect to frequency.  It can be computed as:
 ##
+## @example
 ##               d/dw H(e^-jw)
 ##        g(w) = -------------
 ##                 H(e^-jw)
+## @end example
 ##
 ## where
+##
+## @example
 ##         H(z) = B(z)/A(z) = sum(b_k z^k)/sum(a_k z^k).
+## @end example
 ##
 ## By the quotient rule,
+##
+## @example
 ##                    A(z) d/dw B(z) - B(z) d/dw A(z)
 ##        d/dw H(z) = -------------------------------
 ##                               A(z) A(z)
+## @end example
+##
 ## Substituting into the expression above yields:
+##
+## @example
 ##                A dB - B dA
 ##        g(w) =  ----------- = dB/B - dA/A
 ##                    A B
+## @end example
 ##
 ## Note that,
+##
+## @example
 ##        d/dw B(e^-jw) = sum(k b_k e^-jwk)
 ##        d/dw A(e^-jw) = sum(k a_k e^-jwk)
+## @end example
+##
 ## which is just the FFT of the coefficients multiplied by a ramp.
 ##
 ## As a further optimization when nfft>>length(a), the IIR filter (b,a)

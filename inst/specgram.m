@@ -21,25 +21,24 @@
 ## @deftypefnx {Function File} {} specgram (@var{x}, @var{n}, @var{Fs}, @var{window}, @var{overlap})
 ## @deftypefnx {Function File} {[@var{S}, @var{f}, @var{t}] =} specgram (@dots{})
 ##
-## Generate a spectrogram for the signal. This chops the signal into
-## overlapping slices, windows each slice and applies a Fourier
-## transform to determine the frequency components at that slice.
+## Generate a spectrogram for the signal @var{x}.  The signal is chopped into
+## overlapping segments of length @var{n}, and each segment is windowed and
+## transformed into the frequency domain using the FFT.  The default segment
+## size is 256.  If @var{fs} is given, it specifies the sampling rate of the
+## input signal.  The argument @var{window} specifies an alternate window to
+## apply rather than the default of @code{hanning (@var{n})}.  The argument
+## @var{overlap} specifies the number of samples overlap between successive
+## segments of the input signal.  The default overlap is
+## @code{length (@var{window})/2}.
 ##
-## x: vector of samples
-## n: size of fourier transform window, or [] for default=256
-## Fs: sample rate, or [] for default=2 Hz
-## window: shape of the fourier transform window, or [] for default=hanning(n)
-##    Note: window length can be specified instead, in which case
-##    window=hanning(length)
-## overlap: overlap with previous window, or [] for default=length(window)/2
+## If no output arguments are given, the spectrogram is displayed.  Otherwise,
+## @var{S} is the complex output of the FFT, one row per slice, @var{f} is the
+## frequency indices corresponding to the rows of @var{S}, and @var{t} is the
+## time indices corresponding to the columns of @var{S}.
 ##
-## Return values
-##    S is complex output of the FFT, one row per slice
-##    f is the frequency indices corresponding to the rows of S.
-##    t is the time indices corresponding to the columns of S.
-##    If no return value is requested, the spectrogram is displayed instead.
-##
-## Example
+## Example:
+## @example
+## @group
 ##    x = chirp([0:0.001:2],0,2,500);  # freq. sweep from 0-500 over 2 sec.
 ##    Fs=1000;                  # sampled every 0.001 sec so rate is 1 kHz
 ##    step=ceil(20*Fs/1000);    # one spectral slice every 20 ms
@@ -57,6 +56,8 @@
 ##    S = max(S, 10^(-40/10));   # clip below -40 dB.
 ##    S = min(S, 10^(-3/10));    # clip above -3 dB.
 ##    imagesc(t, f, flipud(log(S)));   # display in log scale
+## @end group
+## @end example
 ##
 ## The choice of window defines the time-frequency resolution.  In
 ## speech for example, a wide window shows more harmonic detail while a

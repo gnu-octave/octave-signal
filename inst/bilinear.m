@@ -35,6 +35,7 @@
 ##
 ## The following table summarizes the transformation:
 ##
+## @example
 ## +---------------+-----------------------+----------------------+
 ## | Transform     | Zero at x             | Pole at x            |
 ## |    H(S)       |   H(S) = S-x          |    H(S)=1/(S-x)      |
@@ -43,13 +44,16 @@
 ## |  S -> - ---   | pole: -1              | pole: (2+xT)/(2-xT)  |
 ## |       T z+1   | gain: (2-xT)/T        | gain: (2-xT)/T       |
 ## +---------------+-----------------------+----------------------+
+## @end example
 ##
 ## With tedious algebra, you can derive the above formulae yourself by
 ## substituting the transform for S into H(S)=S-x for a zero at x or
 ## H(S)=1/(S-x) for a pole at x, and converting the result into the
 ## form:
 ##
+## @example
 ##    H(Z)=g prod(Z-Xi)/prod(Z-Xj)
+## @end example
 ##
 ## Please note that a pole and a zero at the same place exactly cancel.
 ## This is significant since the bilinear transform creates numerous

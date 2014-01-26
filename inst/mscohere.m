@@ -22,7 +22,7 @@
 ## @deftypefnx {Function File} {[@dots{}] =} mscohere (@var{x}, @var{y}, @var{window}, @var{overlap}, @var{Nfft}, @var{Fs}, @var{range})
 ## @deftypefnx {Function File} {} mscohere (@dots{})
 ##
-## Estimate (mean square) coherence of signals "x" and "y".
+## Estimate (mean square) coherence of signals @var{x} and @var{y}.
 ## Use the Welch (1967) periodogram/FFT method.
 ## @seealso{pwelch}
 ## @end deftypefn

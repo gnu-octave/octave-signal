@@ -14,38 +14,36 @@
 ## this program; if not, see <http://www.gnu.org/licenses/>.
 
 ## -*- texinfo -*-
-## @deftypefn {Function File} {[@var{r}, @var{p}, @var{f}, @var{m}] =} residued (@var{B}, @var{A})
+## @deftypefn {Function File} {[@var{r}, @var{p}, @var{f}, @var{m}] =} residued (@var{b}, @var{a})
 ## Compute the partial fraction expansion (PFE) of filter
-## @math{H(z) = B(z)/A(z)}.
-## In the usual PFE function @code{residuez},
-## the IIR part (poles @var{p} and residues
-## @var{r}) is driven @emph{in parallel} with the FIR part (@var{f}).
-## In this variant (@code{residued}) the IIR part is driven
-## by the @emph{output} of the FIR part.  This structure can be
-## more accurate in signal modeling applications.
+## @math{H(z) = B(z)/A(z)}.  In the usual PFE function @code{residuez}, the
+## IIR part (poles @var{p} and residues @var{r}) is driven @emph{in parallel}
+## with the FIR part (@var{f}).  In this variant, the IIR part is driven by
+## the @emph{output} of the FIR part.  This structure can be more accurate in
+## signal modeling applications.
 ##
 ## INPUTS:
-## @var{B} and @var{A} are vectors specifying the digital filter @math{H(z) = B(z)/A(z)}.
-## Say @code{help filter} for documentation of the @var{B} and @var{A}
-## filter coefficients.
+## @var{b} and @var{a} are vectors specifying the digital filter
+## @math{H(z) = B(z)/A(z)}.  See @code{help filter} for documentation of the
+## @var{b} and @var{a} filter coefficients.
 ##
 ## RETURNED:
-##   @itemize
-##   @item @var{r} = column vector containing the filter-pole residues@*
-##   @item @var{p} = column vector containing the filter poles@*
-##   @item @var{f} = row vector containing the FIR part, if any@*
-##   @item @var{m} = column vector of pole multiplicities
-##   @end itemize
+## @itemize
+## @item @var{r} = column vector containing the filter-pole residues
+## @item @var{p} = column vector containing the filter poles
+## @item @var{f} = row vector containing the FIR part, if any
+## @item @var{m} = column vector of pole multiplicities
+## @end itemize
 ##
 ## EXAMPLES:
 ## @example
-##   Say @code{test residued verbose} to see a number of examples.
+## See @code{test residued verbose} to see a number of examples.
 ## @end example
 ##
 ## For the theory of operation, see
 ## @indicateurl{http://ccrma.stanford.edu/~jos/filters/residued.html}
 ##
-## @seealso{residue residued}
+## @seealso{residue, residued}
 ## @end deftypefn
 
 function [r, p, f, m] = residued(b, a, toler)

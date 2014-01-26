@@ -21,7 +21,8 @@
 ## @deftypefnx {Function File} {[@dots{}] =} cpsd (@var{x}, @var{y}, @var{window}, @var{overlap}, @var{Nfft}, @var{Fs})
 ## @deftypefnx {Function File} {[@dots{}] =} cpsd (@var{x}, @var{y}, @var{window}, @var{overlap}, @var{Nfft}, @var{Fs}, @var{range})
 ## @deftypefnx {Function File} {} cpsd (@dots{})
-## Estimate cross power spectrum of data "x" and "y" by the Welch (1967)
+##
+## Estimate cross power spectrum of data @var{x} and @var{y} by the Welch (1967)
 ## periodogram/FFT method.
 ## @seealso{pwelch}
 ## @end deftypefn

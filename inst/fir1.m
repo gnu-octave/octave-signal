@@ -19,33 +19,35 @@
 ## @deftypefnx {Function File} {@var{b} =} fir1 (@var{n}, @var{w}, @var{type}, @var{window})
 ## @deftypefnx {Function File} {@var{b} =} fir1 (@var{n}, @var{w}, @var{type}, @var{window}, @var{noscale})
 ##
-## Produce an order n FIR filter with the given frequency cutoff,
-## returning the n+1 filter coefficients in b.
+## Produce an order @var{n} FIR filter with the given frequency cutoff @var{w},
+## returning the @var{n}+1 filter coefficients in @var{b}.  If @var{w} is a
+## scalar, it specifies the frequency cutoff for a lowpass or highpass filter.
+## If @var{w} is a two-element vector, the two values specify the edges of a
+## bandpass or bandstop filter.  If @var{w} is an N-element vector, each
+## value specifies a band edge of a multiband pass/stop filter.
 ##
-## n: order of the filter (1 less than the length of the filter)
-## w: band edges
-##    strictly increasing vector in range [0, 1]
-##    singleton for highpass or lowpass, vector pair for bandpass or
-##    bandstop, or vector for alternating pass/stop filter.
-## type: choose between pass and stop bands
-##    'high' for highpass filter, cutoff at w
-##    'stop' for bandstop filter, edges at w = [lo, hi]
-##    'DC-0' for bandstop as first band of multiband filter
-##    'DC-1' for bandpass as first band of multiband filter
-## window: smoothing window
-##    defaults to hamming(n+1) row vector
-##    returned filter is the same shape as the smoothing window
-## noscale: choose whether to normalize or not
-##    'scale': set the magnitude of the center of the first passband to 1
-##    'noscale': don't normalize
+## The filter @var{type} can be specified with one of the following strings:
+## "low", "high", "stop", "pass", "bandpass", "DC-0", or "DC-1".  The default
+## is "low" is @var{w} is a scalar, "pass" if @var{w} is a pair, or "DC-0" if
+## @var{w} is a vector with more than 2 elements.
 ##
-## To apply the filter, use the return vector b:
-##       y=filter(b,1,x);
+## An optional shaping @var{window} can be given as a vector with length
+## @var{n}+1.  If not specified, a Hamming window of length @var{n}+1 is used.
+##
+## With the option "noscale", the filter coefficients are not normalized. The
+## default is to normalize the filter such that the magnitude response of the
+## center of the first passband is 1.
+##
+## To apply the filter, use the return vector @var{b} with the @code{filter}
+## function, for example @code{y = filter (b, 1, x)}.
 ##
 ## Examples:
-##   freqz(fir1(40,0.3));
-##   freqz(fir1(15,[0.2, 0.5], 'stop'));  # note the zero-crossing at 0.1
-##   freqz(fir1(15,[0.2, 0.5], 'stop', 'noscale'));
+## @example
+## freqz (fir1 (40, 0.3));
+## freqz (fir1 (15, [0.2, 0.5], "stop"));  # note the zero-crossing at 0.1
+## freqz (fir1 (15, [0.2, 0.5], "stop", "noscale"));
+## @end example
+## @seealso{filter, fir2}
 ## @end deftypefn
 
 ## TODO: Consider using exact expression (in terms of sinc) for the

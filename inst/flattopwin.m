@@ -8,8 +8,12 @@
 ##
 ## Return the window f(w):
 ##
+## @example
+## @group
 ##   f(w) = 1 - 1.93 cos(2 pi w) + 1.29 cos(4 pi w)
 ##            - 0.388 cos(6 pi w) + 0.0322cos(8 pi w)
+## @end group
+## @end example
 ##
 ## where w = i/(L-1) for i=0:L-1 for a symmetric window, or
 ## w = i/L for i=0:L-1 for a periodic window.  The default

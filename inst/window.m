@@ -14,9 +14,10 @@
 ## this program; if not, see <http://www.gnu.org/licenses/>.
 
 ## -*- texinfo -*-
-## @deftypefn {Function File} {@var{w} =} window (@var{f}, @var{n}, @var{opts})
-## Create a @var{n}-point windowing from the function @var{f}. The
-## function @var{f} can be for example @code{@@blackman}. Any additional
+## @deftypefn  {Function File} {@var{w} =} window (@var{f}, @var{n})
+## @deftypefnx {Function File} {@var{w} =} window (@var{f}, @var{n}, @var{opts})
+## Create an @var{n}-point window from the function @var{f}.  The function
+## @var{f} can be for example @code{@@blackman}.  Any additional
 ## arguments @var{opt} are passed to the windowing function.
 ## @end deftypefn
 

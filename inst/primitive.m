@@ -19,17 +19,18 @@
 ## @deftypefn {Function File} {@var{F} =} primitive (@var{f}, @var{t}, @var{F0})
 ## Calcuates the primitive of a function.
 ##
-## The function approximates the primitive (indefinite integral) of the univariate function handle
-## @var{f} with constant of integration @var{F0}. The output is the primitive evaluated at
-## the points @var{t}. The vector @var{t} must be ordered and ascending.
+## The function approximates the primitive (indefinite integral) of the
+## univariate function handle @var{f} with constant of integration @var{F0}.
+## The output is the primitive evaluated at the points @var{t}.  The vector
+## @var{t} must be ordered and ascending.
 ##
 ## This function is a fancy way of calculating the cumulative sum,
 ##
 ## @command{F = cumsum (f(t).*diff (t)([1 1:end]))}.
 ##
-## Example of use:
+## Example:
 ## @example
-## f = @(t) sin(2*pi*3*t);
+## f = @@(t) sin(2*pi*3*t);
 ## t = [0; sort(rand(100,1))];
 ## F = primitive (f,t,0);
 ## t_true = linspace(0,1,1e3).';

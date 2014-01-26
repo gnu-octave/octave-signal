@@ -17,15 +17,19 @@
 ## @deftypefn  {Function File} {@var{y} =} rectpuls (@var{t})
 ## @deftypefnx {Function File} {@var{y} =} rectpuls (@var{t}, @var{w})
 ##
-## Generate a rectangular pulse over the interval [-w/2,w/2), sampled at
-## times t.  This is useful with the function pulstran for generating a
-## series pulses.
+## Generate a rectangular pulse over the interval [-@var{w}/2,@var{w}/2),
+## sampled at times @var{t}.  This is useful with the function @code{pulstran}
+## for generating a series pulses.
 ##
-## Example
-##   fs = 11025;  # arbitrary sample rate
-##   f0 = 100;    # pulse train sample rate
-##   w = 0.3/f0;  # pulse width 3/10th the distance between pulses
-##   auplot(pulstran(0:1/fs:4/f0, 0:1/f0:4/f0, 'rectpuls', w), fs);
+## Example:
+## @example
+## @group
+## fs = 11025;  # arbitrary sample rate
+## f0 = 100;    # pulse train sample rate
+## w = 0.3/f0;  # pulse width 3/10th the distance between pulses
+## auplot(pulstran(0:1/fs:4/f0, 0:1/f0:4/f0, 'rectpuls', w), fs);
+## @end group
+## @end example
 ##
 ## @seealso{pulstran}
 ## @end deftypefn

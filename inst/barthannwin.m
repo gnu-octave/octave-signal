@@ -15,8 +15,8 @@
 
 ## -*- texinfo -*-
 ## @deftypefn {Function File} {[@var{w}] =} barthannwin (@var{L})
-## Compute the modified Bartlett-Hann window of lenght L.
-## @seealso{rectwin,  bartlett}
+## Compute the modified Bartlett-Hann window of length @var{L}.
+## @seealso{rectwin, bartlett}
 ## @end deftypefn
 
 function [w] = barthannwin(L)

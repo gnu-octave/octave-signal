@@ -35,6 +35,8 @@
 ##
 ## The transfer function is
 ##
+## @example
+## @group
 ##        B(z)   b0 + b1 z^(-1) + b2 z^(-2) + ... + bM z^(-M)
 ## H(z) = ---- = --------------------------------------------
 ##        A(z)   a0 + a1 z^(-1) + a2 z^(-2) + ... + aN z^(-N)
@@ -42,6 +44,8 @@
 ##               b0          (z - z1) (z - z2) ... (z - zM)
 ##             = -- z^(-M+N) ------------------------------
 ##               a0          (z - p1) (z - p2) ... (z - pN)
+## @end group
+## @end example
 ##
 ## The denominator a defaults to 1, and the poles p defaults to [].
 ## @end deftypefn

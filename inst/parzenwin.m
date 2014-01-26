@@ -15,8 +15,8 @@
 
 ## -*- texinfo -*-
 ## @deftypefn {Function File} {[@var{w}] =} parzenwin (@var{L})
-## Compute the Parzen window of lenght L.
-## @seealso{rectwin,  bartlett}
+## Compute the Parzen window of length @var{L}.
+## @seealso{rectwin, bartlett}
 ## @end deftypefn
 
 function w = parzenwin (L)

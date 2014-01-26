@@ -18,28 +18,29 @@
 ## @deftypefnx {Function File} {[@var{sos}, @var{g}] =} zp2sos (@var{z}, @var{p}, @var{g})
 ## Convert filter poles and zeros to second-order sections.
 ##
-## INPUTS:@*
+## INPUTS:
 ## @itemize
 ## @item
-##   @var{z} = column-vector containing the filter zeros@*
+## @var{z} = column-vector containing the filter zeros
 ## @item
-##   @var{p} = column-vector containing the filter poles@*
+## @var{p} = column-vector containing the filter poles
 ## @item
-##   @var{g} = overall filter gain factor
-##   If not given the gain is assumed to be 1.
+## @var{g} = overall filter gain factor
+## If not given the gain is assumed to be 1.
 ## @end itemize
 ##
 ## RETURNED:
 ## @itemize
 ## @item
-## @var{sos} = matrix of series second-order sections, one per row:@*
-## @var{sos} = [@var{B1}.' @var{A1}.'; ...; @var{BN}.' @var{AN}.'], where@*
-## @code{@var{B1}.'==[b0 b1 b2] and @var{A1}.'==[1 a1 a2]} for
-## section 1, etc.@*
-## b0 must be nonzero for each section.@*
-## See @code{filter()} for documentation of the
-## second-order direct-form filter coefficients @var{B}i and
-## %@var{A}i, i=1:N.
+## @var{sos} = matrix of series second-order sections, one per row:
+## @example
+## @var{sos} = [@var{B1}.' @var{A1}.'; ...; @var{BN}.' @var{AN}.']
+## @end example
+## where
+## @code{@var{B1}.' = [b0 b1 b2] and @var{A1}.' = [1 a1 a2]} for
+## section 1, etc.  The b0 entry must be nonzero for each section.
+## See @code{filter} for documentation of the second-order direct-form filter
+## coefficients @var{B}i and %@var{A}i, i=1:N.
 ##
 ## @item
 ## @var{Bscale} is an overall gain factor that effectively scales
@@ -48,8 +49,8 @@
 ##
 ## EXAMPLE:
 ## @example
-##   [z,p,g] = tf2zp([1 0 0 0 0 1],[1 0 0 0 0 .9]);
-##   [sos,g] = zp2sos(z,p,g)
+##   [z, p, g] = tf2zp ([1 0 0 0 0 1], [1 0 0 0 0 .9]);
+##   [sos, g] = zp2sos (z, p, g)
 ##
 ## sos =
 ##    1.0000    0.6180    1.0000    1.0000    0.6051    0.9587
@@ -60,7 +61,7 @@
 ##     1
 ## @end example
 ##
-## @seealso{sos2pz sos2tf tf2sos zp2tf tf2zp}
+## @seealso{sos2pz, sos2tf, tf2sos, zp2tf, tf2zp}
 ## @end deftypefn
 
 function [sos,g] = zp2sos(z,p,g)

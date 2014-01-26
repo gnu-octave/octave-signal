@@ -26,9 +26,13 @@
 ##
 ## The continuous version of width L centered about x=0 is:
 ##
+## @example
+## @group
 ##         besseli(0, beta * sqrt(1-(2*x/L).^2))
 ## k(x) =  -------------------------------------,  L/2 <= x <= L/2
 ##                besseli(0, beta)
+## @end group
+## @end example
 ##
 ## @seealso{kaiserord}
 ## @end deftypefn

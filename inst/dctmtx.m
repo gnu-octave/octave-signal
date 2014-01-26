@@ -15,14 +15,19 @@
 
 ## -*- texinfo -*-
 ## @deftypefn {Function File} {} dctmtx (@var{n})
-## Return the DCT transformation matrix of size n x n.
+## Return the DCT transformation matrix of size @var{n}-by-@var{n}.
 ##
-## If A is an n x n matrix, then the following are true:
+## If A is an @var{n}-by-@var{n} matrix, then the following are true:
+##
+## @example
+## @group
 ##     T*A    == dct(A),  T'*A   == idct(A)
 ##     T*A*T' == dct2(A), T'*A*T == idct2(A)
+## @end group
+## @end example
 ##
-## A dct transformation matrix is useful for doing things like jpeg
-## image compression, in which an 8x8 dct matrix is applied to
+## A DCT transformation matrix is useful for doing things like jpeg
+## image compression, in which an 8x8 DCT matrix is applied to
 ## non-overlapping blocks throughout an image and only a subblock on the
 ## top left of each block is kept.  During restoration, the remainder of
 ## the block is filled with zeros and the inverse transform is applied

@@ -18,9 +18,13 @@
 ## Returns the value of the nth-order Chebyshev polynomial calculated at
 ## the point x. The Chebyshev polynomials are defined by the equations:
 ##
+## @example
+## @group
 ##           / cos(n acos(x),    |x| <= 1
 ##   Tn(x) = |
 ##           \ cosh(n acosh(x),  |x| > 1
+## @end group
+## @end example
 ##
 ## If x is a vector, the output is a vector of the same size, where each
 ## element is calculated as y(i) = Tn(x(i)).

@@ -14,17 +14,17 @@
 ## this program; if not, see <http://www.gnu.org/licenses/>.
 
 ## -*- texinfo -*-
-## @deftypefn {Function File} {@var{m} =} fht (@var{d}, @var{n}, @var{dim})
-## @cindex linear algebra
-##  The function fht calculates  Fast Hartley Transform
-##  where @var{d} is the real input vector (matrix), and @var{m}
-## is the real-transform vector. For matrices the hartley transform
-## is calculated along the columns by default. The options
-## @var{n},and @var{dim} are similar to the options of FFT function.
+## @deftypefn  {Function File} {@var{m} =} fht (@var{d})
+## @deftypefnx {Function File} {@var{m} =} fht (@var{d}, @var{n})
+## @deftypefnx {Function File} {@var{m} =} fht (@var{d}, @var{n}, @var{dim})
+## Calculate the Fast Hartley Transform of real input @var{d}.  If @var{d} is
+## a matrix, the Hartley transform is calculated along the columns by default.
+## The options @var{n} and @var{dim} are similar to the options of FFT
+## function.
 ##
-## The forward and inverse hartley transforms are the same (except for a
-## scale factor of 1/N for the inverse hartley transform), but
-## implemented using different functions .
+## The forward and inverse Hartley transforms are the same (except for a
+## scale factor of 1/N for the inverse Hartley transform), but
+## implemented using different functions.
 ##
 ## The definition of the forward hartley transform for vector d,
 ## @math{
@@ -34,7 +34,7 @@
 ## @example
 ## fht(1:4)
 ## @end example
-## @seealso{ifht,fft}
+## @seealso{ifht, fft}
 ## @end deftypefn
 
 function m = fht( d, n, dim )

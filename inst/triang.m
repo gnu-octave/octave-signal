@@ -16,10 +16,10 @@
 ## -*- texinfo -*-
 ## @deftypefn {Function File} {@var{w} =} triang (@var{L})
 ##
-## Returns the filter coefficients of a triangular window of length L.
+## Returns the filter coefficients of a triangular window of length @var{L}.
 ## Unlike the bartlett window, triang does not go to zero at the edges
-## of the window.  For odd L, triang(L) is equal to bartlett(L+2) except
-## for the zeros at the edges of the window.
+## of the window.  For odd @var{L}, @code{triang(@var{L})} is equal to
+## @code{bartlett(@var{L}+2)} except for the zeros at the edges of the window.
 ## @end deftypefn
 
 function w = triang(L)

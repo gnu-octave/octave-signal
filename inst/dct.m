@@ -16,17 +16,21 @@
 ## -*- texinfo -*-
 ## @deftypefn  {Function File} {} dct (@var{x})
 ## @deftypefnx {Function File} {} dct (@var{x}, @var{n})
-##    Computes the discrete cosine transform of x.  If n is given, then
-##    x is padded or trimmed to length n before computing the transform.
-##    If x is a matrix, compute the transform along the columns of the
-##    the matrix. The transform is faster if x is real-valued and even
-##    length.
+## Compute the discrete cosine transform of @var{x}.  If @var{n} is given,
+## then @var{x} is padded or trimmed to length @var{n} before computing the
+## transform.  If @var{x} is a matrix, compute the transform along the columns
+## of the the matrix.  The transform is faster if @var{x} is real-valued and
+## has even length.
 ##
-## The discrete cosine transform X of x can be defined as follows:
+## The discrete cosine transform @var{x} can be defined as follows:
 ##
+## @example
+## @group
 ##               N-1
 ##   X[k] = w(k) sum x[n] cos (pi (2n+1) k / 2N ),  k = 0, ..., N-1
 ##               n=0
+## @end group
+## @end example
 ##
 ## with w(0) = sqrt(1/N) and w(k) = sqrt(2/N), k = 1, ..., N-1.  There
 ## are other definitions with different scaling of X[k], but this form

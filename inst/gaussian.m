@@ -16,9 +16,9 @@
 ## -*- texinfo -*-
 ## @deftypefn {Function File} {@var{w} =} gaussian (@var{n}, @var{a})
 ##
-## Generate an n-point gaussian convolution window of the given
-## width.  Use larger a for a narrower window.  Use larger n for
-## longer tails.
+## Generate an @var{n}-point gaussian convolution window of the given
+## width.  Use larger @var{a} for a narrower window.  Use larger @var{n}
+## for longer tails.
 ##
 ##     w = exp ( -(a*x)^2/2 )
 ##

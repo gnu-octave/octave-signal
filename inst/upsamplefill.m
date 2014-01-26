@@ -23,26 +23,26 @@
 ## If the optional argument @var{copy} is @var{true} then @var{v} should be a
 ## scalar and each value in @var{x} are repeat @var{v} times.
 ##
-## Example
+## Example:
 ## @example
-## > upsamplefill(eye(2),2,true)
-## ans =
-##   1   0
-##   1   0
-##   1   0
-##   0   1
-##   0   1
-##   0   1
-## > upsamplefill(eye(2),[-1 -1 -1])
-## ans =
-##   1   0
-##  -1  -1
-##  -1  -1
-##  -1  -1
-##   0   1
-##  -1  -1
-##  -1  -1
-##  -1  -1
+## @group
+## upsamplefill (eye (2), 2, true)
+## @result{}  1   0
+##     1   0
+##     1   0
+##     0   1
+##     0   1
+##     0   1
+## upsamplefill (eye (2), [-1 -1 -1])
+## @result{}  1   0
+##    -1  -1
+##    -1  -1
+##    -1  -1
+##     0   1
+##    -1  -1
+##    -1  -1
+##    -1  -1
+## @end group
 ## @end example
 ##
 ## @seealso{upsample}

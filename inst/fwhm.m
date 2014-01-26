@@ -10,36 +10,26 @@
 ## @deftypefnx {Function File} {@var{f} =} fwhm (@dots{}, "rlevel", @var{level})
 ##
 ## Compute peak full-width at half maximum (FWHM) or at another level of peak
-## maximum for vector or matrix data y, optionally sampled as y(x). If y is
-## a matrix, return FWHM for each column as a row vector.
-##   Syntax:
-##      f = fwhm({x, } y {, 'zero'|'min' {, 'rlevel', rlevel}})
-##      f = fwhm({x, } y {, 'alevel', alevel})
-##   Examples:
-##      f = fwhm(y)
-##      f = fwhm(x, y)
-##      f = fwhm(x, y, 'zero')
-##      f = fwhm(x, y, 'min')
-##      f = fwhm(x, y, 'alevel', 15.3)
-##      f = fwhm(x, y, 'zero', 'rlevel', 0.5)
-##      f = fwhm(x, y, 'min',  'rlevel', 0.1)
+## maximum for vector or matrix data @var{y}, optionally sampled as @math{y(x)}.
+## If @var{y} is a matrix, return FWHM for each column as a row vector.
 ##
-## The default option 'zero' computes fwhm at half maximum, i.e. 0.5*max(y).
-## The option 'min' computes fwhm at the middle curve, i.e. 0.5*(min(y)+max(y)).
+## The default option "zero" computes fwhm at half maximum, i.e.
+## @math{0.5*max(y)}.  The option "min" computes fwhm at the middle curve, i.e.
+## @math{0.5*(min(y)+max(y))}.
 ##
-## The option 'rlevel' computes full-width at the given relative level of peak
-## profile, i.e. at rlevel*max(y) or rlevel*(min(y)+max(y)), respectively.
-## For example, fwhm(..., 'rlevel', 0.1) computes full width at 10 % of peak
-## maximum with respect to zero or minimum; FWHM is equivalent to
-## fwhm(..., 'rlevel', 0.5).
+## The option "rlevel" computes full-width at the given relative level of peak
+## profile, i.e. at @math{rlevel*max(y)} or @math{rlevel*(min(y)+max(y))},
+## respectively.  For example, @code{fwhm (@dots{}, "rlevel", 0.1)} computes
+## full width at 10 % of peak maximum with respect to zero or minimum; FWHM is
+## equivalent to @code{fwhm(@dots{}, "rlevel", 0.5)}.
 ##
-## The option 'alevel' computes full-width at the given absolute level of y.
+## The option "alevel" computes full-width at the given absolute level of
+## @var{y}.
 ##
 ## Return 0 if FWHM does not exist (e.g. monotonous function or the function
-## does not cut horizontal line at rlevel*max(y) or rlevel*(max(y)+min(y)) or
-## alevel, respectively).
+## does not cut horizontal line at @math{rlevel*max(y)} or
+## @math{rlevel*(max(y)+min(y))} or alevel, respectively).
 ##
-## Compatibility: Octave 3.x, Matlab
 ## @end deftypefn
 
 function myfwhm = fwhm (y, varargin)

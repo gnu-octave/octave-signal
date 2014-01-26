@@ -25,10 +25,15 @@
 ##
 ## To evaluate the frequency response for the range f1 to f2 in a signal
 ## with sampling frequency Fs, use the following:
-##     m = 32;                               ## number of points desired
-##     w = exp(-j*2*pi*(f2-f1)/((m-1)*Fs));  ## freq. step of f2-f1/m
-##     a = exp(j*2*pi*f1/Fs);                ## starting at frequency f1
-##     y = czt(x, m, w, a);
+##
+## @example
+## @group
+## m = 32;                               ## number of points desired
+## w = exp(-j*2*pi*(f2-f1)/((m-1)*Fs));  ## freq. step of f2-f1/m
+## a = exp(j*2*pi*f1/Fs);                ## starting at frequency f1
+## y = czt(x, m, w, a);
+## @end group
+## @end example
 ##
 ## If you don't specify them, then the parameters default to a fourier
 ## transform:

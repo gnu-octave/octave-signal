@@ -34,12 +34,16 @@
 ## averager, an order 5 butterworth lowpass filter (cutoff 1/3) and
 ## sgolayfilt(x, 3, 5), the best cubic estimated from 5 points:
 ##
-##    [b, a] = butter(5,1/3);
-##    x=[zeros(1,15), 10*ones(1,10), zeros(1,15)];
-##    plot(sgolayfilt(x),"r;sgolayfilt;",...
-##         filtfilt(ones(1,5)/5,1,x),"g;5 sample average;",...
-##         filtfilt(b,a,x),"c;order 5 butterworth;",...
-##         x,"+b;original data;");
+## @example
+## @group
+## [b, a] = butter (5, 1/3);
+## x = [zeros(1,15), 10*ones(1,10), zeros(1,15)];
+## plot (sgolayfilt (x), "r;sgolayfilt;", ...
+##       filtfilt (ones (1,5)/5, 1, x), "g;5 sample average;", ...
+##       filtfilt (b, a, x), "c;order 5 butterworth;", ...
+##       x, "+b;original data;");
+## @end group
+## @end example
 ##
 ## @seealso{sgolay}
 ## @end deftypefn

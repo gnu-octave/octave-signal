@@ -23,12 +23,16 @@
 ## n defaults to 4 and Wc defaults to 0.5.
 ##
 ## Example
-##                                          # Generate a signal.
-##    t=0:0.01:2; x=chirp(t,2,.5,10,'quadratic')+sin(2*pi*t*0.4);
-##    y = interp(x(1:4:length(x)),4,4,1);   # interpolate a sub-sample
-##    stem(t(1:121)*1000,x(1:121),"-g;Original;"); hold on;
-##    stem(t(1:121)*1000,y(1:121),"-r;Interpolated;");
-##    stem(t(1:4:121)*1000,x(1:4:121),"-b;Subsampled;"); hold off;
+## @example
+## @group
+## # Generate a signal.
+## t=0:0.01:2; x=chirp(t,2,.5,10,'quadratic')+sin(2*pi*t*0.4);
+## y = interp(x(1:4:length(x)),4,4,1);   # interpolate a sub-sample
+## stem(t(1:121)*1000,x(1:121),"-g;Original;"); hold on;
+## stem(t(1:121)*1000,y(1:121),"-r;Interpolated;");
+## stem(t(1:4:121)*1000,x(1:4:121),"-b;Subsampled;"); hold off;
+## @end group
+## @end example
 ##
 ## @seealso{decimate, resample}
 ## @end deftypefn

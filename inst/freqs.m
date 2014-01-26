@@ -22,9 +22,11 @@
 ## argument, a plot of magnitude and phase are displayed.
 ##
 ## Example:
-##    B = [1 2]; A = [1 1];
-##    w = linspace(0,4,128);
-##    freqs(B,A,w);
+## @example
+## b = [1 2]; a = [1 1];
+## w = linspace (0, 4, 128);
+## freqs (b, a, w);
+## @end example
 ## @end deftypefn
 
 function [H] = freqs(B,A,W)

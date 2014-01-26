@@ -17,8 +17,8 @@
 ## @deftypefn  {Function File} {} chebwin (@var{L})
 ## @deftypefnx {Function File} {} chebwin (@var{L}, @var{at})
 ##
-## Returns the filter coefficients of the L-point Dolph-Chebyshev window
-## with at dB of attenuation in the stop-band of the corresponding
+## Returns the filter coefficients of the @var{L}-point Dolph-Chebyshev window
+## with @var{at} dB of attenuation in the stop-band of the corresponding
 ## Fourier transform.  The default attenuation value is 100 dB.
 ##
 ## For the definition of the Chebyshev window, see
@@ -33,13 +33,21 @@
 ##
 ## The window is described in frequency domain by the expression:
 ##
+## @example
+## @group
 ##          Cheb(L-1, beta * cos(pi * k/L))
 ##   W(k) = -------------------------------
 ##                 Cheb(L-1, beta)
+## @end group
+## @end example
 ##
 ## with
 ##
+## @example
+## @group
 ##   beta = cosh(1/(L-1) * acosh(10^(at/20))
+## @end group
+## @end example
 ##
 ## and Cheb(m,x) denoting the m-th order Chebyshev polynomial calculated
 ## at the point x.

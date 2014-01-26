@@ -19,33 +19,38 @@
 ## @deftypefnx {Function File} {@var{b} =} fir2 (@var{n}, @var{f}, @var{m}, @var{grid_n}, @var{ramp_n})
 ## @deftypefnx {Function File} {@var{b} =} fir2 (@var{n}, @var{f}, @var{m}, @var{grid_n}, @var{ramp_n}, @var{window})
 ##
-## Produce an FIR filter of order n with arbitrary frequency response,
-## returning the n+1 filter coefficients in b.
+## Produce an order @var{n} FIR filter with arbitrary frequency response
+## @var{m} over frequency bands @var{f}, returning the @var{n}+1 filter
+## coefficients in @var{b}.  The vector @var{f} specifies the frequency band
+## edges of the filter response and @var{m} specifies the magnitude response
+## at each frequency.
 ##
-## n: order of the filter (1 less than the length of the filter)
-## f: frequency at band edges
-##    f is a vector of nondecreasing elements in [0,1]
-##    the first element must be 0 and the last element must be 1
-##    if elements are identical, it indicates a jump in freq. response
-## m: magnitude at band edges
-##    m is a vector of length(f)
-## grid_n: length of ideal frequency response function
-##    defaults to 512, should be a power of 2 bigger than n/2
-## ramp_n: transition width for jumps in filter response
-##    defaults to grid_n/25; a wider ramp gives wider transitions
-##    but has better stopband characteristics.
-## window: smoothing window
-##    defaults to hamming(n+1) row vector
-##    returned filter is the same shape as the smoothing window
+## The vector @var{f} must be nondecreasing over the range [0,1], and the
+## first and last elements must be 0 and 1, respectively.  A discontinuous
+## jump in the frequency response can be specified by duplicating a band edge
+## in @var{f} with different values in @var{m}.
 ##
-## To apply the filter, use the return vector b:
-##       y=filter(b,1,x);
-## Note that plot(f,m) shows target response.
+## The resolution over which the frequency response is evaluated can be
+## controlled with the @var{grid_n} argument.  The default is 512 or the
+## next larger power of 2 greater than the filter length.
+##
+## The band transition width for discontinuities can be controlled with the
+## @var{ramp_n} argument.  The default is @var{grid_n}/25.  Larger values
+## will result in wider band transitions but better stopband rejection.
+##
+## An optional shaping @var{window} can be given as a vector with length
+## @var{n}+1.  If not specified, a Hamming window of length @var{n}+1 is used.
+##
+## To apply the filter, use the return vector @var{b} with the @code{filter}
+## function, for example @code{y = filter (b, 1, x)}.
 ##
 ## Example:
-##   f=[0, 0.3, 0.3, 0.6, 0.6, 1]; m=[0, 0, 1, 1/2, 0, 0];
-##   [h, w] = freqz(fir2(100,f,m));
-##   plot(f,m,';target response;',w/pi,abs(h),';filter response;');
+## @example
+## f = [0, 0.3, 0.3, 0.6, 0.6, 1]; m = [0, 0, 1, 1/2, 0, 0];
+## [h, w] = freqz (fir2 (100, f, m));
+## plot (f, m, ";target response;", w/pi, abs (h), ";filter response;");
+## @end example
+## @seealso{filter, fir1}
 ## @end deftypefn
 
 function b = fir2(n, f, m, grid_n, ramp_n, window)

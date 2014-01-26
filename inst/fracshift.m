@@ -17,7 +17,8 @@
 ## @deftypefn  {Function File} {[@var{y}, @var{h}] =} fracshift (@var{x}, @var{d})
 ## @deftypefnx {Function File} {@var{y} =} fracshift (@var{x}, @var{d}, @var{h})
 ## Shift the series @var{x} by a (possibly fractional) number of samples @var{d}.
-## The interpolator @var{h} is either specified or either designed with a Kaiser-windowed sinecard.
+## The interpolator @var{h} is either specified or either designed with a
+## Kaiser-windowed sinecard.
 ## @seealso{circshift}
 ## @end deftypefn
 

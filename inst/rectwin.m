@@ -15,7 +15,7 @@
 
 ## -*- texinfo -*-
 ## @deftypefn {Function File} {[@var{w}] =} rectwin (@var{L})
-## Return the filter coefficients of a rectangle window of length L.
+## Return the filter coefficients of a rectangle window of length @var{L}.
 ## @seealso{hamming, hanning}
 ## @end deftypefn
 

@@ -15,12 +15,14 @@
 
 ## -*- texinfo -*-
 ## @deftypefn {Function File} {@var{d} =} dftmtx (@var{n})
+## Compute the @var{n}-by-@var{n} Fourier transformation matrix.  This is
+## the matrix @var{d} such that the Fourier transform of a column vector of
+## length @var{n} is given by @code{dftmtx(@var{n}) * @var{x}} and the
+## inverse Fourier transform is given by @code{inv(dftmtx(@var{n})) * @var{x}}.
 ##
-## If @var{n} is a scalar, produces a @var{n}-by-@var{n} matrix @var{d}
-## such that the Fourier transform of a column vector of length @var{n}
-## is given by @code{dftmtx(@var{n}) * x} and the inverse Fourier transform
-## is given by @code{inv(dftmtx(@var{n})) * x}. In general this is less
-## efficient than calling the @dfn{fft} and @dfn{ifft} directly.
+## In general this is less efficient than calling the @code{fft} and
+## @code{ifft} functions directly.
+## @seealso{fft, ifft}
 ## @end deftypefn
 
 function d = dftmtx(n)

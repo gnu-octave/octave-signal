@@ -16,9 +16,10 @@
 ## -*- texinfo -*-
 ## @deftypefn  {Function File} {[@var{y}, @var{h}] =} resample (@var{x}, @var{p}, @var{q})
 ## @deftypefnx {Function File} {@var{y} =} resample (@var{x}, @var{p}, @var{q}, @var{h})
-## Change the sample rate of @var{x} by a factor of @var{p}/@var{q}. This is
-## performed using a polyphase algorithm. The impulse response @var{h} of the antialiasing
-## filter is either specified or either designed with a Kaiser-windowed sinecard.
+## Change the sample rate of @var{x} by a factor of @var{p}/@var{q}.  This is
+## performed using a polyphase algorithm.  The impulse response @var{h} of
+## the antialiasing filter is either specified or either designed with a
+## Kaiser-windowed sinecard.
 ##
 ## Ref [1] J. G. Proakis and D. G. Manolakis,
 ## Digital Signal Processing: Principles, Algorithms, and Applications,

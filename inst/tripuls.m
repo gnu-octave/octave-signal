@@ -26,11 +26,15 @@
 ## of the peak within the width.  -1 indicates that the peak should be
 ## at -w/2, and 1 indicates that the peak should be at w/2.
 ##
-## Example
-##   fs = 11025;  # arbitrary sample rate
-##   f0 = 100;    # pulse train sample rate
-##   w = 0.3/f0;  # pulse width 3/10th the distance between pulses
-##   auplot(pulstran(0:1/fs:4/f0, 0:1/f0:4/f0, 'tripuls', w), fs);
+## Example:
+## @example
+## @group
+## fs = 11025;  # arbitrary sample rate
+## f0 = 100;    # pulse train sample rate
+## w = 0.3/f0;  # pulse width 3/10th the distance between pulses
+## auplot(pulstran(0:1/fs:4/f0, 0:1/f0:4/f0, 'tripuls', w), fs);
+## @end group
+## @end example
 ##
 ## @seealso{pulstran}
 ## @end deftypefn

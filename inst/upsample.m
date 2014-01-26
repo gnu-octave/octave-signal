@@ -4,12 +4,12 @@
 ## -*- texinfo -*-
 ## @deftypefn  {Function File} {@var{y} =} upsample (@var{x}, @var{n})
 ## @deftypefnx {Function File} {@var{y} =} upsample (@var{x}, @var{n}, @var{offset})
-## Upsample the signal, inserting n-1 zeros between every element.
+## Upsample the signal, inserting @var{n}-1 zeros between every element.
 ##
 ## If @var{x} is a matrix, upsample every column.
 ##
 ## If @var{offset} is specified, control the position of the inserted sample in
-## the block of n zeros.
+## the block of @var{n} zeros.
 ## @seealso{decimate, downsample, interp, resample, upfirdn}
 ## @end deftypefn
 

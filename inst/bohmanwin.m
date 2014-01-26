@@ -15,8 +15,8 @@
 
 ## -*- texinfo -*-
 ## @deftypefn {Function File} {[@var{w}] =} bohmanwin (@var{L})
-## Compute the Bohman window of lenght L.
-## @seealso{rectwin,  bartlett}
+## Compute the Bohman window of length @var{L}.
+## @seealso{rectwin, bartlett}
 ## @end deftypefn
 
 function [w] = bohmanwin(L)

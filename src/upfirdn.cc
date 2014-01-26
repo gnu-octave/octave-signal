@@ -87,8 +87,8 @@ MT upfirdn (MT &x, ColumnVector &h, octave_idx_type p, octave_idx_type q)
 
 DEFUN_DLD (upfirdn, args,,
   "-*- texinfo -*-\n\
-@deftypefn {Loadable Function} {@var{y} =} upfirdn (@var{x},@var{h},@var{p},@var{q})\n\
-Upsample, FIR filtering and downsample.@*\n\
+@deftypefn {Loadable Function} {@var{y} =} upfirdn (@var{x}, @var{h}, @var{p}, @var{q})\n\
+Upsample, FIR filtering, and downsample.\n\
 @end deftypefn\n")
 {
   octave_value_list retval;

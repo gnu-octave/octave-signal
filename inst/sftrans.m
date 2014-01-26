@@ -28,6 +28,7 @@
 ## band stop by transforming each of the poles and zeros individually.
 ## The following table summarizes the transformation:
 ##
+## @example
 ## Transform         Zero at x                  Pole at x
 ## ----------------  -------------------------  ------------------------
 ## Low Pass          zero: Fc x/C               pole: Fc x/C
@@ -37,13 +38,13 @@
 ## S -> C Fc/S       pole: 0                    zero: 0
 ##                   gain: -x                   gain: -1/x
 ## ----------------  -------------------------  ------------------------
-## Band Pass         zero: b ± sqrt(b^2-FhFl)   pole: b ± sqrt(b^2-FhFl)
+## Band Pass         zero: b +- sqrt(b^2-FhFl)  pole: b +- sqrt(b^2-FhFl)
 ##        S^2+FhFl   pole: 0                    zero: 0
 ## S -> C --------   gain: C/(Fh-Fl)            gain: (Fh-Fl)/C
 ##        S(Fh-Fl)   b=x/C (Fh-Fl)/2            b=x/C (Fh-Fl)/2
 ## ----------------  -------------------------  ------------------------
-## Band Stop         zero: b ± sqrt(b^2-FhFl)   pole: b ± sqrt(b^2-FhFl)
-##        S(Fh-Fl)   pole: ±sqrt(-FhFl)         zero: ±sqrt(-FhFl)
+## Band Stop         zero: b +- sqrt(b^2-FhFl)  pole: b +- sqrt(b^2-FhFl)
+##        S(Fh-Fl)   pole: +-sqrt(-FhFl)        zero: +-sqrt(-FhFl)
 ## S -> C --------   gain: -x                   gain: -1/x
 ##        S^2+FhFl   b=C/x (Fh-Fl)/2            b=C/x (Fh-Fl)/2
 ## ----------------  -------------------------  ------------------------
@@ -52,6 +53,7 @@
 ## S -> - ---        gain: (2-xT)/T             gain: (2-xT)/T
 ##      T z+1
 ## ----------------  -------------------------  ------------------------
+## @end example
 ##
 ## where C is the cutoff frequency of the initial lowpass filter, Fc is
 ## the edge of the target low/high pass filter and [Fl,Fh] are the edges
@@ -60,7 +62,9 @@
 ## transform for S into H(S)=S-x for a zero at x or H(S)=1/(S-x) for a
 ## pole at x, and converting the result into the form:
 ##
+## @example
 ##    H(S)=g prod(S-Xi)/prod(S-Xj)
+## @end example
 ##
 ## The transforms are from the references.  The actual pole-zero-gain
 ## changes I derived myself.

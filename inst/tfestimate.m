@@ -22,7 +22,7 @@
 ## @deftypefnx {Function File} {} tfestimate (@var{x}, @var{y}, @var{window}, @var{overlap}, @var{Nfft}, @var{Fs}, @var{range})
 ## @deftypefnx {Function File} {[@var{Pxx}, @var{freq}] =} tfestimate (@dots{})
 ##
-## Estimate transfer function of system with input "x" and output "y".
+## Estimate transfer function of system with input @var{x} and output @var{y}.
 ## Use the Welch (1967) periodogram/FFT method.
 ## @seealso{pwelch}
 ## @end deftypefn

@@ -16,14 +16,14 @@
 ## -*- texinfo -*-
 ## @deftypefn {Function File} {@var{y} =} sigmoid_train (@var{t}, @var{ranges}, @var{rc})
 ##
-## Evaluates a train of sigmoid functions at @var{t}.
+## Evaluate a train of sigmoid functions at @var{t}.
 ##
-## The number and duration of each sigmoid is determined from @var{ranges}. Each
-## row of @var{ranges} represents a real interval, e.g. if sigmod @code{i} starts
-## at @code{t=0.1} and ends at @code{t=0.5}, then @code{@var{ranges}(i,:) = [0.1
-## 0.5]}.
-## The input @var{rc} is a array that defines the rising and falling time
-## constants of each sigmoids. Its size must equal the size of @var{ranges}.
+## The number and duration of each sigmoid is determined from @var{ranges}.
+## Each row of @var{ranges} represents a real interval, e.g. if sigmoid
+## @code{i} starts at @code{t=0.1} and ends at @code{t=0.5}, then
+## @code{@var{ranges}(i,:) = [0.1 0.5]}.
+## The input @var{rc} is an array that defines the rising and falling time
+## constants of each sigmoid.  Its size must equal the size of @var{ranges}.
 ##
 ## Run @code{demo sigmoid_train} to some examples of the use of this function.
 ##

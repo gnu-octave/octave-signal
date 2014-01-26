@@ -16,7 +16,7 @@
 ## -*- texinfo -*-
 ## @deftypefn {Function File} {[@var{w}] =} blackmanharris (@var{L})
 ## Compute the Blackman-Harris window.
-## @seealso{rectwin,  bartlett}
+## @seealso{rectwin, bartlett}
 ## @end deftypefn
 
 function [w] = blackmanharris (L)

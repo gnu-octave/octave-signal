@@ -19,13 +19,17 @@
 ## phase reconstruction of the signal x.  If x is a matrix, do so
 ## for each column of the matrix.
 ##
-## Example
-##   f0=70; Fs=10000;           # 100 Hz fundamental, 10kHz sampling rate
-##   a=poly(0.985*exp(1i*pi*[0.1, -0.1, 0.3, -0.3])); # two formants
-##   s=0.005*randn(1024,1);      # Noise excitation signal
-##   s(1:Fs/f0:length(s)) = 1;   # Impulse glottal wave
-##   x=filter(1,a,s);            # Speech signal in x
-##   [y, xm] = rceps(x.*hanning(1024)); # cepstrum and min phase reconstruction
+## Example:
+## @example
+## @group
+## f0 = 70; Fs = 10000;                   # 100 Hz fundamental, 10kHz sampling rate
+## a = poly (0.985 * exp (1i*pi*[0.1, -0.1, 0.3, -0.3])); # two formants
+## s = 0.005 * randn (1024, 1);           # Noise excitation signal
+## s(1:Fs/f0:length(s)) = 1;              # Impulse glottal wave
+## x = filter (1, a, s);                  # Speech signal in x
+## [y, xm] = rceps (x .* hanning (1024)); # cepstrum and min phase reconstruction
+## @end group
+## @end example
 ##
 ## Reference
 ##    Programs for digital signal processing. IEEE Press.

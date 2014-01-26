@@ -14,13 +14,14 @@
 ## this program; if not, see <http://www.gnu.org/licenses/>.
 
 ## -*- texinfo -*-
-## @deftypefn {Function File} {@var{w} =} tukeywin (@var{L}, @var{r})
+## @deftypefn  {Function File} {@var{w} =} tukeywin (@var{L})
+## @deftypefnx {Function File} {@var{w} =} tukeywin (@var{L}, @var{r})
 ## Return the filter coefficients of a Tukey window (also known as the
-## cosine-tapered window) of length @var{L}. @var{r} defines the ratio
-## between the constant section and and the cosine section. It has to be
-## between 0 and 1. The function returns a Hanning window for @var{r}
-## egals 0 and a full box for @var{r} egals 1. By default @var{r} is set
-## to 1/2.
+## cosine-tapered window) of length @var{L}.  @var{r} defines the ratio
+## between the constant section and and the cosine section.  It has to be
+## between 0 and 1.  The function returns a Hanning window for @var{r}
+## equal to 0 and a full box for @var{r} equals to 1.  The default value of
+## @var{r} is 1/2.
 ##
 ## For a definition of the Tukey window, see e.g. Fredric J. Harris,
 ## "On the Use of Windows for Harmonic Analysis with the Discrete Fourier
