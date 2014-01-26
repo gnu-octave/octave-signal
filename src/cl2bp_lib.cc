@@ -447,6 +447,9 @@ bool cl2bp(MallocArray<double>& h, int m, double w1, double w2, double up[3], do
       err = erro > erru ? erro : erru;
       log_printf("erru = %14.6e iup = %4d kmax = %4d ", erru, iup, kmax[iup]);
       log_printf("erro = %14.6e ilo = %4d kmin = %4d\n", erro, ilo, kmin[ilo]);
+#ifndef CL2BP_LOGGING
+      static_cast<void>(iup);
+#endif
 
       if ( err < eps )
         break;
@@ -570,6 +573,9 @@ bool cl2bp(MallocArray<double>& h, int m, double w1, double w2, double up[3], do
       log_printf("\n uvo = %12.4e k1 = %4d (%3d) ", uvo, k1, ak1);
       log_printf("  lvo = %12.4e k2 = %4d (%3d) ", lvo, k2, ak2);
       log_printf(" maxerr = %12.4e\n", uvo > lvo ? uvo : lvo);
+#ifndef CL2BP_LOGGING
+      static_cast<void>(ak1);
+#endif
     }
 
     log_printf("\nConstrained L2 band filter coefficients.\n");

@@ -145,6 +145,8 @@ find_zero(int n, double mu, int l, double extremum_mag, double ripple_ratio,
       n, mu, l, target, ripple_ratio);
   SHOW1(x0); fprintf(stderr, ") %s ", met? "converged to" : "FAILED at");
   SHOW1(x); fprintf(stderr, " in %i iterations\n", i);
+#else
+  static_cast<void>(x0);
 #endif
   return met? x : 0;
 }
