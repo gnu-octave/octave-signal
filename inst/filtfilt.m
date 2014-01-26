@@ -36,8 +36,8 @@
 ## @end example
 ## @end deftypefn
 
-## TODO:  (pkienzle) My version seems to have similar quality to matlab,
-##      but both are pretty bad.  They do remove gross lag errors, though.
+## FIXME: My version seems to have similar quality to matlab,
+##        but both are pretty bad.  They do remove gross lag errors, though.
 
 function y = filtfilt(b, a, x)
 

@@ -52,9 +52,9 @@
 ##
 ## http://ccrma.stanford.edu/~jos/filters/FFT_Based_Equation_Error_Method.html
 
-## TODO: implement Steiglitz-McBride iterations
-## TODO: improve numerical stability for high order filters (matlab is a bit better)
-## TODO: modify to accept more argument configurations
+## FIXME: implement Steiglitz-McBride iterations
+## FIXME: improve numerical stability for high order filters (matlab is a bit better)
+## FIXME: modify to accept more argument configurations
 
 function [B, A, SigN] = invfreq(H, F, nB, nA, W, iter, tol, tr, plane, varargin)
 

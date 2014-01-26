@@ -108,7 +108,7 @@ find_zero(int n, double mu, int l, double extremum_mag, double ripple_ratio,
   if (!divs)
     return 0;
   if (!l) {
-    double r = ripple_ratio;    /* TODO: factor in weighted extremum_mag here */
+    double r = ripple_ratio;   /* FIXME: factor in weighted extremum_mag here */
     x = r > 1 ? cosh(acosh(r) / n) : cos(acos(r) / n); /* invert chebpoly-1st */
     x0 = x *= lower_bound / cos(M_PI * .5 / n) + epsilon;
     target = log(extremum_mag * ripple_ratio);

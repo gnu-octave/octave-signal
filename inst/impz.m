@@ -31,10 +31,10 @@
 ## @seealso{freqz, zplane}
 ## @end deftypefn
 
-## TODO: Call equivalent function from control toolbox since it is
-## TODO:    probably more sophisticated than this one, and since it
-## TODO:    is silly to maintain two different versions of essentially
-## TODO:    the same thing.
+## FIXME: Call equivalent function from control toolbox since it is
+##        probably more sophisticated than this one, and since it
+##        is silly to maintain two different versions of essentially
+##        the same thing.
 
 function [x_r, t_r] = impz(b, a = [1], n = [], fs = 1)
 

@@ -50,11 +50,11 @@
 ## The denominator a defaults to 1, and the poles p defaults to [].
 ## @end deftypefn
 
-## TODO: Consider a plot-like interface:
-## TODO:       zplane(x1,y1,fmt1,x2,y2,fmt2,...)
-## TODO:    with y_i or fmt_i optional as usual.  This would allow
-## TODO:    legends and control over point colour and filters of
-## TODO:    different orders.
+## FIXME: Consider a plot-like interface:
+##           zplane(x1,y1,fmt1,x2,y2,fmt2,...)
+##        with y_i or fmt_i optional as usual.  This would allow
+##        legends and control over point colour and filters of
+##        different orders.
 
 function zplane(z, p = [])
 

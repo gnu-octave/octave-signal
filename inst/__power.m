@@ -36,8 +36,8 @@
 ## spectrum and don't return anything.
 ## @end deftypefn
 
-## TODO: consider folding this into freqz --- just one more parameter to
-## TODO:    distinguish between 'linear', 'log', 'logsquared' and 'squared'
+## FIXME: consider folding this into freqz --- just one more parameter to
+##        distinguish between 'linear', 'log', 'logsquared' and 'squared'
 
 function [varargout] = __power (b, a, varargin)
 

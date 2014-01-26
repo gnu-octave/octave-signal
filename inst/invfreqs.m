@@ -42,7 +42,7 @@
 ##       err = norm(H-Hh);
 ##       disp(sprintf('L2 norm of frequency response error = %f',err));
 
-## TODO: check invfreq.m for todo's
+## FIXME: check invfreq.m for todo's
 
 function [B, A, SigN] = invfreqs(H,F,nB,nA,W,iter,tol,tr, varargin)
 

@@ -49,9 +49,9 @@
 ## @end example
 ## @end deftypefn
 
-## TODO: Make it faster.  It is currently unusable for anything real.
-## TODO: It may not be possible to speed it up with the present interface.
-## TODO: See speech/voice.m for a better way.
+## FIXME: Make it faster.  It is currently unusable for anything real.
+##        It may not be possible to speed it up with the present interface.
+##        See speech/voice.m for a better way.
 
 ## Note that pulstran can be used for some pretty strange things such
 ## as simple band-limited interpolation:

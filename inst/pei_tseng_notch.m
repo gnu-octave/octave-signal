@@ -28,7 +28,8 @@
 ## doi: 10.1109/TENCON.1996.608814)
 ## @end deftypefn
 
-## TODO: Implement Laplace-space frequencies and bandwidths, and perhaps better range checking for bandwidths?
+## FIXME: Implement Laplace-space frequencies and bandwidths, and perhaps
+##        better range checking for bandwidths?
 
 function [ b, a ] = pei_tseng_notch ( frequencies, bandwidths )
 

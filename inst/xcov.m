@@ -69,7 +69,7 @@ function [retval, lags] = xcov (X, Y, maxlag, scale)
     if isscalar(Y), maxlag=Y; Y=[]; endif
   endif
 
-  ## XXX FIXME XXX --- should let center(Y) deal with []
+  ## FIXME: should let center(Y) deal with []
   ## [retval, lags] = xcorr(center(X), center(Y), maxlag, scale);
   if (!isempty(Y))
     [retval, lags] = xcorr(center(X), center(Y), maxlag, scale);

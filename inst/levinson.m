@@ -44,10 +44,10 @@
 ##    Copyright (C) 1995 Friedrich Leisch <Friedrich.Leisch@ci.tuwien.ac.at>
 ##    GPL license
 
-## TODO: Matlab doesn't return reflection coefficients and
-## TODO:    errors in addition to the polynomial a.
-## TODO: What is the difference between aryule, levinson,
-## TODO:    ac2poly, ac2ar, lpc, etc.?
+## FIXME: Matlab doesn't return reflection coefficients and
+##        errors in addition to the polynomial a.
+## FIXME: What is the difference between aryule, levinson,
+##        ac2poly, ac2ar, lpc, etc.?
 
 function [a, v, ref] = levinson (acf, p)
 

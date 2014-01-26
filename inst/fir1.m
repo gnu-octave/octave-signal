@@ -50,11 +50,11 @@
 ## @seealso{filter, fir2}
 ## @end deftypefn
 
-## TODO: Consider using exact expression (in terms of sinc) for the
-## TODO:    impulse response rather than relying on fir2.
-## TODO: Find reference to the requirement that order be even for
-## TODO:    filters that end high.  Figure out what to do with the
-## TODO:    window in these cases
+## FIXME: Consider using exact expression (in terms of sinc) for the
+##        impulse response rather than relying on fir2.
+## FIXME: Find reference to the requirement that order be even for
+##        filters that end high.  Figure out what to do with the
+##        window in these cases
 
 function b = fir1(n, w, varargin)
 

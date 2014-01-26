@@ -48,7 +48,7 @@
 ## @seealso{sgolay}
 ## @end deftypefn
 
-## TODO: Patch filter.cc so that it accepts matrix arguments
+## FIXME: Patch filter.cc so that it accepts matrix arguments
 
 function y = sgolayfilt (x, p = 3, n, m = 0, ts = 1)
 

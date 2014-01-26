@@ -58,8 +58,7 @@
 ## @seealso{fir1, kaiser}
 ## @end deftypefn
 
-## TODO: order is underestimated for the final test case: 2 stop bands.
-## TODO:     octave> ftest("kaiserord") # shows test cases
+## FIXME: order is underestimated for the final test case: 2 stop bands.
 
 function [n, w, beta, ftype] = kaiserord(f, m, dev, fs)
 
@@ -151,4 +150,4 @@ endfunction
 %! % order.  Confirm that the blue filter meets the criteria and
 %! % the red line fails.
 
-%!# XXX FIXME XXX extend demo to show detail at criteria box corners
+## FIXME: extend demo to show detail at criteria box corners

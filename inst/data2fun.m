@@ -59,7 +59,7 @@ function [fhandle fullfname] = data2fun( t, y, varargin)
     endfor
 
     if given.file
-      ## TODO: check that file will be in the path. Otherwise fhabdle(0) fails.
+      ## FIXME: check that file will be in the path. Otherwise fhabdle(0) fails.
 
       if !isempty(varargin{idx(1)+1})
 

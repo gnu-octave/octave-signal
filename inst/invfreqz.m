@@ -37,7 +37,7 @@
 ##     Hh = freqz(Bh,Ah);
 ##     disp(sprintf('||frequency response error|| = %f',norm(H-Hh)));
 
-## TODO: check invfreq.m for todo's
+## FIXME: check invfreq.m for todo's
 
 function [B, A, SigN] = invfreqz(H, F, nB, nA, W, iter, tol, tr, varargin)
 

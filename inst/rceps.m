@@ -77,7 +77,7 @@ endfunction
 %! hx = fft(x);
 %! hxm = fft(xm);
 %! assert(abs(hx), abs(hxm), 200*eps); # good magnitude response match
-%! #XXX FIXME XXX test for minimum phase?  Stop using random datasets!
+%! ## FIXME: test for minimum phase?  Stop using random datasets!
 %! #assert(arg(hx) != arg(hxm));        # phase mismatch
 
 %!test
