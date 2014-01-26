@@ -6,16 +6,24 @@ signal-1.3.0   Release Date: XXXX-XX-XX   Release Manager: TBD
 
  ** The following functions are new:
 
-      digitrevorder     ultrwin
-      primitive         upsamplefill
-      wconv
+      digitrevorder   upsamplefill
+      primitive       wconv
+      ultrwin
 
- ** The function `resample' was fixed to accept integer-type arguments.
+ ** Several bugs have been fixed in the following functions:
+
+      ellipord    ifwht
+      findpeaks   remez
+      fir1        resample
+      fwht        schtrig
+      grpdelay    zp2sos
 
  ** Replaced line continuation marker "\" by "..." to avoid deprecated syntax
-    warning in Octave 4.0.
+    warning in Octave 3.8.
 
- ** The signal package no longer depends on the specfun package.
+ ** The signal package now depends on Octave 3.8 or newer.  The `ellipke'
+    function is required, which used to be provided by the specfun package.
+    Consequently, the signal package no longer depends on specfun.
 
 ===============================================================================
 signal-1.2.2   Release Date: 2013-03-25   Release Manager: Mike Miller
