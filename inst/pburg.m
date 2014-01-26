@@ -127,24 +127,18 @@ function [psd,f_out]=pburg(x,poles,varargin)
 endfunction
 
 %!demo
-%! fflush(stdout);
-%! rand('seed',2038014164);
-%! a = [ 1.0 -1.6216505 1.1102795 -0.4621741 0.2075552 -0.018756746 ];
-%! signal = detrend(filter(0.70181,a,rand(1,16384)));
-%! % frequency shift by modulating with exp(j.omega.t)
-%! skewed = signal.*exp(2*pi*i*2/25*[1:16384]);
+%! rand ("seed", 2038014164);
+%! a = [1.0 -1.6216505 1.1102795 -0.4621741 0.2075552 -0.018756746];
 %! Fs = 25;
+%! n = 16384;
+%! signal = detrend (filter (0.70181, a, rand (1, n)));
+%! % frequency shift by modulating with exp(j.omega.t)
+%! skewed = signal .* exp (2*pi*i*2/Fs*[1:n]);
 %! hold on
-%! pburg(signal,3,[],Fs);
-%! input('Onesided 3-pole spectrum. Press ENTER', 's' );
-%! pburg(signal,4,[],Fs,'whole');
-%! input('Twosided 4-pole spectrum of same data. Press ENTER', 's' );
-%! pburg(signal,5,128,Fs,'shift', 'semilogy');
-%! input('Twosided, centred zero-frequency, 5-pole. Press ENTER', 's' );
-%! pburg(skewed,7,128,Fs,'AKICc','shift','semilogy');
-%! input('Complex data, AKICc chooses no. of poles. Press ENTER', 's' );
-%! user_freq=[-0.2:0.02:0.2]*Fs;
-%! pburg(skewed,7,user_freq,Fs,'AKICc','semilogy');
-%! input('User-specified frequency values. Press ENTER', 's' );
+%! pburg (signal, 3, [], Fs);
+%! pburg (signal, 4, [], Fs, "whole");
+%! pburg (signal, 5, 128, Fs, "shift", "semilogy");
+%! pburg (skewed, 7, 128, Fs, "AKICc", "shift", "semilogy");
+%! user_freq = [-0.2:0.02:0.2]*Fs;
+%! pburg (skewed, 7, user_freq, Fs, "AKICc", "semilogy");
 %! hold off
-%! clf

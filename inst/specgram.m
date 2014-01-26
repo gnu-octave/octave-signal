@@ -203,13 +203,6 @@ endfunction
 %! ## test of automatic plot
 %! [S, f, t] = specgram(x);
 %! specgram(x, 2^nextpow2(window), Fs, window, window-step);
-%! disp("shows a diagonal from bottom left to top right");
-%! input("press enter:","s");
-%!
-%! ## test of returned values
-%! S = specgram(x, 2^nextpow2(window), Fs, window, window-step);
-%! imagesc(20*log10(flipud(abs(S))));
-%! disp("same again, but this time using returned value");
 
 %!#demo  # FIXME: Enable once we have an audio file to demo
 %! ## Speech spectrogram

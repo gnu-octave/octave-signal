@@ -98,25 +98,18 @@ function [psd,f_out]=pyulear(x,poles,varargin)
 endfunction
 
 %!demo
-%! fflush(stdout);
-%! rand('seed',2038014164);
-%! a = [ 1.0 -1.6216505 1.1102795 -0.4621741 0.2075552 -0.018756746 ];
-%! signal = detrend(filter(0.70181,a,rand(1,16384)));
-%! % frequency shift by modulating with exp(j.omega.t)
-%! skewed = signal.*exp(2*pi*i*2/25*[1:16384]);
+%! rand ("seed", 2038014164);
+%! a = [1.0 -1.6216505 1.1102795 -0.4621741 0.2075552 -0.018756746];
 %! Fs = 25;
+%! n = 16384;
+%! signal = detrend (filter (0.70181, a, rand (1, n)));
+%! % frequency shift by modulating with exp(j.omega.t)
+%! skewed = signal .* exp (2*pi*i*2/Fs*[1:n]);
 %! hold on
-%! pyulear(signal,3,[],Fs);
-%! disp( 'Results from this demo should be nearly the same as pburg demo' );
-%! input('Onesided 3-pole spectrum. Press ENTER', 's' );
-%! pyulear(signal,4,[],Fs,'whole');
-%! input('Twosided 4-pole spectrum of same data. Press ENTER', 's' );
-%! pyulear(signal,5,128,Fs,'shift', 'semilogy');
-%! input('Twosided, centred zero-frequency, 5-pole. Press ENTER', 's' );
-%! pyulear(skewed,7,128,Fs,'shift','semilogy');
-%! input('Complex data, frequency-shifted. Press ENTER', 's' );
-%! user_freq=[-0.2:0.02:0.2]*Fs;
-%! pyulear(skewed,7,user_freq,Fs,'semilogy');
-%! input('User-specified frequency values. Press ENTER', 's' );
+%! pyulear (signal, 3, [], Fs);
+%! pyulear (signal, 4, [], Fs, "whole");
+%! pyulear (signal, 5, 128, Fs, "shift", "semilogy");
+%! pyulear (skewed, 7, 128, Fs, "shift", "semilogy");
+%! user_freq = [-0.2:0.02:0.2]*Fs;
+%! pyulear (skewed, 7, user_freq, Fs, "semilogy");
 %! hold off
-%! clf

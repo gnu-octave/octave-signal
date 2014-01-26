@@ -917,41 +917,26 @@ endfunction
 %! hold off
 %! pwelch([]);
 %! pwelch(signal);
-%! disp('Default settings: Fs=1Hz, overlap=0.5, no padding' )
-%! input('Onesided power spectral density (real data). Press ENTER', 's' );
 %! hold on
 %! pwelch(skewed);
-%! disp('Frequency-shifted complex data.  Twosided wrap-around spectrum.' );
-%! input('Area is same as one-sided spectrum. Press ENTER', 's' );
 %! pwelch(signal,'shift','semilogy');
-%! input('Twosided, centred zero-frequency, lin-log plot. Press ENTER', 's' );
 %! hold off
 %! figure();
 %! pwelch(skewed,[],[],[],Fs,'shift','semilogy');
-%! input('Actual Fs=25 Hz. Note change of scales. Press ENTER', 's' );
 %! pwelch(skewed,[],[],[],Fs,0.95,'shift','semilogy');
-%! input('Spectral density with 95% confidence interval. Press ENTER', 's' );
 %! pwelch('R12+');
 %! pwelch(signal,'squared');
-%! input('Spectral density with Matlab R12 defaults. Press ENTER', 's' );
 %! figure();
 %! pwelch([]);
 %! pwelch(signal,3640,[],4096,2*pi,[],'no-strip');
-%! input('Same spectrum with 95% confidence interval. Press ENTER', 's' );
 %! figure();
 %! pwelch(signal,[],[],[],2*pi,0.95,'no-strip');
-%! input('95% confidence interval with native defaults. Press ENTER', 's' );
 %! pwelch(signal,64,[],[],2*pi,'no-strip');
-%! input('Only 32 frequency values in this spectrum. Press ENTER', 's' );
 %! hold on
 %! pwelch(signal,64,[],256,2*pi,'no-strip');
-%! input('4:1 zero padding gives artificial smoothing. Press ENTER', 's' );
 %! figure();
 %! pwelch('psd');
 %! pwelch(signal,'squared');
-%! input('Just like Matlab spectrum.welch(...) defaults. Press ENTER', 's' );
 %! hold off
 %! pwelch({});
 %! pwelch(white,signal,'trans','coher','short')
-%! input('Transfer and coherence functions. Press ENTER', 's' );
-%! disp('Use "close all" to remove plotting windows.' );

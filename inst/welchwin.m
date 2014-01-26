@@ -63,37 +63,30 @@ function [w] = welchwin(L,c)
 endfunction;
 
 %!demo
-%! printf( "Short symmetric windows\n" );
-%! welchwin(5)
-%! welchwin(6)
-%! welchwin(6,"symmetric")
-%! welchwin(7)
-%! input( "Press ENTER to continue", "s" );
-%!
-%! printf( "Short periodic windows\n" );
-%! welchwin(6,"periodic")
-%! welchwin(7,"periodic")
-%! input( "Press ENTER to continue", "s" );
-%!
-%! L=32;
-%! printf( "Graph: single period of " );
-%! printf( "%d-point periodic (blue) and symmetric (red) windows\n", L );
-%! t=[0:L-1];
-%! xp=welchwin(L,"periodic");
-%! xs=welchwin(L,"symmetric");
-%! plot(t,xp,"b",t,xs,"r")
-%! input( "Press ENTER to continue", "s" );
-%!
-%! printf( "Graph: 4 periods of " );
-%! printf( "%d-point periodic (blue) and symmetric (red) windows\n", L );
-%! t2=[0:4*L-1];
-%! xp2=repmat(xp,1,4);
-%! xs2=repmat(xs,1,4);
-%! plot(t2,xp2,"b",t2,xs2,"r")
-%! input( "Press ENTER to continue", "s" );
-%!
-%! n=512;
-%! s=fftshift(max(1.0e-2,abs(fft(postpad(xp,n)))));
-%! f=[-0.5:1/n:0.5-1/n];
-%! printf( "%dx null-padded, power spectrum of %d-point window\n", n/L, L );
-%! semilogy(f,s)
+%! L = 32;
+%! t = [0:L-1];
+%! printf ("Graph: single period of ");
+%! printf ("%d-point periodic (blue) and symmetric (red) windows\n", L);
+%! xp = welchwin (L, "periodic");
+%! xs = welchwin (L, "symmetric");
+%! plot (t, xp, "b", t, xs, "r")
+
+%!demo
+%! L = 32;
+%! t = [0:4*L-1];
+%! printf ("Graph: 4 periods of ");
+%! printf ("%d-point periodic (blue) and symmetric (red) windows\n", L);
+%! xp = welchwin (L, "periodic");
+%! xs = welchwin (L, "symmetric");
+%! xp2 = repmat (xp, 1, 4);
+%! xs2 = repmat (xs, 1, 4);
+%! plot (t, xp2, "b", t, xs2, "r")
+
+%!demo
+%! L = 32;
+%! n = 512;
+%! xp = welchwin (L, "periodic");
+%! s = fftshift (max (1e-2, abs (fft (postpad (xp, n)))));
+%! f = [-0.5:1/n:0.5-1/n];
+%! printf ("%dx null-padded, power spectrum of %d-point window\n", n/L, L);
+%! semilogy (f, s)
