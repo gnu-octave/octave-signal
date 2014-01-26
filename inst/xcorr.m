@@ -31,16 +31,16 @@
 ## The cross-correlation estimate between vectors "x" and "y" (of
 ## length N) for lag "k" is given by
 ##
-## @iftex
 ## @tex
 ## $$   R_{xy}(k) = \sum_{i=1}^{N} x_{i+k} \conj(y_i),
 ## @end tex
-## @end iftex
 ## @ifnottex
 ## @example
+## @group
 ##            N
 ## R_xy(k) = sum x_@{i+k@} conj(y_i),
 ##           i=1
+## @end group
 ## @end example
 ## @end ifnottex
 ##

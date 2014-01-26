@@ -36,19 +36,19 @@
 ## @itemx @var{c}
 ## @itemx @var{d}
 ## The state space system, in the form:
-## @iftex
 ## @tex
 ## $$ \dot x = Ax + Bu $$
 ## $$ y = Cx + Du $$
 ## @end tex
-## @end iftex
-## @ifinfo
+## @ifnottex
 ## @example
+## @group
 ##      .
 ##      x = Ax + Bu
 ##      y = Cx + Du
+## @end group
 ## @end example
-## @end ifinfo
+## @end ifnottex
 ## @end table
 ## @end deftypefn
 

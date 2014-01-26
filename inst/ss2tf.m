@@ -18,34 +18,33 @@
 ## @deftypefn {Function File} {[@var{num}, @var{den}] =} ss2tf (@var{a}, @var{b}, @var{c}, @var{d})
 ## Conversion from transfer function to state-space.
 ## The state space system:
-## @iftex
 ## @tex
 ## $$ \dot x = Ax + Bu $$
 ## $$ y = Cx + Du $$
 ## @end tex
-## @end iftex
-## @ifinfo
+## @ifnottex
 ## @example
+## @group
 ##       .
 ##       x = Ax + Bu
 ##       y = Cx + Du
+## @end group
 ## @end example
-## @end ifinfo
+## @end ifnottex
 ##
 ## is converted to a transfer function:
-## @iftex
 ## @tex
 ## $$ G(s) = { { \rm num }(s) \over { \rm den }(s) } $$
 ## @end tex
-## @end iftex
-## @ifinfo
+## @ifnottex
 ## @example
-##
+## @group
 ##                 num(s)
 ##           G(s)=-------
 ##                 den(s)
+## @end group
 ## @end example
-## @end ifinfo
+## @end ifnottex
 ##
 ## @end deftypefn
 
