@@ -95,6 +95,8 @@ void CreateDenseGrid(int r, int numtaps, int numband, const double bands[],
       lowf = (band==0 ? grid0 : bands[2*band]);
       highf = bands[2*band + 1];
       k = (int)((highf - lowf)/delf + 0.5);   /* .5 for rounding */
+      if (band == 0 && symmetry == NEGATIVE)
+        k--;
       for (i=0; i<k; i++)
         {
           D[j] = des[2*band] + i*(des[2*band+1]-des[2*band])/(k-1);
