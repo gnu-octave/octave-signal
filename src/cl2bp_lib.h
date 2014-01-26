@@ -61,7 +61,7 @@ public:
   }
   ~MallocArray() { free(ptr); }
 private:
-  MallocArray(const MallocArray& src) { }  // copy constructor is unimplemented and disallowed
+  MallocArray(const MallocArray&) { }  // copy constructor is unimplemented and disallowed
 };
 
 //-----------------------------------------------------------------------------------------------------------
