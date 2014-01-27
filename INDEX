@@ -154,10 +154,11 @@ Utility
   clustersegment
   findpeaks
   fracshift
-  upsamplefill
   marcumq
+  primitive
   sampled2continuous
   schtrig
+  upsamplefill
   wconv
   wkeep
   wrev
