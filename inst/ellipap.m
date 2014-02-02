@@ -17,8 +17,8 @@
 ## @deftypefn {Function File} {[@var{z}, @var{p}, @var{g}] =} ellipap (@var{n}, @var{Rp}, @var{Rs})
 ## Design lowpass analog elliptic filter.
 ##
-## This function exists only for matlab compatibility and is equivalent to
-## @code{ellip (@var{n}, @var{Rp}, @var{Rs}, 1, "s")}
+## This function exists for @sc{matlab} compatibility only, and is equivalent
+## to @code{ellip (@var{n}, @var{Rp}, @var{Rs}, 1, "s")}.
 ##
 ## @seealso{ellip}
 ## @end deftypefn

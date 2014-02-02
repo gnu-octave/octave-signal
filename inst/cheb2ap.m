@@ -17,8 +17,8 @@
 ## @deftypefn {Function File} {[@var{z}, @var{p}, @var{g}] =} cheb2ap (@var{n}, @var{Rs})
 ## Design lowpass analog Chebyshev type II filter.
 ##
-## This function exists only for matlab compatibility and is equivalent to
-## @code{cheby2 (@var{n}, @var{Rs}, 1, "s")}
+## This function exists for @sc{matlab} compatibility only, and is equivalent
+## to @code{cheby2 (@var{n}, @var{Rs}, 1, "s")}.
 ##
 ## @seealso{cheby2}
 ## @end deftypefn

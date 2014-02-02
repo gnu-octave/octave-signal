@@ -17,8 +17,8 @@
 ## @deftypefn {Function File} {[@var{z}, @var{p}, @var{g}] =} buttap (@var{n})
 ## Design lowpass analog Butterworth filter.
 ##
-## This function exists only for matlab compatibility and is equivalent to
-## @code{butter (@var{n}, 1, "s")}
+## This function exists for @sc{matlab} compatibility only, and is equivalent
+## to @code{butter (@var{n}, 1, "s")}.
 ##
 ## @seealso{butter}
 ## @end deftypefn
