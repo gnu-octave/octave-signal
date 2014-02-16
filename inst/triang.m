@@ -14,22 +14,22 @@
 ## this program; if not, see <http://www.gnu.org/licenses/>.
 
 ## -*- texinfo -*-
-## @deftypefn {Function File} {@var{w} =} triang (@var{L})
+## @deftypefn {Function File} {@var{w} =} triang (@var{m})
 ##
-## Returns the filter coefficients of a triangular window of length @var{L}.
+## Returns the filter coefficients of a triangular window of length @var{m}.
 ## Unlike the bartlett window, triang does not go to zero at the edges
-## of the window.  For odd @var{L}, @code{triang(@var{L})} is equal to
-## @code{bartlett(@var{L}+2)} except for the zeros at the edges of the window.
+## of the window.  For odd @var{m}, @code{triang(@var{m})} is equal to
+## @code{bartlett(@var{m}+2)} except for the zeros at the edges of the window.
 ## @end deftypefn
 
-function w = triang(L)
+function w = triang(m)
 
   if (nargin != 1)
     print_usage;
-  elseif (!isscalar(L) || L != fix (L) || L < 1)
-    error("triang: L has to be an integer > 0");
+  elseif (!isscalar(m) || m != fix (m) || m < 1)
+    error("triang: M has to be an integer > 0");
   endif
-  w = 1 - abs ([-(L-1):2:(L-1)]' / (L+rem(L,2)));
+  w = 1 - abs ([-(m-1):2:(m-1)]' / (m+rem(m,2)));
 
 endfunction
 

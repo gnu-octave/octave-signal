@@ -14,23 +14,23 @@
 ## this program; if not, see <http://www.gnu.org/licenses/>.
 
 ## -*- texinfo -*-
-## @deftypefn {Function File} {[@var{w}] =} blackmanharris (@var{L})
+## @deftypefn {Function File} {[@var{w}] =} blackmanharris (@var{m})
 ## Compute the Blackman-Harris window.
 ## @seealso{rectwin, bartlett}
 ## @end deftypefn
 
-function [w] = blackmanharris (L)
+function [w] = blackmanharris (m)
 
   if (nargin < 1)
     print_usage;
-  elseif(! isscalar(L))
-    error("L must be a number");
+  elseif(! isscalar(m))
+    error("M must be a number");
   endif
 
-  if (L == 1)
+  if (m == 1)
     w = 1;
   else
-    N = L-1;
+    N = m - 1;
     a0 = 0.35875;
     a1 = 0.48829;
     a2 = 0.14128;

@@ -14,28 +14,28 @@
 ## this program; if not, see <http://www.gnu.org/licenses/>.
 
 ## -*- texinfo -*-
-## @deftypefn {Function File} {[@var{w}] =} nuttallwin (@var{L})
-## Compute the Blackman-Harris window defined by Nuttall of length @var{L}.
+## @deftypefn {Function File} {[@var{w}] =} nuttallwin (@var{m})
+## Compute the Blackman-Harris window defined by Nuttall of length @var{m}.
 ## @seealso{blackman, blackmanharris}
 ## @end deftypefn
 
-function [w] = nuttallwin(L)
+function [w] = nuttallwin(m)
 
   if (nargin != 1); print_usage; endif
 
-  if(L < 0)
-    error('L must be positive');
+  if(m < 0)
+    error('M must be positive');
   endif
 
-  if(L ~= floor(L))
-    L = round(L);
-    warning('L rounded to the nearest integer.');
+  if(m ~= floor(m))
+    m = round(m);
+    warning('M rounded to the nearest integer.');
   endif
 
-  if (L == 1)
+  if (m == 1)
     w = 1;
   else
-    N = L-1;
+    N = m - 1;
     a0 = 0.355768;
     a1 = 0.487396;
     a2 = 0.144232;

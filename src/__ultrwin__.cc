@@ -236,7 +236,7 @@ ultraspherical_window(int n, double mu, double par, uswpt_t type, int even_norm,
 
 DEFUN_DLD (__ultrwin__, args, ,
   "-*- texinfo -*-\n\
-@deftypefn {Loadable Function} {} __ultrwin__ (@var{l}, @var{mu}, @var{par}, @var{par_type}, @var{norm})\n\
+@deftypefn {Loadable Function} {} __ultrwin__ (@var{m}, @var{mu}, @var{par}, @var{par_type}, @var{norm})\n\
 Undocumented internal function.\n\
 @end deftypefn")
 {
@@ -257,13 +257,13 @@ Undocumented internal function.\n\
         return retval;
       }
 
-  int L = args(0).scalar_value ();
+  int m = args(0).scalar_value ();
   double mu = args(1).scalar_value ();
   double par = args(2).scalar_value ();
   uswpt_t par_type = static_cast<uswpt_t> (args(3).scalar_value ());
   int even_norm = args(4).scalar_value ();
   double xmu;
-  double *w = ultraspherical_window (L, mu, par, par_type, even_norm, &xmu);
+  double *w = ultraspherical_window (m, mu, par, par_type, even_norm, &xmu);
 
   if (!w)
     {
@@ -271,8 +271,8 @@ Undocumented internal function.\n\
       return retval;
     }
 
-  ColumnVector ww (L);
-  for (octave_idx_type i = 0; i < L; i++)
+  ColumnVector ww (m);
+  for (octave_idx_type i = 0; i < m; i++)
     ww(i) = w[i];
   free (w);
 

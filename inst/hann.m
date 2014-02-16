@@ -14,22 +14,22 @@
 ## this program; if not, see <http://www.gnu.org/licenses/>.
 
 ## -*- texinfo -*-
-## @deftypefn  {Function File} {} hann (@var{n})
-## Return the filter coefficients of a Hanning window of length @var{n}.
+## @deftypefn  {Function File} {} hann (@var{m})
+## Return the filter coefficients of a Hanning window of length @var{m}.
 ##
 ## This function exists for @sc{matlab} compatibility only, and is equivalent
-## to @code{hanning (@var{n})}.
+## to @code{hanning (@var{m})}.
 ##
 ## @seealso{hanning}
 ## @end deftypefn
 
-function w = hann (n)
+function w = hann (m)
 
   if (nargin != 1)
     print_usage ();
   endif
 
-  w = hanning (n);
+  w = hanning (m);
 
 endfunction
 

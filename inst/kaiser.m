@@ -15,21 +15,21 @@
 ## this program; if not, see <http://www.gnu.org/licenses/>.
 
 ## -*- texinfo -*-
-## @deftypefn  {Function File} {} kaiser (@var{L})
-## @deftypefnx {Function File} {} kaiser (@var{L}, @var{beta})
+## @deftypefn  {Function File} {} kaiser (@var{m})
+## @deftypefnx {Function File} {} kaiser (@var{m}, @var{beta})
 ##
-## Returns the filter coefficients of the L-point Kaiser window with
+## Returns the filter coefficients of the m-point Kaiser window with
 ## parameter beta.
 ##
 ## For the definition of the Kaiser window, see A. V. Oppenheim &
 ## R. W. Schafer, "Discrete-Time Signal Processing".
 ##
-## The continuous version of width L centered about x=0 is:
+## The continuous version of width m centered about x=0 is:
 ##
 ## @example
 ## @group
-##         besseli(0, beta * sqrt(1-(2*x/L).^2))
-## k(x) =  -------------------------------------,  L/2 <= x <= L/2
+##         besseli(0, beta * sqrt(1-(2*x/m).^2))
+## k(x) =  -------------------------------------,  m/2 <= x <= m/2
 ##                besseli(0, beta)
 ## @end group
 ## @end example
@@ -37,22 +37,22 @@
 ## @seealso{kaiserord}
 ## @end deftypefn
 
-function w = kaiser (L, beta = 0.5)
+function w = kaiser (m, beta = 0.5)
 
   if (nargin < 1)
     print_usage;
-  elseif !(isscalar (L) && (L == round (L)) && (L > 0))
-    error ("kaiser:  L has to be a positive integer");
+  elseif !(isscalar (m) && (m == round (m)) && (m > 0))
+    error ("kaiser:  M has to be a positive integer");
   elseif !(isscalar (beta) && (beta == real (beta)))
     error ("kaiser:  beta has to be a real scalar");
   endif
 
-  if (L == 1)
+  if (m == 1)
     w = 1;
   else
-    m = L - 1;
-    k = (0 : m)';
-    k = 2 * beta / m * sqrt (k .* (m - k));
+    N = m - 1;
+    k = (0 : N)';
+    k = 2 * beta / N * sqrt (k .* (N - k));
     w = besseli (0, k) / besseli (0, beta);
   endif
 

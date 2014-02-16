@@ -14,27 +14,27 @@
 ## this program; if not, see <http://www.gnu.org/licenses/>.
 
 ## -*- texinfo -*-
-## @deftypefn {Function File} {[@var{w}] =} barthannwin (@var{L})
-## Compute the modified Bartlett-Hann window of length @var{L}.
+## @deftypefn {Function File} {[@var{w}] =} barthannwin (@var{m})
+## Compute the modified Bartlett-Hann window of length @var{m}.
 ## @seealso{rectwin, bartlett}
 ## @end deftypefn
 
-function [w] = barthannwin(L)
+function [w] = barthannwin(m)
 
   if (nargin < 1)
     print_usage;
-  elseif (! isscalar(L) || L < 0)
-    error("L must be a positive integer");
+  elseif (! isscalar(m) || m < 0)
+    error("M must be a positive integer");
   endif
-  L = round(L);
+  m = round(m);
 
-  if (L == 1)
+  if (m == 1)
     w = 1;
   else
-    N = L-1;
+    N = m - 1;
     n = 0:N;
 
-    w = 0.62 -0.48.*abs(n./(L-1) - 0.5)+0.38*cos(2.*pi*(n./(L-1)-0.5));
+    w = 0.62 -0.48.*abs(n./(m-1) - 0.5)+0.38*cos(2.*pi*(n./(m-1)-0.5));
     w = w';
   endif
 

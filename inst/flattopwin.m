@@ -2,9 +2,9 @@
 ## This program is granted to the public domain.
 
 ## -*- texinfo -*-
-## @deftypefn  {Function File} {} flattopwin (@var{L})
-## @deftypefnx {Function File} {} flattopwin (@var{L}, "symmetric")
-## @deftypefnx {Function File} {} flattopwin (@var{L}, "periodic")
+## @deftypefn  {Function File} {} flattopwin (@var{m})
+## @deftypefnx {Function File} {} flattopwin (@var{m}, "symmetric")
+## @deftypefnx {Function File} {} flattopwin (@var{m}, "periodic")
 ##
 ## Return the window f(w):
 ##
@@ -15,8 +15,8 @@
 ## @end group
 ## @end example
 ##
-## where w = i/(L-1) for i=0:L-1 for a symmetric window, or
-## w = i/L for i=0:L-1 for a periodic window.  The default
+## where w = i/(m-1) for i=0:m-1 for a symmetric window, or
+## w = i/m for i=0:m-1 for a periodic window.  The default
 ## is symmetric.  The returned window is normalized to a peak
 ## of 1 at w = 0.5.
 ##
@@ -31,28 +31,28 @@
 ## analysis (Part I)", Bruel & Kjaer Technical Review No.3.
 ## @end deftypefn
 
-function w = flattopwin (L, sym)
+function w = flattopwin (m, sym)
 
   if nargin == 0 || nargin > 2
     print_usage;
   endif
 
-  divisor = L-1;
+  divisor = m-1;
   if nargin > 1
     match = strmatch(sym,['periodic';'symmetric']);
     if isempty(match),
       error("window type must be periodic or symmetric");
     elseif match == 1
-      divisor = L;
+      divisor = m;
     else
-      divisor = L-1;
+      divisor = m-1;
     endif
   endif
 
-  if (L == 1)
+  if (m == 1)
     w = 1;
   else
-    x = 2*pi*[0:L-1]'/divisor;
+    x = 2*pi*[0:m-1]'/divisor;
     w = (1-1.93*cos(x)+1.29*cos(2*x)-0.388*cos(3*x)+0.0322*cos(4*x))/4.6402;
   endif
 

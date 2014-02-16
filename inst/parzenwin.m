@@ -14,32 +14,32 @@
 ## this program; if not, see <http://www.gnu.org/licenses/>.
 
 ## -*- texinfo -*-
-## @deftypefn {Function File} {[@var{w}] =} parzenwin (@var{L})
-## Compute the Parzen window of length @var{L}.
+## @deftypefn {Function File} {[@var{w}] =} parzenwin (@var{m})
+## Compute the Parzen window of length @var{m}.
 ## @seealso{rectwin, bartlett}
 ## @end deftypefn
 
-function w = parzenwin (L)
+function w = parzenwin (m)
 
   if(nargin != 1)
     print_usage;
-  elseif(L < 0)
-    error('L must be positive');
+  elseif(m < 0)
+    error('M must be positive');
   endif
 
-  if(L ~= floor(L))
-    L = round(L);
+  if(m ~= floor(m))
+    m = round(m);
   endif
 
-  N = L-1;
+  N = m - 1;
   n = -(N/2):N/2;
   n1 = n(find(abs(n) <= N/4));
   n2 = n(find(n > N/4));
   n3 = n(find(n < -N/4));
 
-  w1 = 1 -6.*(abs(n1)./(L/2)).^2 + 6*(abs(n1)./(L/2)).^3;
-  w2 = 2.*(1-abs(n2)./(L/2)).^3;
-  w3 = 2.*(1-abs(n3)./(L/2)).^3;
+  w1 = 1 -6.*(abs(n1)./(m/2)).^2 + 6*(abs(n1)./(m/2)).^3;
+  w2 = 2.*(1-abs(n2)./(m/2)).^3;
+  w3 = 2.*(1-abs(n3)./(m/2)).^3;
   w = [w3 w1 w2]';
 
 endfunction

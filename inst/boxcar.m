@@ -14,18 +14,18 @@
 ## this program; if not, see <http://www.gnu.org/licenses/>.
 
 ## -*- texinfo -*-
-## @deftypefn {Function File} {} boxcar (@var{n})
-## Return the filter coefficients of a rectangular window of length @var{n}.
+## @deftypefn {Function File} {} boxcar (@var{m})
+## Return the filter coefficients of a rectangular window of length @var{m}.
 ## @end deftypefn
 
-function w = boxcar (n)
+function w = boxcar (m)
 
   if (nargin != 1)
     print_usage;
-  elseif !isscalar(n) || n != floor(n) || n <= 0
-    error ("boxcar:  n must be an integer > 0");
+  elseif !isscalar(m) || m != floor(m) || m <= 0
+    error ("boxcar:  M must be an integer > 0");
   endif
 
-  w = ones(n, 1);
+  w = ones(m, 1);
 
 endfunction

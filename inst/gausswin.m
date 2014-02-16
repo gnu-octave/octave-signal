@@ -14,22 +14,22 @@
 ## this program; if not, see <http://www.gnu.org/licenses/>.
 
 ## -*- texinfo -*-
-## @deftypefn {Function File} {@var{w} =} gausswin (@var{L}, @var{a})
+## @deftypefn {Function File} {@var{w} =} gausswin (@var{m}, @var{a})
 ##
-## Generate an @var{L}-point gaussian window of the given width.  Use larger
-## @var{a} for a narrow window.  Use larger @var{L} for a smoother curve.
+## Generate an @var{m}-point gaussian window of the given width.  Use larger
+## @var{a} for a narrow window.  Use larger @var{m} for a smoother curve.
 ##
 ##     w = exp ( -(a*x)^2/2 )
 ##
-## for x = linspace(-(L-1)/L, (L-1)/L, L)
+## for x = linspace(-(m-1)/m, (m-1)/m, m)
 ## @end deftypefn
 
-function x = gausswin(L, w)
+function x = gausswin(m, w)
 
   if nargin < 1 || nargin > 2
     print_usage;
   endif
   if nargin == 1, w = 2.5; endif
-  x = exp ( -0.5 * ( w/L * [ -(L-1) : 2 : L-1 ]' ) .^ 2 );
+  x = exp ( -0.5 * ( w/m * [ -(m-1) : 2 : m-1 ]' ) .^ 2 );
 
 endfunction

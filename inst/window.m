@@ -14,19 +14,19 @@
 ## this program; if not, see <http://www.gnu.org/licenses/>.
 
 ## -*- texinfo -*-
-## @deftypefn  {Function File} {@var{w} =} window (@var{f}, @var{n})
-## @deftypefnx {Function File} {@var{w} =} window (@var{f}, @var{n}, @var{opts})
-## Create an @var{n}-point window from the function @var{f}.  The function
+## @deftypefn  {Function File} {@var{w} =} window (@var{f}, @var{m})
+## @deftypefnx {Function File} {@var{w} =} window (@var{f}, @var{m}, @var{opts})
+## Create an @var{m}-point window from the function @var{f}.  The function
 ## @var{f} can be for example @code{@@blackman}.  Any additional
 ## arguments @var{opt} are passed to the windowing function.
 ## @end deftypefn
 
-function wout = window (f, n, varargin)
+function wout = window (f, m, varargin)
 
   if (nargin == 0)
     error ("window: UI tool not supported");
   elseif (nargin > 1)
-    w = feval (f, n, varargin{:});
+    w = feval (f, m, varargin{:});
     if (nargout > 0)
       wout = w;
     endif

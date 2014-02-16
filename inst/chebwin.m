@@ -14,10 +14,10 @@
 ## this program; if not, see <http://www.gnu.org/licenses/>.
 
 ## -*- texinfo -*-
-## @deftypefn  {Function File} {} chebwin (@var{L})
-## @deftypefnx {Function File} {} chebwin (@var{L}, @var{at})
+## @deftypefn  {Function File} {} chebwin (@var{m})
+## @deftypefnx {Function File} {} chebwin (@var{m}, @var{at})
 ##
-## Returns the filter coefficients of the @var{L}-point Dolph-Chebyshev window
+## Returns the filter coefficients of the @var{m}-point Dolph-Chebyshev window
 ## with @var{at} dB of attenuation in the stop-band of the corresponding
 ## Fourier transform.  The default attenuation value is 100 dB.
 ##
@@ -35,9 +35,9 @@
 ##
 ## @example
 ## @group
-##          Cheb(L-1, beta * cos(pi * k/L))
+##          Cheb(m-1, beta * cos(pi * k/m))
 ##   W(k) = -------------------------------
-##                 Cheb(L-1, beta)
+##                 Cheb(m-1, beta)
 ## @end group
 ## @end example
 ##
@@ -45,7 +45,7 @@
 ##
 ## @example
 ## @group
-##   beta = cosh(1/(L-1) * acosh(10^(at/20))
+##   beta = cosh(1/(m-1) * acosh(10^(at/20))
 ## @end group
 ## @end example
 ##
@@ -59,7 +59,7 @@
 ## @seealso{kaiser}
 ## @end deftypefn
 
-function w = chebwin (L, at)
+function w = chebwin (m, at)
 
   if (nargin < 1 || nargin > 2)
     print_usage;
@@ -67,34 +67,34 @@ function w = chebwin (L, at)
     at = 100;
   endif
 
-  if !(isscalar (L) && (L == round(L)) && (L > 0))
-    error ("chebwin: L has to be a positive integer");
+  if !(isscalar (m) && (m == round(m)) && (m > 0))
+    error ("chebwin: M has to be a positive integer");
   elseif !(isscalar (at) && (at == real (at)))
     error ("chebwin: at has to be a real scalar");
   endif
 
-  if (L == 1)
+  if (m == 1)
     w = 1;
   else
     ## beta calculation
     gamma = 10^(-at/20);
-    beta = cosh(1/(L-1) * acosh(1/gamma));
+    beta = cosh(1/(m-1) * acosh(1/gamma));
     ## freq. scale
-    k = (0:L-1);
-    x = beta*cos(pi*k/L);
+    k = (0:m-1);
+    x = beta*cos(pi*k/m);
     ## Chebyshev window (freq. domain)
-    p = cheb(L-1, x);
+    p = cheb(m-1, x);
     ## inverse Fourier transform
-    if (rem(L,2))
+    if (rem(m,2))
       w = real(fft(p));
-      M = (L+1)/2;
+      M = (m+1)/2;
       w = w(1:M)/w(1);
       w = [w(M:-1:2) w]';
     else
       ## half-sample delay (even order)
-      p = p.*exp(j*pi/L * (0:L-1));
+      p = p.*exp(j*pi/m * (0:m-1));
       w = real(fft(p));
-      M = L/2+1;
+      M = m/2+1;
       w = w/w(2);
       w = [w(M:-1:2) w(2:M)]';
     endif

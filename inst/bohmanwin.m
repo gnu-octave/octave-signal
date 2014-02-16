@@ -14,34 +14,34 @@
 ## this program; if not, see <http://www.gnu.org/licenses/>.
 
 ## -*- texinfo -*-
-## @deftypefn {Function File} {[@var{w}] =} bohmanwin (@var{L})
-## Compute the Bohman window of length @var{L}.
+## @deftypefn {Function File} {[@var{w}] =} bohmanwin (@var{m})
+## Compute the Bohman window of length @var{m}.
 ## @seealso{rectwin, bartlett}
 ## @end deftypefn
 
-function [w] = bohmanwin(L)
+function [w] = bohmanwin(m)
 
   if (nargin < 1)
     print_usage
-  elseif(! isscalar(L))
-    error("L must be a number");
-  elseif(L < 0)
-    error('L must be positive');
+  elseif(! isscalar(m))
+    error("M must be a number");
+  elseif(m < 0)
+    error('M must be positive');
   endif
 
-  if(L ~= floor(L))
-    L = round(L);
-    warning('L rounded to the nearest integer.');
+  if(m ~= floor(m))
+    m = round(m);
+    warning('M rounded to the nearest integer.');
   endif
 
-  if(L == 0)
+  if(m == 0)
     w = [];
 
-  elseif(L == 1)
+  elseif(m == 1)
     w = 1;
 
   else
-    N = L-1;
+    N = m - 1;
     n = -N/2:N/2;
 
     w = (1-2.*abs(n)./N).*cos(2.*pi.*abs(n)./N) + (1./pi).*sin(2.*pi.*abs(n)./N);

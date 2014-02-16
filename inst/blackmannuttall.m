@@ -14,23 +14,23 @@
 ## this program; if not, see <http://www.gnu.org/licenses/>.
 
 ## -*- texinfo -*-
-## @deftypefn {Function File} {[@var{w}] =} blackmannuttall (@var{L})
+## @deftypefn {Function File} {[@var{w}] =} blackmannuttall (@var{m})
 ## Compute the Blackman-Nuttall window.
 ## @seealso{nuttallwin, kaiser}
 ## @end deftypefn
 
-function [w] = blackmannuttall(L)
+function [w] = blackmannuttall(m)
 
   if (nargin < 1)
     print_usage;
-  elseif (! isscalar(L))
-    error("L must be a number");
+  elseif (! isscalar(m))
+    error("M must be a number");
   endif
 
-  if (L == 1)
+  if (m == 1)
     w = 1;
   else
-    N = L-1;
+    N = m - 1;
     a0 = 0.3635819;
     a1 = 0.4891775;
     a2 = 0.1365995;

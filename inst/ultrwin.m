@@ -14,11 +14,11 @@
 ## this program; if not, see <http://www.gnu.org/licenses/>.
 
 ## -*- texinfo -*-
-## @deftypefn  {Function File} {[@var{w}, @var{xmu}] =} ultrwin (@var{l}, @var{mu}, @var{beta})
-## @deftypefnx {Function File} {[@var{w}, @var{xmu}] =} ultrwin (@var{l}, @var{mu}, @var{att}, "att")
-## @deftypefnx {Function File} {[@var{w}, @var{xmu}] =} ultrwin (@var{l}, @var{mu}, @var{latt}, "latt")
-## @deftypefnx {Function File} {@var{w} =} ultrwin (@var{l}, @var{mu}, @var{xmu}, "xmu")
-## Return as column-vector @var{w}, the coefficients of the @var{l}-point
+## @deftypefn  {Function File} {[@var{w}, @var{xmu}] =} ultrwin (@var{m}, @var{mu}, @var{beta})
+## @deftypefnx {Function File} {[@var{w}, @var{xmu}] =} ultrwin (@var{m}, @var{mu}, @var{att}, "att")
+## @deftypefnx {Function File} {[@var{w}, @var{xmu}] =} ultrwin (@var{m}, @var{mu}, @var{latt}, "latt")
+## @deftypefnx {Function File} {@var{w} =} ultrwin (@var{m}, @var{mu}, @var{xmu}, "xmu")
+## Return as column-vector @var{w}, the coefficients of the @var{m}-point
 ## Ultraspherical window, where @var{mu} controls the window's Fourier
 ## transform's side-lobe to side-lobe ratio, and the third given parameter
 ## controls the transform's main-lobe width/side-lobe-ratio; normalise @var{w}
@@ -32,8 +32,8 @@
 ##
 ## @verbatim
 ##              (MU)
-##      W(k) = C   [ XMU cos(pi k/L) ],  k = 0, 1, ..., L-1,
-##              L-1
+##      W(k) = C   [ XMU cos(pi k/M) ],  k = 0, 1, ..., M-1,
+##              M-1
 ## @end verbatim
 ##
 ## where C is the Ultraspherical (a.k.a. Gegenbauer) polynomial, which can be
@@ -72,7 +72,7 @@
 ## @seealso{chebwin, kaiser}
 ## @end deftypefn
 
-function [w, xmu] = ultrwin (L, mu, par, key = "beta", norm = 0)
+function [w, xmu] = ultrwin (m, mu, par, key = "beta", norm = 0)
   ## This list of parameter types must be kept in sync with the enum order.
   types = {"xmu", "beta", "att", "latt"};
   type = [];
@@ -82,8 +82,8 @@ function [w, xmu] = ultrwin (L, mu, par, key = "beta", norm = 0)
 
   if (nargin < 3 || nargin > 5)
     print_usage ();
-  elseif (! (isscalar (L) && L == fix (L) && L > 0))
-    error ("ultrwin: L must be a positive integer");
+  elseif (! (isscalar (m) && m == fix (m) && m > 0))
+    error ("ultrwin: M must be a positive integer");
   elseif (! (isscalar (mu) && isreal (mu)))
     error ("ultrwin: MU must be a real scalar");
   elseif (! ischar (key))
@@ -96,7 +96,7 @@ function [w, xmu] = ultrwin (L, mu, par, key = "beta", norm = 0)
     error ("ultrwin: NORM must be a non-negative integer");
   endif
 
-  [w, xmu] = __ultrwin__(L, mu, par, type-1, norm);
+  [w, xmu] = __ultrwin__(m, mu, par, type-1, norm);
 
 endfunction
 

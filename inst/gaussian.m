@@ -14,27 +14,27 @@
 ## this program; if not, see <http://www.gnu.org/licenses/>.
 
 ## -*- texinfo -*-
-## @deftypefn {Function File} {@var{w} =} gaussian (@var{n}, @var{a})
+## @deftypefn {Function File} {@var{w} =} gaussian (@var{m}, @var{a})
 ##
-## Generate an @var{n}-point gaussian convolution window of the given
-## width.  Use larger @var{a} for a narrower window.  Use larger @var{n}
+## Generate an @var{m}-point gaussian convolution window of the given
+## width.  Use larger @var{a} for a narrower window.  Use larger @var{m}
 ## for longer tails.
 ##
 ##     w = exp ( -(a*x)^2/2 )
 ##
-## for x = linspace ( -(n-1)/2, (n-1)/2, n ).
+## for x = linspace ( -(m-1)/2, (m-1)/2, m ).
 ##
 ## Width a is measured in frequency units (sample rate/num samples).
 ## It should be f when multiplying in the time domain, but 1/f when
 ## multiplying in the frequency domain (for use in convolutions).
 ## @end deftypefn
 
-function x = gaussian(n, w)
+function x = gaussian(m, w)
 
   if nargin < 1 || nargin > 2
     print_usage;
   endif
   if nargin == 1, w = 1; endif
-  x = exp(-0.5*(([0:n-1]'-(n-1)/2)*w).^2);
+  x = exp(-0.5*(([0:m-1]'-(m-1)/2)*w).^2);
 
 endfunction
