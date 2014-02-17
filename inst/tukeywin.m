@@ -27,6 +27,7 @@
 ## "On the Use of Windows for Harmonic Analysis with the Discrete Fourier
 ## Transform, Proceedings of the IEEE", Vol. 66, No. 1, January 1978,
 ## Page 67, Equation 38.
+## @seealso{hanning}
 ## @end deftypefn
 
 function w = tukeywin (m, r = 1/2)

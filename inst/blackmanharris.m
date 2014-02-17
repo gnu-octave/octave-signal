@@ -15,7 +15,7 @@
 
 ## -*- texinfo -*-
 ## @deftypefn {Function File} {} blackmanharris (@var{m})
-## Compute the Blackman-Harris window.
+## Return the filter coefficients of a Blackman-Harris window of length @var{m}.
 ## @seealso{rectwin, bartlett}
 ## @end deftypefn
 

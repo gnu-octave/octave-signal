@@ -18,8 +18,9 @@
 ## @deftypefn  {Function File} {} kaiser (@var{m})
 ## @deftypefnx {Function File} {} kaiser (@var{m}, @var{beta})
 ##
-## Returns the filter coefficients of the m-point Kaiser window with
-## parameter beta.
+## Return the filter coefficients of a Kaiser window of length @var{m}.  The
+## Fourier transform of the window has a stop-band attenuation that is derived
+## from the parameter @var{beta}.
 ##
 ## For the definition of the Kaiser window, see A. V. Oppenheim &
 ## R. W. Schafer, "Discrete-Time Signal Processing".

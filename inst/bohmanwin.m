@@ -15,7 +15,7 @@
 
 ## -*- texinfo -*-
 ## @deftypefn {Function File} {} bohmanwin (@var{m})
-## Compute the Bohman window of length @var{m}.
+## Return the filter coefficients of a Bohman window of length @var{m}.
 ## @seealso{rectwin, bartlett}
 ## @end deftypefn
 

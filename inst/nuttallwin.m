@@ -15,7 +15,8 @@
 
 ## -*- texinfo -*-
 ## @deftypefn {Function File} {} nuttallwin (@var{m})
-## Compute the Blackman-Harris window defined by Nuttall of length @var{m}.
+## Return the filter coefficients of a Blackman-Harris window defined by Nuttall
+## of length @var{m}.
 ## @seealso{blackman, blackmanharris}
 ## @end deftypefn
 

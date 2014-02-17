@@ -17,9 +17,9 @@
 ## @deftypefn  {Function File} {} chebwin (@var{m})
 ## @deftypefnx {Function File} {} chebwin (@var{m}, @var{at})
 ##
-## Returns the filter coefficients of the @var{m}-point Dolph-Chebyshev window
-## with @var{at} dB of attenuation in the stop-band of the corresponding
-## Fourier transform.  The default attenuation value is 100 dB.
+## Return the filter coefficients of a Dolph-Chebyshev window of length @var{m}.
+## The Fourier transform of the window has a stop-band attenuation of @var{at}
+## dB.  The default attenuation value is 100 dB.
 ##
 ## For the definition of the Chebyshev window, see
 ##

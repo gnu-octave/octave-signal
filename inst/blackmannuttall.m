@@ -15,7 +15,8 @@
 
 ## -*- texinfo -*-
 ## @deftypefn {Function File} {} blackmannuttall (@var{m})
-## Compute the Blackman-Nuttall window.
+## Return the filter coefficients of a Blackman-Nuttall window of length
+## @var{m}.
 ## @seealso{nuttallwin, kaiser}
 ## @end deftypefn
 

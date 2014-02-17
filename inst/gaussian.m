@@ -14,11 +14,12 @@
 ## this program; if not, see <http://www.gnu.org/licenses/>.
 
 ## -*- texinfo -*-
-## @deftypefn {Function File} {} gaussian (@var{m}, @var{a})
+## @deftypefn  {Function File} {} gaussian (@var{m})
+## @deftypefnx {Function File} {} gaussian (@var{m}, @var{a})
 ##
-## Generate an @var{m}-point gaussian convolution window of the given
-## width.  Use larger @var{a} for a narrower window.  Use larger @var{m}
-## for longer tails.
+## Return a Gaussian convolution window of length @var{m}.  The width of the
+## window is inversely proportional to the parameter @var{a}.  Use larger
+## @var{a} for a narrower window.  Use larger @var{m} for longer tails.
 ##
 ##     w = exp ( -(a*x)^2/2 )
 ##

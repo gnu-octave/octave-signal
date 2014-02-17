@@ -18,11 +18,11 @@
 ## @deftypefnx {Function File} {[@var{w}, @var{xmu}] =} ultrwin (@var{m}, @var{mu}, @var{att}, "att")
 ## @deftypefnx {Function File} {[@var{w}, @var{xmu}] =} ultrwin (@var{m}, @var{mu}, @var{latt}, "latt")
 ## @deftypefnx {Function File} {@var{w} =} ultrwin (@var{m}, @var{mu}, @var{xmu}, "xmu")
-## Return as column-vector @var{w}, the coefficients of the @var{m}-point
-## Ultraspherical window, where @var{mu} controls the window's Fourier
-## transform's side-lobe to side-lobe ratio, and the third given parameter
-## controls the transform's main-lobe width/side-lobe-ratio; normalise @var{w}
-## such that the central coefficient(s) value is unitary.
+## Return the coefficients of an Ultraspherical window of length @var{m}.
+## The parameter @var{mu} controls the window's Fourier transform's side-lobe
+## to side-lobe ratio, and the third given parameter controls the transform's
+## main-lobe width/side-lobe-ratio; normalise @var{w} such that the central
+## coefficient(s) value is unitary.
 ##
 ## By default, the third parameter is @var{beta}, which sets the main lobe width
 ## to @var{beta} times that of a rectangular window.  Alternatively, giving

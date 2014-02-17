@@ -15,7 +15,8 @@
 
 ## -*- texinfo -*-
 ## @deftypefn {Function File} {} barthannwin (@var{m})
-## Compute the modified Bartlett-Hann window of length @var{m}.
+## Return the filter coefficients of a modified Bartlett-Hann window of length
+## @var{m}.
 ## @seealso{rectwin, bartlett}
 ## @end deftypefn
 

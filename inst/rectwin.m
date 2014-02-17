@@ -15,8 +15,8 @@
 
 ## -*- texinfo -*-
 ## @deftypefn {Function File} {} rectwin (@var{m})
-## Return the filter coefficients of a rectangle window of length @var{m}.
-## @seealso{hamming, hanning}
+## Return the filter coefficients of a rectangular window of length @var{m}.
+## @seealso{boxcar, hamming, hanning}
 ## @end deftypefn
 
 function w = rectwin (m)

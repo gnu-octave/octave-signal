@@ -15,7 +15,7 @@
 
 ## -*- texinfo -*-
 ## @deftypefn {Function File} {} parzenwin (@var{m})
-## Compute the Parzen window of length @var{m}.
+## Return the filter coefficients of a Parzen window of length @var{m}.
 ## @seealso{rectwin, bartlett}
 ## @end deftypefn
 

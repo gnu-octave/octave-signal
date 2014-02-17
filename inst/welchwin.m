@@ -18,21 +18,20 @@
 ## -*- texinfo -*-
 ## @deftypefn  {Function File} {} welchwin (@var{m})
 ## @deftypefnx {Function File} {} welchwin (@var{m}, @var{c})
-## Returns a row vector containing a Welch window, given by
+## Return the filter coefficients of a Welch window of length @var{m}.  The
+## Welch window is given by
 ## @var{w}(n)=1-(n/N-1)^2,   n=[0,1, ... @var{m}-1].
-## Argument @var{m} is the length of the window.
-## Optional argument @var{c} specifies a "symmetric" window (the default),
+## The optional argument @var{c} specifies a "symmetric" window (the default),
 ## or a "periodic" window.
 ##
-## A symmetric window has zero at each end and maximum in the middle;
-## @var{m} must be an integer larger than 2.
-## @code{if c=="symmetric", N=(m-1)/2}
+## A symmetric window has zero at each end and maximum in the middle, and the
+## length must be an integer greater than 2.  The variable @var{N} in the
+## formula above is @code{(@var{m}-1)/2}.
 ##
 ## A periodic window wraps around the cyclic interval [0,1, ... @var{m}-1],
-## and is intended for use with the DFT  (functions fft(),
-## periodogram() etc).
-## @var{m} must be an integer larger than 1.
-## @code{if c=="periodic", N=@var{m}/2}.
+## and is intended for use with the DFT.  The length must be an integer
+## greater than 1.  The variable @var{N} in the formula above is
+## @code{@var{m}/2}.
 ##
 ## @seealso{blackman, kaiser}
 ## @end deftypefn

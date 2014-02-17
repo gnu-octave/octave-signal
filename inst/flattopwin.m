@@ -6,7 +6,8 @@
 ## @deftypefnx {Function File} {} flattopwin (@var{m}, "symmetric")
 ## @deftypefnx {Function File} {} flattopwin (@var{m}, "periodic")
 ##
-## Return the window f(w):
+## Return the filter coefficients of a Flat Top window of length @var{m}.
+## The Flat Top window is defined by the function f(w):
 ##
 ## @example
 ## @group

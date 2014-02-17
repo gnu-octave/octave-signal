@@ -16,10 +16,12 @@
 ## -*- texinfo -*-
 ## @deftypefn {Function File} {} triang (@var{m})
 ##
-## Returns the filter coefficients of a triangular window of length @var{m}.
-## Unlike the bartlett window, triang does not go to zero at the edges
-## of the window.  For odd @var{m}, @code{triang(@var{m})} is equal to
-## @code{bartlett(@var{m}+2)} except for the zeros at the edges of the window.
+## Return the filter coefficients of a triangular window of length @var{m}.
+## Unlike the Bartlett window, @code{triang} does not go to zero at the edges
+## of the window.  For odd @var{m}, @code{triang (@var{m})} is equal to
+## @code{bartlett (@var{m} + 2)} except for the zeros at the edges of the
+## window.
+## @seealso{bartlett}
 ## @end deftypefn
 
 function w = triang (m)

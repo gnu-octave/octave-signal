@@ -14,10 +14,13 @@
 ## this program; if not, see <http://www.gnu.org/licenses/>.
 
 ## -*- texinfo -*-
-## @deftypefn {Function File} {} gausswin (@var{m}, @var{a})
+## @deftypefn  {Function File} {} gausswin (@var{m})
+## @deftypefnx {Function File} {} gausswin (@var{m}, @var{a})
 ##
-## Generate an @var{m}-point gaussian window of the given width.  Use larger
-## @var{a} for a narrow window.  Use larger @var{m} for a smoother curve.
+## Return the filter coefficients of a Gaussian window of length @var{m}.
+## The width of the window is inversely proportional to the parameter @var{a}.
+## Use larger @var{a} for a narrow window.  Use larger @var{m} for a smoother
+## curve.
 ##
 ##     w = exp ( -(a*x)^2/2 )
 ##
