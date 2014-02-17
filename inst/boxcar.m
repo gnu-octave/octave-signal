@@ -21,9 +21,9 @@
 function w = boxcar (m)
 
   if (nargin != 1)
-    print_usage;
-  elseif !isscalar(m) || m != floor(m) || m <= 0
-    error ("boxcar:  M must be an integer > 0");
+    print_usage ();
+  elseif (! (isscalar (m) && (m == fix (m)) && (m > 0)))
+    error ("boxcar: M must be a positive integer");
   endif
 
   w = ones(m, 1);

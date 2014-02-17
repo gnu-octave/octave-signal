@@ -62,15 +62,13 @@
 function w = chebwin (m, at)
 
   if (nargin < 1 || nargin > 2)
-    print_usage;
+    print_usage ();
+  elseif (! (isscalar (m) && (m == fix (m)) && (m > 0)))
+    error ("chebwin: M must be a positive integer");
   elseif (nargin == 1)
     at = 100;
-  endif
-
-  if !(isscalar (m) && (m == round(m)) && (m > 0))
-    error ("chebwin: M has to be a positive integer");
-  elseif !(isscalar (at) && (at == real (at)))
-    error ("chebwin: at has to be a real scalar");
+  elseif (! (isscalar (at) && isreal (at)))
+    error ("chebwin: AT must be a real scalar");
   endif
 
   if (m == 1)

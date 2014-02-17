@@ -25,13 +25,13 @@ function wout = window (f, m, varargin)
 
   if (nargin == 0)
     error ("window: UI tool not supported");
-  elseif (nargin > 1)
+  elseif (nargin < 2)
+    print_usage ();
+  else
     w = feval (f, m, varargin{:});
     if (nargout > 0)
       wout = w;
     endif
-  else
-    print_usage ();
   endif
 
 endfunction

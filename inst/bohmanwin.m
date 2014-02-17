@@ -21,25 +21,14 @@
 
 function [w] = bohmanwin(m)
 
-  if (nargin < 1)
-    print_usage
-  elseif(! isscalar(m))
-    error("M must be a number");
-  elseif(m < 0)
-    error('M must be positive');
+  if (nargin != 1)
+    print_usage ();
+  elseif (! (isscalar (m) && (m == fix (m)) && (m > 0)))
+    error ("bohmanwin: M must be a positive integer");
   endif
 
-  if(m ~= floor(m))
-    m = round(m);
-    warning('M rounded to the nearest integer.');
-  endif
-
-  if(m == 0)
-    w = [];
-
-  elseif(m == 1)
+  if (m == 1)
     w = 1;
-
   else
     N = m - 1;
     n = -N/2:N/2;

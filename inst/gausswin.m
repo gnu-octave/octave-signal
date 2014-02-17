@@ -26,10 +26,14 @@
 
 function x = gausswin(m, w)
 
-  if nargin < 1 || nargin > 2
-    print_usage;
+  if (nargin < 1 || nargin > 2)
+    print_usage ();
+  elseif (! (isscalar (m) && (m == fix (m)) && (m > 0)))
+    error ("gausswin: M must be a positive integer");
+  elseif (nargin == 1)
+    w = 2.5
   endif
-  if nargin == 1, w = 2.5; endif
+
   x = exp ( -0.5 * ( w/m * [ -(m-1) : 2 : m-1 ]' ) .^ 2 );
 
 endfunction

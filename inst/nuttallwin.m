@@ -21,15 +21,10 @@
 
 function [w] = nuttallwin(m)
 
-  if (nargin != 1); print_usage; endif
-
-  if(m < 0)
-    error('M must be positive');
-  endif
-
-  if(m ~= floor(m))
-    m = round(m);
-    warning('M rounded to the nearest integer.');
+  if (nargin != 1)
+    print_usage ();
+  elseif (! (isscalar (m) && (m == fix (m)) && (m > 0)))
+    error ("nuttallwin: M must be a positive integer");
   endif
 
   if (m == 1)

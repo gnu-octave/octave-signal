@@ -21,12 +21,11 @@
 
 function [w] = barthannwin(m)
 
-  if (nargin < 1)
-    print_usage;
-  elseif (! isscalar(m) || m < 0)
-    error("M must be a positive integer");
+  if (nargin != 1)
+    print_usage ();
+  elseif (! (isscalar (m) && (m == fix (m)) && (m > 0)))
+    error ("barthannwin: M must be a positive integer");
   endif
-  m = round(m);
 
   if (m == 1)
     w = 1;

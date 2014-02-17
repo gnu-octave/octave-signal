@@ -38,24 +38,27 @@
 
 function [w] = welchwin(m,c)
 
-  if (nargin < 1 || nargin>2 )
-    print_usage;
+  if (nargin < 1 || nargin > 2)
+    print_usage ();
+  elseif (! (isscalar (m) && (m == fix (m)) && (m > 0)))
+    error ("welchwin: M must be a positive integer");
   endif
-  symmetric=1;
-  if ( nargin==2 && ! isempty(c) )
+
+  symmetric = 1;
+  if (nargin == 2 && ! isempty (c))
     if ( ! ischar(c) || size(c,1) != 1 ||
          ( ! strcmp(c,'periodic') && ! strcmp(c,'symmetric') ) )
-      error( "arg 2 (c) must be \"periodic\" or \"symmetric\"" )
+      error ("welchwin: window type must be \"periodic\" or \"symmetric\"");
     endif
     symmetric = ! strcmp(c,'periodic');
   endif
-  ##
+
   ## Periodic window is not properly defined if m<2.
   ## Symmetric window is not properly defined if m<3.
-  min_M = 2 + symmetric;
-  if ( ! isreal(m) || ! isscalar(m) || m<min_M || fix(m) != m )
-    error("arg 1 (M) must be an integer larger than %d", min_M-1 );
+  if (m < (2 + symmetric))
+    error ("welchwin: M must be an integer greater than %d", (2 + symmetric - 1));
   endif
+
   N = (m-symmetric)/2;
   n = 0:m-1;
   w = 1 - ((n-N)./N).^2;

@@ -21,7 +21,12 @@
 
 function w = rectwin(m)
 
-  if (nargin < 1); print_usage; endif
-  w = ones(round(m),1);
+  if (nargin != 1)
+    print_usage ();
+  elseif (! (isscalar (m) && (m == fix (m)) && (m > 0)))
+    error ("rectwin: M must be a positive integer");
+  endif
+
+  w = ones (m, 1);
 
 endfunction

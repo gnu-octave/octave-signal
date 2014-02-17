@@ -31,10 +31,14 @@
 
 function x = gaussian(m, w)
 
-  if nargin < 1 || nargin > 2
-    print_usage;
+  if (nargin < 1 || nargin > 2)
+    print_usage ();
+  elseif (! (isscalar (m) && (m == fix (m)) && (m > 0)))
+    error ("gaussian: M must be a positive integer");
+  elseif (nargin == 1)
+    w = 1;
   endif
-  if nargin == 1, w = 1; endif
+
   x = exp(-0.5*(([0:m-1]'-(m-1)/2)*w).^2);
 
 endfunction

@@ -39,12 +39,12 @@
 
 function w = kaiser (m, beta = 0.5)
 
-  if (nargin < 1)
-    print_usage;
-  elseif !(isscalar (m) && (m == round (m)) && (m > 0))
-    error ("kaiser:  M has to be a positive integer");
-  elseif !(isscalar (beta) && (beta == real (beta)))
-    error ("kaiser:  beta has to be a real scalar");
+  if (nargin < 1 || nargin > 2)
+    print_usage ();
+  elseif (! (isscalar (m) && (m == fix (m)) && (m > 0)))
+    error ("kaiser: M must be a positive integer");
+  elseif (! (isscalar (beta) && isreal (beta)))
+    error ("kaiser: BETA must be a real scalar");
   endif
 
   if (m == 1)

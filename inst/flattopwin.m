@@ -33,15 +33,17 @@
 
 function w = flattopwin (m, sym)
 
-  if nargin == 0 || nargin > 2
-    print_usage;
+  if (nargin < 1 || nargin > 2)
+    print_usage ();
+  elseif (! (isscalar (m) && (m == fix (m)) && (m > 0)))
+    error ("flattopwin: M must be a positive integer");
   endif
 
   divisor = m-1;
-  if nargin > 1
+  if (nargin == 2)
     match = strmatch(sym,['periodic';'symmetric']);
     if isempty(match),
-      error("window type must be periodic or symmetric");
+      error ("flattopwin: window type must be \"periodic\" or \"symmetric\"");
     elseif match == 1
       divisor = m;
     else

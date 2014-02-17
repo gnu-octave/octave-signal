@@ -21,10 +21,10 @@
 
 function [w] = blackmannuttall(m)
 
-  if (nargin < 1)
-    print_usage;
-  elseif (! isscalar(m))
-    error("M must be a number");
+  if (nargin != 1)
+    print_usage ();
+  elseif (! (isscalar (m) && (m == fix (m)) && (m > 0)))
+    error ("blackmannuttall: M must be a positive integer");
   endif
 
   if (m == 1)

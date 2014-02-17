@@ -82,7 +82,7 @@ function [w, xmu] = ultrwin (m, mu, par, key = "beta", norm = 0)
 
   if (nargin < 3 || nargin > 5)
     print_usage ();
-  elseif (! (isscalar (m) && m == fix (m) && m > 0))
+  elseif (! (isscalar (m) && (m == fix (m)) && (m > 0)))
     error ("ultrwin: M must be a positive integer");
   elseif (! (isscalar (mu) && isreal (mu)))
     error ("ultrwin: MU must be a real scalar");

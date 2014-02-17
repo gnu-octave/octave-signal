@@ -25,10 +25,11 @@
 function w = triang(m)
 
   if (nargin != 1)
-    print_usage;
-  elseif (!isscalar(m) || m != fix (m) || m < 1)
-    error("triang: M has to be an integer > 0");
+    print_usage ();
+  elseif (! (isscalar (m) && (m == fix (m)) && (m > 0)))
+    error ("triang: M must be a positive integer");
   endif
+
   w = 1 - abs ([-(m-1):2:(m-1)]' / (m+rem(m,2)));
 
 endfunction

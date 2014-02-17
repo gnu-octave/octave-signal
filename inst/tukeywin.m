@@ -32,7 +32,9 @@
 function w = tukeywin (m, r = 1/2)
 
   if (nargin < 1 || nargin > 2)
-    print_usage;
+    print_usage ();
+  elseif (! (isscalar (m) && (m == fix (m)) && (m > 0)))
+    error ("tukeywin: M must be a positive integer");
   elseif (nargin == 2)
     ## check that 0 < r < 1
     if r > 1

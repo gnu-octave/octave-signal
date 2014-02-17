@@ -21,14 +21,10 @@
 
 function w = parzenwin (m)
 
-  if(nargin != 1)
-    print_usage;
-  elseif(m < 0)
-    error('M must be positive');
-  endif
-
-  if(m ~= floor(m))
-    m = round(m);
+  if (nargin != 1)
+    print_usage ();
+  elseif (! (isscalar (m) && (m == fix (m)) && (m > 0)))
+    error ("parzenwin: M must be a positive integer");
   endif
 
   N = m - 1;
