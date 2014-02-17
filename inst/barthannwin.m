@@ -14,12 +14,12 @@
 ## this program; if not, see <http://www.gnu.org/licenses/>.
 
 ## -*- texinfo -*-
-## @deftypefn {Function File} {[@var{w}] =} barthannwin (@var{m})
+## @deftypefn {Function File} {} barthannwin (@var{m})
 ## Compute the modified Bartlett-Hann window of length @var{m}.
 ## @seealso{rectwin, bartlett}
 ## @end deftypefn
 
-function [w] = barthannwin(m)
+function w = barthannwin (m)
 
   if (nargin != 1)
     print_usage ();

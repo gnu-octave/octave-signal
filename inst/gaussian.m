@@ -14,7 +14,7 @@
 ## this program; if not, see <http://www.gnu.org/licenses/>.
 
 ## -*- texinfo -*-
-## @deftypefn {Function File} {@var{w} =} gaussian (@var{m}, @var{a})
+## @deftypefn {Function File} {} gaussian (@var{m}, @var{a})
 ##
 ## Generate an @var{m}-point gaussian convolution window of the given
 ## width.  Use larger @var{a} for a narrower window.  Use larger @var{m}
@@ -29,16 +29,16 @@
 ## multiplying in the frequency domain (for use in convolutions).
 ## @end deftypefn
 
-function x = gaussian(m, w)
+function w = gaussian (m, a)
 
   if (nargin < 1 || nargin > 2)
     print_usage ();
   elseif (! (isscalar (m) && (m == fix (m)) && (m > 0)))
     error ("gaussian: M must be a positive integer");
   elseif (nargin == 1)
-    w = 1;
+    a = 1;
   endif
 
-  x = exp(-0.5*(([0:m-1]'-(m-1)/2)*w).^2);
+  w = exp(-0.5*(([0:m-1]'-(m-1)/2)*a).^2);
 
 endfunction

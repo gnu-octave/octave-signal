@@ -14,8 +14,8 @@
 ## this program; if not, see <http://www.gnu.org/licenses/>.
 
 ## -*- texinfo -*-
-## @deftypefn  {Function File} {@var{w} =} tukeywin (@var{m})
-## @deftypefnx {Function File} {@var{w} =} tukeywin (@var{m}, @var{r})
+## @deftypefn  {Function File} {} tukeywin (@var{m})
+## @deftypefnx {Function File} {} tukeywin (@var{m}, @var{r})
 ## Return the filter coefficients of a Tukey window (also known as the
 ## cosine-tapered window) of length @var{m}.  @var{r} defines the ratio
 ## between the constant section and and the cosine section.  It has to be

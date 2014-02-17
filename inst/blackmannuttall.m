@@ -14,12 +14,12 @@
 ## this program; if not, see <http://www.gnu.org/licenses/>.
 
 ## -*- texinfo -*-
-## @deftypefn {Function File} {[@var{w}] =} blackmannuttall (@var{m})
+## @deftypefn {Function File} {} blackmannuttall (@var{m})
 ## Compute the Blackman-Nuttall window.
 ## @seealso{nuttallwin, kaiser}
 ## @end deftypefn
 
-function [w] = blackmannuttall(m)
+function w = blackmannuttall (m)
 
   if (nargin != 1)
     print_usage ();

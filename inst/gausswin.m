@@ -14,7 +14,7 @@
 ## this program; if not, see <http://www.gnu.org/licenses/>.
 
 ## -*- texinfo -*-
-## @deftypefn {Function File} {@var{w} =} gausswin (@var{m}, @var{a})
+## @deftypefn {Function File} {} gausswin (@var{m}, @var{a})
 ##
 ## Generate an @var{m}-point gaussian window of the given width.  Use larger
 ## @var{a} for a narrow window.  Use larger @var{m} for a smoother curve.
@@ -24,16 +24,16 @@
 ## for x = linspace(-(m-1)/m, (m-1)/m, m)
 ## @end deftypefn
 
-function x = gausswin(m, w)
+function w = gausswin (m, a)
 
   if (nargin < 1 || nargin > 2)
     print_usage ();
   elseif (! (isscalar (m) && (m == fix (m)) && (m > 0)))
     error ("gausswin: M must be a positive integer");
   elseif (nargin == 1)
-    w = 2.5
+    a = 2.5
   endif
 
-  x = exp ( -0.5 * ( w/m * [ -(m-1) : 2 : m-1 ]' ) .^ 2 );
+  w = exp ( -0.5 * ( a/m * [ -(m-1) : 2 : m-1 ]' ) .^ 2 );
 
 endfunction

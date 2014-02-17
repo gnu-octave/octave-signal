@@ -14,12 +14,12 @@
 ## this program; if not, see <http://www.gnu.org/licenses/>.
 
 ## -*- texinfo -*-
-## @deftypefn {Function File} {[@var{w}] =} bohmanwin (@var{m})
+## @deftypefn {Function File} {} bohmanwin (@var{m})
 ## Compute the Bohman window of length @var{m}.
 ## @seealso{rectwin, bartlett}
 ## @end deftypefn
 
-function [w] = bohmanwin(m)
+function w = bohmanwin (m)
 
   if (nargin != 1)
     print_usage ();

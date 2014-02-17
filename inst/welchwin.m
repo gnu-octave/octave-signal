@@ -16,7 +16,8 @@
 ## this program; if not, see <http://www.gnu.org/licenses/>.
 
 ## -*- texinfo -*-
-## @deftypefn {Function File} {[@var{w}] =} welchwin (@var{m},@var{c})
+## @deftypefn  {Function File} {} welchwin (@var{m})
+## @deftypefnx {Function File} {} welchwin (@var{m}, @var{c})
 ## Returns a row vector containing a Welch window, given by
 ## @var{w}(n)=1-(n/N-1)^2,   n=[0,1, ... @var{m}-1].
 ## Argument @var{m} is the length of the window.
@@ -36,7 +37,7 @@
 ## @seealso{blackman, kaiser}
 ## @end deftypefn
 
-function [w] = welchwin(m,c)
+function w = welchwin (m, c)
 
   if (nargin < 1 || nargin > 2)
     print_usage ();
@@ -63,7 +64,7 @@ function [w] = welchwin(m,c)
   n = 0:m-1;
   w = 1 - ((n-N)./N).^2;
 
-endfunction;
+endfunction
 
 %!demo
 %! m = 32;

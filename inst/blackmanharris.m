@@ -14,12 +14,12 @@
 ## this program; if not, see <http://www.gnu.org/licenses/>.
 
 ## -*- texinfo -*-
-## @deftypefn {Function File} {[@var{w}] =} blackmanharris (@var{m})
+## @deftypefn {Function File} {} blackmanharris (@var{m})
 ## Compute the Blackman-Harris window.
 ## @seealso{rectwin, bartlett}
 ## @end deftypefn
 
-function [w] = blackmanharris (m)
+function w = blackmanharris (m)
 
   if (nargin != 1)
     print_usage ();

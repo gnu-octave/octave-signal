@@ -14,12 +14,12 @@
 ## this program; if not, see <http://www.gnu.org/licenses/>.
 
 ## -*- texinfo -*-
-## @deftypefn {Function File} {[@var{w}] =} nuttallwin (@var{m})
+## @deftypefn {Function File} {} nuttallwin (@var{m})
 ## Compute the Blackman-Harris window defined by Nuttall of length @var{m}.
 ## @seealso{blackman, blackmanharris}
 ## @end deftypefn
 
-function [w] = nuttallwin(m)
+function w = nuttallwin (m)
 
   if (nargin != 1)
     print_usage ();

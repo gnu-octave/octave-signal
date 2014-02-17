@@ -14,7 +14,7 @@
 ## this program; if not, see <http://www.gnu.org/licenses/>.
 
 ## -*- texinfo -*-
-## @deftypefn {Function File} {@var{w} =} triang (@var{m})
+## @deftypefn {Function File} {} triang (@var{m})
 ##
 ## Returns the filter coefficients of a triangular window of length @var{m}.
 ## Unlike the bartlett window, triang does not go to zero at the edges
@@ -22,7 +22,7 @@
 ## @code{bartlett(@var{m}+2)} except for the zeros at the edges of the window.
 ## @end deftypefn
 
-function w = triang(m)
+function w = triang (m)
 
   if (nargin != 1)
     print_usage ();
