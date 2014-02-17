@@ -22,7 +22,7 @@
 ##     See "help pwelch" for description of arguments, hints and references
 ##     --- especially hint (7) for Matlab R11 defaults.
 
-function [varargout] = tfe(varargin)
+function varargout = tfe(varargin)
 
   ##
   ## Check fixed argument

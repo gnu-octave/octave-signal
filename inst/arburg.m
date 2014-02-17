@@ -117,7 +117,7 @@
 ## @seealso{ar_psd}
 ## @end deftypefn
 
-function [varargout] = arburg( x, poles, criterion )
+function varargout = arburg( x, poles, criterion )
 
   ##
   ## Check arguments

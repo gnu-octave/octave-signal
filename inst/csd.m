@@ -21,7 +21,7 @@
 ##     See "help pwelch" for description of arguments, hints and references
 ##     --- especially hint (7) for Matlab R11 defaults.
 
-function [varargout] = csd(varargin)
+function varargout = csd(varargin)
 
   ## Check fixed argument
   if ( nargin<2 )

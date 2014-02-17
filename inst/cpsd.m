@@ -27,7 +27,7 @@
 ## @seealso{pwelch}
 ## @end deftypefn
 
-function [varargout] = cpsd(varargin)
+function varargout = cpsd(varargin)
 
   ## Check fixed argument
   if (nargin < 2 || nargin > 7)

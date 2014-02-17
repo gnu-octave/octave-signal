@@ -127,7 +127,7 @@
 ##
 ## @end deftypefn
 
-function [varargout]=ar_psd(a,v,varargin)
+function varargout = ar_psd(a,v,varargin)
 
   ##
   ## Check fixed arguments

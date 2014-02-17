@@ -29,7 +29,7 @@
 ## @end example
 ## @end deftypefn
 
-function [H] = freqs(B,A,W)
+function H = freqs(B,A,W)
 
   if (nargin ~= 3 || nargout>1)
     print_usage;

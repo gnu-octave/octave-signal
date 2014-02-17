@@ -27,7 +27,7 @@
 ## @seealso{pwelch}
 ## @end deftypefn
 
-function [varargout] = tfestimate(varargin)
+function varargout = tfestimate(varargin)
 
   ##
   ## Check fixed argument

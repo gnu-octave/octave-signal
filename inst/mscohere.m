@@ -27,7 +27,7 @@
 ## @seealso{pwelch}
 ## @end deftypefn
 
-function [varargout] = mscohere(varargin)
+function varargout = mscohere(varargin)
 
   ##
   ## Check fixed argument

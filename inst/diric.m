@@ -14,12 +14,12 @@
 ## this program; if not, see <http://www.gnu.org/licenses/>.
 
 ## -*- texinfo -*-
-## @deftypefn {Function File} {[@var{y}] =} diric (@var{x},@var{n})
+## @deftypefn {Function File} {@var{y} =} diric (@var{x},@var{n})
 ## Compute the dirichlet function.
 ## @seealso{sinc, gauspuls, sawtooth}
 ## @end deftypefn
 
-function [y] = diric(x,n)
+function y = diric(x,n)
 
   if (nargin < 2)
     print_usage;

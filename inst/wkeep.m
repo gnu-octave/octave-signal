@@ -14,8 +14,8 @@
 ## this program; if not, see <http://www.gnu.org/licenses/>.
 
 ## -*- texinfo -*-
-## @deftypefn  {Function File} {[@var{y}] =} wkeep (@var{x}, @var{l})
-## @deftypefnx {Function File} {[@var{y}] =} wkeep (@var{x}, @var{l}, @var{opt})
+## @deftypefn  {Function File} {@var{y} =} wkeep (@var{x}, @var{l})
+## @deftypefnx {Function File} {@var{y} =} wkeep (@var{x}, @var{l}, @var{opt})
 ## Extract the elements of @var{x} of size @var{l} from the center, the right
 ## or the left.
 ## @end deftypefn

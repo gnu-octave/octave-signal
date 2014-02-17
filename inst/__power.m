@@ -39,7 +39,7 @@
 ## FIXME: consider folding this into freqz --- just one more parameter to
 ##        distinguish between 'linear', 'log', 'logsquared' and 'squared'
 
-function [varargout] = __power (b, a, varargin)
+function varargout = __power (b, a, varargin)
 
   if (nargin < 2 || nargin > 6) print_usage; endif
 

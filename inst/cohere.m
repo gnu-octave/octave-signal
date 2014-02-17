@@ -23,7 +23,7 @@
 ##     --- especially hint (7) for Matlab R11 defaults.
 ##
 
-function [varargout] = cohere(varargin)
+function varargout = cohere(varargin)
 
 ##
   if ( nargin<2 )

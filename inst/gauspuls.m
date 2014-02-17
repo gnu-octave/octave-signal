@@ -14,11 +14,11 @@
 ## this program; if not, see <http://www.gnu.org/licenses/>.
 
 ## -*- texinfo -*-
-## @deftypefn {Function File} {[@var{y}] =} gauspuls (@var{t},@var{fc},@var{bw})
+## @deftypefn {Function File} {@var{y} =} gauspuls (@var{t},@var{fc},@var{bw})
 ## Return the Gaussian modulated sinusoidal pulse.
 ## @end deftypefn
 
-function [y] = gauspuls(t, fc = 1e3, bw = 0.5)
+function y = gauspuls(t, fc = 1e3, bw = 0.5)
 
   if nargin<1, print_usage; endif
   if fc < 0 , error("fc must be positive"); endif

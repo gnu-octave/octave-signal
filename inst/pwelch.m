@@ -265,7 +265,7 @@
 ##      Cambridge University Press, 2002 --- Section 13.7.
 ##  [3] Paul Kienzle (1999-2001): "pwelch", http://octave.sourceforge.net/
 
-function [varargout] = pwelch(x,varargin)
+function varargout = pwelch(x,varargin)
 
   ##
   ## COMPATIBILITY LEVEL

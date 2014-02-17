@@ -14,11 +14,11 @@
 ## this program; if not, see <http://www.gnu.org/licenses/>.
 
 ## -*- texinfo -*-
-## @deftypefn {Function File} {[@var{y}] =} gmonopuls (@var{t},@var{fc})
+## @deftypefn {Function File} {@var{y} =} gmonopuls (@var{t},@var{fc})
 ## Return the gaussian monopulse.
 ## @end deftypefn
 
-function [y] = gmonopuls(t, fc = 1e3)
+function y = gmonopuls(t, fc = 1e3)
 
   if (nargin<1 || nargin > 2), print_usage; endif
   if fc < 0 , error("fc must be positive"); endif
