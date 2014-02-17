@@ -34,7 +34,7 @@ function w = gausswin (m, a)
   elseif (! (isscalar (m) && (m == fix (m)) && (m > 0)))
     error ("gausswin: M must be a positive integer");
   elseif (nargin == 1)
-    a = 2.5
+    a = 2.5;
   endif
 
   w = exp ( -0.5 * ( a/m * [ -(m-1) : 2 : m-1 ]' ) .^ 2 );
