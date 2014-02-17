@@ -43,3 +43,12 @@ function w = gaussian (m, a)
   w = exp(-0.5*(([0:m-1]'-(m-1)/2)*a).^2);
 
 endfunction
+
+%!assert (gaussian (1), 1)
+
+%% Test input validation
+%!error gaussian ()
+%!error gaussian (0.5)
+%!error gaussian (-1)
+%!error gaussian (ones (1, 4))
+%!error gaussian (1, 2, 3)

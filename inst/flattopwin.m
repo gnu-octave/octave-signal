@@ -60,3 +60,14 @@ function w = flattopwin (m, sym)
   endif
 
 endfunction
+
+%!assert (flattopwin (1), 1)
+%!assert (flattopwin (2), 0.0042 / 4.6402 * ones (2, 1), eps)
+
+%% Test input validation
+%!error flattopwin ()
+%!error flattopwin (0.5)
+%!error flattopwin (-1)
+%!error flattopwin (ones (1, 4))
+%!error flattopwin (1, 2)
+%!error flattopwin (1, 2, 3)

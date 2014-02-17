@@ -30,3 +30,14 @@ function w = rectwin (m)
   w = ones (m, 1);
 
 endfunction
+
+%!assert (rectwin (1), 1)
+%!assert (rectwin (2), ones (2, 1))
+%!assert (rectwin (100), ones (100, 1))
+
+%% Test input validation
+%!error rectwin ()
+%!error rectwin (0.5)
+%!error rectwin (-1)
+%!error rectwin (ones (1, 4))
+%!error rectwin (1, 2)

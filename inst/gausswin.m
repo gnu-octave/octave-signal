@@ -40,3 +40,12 @@ function w = gausswin (m, a)
   w = exp ( -0.5 * ( a/m * [ -(m-1) : 2 : m-1 ]' ) .^ 2 );
 
 endfunction
+
+%!assert (gausswin (1), 1)
+
+%% Test input validation
+%!error gausswin ()
+%!error gausswin (0.5)
+%!error gausswin (-1)
+%!error gausswin (ones (1, 4))
+%!error gausswin (1, 2, 3)

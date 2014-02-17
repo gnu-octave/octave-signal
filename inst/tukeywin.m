@@ -69,3 +69,16 @@ endfunction
 %! w = tukeywin (m, r);
 %! title(sprintf("%d-point Tukey window, R = %d/%d", m, [p, q] = rat(r), q));
 %! plot(w);
+
+%!assert (tukeywin (1), 1)
+%!assert (tukeywin (2), zeros (2, 1))
+%!assert (tukeywin (3), [0; 1; 0])
+%!assert (tukeywin (16, 0), rectwin (16))
+%!assert (tukeywin (16, 1), hanning (16))
+
+%% Test input validation
+%!error tukeywin ()
+%!error tukeywin (0.5)
+%!error tukeywin (-1)
+%!error tukeywin (ones (1, 4))
+%!error tukeywin (1, 2, 3)

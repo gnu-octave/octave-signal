@@ -42,3 +42,13 @@ function w = nuttallwin (m)
   endif
 
 endfunction
+
+%!assert (nuttallwin (1), 1)
+%!assert (nuttallwin (2), zeros (2, 1), eps)
+
+%% Test input validation
+%!error nuttallwin ()
+%!error nuttallwin (0.5)
+%!error nuttallwin (-1)
+%!error nuttallwin (ones (1, 4))
+%!error nuttallwin (1, 2)

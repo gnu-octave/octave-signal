@@ -61,3 +61,12 @@ endfunction
 
 %!demo
 %! % use demo("kaiserord");
+
+%!assert (kaiser (1), 1)
+
+%% Test input validation
+%!error kaiser ()
+%!error kaiser (0.5)
+%!error kaiser (-1)
+%!error kaiser (ones (1, 4))
+%!error kaiser (1, 2, 3)

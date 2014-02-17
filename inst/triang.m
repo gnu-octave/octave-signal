@@ -36,16 +36,20 @@ function w = triang (m)
 
 endfunction
 
-%!error triang
-%!error triang(1,2)
-%!error triang([1,2]);
-%!assert (triang(1), 1)
-%!assert (triang(2), [1; 1]/2)
-%!assert (triang(3), [1; 2; 1]/2);
-%!assert (triang(4), [1; 3; 3; 1]/4);
+%!assert (triang (1), 1)
+%!assert (triang (2), [1; 1]/2)
+%!assert (triang (3), [1; 2; 1]/2)
+%!assert (triang (4), [1; 3; 3; 1]/4)
 %!test
-%! x = bartlett(5);
-%! assert (triang(3), x(2:4));
+%! x = bartlett (5);
+%! assert (triang (3), x(2:4));
+
+%% Test input validation
+%!error triang ()
+%!error triang (0.5)
+%!error triang (-1)
+%!error triang (ones (1, 4))
+%!error triang (1, 2)
 
 %!demo
 %! subplot(221);

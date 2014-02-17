@@ -29,3 +29,14 @@ function w = boxcar (m)
   w = ones(m, 1);
 
 endfunction
+
+%!assert (boxcar (1), 1)
+%!assert (boxcar (2), ones (2, 1))
+%!assert (boxcar (100), ones (100, 1))
+
+%% Test input validation
+%!error boxcar ()
+%!error boxcar (0.5)
+%!error boxcar (-1)
+%!error boxcar (ones (1, 4))
+%!error boxcar (1, 2)

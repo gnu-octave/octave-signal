@@ -42,3 +42,13 @@ function w = blackmannuttall (m)
   endif
 
 endfunction
+
+%!assert (blackmannuttall (1), 1)
+%!assert (blackmannuttall (2), 0.0003628 * ones (2, 1), eps)
+
+%% Test input validation
+%!error blackmannuttall ()
+%!error blackmannuttall (0.5)
+%!error blackmannuttall (-1)
+%!error blackmannuttall (ones (1, 4))
+%!error blackmannuttall (1, 2)

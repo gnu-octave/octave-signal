@@ -93,3 +93,12 @@ endfunction
 %! f = [-0.5:1/n:0.5-1/n];
 %! printf ("%dx null-padded, power spectrum of %d-point window\n", n/m, m);
 %! semilogy (f, s)
+
+%!assert (welchwin (3), [0, 1, 0])
+
+%% Test input validation
+%!error welchwin ()
+%!error welchwin (0.5)
+%!error welchwin (-1)
+%!error welchwin (ones (1, 4))
+%!error welchwin (1, 2, 3)

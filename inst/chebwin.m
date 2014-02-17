@@ -101,3 +101,13 @@ function w = chebwin (m, at)
   w = w ./ max (w (:));
 
 endfunction
+
+%!assert (chebwin (1), 1)
+%!assert (chebwin (2), ones (2, 1))
+
+%% Test input validation
+%!error chebwin ()
+%!error chebwin (0.5)
+%!error chebwin (-1)
+%!error chebwin (ones (1, 4))
+%!error chebwin (1, 2, 3)

@@ -40,3 +40,13 @@ function w = bohmanwin (m)
   endif
 
 endfunction
+
+%!assert (bohmanwin (1), 1)
+%!assert (bohmanwin (2), zeros (2, 1))
+
+%% Test input validation
+%!error bohmanwin ()
+%!error bohmanwin (0.5)
+%!error bohmanwin (-1)
+%!error bohmanwin (ones (1, 4))
+%!error bohmanwin (1, 2)

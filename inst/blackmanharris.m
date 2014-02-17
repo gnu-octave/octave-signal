@@ -40,3 +40,13 @@ function w = blackmanharris (m)
   endif
 
 endfunction
+
+%!assert (blackmanharris (1), 1)
+%!assert (blackmanharris (2), 0.00006 * ones (2, 1), eps)
+
+%% Test input validation
+%!error blackmanharris ()
+%!error blackmanharris (0.5)
+%!error blackmanharris (-1)
+%!error blackmanharris (ones (1, 4))
+%!error blackmanharris (1, 2)

@@ -35,3 +35,13 @@ function wout = window (f, m, varargin)
   endif
 
 endfunction
+
+%!assert (window (@bartlett, 16), window ("bartlett", 16))
+%!assert (window (@hamming, 16), window ("hamming", 16))
+%!assert (window (@hanning, 16), window ("hanning", 16))
+%!assert (window (@triang, 16), window ("triang", 16))
+
+%% Test input validation
+%!error window ()
+%!error window (1)
+%!error window ("hanning")

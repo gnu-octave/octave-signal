@@ -39,3 +39,13 @@ function w = barthannwin (m)
   endif
 
 endfunction
+
+%!assert (barthannwin (1), 1)
+%!assert (barthannwin (2), zeros (2, 1))
+
+%% Test input validation
+%!error barthannwin ()
+%!error barthannwin (0.5)
+%!error barthannwin (-1)
+%!error barthannwin (ones (1, 4))
+%!error barthannwin (1, 2)

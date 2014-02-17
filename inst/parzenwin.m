@@ -39,3 +39,13 @@ function w = parzenwin (m)
   w = [w3 w1 w2]';
 
 endfunction
+
+%!assert (parzenwin (1), 1)
+%!assert (parzenwin (2), 0.25 * ones (2, 1))
+
+%% Test input validation
+%!error parzenwin ()
+%!error parzenwin (0.5)
+%!error parzenwin (-1)
+%!error parzenwin (ones (1, 4))
+%!error parzenwin (1, 2)
