@@ -88,3 +88,13 @@ function [n, Wc] = buttord(Wp, Ws, Rp, Rs)
   Wc(stop) = 1-Wc(stop);
 
 endfunction
+
+%% Test input validation
+%!error buttord ()
+%!error buttord (.1)
+%!error buttord (.1, .2)
+%!error buttord (.1, .2, 3)
+%!error buttord (.1, .2, 3, 4, 5)
+%!error buttord ([.1 .1], [.2 .2], 3, 4)
+%!error buttord ([.1 .2], [.5 .6], 3, 4)
+%!error buttord ([.1 .5], [.2 .6], 3, 4)

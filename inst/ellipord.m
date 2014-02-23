@@ -86,3 +86,13 @@ function [n, Wp] = ellipord(Wp, Ws, Rp, Rs)
   n=ceil(log10(16*D)/log10(1/q));
 
 endfunction
+
+%% Test input validation
+%!error ellipord ()
+%!error ellipord (.1)
+%!error ellipord (.1, .2)
+%!error ellipord (.1, .2, 3)
+%!error ellipord (.1, .2, 3, 4, 5)
+%!error ellipord ([.1 .1], [.2 .2], 3, 4)
+%!error ellipord ([.1 .2], [.5 .6], 3, 4)
+%!error ellipord ([.1 .5], [.2 .6], 3, 4)

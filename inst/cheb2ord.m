@@ -150,3 +150,16 @@ endfunction
 %! [h, w] = freqz (b, a, [1190:1210], Fs);
 %! plot (w, 20*log10(abs(h)), "g;filter n+1;");
 %! hold off;
+
+%% Test case from demo
+%!assert (cheb2ord (0.2, 0.24, 0.5, 29), 8)
+
+%% Test input validation
+%!error cheb2ord ()
+%!error cheb2ord (.1)
+%!error cheb2ord (.1, .2)
+%!error cheb2ord (.1, .2, 3)
+%!error cheb2ord (.1, .2, 3, 4, 5)
+%!error cheb2ord ([.1 .1], [.2 .2], 3, 4)
+%!error cheb2ord ([.1 .2], [.5 .6], 3, 4)
+%!error cheb2ord ([.1 .5], [.2 .6], 3, 4)
