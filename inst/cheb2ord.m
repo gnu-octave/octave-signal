@@ -57,8 +57,8 @@ function [n, Wc] = cheb2ord(Wp, Ws, Rp, Rs)
     if (length(Wp) == 1)
       Wa = Wp/Ws;
     else
-      ## band reject
-      error ("band reject is not implement yet.");
+      ## FIXME: Implement band reject filter type
+      error ("cheb2ord: band reject is not yet implemented");
     endif;
   else
    ## if high pass, reverse the sense of the test
