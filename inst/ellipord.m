@@ -13,18 +13,34 @@
 ## You should have received a copy of the GNU General Public License along with
 ## this program; if not, see <http://www.gnu.org/licenses/>.
 
-## usage: [n,wp] = ellipord(wp,ws, rp,rs)
+## -*- texinfo -*-
+## @deftypefn  {Function File} {@var{n} =} ellipord (@var{wp}, @var{ws}, @var{rp}, @var{rs})
+## @deftypefnx {Function File} {@var{n} =} ellipord ([@var{wp1}, @var{wp2}], [@var{ws1}, @var{ws2}], @var{rp}, @var{rs})
+## @deftypefnx {Function File} {[@var{n}, @var{wc}] =} ellipord (@dots{})
+## Compute the minimum filter order of an elliptic filter with the desired
+## response characteristics.  The filter frequency band edges are specified
+## by the passband frequency @var{wp} and stopband frequency @var{ws}.
+## Frequencies are normalized to the Nyquist frequency in the range [0,1].
+## @var{rp} is the allowable passband ripple measured in decibels, and @var{rs}
+## is the minimum attenuation in the stop band, also in decibels.  The output
+## arguments @var{n} and @var{wc} can be given as inputs to @code{ellip}.
 ##
-## Calculate the order for the elliptic filter (discrete)
-## wp: Cutoff frequency
-## ws: Stopband edge
-## rp: decibels of ripple in the passband.
-## rs: decibels of ripple in the stopband.
+## If @var{wp} and @var{ws} are scalars, then @var{wp} is the passband cutoff
+## frequency and @var{ws} is the stopband edge frequency.  If @var{ws} is
+## greater than @var{wp}, the filter is a low-pass filter.  If @var{wp} is
+## greater than @var{ws}, the filter is a high-pass filter.
 ##
-## References:
+## If @var{wp} and @var{ws} are vectors of length 2, then @var{wp} defines the
+## passband interval and @var{ws} defines the stopband interval.  If @var{wp}
+## is contained within @var{ws} (@var{ws1} < @var{wp1} < @var{wp2} < @var{ws2}),
+## the filter is a band-pass filter.  If @var{ws} is contained within @var{wp}
+## (@var{wp1} < @var{ws1} < @var{ws2} < @var{wp2}), the filter is a band-stop
+## or band-reject filter.
 ##
-## - Lamar, Marcus Vinicius, Notas de aula da disciplina TE 456 - Circuitos
-##   Analogicos II, UFPR, 2001/2002.
+## Reference: Lamar, Marcus Vinicius, @cite{Notas de aula da disciplina TE 456 -
+## Circuitos Analogicos II}, UFPR, 2001/2002.
+## @seealso{buttord, cheb1ord, cheb2ord, ellip}
+## @end deftypefn
 
 function [n, Wp] = ellipord(Wp, Ws, Rp, Rs)
 

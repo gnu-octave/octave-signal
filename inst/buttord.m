@@ -14,21 +14,28 @@
 ## this program; if not, see <http://www.gnu.org/licenses/>.
 
 ## -*- texinfo -*-
-## @deftypefn  {Function File} {[@var{n}, @var{Wc}] =} buttord (@var{Wp}, @var{Ws}, @var{Rp}, @var{Rs})
-## @deftypefnx {Function File} {[@var{n}, @var{Wc}] =} buttord ([@var{Wp1}, @var{Wp2}], [@var{Ws1}, @var{Ws2}], @var{Rp}, @var{Rs})
-## Compute butterworth filter order and cutoff for the desired response
-## characteristics. Rp is the allowable decibels of ripple in the pass
-## band. Rs is the minimum attenuation in the stop band.
+## @deftypefn  {Function File} {@var{n} =} buttord (@var{wp}, @var{ws}, @var{rp}, @var{rs})
+## @deftypefnx {Function File} {@var{n} =} buttord ([@var{wp1}, @var{wp2}], [@var{ws1}, @var{ws2}], @var{rp}, @var{rs})
+## @deftypefnx {Function File} {[@var{n}, @var{wc}] =} buttord (@dots{})
+## Compute the minimum filter order of a Butterworth filter with the desired
+## response characteristics.  The filter frequency band edges are specified by
+## the passband frequency @var{wp} and stopband frequency @var{ws}.  Frequencies
+## are normalized to the Nyquist frequency in the range [0,1].  @var{rp} is the
+## allowable passband ripple measured in decibels, and @var{rs} is the minimum
+## attenuation in the stop band, also in decibels.  The output arguments @var{n}
+## and @var{wc} can be given as inputs to @code{butter}.
 ##
-## [n, Wc] = buttord(Wp, Ws, Rp, Rs)
-##     Low pass (Wp<Ws) or high pass (Wp>Ws) filter design.  Wp is the
-##     pass band edge and Ws is the stop band edge.  Frequencies are
-##     normalized to [0,1], corresponding to the range [0,Fs/2].
+## If @var{wp} and @var{ws} are scalars, then @var{wp} is the passband cutoff
+## frequency and @var{ws} is the stopband edge frequency.  If @var{ws} is
+## greater than @var{wp}, the filter is a low-pass filter.  If @var{wp} is
+## greater than @var{ws}, the filter is a high-pass filter.
 ##
-## [n, Wc] = buttord([Wp1, Wp2], [Ws1, Ws2], Rp, Rs)
-##     Band pass (Ws1<Wp1<Wp2<Ws2) or band reject (Wp1<Ws1<Ws2<Wp2)
-##     filter design. Wp gives the edges of the pass band, and Ws gives
-##     the edges of the stop band.
+## If @var{wp} and @var{ws} are vectors of length 2, then @var{wp} defines the
+## passband interval and @var{ws} defines the stopband interval.  If @var{wp}
+## is contained within @var{ws} (@var{ws1} < @var{wp1} < @var{wp2} < @var{ws2}),
+## the filter is a band-pass filter.  If @var{ws} is contained within @var{wp}
+## (@var{wp1} < @var{ws1} < @var{ws2} < @var{wp2}), the filter is a band-stop
+## or band-reject filter.
 ##
 ## Theory: |H(W)|^2 = 1/[1+(W/Wc)^(2N)] = 10^(-R/10)
 ## With some algebra, you can solve simultaneously for Wc and N given
@@ -38,7 +45,7 @@
 ## significantly overdesigns.  Artificially dividing N by 2 in this case
 ## helps a lot, but it still overdesigns.
 ##
-## @seealso{butter}
+## @seealso{butter, cheb1ord, cheb2ord, ellipord}
 ## @end deftypefn
 
 function [n, Wc] = buttord(Wp, Ws, Rp, Rs)
