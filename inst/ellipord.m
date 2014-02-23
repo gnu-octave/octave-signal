@@ -28,22 +28,10 @@
 
 function [n, Wp] = ellipord(Wp, Ws, Rp, Rs)
 
-  [rp, cp]=size(Wp);
-  [rs, cs]=size(Ws);
-  if ( !(length(Wp)<=2 && (rp==1 || cp==1) && length(Ws)<=2 && (rs==1 || cs==1)) )
-    error ("ellipord: frequency must be given as w0 or [w0, w1]");
-  elseif (!all(Wp >= 0 & Wp <= 1 & Ws >= 0 & Ws <= 1)) #####
-    error ("ellipord: critical frequencies must be in (0 1)");
-  elseif (!(length(Wp)==1 || length(Wp) == 2 & length(Ws)==1 || length(Ws) == 2))
-    error ("ellipord: only one filter band allowed");
-  elseif (length(Wp)==2 && !(Wp(1) < Wp(2)))
-    error ("ellipord: first band edge must be smaller than second");
-  elseif (length(Ws)==2 && !(length(Wp)==2))
-    error ("ellipord: you must specify band pass borders.");
-  elseif (length(Wp)==2 && length(Ws)==2 && !(Ws(1) < Wp(1) && Ws(2) > Wp(2)) )
-    error ("ellipord: ( Wp(1), Wp(2) ) must be inside of interval ( Ws(1), Ws(2) )");
-  elseif (length(Wp)==2 && length(Ws)==1 && !(Ws < Wp(1) || Ws > Wp(2)) )
-    error ("ellipord: Ws must be out of interval ( Wp(1), Wp(2) )");
+  if (nargin != 4)
+    print_usage ();
+  else
+    validate_filter_bands ("ellipord", Wp, Ws);
   endif
 
   ## sampling frequency of 2 Hz

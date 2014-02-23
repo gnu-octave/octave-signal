@@ -39,13 +39,8 @@ function [n, Wc] = cheb2ord(Wp, Ws, Rp, Rs)
 
   if nargin != 4
     print_usage;
-  elseif length(Wp) != length(Ws)
-    error("cheb2ord: Wp and Ws must have the same length");
-  elseif length(Wp) != 1 && length(Wp) != 2
-    error("cheb2ord: Wp,Ws must have length 1 or 2");
-  elseif length(Wp) == 2 && ...
-          (all(Wp>Ws) || all(Ws>Wp) || diff(Wp)<=0 || diff(Ws)<=0)
-    error("cheb2ord: Wp(1)<Ws(1)<Ws(2)<Wp(2) or Ws(1)<Wp(1)<Wp(2)<Ws(2)");
+  else
+    validate_filter_bands ("cheb2ord", Wp, Ws);
   endif
 
   T = 2;

@@ -43,18 +43,14 @@
 
 function [n, Wc] = buttord(Wp, Ws, Rp, Rs)
 
-  if nargin != 4
-    print_usage;
-  elseif length(Wp) != length(Ws)
-    error("buttord: Wp and Ws must have the same length");
-  elseif length(Wp) != 1 && length(Wp) != 2
-    error("buttord: Wp,Ws must have length 1 or 2");
-  elseif length(Wp) == 2 && (all(Wp>Ws) || all(Ws>Wp) || diff(Wp)<=0 || diff(Ws)<=0)
-    error("buttord: Wp(1)<Ws(1)<Ws(2)<Wp(2) or Ws(1)<Wp(1)<Wp(2)<Ws(2)");
+  if (nargin != 4)
+    print_usage ();
+  else
+    validate_filter_bands ("buttord", Wp, Ws);
   endif
 
-  if length(Wp) == 2
-    warning("buttord: seems to overdesign bandpass and bandreject filters");
+  if (numel (Wp) == 2)
+    warning ("buttord: seems to overdesign bandpass and bandreject filters");
   endif
 
   T = 2;
