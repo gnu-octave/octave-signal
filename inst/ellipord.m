@@ -53,16 +53,6 @@ function [n, Wp] = ellipord(Wp, Ws, Rp, Rs)
     else
       ws = (Wsw(2)-Wsw(1))/(Wpw(2)-Wpw(1));
     endif
-  elseif (length(Wpw)==2 && length(Wsw)==1)
-    wp=1;
-    w02 = Wpw(1) * Wpw(2);
-    if (Wsw > Wpw(2))
-      w3 = w02/Wsw;
-      ws = (Wsw - w3)/(Wpw(2) - Wpw(1));
-    else
-      w4 = w02/Wsw;
-      ws = (w4 - Wsw)/(Wpw(2) - Wpw(1));
-    endif
   elseif (Wpw > Wsw)
     wp = Wsw;
     ws = Wpw;
