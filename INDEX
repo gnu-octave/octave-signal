@@ -6,9 +6,9 @@ Signals
   diric
   gauspuls
   gmonopuls
+  mexihat
   meyeraux
   morlet
-  mexihat
   pulstran
   rectpuls
   sawtooth
@@ -34,8 +34,8 @@ Filter Analysis
 Filter Conversion
   convmtx
   polystab
-  residuez
   residued
+  residuez
   sos2tf
   sos2zp
   ss2tf
@@ -84,8 +84,8 @@ Transforms
   cplxreal
   czt
   dct
-  dctmtx
   dct2
+  dctmtx
   dftmtx
   digitrevorder
   dst
@@ -104,12 +104,12 @@ Power Spectrum Analysis
   cohere
   cpsd
   csd
-  tfe
-  tfestimate
   mscohere
   pburg
   pwelch
   pyulear
+  tfe
+  tfestimate
   xcorr
   xcorr2
   xcov
