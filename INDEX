@@ -17,6 +17,8 @@ Signals
   specgram
   square
   tripuls
+  udecode
+  uencode
 Signal Measurement
   findpeaks
   peak2peak
