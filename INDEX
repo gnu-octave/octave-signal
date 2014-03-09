@@ -13,12 +13,14 @@ Signals
   rectpuls
   sawtooth
   shanwavf
+  shiftdata
   sigmoid_train
   specgram
   square
   tripuls
   udecode
   uencode
+  unshiftdata
 Signal Measurement
   findpeaks
   peak2peak
