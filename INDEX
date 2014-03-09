@@ -19,6 +19,7 @@ Signals
   tripuls
 Signal Measurement
   findpeaks
+  peak2peak
   peak2rms
   rms
 Filtering
