@@ -59,7 +59,7 @@ function v = schtrig (x, lvl, rst = 1)
   ranges = clustersegment (idx');
 
   for i=1:nc
-    ## Record the state at the begining of the interval between levels
+    ## Record the state at the beginning of the interval between levels
     if !isempty (ranges{i})
       prev         = ranges{i}(1,:)-1;
       prev(prev<1) = 1;

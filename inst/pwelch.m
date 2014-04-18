@@ -197,7 +197,7 @@
 ## 5) REMOVING MEAN FROM SIGNAL:
 ##    If the mean is not removed from the signal there is a large spectral
 ##    peak at zero frequency and the sidelobes of this peak are likely to
-##    swamp the rest of the spectrum.  For this reason, the default behaviour
+##    swamp the rest of the spectrum.  For this reason, the default behavior
 ##    is to remove the mean.  However, the matlab pwelch does not do this.
 ## 6) WARNING ON CONFIDENCE INTERVALS
 ##    Confidence intervals are obtained by measuring the sample variance of
@@ -650,7 +650,7 @@ function varargout = pwelch(x,varargin)
     ##
     ## minimum FFT length is seg_len
     Nfft = max( Nfft, seg_len );
-    ## Mean square of window is required for normalising PSD amplitude.
+    ## Mean square of window is required for normalizing PSD amplitude.
     win_meansq = (window.' * window) / seg_len;
     ##
     ## Set default or check overlap.

@@ -20,7 +20,7 @@
 ## The function calculates the initial index and end index of the sequences of
 ## 1's in the rows of @var{unos}. The result is returned in a cell of size
 ## 1-by-Np, being Np the numer of rows in @var{unos}. Each element of the cell
-## has two rows. The first row is the inital index of a sequence of 1's and the
+## has two rows. The first row is the initial index of a sequence of 1's and the
 ## second row is the end index of that sequence.
 ##
 ## If Np == 1 the output is a matrix with two rows.

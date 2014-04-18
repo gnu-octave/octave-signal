@@ -128,7 +128,7 @@ endfunction
 %! c = xcorr2 (a, b, "coeff");
 %!assert (nthargout ([1 2], @find, c == max (c(:))), {row_shift, col_shift});   # even with some small noise, should return exact coordinates
 
-%!test  # coeff of autocorrelation must be same as negavtive of correlation by additive inverse
+%!test  # coeff of autocorrelation must be same as negative of correlation by additive inverse
 %! a = 10 * randn (100, 100);
 %! auto    = xcorr2 (a, "coeff");
 %! add_in  = xcorr2 (a, -a, "coeff");

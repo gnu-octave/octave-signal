@@ -26,7 +26,7 @@
 ## @item v
 ## variance of white noise
 ## @item k
-## reflection coeffients for use in lattice filter
+## reflection coefficients for use in lattice filter
 ## @end table
 ##
 ## The power spectrum of the resulting filter can be plotted with

@@ -71,7 +71,7 @@
 ## criterion %% [optional string arg]  model-selection criterion.  Limits
 ##           %%       the number of poles so that spurious poles are not
 ##           %%       added when the whitened data has no more information
-##           %%       in it (see Kay & Marple, 1981). Recognised values are
+##           %%       in it (see Kay & Marple, 1981). Recognized values are
 ##           %%  'AKICc' -- approximate corrected Kullback information
 ##           %%             criterion (recommended),
 ##           %%   'KIC'  -- Kullback information criterion

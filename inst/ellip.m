@@ -23,7 +23,7 @@
 ## @deftypefnx {Function File} {[@var{a}, @var{b}, @var{c}, @var{d}] =} ellip (@dots{})
 ## @deftypefnx {Function File} {[@dots{}] =} ellip (@dots{}, "s")
 ##
-## Generate an Elliptic or Cauer filter (discrete and contnuious).
+## Generate an Elliptic or Cauer filter (discrete and continuous).
 ##
 ## [b,a] = ellip(n, Rp, Rs, Wp)
 ##  low pass filter with order n, cutoff pi*Wp radians, Rp decibels

@@ -27,7 +27,7 @@ function [b_out, a_out] = inv_residue(r_in, p_in, k_in, tol)
 
   n = length(r_in); # Number of poles/residues
 
-  k = 0; # Capture contstant term
+  k = 0; # Capture constant term
   if (length(k_in)==1)    # A single direct term (order N = order D)
     k = k_in(1);          # Capture constant term
   elseif (length(k_in)>1) # Greater than one means non-physical system

@@ -162,4 +162,4 @@ endfunction
 %! % Should see (1) rectangular pulses centered on *,
 %! %            (2) rectangular pulses to the right of *,
 %! %            (3) smooth interpolation between the *'s, and
-%! %            (4) asymetric sines to the right of *
+%! %            (4) asymmetric sines to the right of *

@@ -52,16 +52,16 @@ function [ b, a ] = pei_tseng_notch ( frequencies, bandwidths )
   bandwidths  = bandwidths (:)';
 
 
-  ## Normalise appropriately
+  ## Normalize appropriately
   frequencies *= pi;
   bandwidths  *= pi;
   M2           = 2 * length ( frequencies );
 
 
-  ## Splice centre and offset frequencies ( Equation 11 )
+  ## Splice center and offset frequencies ( Equation 11 )
   omega = vec ( [ frequencies - bandwidths / 2; frequencies ] );
 
-  ## Splice centre and offset phases ( Equations 12 )
+  ## Splice center and offset phases ( Equations 12 )
   factors = ( 1 : 2 : M2 );
   phi     = vec ( [ -pi * factors + pi / 2; -pi * factors ] );
 

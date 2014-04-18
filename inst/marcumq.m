@@ -132,7 +132,7 @@ endfunction
 ## from J.I. Marcum, "Table of Q Functions", Rand Technical Report
 ## RM-339, 1950/1/1.
 ##
-## There is one discrepency in the tables.  Marcum has
+## There is one discrepancy in the tables.  Marcum has
 ##   Q(14.00,17.10) = 0.001078
 ## while we compute
 ##   Q(14.00,17.10) = 0.0010785053 = 0.001079

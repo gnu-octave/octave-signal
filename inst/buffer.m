@@ -60,12 +60,12 @@ function [y, z, opt] = buffer (x, n, p, opt)
     print_usage ();
   endif
   if  (!isscalar (n) || n != floor (n))
-    error ("buffer: n must be an inetger");
+    error ("buffer: n must be an integer");
   endif
   if (nargin < 3)
     p = 0;
   elseif (!isscalar (p) || p != floor (p) || p >= n)
-    error ("buffer: p must be an inetger less than n");
+    error ("buffer: p must be an integer less than n");
   endif
   if (nargin <  4)
     if (p < 0)

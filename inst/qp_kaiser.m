@@ -28,7 +28,7 @@
 ## of a Hilbert transform.
 ##
 ## By using a third non-null argument, the minimum-phase calculation is
-## ommited at all.
+## omitted at all.
 ## @end deftypefn
 
 function h = qp_kaiser (nb, at, linear = 0)

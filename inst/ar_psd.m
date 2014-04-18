@@ -140,7 +140,7 @@ function varargout = ar_psd(a,v,varargin)
   else
     real_model = isreal(a);
   ##
-  ##  default values for optional areguments
+  ##  default values for optional arguments
     freq = 256;
     user_freqs = 0;    ## boolean: true for user-specified frequencies
     Fs   = 1.0;

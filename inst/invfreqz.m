@@ -25,7 +25,7 @@
 ## Note: all the guts are in invfreq.m
 ##
 ## H: desired complex frequency response
-## F: normalized frequncy (0 to pi) (must be same length as H)
+## F: normalized frequency (0 to pi) (must be same length as H)
 ## nA: order of the denominator polynomial A
 ## nB: order of the numerator polynomial B
 ## W: vector of weights (must be same length as F)

@@ -35,7 +35,7 @@
 ## @end group
 ## @end example
 ##
-## If you don't specify them, then the parameters default to a fourier
+## If you don't specify them, then the parameters default to a Fourier
 ## transform:
 ##     m=length(x), w=exp(-j*2*pi/m), a=1
 ##

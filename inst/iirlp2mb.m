@@ -133,7 +133,7 @@ function [Num,Den,AllpassNum,AllpassDen] = iirlp2mb(varargin)
   ##          -1
   ## 1 - K(2)z
   ##
-  ## From the low pass to low pass tranformation in Table 7.1 p. 529 of A.
+  ## From the low pass to low pass transformation in Table 7.1 p. 529 of A.
   ## Oppenheim and R. Schafer, Discrete-Time Signal Processing 3rd edition,
   ## Prentice Hall 2010, one can see that the denominator of an allpass for
   ## going in the opposite direction can be obtained by a sign reversal of the

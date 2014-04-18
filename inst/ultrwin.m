@@ -21,13 +21,13 @@
 ## Return the coefficients of an Ultraspherical window of length @var{m}.
 ## The parameter @var{mu} controls the window's Fourier transform's side-lobe
 ## to side-lobe ratio, and the third given parameter controls the transform's
-## main-lobe width/side-lobe-ratio; normalise @var{w} such that the central
+## main-lobe width/side-lobe-ratio; normalize @var{w} such that the central
 ## coefficient(s) value is unitary.
 ##
 ## By default, the third parameter is @var{beta}, which sets the main lobe width
 ## to @var{beta} times that of a rectangular window.  Alternatively, giving
 ## @var{att} or @var{latt} sets the ripple ratio at the first or last side-lobe
-## respectively, or giving @var{xmu} sets the (un-normalised) window's Fourier
+## respectively, or giving @var{xmu} sets the (un-normalized) window's Fourier
 ## transform according to its canonical definition:
 ##
 ## @verbatim
@@ -54,7 +54,7 @@
 ##
 ## The Dolph-Chebyshev and Saramaki windows are special cases of the
 ## Ultraspherical window, with @var{mu} set to 0 and 1 respectively.  Note that
-## when not giving @var{xmu}, stabilty issues may occur with @var{mu} <= -1.5.
+## when not giving @var{xmu}, stability issues may occur with @var{mu} <= -1.5.
 ## For further information about the window, see
 ##
 ## @itemize @bullet

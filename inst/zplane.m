@@ -53,7 +53,7 @@
 ## FIXME: Consider a plot-like interface:
 ##           zplane(x1,y1,fmt1,x2,y2,fmt2,...)
 ##        with y_i or fmt_i optional as usual.  This would allow
-##        legends and control over point colour and filters of
+##        legends and control over point color and filters of
 ##        different orders.
 
 function zplane(z, p = [])

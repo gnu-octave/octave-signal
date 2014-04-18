@@ -28,7 +28,7 @@
 ## [b, a] = invimpinvar (b, a);
 ## @end example
 ##
-## If @var{fs} is not specificied, or is an empty vector, it defaults to 1Hz.
+## If @var{fs} is not specified, or is an empty vector, it defaults to 1Hz.
 ##
 ## If @var{tol} is not specified, it defaults to 0.0001 (0.1%)
 ##

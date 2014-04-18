@@ -22,7 +22,7 @@
 ## Converts analog filter with coefficients @var{b} and @var{a} to digital,
 ## conserving impulse response.
 ##
-## If @var{fs} is not specificied, or is an empty vector, it defaults to 1Hz.
+## If @var{fs} is not specified, or is an empty vector, it defaults to 1Hz.
 ##
 ## If @var{tol} is not specified, it defaults to 0.0001 (0.1%)
 ## This function does the inverse of impinvar so that the following example should
@@ -64,7 +64,7 @@ function [b_out, a_out] = impinvar (b_in, a_in, fs = 1, tol = 0.0001)
 
   r_out = zeros(1,n); # Residues of H(z)
   p_out = zeros(1,n); # Poles of H(z)
-  k_out = 0;          # Contstant term of H(z)
+  k_out = 0;          # Constant term of H(z)
 
   i=1;
   while (i<=n)

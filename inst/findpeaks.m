@@ -274,5 +274,5 @@ endfunction
 %! plot(t,data,t(idx2),data(idx2),'.r')
 %!
 %! #----------------------------------------------------------------------------
-%! # Noisy data may need tunning of the parameters. In the 2nd example,
+%! # Noisy data may need tuning of the parameters. In the 2nd example,
 %! # MinPeakDistance is used as a smoother of the peaks.

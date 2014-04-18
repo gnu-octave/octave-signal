@@ -37,7 +37,7 @@
 ## @var{criterion}
 ## model-selection criterion.  Limits the number of poles so that spurious
 ## poles are not added when the whitened data has no more information
-## in it (see Kay & Marple, 1981). Recognised values are
+## in it (see Kay & Marple, 1981). Recognized values are
 ## 'AKICc' -- approximate corrected Kullback information criterion (recommended),
 ## 'KIC'  -- Kullback information criterion
 ## 'AICc' -- corrected Akaike information criterion
@@ -88,7 +88,7 @@
 ##
 ##   AIC, AICc, KIC and AKICc are based on information theory.  They  attempt
 ##   to balance the complexity (or length) of the model against how well the
-##   model fits the data.  AIC and KIC are biassed estimates of the asymmetric
+##   model fits the data.  AIC and KIC are biased estimates of the asymmetric
 ##   and the symmetric Kullback-Leibler divergence respectively.  AICc and
 ##   AKICc attempt to correct the bias. See reference [4].
 ##
@@ -145,7 +145,7 @@ function varargout = arburg( x, poles, criterion )
       use_inf_crit = is_corrected || isa_KIC || strcmp(criterion,'AIC');
       use_FPE = strcmp(criterion,'FPE');
       if ( ~use_inf_crit && ~use_FPE )
-        error( 'arburg: value of arg 3 (criterion) not recognised' );
+        error( 'arburg: value of arg 3 (criterion) not recognized' );
       endif
     else
       use_inf_crit = 0;

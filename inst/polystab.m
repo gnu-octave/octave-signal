@@ -15,7 +15,7 @@
 
 ## b = polystab(a)
 ##
-## Stabalize the polynomial transfer function by replacing all roots
+## Stabilize the polynomial transfer function by replacing all roots
 ## outside the unit circle with their reflection inside the unit circle.
 
 function b = polystab(a)

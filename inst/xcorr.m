@@ -75,7 +75,7 @@
 ## @item biased
 ## return the biased average, R/N,
 ## @item unbiased
-## return the unbiassed average, R(k)/(N-|k|),
+## return the unbiased average, R(k)/(N-|k|),
 ## @item coeff
 ## return the correlation coefficient, R/(rms(x).rms(y)),
 ## where "k" is the lag, and "N" is the length of @var{X}.
@@ -214,7 +214,7 @@ function [R, lags] = xcorr (X, Y, maxlag, scale)
     R(:, 1:P+1:P^2) = cor (1:2*maxlag+1,:);
 
     ## do the cross correlations
-    ##   -- these are the off-diagonal colummn of the reshaped 3D result
+    ##   -- these are the off-diagonal column of the reshaped 3D result
     ##      matrix -- i!=j in R(:,i,j)
     for i=1:P-1
       j = i+1:P;
@@ -266,7 +266,7 @@ function [R, lags] = xcorr (X, Y, maxlag, scale)
   endif
 
   ## Pad result if necessary
-  ##  (most likely is not required, use "if" to avoid uncessary code)
+  ##  (most likely is not required, use "if" to avoid unnecessary code)
   ## At this point, lag varies with the first index in R;
   ##  so pad **before** the transpose.
   if pad_result

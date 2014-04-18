@@ -74,7 +74,7 @@ function [B, A, SigN] = invfreq(H, F, nB, nA, W, iter, tol, tr, plane, varargin)
   if (plane ~= 'z' && plane ~= 's'), disp('invfreqz: Error in plane argument'), endif
 
   [reg, prop ] = parseparams(varargin);
-  ## should we normalise freqs to avoid matrices with rank deficiency ?
+  ## should we normalize freqs to avoid matrices with rank deficiency ?
   norm = false;
   ## by default, use Ordinary Least Square to solve normal equations
   method = 'LS';
@@ -99,7 +99,7 @@ function [B, A, SigN] = invfreq(H, F, nB, nA, W, iter, tol, tr, plane, varargin)
             error('invfreq.m: incorrect/missing method argument');
           endif
         otherwise # FIXME: just skip it for now
-          disp(sprintf("Ignoring unkown argument %s", varargin{indi}));
+          disp(sprintf("Ignoring unknown argument %s", varargin{indi}));
           indi = indi + 1;
       endswitch
     endwhile
@@ -126,7 +126,7 @@ function [B, A, SigN] = invfreq(H, F, nB, nA, W, iter, tol, tr, plane, varargin)
     case 's'
       if max(F) > 1e6 && n > 5,
         if ~norm,
-          disp('Be carefull, there are risks of generating singular matrices');
+          disp('Be careful, there are risks of generating singular matrices');
           disp('Call invfreqs as (..., "norm", true) to avoid it');
         else
           Fmax = max(F); s = sqrt(-1)*F/Fmax;
@@ -211,7 +211,7 @@ function [B, A, SigN] = invfreq(H, F, nB, nA, W, iter, tol, tr, plane, varargin)
   if strcmp(plane,'s')
     B = B(mB:-1:1);
     A = A(mA:-1:1);
-    if norm, # Frequencies were normalised -- unscale coefficients
+    if norm, # Frequencies were normalized -- unscale coefficients
       Zk = Fmax.^[n:-1:0].';
       for k = nB:-1:1+zB, B(k) = B(k)/Zk(k); endfor
       for k = nA:-1:1, A(k) = A(k)/Zk(k); endfor

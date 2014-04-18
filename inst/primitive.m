@@ -17,7 +17,7 @@
 
 ## -*- texinfo -*-
 ## @deftypefn {Function File} {@var{F} =} primitive (@var{f}, @var{t}, @var{F0})
-## Calcuates the primitive of a function.
+## Calculates the primitive of a function.
 ##
 ## The function approximates the primitive (indefinite integral) of the
 ## univariate function handle @var{f} with constant of integration @var{F0}.

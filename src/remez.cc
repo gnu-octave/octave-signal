@@ -531,7 +531,7 @@ void FreqSample(int N, double A[], double h[], int symm)
  *
  * INPUT:
  * ------
- * int    r     - 1/2 the number of filter coeffiecients
+ * int    r     - 1/2 the number of filter coefficients
  * int    Ext[] - Indexes to extremal frequencies [r+1]
  * double E[]   - Error function on the dense grid [gridsize]
  *
@@ -563,7 +563,7 @@ int isDone(int r, int Ext[], double E[])
  *=======
  * Calculates the optimal (in the Chebyshev/minimax sense)
  * FIR filter impulse response given a set of band edges,
- * the desired reponse on those bands, and the weight given to
+ * the desired response on those bands, and the weight given to
  * the error in those bands.
  *
  * INPUT:

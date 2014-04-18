@@ -101,7 +101,7 @@ void Median::remove(double v)
   // Verify that it is the correct value to replace
   // Note that we shouldn't need this code since we are always replacing
   // a value that is already in the window, but for some reason
-  // v==window[hole] occasionally doens't work.
+  // v==window[hole] occasionally doesn't work.
   if (v != window[hole]) {
     for (hole = 0; hole < max-1; hole++)
       if (fabs(v-window[hole]) < fabs(v-window[hole+1])) break;

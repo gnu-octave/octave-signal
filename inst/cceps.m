@@ -23,7 +23,7 @@
 
 ## Author: Andreas Weingessel <Andreas.Weingessel@ci.tuwien.ac.at>
 ## Apr 1, 1994
-## Last modifified by AW on Nov 8, 1994
+## Last modified by AW on Nov 8, 1994
 
 function cep = cceps (x, c)
 
