@@ -93,12 +93,33 @@ function [pks idx varargout] = findpeaks (data, varargin)
 
   parser = inputParser ();
   parser.FunctionName = "findpeaks";
-  parser = addParamValue (parser,"MinPeakHeight", 2*std (__data__),posscal);
-  parser = addParamValue (parser,"MinPeakDistance",4,posscal);
-  parser = addParamValue (parser,"MinPeakWidth",2,posscal);
-  parser = addSwitch (parser,"DoubleSided");
 
-  parser = parse(parser,varargin{:});
+  ## FIXME: inputParser was first implemented in the general package in the
+  ##        old @class type which allowed for a very similar interface to
+  ##        Matlab.  classdef was implemented in the upcoming 4.2 release,
+  ##        which enabled inputParser to be implemented exactly the same and
+  ##        it is now part of Octave core.  To prevent issues while all this
+  ##        versions are available, we check if the inputParser being used
+  ##        is in a @inputParser directory.
+  ##
+  ##        Remove all this checks once we are no longer dependent on Octave
+  ##        versions older than 4.2.
+
+  if (strfind (which ("inputParser"), ["@inputParser" filesep "inputParser.m"]))
+    parser = addParamValue (parser,"MinPeakHeight", 2*std (__data__),posscal);
+    parser = addParamValue (parser,"MinPeakDistance",4,posscal);
+    parser = addParamValue (parser,"MinPeakWidth",2,posscal);
+    parser = addSwitch (parser,"DoubleSided");
+
+    parser = parse (parser,varargin{:});
+  else
+    parser.addParamValue ("MinPeakHeight", 2*std (__data__),posscal);
+    parser.addParamValue ("MinPeakDistance",4,posscal);
+    parser.addParamValue ("MinPeakWidth",2,posscal);
+    parser.addSwitch ("DoubleSided");
+
+    parser.parse (varargin{:});
+  endif
 
   minH      = parser.Results.MinPeakHeight;
   minD      = parser.Results.MinPeakDistance;
