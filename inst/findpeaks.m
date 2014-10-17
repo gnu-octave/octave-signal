@@ -87,37 +87,55 @@
 function [pks idx varargout] = findpeaks (data, varargin)
 
   ## --- Parse arguments --- #
-  __data__ = abs (detrend (data,0));
+  __data__ = abs (detrend (data, 0));
 
-  posscal = @(x)isscalar (x) && x >= 0;
+  posscal = @(x) isscalar (x) && x >= 0;
 
   parser = inputParser ();
   parser.FunctionName = "findpeaks";
-  parser = addParamValue (parser,"MinPeakHeight", 2*std (__data__),posscal);
-  parser = addParamValue (parser,"MinPeakDistance",4,posscal);
-  parser = addParamValue (parser,"MinPeakWidth",2,posscal);
-  parser = addSwitch (parser,"DoubleSided");
 
-  parser = parse(parser,varargin{:});
+  ## FIXME: inputParser was first implemented in the general package in the
+  ##        old @class type which allowed for a very similar interface to
+  ##        Matlab.  classdef was implemented in the upcoming 4.2 release,
+  ##        which enabled inputParser to be implemented exactly the same and
+  ##        it is now part of Octave core.  To prevent issues while all this
+  ##        versions are available, we check if the inputParser being used
+  ##        is in a @inputParser directory.
+  ##
+  ##        Remove all this checks once we are no longer dependent on Octave
+  ##        versions older than 4.2.
+
+  if (strfind (which ("inputParser"), ["@inputParser" filesep "inputParser.m"]))
+    parser = addParamValue (parser, "MinPeakHeight", 2*std (__data__), posscal);
+    parser = addParamValue (parser, "MinPeakDistance", 4, posscal);
+    parser = addParamValue (parser,"MinPeakWidth", 2, posscal);
+    parser = addSwitch (parser, "DoubleSided");
+
+    parser = parse (parser,varargin{:});
+  else
+    parser.addParamValue ("MinPeakHeight", 2*std (__data__),posscal);
+    parser.addParamValue ("MinPeakDistance", 4, posscal);
+    parser.addParamValue ("MinPeakWidth", 2, posscal);
+    parser.addSwitch ("DoubleSided");
+
+    parser.parse (varargin{:});
+  endif
 
   minH      = parser.Results.MinPeakHeight;
   minD      = parser.Results.MinPeakDistance;
   minW      = parser.Results.MinPeakWidth;
   dSided    = parser.Results.DoubleSided;
 
-  clear parser posscal
-  ## ------ #
-
-  if dSided
-    [data __data__] = deal (__data__, data);
-  elseif min(data)<0
+  if (dSided)
+    [data, __data__] = deal (__data__, data);
+  elseif (min (data) < 0)
     error ("findpeaks:InvalidArgument",
            'Data contains negative values. You may want to "DoubleSided" option');
   endif
 
   ## Rough estimates of first and second derivative
-  df1 = diff (data,1)([1; (1:end)']);
-  df2 = diff (data,2)([1; 1; (1:end)']);
+  df1 = diff (data, 1)([1; (1:end)']);
+  df2 = diff (data, 2)([1; 1; (1:end)']);
 
   ## check for changes of sign of 1st derivative and negativity of 2nd
   ## derivative.
@@ -128,12 +146,12 @@ function [pks idx varargout] = findpeaks (data, varargin)
   idx = idx(tf);
 
   ## sort according to magnitude
-  [~,tmp] = sort(data(idx),"descend");
+  [~, tmp] = sort (data(idx), "descend");
   idx_s = idx(tmp);
 
   ## Treat peaks separated less than minD as one
   D = abs (idx_s - idx_s');
-  if any(D(:) < minD)
+  if (any (D(:) < minD))
 
     i = 1;
     peak = cell ();
@@ -145,7 +163,7 @@ function [pks idx varargout] = findpeaks (data, varargin)
 ##    h = plot(1:length(data),data,"-",idx_s,data(idx_s),'.r',idx_s,data(idx_s),'.g');
 ##    set(h(3),"visible","off");
 
-    while ~isempty (node2visit)
+    while (! isempty (node2visit))
 
       d = D(node2visit(1),:);
 
@@ -153,16 +171,16 @@ function [pks idx varargout] = findpeaks (data, varargin)
       node2visit(1) = [];
 
       neighs  = setdiff (find (d < minD), visited);
-      if ~isempty (neighs)
+      if (! isempty (neighs))
         ## debug
 ##        set(h(3),"xdata",idx_s(neighs),"ydata",data(idx_s(neighs)),"visible","on")
 ##        pause(0.2)
 ##        set(h(3),"visible","off");
 
-        idx_pruned   = setdiff (idx_pruned,idx_s(neighs));
+        idx_pruned = setdiff (idx_pruned, idx_s(neighs));
 
         visited    = [visited neighs];
-        node2visit = setdiff (node2visit,visited);
+        node2visit = setdiff (node2visit, visited);
 
         ## debug
 ##        set(h(2),"xdata",idx_pruned,"ydata",data(idx_pruned))
@@ -178,7 +196,7 @@ function [pks idx varargout] = findpeaks (data, varargin)
   ## wrong concavity.
   ## not high enough
   ## data at peak is lower than parabola by 1%
-  if minW > 0
+  if (minW > 0)
     ## debug
 ##    h = plot(1:length(data),data,"-",idx,data(idx),'.r',...
 ##          idx,data(idx),'og',idx,data(idx),'-m');
@@ -186,13 +204,13 @@ function [pks idx varargout] = findpeaks (data, varargin)
 ##    set(h(3:4),"visible","off");
 
     idx_pruned = idx;
-    n  = length(idx);
-    np = length(data);
+    n  = numel (idx);
+    np = numel (data);
     struct_count = 0;
     for i=1:n
       ind = (round (max(idx(i)-minD/2,1)) : ...
              round (min(idx(i)+minD/2,np)))';
-      pp = polyfit (ind,data(ind),2);
+      pp = polyfit (ind, data(ind), 2);
       H  = pp(3) - pp(2)^2/(4*pp(1));
 
       ## debug
@@ -204,16 +222,16 @@ function [pks idx varargout] = findpeaks (data, varargin)
 
       rz = roots ([pp(1:2) pp(3)-mean([H,minH])]);
       width = abs (diff (rz));
-      if width < minW || pp(1) > 0 || H < minH || data(idx(i)) < 0.99*H
+      if (width < minW || pp(1) > 0 || H < minH || data(idx(i)) < 0.99*H)
         idx_pruned = setdiff (idx_pruned, idx(i));
-      elseif nargout > 2
+      elseif (nargout > 2)
         struct_count++;
         extra.parabol(struct_count).x  = ind([1 end]);
         extra.parabol(struct_count).pp = pp;
 
-        extra.roots(struct_count,1:2)    = rz;
+        extra.roots(struct_count,1:2)= rz;
         extra.height(struct_count)   = H;
-        extra.baseline(struct_count) = mean([H,minH]);
+        extra.baseline(struct_count) = mean ([H minH]);
       endif
 
       ## debug
@@ -221,17 +239,17 @@ function [pks idx varargout] = findpeaks (data, varargin)
 ##      pause(0.2)
 
     endfor
-  idx = idx_pruned;
+    idx = idx_pruned;
   endif
 
 
-  if dSided
+  if (dSided)
     pks = __data__(idx);
   else
     pks = data(idx);
   endif
 
-  if nargout()>2
+  if (nargout() > 2)
     varargout{1} = extra;
   endif
 
