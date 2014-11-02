@@ -55,7 +55,8 @@
 ##    S = S/max(S(:));           # normalize magnitude so that max is 0 dB.
 ##    S = max(S, 10^(-40/10));   # clip below -40 dB.
 ##    S = min(S, 10^(-3/10));    # clip above -3 dB.
-##    imagesc(t, f, flipud(log(S)));   # display in log scale
+##    imagesc (t, f, log(S));    # display in log scale
+##    set (gca, "ydir", "normal"); # put the 'y' direction in the correct direction
 ## @end group
 ## @end example
 ##
