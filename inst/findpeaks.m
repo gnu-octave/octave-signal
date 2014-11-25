@@ -150,7 +150,7 @@ function [pks idx varargout] = findpeaks (data, varargin)
   idx_s = idx(tmp);
 
   ## Treat peaks separated less than minD as one
-  D = abs (idx_s - idx_s');
+  D = abs (bsxfun (@minus, idx_s, idx_s'));
   if (any (D(:) < minD))
 
     i = 1;
@@ -190,6 +190,8 @@ function [pks idx varargout] = findpeaks (data, varargin)
     endwhile
     idx = idx_pruned;
   endif
+
+  extra = struct ("parabol", [], "height", [], "baseline", [], "roots", []);
 
   ## Estimate widths of peaks and filter for:
   ## width smaller than given.
