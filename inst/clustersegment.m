@@ -18,12 +18,16 @@
 ## Calculate boundary indexes of clusters of 1's.
 ##
 ## The function calculates the initial index and end index of the sequences of
-## 1's in the rows of @var{unos}. The result is returned in a cell of size
-## 1-by-Np, being Np the numer of rows in @var{unos}. Each element of the cell
-## has two rows. The first row is the initial index of a sequence of 1's and the
-## second row is the end index of that sequence.
+## 1's in the rows of @var{unos}. The clusters are sought in the rows of the array @{unos}. 
 ##
+## The result is returned in a cell of size 1-by-Np, being Np the numer of rows
+## in @var{unos}. Each element of the cell has two rows. The first row is the 
+## initial index of a sequence of 1's and the second row is the end index of that
+## sequence.
 ## If Np == 1 the output is a matrix with two rows.
+##
+## The function works by finding the indexes of jumps between 
+## consecutive values in the rows of @var{unos}.
 ##
 ## @end deftypefn
 

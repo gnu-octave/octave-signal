@@ -28,3 +28,4 @@ syntax: regexp
 
 # Other text editors often create these
 (^|/)~.*
+(^|/).*~$
