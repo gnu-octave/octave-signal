@@ -158,6 +158,35 @@ endfunction
 %! assert ( isequal (b17, b32))
 %! assert (~isequal (b16, b17))
 
+%% Test expected magnitudes of passbands, stopbands, and cutoff frequencies
+%!test
+%! f = [0, 0.7, 0.7, 1]; m = [0, 0, 1, 1];
+%! b = fir2 (50, f, m);
+%! h = abs (freqz (b, 1, [0, 0.7, 1], 2));
+%! assert (h(1) <= 3e-3)
+%! assert (h(2) <= 1/sqrt (2))
+%! assert (h(3), 1, 2e-3)
+
+%!test
+%! f = [0, 0.25, 0.25, 0.75, 0.75, 1]; m = [0, 0, 1, 1, 0, 0];
+%! b = fir2 (50, f, m);
+%! h = abs (freqz (b, 1, [0, 0.25, 0.5, 0.75, 1], 2));
+%! assert (h(1) <= 3e-3)
+%! assert (h(2) <= 1/sqrt (2))
+%! assert (h(3), 1, 2e-3)
+%! assert (h(4) <= 1/sqrt (2))
+%! assert (h(5) <= 3e-3)
+
+%!test
+%! f = [0, 0.45, 0.45, 0.55, 0.55, 1]; m = [1, 1, 0, 0, 1, 1];
+%! b = fir2 (50, f, m);
+%! h = abs (freqz (b, 1, [0, 0.45, 0.5, 0.55, 1], 2));
+%! assert (h(1), 1, 2e-3)
+%! assert (h(2) <= 1/sqrt (2))
+%! assert (h(3) <= 1e-1)
+%! assert (h(4) <= 1/sqrt (2))
+%! assert (h(5), 1, 2e-3)
+
 %!demo
 %! f=[0, 0.3, 0.3, 0.6, 0.6, 1]; m=[0, 0, 1, 1/2, 0, 0];
 %! [h, w] = freqz(fir2(100,f,m));

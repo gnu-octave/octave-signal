@@ -159,3 +159,30 @@ endfunction
 %!assert(fir1(10,.5,'hanning','scale'), fir1(10,.5,'scale','hanning','low'));
 %!assert(fir1(10,.5,'haNNing','NOscale'), fir1(10,.5,'noscale','Hanning','LOW'));
 %!assert(fir1(10,.5,'boxcar',[]), fir1(10,.5,'boxcar'));
+
+%% Test expected magnitudes of passbands, stopbands, and cutoff frequencies
+
+%!test
+%! b = fir1 (30, 0.3);
+%! h = abs (freqz (b, 1, [0, 0.3, 1], 2));
+%! assert (h(1), 1, 1e-3)
+%! assert (all (h(2:3) <= [1/sqrt(2), 3e-3]))
+
+%!test
+%! b = fir1 (30, 0.7, "high");
+%! h = abs (freqz (b, 1, [0, 0.7, 1], 2));
+%! assert (h(3), 1, 1e-3)
+%! assert (all (h(1:2) <= [3e-3, 1/sqrt(2)]))
+
+%!test
+%! b = fir1 (30, [0.3, 0.7]);
+%! h = abs (freqz (b, 1, [0, 0.3, 0.5, 0.7, 1], 2));
+%! assert (h(3), 1, 1e-3)
+%! assert (all (h([1:2, 4:5]) <= [3e-3, 1/sqrt(2), 1/sqrt(2), 3e-3]))
+
+%!test
+%! b = fir1 (50, [0.3, 0.7], "stop");
+%! h = abs (freqz (b, 1, [0, 0.3, 0.5, 0.7, 1], 2));
+%! assert (h(1), 1, 1e-3)
+%! assert (h(5), 1, 1e-3)
+%! assert (all (h(2:4) <= [1/sqrt(2), 3e-3, 1/sqrt(2)]))
