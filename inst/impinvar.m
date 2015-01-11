@@ -35,7 +35,7 @@
 ## @end example
 ##
 ## Reference: Thomas J. Cavicchi (1996) ``Impulse invariance and multiple-order
-## poles''. IEEE transactions on signal processing, Vol 40 (9): 2344--2347
+## poles''. IEEE transactions on signal processing, Vol 44 (9): 2344--2347
 ##
 ## @seealso{bilinear, invimpinvar}
 ## @end deftypefn
