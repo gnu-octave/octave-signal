@@ -136,6 +136,10 @@ function [S_r, f_r, t_r] = specgram(x, n = min(256, length(x)), Fs = 2, window =
     error("specgram doesn't handle frequency vectors yet");
   endif
 
+  if (length (x) <= length (window))
+    error ("specgram: segment length must be less than the size of X");
+  endif
+
   ## compute window offsets
   win_size = length(window);
   if (win_size > n)
