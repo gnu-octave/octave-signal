@@ -95,7 +95,7 @@ Upsample, FIR filtering, and downsample.\n\
 
   const int nargin = args.length ();
 
-  if (nargin < 4)
+  if (nargin != 4)
     {
       print_usage ();
       return retval;
@@ -126,19 +126,7 @@ Upsample, FIR filtering, and downsample.\n\
     }
 
   // Do the dispatching
-  if (args (0).is_real_matrix ())
-    {
-      Matrix x = args (0).matrix_value ();
-      if (error_state)
-        {
-          gripe_wrong_type_arg ("upfirdn", args (0));
-          return retval;
-        }
-
-      Matrix y = upfirdn (x, h, p, q);
-      retval (0) = y;
-    }
-  else if (args (0).is_complex_matrix ())
+  if (args (0).is_complex_matrix ())
     {
       ComplexMatrix x = args (0).complex_matrix_value ();
       if (error_state)
@@ -150,6 +138,30 @@ Upsample, FIR filtering, and downsample.\n\
       ComplexMatrix y = upfirdn (x, h, p, q);
       retval (0) = y;
     }
+  else
+    {
+      Matrix x = args (0).matrix_value ();
+      if (error_state)
+        {
+          gripe_wrong_type_arg ("upfirdn", args (0));
+          return retval;
+        }
+
+      Matrix y = upfirdn (x, h, p, q);
+      retval (0) = y;
+    }
 
   return retval;
 }
+
+/*
+%!assert (isequal (upfirdn (1:100, 1, 1, 1), 1:100))
+%!assert (isequal (upfirdn (1:100, 1, 1, 2), 1:2:100))
+
+%% Test input validation
+%!error upfirdn ()
+%!error upfirdn (1,2)
+%!error upfirdn (1,2,3)
+%!error upfirdn (1,2,3,4,5)
+*/
+
