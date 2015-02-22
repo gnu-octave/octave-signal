@@ -86,6 +86,21 @@
 
 function [pks idx varargout] = findpeaks (data, varargin)
 
+  if (nargin < 1)
+    print_usage ();
+  endif
+
+  if (! (isvector (data) && numel (data) >= 3))
+    error ("findpeaks:InvalidArgument",
+           "findpeaks: DATA must be a vector of at least 3 elements");
+  endif
+
+  transpose = (rows (data) == 1);
+
+  if (transpose)
+    data = data.';
+  endif
+
   ## --- Parse arguments --- #
   __data__ = abs (detrend (data, 0));
 
@@ -251,6 +266,11 @@ function [pks idx varargout] = findpeaks (data, varargin)
     pks = data(idx);
   endif
 
+  if (transpose)
+    pks = pks.';
+    idx = idx.';
+  endif
+
   if (nargout() > 2)
     varargout{1} = extra;
   endif
@@ -296,3 +316,12 @@ endfunction
 %! #----------------------------------------------------------------------------
 %! # Noisy data may need tuning of the parameters. In the 2nd example,
 %! # MinPeakDistance is used as a smoother of the peaks.
+
+%!assert (isempty (findpeaks ([1, 1, 1])))
+%!assert (isempty (findpeaks ([1; 1; 1])))
+
+%% Test input validation
+%!error findpeaks ()
+%!error findpeaks (1)
+%!error findpeaks ([1, 2])
+
