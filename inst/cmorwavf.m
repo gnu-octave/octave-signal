@@ -14,7 +14,7 @@
 ## this program; if not, see <http://www.gnu.org/licenses/>.
 
 ## -*- texinfo -*-
-## @deftypefn {Function File} {[@var{psi,x}] =} cmorwavf (@var{lb,ub,n,fb,fc})
+## @deftypefn {Function File} {[@var{psi}, @var{x}] =} cmorwavf (@var{lb}, @var{ub}, @var{n}, @var{fb}, @var{fc})
 ## Compute the Complex Morlet wavelet.
 ## @end deftypefn
 

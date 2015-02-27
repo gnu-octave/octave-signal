@@ -14,7 +14,7 @@
 ## this program; if not, see <http://www.gnu.org/licenses/>.
 
 ## -*- texinfo -*-
-## @deftypefn {Function File} {[@var{psi,x}] =} shanwavf (@var{lb,ub,n,fb,fc})
+## @deftypefn {Function File} {[@var{psi}, @var{x}] =} shanwavf (@var{lb}, @var{ub}, @var{n}, @var{fb}, @var{fc})
 ## Compute the Complex Shannon wavelet.
 ## @end deftypefn
 

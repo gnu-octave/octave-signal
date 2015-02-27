@@ -14,7 +14,7 @@
 ## this program; if not, see <http://www.gnu.org/licenses/>.
 
 ## -*- texinfo -*-
-## @deftypefn {Function File} {[@var{psi,x}] =} morlet (@var{lb,ub,n})
+## @deftypefn {Function File} {[@var{psi}, @var{x}] =} morlet (@var{lb}, @var{ub}, @var{n})
 ## Compute the Morlet wavelet.
 ## @end deftypefn
 

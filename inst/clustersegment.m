@@ -19,7 +19,7 @@
 ##
 ## The function calculates the initial index and end index of the sequences of
 ## 1's in the rows of @var{unos}. The clusters are sought in the rows of the
-## array @{unos}.
+## array @var{unos}.
 ##
 ## The result is returned in a cell array of size 1-by-@var{Np}, where @var{Np}
 ## is the number of rows in @var{unos}. Each element of the cell has two rows.
