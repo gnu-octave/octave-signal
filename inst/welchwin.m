@@ -81,8 +81,8 @@ endfunction
 %! printf ("%d-point periodic (blue) and symmetric (red) windows\n", m);
 %! xp = welchwin (m, "periodic");
 %! xs = welchwin (m, "symmetric");
-%! xp2 = repmat (xp, 1, 4);
-%! xs2 = repmat (xs, 1, 4);
+%! xp2 = repmat (xp, 4, 1);
+%! xs2 = repmat (xs, 4, 1);
 %! plot (t, xp2, "b", t, xs2, "r")
 
 %!demo
