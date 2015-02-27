@@ -137,7 +137,7 @@ function [a,b,c,d] = ellip(n, Rp, Rs, W, varargin)
 endfunction
 
 %!demo
-%! [n, Ws] = ellipord ([.1 .2], .4, 1, 90);
+%! [n, Ws] = ellipord ([.1 .2], [.01 .4], 1, 90);
 %! [b, a] = ellip (5, 1, 90, [.1 .2]);
 %! [h, w] = freqz (b, a);
 %!
