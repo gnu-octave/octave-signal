@@ -1,18 +1,30 @@
 MKOCTFILE ?= mkoctfile
 
-all: __fwht__.oct __ultrwin__.oct cl2bp.oct remez.oct medfilt1.oct sosfilt.oct upfirdn.oct
+OCT_FILES = \
+  __fwht__.oct \
+  __ultrwin__.oct \
+  cl2bp.oct \
+  medfilt1.oct \
+  remez.oct \
+  sosfilt.oct \
+  upfirdn.oct
+
+CL2BP_OBJECTS = cl2bp.o cl2bp_lib.o
+
+all: $(OCT_FILES)
+
+%.o: %.cc
+	$(MKOCTFILE) -Wall -c $< -o $@
 
 %.oct: %.cc
-	$(MKOCTFILE) -Wall $<
+	$(MKOCTFILE) -Wall $< -o $@
 
-cl2bp.o: cl2bp.cc cl2bp_lib.h
-	$(MKOCTFILE) -Wall -c $<
+cl2bp.oct: $(CL2BP_OBJECTS)
+	$(MKOCTFILE) -Wall $^ -o $@
 
-cl2bp_lib.o: cl2bp_lib.cc cl2bp_lib.h
-	$(MKOCTFILE) -Wall -c $<
-
-cl2bp.oct: cl2bp.o cl2bp_lib.o
-	$(MKOCTFILE) -Wall $^
+$(CL2BP_OBJECTS): cl2bp_lib.h
 
 clean:
-	rm -f *.o octave-core core *.oct *~
+	-rm -f *.o *.oct
+
+.PHONY: all clean
