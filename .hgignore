@@ -10,6 +10,7 @@ syntax: regexp
 (^|/).*\.octlink$
 (^|/)octave-core$
 (^|/).*\.tar\.gz$
+(^|/)PKG_(ADD|DEL)$
 
 (^|/)aclocal\.m4$
 (^|/)configure$

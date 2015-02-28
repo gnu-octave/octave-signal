@@ -1,4 +1,5 @@
 MKOCTFILE ?= mkoctfile
+SED       ?= sed
 
 OCT_FILES = \
   __fwht__.oct \
@@ -10,6 +11,8 @@ OCT_FILES = \
   upfirdn.oct
 
 CL2BP_OBJECTS = cl2bp.o cl2bp_lib.o
+
+OCT_SOURCES = $(patsubst %.oct,%.cc,$(OCT_FILES))
 
 all: $(OCT_FILES)
 
@@ -24,7 +27,11 @@ cl2bp.oct: $(CL2BP_OBJECTS)
 
 $(CL2BP_OBJECTS): cl2bp_lib.h
 
+PKG_ADD PKG_DEL: $(OCT_SOURCES)
+	$(SED) -n -e 's/.*$@: \(.*\)/\1/p' $^ > $@-t
+	mv $@-t $@
+
 clean:
-	-rm -f *.o *.oct
+	-rm -f *.o *.oct PKG_*
 
 .PHONY: all clean
