@@ -16,11 +16,16 @@
 ## -*- texinfo -*-
 ## @deftypefn  {Function File} {@var{y} =} decimate (@var{x}, @var{q})
 ## @deftypefnx {Function File} {@var{y} =} decimate (@var{x}, @var{q}, @var{n})
-## @deftypefnx {Function File} {@var{y} =} decimate (@var{x}, @var{q}, @var{n}, @var{ftype})
+## @deftypefnx {Function File} {@var{y} =} decimate (@dots{}, "fir")
 ##
-## Downsample the signal @var{x} by a factor of @var{q}, using an order @var{n}
-## filter of @var{ftype} "fir" or "iir".  By default, an order 8 Chebyshev
-## type I filter is used or a 30 point FIR filter if @var{ftype} is "fir".
+## Downsample the signal @var{x} by a reduction factor of @var{q}. A lowpass
+## antialiasing filter is applied to the signal prior to reducing the input
+## sequence. By default, an order @var{n} Chebyshev type I filter is used.
+## If @var{n} is not specified, the default is 8.
+##
+## If the optional argument @code{"fir"} is given, an order @var{n} FIR filter
+## is used, with a default order of 30 if @var{n} is not given.
+##
 ## Note that @var{q} must be an integer for this rate change method.
 ##
 ## Example:
@@ -42,36 +47,49 @@
 
 function y = decimate(x, q, n, ftype)
 
-  if nargin < 1 || nargin > 4
-    print_usage;
-  elseif q != fix(q)
-    error("decimate only works with integer q.");
+  if (nargin < 2 || nargin > 4)
+    print_usage ();
+  elseif (! (isscalar (q) && (q == fix (q)) && (q > 0)))
+    error ("decimate: Q must be a positive integer");
   endif
 
-  if nargin<3
-    ftype='iir';
-    n=[];
-  elseif nargin==3
-    if ischar(n)
-      ftype=n;
-      n=[];
+  if (nargin < 3)
+    ftype = "iir";
+    n = [];
+  elseif (nargin < 4)
+    if (ischar (n))
+      ftype = n;
+      n = [];
     else
-      ftype='iir';
+      ftype = "iir";
     endif
   endif
 
-  fir = strcmp(ftype, 'fir');
-  if isempty(n)
-    if fir, n=30; else n=8; endif
+  if (! any (strcmp (ftype, {"fir", "iir"})))
+    error ('decimate: filter type must be either "fir" or "iir"');
   endif
 
-  if fir
-    b = fir1(n, 1/q);
-    y=fftfilt(b, x);
-  else
-    [b, a] = cheby1(n, 0.05, 0.8/q);
-    y=filtfilt(b,a,x);
+  fir = strcmp (ftype, "fir");
+  if (isempty (n))
+    if (fir)
+      n = 30;
+    else
+      n = 8;
+    endif
   endif
+
+  if (! (isscalar (n) && (n == fix (n)) && (n > 0)))
+    error ("decimate: N must be a positive integer");
+  endif
+
+  if (fir)
+    b = fir1 (n, 1/q);
+    y = fftfilt (b, x);
+  else
+    [b, a] = cheby1 (n, 0.05, 0.8/q);
+    y = filtfilt (b, a, x);
+  endif
+
   y = y(1:q:length(x));
 
 endfunction
@@ -89,3 +107,10 @@ endfunction
 %! % how it follows the curve nicely in the slowly varying early
 %! % part of the signal, but averages the curve in the quickly
 %! % varying late part of the signal.
+
+%% Test input validation
+%!error decimate ()
+%!error decimate (1)
+%!error decimate (1, 2, 3, 4, 5)
+%!error decimate (1, -1)
+
