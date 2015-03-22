@@ -17,12 +17,13 @@
 
 ## -*- texinfo -*-
 ## @deftypefn  {Function File} {} welchwin (@var{m})
-## @deftypefnx {Function File} {} welchwin (@var{m}, @var{c})
+## @deftypefnx {Function File} {} welchwin (@var{m}, "periodic")
+## @deftypefnx {Function File} {} welchwin (@var{m}, "symmetric")
 ## Return the filter coefficients of a Welch window of length @var{m}.  The
 ## Welch window is given by
 ## @var{w}(n)=1-(n/N-1)^2,   n=[0,1, ... @var{m}-1].
-## The optional argument @var{c} specifies a "symmetric" window (the default),
-## or a "periodic" window.
+## The optional argument specifies a "symmetric" window (the default) or a
+## "periodic" window.
 ##
 ## A symmetric window has zero at each end and maximum in the middle, and the
 ## length must be an integer greater than 2.  The variable @var{N} in the
@@ -36,7 +37,7 @@
 ## @seealso{blackman, kaiser}
 ## @end deftypefn
 
-function w = welchwin (m, c)
+function w = welchwin (m, opt)
 
   if (nargin < 1 || nargin > 2)
     print_usage ();
@@ -44,22 +45,26 @@ function w = welchwin (m, c)
     error ("welchwin: M must be a positive integer");
   endif
 
-  symmetric = 1;
-  if (nargin == 2 && ! isempty (c))
-    if ( ! ischar(c) || size(c,1) != 1 ||
-         ( ! strcmp(c,'periodic') && ! strcmp(c,'symmetric') ) )
-      error ("welchwin: window type must be \"periodic\" or \"symmetric\"");
-    endif
-    symmetric = ! strcmp(c,'periodic');
+  N = (m - 1) / 2;
+  mmin = 3;
+  if (nargin == 2)
+    switch (opt)
+      case "periodic"
+        N = m / 2;
+        mmin = 2;
+      case "symmetric"
+        N = (m - 1) / 2;
+      otherwise
+        error ("welchwin: window type must be either \"periodic\" or \"symmetric\"");
+    endswitch
   endif
 
-  ## Periodic window is not properly defined if m<2.
-  ## Symmetric window is not properly defined if m<3.
-  if (m < (2 + symmetric))
-    error ("welchwin: M must be an integer greater than %d", (2 + symmetric - 1));
+  ## Periodic window is not properly defined for m < 2.
+  ## Symmetric window is not properly defined for m < 3.
+  if (m < mmin)
+    error ("welchwin: M must be an integer greater than %d", mmin);
   endif
 
-  N = (m-symmetric)/2;
   n = [0:m-1]';
   w = 1 - ((n-N)./N).^2;
 
@@ -94,7 +99,11 @@ endfunction
 %! printf ("%dx null-padded, power spectrum of %d-point window\n", n/m, m);
 %! semilogy (f, s)
 
-%!assert (welchwin (3), [0; 1; 0])
+%!assert (welchwin (3), [0; 1; 0]);
+%!assert (welchwin (15), flipud (welchwin (15)));
+%!assert (welchwin (16), flipud (welchwin (16)));
+%!assert (welchwin (15), welchwin (15, "symmetric"));
+%!assert (welchwin (16)(1:15), welchwin (15, "periodic"));
 
 %% Test input validation
 %!error welchwin ()
@@ -102,3 +111,5 @@ endfunction
 %!error welchwin (-1)
 %!error welchwin (ones (1, 4))
 %!error welchwin (1, 2, 3)
+%!error welchwin (1, "invalid")
+

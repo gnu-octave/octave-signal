@@ -14,37 +14,59 @@
 ## this program; if not, see <http://www.gnu.org/licenses/>.
 
 ## -*- texinfo -*-
-## @deftypefn {Function File} {} blackmannuttall (@var{m})
+## @deftypefn  {Function File} {} blackmannuttall (@var{m})
+## @deftypefnx {Function File} {} blackmannuttall (@var{m}, "periodic")
+## @deftypefnx {Function File} {} blackmannuttall (@var{m}, "symmetric")
 ## Return the filter coefficients of a Blackman-Nuttall window of length
 ## @var{m}.
+##
+## If the optional argument @code{"periodic"} is given, the periodic form
+## of the window is returned.  This is equivalent to the window of length
+## @var{m}+1 with the last coefficient removed.  The optional argument
+## @code{"symmetric"} is equivalent to not specifying a second argument.
+##
 ## @seealso{nuttallwin, kaiser}
 ## @end deftypefn
 
-function w = blackmannuttall (m)
+function w = blackmannuttall (m, opt)
 
-  if (nargin != 1)
+  if (nargin < 1 || nargin > 2)
     print_usage ();
   elseif (! (isscalar (m) && (m == fix (m)) && (m > 0)))
     error ("blackmannuttall: M must be a positive integer");
   endif
 
+  N = m - 1;
+  if (nargin == 2)
+    switch (opt)
+      case "periodic"
+        N = m;
+      case "symmetric"
+        N = m - 1;
+      otherwise
+        error ("blackmannuttall: window type must be either \"periodic\" or \"symmetric\"");
+    endswitch
+  endif
+
   if (m == 1)
     w = 1;
   else
-    N = m - 1;
     a0 = 0.3635819;
     a1 = 0.4891775;
     a2 = 0.1365995;
     a3 = 0.0106411;
-    n = 0:N;
+    n = [0:m-1]';
     w = a0 - a1.*cos(2.*pi.*n./N) + a2.*cos(4.*pi.*n./N) - a3.*cos(6.*pi.*n./N);
-    w = w.';
   endif
 
 endfunction
 
 %!assert (blackmannuttall (1), 1)
 %!assert (blackmannuttall (2), 0.0003628 * ones (2, 1), eps)
+%!assert (blackmannuttall (15), flipud (blackmannuttall (15)), 10*eps);
+%!assert (blackmannuttall (16), flipud (blackmannuttall (16)), 10*eps);
+%!assert (blackmannuttall (15), blackmannuttall (15, "symmetric"));
+%!assert (blackmannuttall (16)(1:15), blackmannuttall (15, "periodic"));
 
 %% Test input validation
 %!error blackmannuttall ()
@@ -52,3 +74,5 @@ endfunction
 %!error blackmannuttall (-1)
 %!error blackmannuttall (ones (1, 4))
 %!error blackmannuttall (1, 2)
+%!error blackmannuttall (1, "invalid")
+
