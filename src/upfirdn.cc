@@ -126,7 +126,19 @@ Upsample, FIR filtering, and downsample.\n\
     }
 
   // Do the dispatching
-  if (args (0).is_complex_matrix ())
+  if (args (0).is_real_type ())
+    {
+      Matrix x = args (0).matrix_value ();
+      if (error_state)
+        {
+          gripe_wrong_type_arg ("upfirdn", args (0));
+          return retval;
+        }
+
+      Matrix y = upfirdn (x, h, p, q);
+      retval (0) = y;
+    }
+  else if (args (0).is_complex_type ())
     {
       ComplexMatrix x = args (0).complex_matrix_value ();
       if (error_state)
@@ -140,15 +152,8 @@ Upsample, FIR filtering, and downsample.\n\
     }
   else
     {
-      Matrix x = args (0).matrix_value ();
-      if (error_state)
-        {
-          gripe_wrong_type_arg ("upfirdn", args (0));
-          return retval;
-        }
-
-      Matrix y = upfirdn (x, h, p, q);
-      retval (0) = y;
+      gripe_wrong_type_arg ("upfirdn", args (0));
+      return retval;
     }
 
   return retval;
