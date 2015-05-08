@@ -154,7 +154,8 @@ function [pks idx varargout] = findpeaks (data, varargin)
 
   ## check for changes of sign of 1st derivative and negativity of 2nd
   ## derivative.
-  idx = find (df1.*[df1(2:end); 0]<=0 & [df2(2:end); 0]<0);
+  ## <= in 1st derivative includes the case of oversampled signals.
+  idx = find (df1.*[df1(2:end); 0] <= 0 & [df2(2:end); 0] < 0);
 
   ## Get peaks that are beyond given height
   tf  = data(idx) > minH;
