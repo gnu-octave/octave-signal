@@ -348,3 +348,8 @@ endfunction
 %!error findpeaks ()
 %!error findpeaks (1)
 %!error findpeaks ([1, 2])
+
+## Failing test because we are not Matlab compatible
+%!assert (findpeaks ([34 134 353 64 134 14 56 67 234 143 64 575 8657]),
+%!        [353 134 234])
+
