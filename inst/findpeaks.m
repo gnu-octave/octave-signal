@@ -110,36 +110,59 @@ function [pks idx varargout] = findpeaks (data, varargin)
   parser.FunctionName = "findpeaks";
 
   ## FIXME: inputParser was first implemented in the general package in the
-  ##        old @class type which allowed for a very similar interface to
-  ##        Matlab.  classdef was implemented in the upcoming 4.2 release,
-  ##        which enabled inputParser to be implemented exactly the same and
-  ##        it is now part of Octave core.  To prevent issues while all this
-  ##        versions are available, we check if the inputParser being used
-  ##        is in a @inputParser directory.
+  ##        old @class type.  This allowed for a very similar interface to
+  ##        Matlab but not quite equal.  classdef was then implemented in
+  ##        Octave 4.0 release, which enabled inputParser to be implemented
+  ##        properly.  However, this causes problem because we don't know
+  ##        what implementation may be running.  A new version of the general
+  ##        package is being released to avoid the two implementations to
+  ##        co-exist.
   ##
-  ##        Remove all this checks once we are no longer dependent on Octave
-  ##        versions older than 4.2.
+  ##        To keep supporting older octave versions, we have an alternative
+  ##        path that avoids inputParser.  And if inputParser is available,
+  ##        we check what implementation is is, and act accordingly.
 
-  if (strfind (which ("inputParser"), ["@inputParser" filesep "inputParser.m"]))
-    parser = addParamValue (parser, "MinPeakHeight", 2*std (__data__), posscal);
-    parser = addParamValue (parser, "MinPeakDistance", 4, posscal);
-    parser = addParamValue (parser,"MinPeakWidth", 2, posscal);
-    parser = addSwitch (parser, "DoubleSided");
-
-    parser = parse (parser,varargin{:});
-  else
+  ## Note that in Octave 4.0, inputParser is classdef and Octave behaves
+  ## weird for it. which ("inputParser") will return empty (thinks its a
+  ## builtin function).
+  if (exist ("inputParser") == 2
+      && isempty (strfind (which ("inputParser"),
+                           ["@inputParser" filesep "inputParser.m"])))
+    ## making use of classdef's inputParser ..
     parser.addParamValue ("MinPeakHeight", 2*std (__data__),posscal);
     parser.addParamValue ("MinPeakDistance", 4, posscal);
     parser.addParamValue ("MinPeakWidth", 2, posscal);
     parser.addSwitch ("DoubleSided");
-
     parser.parse (varargin{:});
+    minH      = parser.Results.MinPeakHeight;
+    minD      = parser.Results.MinPeakDistance;
+    minW      = parser.Results.MinPeakWidth;
+    dSided    = parser.Results.DoubleSided;
+  else
+    ## either old @inputParser or no inputParser at all...
+    lvarargin = lower (varargin);
+
+    ds = strcmpi (lvarargin, "DoubleSided");
+    if (any (ds))
+      dSided = true;
+      lvarargin(ds) = [];
+    else
+      dSided = false;
+    endif
+
+    [~, minH, minD, minW] = parseparams (lvarargin,
+                                         "minpeakheight", 2 * std (__data__),
+                                         "minpeakdistance", 4,
+                                         "minpeakwidth", 2);
+    if (! posscal (minH))
+      error ("findpeaks: MinPeakHeight must be a positive scalar");
+    elseif (! posscal (minD))
+      error ("findpeaks: MinPeakDistance must be a positive scalar");
+    elseif (! posscal (minW))
+      error ("findpeaks: MinPeakWidth must be a positive scalar");
+    endif
   endif
 
-  minH      = parser.Results.MinPeakHeight;
-  minD      = parser.Results.MinPeakDistance;
-  minW      = parser.Results.MinPeakWidth;
-  dSided    = parser.Results.DoubleSided;
 
   if (dSided)
     [data, __data__] = deal (__data__, data);
