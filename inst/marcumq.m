@@ -1,4 +1,4 @@
-## Copyright (C) 2012   Robert T. Short     <rtshort@ieee.org>
+## Copyright (C) 2012 Robert T. Short <rtshort@ieee.org>
 ##
 ## This program is free software; you can redistribute it and/or modify it under
 ## the terms of the GNU General Public License as published by the Free Software
@@ -14,13 +14,13 @@
 ## this program; if not, see <http://www.gnu.org/licenses/>.
 
 ## -*- texinfo -*-
-## @deftypefn  {Function File} {@var{Q} =} marcumq (@var{a}, @var{b})
-## @deftypefnx {Function File} {@var{Q} =} marcumq (@var{a}, @var{b}, @var{m})
-## @deftypefnx {Function File} {@var{Q} =} marcumq (@var{a}, @var{b}, @var{m}, @var{tol})
+## @deftypefn  {Function File} {@var{q} =} marcumq (@var{a}, @var{b})
+## @deftypefnx {Function File} {@var{q} =} marcumq (@var{a}, @var{b}, @var{m})
+## @deftypefnx {Function File} {@var{q} =} marcumq (@var{a}, @var{b}, @var{m}, @var{tol})
 ##
-## Compute the generalized Marcum Q function of order @var{M} with
+## Compute the generalized Marcum Q function of order @var{m} with
 ## noncentrality parameter @var{a} and argument @var{b}.  If the order
-## @var{M} is omitted it defaults to 1.  An optional relative tolerance
+## @var{m} is omitted it defaults to 1.  An optional relative tolerance
 ## @var{tol} may be included, the default is @code{eps}.
 ##
 ## If the input arguments are commensurate vectors, this function
@@ -39,76 +39,79 @@
 ##
 ## @end deftypefn
 
-function Q = marcumq(a,b,M=1,tol=eps)
+function q = marcumq (a, b, m = 1, tol = eps)
 
-  if ( (nargin<2) || (nargin>4) )
-    print_usage();
+  if ((nargin < 2) || (nargin > 4))
+    print_usage ();
   endif
-  if ( any(a<0) || any(b<0) )
-    error("Parameters to marcumq must be positive");
+  if (any (a < 0))
+    error ("marcumq: A must be a non-negative value");
   endif
-  if ( any(M<0) || any(floor(M)~=M) )
-    error("M must be a positive integer");
+  if (any (b < 0))
+    error ("marcumq: B must be a non-negative value");
+  endif
+  if (any (m < 0) || any (fix (m) != m))
+    error ("marcumq: M must be a positive integer");
   endif
 
-  [a,b,M] = tablify(a,b,M);
+  [a, b, m] = tablify (a, b, m);
 
-  Q = arrayfun(@mq, a,b,M,tol);
+  q = arrayfun (@mq, a, b, m, tol);
 
 endfunction
 
 ## Subfunction to compute the actual Marcum Q function.
 
-function Q = mq(a,b,M,tol)
+function q = mq (a, b, m, tol)
 
   ## Special cases.
-  if (b==0)
-    Q = 1;
+  if (b == 0)
+    q = 1;
     N = 0;
     return;
   endif
-  if (a==0)
-    k = 0:(M-1);
-    Q = exp(-b^2/2)*sum(b.^(2*k)./(2.^k .* factorial(k)));
+  if (a == 0)
+    k = 0:(m - 1);
+    q = exp (-b^2 / 2) * sum (b.^(2 * k) ./ (2.^k .* factorial (k)));
     N = 0;
     return;
   endif
 
   ## The basic iteration.  If a<b compute Q_M, otherwise
   ## compute 1-Q_M.
-  k = M;
-  z = a*b;
+  k = m;
+  z = a * b;
   t = 1;
   k = 0;
-  if (a<b)
-    s = +1;
-    c =  0;
-    x = a/b;
+  if (a < b)
+    s = 1;
+    c = 0;
+    x = a / b;
     d = x;
-    S = besseli(0,z,1);
-    for k=1:M-1
-      t = (d+1/d)*besseli(k,z,1);
+    S = besseli (0, z, 1);
+    for k = 1:m - 1
+      t = (d + 1 / d) * besseli (k, z, 1);
       S = S + t;
-      d = d*x;
+      d = d * x;
     endfor
-    N=k++;
+    N = k++;
   else
     s = -1;
     c =  1;
-    x = b/a;
-    k = M;
-    d = x^M;
+    x = b / a;
+    k = m;
+    d = x^m;
     S = 0;
     N = 0;
   endif
 
   do
-    t = d*besseli(abs(k),z,1);
+    t = d * besseli (abs (k), z, 1);
     S = S + t;
-    d = d*x;
+    d = d * x;
     N = k++;
-  until (abs(t/S)<tol)
-  Q = c + s*exp( -(a-b)^2/2 )*S;
+  until (abs (t / S) < tol)
+  q = c + s * exp (-(a - b)^2 / 2) * S;
 
 endfunction
 
@@ -143,25 +146,19 @@ function [varargout] = tablify (varargin)
     error ("tablify: incommensurate sizes");
   endif
 
-  varargout        = varargin;
+  varargout         = varargin;
   varargout(! ridx) = cellindexmat (varargout(! ridx), ones (rdim, 1), ":");
   varargout(! cidx) = cellindexmat (varargout(! cidx), ":", ones (1, cdim));
 
 endfunction
 
 %% Tests for number and validity of arguments.
-%!error
-%! fail(marcumq(1))
-%!error
-%! fail(marcumq(-1,1,1,1,1))
-%!error
-%! fail(marcumq(-1,1))
-%!error
-%! fail(marcumq(1,-1))
-%!error
-%! fail(marcumq(1,1,-1))
-%!error
-%! fail(marcumq(1,1,1.1))
+%!error marcumq (1)
+%!error marcumq (-1, 1, 1, 1, 1)
+%!error marcumq (-1, 1)
+%!error marcumq (1, -1)
+%!error marcumq (1, 1, -1)
+%!error marcumq (1, 1, 1.1)
 
 ## Notes on tests and accuracy.
 ## -----------------------------------
@@ -180,9 +177,9 @@ endfunction
 ## numerical integration.  All of them agree to with 10^(-16).
 
 %!test
-%! a = [0.00;0.05;1.00;2.00;3.00;4.00;5.00;6.00;7.00;8.00;9.00;10.00;
-%!      11.00;12.00;13.00;14.00;15.00;16.00;17.00;18.00;19.00;20.00;
-%!      21.00;22.00;23.00;24.00];
+%! a = [0.00; 0.05; 1.00; 2.00; 3.00; 4.00; 5.00; 6.00; 7.00; 8.00; 9.00; 10.00;
+%!      11.00; 12.00; 13.00; 14.00; 15.00; 16.00; 17.00; 18.00; 19.00; 20.00;
+%!      21.00; 22.00; 23.00; 24.00];
 %! b = [0.000000, 0.100000, 1.100000, 2.100000, 3.100000, 4.100000];
 %! Q = [1.000000, 0.995012, 0.546074, 0.110251, 0.008189, 0.000224;
 %!      1.000000, 0.995019, 0.546487, 0.110554, 0.008238, 0.000226;
@@ -210,13 +207,13 @@ endfunction
 %!      1.000000, 1.000000, 1.000000, 1.000000, 1.000000, 1.000000;
 %!      1.000000, 1.000000, 1.000000, 1.000000, 1.000000, 1.000000;
 %!      1.000000, 1.000000, 1.000000, 1.000000, 1.000000, 1.000000];
-%! q = marcumq(a,b);
-%! assert(q,Q,1e-6);
+%! q = marcumq (a, b);
+%! assert (q, Q, 1e-6);
 
 %!test
-%! a = [0.00;0.05;1.00;2.00;3.00;4.00;5.00;6.00;7.00;8.00;9.00;10.00;
-%!      11.00;12.00;13.00;14.00;15.00;16.00;17.00;18.00;19.00;20.00;
-%!      21.00;22.00;23.00;24.00];
+%! a = [0.00; 0.05; 1.00; 2.00; 3.00; 4.00; 5.00; 6.00; 7.00; 8.00; 9.00; 10.00;
+%!      11.00; 12.00; 13.00; 14.00; 15.00; 16.00; 17.00; 18.00; 19.00; 20.00;
+%!      21.00; 22.00; 23.00; 24.00];
 %! b = [5.100000, 6.100000, 7.100000, 8.100000, 9.100000, 10.10000];
 %! Q = [0.000002, 0.000000, 0.000000, 0.000000, 0.000000, 0.000000;
 %!      0.000002, 0.000000, 0.000000, 0.000000, 0.000000, 0.000000;
@@ -244,14 +241,14 @@ endfunction
 %!      1.000000, 1.000000, 1.000000, 1.000000, 1.000000, 1.000000;
 %!      1.000000, 1.000000, 1.000000, 1.000000, 1.000000, 1.000000;
 %!      1.000000, 1.000000, 1.000000, 1.000000, 1.000000, 1.000000];
-%! q = marcumq(a,b);
-%! assert(q,Q,1e-6);
+%! q = marcumq (a, b);
+%! assert (q, Q, 1e-6);
 
 
 %!test
-%! a = [0.00;0.05;1.00;2.00;3.00;4.00;5.00;6.00;7.00;8.00;9.00;10.00;
-%!      11.00;12.00;13.00;14.00;15.00;16.00;17.00;18.00;19.00;20.00;
-%!      21.00;22.00;23.00;24.00];
+%! a = [0.00; 0.05; 1.00; 2.00; 3.00; 4.00; 5.00; 6.00; 7.00; 8.00; 9.00; 10.00;
+%!      11.00; 12.00; 13.00; 14.00; 15.00; 16.00; 17.00; 18.00; 19.00; 20.00;
+%!      21.00; 22.00; 23.00; 24.00];
 %! b = [11.10000, 12.10000, 13.10000, 14.10000, 15.10000, 16.10000];
 %! Q = [0.000000, 0.000000, 0.000000, 0.000000, 0.000000, 0.000000;
 %!      0.000000, 0.000000, 0.000000, 0.000000, 0.000000, 0.000000;
@@ -279,14 +276,14 @@ endfunction
 %!      1.000000, 1.000000, 1.000000, 1.000000, 1.000000, 1.000000;
 %!      1.000000, 1.000000, 1.000000, 1.000000, 1.000000, 1.000000;
 %!      1.000000, 1.000000, 1.000000, 1.000000, 1.000000, 1.000000];
-%! q = marcumq(a,b);
-%! assert(q,Q,1e-6);
+%! q = marcumq (a, b);
+%! assert (q, Q, 1e-6);
 
 
 %!test
-%! a = [0.00;0.05;1.00;2.00;3.00;4.00;5.00;6.00;7.00;8.00;9.00;10.00;
-%!      11.00;12.00;13.00;14.00;15.00;16.00;17.00;18.00;19.00;20.00;
-%!      21.00;22.00;23.00;24.00];
+%! a = [0.00; 0.05; 1.00; 2.00; 3.00; 4.00; 5.00; 6.00; 7.00; 8.00; 9.00; 10.00;
+%!      11.00; 12.00; 13.00; 14.00; 15.00; 16.00; 17.00; 18.00; 19.00; 20.00;
+%!      21.00; 22.00; 23.00; 24.00];
 %! b = [17.10000, 18.10000, 19.10000];
 %! Q = [0.000000, 0.000000, 0.000000;
 %!      0.000000, 0.000000, 0.000000;
@@ -314,8 +311,8 @@ endfunction
 %!      1.000000, 0.999957, 0.998274;
 %!      1.000000, 1.000000, 0.999956;
 %!      1.000000, 1.000000, 1.000000];
-%! q = marcumq(a,b);
-%! assert(q,Q,1e-6);
+%! q = marcumq (a, b);
+%! assert (q, Q, 1e-6);
 
 ## The tests for M>1 were generating from Marcum's tables by
 ## using the formula
@@ -323,8 +320,9 @@ endfunction
 
 %!test
 %! M = 2;
-%! a = [0.00;0.05;1.00;2.00;3.00;4.00;5.00;6.00;7.00;8.00;9.00;10.00;11.00;12.00;13.00;14.00;15.00;16.00;17.00;18.00;19.00;20.00;21.00;22.00;23.00;24.000000];
-%!
+%! a = [0.00; 0.05; 1.00; 2.00; 3.00; 4.00; 5.00; 6.00; 7.00; 8.00; 9.00; 10.00;
+%!      11.00; 12.00; 13.00; 14.00; 15.00; 16.00; 17.00; 18.00; 19.00; 20.00;
+%!      21.00; 22.00; 23.00; 24.00];
 %! b = [    0.00,     0.10,     2.10,     7.10,    12.10,    17.10];
 %! Q = [1.000000, 0.999987, 0.353353, 0.000000, 0.000000, 0.000000;
 %!      1.000000, 0.999988, 0.353687, 0.000000, 0.000000, 0.000000;
@@ -352,13 +350,14 @@ endfunction
 %!      1.000000, 1.000000, 1.000000, 1.000000, 1.000000, 1.000000;
 %!      1.000000, 1.000000, 1.000000, 1.000000, 1.000000, 1.000000;
 %!      1.000000, 1.000000, 1.000000, 1.000000, 1.000000, 1.000000];
-%! q = marcumq(a,b,M);
-%! assert(q,Q,1e-6);
+%! q = marcumq (a, b, M);
+%! assert (q, Q, 1e-6);
 
 %!test
 %! M = 5;
-%! a = [0.00;0.05;1.00;2.00;3.00;4.00;5.00;6.00;7.00;8.00;9.00;10.00;11.00;12.00;13.00;14.00;15.00;16.00;17.00;18.00;19.00;20.00;21.00;22.00;23.00;24.000000];
-%!
+%! a = [0.00; 0.05; 1.00; 2.00; 3.00; 4.00; 5.00; 6.00; 7.00; 8.00; 9.00; 10.00;
+%!      11.00; 12.00; 13.00; 14.00; 15.00; 16.00; 17.00; 18.00; 19.00; 20.00;
+%!      21.00; 22.00; 23.00; 24.00];
 %! b = [    0.00,     0.10,     2.10,     7.10,    12.10,    17.10];
 %! Q = [1.000000, 1.000000, 0.926962, 0.000000, 0.000000, 0.000000;
 %!      1.000000, 1.000000, 0.927021, 0.000000, 0.000000, 0.000000;
@@ -386,13 +385,14 @@ endfunction
 %!      1.000000, 1.000000, 1.000000, 1.000000, 1.000000, 1.000000;
 %!      1.000000, 1.000000, 1.000000, 1.000000, 1.000000, 1.000000;
 %!      1.000000, 1.000000, 1.000000, 1.000000, 1.000000, 1.000000];
-%! q = marcumq(a,b,M);
-%! assert(q,Q,1e-6);
+%! q = marcumq (a, b, M);
+%! assert (q, Q, 1e-6);
 
 %!test
 %! M = 10;
-%! a = [0.00;0.05;1.00;2.00;3.00;4.00;5.00;6.00;7.00;8.00;9.00;10.00;11.00;12.00;13.00;14.00;15.00;16.00;17.00;18.00;19.00;20.00;21.00;22.00;23.00;24.000000];
-%!
+%! a = [0.00; 0.05; 1.00; 2.00; 3.00; 4.00; 5.00; 6.00; 7.00; 8.00; 9.00; 10.00;
+%!      11.00; 12.00; 13.00; 14.00; 15.00; 16.00; 17.00; 18.00; 19.00; 20.00;
+%!      21.00; 22.00; 23.00; 24.00];
 %! b = [    0.00,     0.10,     2.10,     7.10,    12.10,    17.10];
 %! Q = [1.000000, 1.000000, 0.999898, 0.000193, 0.000000, 0.000000;
 %!      1.000000, 1.000000, 0.999897, 0.000194, 0.000000, 0.000000;
@@ -420,5 +420,6 @@ endfunction
 %!      1.000000, 1.000000, 1.000000, 1.000000, 1.000000, 1.000000;
 %!      1.000000, 1.000000, 1.000000, 1.000000, 1.000000, 1.000000;
 %!      1.000000, 1.000000, 1.000000, 1.000000, 1.000000, 1.000000];
-%! q = marcumq(a,b,M);
-%! assert(q,Q,1e-6);
+%! q = marcumq (a, b, M);
+%! assert (q, Q, 1e-6);
+
