@@ -112,6 +112,43 @@ function Q = mq(a,b,M,tol)
 
 endfunction
 
+## Internal helper function to create a table of like dimensions from arguments.
+
+function [varargout] = tablify (varargin)
+
+  if (nargin < 2)
+    varargout = varargin;
+    return;
+  endif
+
+  empty = cellfun (@isempty, varargin);
+
+  nrows = cellfun (@rows, varargin(! empty));
+  ridx  = (nrows > 1);
+  if (any (ridx))
+    rdim = nrows(ridx)(1);
+  else
+    rdim = 1;
+  endif
+
+  ncols = cellfun (@columns, varargin(! empty));
+  cidx  = (ncols > 1);
+  if (any (cidx))
+    cdim = ncols(cidx)(1);
+  else
+    cdim = 1;
+  endif
+
+  if (any (nrows(ridx) != rdim) || any (ncols(cidx) != cdim))
+    error ("tablify: incommensurate sizes");
+  endif
+
+  varargout        = varargin;
+  varargout(! ridx) = cellindexmat (varargout(! ridx), ones (rdim, 1), ":");
+  varargout(! cidx) = cellindexmat (varargout(! cidx), ":", ones (1, cdim));
+
+endfunction
+
 %% Tests for number and validity of arguments.
 %!error
 %! fail(marcumq(1))
