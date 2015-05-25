@@ -15,14 +15,14 @@
 ## this program; if not, see <http://www.gnu.org/licenses/>.
 
 ## -*- texinfo -*-
-## @deftypefn  {Function File} {[@var{b}, @var{a}] =} cheby1 (@var{n}, @var{Rp}, @var{Wc})
-## @deftypefnx {Function File} {[@var{b}, @var{a}] =} cheby1 (@var{n}, @var{Rp}, @var{Wc}, "high")
-## @deftypefnx {Function File} {[@var{b}, @var{a}] =} cheby1 (@var{n}, @var{Rp}, [@var{Wl}, @var{Wh}])
-## @deftypefnx {Function File} {[@var{b}, @var{a}] =} cheby1 (@var{n}, @var{Rp}, [@var{Wl}, @var{Wh}], "stop")
+## @deftypefn  {Function File} {[@var{b}, @var{a}] =} cheby1 (@var{n}, @var{rp}, @var{w})
+## @deftypefnx {Function File} {[@var{b}, @var{a}] =} cheby1 (@var{n}, @var{rp}, @var{w}, "high")
+## @deftypefnx {Function File} {[@var{b}, @var{a}] =} cheby1 (@var{n}, @var{rp}, [@var{wl}, @var{wh}])
+## @deftypefnx {Function File} {[@var{b}, @var{a}] =} cheby1 (@var{n}, @var{rp}, [@var{wl}, @var{wh}], "stop")
 ## @deftypefnx {Function File} {[@var{z}, @var{p}, @var{g}] =} cheby1 (@dots{})
 ## @deftypefnx {Function File} {[@var{a}, @var{b}, @var{c}, @var{d}] =} cheby1 (@dots{})
 ## @deftypefnx {Function File} {[@dots{}] =} cheby1 (@dots{}, "s")
-## Generate an Chebyshev type I filter with Rp dB of pass band ripple.
+## Generate a Chebyshev type I filter with @var{rp} dB of passband ripple.
 ##
 ## [b, a] = cheby1(n, Rp, Wc)
 ##    low pass filter with cutoff pi*Wc radians
@@ -52,83 +52,85 @@
 ## John Wiley & Sons, Inc.
 ## @end deftypefn
 
-function [a,b,c,d] = cheby1(n, Rp, W, varargin)
+function [a, b, c, d] = cheby1 (n, rp, w, varargin)
 
-  if (nargin>5 || nargin<3) || (nargout>4 || nargout<2)
-    print_usage;
+  if (nargin > 5 || nargin < 3 || nargout > 4 || nargout < 2)
+    print_usage ();
   endif
 
   ## interpret the input parameters
-  if (!(length(n)==1 && n == round(n) && n > 0))
-    error ("cheby1: filter order n must be a positive integer");
+  if (! (isscalar (n) && (n == fix (n)) && (n > 0)))
+    error ("cheby1: filter order N must be a positive integer");
   endif
 
-  stop = 0;
-  digital = 1;
-  for i=1:length(varargin)
-    switch varargin{i}
-      case 's', digital = 0;
-      case 'z', digital = 1;
-      case { 'high', 'stop' }, stop = 1;
-      case { 'low',  'pass' }, stop = 0;
-      otherwise,  error ("cheby1: expected [high|stop] or [s|z]");
+  stop = false;
+  digital = true;
+  for i = 1:numel (varargin)
+    switch (varargin{i})
+      case "s"
+        digital = false;
+      case "z"
+        digital = true;
+      case {"high", "stop"}
+        stop = true;
+      case {"low", "pass"}
+        stop = false;
+      otherwise
+        error ("cheby1: expected [high|stop] or [s|z]");
     endswitch
   endfor
 
-  [r, c]=size(W);
-  if (!(length(W)<=2 && (r==1 || c==1)))
-    error ("cheby1: frequency must be given as w0 or [w0, w1]");
-  elseif (!(length(W)==1 || length(W) == 2))
-    error ("cheby1: only one filter band allowed");
-  elseif (length(W)==2 && !(W(1) < W(2)))
-    error ("cheby1: first band edge must be smaller than second");
+  if (! ((numel (w) <= 2) && (rows (w) == 1 || columns (w) == 1)))
+    error ("cheby1: frequency must be given as WC or [WL, WH]");
+  elseif ((numel (w) == 2) && (w(2) <= w(1)))
+    error ("cheby1: W(1) must be less than W(2)");
   endif
 
-  if ( digital && !all(W >= 0 & W <= 1))
-    error ("cheby1: critical frequencies must be in (0 1)");
-  elseif ( !digital && !all(W >= 0 ))
-    error ("cheby1: critical frequencies must be in (0 inf)");
+  if (digital && ! all ((w >= 0) & (w <= 1)))
+    error ("cheby1: all elements of W must be in the range [0,1]");
+  elseif (! digital && ! all (w >= 0))
+    error ("cheby1: all elements of W must be in the range [0,inf]");
   endif
 
-  if (Rp < 0)
-    error("cheby1: passband ripple must be positive decibels");
+  if (! (isscalar (rp) && isnumeric (rp) && (rp >= 0)))
+    error ("cheby1: passband ripple RP must be a non-negative scalar");
   endif
 
   ## Prewarp to the band edges to s plane
-  if digital
+  if (digital)
     T = 2;       # sampling frequency of 2 Hz
-    W = 2/T*tan(pi*W/T);
+    w = 2 / T * tan (pi * w / T);
   endif
 
-  ## Generate splane poles and zeros for the chebyshev type 1 filter
-  C = 1; # default cutoff frequency
-  epsilon = sqrt(10^(Rp/10) - 1);
-  v0 = asinh(1/epsilon)/n;
-  pole = exp(1i*pi*[-(n-1):2:(n-1)]/(2*n));
-  pole = -sinh(v0)*real(pole) + 1i*cosh(v0)*imag(pole);
+  ## Generate splane poles and zeros for the Chebyshev type 1 filter
+  C = 1;  ## default cutoff frequency
+  epsilon = sqrt (10^(rp / 10) - 1);
+  v0 = asinh (1 / epsilon) / n;
+  pole = exp (1i * pi * [-(n - 1):2:(n - 1)] / (2 * n));
+  pole = -sinh (v0) * real (pole) + 1i * cosh (v0) * imag (pole);
   zero = [];
 
   ## compensate for amplitude at s=0
-  gain = prod(-pole);
+  gain = prod (-pole);
   ## if n is even, the ripple starts low, but if n is odd the ripple
   ## starts high. We must adjust the s=0 amplitude to compensate.
-  if (rem(n,2)==0)
-    gain = gain/10^(Rp/20);
+  if (rem (n, 2) == 0)
+    gain = gain / 10^(rp / 20);
   endif
 
   ## splane frequency transform
-  [zero, pole, gain] = sftrans(zero, pole, gain, W, stop);
+  [zero, pole, gain] = sftrans (zero, pole, gain, w, stop);
 
   ## Use bilinear transform to convert poles to the z plane
-  if digital
-    [zero, pole, gain] = bilinear(zero, pole, gain, T);
+  if (digital)
+    [zero, pole, gain] = bilinear (zero, pole, gain, T);
   endif
 
   ## convert to the correct output form
-  if nargout==2,
-    a = real(gain*poly(zero));
-    b = real(poly(pole));
-  elseif nargout==3,
+  if (nargout == 2)
+    a = real (gain * poly (zero));
+    b = real (poly (pole));
+  elseif (nargout == 3)
     a = zero;
     b = pole;
     c = gain;
@@ -138,3 +140,12 @@ function [a,b,c,d] = cheby1(n, Rp, W, varargin)
   endif
 
 endfunction
+
+%% Test input validation
+%!error [a, b] = cheby1 ()
+%!error [a, b] = cheby1 (1)
+%!error [a, b] = cheby1 (1, 2)
+%!error [a, b] = cheby1 (1, 2, 3, 4, 5, 6)
+%!error [a, b] = cheby1 (.5, 2, .2)
+%!error [a, b] = cheby1 (3, 2, .2, "invalid")
+

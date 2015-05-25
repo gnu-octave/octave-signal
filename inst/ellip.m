@@ -15,15 +15,16 @@
 ## this program; if not, see <http://www.gnu.org/licenses/>.
 
 ## -*- texinfo -*-
-## @deftypefn  {Function File} {[@var{b}, @var{a}] =} ellip (@var{n}, @var{Rp}, @var{Rs}, @var{Wp})
-## @deftypefnx {Function File} {[@var{b}, @var{a}] =} ellip (@var{n}, @var{Rp}, @var{Rs}, @var{Wp}, "high")
-## @deftypefnx {Function File} {[@var{b}, @var{a}] =} ellip (@var{n}, @var{Rp}, @var{Rs}, @var{[Wl}, @var{Wh}])
-## @deftypefnx {Function File} {[@var{b}, @var{a}] =} ellip (@var{n}, @var{Rp}, @var{Rs}, @var{[Wl}, @var{Wh}], "stop")
+## @deftypefn  {Function File} {[@var{b}, @var{a}] =} ellip (@var{n}, @var{rp}, @var{rs}, @var{wp})
+## @deftypefnx {Function File} {[@var{b}, @var{a}] =} ellip (@var{n}, @var{rp}, @var{rs}, @var{wp}, "high")
+## @deftypefnx {Function File} {[@var{b}, @var{a}] =} ellip (@var{n}, @var{rp}, @var{rs}, @var{[wl}, @var{wh}])
+## @deftypefnx {Function File} {[@var{b}, @var{a}] =} ellip (@var{n}, @var{rp}, @var{rs}, @var{[wl}, @var{wh}], "stop")
 ## @deftypefnx {Function File} {[@var{z}, @var{p}, @var{g}] =} ellip (@dots{})
 ## @deftypefnx {Function File} {[@var{a}, @var{b}, @var{c}, @var{d}] =} ellip (@dots{})
 ## @deftypefnx {Function File} {[@dots{}] =} ellip (@dots{}, "s")
 ##
-## Generate an Elliptic or Cauer filter (discrete and continuous).
+## Generate an elliptic or Cauer filter with @var{rp} dB of passband ripple and
+## @var{rs} dB of stopband attenuation.
 ##
 ## [b,a] = ellip(n, Rp, Rs, Wp)
 ##  low pass filter with order n, cutoff pi*Wp radians, Rp decibels
@@ -55,77 +56,77 @@
 ## - Kienzle, Paul, functions from Octave-Forge, 1999 (http://octave.sf.net).
 ## @end deftypefn
 
-function [a,b,c,d] = ellip(n, Rp, Rs, W, varargin)
+function [a, b, c, d] = ellip (n, rp, rs, w, varargin)
 
-  if (nargin>6 || nargin<4) || (nargout>4 || nargout<2)
-    print_usage;
+  if (nargin > 6 || nargin < 4 || nargout > 4 || nargout < 2)
+    print_usage ();
   endif
 
   ## interpret the input parameters
-  if (!(length(n)==1 && n == round(n) && n > 0))
-    error ("ellip: filter order n must be a positive integer");
+  if (! (isscalar (n) && (n == fix (n)) && (n > 0)))
+    error ("ellip: filter order N must be a positive integer");
   endif
 
-
-  stop = 0;
-  digital = 1;
-  for i=1:length(varargin)
-    switch varargin{i}
-      case 's', digital = 0;
-      case 'z', digital = 1;
-      case { 'high', 'stop' }, stop = 1;
-      case { 'low',  'pass' }, stop = 0;
-      otherwise,  error ("ellip: expected [high|stop] or [s|z]");
+  stop = false;
+  digital = true;
+  for i = 1:numel (varargin)
+    switch (varargin{i})
+      case "s"
+        digital = false;
+      case "z"
+        digital = true;
+      case {"high", "stop"}
+        stop = true;
+      case {"low", "pass"}
+        stop = false;
+      otherwise
+        error ("ellip: expected [high|stop] or [s|z]");
     endswitch
   endfor
 
-  [r, c]=size(W);
-  if (!(length(W)<=2 && (r==1 || c==1)))
-    error ("ellip: frequency must be given as w0 or [w0, w1]");
-  elseif (!(length(W)==1 || length(W) == 2))
-    error ("ellip: only one filter band allowed");
-  elseif (length(W)==2 && !(W(1) < W(2)))
-    error ("ellip: first band edge must be smaller than second");
+  if (! ((numel (w) <= 2) && (rows (w) == 1 || columns (w) == 1)))
+    error ("ellip: frequency must be given as WC or [WL, WH]");
+  elseif ((numel (w) == 2) && (w(2) <= w(1)))
+    error ("ellip: W(1) must be less than W(2)");
   endif
 
-  if ( digital && !all(W >= 0 & W <= 1))
-    error ("ellip: critical frequencies must be in (0 1)");
-  elseif ( !digital && !all(W >= 0 ))
-    error ("ellip: critical frequencies must be in (0 inf)");
+  if (digital && ! all ((w >= 0) & (w <= 1)))
+    error ("ellip: all elements of W must be in the range [0,1]");
+  elseif (! digital && ! all (w >= 0))
+    error ("ellip: all elements of W must be in the range [0,inf]");
   endif
 
-  if (Rp < 0)
-    error("ellip: passband ripple must be positive decibels");
+  if (! (isscalar (rp) && isnumeric (rp) && (rp >= 0)))
+    error ("ellip: passband ripple RP must be a non-negative scalar");
   endif
 
-  if (Rs < 0)
-    error("ellip: stopband ripple must be positive decibels");
+  if (! (isscalar (rs) && isnumeric (rs) && (rs >= 0)))
+    error ("ellip: stopband attenuation RS must be a non-negative scalar");
   endif
 
 
   ## Prewarp the digital frequencies
-  if digital
+  if (digital)
     T = 2;       # sampling frequency of 2 Hz
-    W = tan(pi*W/T);
+    w = 2 / T * tan (pi * w / T);
   endif
 
   ## Generate s-plane poles, zeros and gain
-  [zero, pole, gain] = ncauer(Rp, Rs, n);
+  [zero, pole, gain] = ncauer (rp, rs, n);
 
   ## splane frequency transform
-  [zero, pole, gain] = sftrans(zero, pole, gain, W, stop);
+  [zero, pole, gain] = sftrans (zero, pole, gain, w, stop);
 
   ## Use bilinear transform to convert poles to the z plane
-  if digital
-    [zero, pole, gain] = bilinear(zero, pole, gain, T);
+  if (digital)
+    [zero, pole, gain] = bilinear (zero, pole, gain, T);
   endif
 
-
   ## convert to the correct output form
-  if nargout==2,
-    a = real(gain*poly(zero));
-    b = real(poly(pole));
-  elseif nargout==3,
+  if (nargout == 2)
+    a = real (gain * poly (zero));
+    b = real (poly (pole));
+  elseif (nargout == 3)
     a = zero;
     b = pole;
     c = gain;
@@ -151,3 +152,13 @@ endfunction
 %! plot (w./pi, x.*-1, ";-1 dB;")
 %! plot (w./pi, x.*-90, ";-90 dB;")
 %! hold ("off");
+
+%% Test input validation
+%!error [a, b] = ellip ()
+%!error [a, b] = ellip (1)
+%!error [a, b] = ellip (1, 2)
+%!error [a, b] = ellip (1, 2, 3)
+%!error [a, b] = ellip (1, 2, 3, 4, 5, 6, 7)
+%!error [a, b] = ellip (.5, 2, 40, .2)
+%!error [a, b] = ellip (3, 2, 40, .2, "invalid")
+
