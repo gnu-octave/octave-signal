@@ -344,6 +344,12 @@ endfunction
 %!assert (isempty (findpeaks ([1, 1, 1])))
 %!assert (isempty (findpeaks ([1; 1; 1])))
 
+## Test for bug #45056
+%!test
+%! ## Test input vector is an oversampled sinusoid with clipped peaks
+%! x = min (3, cos (2*pi*[0:8000] ./ 600) + 2.01);
+%! assert (! isempty (findpeaks (x)))
+
 %% Test input validation
 %!error findpeaks ()
 %!error findpeaks (1)
