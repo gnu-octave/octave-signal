@@ -18,8 +18,6 @@
 ## -*- texinfo -*-
 ## @deftypefn  {Function File} {[@var{b}, @var{a}] =} besself (@var{n}, @var{w})
 ## @deftypefnx {Function File} {[@var{b}, @var{a}] =} besself (@var{n}, @var{w}, "high")
-## @deftypefnx {Function File} {[@var{b}, @var{a}] =} besself (@var{n}, [@var{wl}, @var{wh}])
-## @deftypefnx {Function File} {[@var{b}, @var{a}] =} besself (@var{n}, [@var{wl}, @var{wh}], "stop")
 ## @deftypefnx {Function File} {[@var{z}, @var{p}, @var{g}] =} besself (@dots{})
 ## @deftypefnx {Function File} {[@var{a}, @var{b}, @var{c}, @var{d}] =} besself (@dots{})
 ## @deftypefnx {Function File} {[@dots{}] =} besself (@dots{}, "z")
@@ -31,12 +29,6 @@
 ##
 ## [b,a] = besself(n, Wc, 'high')
 ##    high pass filter with cutoff pi*Wc radians
-##
-## [b,a] = besself(n, [Wl, Wh])
-##    band pass filter with edges pi*Wl and pi*Wh radians
-##
-## [b,a] = besself(n, [Wl, Wh], 'stop')
-##    band reject filter with edges pi*Wl and pi*Wh radians
 ##
 ## [z,p,g] = besself(...)
 ##    return filter as zero-pole-gain rather than coefficients of the
@@ -81,6 +73,12 @@ function [a, b, c, d] = besself (n, w, varargin)
         error ("besself: expected [high|stop] or [s|z]");
     endswitch
   endfor
+
+  ## FIXME: Band-pass and stop-band currently non-functional, remove
+  ##        this check once low-pass to band-pass transform is implemented.
+  if (! isscalar (w))
+    error ("besself: band-pass and stop-band filters not yet implemented");
+  endif
 
   if (! ((numel (w) <= 2) && (rows (w) == 1 || columns (w) == 1)))
     error ("besself: frequency must be given as WC or [WL, WH]");
