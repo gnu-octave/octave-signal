@@ -16,14 +16,12 @@
 ## this program; if not, see <http://www.gnu.org/licenses/>.
 
 ## -*- texinfo -*-
-## @deftypefn  {Function File} {[@var{b}, @var{a}] =} besself (@var{n}, @var{W})
-## @deftypefnx {Function File} {[@var{b}, @var{a}] =} besself (@var{n}, @var{W}, "high")
-## @deftypefnx {Function File} {[@var{b}, @var{a}] =} besself (@var{n}, [@var{Wl}, @var{Wh}])
-## @deftypefnx {Function File} {[@var{b}, @var{a}] =} besself (@var{n}, [@var{Wl}, @var{Wh}], "stop")
+## @deftypefn  {Function File} {[@var{b}, @var{a}] =} besself (@var{n}, @var{w})
+## @deftypefnx {Function File} {[@var{b}, @var{a}] =} besself (@var{n}, @var{w}, "high")
 ## @deftypefnx {Function File} {[@var{z}, @var{p}, @var{g}] =} besself (@dots{})
 ## @deftypefnx {Function File} {[@var{a}, @var{b}, @var{c}, @var{d}] =} besself (@dots{})
 ## @deftypefnx {Function File} {[@dots{}] =} besself (@dots{}, "z")
-## Generate a bessel filter.
+## Generate a Bessel filter.
 ## Default is a Laplace space (s) filter.
 ##
 ## [b,a] = besself(n, Wc)
@@ -31,12 +29,6 @@
 ##
 ## [b,a] = besself(n, Wc, 'high')
 ##    high pass filter with cutoff pi*Wc radians
-##
-## [b,a] = besself(n, [Wl, Wh])
-##    band pass filter with edges pi*Wl and pi*Wh radians
-##
-## [b,a] = besself(n, [Wl, Wh], 'stop')
-##    band reject filter with edges pi*Wl and pi*Wh radians
 ##
 ## [z,p,g] = besself(...)
 ##    return filter as zero-pole-gain rather than coefficients of the
@@ -54,67 +46,74 @@
 ## Macmillan Publishing Company.
 ## @end deftypefn
 
-function [a, b, c, d] = besself (n, W, varargin)
+function [a, b, c, d] = besself (n, w, varargin)
 
-  if (nargin>4 || nargin<2) || (nargout>4 || nargout<2)
-    print_usage;
+  if (nargin > 4 || nargin < 2 || nargout > 4 || nargout < 2)
+    print_usage ();
   endif
 
   ## interpret the input parameters
-  if (!(length(n)==1 && n == round(n) && n > 0))
-    error ("besself: filter order n must be a positive integer");
+  if (! (isscalar (n) && (n == fix (n)) && (n > 0)))
+    error ("besself: filter order N must be a positive integer");
   endif
 
-  stop = 0;
-  digital = 0;
-  for i=1:length(varargin)
-    switch varargin{i}
-      case 's', digital = 0;
-      case 'z', digital = 1;
-      case { 'high', 'stop' }, stop = 1;
-      case { 'low',  'pass' }, stop = 0;
-      otherwise,  error ("besself: expected [high|stop] or [s|z]");
+  stop = false;
+  digital = false;
+  for i = 1:numel (varargin)
+    switch (varargin{i})
+      case "s"
+        digital = false;
+      case "z"
+        digital = true;
+      case {"high", "stop"}
+        stop = true;
+      case {"low", "pass"}
+        stop = false;
+      otherwise
+        error ("besself: expected [high|stop] or [s|z]");
     endswitch
   endfor
 
-
-  [r, c]=size(W);
-  if (!(length(W)<=2 && (r==1 || c==1)))
-    error ("besself: frequency must be given as w0 or [w0, w1]");
-  elseif (!(length(W)==1 || length(W) == 2))
-    error ("besself: only one filter band allowed");
-  elseif (length(W)==2 && !(W(1) < W(2)))
-    error ("besself: first band edge must be smaller than second");
+  ## FIXME: Band-pass and stop-band currently non-functional, remove
+  ##        this check once low-pass to band-pass transform is implemented.
+  if (! isscalar (w))
+    error ("besself: band-pass and stop-band filters not yet implemented");
   endif
 
-  if ( digital && !all(W >= 0 & W <= 1))
-    error ("besself: critical frequencies must be in (0 1)");
-  elseif ( !digital && !all(W >= 0 ))
-    error ("besself: critical frequencies must be in (0 inf)");
+  if (! ((numel (w) <= 2) && (rows (w) == 1 || columns (w) == 1)))
+    error ("besself: frequency must be given as WC or [WL, WH]");
+  elseif ((numel (w) == 2) && (w(2) <= w(1)))
+    error ("besself: W(1) must be less than W(2)");
+  endif
+
+  if (digital && ! all ((w >= 0) & (w <= 1)))
+    error ("besself: all elements of W must be in the range [0,1]");
+  elseif (! digital && ! all (w >= 0))
+    error ("besself: all elements of W must be in the range [0,inf]");
   endif
 
   ## Prewarp to the band edges to s plane
-  if digital
+  if (digital)
     T = 2;       # sampling frequency of 2 Hz
-    W = 2/T*tan(pi*W/T);
+    w = 2 / T * tan (pi * w / T);
   endif
 
-  ## Generate splane poles for the prototype bessel filter
-  [zero, pole, gain] = besselap(n);
+  ## Generate splane poles for the prototype Bessel filter
+  [zero, pole, gain] = besselap (n);
 
   ## splane frequency transform
-  [zero, pole, gain] = sftrans(zero, pole, gain, W, stop);
+  [zero, pole, gain] = sftrans (zero, pole, gain, w, stop);
 
   ## Use bilinear transform to convert poles to the z plane
-  if digital
-     [zero, pole, gain] = bilinear(zero, pole, gain, T);
+  if (digital)
+    [zero, pole, gain] = bilinear (zero, pole, gain, T);
   endif
 
   ## convert to the correct output form
-  if nargout==2,
-    a = real(gain*poly(zero));
-    b = real(poly(pole));
-  elseif nargout==3,
+  if (nargout == 2)
+    a = real (gain * poly (zero));
+    b = real (poly (pole));
+  elseif (nargout == 3)
     a = zero;
     b = pole;
     c = gain;
@@ -124,3 +123,11 @@ function [a, b, c, d] = besself (n, W, varargin)
   endif
 
 endfunction
+
+%% Test input validation
+%!error [a, b] = besself ()
+%!error [a, b] = besself (1)
+%!error [a, b] = besself (1, 2, 3, 4, 5)
+%!error [a, b] = besself (.5, .2)
+%!error [a, b] = besself (3, .2, "invalid")
+

@@ -344,12 +344,18 @@ endfunction
 %!assert (isempty (findpeaks ([1, 1, 1])))
 %!assert (isempty (findpeaks ([1; 1; 1])))
 
+## Test for bug #45056
+%!test
+%! ## Test input vector is an oversampled sinusoid with clipped peaks
+%! x = min (3, cos (2*pi*[0:8000] ./ 600) + 2.01);
+%! assert (! isempty (findpeaks (x)))
+
 %% Test input validation
 %!error findpeaks ()
 %!error findpeaks (1)
 %!error findpeaks ([1, 2])
 
 ## Failing test because we are not Matlab compatible
-%!assert (findpeaks ([34 134 353 64 134 14 56 67 234 143 64 575 8657]),
-%!        [353 134 234])
+%!xtest assert (findpeaks ([34 134 353 64 134 14 56 67 234 143 64 575 8657]),
+%!              [353 134 234])
 

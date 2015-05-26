@@ -15,14 +15,14 @@
 ## this program; if not, see <http://www.gnu.org/licenses/>.
 
 ## -*- texinfo -*-
-## @deftypefn  {Function File} {[@var{b}, @var{a}] =} cheby2 (@var{n}, @var{Rs}, @var{Wc})
-## @deftypefnx {Function File} {[@var{b}, @var{a}] =} cheby2 (@var{n}, @var{Rs}, @var{Wc}, "high")
-## @deftypefnx {Function File} {[@var{b}, @var{a}] =} cheby2 (@var{n}, @var{Rs}, [@var{Wl}, @var{Wh}])
-## @deftypefnx {Function File} {[@var{b}, @var{a}] =} cheby2 (@var{n}, @var{Rs}, [@var{Wl}, @var{Wh}], "stop")
+## @deftypefn  {Function File} {[@var{b}, @var{a}] =} cheby2 (@var{n}, @var{rs}, @var{wc})
+## @deftypefnx {Function File} {[@var{b}, @var{a}] =} cheby2 (@var{n}, @var{rs}, @var{wc}, "high")
+## @deftypefnx {Function File} {[@var{b}, @var{a}] =} cheby2 (@var{n}, @var{rs}, [@var{wl}, @var{wh}])
+## @deftypefnx {Function File} {[@var{b}, @var{a}] =} cheby2 (@var{n}, @var{rs}, [@var{wl}, @var{wh}], "stop")
 ## @deftypefnx {Function File} {[@var{z}, @var{p}, @var{g}] =} cheby2 (@dots{})
 ## @deftypefnx {Function File} {[@var{a}, @var{b}, @var{c}, @var{d}] =} cheby2 (@dots{})
 ## @deftypefnx {Function File} {[@dots{}] =} cheby2 (@dots{}, "s")
-## Generate an Chebyshev type II filter with Rs dB of stop band attenuation.
+## Generate a Chebyshev type II filter with @var{rs} dB of stopband attenuation.
 ##
 ## [b, a] = cheby2(n, Rs, Wc)
 ##    low pass filter with cutoff pi*Wc radians
@@ -52,92 +52,93 @@
 ## John Wiley & Sons, Inc.
 ## @end deftypefn
 
-function [a,b,c,d] = cheby2(n, Rs, W, varargin)
+function [a, b, c, d] = cheby2 (n, rs, w, varargin)
 
-  if (nargin>5 || nargin<3) || (nargout>4 || nargout<2)
-    print_usage;
+  if (nargin > 5 || nargin < 3 || nargout > 4 || nargout < 2)
+    print_usage ();
   endif
 
   ## interpret the input parameters
-  if (!(length(n)==1 && n == round(n) && n > 0))
-    error ("cheby2: filter order n must be a positive integer");
+  if (! (isscalar (n) && (n == fix (n)) && (n > 0)))
+    error ("cheby2: filter order N must be a positive integer");
   endif
 
-
-  stop = 0;
-  digital = 1;
-  for i=1:length(varargin)
-    switch varargin{i}
-      case 's', digital = 0;
-      case 'z', digital = 1;
-      case { 'high', 'stop' }, stop = 1;
-      case { 'low',  'pass' }, stop = 0;
-      otherwise,  error ("cheby2: expected [high|stop] or [s|z]");
+  stop = false;
+  digital = true;
+  for i = 1:numel (varargin)
+    switch (varargin{i})
+      case "s"
+        digital = false;
+      case "z"
+        digital = true;
+      case {"high", "stop"}
+        stop = true;
+      case {"low", "pass"}
+        stop = false;
+      otherwise
+        error ("cheby2: expected [high|stop] or [s|z]");
     endswitch
   endfor
 
-  [r, c]=size(W);
-  if (!(length(W)<=2 && (r==1 || c==1)))
-    error ("cheby2: frequency must be given as w0 or [w0, w1]");
-  elseif (!(length(W)==1 || length(W) == 2))
-    error ("cheby2: only one filter band allowed");
-  elseif (length(W)==2 && !(W(1) < W(2)))
-    error ("cheby2: first band edge must be smaller than second");
+  if (! ((numel (w) <= 2) && (rows (w) == 1 || columns (w) == 1)))
+    error ("cheby2: frequency must be given as WC or [WL, WH]");
+  elseif ((numel (w) == 2) && (w(2) <= w(1)))
+    error ("cheby2: W(1) must be less than W(2)");
   endif
 
-  if ( digital && !all(W >= 0 & W <= 1))
-    error ("cheby2: critical frequencies must be in (0 1)");
-  elseif ( !digital && !all(W >= 0 ))
-    error ("cheby2: critical frequencies must be in (0 inf)");
+  if (digital && ! all ((w >= 0) & (w <= 1)))
+    error ("cheby2: all elements of W must be in the range [0,1]");
+  elseif (! digital && ! all (w >= 0))
+    error ("cheby2: all elements of W must be in the range [0,inf]");
   endif
 
-  if (Rs < 0)
-    error("cheby2: stopband attenuation must be positive decibels");
+  if (! (isscalar (rs) && isnumeric (rs) && (rs >= 0)))
+    error ("cheby2: stopband attenuation RS must be a non-negative scalar");
   endif
 
   ## Prewarp to the band edges to s plane
-  if digital
+  if (digital)
     T = 2;       # sampling frequency of 2 Hz
-    W = 2/T*tan(pi*W/T);
+    w = 2 / T * tan (pi * w / T);
   endif
 
-  ## Generate splane poles and zeros for the chebyshev type 2 filter
+  ## Generate splane poles and zeros for the Chebyshev type 2 filter
   ## From: Stearns, SD; David, RA; (1988). Signal Processing Algorithms.
   ##       New Jersey: Prentice-Hall.
-  C = 1;                        # default cutoff frequency
-  lambda = 10^(Rs/20);
-  phi = log(lambda + sqrt(lambda^2-1))/n;
-  theta = pi*([1:n]-0.5)/n;
-  alpha = -sinh(phi)*sin(theta);
-  beta = cosh(phi)*cos(theta);
-  if (rem(n,2))
+  C = 1;  ## default cutoff frequency
+  lambda = 10^(rs / 20);
+  phi = log (lambda + sqrt (lambda^2 - 1)) / n;
+  theta = pi * ([1:n] - 0.5) / n;
+  alpha = -sinh (phi) * sin (theta);
+  beta = cosh (phi) * cos (theta);
+  if (rem (n, 2))
     ## drop theta==pi/2 since it results in a zero at infinity
-    zero = 1i*C./cos(theta([1:(n-1)/2, (n+3)/2:n]));
+    zero = 1i * C ./ cos (theta([1:(n - 1) / 2, (n + 3) / 2:n]));
   else
-    zero = 1i*C./cos(theta);
+    zero = 1i * C ./ cos (theta);
   endif
-  pole = C./(alpha.^2+beta.^2).*(alpha-1i*beta);
+  pole = C ./ (alpha.^2 + beta.^2) .* (alpha - 1i * beta);
 
   ## Compensate for amplitude at s=0
   ## Because of the vagaries of floating point computations, the
   ## prod(pole)/prod(zero) sometimes comes out as negative and
   ## with a small imaginary component even though analytically
   ## the gain will always be positive, hence the abs(real(...))
-  gain = abs(real(prod(pole)/prod(zero)));
+  gain = abs (real (prod (pole) / prod (zero)));
 
   ## splane frequency transform
-  [zero, pole, gain] = sftrans(zero, pole, gain, W, stop);
+  [zero, pole, gain] = sftrans (zero, pole, gain, w, stop);
 
   ## Use bilinear transform to convert poles to the z plane
-  if digital
-    [zero, pole, gain] = bilinear(zero, pole, gain, T);
+  if (digital)
+    [zero, pole, gain] = bilinear (zero, pole, gain, T);
   endif
 
   ## convert to the correct output form
-  if nargout==2,
-    a = real(gain*poly(zero));
-    b = real(poly(pole));
-  elseif nargout==3,
+  if (nargout == 2)
+    a = real (gain * poly (zero));
+    b = real (poly (pole));
+  elseif (nargout == 3)
     a = zero;
     b = pole;
     c = gain;
@@ -147,3 +148,12 @@ function [a,b,c,d] = cheby2(n, Rs, W, varargin)
   endif
 
 endfunction
+
+%% Test input validation
+%!error [a, b] = cheby2 ()
+%!error [a, b] = cheby2 (1)
+%!error [a, b] = cheby2 (1, 2)
+%!error [a, b] = cheby2 (1, 2, 3, 4, 5, 6)
+%!error [a, b] = cheby2 (.5, 40, .2)
+%!error [a, b] = cheby2 (3, 40, .2, "invalid")
+
