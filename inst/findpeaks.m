@@ -112,9 +112,6 @@ function [pks idx varargout] = findpeaks (data, varargin)
 
   posscal = @(x) isscalar (x) && x >= 0;
 
-  parser = inputParser ();
-  parser.FunctionName = "findpeaks";
-
   ## FIXME: inputParser was first implemented in the general package in the
   ##        old @class type.  This allowed for a very similar interface to
   ##        Matlab but not quite equal.  classdef was then implemented in
@@ -135,6 +132,8 @@ function [pks idx varargout] = findpeaks (data, varargin)
       && isempty (strfind (which ("inputParser"),
                            ["@inputParser" filesep "inputParser.m"])))
     ## making use of classdef's inputParser ..
+    parser = inputParser ();
+    parser.FunctionName = "findpeaks";
     parser.addParamValue ("MinPeakHeight", eps,posscal);
     parser.addParamValue ("MinPeakDistance", 1, posscal);
     parser.addParamValue ("MinPeakWidth", 1, posscal);
