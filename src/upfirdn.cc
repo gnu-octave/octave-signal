@@ -13,11 +13,11 @@
 // You should have received a copy of the GNU General Public License along with
 // this program; if not, see <http://www.gnu.org/licenses/>.
 
-#include <octave/config.h>
+#include <octave/oct.h>
 #include <octave/defun-dld.h>
 #include <octave/error.h>
 #include <octave/gripes.h>
-#include <octave/oct-obj.h>
+#include <octave/ovl.h>
 #include <octave/pager.h>
 #include <octave/quit.h>
 #include <octave/variables.h>
@@ -37,7 +37,7 @@ MT upfirdn (MT &x, ColumnVector &h, octave_idx_type p, octave_idx_type q)
       isrowvector = true;
     }
 
-  octave_idx_type Lh = h.length ();
+  octave_idx_type Lh = h.numel ();
   const double r = p/(static_cast<double> (q));
 
   const octave_idx_type Ly = ceil (static_cast<double> ((rx-1)*p + Lh) /
@@ -105,7 +105,7 @@ Upsample, FIR filtering, and downsample.\n\
 
   if (error_state)
     {
-      gripe_wrong_type_arg ("upfirdn", args (1));
+      err_wrong_type_arg ("upfirdn", args (1));
       return retval;
     }
 
@@ -113,7 +113,7 @@ Upsample, FIR filtering, and downsample.\n\
 
   if (error_state)
     {
-      gripe_wrong_type_arg ("upfirdn", args (2));
+      err_wrong_type_arg ("upfirdn", args (2));
       return retval;
     }
 
@@ -121,7 +121,7 @@ Upsample, FIR filtering, and downsample.\n\
 
   if (error_state)
     {
-      gripe_wrong_type_arg ("upfirdn", args (3));
+      err_wrong_type_arg ("upfirdn", args (3));
       return retval;
     }
 
@@ -131,7 +131,7 @@ Upsample, FIR filtering, and downsample.\n\
       Matrix x = args (0).matrix_value ();
       if (error_state)
         {
-          gripe_wrong_type_arg ("upfirdn", args (0));
+          err_wrong_type_arg ("upfirdn", args (0));
           return retval;
         }
 
@@ -143,7 +143,7 @@ Upsample, FIR filtering, and downsample.\n\
       ComplexMatrix x = args (0).complex_matrix_value ();
       if (error_state)
         {
-          gripe_wrong_type_arg ("upfirdn", args (0));
+          err_wrong_type_arg ("upfirdn", args (0));
           return retval;
         }
 
@@ -152,7 +152,7 @@ Upsample, FIR filtering, and downsample.\n\
     }
   else
     {
-      gripe_wrong_type_arg ("upfirdn", args (0));
+      err_wrong_type_arg ("upfirdn", args (0));
       return retval;
     }
 
@@ -169,4 +169,3 @@ Upsample, FIR filtering, and downsample.\n\
 %!error upfirdn (1,2,3)
 %!error upfirdn (1,2,3,4,5)
 */
-

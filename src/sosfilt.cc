@@ -17,7 +17,7 @@
 #include <octave/defun-dld.h>
 #include <octave/error.h>
 #include <octave/gripes.h>
-#include <octave/oct-obj.h>
+#include <octave/ovl.h>
 #include <octave/pager.h>
 #include <octave/quit.h>
 #include <octave/variables.h>

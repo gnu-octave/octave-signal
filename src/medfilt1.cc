@@ -193,7 +193,7 @@ values.\n\
     }
 
   int n=3;    // length of the filter (default 3)
-  if (nargin > 1) n = NINT(args(1).double_value());
+  if (nargin > 1) n = octave::math::nint(args(1).double_value());
   if (n < 1)
     {
       error ("medfilt1 filter length must be at least 1");
