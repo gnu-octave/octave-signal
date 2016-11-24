@@ -76,7 +76,7 @@ IEEE Trans. on Signal Processing, 46(2):497-501, February 1998.\n\
 {
   octave_value_list retval;
 
-  const int nargin = args.numel();
+  const int nargin = args.length();
   if (nargin < 5 || nargin > 6) {
     print_usage ();
     return retval;
@@ -84,27 +84,27 @@ IEEE Trans. on Signal Processing, 46(2):497-501, February 1998.\n\
 
   const int m = args(0).int_value(true);
   if (error_state) {
-    gripe_wrong_type_arg("cl2bp", args (0));
+    err_wrong_type_arg("cl2bp", args (0));
     return retval;
   }
   const double w1 = args(1).double_value();
   if (error_state) {
-    gripe_wrong_type_arg("cl2bp", args (1));
+    err_wrong_type_arg("cl2bp", args (1));
     return retval;
   }
   const double w2 = args(2).double_value();
   if (error_state) {
-    gripe_wrong_type_arg("cl2bp", args (2));
+    err_wrong_type_arg("cl2bp", args (2));
     return retval;
   }
   const ColumnVector up_vector(args(3).vector_value());
   if (error_state) {
-    gripe_wrong_type_arg("cl2bp", args (3));
+    err_wrong_type_arg("cl2bp", args (3));
     return retval;
   }
   const ColumnVector lo_vector(args(4).vector_value());
   if (error_state) {
-    gripe_wrong_type_arg("cl2bp", args (4));
+    err_wrong_type_arg("cl2bp", args (4));
     return retval;
   }
   if (up_vector.numel() != 3 || lo_vector.numel() != 3) {
@@ -121,7 +121,7 @@ IEEE Trans. on Signal Processing, 46(2):497-501, February 1998.\n\
 
   const int L = args(5).int_value(true);
   if (error_state) {
-    gripe_wrong_type_arg("cl2bp", args (5));
+    err_wrong_type_arg("cl2bp", args (5));
     return retval;
   }
   if (L > 1000000) {
