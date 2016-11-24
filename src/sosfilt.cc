@@ -13,6 +13,7 @@
 // You should have received a copy of the GNU General Public License along with
 // this program; if not, see <http://www.gnu.org/licenses/>.
 
+#include <octave/oct.h>
 #include <octave/defun-dld.h>
 #include <octave/error.h>
 #include <octave/gripes.h>
@@ -51,7 +52,7 @@ section 1, etc.  The b0 entry must be nonzero for each section.\n\
 
   if (error_state)
     {
-      gripe_wrong_type_arg("sosfilt",args(0));
+      err_wrong_type_arg("sosfilt",args(0));
       return retval;
     }
 
@@ -65,7 +66,7 @@ section 1, etc.  The b0 entry must be nonzero for each section.\n\
 
   if (error_state)
     {
-      gripe_wrong_type_arg("sosfilt",args(1));
+      err_wrong_type_arg("sosfilt",args(1));
       return retval;
     }
 
