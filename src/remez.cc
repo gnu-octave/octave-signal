@@ -784,20 +784,20 @@ Frequency is in the range (0, 1), with 1 being the Nyquist frequency.\n\
     return retval;
   }
 
-  int numtaps = NINT (args(0).double_value()) + 1; // #coeff = filter order+1
+  int numtaps = octave::math::nint (args(0).double_value()) + 1; // #coeff = filter order+1
   if (numtaps < 4) {
     error("remez: number of taps must be an integer greater than 3");
     return retval;
   }
 
   ColumnVector o_bands(args(1).vector_value());
-  int numbands = o_bands.length()/2;
+  int numbands = o_bands.numel()/2;
   OCTAVE_LOCAL_BUFFER(double, bands, numbands*2);
-  if (numbands < 1 || o_bands.length()%2 == 1) {
+  if (numbands < 1 || o_bands.numel()%2 == 1) {
     error("remez: must have an even number of band edges");
     return retval;
   }
-  for (i=1; i < o_bands.length(); i++) {
+  for (i=1; i < o_bands.numel(); i++) {
     if (o_bands(i)<o_bands(i-1)) {
       error("band edges must be nondecreasing");
       return retval;
@@ -811,7 +811,7 @@ Frequency is in the range (0, 1), with 1 being the Nyquist frequency.\n\
 
   ColumnVector o_response(args(2).vector_value());
   OCTAVE_LOCAL_BUFFER (double, response, numbands*2);
-  if (o_response.length() != o_bands.length()) {
+  if (o_response.numel() != o_bands.numel()) {
     error("remez: must have one response magnitude for each band edge");
     return retval;
   }
@@ -826,7 +826,7 @@ Frequency is in the range (0, 1), with 1 being the Nyquist frequency.\n\
       stype = args(3).string_value();
     else if (args(3).is_real_matrix() || args(3).is_real_scalar()) {
       ColumnVector o_weight(args(3).vector_value());
-      if (o_weight.length() != numbands) {
+      if (o_weight.numel() != numbands) {
         error("remez: need one weight for each band [=length(band)/2]");
         return retval;
       }
@@ -841,7 +841,7 @@ Frequency is in the range (0, 1), with 1 being the Nyquist frequency.\n\
     if (args(4).is_string() && !args(3).is_string())
       stype = args(4).string_value();
     else if (args(4).is_real_scalar())
-      density = NINT(args(4).double_value());
+      density = octave::math::nint (args(4).double_value());
     else {
       error("remez: incorrect argument list");
       return retval;
@@ -850,7 +850,7 @@ Frequency is in the range (0, 1), with 1 being the Nyquist frequency.\n\
   if (nargin > 5) {
     if (args(5).is_real_scalar()
         && !args(4).is_real_scalar())
-      density = NINT(args(5).double_value());
+      density = octave::math::nint (args(5).double_value());
     else {
       error("remez: incorrect argument list");
       return retval;
