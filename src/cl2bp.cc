@@ -76,7 +76,7 @@ IEEE Trans. on Signal Processing, 46(2):497-501, February 1998.\n\
 {
   octave_value_list retval;
 
-  const int nargin = args.length();
+  const int nargin = args.numel();
   if (nargin < 5 || nargin > 6) {
     print_usage ();
     return retval;
@@ -107,7 +107,7 @@ IEEE Trans. on Signal Processing, 46(2):497-501, February 1998.\n\
     gripe_wrong_type_arg("cl2bp", args (4));
     return retval;
   }
-  if (up_vector.length() != 3 || lo_vector.length() != 3) {
+  if (up_vector.numel() != 3 || lo_vector.numel() != 3) {
     error("cl2bp: The up and lo vectors must contain 3 values");
     return retval;
   }

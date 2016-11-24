@@ -76,7 +76,7 @@ all:
 
 check: all
 	$(OCTAVE) --silent \
-	  --eval 'pkg load $(DEPENDS);' \
+	  --eval 'if(!isempty("$(DEPENDS)")); pkg load $(DEPENDS); endif;' \
 	  --eval 'addpath (fullfile ([pwd filesep "inst"]));' \
 	  --eval 'addpath (fullfile ([pwd filesep "src"]));' \
 	  --eval 'runtests ("inst"); runtests ("src");'
@@ -94,4 +94,3 @@ clean:
 	cd src && $(MAKE) $@
 
 maintainer-clean: clean
-

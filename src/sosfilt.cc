@@ -13,7 +13,6 @@
 // You should have received a copy of the GNU General Public License along with
 // this program; if not, see <http://www.gnu.org/licenses/>.
 
-#include <octave/config.h>
 #include <octave/defun-dld.h>
 #include <octave/error.h>
 #include <octave/gripes.h>
