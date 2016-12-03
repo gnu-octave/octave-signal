@@ -10,10 +10,13 @@ HTML_DIR        = $(PACKAGE)-html
 HTML_TARBALL    = $(PACKAGE)-html.tar.gz
 
 MD5SUM    ?= md5sum
-MKOCTFILE ?= mkoctfile
-OCTAVE    ?= octave
 SED       ?= sed
 TAR       ?= tar
+
+# Follow jwe suggestion on not hinreting these vars from
+# the enviroment, so they can be set as command line arguemnts
+MKOCTFILE := mkoctfile
+OCTAVE    := octave
 
 TOLOWER = $(SED) -e 'y/ABCDEFGHIJKLMNOPQRSTUVWXYZ/abcdefghijklmnopqrstuvwxyz/'
 

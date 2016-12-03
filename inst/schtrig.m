@@ -14,35 +14,73 @@
 ## along with this program; if not, see <http://www.gnu.org/licenses/>.
 
 ## -*- texinfo -*-
-## @deftypefn {Function File} {[@var{rmsx},@var{w}] =} schtrig (@var{x},@var{lvl},@var{rst}=1)
+## @deftypefn {@var{v} =} schtrig (@var{x},@var{lvl},@var{rst}=1)
+## @deftypefnx {[@var{v},@var{rng}] =} schtrig (@dots{})
 ## Implements a multisignal Schmitt trigger with levels @var{lvl}.
 ##
-## The triger works along the first dimension of the array @var{x}. When @code{@var{rst}==1}
-## the state of the trigger for all signals is set to the low state (i.e. 0).
+## The triger works along the first dimension of the 2-dimensional array @var{x}.
+## It compares each column in @var{x} to the levels in @var{lvl}, when the
+## value is higher @code{max (@var{lvl})} the output @var{v} is high (i.e. 1); when the
+## value is below @code{min (@var{lvl})} the output is low (i.e. 0); and when
+## the value is between the two levels the output retains its value.
 ##
-## Run @code{demo schtrig} to see an example.
+## The threshold levels are passed in the array @var{lvl}. If this is a scalar,
+## the thresholds are symmetric around 0, i.e. @code{[-lvl lvl]}.
+##
+## The second output argument stores the ranges in which the output is high, so
+## the indexes @var{rng(1,i):rng(2,i)} point to the i-th segment of 1s in @var{v}.
+## See @code{clustersegment} for a detailed explanation.
+##
+## The function conserves the state of the trigger across calls (persistent variable).
+## If the reset flag is active, i.e. @code{@var{rst}== true}, then the state of
+## the trigger for all signals is set to the low state (i.e. 0).
+##
+## Example:
+## @example
+## x = [0 0.5 1 1.5 2 1.5 1.5 1.2 1 0 0].';
+## y = schtrig (x, [1.3 1.6]);
+## disp ([x y]);
+##   0.0   0
+##   0.5   0
+##   1.0   0
+##   1.5   0
+##   2.0   1
+##   1.5   1
+##   1.5   1
+##   1.2   0
+##   1.0   0
+##   0.0   0
+##   0.0   0
+## @end example
+##
+## Run @code{demo schtrig} to see further examples.
 ##
 ## @seealso{clustersegment}
 ## @end deftypefn
 
-function v = schtrig (x, lvl, rst = 1)
+function [v rg] = schtrig (x, lvl, rst = true)
+
+  if (length (ndims (x)) > 2)
+    error ('Octave:invalid-input-arg', 'The input should be two dimensional.');
+  endif
+  if (length (ndims (lvl)) > 2)
+    error ('Octave:invalid-input-arg', 'Only a maximum of two threshold levels accepted.');
+  endif
+
+  [nT nc] = size (x);
 
   persistent st0;
+  if (rst || isempty (st0))
+    st0 = zeros (1,nc);
+  endif
 
-  if length(lvl) == 1
-    lvl = abs (lvl)*[1 -1];
+  if (length(lvl) == 1)
+    lvl = abs (lvl) .* [1 -1];
   else
-    lvl = sort(lvl,'descend');
+    lvl = sort (lvl,'descend');
   endif
 
-  [nT nc] = size(x);
-
-  v = NA (nT, nc);
-
-  if rst || isempty(st0)
-    st0 = zeros(1,nc);
-  endif
-
+  v      = NA (nT, nc);
   v(1,:) = st0;
 
   ## Signal is above up level
@@ -55,12 +93,15 @@ function v = schtrig (x, lvl, rst = 1)
 
   ## Resolve intermediate states
   ## Find data between the levels
-  idx = isnan (v);
+  idx    = isnan (v);
   ranges = clustersegment (idx');
+  if (nc == 1)
+    ranges = {ranges};
+  endif
 
   for i=1:nc
     ## Record the state at the beginning of the interval between levels
-    if !isempty (ranges{i})
+    if (!isempty (ranges{i}))
       prev         = ranges{i}(1,:)-1;
       prev(prev<1) = 1;
       st0          = v(prev,i);
@@ -85,9 +126,18 @@ endfunction
 %! lvl = [0.8 0.25]';
 %! v   = schtrig (x,lvl);
 %!
-%! h = plot(t,x,t,v);
-%! set (h([1 3]),'color','b');
-%! set (h([2 4]),'color',[0 1 0.5]);
+%! subplot(2,1,1)
+%! h = plot (t, x(:,1), t, v(:,1));
+%! set (h, 'linewidth',2);
+%! line([0; 1],lvl([1; 1]),'color','g');
+%! line([0;1],lvl([2;2]),'color','k')
+%! axis tight
+%!
+%! subplot(2,1,2)
+%! h = plot (t, x(:,2), t, v(:,2));
 %! set (h,'linewidth',2);
-%! line([0; 1],lvl([1; 1]),'color','r');
-%! line([0;1],lvl([2;2]),'color','b')
+%! line([0; 1],lvl([1; 1]),'color','g');
+%! line([0;1],lvl([2;2]),'color','k')
+%! axis tight
+
+# TODO add tests
