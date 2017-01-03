@@ -84,30 +84,30 @@ IEEE Trans. on Signal Processing, 46(2):497-501, February 1998.\n\
 
   const int m = args(0).int_value(true);
   if (error_state) {
-    gripe_wrong_type_arg("cl2bp", args (0));
+    err_wrong_type_arg("cl2bp", args (0));
     return retval;
   }
   const double w1 = args(1).double_value();
   if (error_state) {
-    gripe_wrong_type_arg("cl2bp", args (1));
+    err_wrong_type_arg("cl2bp", args (1));
     return retval;
   }
   const double w2 = args(2).double_value();
   if (error_state) {
-    gripe_wrong_type_arg("cl2bp", args (2));
+    err_wrong_type_arg("cl2bp", args (2));
     return retval;
   }
   const ColumnVector up_vector(args(3).vector_value());
   if (error_state) {
-    gripe_wrong_type_arg("cl2bp", args (3));
+    err_wrong_type_arg("cl2bp", args (3));
     return retval;
   }
   const ColumnVector lo_vector(args(4).vector_value());
   if (error_state) {
-    gripe_wrong_type_arg("cl2bp", args (4));
+    err_wrong_type_arg("cl2bp", args (4));
     return retval;
   }
-  if (up_vector.length() != 3 || lo_vector.length() != 3) {
+  if (up_vector.numel() != 3 || lo_vector.numel() != 3) {
     error("cl2bp: The up and lo vectors must contain 3 values");
     return retval;
   }
@@ -121,7 +121,7 @@ IEEE Trans. on Signal Processing, 46(2):497-501, February 1998.\n\
 
   const int L = args(5).int_value(true);
   if (error_state) {
-    gripe_wrong_type_arg("cl2bp", args (5));
+    err_wrong_type_arg("cl2bp", args (5));
     return retval;
   }
   if (L > 1000000) {
@@ -164,5 +164,5 @@ IEEE Trans. on Signal Processing, 46(2):497-501, February 1998.\n\
 %!   -0.0000000000000000
 %!    0.0563980420304213
 %!    0.0000000000000000];
-%! assert(cl2bp(7, 0.25*pi, 0.75*pi, [0.01, 1.04, 0.01], [-0.01, 0.96, -0.01], 2^11), b, 1e-14);
+%! assert(cl2bp(7, 0.25*pi, 0.75*pi, [0.01, 1.04, 0.01], [-0.01, 0.96, -0.01], 2^11), b.', 1e-14);
 */

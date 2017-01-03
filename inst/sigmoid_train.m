@@ -14,7 +14,7 @@
 ## this program; if not, see <http://www.gnu.org/licenses/>.
 
 ## -*- texinfo -*-
-## @deftypefn {Function File} {@var{y} =} sigmoid_train (@var{t}, @var{ranges}, @var{rc})
+## @deftypefn {Function File} {[@var{y} @var{s}] =} sigmoid_train (@var{t}, @var{ranges}, @var{rc})
 ##
 ## Evaluate a train of sigmoid functions at @var{t}.
 ##
@@ -25,11 +25,15 @@
 ## The input @var{rc} is an array that defines the rising and falling time
 ## constants of each sigmoid.  Its size must equal the size of @var{ranges}.
 ##
+## The individual sigmoids are returned in @var{s}. The combined sigmoid train
+## is returned in the vector @var{y} of length equal to @var{t}, and such that
+## @code{Y = max (S)}.
+##
 ## Run @code{demo sigmoid_train} to some examples of the use of this function.
 ##
 ## @end deftypefn
 
-function envelope = sigmoid_train (t, range, timeconstant)
+function [envelope Y] = sigmoid_train (t, range, timeconstant)
 
   ## number of sigmoids
   nRanges = size (range, 1);
@@ -39,15 +43,16 @@ function envelope = sigmoid_train (t, range, timeconstant)
     ## All bumps have the same time constant and are symmetric
     timeconstant = timeconstant * ones (nRanges,2);
 
-  elseif any( size(timeconstant) != [1 1])
-
+  elseif any (size(timeconstant) == [1 1]) && nRanges > 1
     ## All bumps have different time constant but are symmetric
-    if length(timeconstant) ~= nRanges
+    if isrow (timeconstant)
+      timeconstant = timeconstant.';
+    endif
+
+    if size (timeconstant, 1) != nRanges
       error('signalError','Length of time constant must equal number of ranges.')
     endif
-    if isrow (timeconstant)
-      timeconstant = timeconstant';
-    endif
+
     timeconstant = repmat (timeconstant,1,2);
 
   endif
@@ -61,11 +66,14 @@ function envelope = sigmoid_train (t, range, timeconstant)
   [ncol nrow]     = size (t);
 
   ## Compute arguments of each sigmoid
-  T    = repmat (t, nRanges, 1);
-  RC1  = repmat (timeconstant(:,1), 1, nrow);
-  RC2  = repmat (timeconstant(:,2), 1, nrow);
-  a_up = (repmat (range(:,1), 1 ,nrow) - T)./RC1;
-  a_dw = (repmat (range(:,2), 1 ,nrow) - T)./RC2;
+  #  T    = repmat (t, nRanges, 1);
+  #  RC1  = repmat (timeconstant(:,1), 1, nrow);
+  #  RC2  = repmat (timeconstant(:,2), 1, nrow);
+  #  a_up = (repmat (range(:,1), 1 ,nrow) - T) ./ RC1;
+  #  a_dw = (repmat (range(:,2), 1 ,nrow) - T) ./ RC2;
+  # Using broadcasting
+  a_up = bsxfun (@rdivide, bsxfun (@minus, range(:,1), t), timeconstant(:,1));
+  a_dw = bsxfun (@rdivide, bsxfun (@minus, range(:,2), t), timeconstant(:,2));
 
   ## Evaluate the sigmoids and mix them
   Y        = 1 ./ ( 1 + exp (a_up) ) .* (1 - 1 ./ ( 1 + exp (a_dw) ) );
@@ -73,16 +81,17 @@ function envelope = sigmoid_train (t, range, timeconstant)
 
   if flag_transposed
     envelope = envelope.';
+    Y        = Y.';
   endif
 
 endfunction
 
 %!demo
 %! # Vectorized
-%! t = linspace (0, 2, 500);
+%! t     = linspace (0, 2, 500);
 %! range = [0.1 0.4; 0.6 0.8; 1 2];
-%! rc = [1e-2 1e-2; 1e-3 1e-3; 2e-2 2e-2];
-%! y = sigmoid_train (t, range, rc);
+%! rc    = [1e-2 1e-3; 1e-3 2e-2; 2e-2 1e-2];
+%! y     = sigmoid_train (t, range, rc);
 %!
 %! close all
 %! for i=1:3
@@ -96,6 +105,22 @@ endfunction
 %!
 %! #-------------------------------------------------------------------------
 %! # The colored regions show the limits defined in range.
+
+%!demo
+%! # Varaible amplitude
+%! t     = linspace (0, 2, 500);
+%! range = [0.1 0.4; 0.6 0.8; 1 2];
+%! rc    = [1e-2 1e-3; 1e-3 2e-2; 2e-2 1e-2];
+%! amp   = [4 2 3];
+%! [~, S] = sigmoid_train (t, range, rc);
+%! y = amp * S;
+%! close all
+%! h = plot (t, y, '-b', t, S, '-');
+%! set (h(1), "linewidth", 2);
+%! legend (h(1:2), {"Sigmoid train", "Components"});
+%! xlabel('time'); ylabel('signal')
+%! title ('Varying amplitude sigmoid train')
+%! axis tight
 
 %!demo
 %! # On demand
