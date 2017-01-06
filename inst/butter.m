@@ -57,7 +57,7 @@
 
 function [a, b, c, d] = butter (n, w, varargin)
 
-  if (nargin > 4 || nargin < 2 || nargout > 4 || nargout < 2)
+  if (nargin > 4 || nargin < 2 || nargout > 4)
     print_usage ();
   endif
 
@@ -120,12 +120,13 @@ function [a, b, c, d] = butter (n, w, varargin)
   endif
 
   ## convert to the correct output form
-  if (nargout == 2)
+  ## note that poly always outputs a row vector
+  if (nargout <= 2)
     a = real (gain * poly (zero));
     b = real (poly (pole));
   elseif (nargout == 3)
-    a = zero;
-    b = pole;
+    a = zero(:);
+    b = pole(:);
     c = gain;
   else
     ## output ss results
@@ -178,6 +179,29 @@ endfunction
 %!error [a, b] = butter (1, 2, 3, 4, 5)
 %!error [a, b] = butter (.5, .2)
 %!error [a, b] = butter (3, .2, "invalid")
+
+%% Test output orientation
+%!test
+%! butter (9, .6);
+%! assert (isrow (ans));
+%!test
+%! A = butter (9, .6);
+%! assert (isrow (A));
+%!test
+%! [A, B] = butter (9, .6);
+%! assert (isrow (A));
+%! assert (isrow (B));
+%!test
+%! [z, p, g] = butter (9, .6);
+%! assert (iscolumn (z));
+%! assert (iscolumn (p));
+%! assert (isscalar (g));
+%!test
+%! [a, b, c, d] = butter (9, .6);
+%! assert (ismatrix (a));
+%! assert (iscolumn (b));
+%! assert (isrow (c));
+%! assert (isscalar (d));
 
 %!demo
 %! sf = 800; sf2 = sf/2;

@@ -55,7 +55,7 @@
 
 function [a, b, c, d] = cheby2 (n, rs, w, varargin)
 
-  if (nargin > 5 || nargin < 3 || nargout > 4 || nargout < 2)
+  if (nargin > 5 || nargin < 3 || nargout > 4)
     print_usage ();
   endif
 
@@ -136,12 +136,13 @@ function [a, b, c, d] = cheby2 (n, rs, w, varargin)
   endif
 
   ## convert to the correct output form
-  if (nargout == 2)
+  ## note that poly always outputs a row vector
+  if (nargout <= 2)
     a = real (gain * poly (zero));
     b = real (poly (pole));
   elseif (nargout == 3)
-    a = zero;
-    b = pole;
+    a = zero(:);
+    b = pole(:);
     c = gain;
   else
     ## output ss results
@@ -157,4 +158,26 @@ endfunction
 %!error [a, b] = cheby2 (1, 2, 3, 4, 5, 6)
 %!error [a, b] = cheby2 (.5, 40, .2)
 %!error [a, b] = cheby2 (3, 40, .2, "invalid")
-
+%
+%% Test output orientation
+%!test
+%! cheby2 (3, 4, .5);
+%! assert (isrow (ans));
+%!test
+%! A = cheby2 (3, 4, .5);
+%! assert (isrow (A));
+%!test
+%! [A, B] = cheby2 (3, 4, .5);
+%! assert (isrow (A));
+%! assert (isrow (B));
+%!test
+%! [z, p, g] = cheby2 (3, 4, .5);
+%! assert (iscolumn (z));
+%! assert (iscolumn (p));
+%! assert (isscalar (g));
+%!test
+%! [a, b, c, d] = cheby2 (3, 4, .5);
+%! assert (ismatrix (a));
+%! assert (iscolumn (b));
+%! assert (isrow (c));
+%! assert (isscalar (d));

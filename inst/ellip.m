@@ -59,7 +59,7 @@
 
 function [a, b, c, d] = ellip (n, rp, rs, w, varargin)
 
-  if (nargin > 6 || nargin < 4 || nargout > 4 || nargout < 2)
+  if (nargin > 6 || nargin < 4 || nargout > 4)
     print_usage ();
   endif
 
@@ -124,12 +124,13 @@ function [a, b, c, d] = ellip (n, rp, rs, w, varargin)
   endif
 
   ## convert to the correct output form
-  if (nargout == 2)
+  ## note that poly always outputs a row vector
+  if (nargout <= 2)
     a = real (gain * poly (zero));
     b = real (poly (pole));
   elseif (nargout == 3)
-    a = zero;
-    b = pole;
+    a = zero(:);
+    b = pole(:);
     c = gain;
   else
     ## output ss results
@@ -163,3 +164,25 @@ endfunction
 %!error [a, b] = ellip (.5, 2, 40, .2)
 %!error [a, b] = ellip (3, 2, 40, .2, "invalid")
 
+%% Test output orientation
+%!test
+%! ellip (6, 3, 50, .6);
+%! assert (isrow (ans));
+%!test
+%! A = ellip (6, 3, 50, .6);
+%! assert (isrow (A));
+%!test
+%! [A, B] = ellip (6, 3, 50, .6);
+%! assert (isrow (A));
+%! assert (isrow (B));
+%!test
+%! [z, p, g] = ellip (6, 3, 50, .6);
+%! assert (iscolumn (z));
+%! assert (iscolumn (p));
+%! assert (isscalar (g));
+%!test
+%! [a, b, c, d] = ellip (6, 3, 50, .6);
+%! assert (ismatrix (a));
+%! assert (iscolumn (b));
+%! assert (isrow (c));
+%! assert (isscalar (d));
