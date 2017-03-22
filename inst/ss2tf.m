@@ -16,7 +16,7 @@
 
 ## -*- texinfo -*-
 ## @deftypefn {Function File} {[@var{num}, @var{den}] =} ss2tf (@var{a}, @var{b}, @var{c}, @var{d})
-## Conversion from transfer function to state-space.
+## Conversion from state-space to transfer function representation.
 ## The state space system:
 ## @tex
 ## $$ \dot x = Ax + Bu $$
