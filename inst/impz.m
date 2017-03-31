@@ -76,6 +76,10 @@ function [x_r, t_r] = impz(b, a = [1], n = [], fs = 1)
     n = n + length(b);
   elseif isempty(n)
     n = length(b);
+  elseif (! isscalar (n))
+    ## TODO: missing option of having N as a vector of values to
+    ##       compute the impulse response.
+    error ("impz: N must be empty or a scalar");
   endif
 
   if length(a) == 1
@@ -106,3 +110,9 @@ function [x_r, t_r] = impz(b, a = [1], n = [], fs = 1)
 endfunction
 
 %!assert (size (impz (1, [1 -1 0.9], 100)), [100 1])
+
+## Missing functionality
+%!xtest
+%! [h, t] = impz (1, [1 -1 0.9], 0:101);
+%! assert (size (h), [101 1])
+%! assert (t, 0:101)
