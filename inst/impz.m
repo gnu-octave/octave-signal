@@ -79,9 +79,9 @@ function [x_r, t_r] = impz(b, a = [1], n = [], fs = 1)
   endif
 
   if length(a) == 1
-    x = fftfilt(b/a, [1, zeros(1,n-1)]);
+    x = fftfilt(b/a, [1, zeros(1,n-1)]');
   else
-    x = filter(b, a, [1, zeros(1,n-1)]);
+    x = filter(b, a, [1, zeros(1,n-1)]');
   endif
   t = [0:n-1]/fs;
 
@@ -104,3 +104,5 @@ function [x_r, t_r] = impz(b, a = [1], n = [], fs = 1)
   endif
 
 endfunction
+
+%!assert (size (impz (1, [1 -1 0.9], 100)), [100 1])
