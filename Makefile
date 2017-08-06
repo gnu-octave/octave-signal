@@ -13,7 +13,7 @@ MD5SUM    ?= md5sum
 SED       ?= sed
 TAR       ?= tar
 
-# Follow jwe suggestion on not hinreting these vars from
+# Follow jwe suggestion on not inheriting these vars from
 # the enviroment, so they can be set as command line arguemnts
 MKOCTFILE := mkoctfile
 OCTAVE    := octave
