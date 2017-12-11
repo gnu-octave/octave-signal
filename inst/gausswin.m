@@ -32,12 +32,17 @@ function w = gausswin (m, a)
   if (nargin < 1 || nargin > 2)
     print_usage ();
   elseif (! (isscalar (m) && (m == fix (m)) && (m > 0)))
-    error ("gausswin: M must be a positive integer");
+    error ("Octave:invalid-input-arg", ...
+            "gausswin: M must be a positive integer");
   elseif (nargin == 1)
     a = 2.5;
   endif
 
-  w = exp ( -0.5 * ( a/m * [ -(m-1) : 2 : m-1 ]' ) .^ 2 );
+  if m==1
+    w = 1;
+  else
+    w = exp ( -0.5 * ( a/(m-1) * [ -(m-1) : 2 : m-1 ]' ) .^ 2 );
+  endif
 
 endfunction
 
