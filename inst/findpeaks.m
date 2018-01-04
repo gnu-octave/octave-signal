@@ -46,8 +46,7 @@
 ##
 ## @item "roots"
 ## The abscissa values (in index units) at which the parabola fitted to
-## each of the returned peaks crosses the @asis{"baseline"} value. The
-## width of the peak is calculated by @command{diff(roots)}.
+## each of the returned peaks realizes its width as defined below.
 ## @end table
 ##
 ## This function accepts property-value pair given in the list below:
@@ -302,7 +301,7 @@ function [pks idx varargout] = findpeaks (data, varargin)
       extra.parabol(struct_count).x  = ind([1 end]);
       extra.parabol(struct_count).pp = pp;
 
-      extra.roots(struct_count,1:2)= rz;
+      extra.roots(struct_count,1:2)= xm + [-width width]/2;
       extra.height(struct_count)   = H;
       extra.baseline(struct_count) = mean ([H minH]);
     endif
