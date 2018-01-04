@@ -64,14 +64,22 @@
 ## less than this distance are considered a single peak. This distance
 ## is also used to fit a second order polynomial to the peaks to
 ## estimate their width, therefore it acts as a smoothing parameter.
+## The neighborhood size is equal to the value of @asis{"MinPeakDistance"}.
 ## Default value 1.
 ##
 ## @item "MinPeakWidth"
 ## Minimum width of peaks (positive integer). The width of the peaks is
 ## estimated using a parabola fitted to the neighborhood of each peak.
-## The neighborhood size is equal to the value of
-## @asis{"MinPeakDistance"}. The width is evaluated at the extrema of the 
-## neighborhood. Default value 1.
+## The width is caulculated with the formula 
+## @group
+## a * (width - x0)^2 = 1
+## @end group
+## where a is the the concavity of the parabola and x0 its vertex.
+## Default value 1.
+##
+## @item "MaxPeakWidth"
+## Maximum width of peaks (positive integer).
+## Default value @code{Inf}.
 ##
 ## @item "DoubleSided"
 ## Tells the function that data takes positive and negative values. The
@@ -119,7 +127,7 @@ function [pks idx varargout] = findpeaks (data, varargin)
   ##
   ##        To keep supporting older octave versions, we have an alternative
   ##        path that avoids inputParser.  And if inputParser is available,
-  ##        we check what implementation is is, and act accordingly.
+  ##        we check what implementation is, and act accordingly.
 
   ## Note that in Octave 4.0, inputParser is classdef and Octave behaves
   ## weird for it. which ("inputParser") will return empty (thinks its a
@@ -131,11 +139,13 @@ function [pks idx varargout] = findpeaks (data, varargin)
     parser.addParamValue ("MinPeakHeight", eps,posscal);
     parser.addParamValue ("MinPeakDistance", 1, posscal);
     parser.addParamValue ("MinPeakWidth", 1, posscal);
+    parser.addParamValue ("MaxPeakWidth", Inf, posscal);
     parser.addSwitch ("DoubleSided");
     parser.parse (varargin{:});
     minH      = parser.Results.MinPeakHeight;
     minD      = parser.Results.MinPeakDistance;
     minW      = parser.Results.MinPeakWidth;
+    maxW      = parser.Results.MaxPeakWidth;
     dSided    = parser.Results.DoubleSided;
   else
     ## either old @inputParser or no inputParser at all...
@@ -149,16 +159,19 @@ function [pks idx varargout] = findpeaks (data, varargin)
       dSided = false;
     endif
 
-    [~, minH, minD, minW] = parseparams (lvarargin,
-                                         "minpeakheight", 2 * std (__data__),
-                                         "minpeakdistance", 4,
-                                         "minpeakwidth", 2);
+    [~, minH, minD, minW, maxW] = parseparams (lvarargin,
+                                         "minpeakheight", eps,
+                                         "minpeakdistance", 1,
+                                         "minpeakwidth", 1, 
+                                         "maxpeakwidth", Inf);
     if (! posscal (minH))
       error ("findpeaks: MinPeakHeight must be a positive scalar");
     elseif (! posscal (minD))
       error ("findpeaks: MinPeakDistance must be a positive scalar");
     elseif (! posscal (minW))
       error ("findpeaks: MinPeakWidth must be a positive scalar");
+    elseif (! posscal (maxW))
+      error ("findpeaks: MaxPeakWidth must be a positive scalar");
     endif
   endif
 
@@ -250,8 +263,8 @@ function [pks idx varargout] = findpeaks (data, varargin)
   struct_count = 0;
 
   for i=1:n
-    ind = (round (max(idx(i)-minD/2,1)) : ...
-           round (min(idx(i)+minD/2,np))).';
+    ind = (floor (max(idx(i)-minD/2,1)) : ...
+           ceil (min(idx(i)+minD/2,np))).';
     pp      = zeros (1,3);
     # If current peak is not local maxima, then fit parabola to neighbor
     if any (data(ind) > data(idx(i)))
@@ -273,11 +286,12 @@ function [pks idx varargout] = findpeaks (data, varargin)
 #    pause(0.2)
 #    set(h(3:4),"visible","off");
 
-    thrsh = min (data(ind([1 end])));
-    rz    = roots ([pp(1:2) pp(3)-thrsh]);
-    width = abs (diff (rz));
+#    thrsh = min (data(ind([1 end])));
+#    rz    = roots ([pp(1:2) pp(3)-thrsh]);
+#    width = abs (diff (rz));
+    width = sqrt (abs(1 / pp(1))) + xm;
 
-    if (width < minW || ...
+    if ( (width > maxW || width < minW) || ...
         pp(1) > 0 || ...
         H < minH || ...
         data(idx(i)) < 0.99*H || ...
