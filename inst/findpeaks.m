@@ -35,7 +35,7 @@
 ## A structure containing the parabola fitted to each returned peak. The
 ## structure has two fields, @asis{"x"} and @asis{"pp"}. The field
 ## @asis{"pp"} contains the coefficients of the 2nd degree polynomial
-## and @asis{"x"} the extrema of the intercal here it was fitted.
+## and @asis{"x"} the extrema of the interval where it was fitted.
 ##
 ## @item "height"
 ## The estimated height of the returned peaks (in units of @var{data}).
@@ -55,24 +55,23 @@
 ## @table @asis
 ##
 ## @item "MinPeakHeight"
-## Minimum peak height (positive scalar). Only peaks that exceed this
+## Minimum peak height (non-negative scalar). Only peaks that exceed this
 ## value will be returned. For data taking positive and negative values
-## use the option "DoubleSided". Default value @code{2*std (abs (detrend
-## (data,0)))}.
+## use the option "DoubleSided". Default value @code{eps}.
 ##
 ## @item "MinPeakDistance"
 ## Minimum separation between (positive integer). Peaks separated by
 ## less than this distance are considered a single peak. This distance
 ## is also used to fit a second order polynomial to the peaks to
 ## estimate their width, therefore it acts as a smoothing parameter.
-## Default value 4.
+## Default value 1.
 ##
 ## @item "MinPeakWidth"
 ## Minimum width of peaks (positive integer). The width of the peaks is
 ## estimated using a parabola fitted to the neighborhood of each peak.
 ## The neighborhood size is equal to the value of
-## @asis{"MinPeakDistance"}. The width is evaluated at the half height
-## of the peak with baseline at "MinPeakHeight". Default value 2.
+## @asis{"MinPeakDistance"}. The width is evaluated at the extrema of the 
+## neighborhood. Default value 1.
 ##
 ## @item "DoubleSided"
 ## Tells the function that data takes positive and negative values. The
@@ -129,9 +128,9 @@ function [pks idx varargout] = findpeaks (data, varargin)
       && isempty (strfind (which ("inputParser"),
                            ["@inputParser" filesep "inputParser.m"])))
     ## making use of classdef's inputParser ..
-    parser.addParamValue ("MinPeakHeight", 2*std (__data__),posscal);
-    parser.addParamValue ("MinPeakDistance", 4, posscal);
-    parser.addParamValue ("MinPeakWidth", 2, posscal);
+    parser.addParamValue ("MinPeakHeight", eps,posscal);
+    parser.addParamValue ("MinPeakDistance", 1, posscal);
+    parser.addParamValue ("MinPeakWidth", 1, posscal);
     parser.addSwitch ("DoubleSided");
     parser.parse (varargin{:});
     minH      = parser.Results.MinPeakHeight;
@@ -172,8 +171,8 @@ function [pks idx varargout] = findpeaks (data, varargin)
   endif
 
   ## Rough estimates of first and second derivative
-  df1 = diff (data, 1)([1; (1:end)']);
-  df2 = diff (data, 2)([1; 1; (1:end)']);
+  df1 = diff (data, 1)([1; (1:end).']);
+  df2 = diff (data, 2)([1; 1; (1:end).']);
 
   ## check for changes of sign of 1st derivative and negativity of 2nd
   ## derivative.
@@ -186,16 +185,17 @@ function [pks idx varargout] = findpeaks (data, varargin)
 
   ## sort according to magnitude
   [~, tmp] = sort (data(idx), "descend");
-  idx_s = idx(tmp);
+  idx_s    = idx(tmp);
 
   ## Treat peaks separated less than minD as one
-  D = abs (bsxfun (@minus, idx_s, idx_s'));
+  D  = abs (bsxfun (@minus, idx_s, idx_s.'));
+  D += diag(NA(1,size(D,1)));                # eliminate diagonal cpmparison
   if (any (D(:) < minD))
 
-    i = 1;
-    peak = cell ();
+    i          = 1;
+    peak       = cell ();
     node2visit = 1:size(D,1);
-    visited = [];
+    visited    = [];
     idx_pruned = idx_s;
 
     ## debug
@@ -206,7 +206,7 @@ function [pks idx varargout] = findpeaks (data, varargin)
 
       d = D(node2visit(1),:);
 
-      visited = [visited node2visit(1)];
+      visited       = [visited node2visit(1)];
       node2visit(1) = [];
 
       neighs  = setdiff (find (d < minD), visited);
@@ -237,52 +237,68 @@ function [pks idx varargout] = findpeaks (data, varargin)
   ## wrong concavity.
   ## not high enough
   ## data at peak is lower than parabola by 1%
-  if (minW > 0)
-    ## debug
+  ## position of extrema minus center is bigger equal than minD/2
+  ## debug
 ##    h = plot(1:length(data),data,"-",idx,data(idx),'.r',...
 ##          idx,data(idx),'og',idx,data(idx),'-m');
 ##    set(h(4),"linewidth",2)
 ##    set(h(3:4),"visible","off");
+  
+  idx_pruned   = idx;
+  n            = numel (idx);
+  np           = numel (data);
+  struct_count = 0;
 
-    idx_pruned = idx;
-    n  = numel (idx);
-    np = numel (data);
-    struct_count = 0;
-    for i=1:n
-      ind = (round (max(idx(i)-minD/2,1)) : ...
-             round (min(idx(i)+minD/2,np)))';
+  for i=1:n
+    ind = (round (max(idx(i)-minD/2,1)) : ...
+           round (min(idx(i)+minD/2,np))).';
+    pp      = zeros (1,3);
+    # If current peak is not local maxima, then fit parabola to neighbor
+    if any (data(ind) > data(idx(i)))
       pp = polyfit (ind, data(ind), 2);
-      H  = pp(3) - pp(2)^2/(4*pp(1));
+      xm = -pp(2)^2 / (2*pp(1));   # position of extrema
+      H  = polyval (pp, xm);      # value at extrema
+    else # use it as vertex of parabola
+      H     = data(idx(i));
+      xm    = idx(i);
+      pp    = zeros (1,3);
+      pp(1) = (ind-xm).^2 \ (data(ind)-H);
+      pp(2) = - 2 * pp(1) * xm;
+      pp(3) = H + pp(1) * xm^2;
+    endif
+    ## debug
+#    x = linspace(ind(1)-1,ind(end)+1,10);
+#    set(h(4),"xdata",x,"ydata",polyval(pp,x),"visible","on")
+#    set(h(3),"xdata",ind,"ydata",data(ind),"visible","on")
+#    pause(0.2)
+#    set(h(3:4),"visible","off");
 
-      ## debug
-##      x = linspace(ind(1)-1,ind(end)+1,10);
-##      set(h(4),"xdata",x,"ydata",polyval(pp,x),"visible","on")
-##      set(h(3),"xdata",ind,"ydata",data(ind),"visible","on")
-##      pause(0.2)
-##      set(h(3:4),"visible","off");
+    thrsh = min (data(ind([1 end])));
+    rz    = roots ([pp(1:2) pp(3)-thrsh]);
+    width = abs (diff (rz));
 
-      rz = roots ([pp(1:2) pp(3)-mean([H,minH])]);
-      width = abs (diff (rz));
-      if (width < minW || pp(1) > 0 || H < minH || data(idx(i)) < 0.99*H)
-        idx_pruned = setdiff (idx_pruned, idx(i));
-      elseif (nargout > 2)
-        struct_count++;
-        extra.parabol(struct_count).x  = ind([1 end]);
-        extra.parabol(struct_count).pp = pp;
+    if (width < minW || ...
+        pp(1) > 0 || ...
+        H < minH || ...
+        data(idx(i)) < 0.99*H || ...
+        abs (idx(i) - xm) > minD/2)
+      idx_pruned = setdiff (idx_pruned, idx(i));
+    elseif (nargout > 2)
+      struct_count++;
+      extra.parabol(struct_count).x  = ind([1 end]);
+      extra.parabol(struct_count).pp = pp;
 
-        extra.roots(struct_count,1:2)= rz;
-        extra.height(struct_count)   = H;
-        extra.baseline(struct_count) = mean ([H minH]);
-      endif
+      extra.roots(struct_count,1:2)= rz;
+      extra.height(struct_count)   = H;
+      extra.baseline(struct_count) = mean ([H minH]);
+    endif
 
-      ## debug
+    ## debug
 ##      set(h(2),"xdata",idx_pruned,"ydata",data(idx_pruned))
 ##      pause(0.2)
 
-    endfor
-    idx = idx_pruned;
-  endif
-
+  endfor
+  idx = idx_pruned;
 
   if (dSided)
     pks = __data__(idx);
@@ -313,9 +329,11 @@ endfunction
 %! [pks3 idx3] = findpeaks(data2,"DoubleSided","MinPeakHeight",0.5);
 %!
 %! subplot(1,2,1)
-%! plot(t,data1,t(idx),data1(idx),'.m')
+%! plot(t,data1,t(idx),data1(idx),'xm')
+%! axis tight
 %! subplot(1,2,2)
-%! plot(t,data2,t(idx2),data2(idx2),".m;>2*std;",t(idx3),data2(idx3),"or;>0.1;")
+%! plot(t,data2,t(idx2),data2(idx2),"xm;>2*std;",t(idx3),data2(idx3),"or;>0.1;")
+%! axis tight
 %! legend("Location","NorthOutside","Orientation","horizontal")
 %!
 %! #----------------------------------------------------------------------------
@@ -333,9 +351,9 @@ endfunction
 %!                              "MinPeakDistance",round(0.5/dt));
 %!
 %! subplot(1,2,1)
-%! plot(t,data,t(idx),data(idx),'.r')
+%! plot(t,data,t(idx),data(idx),'or')
 %! subplot(1,2,2)
-%! plot(t,data,t(idx2),data(idx2),'.r')
+%! plot(t,data,t(idx2),data(idx2),'or')
 %!
 %! #----------------------------------------------------------------------------
 %! # Noisy data may need tuning of the parameters. In the 2nd example,
@@ -355,7 +373,7 @@ endfunction
 %!error findpeaks (1)
 %!error findpeaks ([1, 2])
 
-## Failing test because we are not Matlab compatible
-%!xtest assert (findpeaks ([34 134 353 64 134 14 56 67 234 143 64 575 8657]),
+## Test Matlab compatibility
+%!test assert (findpeaks ([34 134 353 64 134 14 56 67 234 143 64 575 8657]),
 %!              [353 134 234])
 
