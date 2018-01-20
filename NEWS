@@ -4,7 +4,7 @@ Summary of important user-visible changes for signal 1.3.3:
  ** Other functions that have been changed for smaller bugfixes,
     increased Matlab compatibility, or performance:
 
-      impz square
+      impz square fracshift
 
 
 Summary of important user-visible changes for signal 1.3.2:
