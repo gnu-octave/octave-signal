@@ -87,21 +87,11 @@ endfunction
 function h = design_filter (d)
   ## properties of the interpolation filter
   log10_rejection   = -3.0;
-  stopband_cutoff_f = 1.0 / 2.0;
-  roll_off_width    = stopband_cutoff_f / 10;
-
-  ## determine filter length
   ## use empirical formula from [1] Chap 7, Eq. (7.63) p 476
   rejection_dB = -20.0 * log10_rejection;
-  L = ceil ((rejection_dB - 8.0) / (28.714 * roll_off_width));
-
-  ## ideal sinc filter
-  t = (-L:L).';
-  ideal_filter = 2 * stopband_cutoff_f * ...
-                     sinc (2 * stopband_cutoff_f * (t - (d - fix (d))));
-
   ## determine parameter of Kaiser window
   ## use empirical formula from [1] Chap 7, Eq. (7.62) p 474
+  ## FIXME since the parameters are fix the conditional below is not needed
   if ((rejection_dB >= 21) && (rejection_dB <= 50))
     beta = 0.5842 * (rejection_dB - 21.0) ^ 0.4 + ...
             0.07886 * (rejection_dB - 21.0);
@@ -110,6 +100,16 @@ function h = design_filter (d)
   else
     beta = 0.0;
   endif
+  ## properties of the interpolation filter
+  stopband_cutoff_f = 0.5;
+  roll_off_width    = stopband_cutoff_f / 10;
+
+  ## ideal sinc filter
+  ## determine filter length
+  L = ceil ((rejection_dB - 8.0) / (28.714 * roll_off_width));
+  t = (-L:L).';
+  ideal_filter = 2 * stopband_cutoff_f * ...
+                     sinc (2 * stopband_cutoff_f * (t - (d - fix (d))));
 
   ## apodize ideal (sincard) filter response
   m = 2 * L;
@@ -165,3 +165,36 @@ endfunction
 %!test #bug 52758
 %! x = [0 1 0 0 0 0 0 0];
 %! y = fracshift(x, 1);
+
+%!test #bug 47387
+%! N = 1024;
+%! t = linspace(0, 1, N).';
+%! x = exp(-t.^2/2/0.25^2).*sin(2*pi*10*t);
+%! dt = 0.25;
+%! d  = dt / (t(2) - t(1));
+%! y = fracshift(x, d);
+%! L = 37;
+%! _t = (-L:L).';
+%! ideal_filter = sinc (_t - (d - fix (d)));
+%! m = 2 * L;
+%! _t = (0:m).' - (d - fix (d));
+%! beta = 5.6533;
+%! _t = 2 * beta / m * sqrt (_t .* (m - _t));
+%! w = besseli (0, _t) / besseli (0, beta);
+%! h = w .* ideal_filter;
+%! yh = fracshift(x, d, h);
+%! assert(y, yh, 1e-8)
+
+%!demo
+%! N = 1024;
+%! t = linspace (0, 1, N).';
+%! x = exp(-t.^2/2/0.25^2).*sin(2*pi*10*t);
+%!
+%! dt = 0.25;
+%! d  = dt / (t(2) - t(1));
+%! y = fracshift(x, d);
+%!
+%! plot(t,y,'r-;shifted;', t, x, 'k-;original;')
+%! axis tight
+%! xlabel ('time')
+%! ylabel ('signal')
