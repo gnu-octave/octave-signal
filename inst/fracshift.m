@@ -52,12 +52,6 @@ function  [y, h] = fracshift( x, d, h = [])
     isrowvector = true;
   endif
 
-  ## if the delay is an exact integer, use circshift
-  if d == fix (d)
-    y = circshift (x, d);
-    return
-  endif
-
   ## if required, filter design using reference [1]
   if isempty (h)
     h = design_filter (d);
@@ -76,7 +70,13 @@ function  [y, h] = fracshift( x, d, h = [])
   ## filtering
   xfilt = upfirdn (x, hpad, 1, 1);
   y     = xfilt((offset + 1):(offset + Ly), :);
-  y     = circshift (y, fix (d));
+
+  ## if the delay is an exact integer, use circshift
+  if d == fix (d)
+    y = circshift (x, d);
+  else
+    y = circshift (y, fix (d));
+  endif
 
   if isrowvector,
     y = y.';
@@ -162,9 +162,19 @@ endfunction
 %! rejection = 10^-3;
 %! assert(max (err) < rejection);
 
+%!test #integer shift similar similar to non-integer
+%! N = 1024;
+%! t = linspace(0, 1, N).';
+%! x = exp(-t.^2/2/0.25^2).*sin(2*pi*10*t);
+%! d  = 10;
+%! y = fracshift(x, d);
+%! yh = fracshift(x, d+1e-8);
+%! assert(y, yh, 1e-8)
+
 %!test #bug 52758
 %! x = [0 1 0 0 0 0 0 0];
 %! y = fracshift(x, 1);
+%! assert (size(x) == size(y))
 
 %!test #bug 47387
 %! N = 1024;
