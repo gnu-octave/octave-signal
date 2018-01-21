@@ -35,7 +35,7 @@
 
 function  [y, h] = fracshift( x, d, h = [])
 
-  if nargin > 3
+  if (nargin > 3 || nargin < 2)
     print_usage;
   endif;
 
