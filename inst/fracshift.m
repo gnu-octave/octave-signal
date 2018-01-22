@@ -52,31 +52,35 @@ function  [y, h] = fracshift( x, d, h = [])
     isrowvector = true;
   endif
 
-  ## if required, filter design using reference [1]
-  if isempty (h)
-    h = design_filter (d);
-  endif
-
-  Lx = length (x);
-  Lh = length (h);
-  L  = ( Lh - 1 ) / 2.0;
-  Ly = Lx;
-
-  ## pre and postpad filter response
-  hpad   = prepad (h, Lh);
-  offset = floor (L);
-  hpad   = postpad (hpad, Ly + offset);
-
-  ## filtering
-  xfilt = upfirdn (x, hpad, 1, 1);
-  y     = xfilt((offset + 1):(offset + Ly), :);
-
   ## if the delay is an exact integer, use circshift
   if d == fix (d)
-    y = circshift (x, d);
+    if ~isempty (h)
+      warning ('Octave:ignore-input-arg', ...
+      ['Provided filter is not used if shift is an integer.\n' ...
+      'Consider using circshift instead.\n']);
+    endif
   else
-    y = circshift (y, fix (d));
+    ## if required, filter design using reference [1]
+    if isempty (h)
+      h = design_filter (d);
+    endif
+
+    Lx = length (x);
+    Lh = length (h);
+    L  = ( Lh - 1 ) / 2.0;
+    Ly = Lx;
+
+    ## pre and postpad filter response
+    hpad   = prepad (h, Lh);
+    offset = floor (L);
+    hpad   = postpad (hpad, Ly + offset);
+
+    ## filtering
+    xfilt = upfirdn (x, hpad, 1, 1);
+    x     = xfilt((offset + 1):(offset + Ly), :);
   endif
+
+  y = circshift (x, fix (d));
 
   if isrowvector,
     y = y.';
@@ -170,6 +174,8 @@ endfunction
 %! y = fracshift(x, d);
 %! yh = fracshift(x, d+1e-8);
 %! assert(y, yh, 1e-8)
+
+%!warning fracshift([1 2 3 2 1], 3, h=0.5); #integer shift and filter provided
 
 %!test #bug 52758
 %! x = [0 1 0 0 0 0 0 0];
