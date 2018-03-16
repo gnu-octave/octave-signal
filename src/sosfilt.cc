@@ -52,7 +52,7 @@ section 1, etc.  The b0 entry must be nonzero for each section.\n\
 
   if (error_state)
     {
-      err_wrong_type_arg("sosfilt",args(0));
+      gripe_wrong_type_arg ("sosfilt", args(0));
       return retval;
     }
 
@@ -66,7 +66,7 @@ section 1, etc.  The b0 entry must be nonzero for each section.\n\
 
   if (error_state)
     {
-      err_wrong_type_arg("sosfilt",args(1));
+      gripe_wrong_type_arg ("sosfilt", args(1));
       return retval;
     }
 

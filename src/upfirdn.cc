@@ -105,7 +105,7 @@ Upsample, FIR filtering, and downsample.\n\
 
   if (error_state)
     {
-      err_wrong_type_arg ("upfirdn", args (1));
+      gripe_wrong_type_arg ("upfirdn", args(1));
       return retval;
     }
 
@@ -113,7 +113,7 @@ Upsample, FIR filtering, and downsample.\n\
 
   if (error_state)
     {
-      err_wrong_type_arg ("upfirdn", args (2));
+      gripe_wrong_type_arg ("upfirdn", args(2));
       return retval;
     }
 
@@ -121,7 +121,7 @@ Upsample, FIR filtering, and downsample.\n\
 
   if (error_state)
     {
-      err_wrong_type_arg ("upfirdn", args (3));
+      gripe_wrong_type_arg ("upfirdn", args(3));
       return retval;
     }
 
@@ -131,7 +131,7 @@ Upsample, FIR filtering, and downsample.\n\
       Matrix x = args (0).matrix_value ();
       if (error_state)
         {
-          err_wrong_type_arg ("upfirdn", args (0));
+          gripe_wrong_type_arg ("upfirdn", args(0));
           return retval;
         }
 
@@ -143,7 +143,7 @@ Upsample, FIR filtering, and downsample.\n\
       ComplexMatrix x = args (0).complex_matrix_value ();
       if (error_state)
         {
-          err_wrong_type_arg ("upfirdn", args (0));
+          gripe_wrong_type_arg ("upfirdn", args(0));
           return retval;
         }
 
@@ -152,7 +152,7 @@ Upsample, FIR filtering, and downsample.\n\
     }
   else
     {
-      err_wrong_type_arg ("upfirdn", args (0));
+      gripe_wrong_type_arg ("upfirdn", args(0));
       return retval;
     }
 
