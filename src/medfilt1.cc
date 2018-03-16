@@ -28,6 +28,7 @@ Created: 2015-12-13
 //#  include "config.h"
 //#endif
 
+#include "oct.h"
 #include "defun-dld.h"
 #include "error.h"
 #include "ov.h"
