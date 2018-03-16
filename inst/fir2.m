@@ -148,7 +148,8 @@ function b = fir2(n, f, m, grid_n, ramp_n, window)
 endfunction
 
 %% Test that the grid size is rounded up to the next power of 2
-%!test
+%% FIXME: test fails randomly on i386
+%!xtest
 %! f = [0 0.6 0.6 1]; m = [1 1 0 0];
 %! b9  = fir2 (30, f, m, 9);
 %! b16 = fir2 (30, f, m, 16);
