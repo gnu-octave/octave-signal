@@ -1,245 +1,528 @@
 /*
- * Copyright 2000 Paul Kienzle <pkienzle@users.sf.net>
- * This source code is freely redistributable and may be used for
- * any purpose.  This copyright notice must be maintained.
- * Paul Kienzle is not responsible for the consequences of using
- * this software.
- *
- * Mar 2000 - Kai Habel (kahacjde@linux.zrz.tu-berlin.de)
- *      Change: ColumnVector x=arg(i).vector_value();
- *      to: ColumnVector x=ColumnVector(arg(i).vector_value());
- * Oct 2000 - Paul Kienzle (pkienzle@users.sf.net)
- *      rewrite to ignore NaNs rather than replacing them with zero
- *      extend to handle matrix arguments
+Copyright (C) 2015-2016 Lachlan Andrew, Monash University
+
+This program is free software; you can redistribute it and/or modify it
+under the terms of the GNU General Public License as published by
+the Free Software Foundation; either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
+/*
+Author: Lachlan Andrew <lachlanbis@gmail.com>
+Created: 2015-12-13
+*/
+
+/** @file libinterp/corefcn/medfilt1.cc
+ One dimensional median filter, for real double variables.
  */
 
-#include <cmath>
-#include <octave/oct.h>
-#include <octave/lo-ieee.h>
-#include <octave/pager.h>
-using namespace std;
+//#ifdef HAVE_CONFIG_H
+//#  include "config.h"
+//#endif
 
-// The median class holds a sorted data window.  This window is
-// intended to slide over the data, so when the window shifts
-// by one position, the old value from the start of the window must
-// be removed and the new value from the end of the window must
-// be added.  Since removals and additions generally occur in pairs,
-// a hole is left in the sorted window when the value is removed so
-// that on average, fewer values need to be shifted to close the
-// hole and open a new one in the sorted position.
-class Median {
-private:
-  double *window; // window data
-  int max;        // length of window used
-  int hole;       // position of hole, or max if no hole
-  void close_hole() // close existing hole
-  {
-    // move hole to the end of the window
-    while (hole < max-1) {
-      window[hole] = window[hole+1];
-      hole++;
+#include "defun-dld.h"
+#include "error.h"
+#include "ov.h"
+
+enum nan_handling { include_nan, omit_nan };
+enum pad_type { zero_pad, truncate };
+
+// Keep a sorted sliding window of values.
+// There is no error checking, to keep things fast.
+// Keeps NaNs at the "top" (after Inf)
+class sorted_window
+{
+  double *buf;
+  octave_idx_type  numel;
+  octave_idx_type  numNaN;
+  bool nan_if_any_is;
+
+  // Return the index of  target  in the window, from element start to the end
+  // FIXME: for large n, use binary search, but be careful to keep NaN at end
+  octave_idx_type find (double target, octave_idx_type start = 0)
+    {
+      octave_idx_type i;
+      for (i = start; i < numel; i++)
+        if (!(buf[i] < target))
+          {
+            if (target == target) // We've found the target.
+              return i;
+            else
+              return numel;       // target is NaN; add it to the end.
+          }
+      return numel;
     }
-    // shorten window (if no hole, then hole==max)
-    if (hole == max-1) max--;
-  }
-  void print();
 
 public:
-  Median(int n)
-  {
-    max=hole=0;
-    window = new double[n];
-  }
-  ~Median(void)
-  {
-    delete [] window;
-  }
-
-  void add(double v);          // add a new value
-  void remove(double v);       // remove an existing value
-  void clear() { max=hole=0; } // clear the window
-  double operator() ();        // find the median in the window
-} ;
-
-// Print the sorted window, and indicate any hole
-void Median::print()
-{
-  octave_stdout << "[ ";
-  for (int i=0; i < max; i++)
+  // Create sorted window with maximum size  width.
+  // If  skip_nan  then the median will consider only valid numbers within
+  // the window.  
+  sorted_window (octave_idx_type width, bool skip_nan = true)
     {
-      if (i == hole)
-        octave_stdout << "x ";
-      else
-        octave_stdout << window[i] << " ";
-    }
-  octave_stdout << " ]";
-}
-
-
-// Remove a value from the sorted window, leaving a hole.  The caller
-// must promise to only remove values that they have added.
-void Median::remove(double v)
-{
-  // NaN's are not added or removed
-  if (lo_ieee_isnan(v)) return;
-
-  //  octave_stdout << "Remove " << v << " from "; print();
-
-  // only one hole allowed, so close pre-existing ones
-  close_hole();
-
-  // binary search to find the value to remove
-  int lo = 0, hi=max-1;
-  hole = hi/2;
-  while (lo <= hi) {
-    if (v > window[hole]) lo = hole+1;
-    else if (v < window[hole]) hi = hole-1;
-    else break;
-    hole = (lo+hi)/2;
-  }
-
-  // Verify that it is the correct value to replace
-  // Note that we shouldn't need this code since we are always replacing
-  // a value that is already in the window, but for some reason
-  // v==window[hole] occasionally doesn't work.
-  if (v != window[hole]) {
-    for (hole = 0; hole < max-1; hole++)
-      if (fabs(v-window[hole]) < fabs(v-window[hole+1])) break;
-    warning ("medfilt1: value %f not found---removing %f instead",
-             v, window[hole]);
-    print(); octave_stdout << endl;
-  }
-
-  //  octave_stdout << " gives "; print(); octave_stdout << endl;
-}
-
-// Insert a new value in the sorted window, plugging any holes, or
-// extending the window as necessary.  The caller must promise not
-// to add more values than median was created with, without
-// removing some beforehand.
-void Median::add(double v)
-{
-  // NaN's are not added or removed
-  if (lo_ieee_isnan(v)) return;
-
-  //  octave_stdout << "Add " << v << " to "; print();
-
-  // If no holes, extend the array
-  if (hole == max) max++;
-
-  // shift the hole up to the beginning as far as it can go.
-  while (hole > 0 && window[hole-1] > v) {
-    window[hole] = window[hole-1];
-    hole--;
-  }
-
-  // or shift the hole down to the end as far as it can go.
-  while (hole < max-1 && window[hole+1] < v) {
-    window[hole] = window[hole+1];
-    hole++;
-  }
-
-  // plug in the replacement value
-  window[hole] = v;
-
-  // close the hole
-  hole = max;
-
-  //  octave_stdout << " gives "; print(); octave_stdout << endl;
-}
-
-// Compute the median value from the sorted window
-// Return the central value if there is one or the average of the
-// two central values.  Return NaN if there are no values.
-double Median::operator()()
-{
-  close_hole();
-
-  if (max % 2 == 1)
-    return window[(max-1)/2];
-  else if (max == 0)
-    return lo_ieee_nan_value();
-  else
-    return (window[max/2-1]+window[max/2])/2.0;
-}
-
-DEFUN_DLD (medfilt1, args, ,
-  "-*- texinfo -*-\n\
-@deftypefn  {Loadable Function} {@var{y} =} medfilt1 (@var{x})\n\
-@deftypefnx {Loadable Function} {@var{y} =} medfilt1 (@var{x}, @var{n})\n\
-Apply a median filter of length @var{n} to the signal @var{x}.  A sliding\n\
-window is applied to the data, and for each step the median value in the\n\
-window is returned.  If @var{n} is odd then the window for y(i) is\n\
-x(i-(n-1)/2:i+(n-1)/2).  If @var{n} is even then the window is\n\
-x(i-n/2:i+n/2-1) and the two values in the center of the sorted window are\n\
-averaged.  If @var{n} is not given, then 3 is used.  NaNs are ignored,\n\
-as are values beyond the ends, by taking the median of the remaining\n\
-values.\n\
-@end deftypefn")
-{
-  octave_value_list retval;
-
-  int nargin = args.length();
-  if (nargin < 1 || nargin > 3)
-    {
-      print_usage ();
-      return retval;
+      numel = 0;
+      nan_if_any_is = ! skip_nan;
+      buf = new double [width];
     }
 
-  if (args(0).is_complex_type())
+  ~sorted_window ()
     {
-      error("medfilt1 cannot process complex vectors");
-      return retval;
+      delete [] buf;
     }
 
-  int n=3;    // length of the filter (default 3)
-  if (nargin > 1) n = octave::math::nint(args(1).double_value());
-  if (n < 1)
+  // Initialize to contain  seed,  and  zeros  additional zeros.
+  void init (const double *seed, octave_idx_type num, octave_idx_type stride,
+             octave_idx_type zeros = 0)
     {
-      error ("medfilt1 filter length must be at least 1");
-      return retval;
+      numel = zeros;
+      numNaN = 0;
+
+      bzero (buf, zeros * sizeof (double));
+
+      // Insert from seed.  Could sort if it is large
+      num *= stride;
+      for (octave_idx_type i = 0; i < num; i += stride)
+        add (seed[i]);
     }
 
-  // Create a window to hold the sorted median values
-  Median median(n);
-  int mid = n/2;             // mid-point of the window
-
-  Matrix signal(args(0).matrix_value());
-  int nr = signal.rows();    // number of points to process
-  int nc = signal.columns(); // number of points to process
-  Matrix filter(nr,nc);      // filtered signal to return
-
-  if (nr == 1) // row vector
+  // Take item  prev  from the window and replace it by  next.
+  // Assumes  prev  is in the window.
+  void replace (double next, double prev)
     {
-      int start = -n, end = 0, pos=-(n-mid)+1;
-      while (pos < nc)
+      octave_idx_type n_pos, p_pos;
+      if (next < prev)
         {
-          if (start >= 0) median.remove(signal(0,start));
-          if (end < nc)   median.add(signal(0,end));
-          if (pos >= 0)   filter(0,pos) = median();
-          start++, end++, pos++;
+          n_pos = find (next);
+          p_pos = find (prev, n_pos);
+          if (n_pos != p_pos)
+            std::copy_backward (buf + n_pos, buf + p_pos, buf + p_pos + 1);
         }
-    }
-  else // column vector or matrix
-    {
-      for (int column=0; column < nc; column++)
+      else if (next > prev)
         {
-          median.clear();
-          int start = -n, end = 0, pos=-(n-mid)+1;
-          while (pos < nr)
+          p_pos = find (prev);
+          n_pos = find (next, p_pos);
+          if (n_pos != p_pos)
             {
-              if (start >= 0) median.remove(signal(start,column));
-              if (end < nr)   median.add(signal(end,column));
-              if (pos >= 0)   filter(pos,column) = median();
-              start++, end++, pos++;
+              std::copy (buf + p_pos + 1, buf + n_pos, buf + p_pos);
+              n_pos--;            // position shifts due to deletion of p_pos
             }
         }
+      else if (next != prev)      // one is NaN.
+        {
+          if (next == next)
+            {
+              n_pos = find (next);
+              std::copy_backward (buf + n_pos, buf + numel - 1, buf + numel);
+              numNaN--;
+            }
+          else if (prev == prev)
+            {
+              p_pos = find (prev);
+              std::copy (buf + p_pos + 1, buf + numel, buf + p_pos);
+              n_pos = numel - 1;
+              numNaN++;
+            }
+          else
+            return;     // fallthrough case (next, prev both NaN)
+        }
+      else              // fallthrough case (next == prev) requires no action.
+        return;
+
+      buf [n_pos] = next;
     }
 
-  retval(0) = filter;
-  return retval;
+  // Expand the window by one element, inserting next.
+  // This will crash if this exceeds the allocation of buf.
+  void add (double next)
+    {
+      octave_idx_type n_pos;
+      if (next == next) // not NaN
+        {
+          n_pos = find (next);
+          if (n_pos < numel)
+            std::copy_backward (buf + n_pos, buf + numel, buf + numel + 1);
+        }
+      else              // NaN stored at end, so nothing to move.
+        {
+          n_pos = numel;
+          numNaN++;
+        }
+      buf[n_pos] = next;
+      numel++;
+    }
+
+  // Reduce the window by one element, deleting prev.
+  // This will crash if the window is already empty
+  void remove (double prev)
+    {
+      octave_idx_type p_pos;
+      if (prev == prev)
+        {
+          p_pos = find (prev);
+          std::copy (buf + p_pos + 1, buf + numel, buf + p_pos);
+        }
+      else                  // NaN stored at end, so nothing to move.
+        numNaN--;
+      numel--;
+    }
+
+  // The middle value if numel-numNaN is odd,
+  // or the mean of the two middle values if numel-numNaN is even.
+  // This will crash if the window is empty.
+  double median (void)
+    {
+      double retval = 0;
+      octave_idx_type non_nan_window = numel;
+      double last = buf [numel-1];
+      if (last != last)     // if NaN
+        {
+          if (nan_if_any_is)
+            retval = last;
+          else
+            {
+              non_nan_window = numel - numNaN;
+              if (non_nan_window == 0)
+                retval = last;
+            }
+        }
+      if (retval == 0)      // if result is not NaN
+        {
+          if (non_nan_window & 1)
+            retval = buf[non_nan_window >> 1];
+          else
+            {
+              octave_idx_type mid = non_nan_window >> 1;
+              retval = (buf[mid - 1] + buf[mid]) / 2;
+            }
+        }
+      return retval;
+    }
+};
+
+// Median filter on a single vector,
+// starting at x with values spaced by stride.
+// The output is placed into y, with the same stride.
+static inline void
+medfilt1_vector (double *x, double *y, octave_idx_type n,
+                    octave_idx_type len,
+                    octave_idx_type offset, octave_idx_type stride,
+                    octave_idx_type leading, octave_idx_type trailing,
+                    octave_idx_type start_middle, octave_idx_type end_middle,
+                    octave_idx_type last, octave_idx_type initial_fill,
+                    pad_type padding, sorted_window& sw)
+{
+  sw.init (x, initial_fill, stride,
+           (padding == zero_pad) ? (n - initial_fill) : 0);
+
+  // Partial window at the start
+  if (padding == zero_pad)
+    for (octave_idx_type i = 0; i < start_middle; i += stride)
+      {
+        sw.replace (x[i + leading], 0);
+        y[i] = sw.median ();
+      }
+  else
+    for (octave_idx_type i = 0; i < start_middle; i += stride)
+      {
+        sw.add (x[i + leading]);
+        y[i] = sw.median ();
+      }
+
+  if (n < len)
+    // Full sized window
+    for (octave_idx_type i = start_middle; i < end_middle; i += stride)
+      {
+        sw.replace (x[i + leading], x[i - trailing]);
+        y[i] = sw.median ();
+      }
+  else
+    {
+      // All of  x  is in the window
+      double m = sw.median ();
+      for (octave_idx_type i = start_middle; i < end_middle; i += stride)
+        y[i] = m;
+    }
+
+  // Partial window at the end
+  if (padding == zero_pad)
+    for (octave_idx_type i = end_middle; i < last; i += stride)
+      {
+        sw.replace (0, x[i - trailing]);
+        y[i] = sw.median ();
+      }
+  else
+    for (octave_idx_type i = end_middle; i < last; i += stride)
+      {
+        sw.remove (x[i - trailing]);
+        y[i] = sw.median ();
+      }
+}
+
+DEFUN_DLD(medfilt1, args, ,
+" -*- texinfo -*- \n\
+@deftypefn  {} {@var{y} =} medfilt1 (@var{x}, @var{n})\n\
+@deftypefnx {} {@var{y} =} medfilt1 (@var{x}, @var{n}, [], @var{dim})\n\
+@deftypefnx {} {@var{y} =} medfilt1 (..., @var{NaN_flag}, @var{padding})\n\
+\n\
+Apply a one dimensional median filter with a window size of @var{n} to\n\
+the data @var{x}, which must be real, double and full.\n\
+For @var{n} = 2m+1, @var{y}(i) is the median of @var{x}(i-m:i+m).\n\
+For @var{n} = 2m,   @var{y}(i) is the median of @var{x}(i-m:i+m-1).\n\
+\n\
+The calculation is performed over the first non-singleton dimension, or over\n\
+dimension @var{dim} if that is specified as the fourth argument.  (The third\n\
+argument is ignored; Matlab used to use it to tune its algorithm.)\n\
+\n\
+@var{NaN_flag} may be @qcode{omitnan} or @qcode{includenan} (the default).\n\
+If it is @qcode{omitnan} then any NaN values are removed from the window\n\
+before the median is taken.\n\
+Otherwise, any window containing an NaN returns a median of NaN.\n\
+\n\
+@var{padding} determines how the partial windows at the start and end of\n\
+@var{x} are treated.\n\
+It may be @qcode{truncate} or @qcode{zeropad} (the default).\n\
+If it is @qcode{truncate} then the window for @var{y}(i) is\n\
+the intersection of the window stated above with 1:length(@var{x}).\n\
+If it is @qcode{zeropad}, then partial windows have additional zeros\n\
+to bring them up to size @var{n}.\n\
+\n\
+@seealso{filter, medfilt2}\n\
+@end deftypefn")
+{
+  if (args.length () < 1)
+    print_usage ();
+
+  octave_idx_type n = 3, dim = 0;
+  nan_handling nan_flag = include_nan;
+  pad_type     padding  = zero_pad;
+
+  int nargin = args.length ();
+
+  Array<double> signal = args(0).array_value ();
+
+  // parse arguments.
+  // FIXME: This allows repeated arguments like
+  //        medfilt1(..., "truncate", "zeropad")
+  while (args(nargin - 1).is_string ())
+    {
+      if (nargin < 2)
+        print_usage ();
+
+      std::string s = args(nargin - 1).string_value ();
+      if (! strcasecmp (s.c_str (), "omitnan"))
+        nan_flag = omit_nan;
+      else if (! strcasecmp (s.c_str (), "truncate"))
+        padding = truncate;
+      else if (strcasecmp (s.c_str (), "includenan")
+               && strcasecmp (s.c_str (), "zeropad"))  // the defaults
+        error ("medfilt1: Invalid NAN_FLAG or PADDING value '%s'", s.c_str ());
+
+      nargin--;    // skip this for parsing the numeric args
+    }
+
+  if (nargin >= 2)
+    {
+      if (args(1).is_numeric_type ())
+        {
+          if (args(1).numel () != 1 || args(1).is_complex_type ())
+            error ("medfilt1: N must be a real scalar");
+          else
+            n = args(1).idx_type_value ();
+        }
+      else
+        error ("medfilt1: Invalid type for N: %s",
+               args(1).type_name ().c_str ());
+    if (nargin >= 4)
+      {
+        if (args(3).is_numeric_type ())
+          {
+            if (args(3).numel () != 1)
+              error ("medfilt1: DIM must be a scalar");
+            else if (args(3).is_complex_type ())
+              error ("medfilt1: DIM must be real");
+
+            dim = round (args(3).double_value ());
+
+            if (dim != args(3).double_value ())
+              error ("medfilt1: DIM must be an integer, not %g",
+                     args(3).double_value ());
+            //if (dim < 1 || dim > signal.dims ().length ())
+            if (dim < 1)
+              error ("medfilt1: DIM must be positive, not %d", dim);
+          }
+        else
+          error ("medfilt1: Invalid type for DIM: %s",
+                 args(1).type_name ().c_str ());
+        if (nargin > 4)
+          error ("medfilt1: Too many input arguments");
+      }
+    }
+
+    // Guard again divide-by-zero later.
+    // This is the last "early return".
+    if (args(0).numel () == 0)
+      return ovl (args(0));
+
+
+    // The following code is based on filter.cc
+    dim_vector x_dims = args(0).dims ();
+    if (dim < 1)
+      dim = x_dims.first_non_singleton ();
+    else
+      dim--;      // make 0-based, not 1-based
+  
+    octave_idx_type x_len = x_dims (dim);
+
+    octave_idx_type x_stride = 1;
+    for (octave_idx_type i = 0; i < dim; i++)
+      x_stride *= x_dims(i);
+
+    MArray<double> x = args(0).array_value ();
+    MArray<double> retval;
+    retval.resize (x_dims, 0.0);
+
+    double *p_in = x.fortran_vec ();
+    double *p_out = retval.fortran_vec ();
+
+    sorted_window sw (n, nan_flag);
+
+    // how far ahead should data be put in window
+    octave_idx_type leading = ((n - 1) / 2) * x_stride;
+
+    // how far back should data be removed from wdw
+    octave_idx_type trailing = n * x_stride - leading;
+
+    // last position in this slice
+    octave_idx_type last = x_len * x_stride;
+
+    // start of the "middle" phase with fixed window size
+    octave_idx_type start_middle;
+
+    // end   of the "middle" phase with fixed window size
+    octave_idx_type end_middle;
+    
+    // start window with x(1:initial_fill)
+    octave_idx_type initial_fill = (n - 1) / 2;
+
+    if (n < x_len)   // small window:
+      {              // The middle phase is when replacing window elements.
+        start_middle = trailing;
+        end_middle = last - leading;
+      }
+    else             // big window:
+      {              // The middle phase has whole input in the window.
+        if (n < 2 * x_len)
+          {
+            start_middle = last - leading;
+            end_middle = trailing;
+          }
+        else         // huge window: all answers are just the median of x.
+          {
+            start_middle = 0;
+            end_middle = last;
+            initial_fill = x_len;
+          }
+      }
+
+    octave_idx_type x_num = x_dims.numel () / x_len;
+    octave_idx_type x_offset = 0, inner_offset = 0;
+
+    for (octave_idx_type num = 0; num < x_num; num++)
+      {
+        medfilt1_vector (p_in + x_offset, p_out + x_offset, n, x_len,
+                            x_offset, x_stride, leading, trailing,
+                            start_middle, end_middle, last, initial_fill,
+                            padding, sw);
+        if (x_stride == 1)
+          x_offset += x_len;
+        else
+          {
+            x_offset++;
+            if (++inner_offset == x_stride)
+              {
+                inner_offset = 0;
+                x_offset += x_stride * (x_len - 1);
+              }
+          }
+      }
+
+  return ovl (retval);
 }
 
 /*
-%!assert(medfilt1([1, 2, 3, 4, 5], 3), [1.5, 2, 3, 4, 4.5]);
+%!assert (medfilt1 ([1 2 3 4 3 2 1]), [1 2 3 3 3 2 1]);
+%!assert (medfilt1 ([1 2 3 4 3 2 1]'), [1 2 3 3 3 2 1]');
+%!assert (medfilt1 ([1 2 3 4 3 2 1], "truncate"), [1.5 2 3 3 3 2 1.5]);
+%!assert (medfilt1 ([-1 2 3 4 3 -2 1], "truncate"), [0.5 2 3 3 3 1 -0.5]);
+%!assert (medfilt1 ([-1 2 3 4 3 -2 1], "zeropad"), [0 2 3 3 3 1 0]);
+
+%!assert (medfilt1 ([]), []);
+
+%!test
+%! A = [1 2 3  ; 6 5 4  ; 6 5 2 ];
+%! assert (medfilt1 (A,4,[],2), [0.5 1.5 1.5; 2.5 4.5 4.5; 2.5 3.5 3.5]);
+%! assert (medfilt1 (A,4,[],1), [0.5 3.5 3.5; 1 3.5 3.5; 1.5 2.5 2.5]');
+%! assert (medfilt1 (A,3,[],1), [1 2 3; 6 5 3; 6 5 2]);
+
+%!test
+%! A = [ Inf 4 -4 NaN -1 -1 -3 -2 1 -Inf];
+%! B = medfilt1 (A, 7, [], 1, 'includenan', 'zeropad');
+%! assert (B, [0, 0, 0, NaN, 0, 0, 0, 0, 0, 0]);
+%! B = medfilt1 (A, 7, [], 2, 'includenan', 'zeropad');
+%! assert (B, [NaN, NaN, NaN, NaN, NaN, NaN, NaN, -1, -1, 0]);
+%! B = medfilt1 (A, 7, [], 2, 'includenan', 'truncate');
+%! assert (B, [NaN, NaN, NaN, NaN, NaN, NaN, NaN, -1.5, -2, -2.5]);
+%! B = medfilt1 (A, 7, [], 2, 'omitnan', 'zeropad');
+%! assert (B, [0, 0, -0.5, -1, -1.5, -1.5, -1.5, -1, -1, 0]);
+%! B = medfilt1 (A, 7, [], 2, 'omitnan', 'truncate');
+%! assert (B, [4, 1.5, -1, -1, -1.5, -1.5, -1.5, -1.5, -2, -2.5]);
+
+%!test
+%! A = medfilt1 ([ NaN NaN -Inf], 4, [], 2, 'omitnan', 'truncate');
+%! assert (A, [NaN, -Inf, -Inf]);
+
+%!test
+%! A = medfilt1 ([-2 Inf -2; 1 3 -Inf; 1 0 -Inf], 1, [], 2);
+%! assert (A, [-2 Inf -2; 1 3 -Inf; 1 0 -Inf]);
+
+%!test
+%! A = medfilt1 ([-Inf 0 -3; Inf 1 NaN], 9, [], 1);
+%! assert (A, [0, 0, NaN; 0, 0, NaN]);
+%! A = medfilt1 ([-Inf 0 -3; Inf 1 NaN], 9, [], 1, 'omitnan', 'truncate');
+%! assert (A, [NaN, 0.5, -3; NaN, 0.5, -3]);
+
+%!test
+%! A = medfilt1 ([Inf -3 Inf Inf 0 -2; Inf 1 NaN 5 5 -3], 3, [], 1);
+%! assert (A, [Inf, 0, NaN, 5, 0, -2; Inf, 0, NaN, 5, 0, -2]);
+
+%!test
+%! A = medfilt1 ([3 3 7 5 6]', 5, [], 1, 'omitnan', 'truncate');
+%! assert (A, [3, 4, 5, 5.5, 6]');
+%! A = medfilt1 ([3 3 7 5 6]', 5, [], 2, 'omitnan', 'truncate');
+%! assert (A, [3, 3, 7, 5, 6]');
+
+%!test
+%! A = medfilt1 ([3 1 4 1 3], 3, 'omitnan', 'truncate');
+%! assert (A, [2, 3, 1, 3, 2]);
+
+%!test
+%! A = medfilt1 ([3 1 4 1 3], 6, 'omitnan', 'truncate');
+%! assert (A, [3, 2, 3, 3, 2]);
+
+%!test
+%! A = medfilt1 ([1 2 3 4 4 3 2 1; 6 5 4 3 3 4 5 6; 6 5 4 3 2 1 0 -1; 6 5 4 3 2 1 0 -1]);
+%! assert (A, [1 2 3 3 3 3 2 1; 6 5 4 3 3 3 2 1; 6 5 4 3 2 1 0 -1; 6 5 4 3 2 1 0 -1]);
+
+# Input checking
+%!error (medfilt1 ([1 2 3], -1));
+%!error (medfilt1 ([1 2 3], 1, [], "hello"));
+%!error (medfilt1 ([1 2 3], 1, [], "omitnan", false));
+%!error (medfilt1 ({1 2 3}));
 */
