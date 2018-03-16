@@ -1,6 +1,8 @@
 MKOCTFILE ?= mkoctfile
 SED       ?= sed
 
+CXXFLAGS_PKG := -Wall -Wno-deprecated-declarations $(CXXFLAGS_PKG_APPEND)
+
 OCT_FILES = \
   __fwht__.oct \
   __ultrwin__.oct \
@@ -17,13 +19,13 @@ OCT_SOURCES = $(patsubst %.oct,%.cc,$(OCT_FILES))
 all: $(OCT_FILES)
 
 %.o: %.cc
-	$(MKOCTFILE) -Wall -c $< -o $@
+	$(MKOCTFILE) $(CXXFLAGS_PKG) -c $< -o $@
 
 %.oct: %.cc
-	$(MKOCTFILE) -Wall $< -o $@
+	$(MKOCTFILE) $(CXXFLAGS_PKG) $< -o $@
 
 cl2bp.oct: $(CL2BP_OBJECTS)
-	$(MKOCTFILE) -Wall $^ -o $@
+	$(MKOCTFILE) $(CXXFLAGS_PKG) $^ -o $@
 
 $(CL2BP_OBJECTS): cl2bp_lib.h
 
