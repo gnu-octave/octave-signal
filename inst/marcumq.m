@@ -50,7 +50,7 @@ function q = marcumq (a, b, m = 1, tol = eps)
   if (any (b < 0))
     error ("marcumq: B must be a non-negative value");
   endif
-  if (any (m < 0) || any (fix (m) != m))
+  if (any (m < 1) || any (fix (m) != m))
     error ("marcumq: M must be a positive integer");
   endif
 
@@ -159,6 +159,7 @@ endfunction
 %!error marcumq (-1, 1, 1, 1, 1)
 %!error marcumq (-1, 1)
 %!error marcumq (1, -1)
+%!error marcumq (1, 1, 0)
 %!error marcumq (1, 1, -1)
 %!error marcumq (1, 1, 1.1)
 
