@@ -89,11 +89,13 @@ function q = mq (a, b, m, tol)
     x = a / b;
     d = x;
     S = besseli (0, z, 1);
-    for k = 1:m - 1
-      t = (d + 1 / d) * besseli (k, z, 1);
-      S = S + t;
-      d = d * x;
-    endfor
+    if (m > 1)
+      for k = 1:m - 1
+        t = (d + 1 / d) * besseli (k, z, 1);
+        S = S + t;
+        d = d * x;
+      endfor
+    endif
     N = k++;
   else
     s = -1;
