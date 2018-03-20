@@ -37,7 +37,7 @@
 ## shape of frequency sweep
 ##    'linear'      f(t) = (f1-f0)*(t/t1) + f0
 ##    'quadratic'   f(t) = (f1-f0)*(t/t1)^2 + f0
-##    'logarithmic' f(t) = (f1-f0)^(t/t1) + f0
+##    'logarithmic' f(t) = (f1/f0)^(t/t1) * f0
 ## @item phase
 ## phase shift at t=0
 ## @end table
@@ -79,10 +79,9 @@ function y = chirp(t, f0, t1, f1, form, phase)
     b = 2*pi*f0;
     y = cos(a*t.^3 + b*t + phase);
   elseif strcmp(form, "logarithmic")
-    a = 2*pi*t1/log(f1-f0);
-    b = 2*pi*f0;
-    x = (f1-f0)^(1/t1);
-    y = cos(a*x.^t + b*t + phase);
+    a = 2*pi*f0*t1/log(f1/f0);
+    x = (f1/f0)^(1/t1);
+    y = cos(a*x.^t + phase);
   else
     error("chirp doesn't understand '%s'",form);
   endif
