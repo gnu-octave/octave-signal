@@ -53,9 +53,17 @@
 ## EXAMPLE:
 ## @example
 ## [z, p, k] = sos2zp ([1 0 1, 1 0 -0.81; 1 0 0, 1 0 0.49])
-##     @result{} z = [i; -i; 0; 0]
-##     @result{} p = [0.9, -0.9, 0.7i, -0.7i]
-##     @result{} k = 1
+##   @result{} z =
+##     -0 + 1i
+##      0 - 1i
+##      0 + 0i
+##      0 + 0i
+##   @result{} p =
+##     -0.90000 + 0.00000i
+##      0.90000 + 0.00000i
+##     -0.00000 + 0.70000i
+##      0.00000 - 0.70000i
+##   @result{} k =  1
 ## @end example
 ##
 ## @seealso{zp2sos, sos2tf, tf2sos, zp2tf, tf2zp}
