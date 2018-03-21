@@ -39,17 +39,19 @@ function w = gausswin (m, a)
     a = 2.5;
   endif
 
-  if m==1
+  if (m == 1)
     w = 1;
   else
-    w = exp ( -0.5 * ( a/(m-1) * [ -(m-1) : 2 : m-1 ]' ) .^ 2 );
+    w = exp (-0.5 * (a / (m-1) * (-(m-1):2:(m-1))') .^ 2);
   endif
 
 endfunction
 
 %!assert (gausswin (1), 1)
+%!assert (gausswin (2), [exp(-3.125); exp(-3.125)])
+%!assert (gausswin (3), [exp(-3.125); 1; exp(-3.125)])
 
-%% Test input validation
+## Test input validation
 %!error gausswin ()
 %!error gausswin (0.5)
 %!error gausswin (-1)
