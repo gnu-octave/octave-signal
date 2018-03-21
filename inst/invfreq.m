@@ -63,16 +63,27 @@ function [B, A, SigN] = invfreq(H, F, nB, nA, W, iter, tol, tr, plane, varargin)
   n = max(nA, nB);
   m = n+1; mA = nA+1; mB = nB+1;
   nF = length(F);
-  if nF ~= length(H), disp('invfreqz: length of H and F must be the same'); endif
   if nargin < 5 || isempty(W), W = ones(1, nF); endif
   if nargin < 6, iter = []; endif
   if nargin < 7  tol = []; endif
   if nargin < 8 || isempty(tr), tr = ''; endif
   if nargin < 9, plane = 'z'; endif
   if nargin < 10, varargin = {}; endif
-  if iter~=[], disp('no implementation for iter yet'),endif
-  if tol ~=[], disp('no implementation for tol yet'),endif
-  if (plane ~= 'z' && plane ~= 's'), disp('invfreqz: Error in plane argument'), endif
+
+  if (! strcmp (plane, "s") && ! strcmp (plane, "z"))
+    error ("invfreq: invalid PLANE argument '%s', expected 's' or 'z'", plane)
+  endif
+
+  fname = ["invfreq", plane];
+
+  if (nF != length (H))
+    error ("%s: length of H and F must be the same\n", fname)
+  endif
+
+  if (! isempty (iter) || ! isempty (tol))
+    warning (["%s: iterative algorithm not yet implemented, ", ...
+              "ITER and TOL arguments are ignored\n"], fname);
+  endif
 
   [reg, prop ] = parseparams(varargin);
   ## should we normalize freqs to avoid matrices with rank deficiency ?
