@@ -31,7 +31,7 @@
 ## Code is generated and .m file is created. The @var{value} contains the name
 ## of the function. The returned function handle is a handle to that file. If
 ## @var{value} is empty, then a name is automatically generated using
-## @code{tmpnam} and the file is created in the current directory. @var{value}
+## @code{tempname} and the file is created in the current directory. @var{value}
 ## must not have an extension, since .m will be appended.
 ## Numerical value used in the function are stored in a .mat file with the same
 ## name as the function.
@@ -68,7 +68,7 @@ function [fhandle fullfname] = data2fun( t, y, varargin)
 
       else
 
-        [DIR fname] = fileparts (tmpnam (pwd (),"agen_"));
+        [DIR fname] = fileparts (tempname (pwd (), "agen_"));
 
       endif
 
