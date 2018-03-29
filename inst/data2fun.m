@@ -100,7 +100,6 @@ function [fhandle fullfname] = data2fun( t, y, varargin)
     fprintf (fid, "%s", strfunc);
     fclose (fid);
 
-    disp(["Function generated: " fullfname ]);
     fhandle = eval(["@" fname]);
 
   else
