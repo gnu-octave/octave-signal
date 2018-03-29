@@ -138,31 +138,34 @@ endfunction
 %! assert(y,fhandle(t));
 
 %!test
-%! [fhandle fname] = data2fun(t,y,"file","testdata2fun");
-%! yt = testdata2fun(t);
-%!
-%! assert(y,yt);
-%! assert(y,fhandle(t));
-%!
-%! delete(fname);
-%! delete([fname(1:end-2) ".mat"]);
+%! unwind_protect
+%!   [fhandle fname] = data2fun(t,y,"file","testdata2fun");
+%!   yt = testdata2fun(t);
+%!   assert(y,yt);
+%!   assert(y,fhandle(t));
+%! unwind_protect_cleanup
+%!   unlink (fname);
+%!   unlink ([fname(1:end-2) ".mat"]);
+%! end_unwind_protect
 
 %!test
-%! [fhandle fname] = data2fun(t,y,"file","");
-%! yt = testdata2fun(t);
-%!
-%! assert(y,yt);
-%! assert(y,fhandle(t));
-%!
-%! delete(fname);
-%! delete([fname(1:end-2) ".mat"]);
+%! unwind_protect
+%!   [fhandle fname] = data2fun(t,y,"file","");
+%!   yt = testdata2fun(t);
+%!   assert(y,yt);
+%!   assert(y,fhandle(t));
+%! unwind_protect_cleanup
+%!   unlink (fname);
+%!   unlink ([fname(1:end-2) ".mat"]);
+%! end_unwind_protect
 
 %!test
-%! [fhandle fname] = data2fun(t,y,"file","testdata2fun","interp","linear");
-%! yt = testdata2fun(t);
-%!
-%! assert(y,yt);
-%! assert(y,fhandle(t));
-%!
-%! delete(fname);
-%! delete([fname(1:end-2) ".mat"]);
+%! unwind_protect
+%!   [fhandle fname] = data2fun(t,y,"file","testdata2fun","interp","linear");
+%!   yt = testdata2fun(t);
+%!   assert(y,yt);
+%!   assert(y,fhandle(t));
+%! unwind_protect_cleanup
+%!   unlink (fname);
+%!   unlink ([fname(1:end-2) ".mat"]);
+%! end_unwind_protect
