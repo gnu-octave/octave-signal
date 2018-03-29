@@ -16,15 +16,15 @@
 
 ## -*- texinfo -*-
 ## @deftypefn  {Function File} {[@var{fhandle}, @var{fullname}] =} data2fun (@var{ti}, @var{yi})
-## @deftypefnx {Function File} {[@dots{}] =} data2fun (@var{ti}, @var{yi},@var{property},@var{value})
-## Creates a vectorized function based on data samples using interpolation.
+## @deftypefnx {Function File} {[@dots{}] =} data2fun (@dots{}, @var{property}, @var{value})
+## Create a vectorized function based on data samples using interpolation.
 ##
 ## The values given in @var{yi} (N-by-k matrix) correspond to evaluations of the
 ## function y(t) at the points @var{ti} (N-by-1 matrix).
 ## The data is interpolated and the function handle to the generated interpolant
 ## is returned.
 ##
-## The function accepts property-value pairs described below.
+## The function accepts @var{property}-@var{value} pairs described below.
 ##
 ## @table @samp
 ## @item file
@@ -33,115 +33,112 @@
 ## @var{value} is empty, then a name is automatically generated using
 ## @code{tempname} and the file is created in the current directory. @var{value}
 ## must not have an extension, since .m will be appended.
-## Numerical value used in the function are stored in a .mat file with the same
+## Numerical values used in the function are stored in a .mat file with the same
 ## name as the function.
 ##
 ## @item interp
 ## Type of interpolation. See @code{interp1}.
-##
 ## @end table
 ##
 ## @seealso{interp1}
 ## @end deftypefn
 
-function [fhandle fullfname] = data2fun( t, y, varargin)
+function [fhandle, fullfname] = data2fun (t, y, varargin)
+
+  if (nargin < 2 || mod (nargin, 2) != 0)
+    print_usage ();
+  endif
 
   ## Check input arguments
   interp_args = {"spline"};
-  given = struct("file",false);
-  if ~isempty(varargin)
+  given = struct ("file", false);
+
+  if (! isempty (varargin))
     ## Arguments
     interp_args = varargin;
 
     opt_args = fieldnames (given);
-    [tf idx] = ismember( opt_args, varargin);
-    for i=1:numel(opt_args)
-        given.(opt_args{i}) = tf(i);
+    [tf, idx] = ismember (opt_args, varargin);
+    for i=1:numel (opt_args)
+      given.(opt_args{i}) = tf(i);
     endfor
 
-    if given.file
-      ## FIXME: check that file will be in the path. Otherwise fhabdle(0) fails.
+    if (given.file)
+      ## FIXME: check that file will be in the path. Otherwise fhandle(0) fails.
 
-      if !isempty(varargin{idx(1)+1})
-
-        [DIR fname] = fileparts(varargin{idx(1)+1});
-
+      if (! isempty (varargin{idx(1)+1}))
+        [dir, fname] = fileparts (varargin{idx(1)+1});
       else
-
-        [DIR fname] = fileparts (tempname (pwd (), "agen_"));
-
+        [dir, fname] = fileparts (tempname (pwd (), "agen_"));
       endif
 
-      interp_args(idx(1)+[0 1]) = [];
+      interp_args(idx(1) + [0, 1]) = [];
     endif
 
-    if isempty(interp_args)
-
+    if (isempty (interp_args))
       interp_args = {"spline"};
-
     endif
+
   endif
 
-  pp = interp1 (t, y, interp_args{end}, 'pp');
+  pp = interp1 (t, y, interp_args{end}, "pp");
 
-  if given.file
-    fullfname = fullfile (DIR,[fname ".m"]);
-    save("-binary",[fullfname(1:end-2) ".mat"],"pp");
+  if (given.file)
+    fullfname = fullfile (dir, [fname, ".m"]);
+    save ("-binary", [fullfname(1:end-2), ".mat"], "pp");
 
     bodystr = ["  persistent pp\n" ...
-                   "  if isempty(pp)\n" ...
-                   "    pp = load([mfilename()" ' ".mat"' "]).pp;\n"...
-                   "  end\n\n" ...
-                   "  z = ppval(pp, x);"];
+               "  if (isempty (pp))\n" ...
+               "    pp = load ([mfilename(), \".mat\"]).pp;\n" ...
+               "  endif\n\n" ...
+               "  z = ppval (pp, x);"];
 
-    strfunc = generate_function_str(fname, {"z"}, {"x"}, bodystr);
+    strfunc = generate_function_str (fname, {"z"}, {"x"}, bodystr);
 
-    fid = fopen ( fullfile (DIR,[fname ".m"]), "w");
+    fid = fopen (fullfile (dir, [fname, ".m"]), "w");
     fprintf (fid, "%s", strfunc);
     fclose (fid);
 
-    fhandle = eval(["@" fname]);
-
+    fhandle = eval (["@", fname]);
   else
     fullfname = "";
     fhandle = @(t_) ppval (pp, t_);
-
   endif
 
 endfunction
 
-function str = generate_function_str(name, oargs, iargs, bodystr)
+function str = generate_function_str (name, oargs, iargs, bodystr)
 
-  striargs = cell2mat ( cellfun (@(x) [x ", "], iargs, "UniformOutput", false));
+  striargs = cell2mat (cellfun (@(x) [x ", "], iargs, "UniformOutput", false));
   striargs = striargs(1:end-2);
 
-  stroargs = cell2mat ( cellfun (@(x) [x ", "], oargs, "UniformOutput", false));
+  stroargs = cell2mat (cellfun (@(x) [x ", "], oargs, "UniformOutput", false));
   stroargs = stroargs(1:end-2);
 
-  if !isempty (stroargs)
-    str = ["function [" stroargs "] = " name "(" striargs ")\n\n" bodystr ...
-           "\n\nendfunction"];
+  if (! isempty (stroargs))
+    str = ["function [" stroargs "] = " name " (" striargs ")\n\n" ...
+           bodystr "\n\nendfunction"];
   else
-    str = ["function " name "(" striargs ")\n\n" bodystr ...
-           "\n\nendfunction"];
+    str = ["function " name " (" striargs ")\n\n" ...
+           bodystr "\n\nendfunction"];
   endif
 
 endfunction
 
 %!shared t, y
-%! t = linspace(0,1,10);
+%! t = linspace (0, 1, 10);
 %! y = t.^2 - 2*t + 1;
 
 %!test
-%! fhandle = data2fun(t,y);
-%! assert(y,fhandle(t));
+%! fhandle = data2fun (t, y);
+%! assert (y, fhandle (t));
 
 %!test
 %! unwind_protect
-%!   [fhandle fname] = data2fun(t,y,"file","testdata2fun");
-%!   yt = testdata2fun(t);
-%!   assert(y,yt);
-%!   assert(y,fhandle(t));
+%!   [fhandle fname] = data2fun (t, y, "file", "testdata2fun");
+%!   yt = testdata2fun (t);
+%!   assert (y, yt);
+%!   assert (y, fhandle (t));
 %! unwind_protect_cleanup
 %!   unlink (fname);
 %!   unlink ([fname(1:end-2) ".mat"]);
@@ -149,10 +146,10 @@ endfunction
 
 %!test
 %! unwind_protect
-%!   [fhandle fname] = data2fun(t,y,"file","");
-%!   yt = testdata2fun(t);
-%!   assert(y,yt);
-%!   assert(y,fhandle(t));
+%!   [fhandle fname] = data2fun (t, y, "file", "");
+%!   yt = testdata2fun (t);
+%!   assert (y, yt);
+%!   assert (y, fhandle (t));
 %! unwind_protect_cleanup
 %!   unlink (fname);
 %!   unlink ([fname(1:end-2) ".mat"]);
@@ -160,11 +157,16 @@ endfunction
 
 %!test
 %! unwind_protect
-%!   [fhandle fname] = data2fun(t,y,"file","testdata2fun","interp","linear");
-%!   yt = testdata2fun(t);
-%!   assert(y,yt);
-%!   assert(y,fhandle(t));
+%!   [fhandle fname] = data2fun (t, y, "file", "testdata2fun", "interp", "linear");
+%!   yt = testdata2fun (t);
+%!   assert (y, yt);
+%!   assert (y, fhandle (t));
 %! unwind_protect_cleanup
 %!   unlink (fname);
 %!   unlink ([fname(1:end-2) ".mat"]);
 %! end_unwind_protect
+
+## Test input validation
+%!error data2fun ()
+%!error data2fun (1)
+%!error data2fun (1, 2, "file")
