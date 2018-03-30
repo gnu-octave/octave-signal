@@ -1,4 +1,5 @@
-## Copyright (C) 2000 Paul Kienzle <pkienzle@users.sf.net>
+## Copyright (C) 2000 Paul Kienzle
+## Copyright (C) 2018 Mike Miller
 ##
 ## This program is free software: you can redistribute it and/or modify
 ## it under the terms of the GNU General Public License as published by
@@ -17,10 +18,9 @@
 ## -*- texinfo -*-
 ## @deftypefn  {Function File} {@var{y} =} rectpuls (@var{t})
 ## @deftypefnx {Function File} {@var{y} =} rectpuls (@var{t}, @var{w})
-##
 ## Generate a rectangular pulse over the interval [-@var{w}/2,@var{w}/2),
 ## sampled at times @var{t}.  This is useful with the function @code{pulstran}
-## for generating a series pulses.
+## for generating a series of pulses.
 ##
 ## Example:
 ## @example
@@ -28,39 +28,49 @@
 ## fs = 11025;  # arbitrary sample rate
 ## f0 = 100;    # pulse train sample rate
 ## w = 0.3/f0;  # pulse width 3/10th the distance between pulses
-## auplot(pulstran(0:1/fs:4/f0, 0:1/f0:4/f0, 'rectpuls', w), fs);
+## plot (pulstran (0:1/fs:4/f0, 0:1/f0:4/f0, "rectpuls", w));
 ## @end group
 ## @end example
 ##
-## @seealso{pulstran}
+## @seealso{gauspuls, pulstran, tripuls}
 ## @end deftypefn
 
-function y = rectpuls(t, w = 1)
+function y = rectpuls (t, w = 1)
 
-  if nargin<1 || nargin>2,
-    print_usage;
+  if (nargin < 1 || nargin > 2)
+    print_usage ();
   endif
 
-  y = zeros(size(t));
-  idx = find(t>=-w/2 & t < w/2);
-  try wfi = warning("off", "Octave:fortran-indexing");
-  catch wfi = 0;
-  end_try_catch
-  unwind_protect
-    y(idx) = ones(size(idx));
-  unwind_protect_cleanup
-    warning(wfi);
-  end_unwind_protect
+  if (! isreal (w) || ! isscalar (w))
+    error ("rectpuls: W must be a real scalar");
+  endif
+
+  y = zeros (size (t));
+
+  idx = find ((t >= -w/2) & (t < w/2));
+
+  y(idx) = 1;
 
 endfunction
 
-%!assert(rectpuls(0:1/100:0.3,.1), rectpuls([0:1/100:0.3]',.1)');
-%!assert(isempty(rectpuls([],.1)));
 %!demo
 %! fs = 11025;  # arbitrary sample rate
 %! f0 = 100;    # pulse train sample rate
 %! w = 0.3/f0;  # pulse width 1/10th the distance between pulses
-%! x = pulstran(0:1/fs:4/f0, 0:1/f0:4/f0, 'rectpuls', w);
-%! plot([0:length(x)-1]*1000/fs, x);
-%! ylabel("amplitude"); xlabel("time (ms)");
-%! title("graph shows 3 ms pulses at 0,10,20,30 and 40 ms");
+%! x = pulstran (0:1/fs:4/f0, 0:1/f0:4/f0, "rectpuls", w);
+%! plot ([0:length(x)-1]*1000/fs, x);
+%! xlabel ("Time (ms)");
+%! ylabel ("Amplitude");
+%! title ("Rectangular pulse train of 3 ms pulses at 10 ms intervals");
+
+%!assert (rectpuls ([]), [])
+%!assert (rectpuls ([], 0.1), [])
+%!assert (rectpuls (zeros (10, 1)), ones (10, 1))
+%!assert (rectpuls (-1:1), [0, 1, 0])
+%!assert (rectpuls (-5:5, 9), [0, ones(1,9), 0])
+%!assert (rectpuls (0:1/100:0.3, 0.1), rectpuls ([0:1/100:0.3]', 0.1)')
+
+## Test input validation
+%!error rectpuls ()
+%!error rectpuls (1, 2, 3)
+%!error rectpuls (1, 2j)

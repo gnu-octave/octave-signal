@@ -1,4 +1,5 @@
-## Copyright (C) 2001 Paul Kienzle <pkienzle@users.sf.net>
+## Copyright (C) 2001 Paul Kienzle
+## Copyright (C) 2018 Mike Miller
 ##
 ## This program is free software: you can redistribute it and/or modify
 ## it under the terms of the GNU General Public License as published by
@@ -18,14 +19,14 @@
 ## @deftypefn  {Function File} {@var{y} =} tripuls (@var{t})
 ## @deftypefnx {Function File} {@var{y} =} tripuls (@var{t}, @var{w})
 ## @deftypefnx {Function File} {@var{y} =} tripuls (@var{t}, @var{w}, @var{skew})
+## Generate a triangular pulse over the interval [-@var{w}/2,@var{w}/2),
+## sampled at times @var{t}.  This is useful with the function @code{pulstran}
+## for generating a series of pulses.
 ##
-## Generate a triangular pulse over the interval [-w/2,w/2), sampled at
-## times t.  This is useful with the function pulstran for generating a
-## series pulses.
-##
-## skew is a value between -1 and 1, indicating the relative placement
+## @var{skew} is a value between -1 and 1, indicating the relative placement
 ## of the peak within the width.  -1 indicates that the peak should be
-## at -w/2, and 1 indicates that the peak should be at w/2.
+## at -@var{w}/2, and 1 indicates that the peak should be at @var{w}/2.  The
+## default value is 0.
 ##
 ## Example:
 ## @example
@@ -33,48 +34,72 @@
 ## fs = 11025;  # arbitrary sample rate
 ## f0 = 100;    # pulse train sample rate
 ## w = 0.3/f0;  # pulse width 3/10th the distance between pulses
-## auplot(pulstran(0:1/fs:4/f0, 0:1/f0:4/f0, 'tripuls', w), fs);
+## plot (pulstran (0:1/fs:4/f0, 0:1/f0:4/f0, "tripuls", w));
 ## @end group
 ## @end example
 ##
-## @seealso{pulstran}
+## @seealso{gauspuls, pulstran, rectpuls}
 ## @end deftypefn
 
 function y = tripuls (t, w = 1, skew = 0)
 
-  if nargin<1 || nargin>3,
-    print_usage;
+  if (nargin < 1 || nargin > 3)
+    print_usage ();
   endif
 
-  y = zeros(size(t));
-  peak = skew*w/2;
-  try wfi = warning("off", "Octave:fortran-indexing");
-  catch wfi = 0;
-  end_try_catch
-  unwind_protect
-    idx = find(t>=-w/2 & t <= peak);
-    if (idx) y(idx) = ( t(idx) + w/2 ) / ( peak + w/2 ); endif
-    idx = find(t>peak & t < w/2);
-    if (idx) y(idx) = ( t(idx) - w/2 ) / ( peak - w/2 ); endif
-  unwind_protect_cleanup
-    warning(wfi);
-  end_unwind_protect
+  if (! isreal (w) || ! isscalar (w))
+    error ("tripuls: W must be a real scalar");
+  endif
+
+  if (! isreal (skew) || ! isscalar (skew) || skew < -1 || skew > 1)
+    error ("tripuls: SKEW must be a real scalar in the range [-1, 1]");
+  endif
+
+  y = zeros (size (t));
+  peak = skew * w/2;
+
+  idx = find ((t >= -w/2) & (t <= peak));
+  if (idx)
+    y(idx) = (t(idx) + w/2) / (peak + w/2);
+  endif
+
+  idx = find ((t > peak) & (t < w/2));
+  if (idx)
+    y(idx) = (t(idx) - w/2) / (peak - w/2);
+  endif
 
 endfunction
 
-%!assert(tripuls(0:1/100:0.3,.1), tripuls([0:1/100:0.3]',.1)');
-%!assert(isempty(tripuls([],.1)));
 %!demo
 %! fs = 11025;  # arbitrary sample rate
 %! f0 = 100;    # pulse train sample rate
 %! w = 0.5/f0;  # pulse width 1/10th the distance between pulses
-%! subplot(211);
-%! x = pulstran(0:1/fs:4/f0, 0:1/f0:4/f0, 'tripuls', w);
-%! plot([0:length(x)-1]*1000/fs, x);
-%! ylabel("amplitude"); xlabel("time (ms)");
-%! title("graph shows 5 ms pulses at 0,10,20,30 and 40 ms");
-%! subplot(212);
-%! x = pulstran(0:1/fs:4/f0, 0:1/f0:4/f0, 'tripuls', w, -0.5);
-%! plot([0:length(x)-1]*1000/fs, x);
-%! ylabel("amplitude"); xlabel("time (ms)");
-%! title("graph shows 5 ms pulses at 0,10,20,30 and 40 ms, skew -0.5");
+%! x = pulstran (0:1/fs:4/f0, 0:1/f0:4/f0, "tripuls", w);
+%! plot ([0:length(x)-1]*1000/fs, x);
+%! xlabel ("Time (ms)");
+%! ylabel ("Amplitude");
+%! title ("Triangular pulse train of 5 ms pulses at 10 ms intervals");
+
+%!demo
+%! fs = 11025;  # arbitrary sample rate
+%! f0 = 100;    # pulse train sample rate
+%! w = 0.5/f0;  # pulse width 1/10th the distance between pulses
+%! x = pulstran (0:1/fs:4/f0, 0:1/f0:4/f0, "tripuls", w, -0.5);
+%! plot ([0:length(x)-1]*1000/fs, x);
+%! xlabel ("Time (ms)");
+%! ylabel ("Amplitude");
+%! title ("Triangular pulse train of 5 ms pulses at 10 ms intervals, skew = -0.5");
+
+%!assert (tripuls ([]), [])
+%!assert (tripuls ([], 0.1), [])
+%!assert (tripuls (zeros (10, 1)), ones (10, 1))
+%!assert (tripuls (-1:1), [0, 1, 0])
+%!assert (tripuls (-5:5, 9), [0, 1, 3, 5, 7, 9, 7, 5, 3, 1, 0] / 9)
+%!assert (tripuls (0:1/100:0.3, 0.1), tripuls ([0:1/100:0.3]', 0.1)')
+
+## Test input validation
+%!error tripuls ()
+%!error tripuls (1, 2, 3, 4)
+%!error tripuls (1, 2j)
+%!error tripuls (1, 2, 2)
+%!error tripuls (1, 2, -2)
