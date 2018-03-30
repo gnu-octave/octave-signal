@@ -1,41 +1,39 @@
 ## Copyright (C) 2014 Georgios Ouzounis <ouzounis_georgios@hotmail.com>
 ##
-## This file is part of Octave.
+## This program is free software: you can redistribute it and/or modify
+## it under the terms of the GNU General Public License as published by
+## the Free Software Foundation, either version 3 of the License, or
+## (at your option) any later version.
 ##
-## Octave is free software; you can redistribute it and/or modify it
-## under the terms of the GNU General Public License as published by
-## the Free Software Foundation; either version 3 of the License, or (at
-## your option) any later version.
-##
-## Octave is distributed in the hope that it will be useful, but
-## WITHOUT ANY WARRANTY; without even the implied warranty of
-## MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-## General Public License for more details.
+## This program is distributed in the hope that it will be useful,
+## but WITHOUT ANY WARRANTY; without even the implied warranty of
+## MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+## GNU General Public License for more details.
 ##
 ## You should have received a copy of the GNU General Public License
-## along with Octave; see the file COPYING.  If not, see
-## <http://www.gnu.org/licenses/>.
+## along with this program; see the file COPYING. If not, see
+## <https://www.gnu.org/licenses/>.
 
 ## -*- texinfo -*-
 ## @deftypefn  {Function File} {@var{out} =} peak2peak (@var{in})
-## @deftypefnx {Function File} {@var{out} =} peak2peak (@var{in}, @var{dimention})
+## @deftypefnx {Function File} {@var{out} =} peak2peak (@var{in}, @var{dim})
 ## Return the difference between the maximum and the minimum value in @var{in}.
 ## @end deftypefn
 
-function out = peak2peak (in, dimention)
+function out = peak2peak (in, dim)
 
   if (nargin < 1 || nargin > 2)
     print_usage ();
   elseif (nargin == 1)
     idx = find (size (in) - 1);
-    dimention = idx(1);
+    dim = idx(1);
   endif
 
-  if (dimention != fix (dimention))
-    error ("peak2peak : DIMENTION must be an integer");
+  if (dim != fix (dim))
+    error ("peak2peak: DIM must be an integer");
   endif
 
-  out = max (in, [], dimention) - min (in, [], dimention);
+  out = max (in, [], dim) - min (in, [], dim);
 
 endfunction
 
@@ -89,3 +87,8 @@ endfunction
 %! T2(:, :, 2) = [61 65];
 %! T(:, :, :, 2) = T2;
 %! assert (Y, T);
+
+## Test input validation
+%!error peak2peak ()
+%!error peak2peak (1, 2, 3)
+%!error peak2peak (1, 1.5)
