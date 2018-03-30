@@ -17,6 +17,10 @@ Signals
   specgram
   square
   tripuls
+Signal Measurement
+  findpeaks
+  peak2rms
+  rms
 Filtering
   filtfilt
   filtic
@@ -152,7 +156,6 @@ Sample Rate Change
 Utility
   buffer
   clustersegment
-  findpeaks
   fracshift
   marcumq
   primitive
