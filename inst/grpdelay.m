@@ -188,7 +188,7 @@ function [gd, w] = grpdelay (b, a = 1, nfft = 512, whole, Fs)
   minmag    = 10*eps;
   polebins  = find (abs (den) < minmag);
   for b = polebins
-    warning ("grpdelay: setting group delay to 0 at singularity");
+    warning ("signal:grpdelay-singularity", "grpdelay: setting group delay to 0 at singularity");
     num(b) = 0;
     den(b) = 1;
     ## try to preserve angle:
@@ -354,6 +354,7 @@ endfunction
 %! assert(gd, [0.095238;0.239175;0.953846;1.759360],1e-5);
 
 %!test % 4
+%! warning ("off", "signal:grpdelay-singularity", "local");
 %! Fs = 8000;
 %! [b, a] = cheby1(3, 3, 2*[1000, 3000]/Fs, 'stop');
 %! [h, w] = grpdelay(b, a, 256, 'half', Fs);
