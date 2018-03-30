@@ -1,20 +1,18 @@
 ## Copyright (C) 2014 Georgios Ouzounis <ouzounis_georgios@hotmail.com>
 ##
-## This file is part of Octave.
+## This program is free software: you can redistribute it and/or modify
+## it under the terms of the GNU General Public License as published by
+## the Free Software Foundation, either version 3 of the License, or
+## (at your option) any later version.
 ##
-## Octave is free software; you can redistribute it and/or modify it
-## under the terms of the GNU General Public License as published by
-## the Free Software Foundation; either version 3 of the License, or (at
-## your option) any later version.
-##
-## Octave is distributed in the hope that it will be useful, but
-## WITHOUT ANY WARRANTY; without even the implied warranty of
-## MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-## General Public License for more details.
+## This program is distributed in the hope that it will be useful,
+## but WITHOUT ANY WARRANTY; without even the implied warranty of
+## MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+## GNU General Public License for more details.
 ##
 ## You should have received a copy of the GNU General Public License
-## along with Octave; see the file COPYING.  If not, see
-## <http://www.gnu.org/licenses/>.
+## along with this program; see the file COPYING. If not, see
+## <https://www.gnu.org/licenses/>.
 
 ## -*- texinfo -*-
 ## @deftypefn  {Function File} {@var{out} =} udecode (@var{in}, @var{n})
@@ -31,19 +29,19 @@ function out = udecode (in, n, v = 1, overflows = "saturate")
   endif
 
   if (in != fix (in))
-    error ("udecode: IN must be matrix of integers.");
+    error ("udecode: IN must be matrix of integers");
   endif
 
   if (n < 2 || n > 32 || n != fix (n))
-    error ("udecode: N must be an integer in [2 32].");
+    error ("udecode: N must be an integer in the range [2, 32]");
   endif
 
   if (v <= 0)
-    error ("udecode: V must be a possitive integer.");
+    error ("udecode: V must be a positive integer");
   endif
 
   if (! (strcmp (overflows, "saturate") || strcmp (overflows, "wrap")))
-    error ("uencode: OVERFLOWS must be either \"saturate\" or \"wrap\".");
+    error ("uencode: OVERFLOWS must be either \"saturate\" or \"wrap\"");
   endif
 
   if ( all (in >= 0))
@@ -117,3 +115,13 @@ endfunction
 %! u = [-7 -6 -5 -4 -3 -2 -1 0 1 2 3 4 5 6 7];
 %! y = udecode(u, 3, 2, "wrap");
 %! assert(y, [0.5 1 1.5 -2 -1.5 -1 -0.5 0 0.5 1 1.5 -2 -1.5 -1 -0.5]);
+
+## Test input validation
+%!error udecode ()
+%!error udecode (1)
+%!error udecode (1, 2, 3, 4, 5)
+%!error udecode (1.5)
+%!error udecode (1, 100)
+%!error udecode (1, 4, 0)
+%!error udecode (1, 4, -1)
+%!error udecode (1, 4, 2, "invalid")
