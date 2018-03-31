@@ -128,7 +128,7 @@ endfunction
 %! d  = [1.5 7/6];
 %! N  = 1024;
 %! t  = ((0:N-1)-N/2).';
-%! tt = t - d;
+%! tt = bsxfun (@minus, t, d);
 %! err1= err2 = zeros(N/2,1);
 %! for n = 0:N/2-1,
 %!   phi0      = 2*pi*rand;
