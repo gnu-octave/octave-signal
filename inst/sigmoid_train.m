@@ -93,8 +93,6 @@ endfunction
 %! range = [0.1 0.4; 0.6 0.8; 1 2];
 %! rc    = [1e-2 1e-3; 1e-3 2e-2; 2e-2 1e-2];
 %! y     = sigmoid_train (t, range, rc);
-%!
-%! close all
 %! for i=1:3
 %!     patch ([range(i,[2 2]) range(i,[1 1])], [0 1 1 0],...
 %!               'facecolor', [1 0.8 0.8],'edgecolor','none');
@@ -103,7 +101,6 @@ endfunction
 %! xlabel('time'); ylabel('S(t)')
 %! title ('Vectorized use of sigmoid train')
 %! axis tight
-%!
 %! #-------------------------------------------------------------------------
 %! # The colored regions show the limits defined in range.
 
@@ -115,7 +112,6 @@ endfunction
 %! amp   = [4 2 3];
 %! [~, S] = sigmoid_train (t, range, rc);
 %! y = amp * S;
-%! close all
 %! h = plot (t, y, '-b', t, S, '-');
 %! set (h(1), "linewidth", 2);
 %! legend (h(1:2), {"Sigmoid train", "Components"});
@@ -130,8 +126,6 @@ endfunction
 %! rc = 3e-2;
 %! dxdt = @(x_,t_) [ x_(2); sigmoid_train(t_, ran, rc) ];
 %! y = lsode(dxdt,[0 0],t);
-%!
-%! close all
 %! for i=1:2
 %!     patch ([ran(i,[2 2]) ran(i,[1 1])], [0 1 1 0],...
 %!               'facecolor', [1 0.8 0.8],'edgecolor','none');
@@ -140,6 +134,5 @@ endfunction
 %! xlabel('time'); ylabel('V(t)')
 %! title ('On demand use of sigmoid train')
 %! axis tight
-%!
 %! #-------------------------------------------------------------------------
 %! # The colored regions show periods when the force is active.

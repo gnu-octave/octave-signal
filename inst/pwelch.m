@@ -907,37 +907,59 @@ function varargout = pwelch(x,varargin)
 endfunction
 
 %!demo
-%! fflush(stdout);
-%! rand('seed',2038014164);
 %! a = [ 1.0 -1.6216505 1.1102795 -0.4621741 0.2075552 -0.018756746 ];
 %! white = rand(1,16384);
 %! signal = detrend(filter(0.70181,a,white));
-%! # frequency shift by modulating with exp(j.omega.t)
+%! % frequency shift by modulating with exp(j.omega.t)
 %! skewed = signal.*exp(2*pi*i*2/25*[1:16384]);
-%! Fs = 25; # sampling frequency
-%! hold off
-%! pwelch([]);
+%! compat = pwelch ([]);
+%! hold on;
 %! pwelch(signal);
-%! hold on
 %! pwelch(skewed);
 %! pwelch(signal,'shift','semilogy');
-%! hold off
-%! figure();
+%! pwelch (compat);
+%! hold off;
+
+%!demo
+%! Fs = 25;
+%! a = [ 1.0 -1.6216505 1.1102795 -0.4621741 0.2075552 -0.018756746 ];
+%! white = rand(1,16384);
+%! signal = detrend(filter(0.70181,a,white));
+%! % frequency shift by modulating with exp(j.omega.t)
+%! skewed = signal.*exp(2*pi*i*2/25*[1:16384]);
+%! compat = pwelch ([]);
 %! pwelch(skewed,[],[],[],Fs,'shift','semilogy');
 %! pwelch(skewed,[],[],[],Fs,0.95,'shift','semilogy');
 %! pwelch('R12+');
 %! pwelch(signal,'squared');
-%! figure();
-%! pwelch([]);
+%! pwelch (compat);
+
+%!demo
+%! a = [ 1.0 -1.6216505 1.1102795 -0.4621741 0.2075552 -0.018756746 ];
+%! white = rand(1,16384);
+%! signal = detrend(filter(0.70181,a,white));
+%! compat = pwelch ([]);
 %! pwelch(signal,3640,[],4096,2*pi,[],'no-strip');
-%! figure();
+%! pwelch (compat);
+
+%!demo
+%! a = [ 1.0 -1.6216505 1.1102795 -0.4621741 0.2075552 -0.018756746 ];
+%! white = rand(1,16384);
+%! signal = detrend(filter(0.70181,a,white));
+%! compat = pwelch ([]);
+%! hold on;
 %! pwelch(signal,[],[],[],2*pi,0.95,'no-strip');
 %! pwelch(signal,64,[],[],2*pi,'no-strip');
-%! hold on
 %! pwelch(signal,64,[],256,2*pi,'no-strip');
-%! figure();
-%! pwelch('psd');
+%! pwelch (compat);
+%! hold off;
+
+%!demo
+%! a = [ 1.0 -1.6216505 1.1102795 -0.4621741 0.2075552 -0.018756746 ];
+%! white = rand(1,16384);
+%! signal = detrend(filter(0.70181,a,white));
+%! compat = pwelch ('psd');
 %! pwelch(signal,'squared');
-%! hold off
 %! pwelch({});
 %! pwelch(white,signal,'trans','coher','short')
+%! pwelch (compat);
