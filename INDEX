@@ -26,6 +26,12 @@ Signal Measurement
   peak2peak
   peak2rms
   rms
+Correlation and Convolution
+  convmtx
+  wconv
+  xcorr
+  xcorr2
+  xcov
 Filtering
   filtfilt
   filtic
@@ -41,7 +47,6 @@ Filter Analysis
   impz
   zplane
 Filter Conversion
-  convmtx
   polystab
   residued
   residuez
@@ -119,9 +124,6 @@ Power Spectrum Analysis
   pyulear
   tfe
   tfestimate
-  xcorr
-  xcorr2
-  xcov
   __power
 Window Functions
   barthannwin
@@ -167,7 +169,6 @@ Utility
   sampled2continuous
   schtrig
   upsamplefill
-  wconv
   wkeep
   wrev
   zerocrossing
