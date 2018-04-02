@@ -12,10 +12,27 @@ Summary of important user-visible changes for signal 1.4.0:
       uencode
       unshiftdata
 
+ ** The medfilt1 function has been completely rewritten to support additional
+    arguments and options and to improve Matlab compatibility.
+
  ** Other functions that have been changed for smaller bugfixes,
     increased Matlab compatibility, or performance:
 
-      impz square fracshift
+      chirp
+      data2fun
+      findpeaks
+      fracshift
+      gauspuls
+      gausswin
+      impz
+      invfreqs
+      invfreqz
+      marcumq
+      rectpuls
+      schtrig
+      sigmoid_train
+      square
+      tripuls
 
 
 Summary of important user-visible changes for signal 1.3.2:
