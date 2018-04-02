@@ -104,7 +104,7 @@ function c = cconv (a, b, n)
   c = ifft (fft (a) .* fft (b)) ;
 
   if (!flgcolumn)
-    c = c';
+    c = c.';
   endif
 
 endfunction
@@ -123,6 +123,9 @@ endfunction
 %!assert (cconv ([2 1 2 1], [1 2 3 4], 3), [22 17 21])
 %!assert (cconv ([2 1 2 1], [1 2 3 4], 2), [28 32])
 %!assert (cconv ([2 1 2 1], [1 2 3 4], 1), 60)
+
+%!assert (cconv (x*j, 1), [1j, 2j, 3j, 4j, 5j])
+%!assert (cconv (x'*j, 1), [1j; 2j; 3j; 4j; 5j])
 
 ## Test input validation
 %!error cconv ()
