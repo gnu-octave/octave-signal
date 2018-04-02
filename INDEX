@@ -27,6 +27,7 @@ Signal Measurement
   peak2rms
   rms
 Correlation and Convolution
+  cconv
   convmtx
   wconv
   xcorr
