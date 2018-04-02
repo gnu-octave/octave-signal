@@ -4,6 +4,12 @@ PACKAGE = $(shell $(SED) -n -e 's/^Name: *\(\w\+\)/\1/p' DESCRIPTION | $(TOLOWER
 VERSION = $(shell $(SED) -n -e 's/^Version: *\(\w\+\)/\1/p' DESCRIPTION | $(TOLOWER))
 DEPENDS = $(shell $(SED) -n -e 's/^Depends[^,]*, \(.*\)/\1/p' DESCRIPTION | $(SED) 's/ *([^()]*),*/ /g')
 
+HG_ID        := $(shell hg identify --id | sed -e 's/+//' )
+HG_TIMESTAMP := $(firstword $(shell hg log --rev $(HG_ID) --template '{date|hgdate}'))
+
+TAR_REPRODUCIBLE_OPTIONS := --sort=name --mtime="@$(HG_TIMESTAMP)" --owner=0 --group=0 --numeric-owner
+TAR_OPTIONS  := --format=ustar $(TAR_REPRODUCIBLE_OPTIONS)
+
 RELEASE_DIR     = $(PACKAGE)-$(VERSION)
 RELEASE_TARBALL = $(PACKAGE)-$(VERSION).tar.gz
 HTML_DIR        = $(PACKAGE)-html
@@ -40,11 +46,11 @@ help:
 $(RELEASE_DIR): .hg/dirstate
 	@echo "Creating package version $(VERSION) release ..."
 	-rm -rf $@
-	hg archive --exclude ".hg*" --exclude Makefile --type files $@
+	hg archive --exclude ".hg*" --exclude Makefile --type files --rev $(HG_ID) $@
 	chmod -R a+rX,u+w,go-w $@
 
 $(RELEASE_TARBALL): $(RELEASE_DIR)
-	$(TAR) cf - --posix $< | gzip -9n > $@
+	$(TAR) -cf - $(TAR_OPTIONS) $< | gzip -9n > $@
 	-rm -rf $<
 
 $(HTML_DIR): install
@@ -57,7 +63,7 @@ $(HTML_DIR): install
 	chmod -R a+rX,u+w,go-w $@
 
 $(HTML_TARBALL): $(HTML_DIR)
-	$(TAR) cf - --posix $< | gzip -9n > $@
+	$(TAR) -cf - $(TAR_OPTIONS) $< | gzip -9n > $@
 	-rm -rf $<
 
 dist: $(RELEASE_TARBALL)
