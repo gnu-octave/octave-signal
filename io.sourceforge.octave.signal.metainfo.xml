@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Copyright 2018 Mike Miller
+
+Copying and distribution of this file, with or without modification,
+are permitted in any medium without royalty provided the copyright
+notice and this notice are preserved.  This file is offered as-is,
+without any warranty.
+-->
+<component type="addon">
+  <id>io.sourceforge.octave.signal</id>
+  <extends>org.octave.Octave.desktop</extends>
+  <name>Signal Processing</name>
+  <summary>Signal processing, measurement, filtering, windowing, and spectral analysis</summary>
+  <keywords>
+    <keyword>FIR filter</keyword>
+    <keyword>IIR filter</keyword>
+    <keyword>convolution</keyword>
+    <keyword>digital filter</keyword>
+    <keyword>linear filter</keyword>
+    <keyword>signal measurement</keyword>
+    <keyword>signal processing</keyword>
+    <keyword>spectral analysis</keyword>
+    <keyword>window function</keyword>
+  </keywords>
+  <url type="homepage">https://octave.sourceforge.io/signal</url>
+  <url type="bugtracker">https://savannah.gnu.org/bugs/?group=octave</url>
+  <metadata_license>FSFAP</metadata_license>
+  <project_license>GPL-3.0+</project_license>
+  <developer_name>Octave-Forge Community</developer_name>
+  <update_contact>octave-maintainers@gnu.org</update_contact>
+</component>
