@@ -119,22 +119,26 @@
 
 function [S_r, f_r, t_r] = specgram(x, n = min(256, length(x)), Fs = 2, window = hanning(n), overlap = ceil(length(window)/2))
 
-  if nargin < 1 || nargin > 5
-    print_usage;
-  ## make sure x is a vector
-  elseif columns(x) != 1 && rows(x) != 1
-    error ("specgram data must be a vector");
+  if (nargin < 1 || nargin > 5)
+    print_usage ();
   endif
-  if columns(x) != 1, x = x'; endif
+
+  if (! isnumeric (x) || ! isvector (x))
+    error ("specgram: X must be a numeric vector");
+  endif
+
+  x = x(:);
 
   ## if only the window length is given, generate hanning window
-  if length(window) == 1, window = hanning(window); endif
+  if (isscalar (window))
+    window = hanning (window);
+  endif
 
   ## should be extended to accept a vector of frequencies at which to
   ## evaluate the Fourier transform (via filterbank or chirp
   ## z-transform)
-  if length(n)>1,
-    error("specgram doesn't handle frequency vectors yet");
+  if (! isscalar (n))
+    error ("specgram: N must be a scalar, vector of frequencies not supported");
   endif
 
   if (length (x) <= length (window))
