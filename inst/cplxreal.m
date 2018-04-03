@@ -1,4 +1,5 @@
-## Copyright (C) 2005 Julius O. Smith III <jos@ccrma.stanford.edu>
+## Copyright (C) 2005 Julius O. Smith III
+## Copyright (C) 2018 Mike Miller
 ##
 ## This program is free software: you can redistribute it and/or modify
 ## it under the terms of the GNU General Public License as published by
@@ -15,61 +16,91 @@
 ## <https://www.gnu.org/licenses/>.
 
 ## -*- texinfo -*-
-## @deftypefn {Function File} {[@var{zc}, @var{zr}] =} cplxreal (@var{z}, @var{thresh})
-## Split the vector z into its complex (@var{zc}) and real (@var{zr}) elements,
-## eliminating one of each complex-conjugate pair.
+## @deftypefn  {Function File} {[@var{zc}, @var{zr}] =} cplxreal (@var{z})
+## @deftypefnx {Function File} {[@var{zc}, @var{zr}] =} cplxreal (@var{z}, @var{tol})
+## @deftypefnx {Function File} {[@var{zc}, @var{zr}] =} cplxreal (@var{z}, @var{tol}, @var{dim})
+## Sort the numbers @var{z} into complex-conjugate-valued and real-valued
+## elements.  The positive imaginary complex numbers of each complex conjugate
+## pair are returned in @var{zc} and the real numbers are returned in @var{zr}.
 ##
-## INPUTS:
-## @itemize
-## @item
-## @var{z} = row- or column-vector of complex numbers
-## @item
-## @var{thresh} = tolerance threshold for numerical comparisons (default = 100*eps)
-## @end itemize
+## @var{tol} is a weighting factor in the range [0, 1) which determines the
+## tolerance of the matching.  The default value is @code{100 * eps} and the
+## resulting tolerance for a given complex pair is
+## @code{@var{tol} * abs (@var{z}(i)))}.
 ##
-## RETURNED:
-## @itemize
-## @item
-## @var{zc} = elements of @var{z} having positive imaginary parts
-## @item
-## @var{zr} = elements of @var{z} having zero imaginary part
-## @end itemize
+## By default the complex pairs are sorted along the first non-singleton
+## dimension of @var{z}.  If @var{dim} is specified, then the complex pairs are
+## sorted along this dimension.
 ##
-## Each complex element of @var{z} is assumed to have a complex-conjugate
-## counterpart elsewhere in @var{z} as well.  Elements are declared real
-## if their imaginary parts have magnitude less than @var{thresh}.
-##
+## Signal an error if some complex numbers could not be paired.  Signal an
+## error if all complex numbers are not exact conjugates (to within @var{tol}).
+## Note that there is no defined order for pairs with identical real parts but
+## differing imaginary parts.
 ## @seealso{cplxpair}
 ## @end deftypefn
 
-function [zc,zr] = cplxreal (z, thresh = 100*eps)
+function [zc, zr] = cplxreal (z, tol, dim)
 
-  ## interesting for testing: if nargin<2, thresh=1E-3; endif
-
-  if isempty(z)
-    zc=[];
-    zr=[];
-  else
-    zcp = cplxpair(z); # sort complex pairs, real roots at end
-    nz = length(z);
-    nzrsec = 0;
-    i=nz;
-    while i && abs(imag(zcp(i)))<thresh # determine no. of real values
-      zcp(i) = real(zcp(i));
-      nzrsec = nzrsec+1;
-      i=i-1;
-    endwhile
-    nzsect2 = nz-nzrsec;
-    if mod(nzsect2,2)~=0
-      error('cplxreal: Odd number of complex values!');
-    endif
-    nzsec = nzsect2/2;
-    zc = zcp(2:2:nzsect2);
-    zr = zcp(nzsect2+1:nz);
+  if (nargin < 1 || nargin > 3)
+    print_usage ();
   endif
+
+  if (isempty (z))
+    zc = zeros (size (z));
+    zr = zeros (size (z));
+    return;
+  endif
+
+  cls = ifelse (isa (z, "single"), "single", "double");
+  if (nargin < 2 || isempty (tol))
+    tol = 100 * eps (cls);
+  endif
+
+  args = cell (1, nargin);
+  args{1} = z;
+  args{2} = tol;
+  if (nargin >= 3)
+    args{3} = dim;
+  endif
+
+  zcp = cplxpair (args{:});
+
+  nz = length (z);
+  idx = nz;
+  while ((idx > 0) && ((abs (imag (zcp(idx))) ./ abs (zcp(idx))) <= tol))
+    zcp(idx) = real (zcp(idx));
+    idx--;
+  endwhile
+
+  if (mod (idx, 2) != 0)
+    error ("cplxreal: odd number of complex values was returned from cplxpair");
+  endif
+
+  zc = zcp(2:2:idx);
+  zr = zcp(idx+1:nz);
 
 endfunction
 
 %!test
-%! [zc,zr] = cplxreal(roots([1 0 0 1]));
-%! assert({zc,zr},{0.5+i*sin(pi/3),-1},10*eps);
+%! [zc, zr] = cplxreal ([]);
+%! assert (isempty (zc))
+%! assert (isempty (zr))
+%!test
+%! [zc, zr] = cplxreal (1);
+%! assert (isempty (zc))
+%! assert (zr, 1)
+%!test
+%! [zc, zr] = cplxreal ([1+1i, 1-1i]);
+%! assert (zc, 1+1i)
+%! assert (isempty (zr))
+%!test
+%! [zc, zr] = cplxreal (roots ([1, 0, 0, 1]));
+%! assert (zc, complex (0.5, sin (pi/3)), 10*eps)
+%! assert (zr, -1)
+
+## Test input validation
+%!error cplxreal ()
+%!error cplxreal (1, 2, 3, 4)
+%!error cplxreal (1, ones (2, 3))
+%!error cplxreal (1, -1)
+%!error cplxreal (1, [], 3)
