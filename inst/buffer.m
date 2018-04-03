@@ -138,10 +138,12 @@ function [y, z, opt] = buffer (x, n, p, opt)
         y = [zeros(p, m); y];
         in = p;
         off = 1;
+        out = 1;
         while (in > 0)
-          y (1 : in, off) = opt(off:end);
+          y(1:in, off) = opt(out:end);
           off++;
-          in = in - n + p;
+          in  -= n - p;
+          out += n - p;
         endwhile
         if (p > n / 2)
           in = n - p;
@@ -275,3 +277,9 @@ endfunction
 %! assert (y, reshape ([-1:3,2:6,5:9],[5,3]));
 %! assert (z, [10; 11]);
 %! assert (opt, [8; 9]);
+
+%!test
+%! [y, z, opt] = buffer (1:10, 6, 4);
+%! assert (y, [0 0 1:2:5; 0 0 2:2:6; 0 1:2:7; 0 2:2:8; 1:2:9; 2:2:10])
+%! assert (z, zeros (1, 0))
+%! assert (opt, [7; 8; 9; 10])
