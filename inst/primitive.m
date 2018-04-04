@@ -14,11 +14,9 @@
 ## along with this program; see the file COPYING. If not, see
 ## <https://www.gnu.org/licenses/>.
 
-## Author: Juan Pablo Carbajal <ajuanpi+dev@gmail.com>
-
 ## -*- texinfo -*-
 ## @deftypefn {Function File} {@var{F} =} primitive (@var{f}, @var{t}, @var{F0})
-## Calculates the primitive of a function.
+## Calculate the primitive of a function.
 ##
 ## The function approximates the primitive (indefinite integral) of the
 ## univariate function handle @var{f} with constant of integration @var{F0}.
@@ -31,25 +29,31 @@
 ##
 ## Example:
 ## @example
-## f = @@(t) sin(2*pi*3*t);
-## t = [0; sort(rand(100,1))];
-## F = primitive (f,t,0);
-## t_true = linspace(0,1,1e3).';
-## F_true = (1 - cos(2*pi*3*t_true))/(2*pi*3);
-## plot (t,F,'.',t_true,F_true)
+## @group
+## f = @@(t) sin (2 * pi * 3 * t);
+## t = [0; sort(rand (100, 1))];
+## F = primitive (f, t, 0);
+## t_true = linspace (0, 1, 1e3).';
+## F_true = (1 - cos (2 * pi * 3 * t_true)) / (2 * pi * 3);
+## plot (t, F, 'o', t_true, F_true);
+## @end group
 ## @end example
 ##
 ## @seealso{quadgk, cumsum}
 ## @end deftypefn
 
-function F = primitive (f,t,C=0)
+function F = primitive (f, t, C = 0)
 
-  i_chunk(0,0,[]);
-  F = arrayfun (@(x)i_chunk(f,x,C),t);
+  if (nargin < 2 || nargin > 3)
+    print_usage ();
+  endif
+
+  i_chunk (0, 0, []);
+  F = arrayfun (@(x) i_chunk (f, x, C), t);
 
 endfunction
 
-function F_prev = i_chunk (f,t,init)
+function F = i_chunk (f, t, init)
 
   persistent F_prev t0
 
@@ -59,18 +63,25 @@ function F_prev = i_chunk (f,t,init)
   elseif isempty (F_prev)
     F_prev = init;
   else
-    F_prev += quadgk(f,t0,t);
+    F_prev += quadgk (f, t0, t);
     t0      = t;
   endif
+
+  F = F_prev;
 
 endfunction
 
 %!demo
-%! f = @(t) sin(2*pi*3*t);
-%! t = [0; sort(rand(100,1))];
-%! F = primitive (f,t,0);
-%! t_true = linspace(0,1,1e3).';
-%! F_true = (1 - cos(2*pi*3*t_true))/(2*pi*3);
-%! h = plot (t,F,".;numerical primtive;",t_true,F_true,"-;true primitive;");
-%! set (h, "linewidth",2);
-%! # -------------------------------------------------
+%! f = @(t) sin (2*pi*3*t);
+%! t = [0; sort(rand (100, 1))];
+%! F = primitive (f, t, 0);
+%! t_true = linspace (0, 1, 1e3).';
+%! F_true = (1 - cos (2 * pi * 3 * t_true)) / (2 * pi * 3);
+%! h = plot (t, F, "o;Numerical primitive;", t_true, F_true, "-;True primitive;");
+%! set (h, "linewidth", 2);
+%! title ("Numerical primitive evaluated at random time points");
+
+## Test input validation
+%!error primitive ()
+%!error primitive (1)
+%!error primitive (1, 2, 3, 4)
