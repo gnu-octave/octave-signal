@@ -9,9 +9,15 @@
 ## notice and this notice are preserved.  This file is offered as-is,
 ## without any warranty.
 
-PACKAGE = $(shell $(SED) -n -e 's/^Name: *\(\w\+\)/\1/p' DESCRIPTION | $(TOLOWER))
-VERSION = $(shell $(SED) -n -e 's/^Version: *\(\w\+\)/\1/p' DESCRIPTION | $(TOLOWER))
-DEPENDS = $(shell $(SED) -n -e 's/^Depends[^,]*, \(.*\)/\1/p' DESCRIPTION | $(SED) 's/ *([^()]*),*/ /g')
+MKOCTFILE := mkoctfile
+OCTAVE    := octave
+SED       := sed
+SHA256SUM := sha256sum
+TAR       := tar
+
+PACKAGE := $(shell $(SED) -n -e 's/^Name: *\(\w\+\)/\1/p' DESCRIPTION)
+VERSION := $(shell $(SED) -n -e 's/^Version: *\(\w\+\)/\1/p' DESCRIPTION)
+DEPENDS := $(shell $(SED) -n -e 's/^Depends[^,]*, \(.*\)/\1/p' DESCRIPTION | $(SED) 's/ *([^()]*),*/ /g')
 
 HG_ID        := $(shell hg identify --id | sed -e 's/+//' )
 HG_TIMESTAMP := $(firstword $(shell hg log --rev $(HG_ID) --template '{date|hgdate}'))
@@ -19,21 +25,10 @@ HG_TIMESTAMP := $(firstword $(shell hg log --rev $(HG_ID) --template '{date|hgda
 TAR_REPRODUCIBLE_OPTIONS := --sort=name --mtime="@$(HG_TIMESTAMP)" --owner=0 --group=0 --numeric-owner
 TAR_OPTIONS  := --format=ustar $(TAR_REPRODUCIBLE_OPTIONS)
 
-RELEASE_DIR     = $(PACKAGE)-$(VERSION)
-RELEASE_TARBALL = $(PACKAGE)-$(VERSION).tar.gz
-HTML_DIR        = $(PACKAGE)-html
-HTML_TARBALL    = $(PACKAGE)-html.tar.gz
-
-MD5SUM    ?= md5sum
-SED       ?= sed
-TAR       ?= tar
-
-# Follow jwe suggestion on not inheriting these vars from
-# the enviroment, so they can be set as command line arguemnts
-MKOCTFILE := mkoctfile
-OCTAVE    := octave
-
-TOLOWER = $(SED) -e 'y/ABCDEFGHIJKLMNOPQRSTUVWXYZ/abcdefghijklmnopqrstuvwxyz/'
+RELEASE_DIR     := $(PACKAGE)-$(VERSION)
+RELEASE_TARBALL := $(PACKAGE)-$(VERSION).tar.gz
+HTML_DIR        := $(PACKAGE)-html
+HTML_TARBALL    := $(PACKAGE)-html.tar.gz
 
 .PHONY: help dist html release install all check run doc clean maintainer-clean
 
@@ -66,7 +61,8 @@ $(HTML_DIR): install
 	@echo "Generating HTML documentation. This may take a while ..."
 	-rm -rf $@
 	$(OCTAVE) --silent \
-	  --eval 'graphics_toolkit ("gnuplot");' \
+	  --eval 'page_screen_output (false);' \
+	  --eval 'set (0, "defaultfigurevisible", "off");' \
 	  --eval 'pkg load generate_html $(PACKAGE);' \
 	  --eval 'generate_package_html ("$(PACKAGE)", "$@", "octave-forge");'
 	chmod -R a+rX,u+w,go-w $@
@@ -80,7 +76,7 @@ dist: $(RELEASE_TARBALL)
 html: $(HTML_TARBALL)
 
 release: dist html
-	@$(MD5SUM) $(RELEASE_TARBALL) $(HTML_TARBALL)
+	@$(SHA256SUM) $(RELEASE_TARBALL) $(HTML_TARBALL)
 	@echo "Upload @ https://sourceforge.net/p/octave/package-releases/new/"
 	@echo "Execute: hg tag \"$(VERSION)\""
 
