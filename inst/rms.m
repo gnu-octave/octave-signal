@@ -17,27 +17,25 @@
 ## -*- texinfo -*-
 ## @deftypefn  {Function File} {@var{y} =} rms (@var{x})
 ## @deftypefnx {Function File} {@var{y} =} rms (@var{x}, @var{dim})
+## Compute the root-mean-square (RMS) of the vector @var{x}.
 ##
-## Return the root-mean-square (RMS) of @var{x}.
+## The root-mean-square is defined as
+##
 ## @tex
-## $$
-## {\rm rms} (x) = {\sqrt{\sum_{i=1}^N {x_i}^2 \over N}}
-## $$
+## $$ {\rm rms}(x) = {\sqrt{\sum_{i=1}^N {x_i}^2 \over N}} $$
 ## @end tex
 ## @ifnottex
 ##
 ## @example
-## @group
-## rms (x) = SQRT (1/N SUM_i x(i)^2)
-## @end group
+## rms (@var{x}) = SQRT (1/N SUM_i @var{x}(i)^2)
 ## @end example
 ##
 ## @end ifnottex
-## For matrix arguments, return a row vector containing the root mean square
-## of each column.
+## If @var{x} is a matrix, compute the root-mean-square for each column and
+## return them in a row vector.
 ##
 ## If the optional argument @var{dim} is given, operate along this dimension.
-## @seealso{peak2rms}
+## @seealso{mean, meansq, peak2rms, rssq, sumsq}
 ## @end deftypefn
 
 function y = rms (varargin)
@@ -50,9 +48,14 @@ function y = rms (varargin)
 
 endfunction
 
+%!assert (rms (0), 0)
+%!assert (rms (1), 1)
 %!assert (rms ([1 2 -1]), sqrt (2))
 %!assert (rms ([1 2 -1]'), sqrt (2))
+%!assert (rms ([1 2], 3), [1 2])
 
 ## Test input validation
 %!error rms ()
 %!error rms (1, 2, 3)
+%!error rms (1, 1.5)
+%!error rms (1, -1)

@@ -17,14 +17,14 @@
 ## -*- texinfo -*-
 ## @deftypefn  {Function File} {@var{y} =} peak2rms (@var{x})
 ## @deftypefnx {Function File} {@var{y} =} peak2rms (@var{x}, @var{dim})
+## Compute the ratio of the largest absolute value to the root-mean-square
+## (RMS) value of the vector @var{x}.
 ##
-## Return the ratio of the largest absolute value to the root-mean-square
-## (RMS) value of @var{x}.
-##
-## For matrix arguments, return a row vector containing the ratio of each column.
+## If @var{x} is a matrix, compute the peak-magnitude-to-RMS ratio for each
+## column and return them in a row vector.
 ##
 ## If the optional argument @var{dim} is given, operate along this dimension.
-## @seealso{rms}
+## @seealso{max, min, peak2peak, rms, rssq}
 ## @end deftypefn
 
 function y = peak2rms (x, dim)
@@ -41,9 +41,14 @@ function y = peak2rms (x, dim)
 
 endfunction
 
+%!assert (peak2rms (1), 1)
+%!assert (peak2rms (-5), 1)
 %!assert (peak2rms ([-2 3; 4 -2]), [4/sqrt(10), 3/sqrt((9+4)/2)])
 %!assert (peak2rms ([-2 3; 4 -2], 2), [3/sqrt((9+4)/2); 4/sqrt(10)])
+%!assert (peak2rms ([1 2 3], 3), [1 1 1])
 
 ## Test input validation
 %!error peak2rms ()
 %!error peak2rms (1, 2, 3)
+%!error peak2rms (1, 1.5)
+%!error peak2rms (1, -1)
