@@ -8,4 +8,4 @@ Description: Signal processing tools, including filtering, windowing and display
 Depends: octave (>= 3.8.0), control (>= 2.4.5)
 Autoload: no
 License: GPLv3+, public domain
-Url: http://octave.sf.net
+Url: https://octave.sourceforge.io/signal/

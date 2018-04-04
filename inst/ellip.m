@@ -54,7 +54,6 @@
 ## - Oppenheim, Alan V., Discrete Time Signal Processing, Hardcover, 1999.
 ## - Parente Ribeiro, E., Notas de aula da disciplina TE498 -  Processamento
 ##   Digital de Sinais, UFPR, 2001/2002.
-## - Kienzle, Paul, functions from Octave-Forge, 1999 (http://octave.sf.net).
 ## @end deftypefn
 
 function [a, b, c, d] = ellip (n, rp, rs, w, varargin)
