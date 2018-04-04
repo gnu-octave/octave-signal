@@ -26,6 +26,7 @@ Signal Measurement
   peak2peak
   peak2rms
   rms
+  rssq
 Correlation and Convolution
   cconv
   convmtx
