@@ -15,25 +15,33 @@
 ## <https://www.gnu.org/licenses/>.
 
 ## -*- texinfo -*-
-## @deftypefn  {Function File} {@var{out} =} peak2peak (@var{in})
-## @deftypefnx {Function File} {@var{out} =} peak2peak (@var{in}, @var{dim})
-## Return the difference between the maximum and the minimum value in @var{in}.
+## @deftypefn  {Function File} {@var{y} =} peak2peak (@var{x})
+## @deftypefnx {Function File} {@var{y} =} peak2peak (@var{x}, @var{dim})
+## Compute the difference between the maximum and minimum values in the vector
+## @var{x}.
+##
+## If @var{x} is a matrix, compute the difference for each column and return
+## them in a row vector.
+##
+## If the optional argument @var{dim} is given, operate along this dimension.
+## @seealso{max, min, peak2rms, rms, rssq}
 ## @end deftypefn
 
-function out = peak2peak (in, dim)
+function y = peak2peak (x, dim)
 
   if (nargin < 1 || nargin > 2)
     print_usage ();
-  elseif (nargin == 1)
-    idx = find (size (in) - 1);
-    dim = idx(1);
   endif
 
-  if (dim != fix (dim))
-    error ("peak2peak: DIM must be an integer");
+  if (nargin > 1 && ! (isscalar (dim) && dim == fix (dim) && dim > 0))
+    error ("peak2peak: DIM must be an integer and a valid dimension");
   endif
 
-  out = max (in, [], dim) - min (in, [], dim);
+  if (nargin == 1)
+    y = max (x) - min (x);
+  else
+    y = max (x, [], dim) - min (x, [], dim);
+  endif
 
 endfunction
 
@@ -92,3 +100,4 @@ endfunction
 %!error peak2peak ()
 %!error peak2peak (1, 2, 3)
 %!error peak2peak (1, 1.5)
+%!error peak2peak (1, 0)
