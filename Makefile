@@ -17,7 +17,7 @@ TAR       := tar
 
 PACKAGE := $(shell $(SED) -n -e 's/^Name: *\(\w\+\)/\1/p' DESCRIPTION)
 VERSION := $(shell $(SED) -n -e 's/^Version: *\(\w\+\)/\1/p' DESCRIPTION)
-DEPENDS := $(shell $(SED) -n -e 's/^Depends[^,]*, \(.*\)/\1/p' DESCRIPTION | $(SED) 's/ *([^()]*),*/ /g')
+DEPENDS := $(shell $(SED) -n -e 's/^Depends[^,]*, *\(.*\)/\1/p' DESCRIPTION | $(SED) 's/ *([^()]*)//g; s/ *, */ /g')
 
 HG_ID        := $(shell hg identify --id | sed -e 's/+//' )
 HG_TIMESTAMP := $(firstword $(shell hg log --rev $(HG_ID) --template '{date|hgdate}'))
@@ -30,7 +30,7 @@ RELEASE_TARBALL := $(PACKAGE)-$(VERSION).tar.gz
 HTML_DIR        := $(PACKAGE)-html
 HTML_TARBALL    := $(PACKAGE)-html.tar.gz
 
-.PHONY: help dist html release install all check run doc clean maintainer-clean
+.PHONY: help dist html release install all check doctest run doc clean maintainer-clean
 
 help:
 	@echo "Targets:"
@@ -41,6 +41,7 @@ help:
 	@echo "   install          - Install the package in GNU Octave"
 	@echo "   all              - Build all oct files"
 	@echo "   check            - Execute package tests (w/o install)"
+	@echo "   doctest          - Execute package doc tests (w/o install)"
 	@echo "   run              - Run Octave with development in PATH (no install)"
 	@echo "   doc              - Build Texinfo package manual"
 	@echo
@@ -90,16 +91,24 @@ all:
 
 check: all
 	$(OCTAVE) --silent \
-	  --eval 'if(!isempty("$(DEPENDS)")); pkg load $(DEPENDS); endif;' \
-	  --eval 'addpath (fullfile ([pwd filesep "inst"]));' \
-	  --eval 'addpath (fullfile ([pwd filesep "src"]));' \
+	  --eval 'if (! isempty ("$(DEPENDS)")); pkg load $(DEPENDS); endif;' \
+	  --eval 'addpath (fullfile (pwd, "inst"));' \
+	  --eval 'addpath (fullfile (pwd, "src"));' \
 	  --eval 'runtests ("inst"); runtests ("src");'
+
+doctest: all
+	$(OCTAVE) --silent \
+	  --eval 'if (! isempty ("$(DEPENDS)")); pkg load $(DEPENDS); endif;' \
+	  --eval 'pkg load doctest;' \
+	  --eval 'addpath (fullfile (pwd, "inst"));' \
+	  --eval 'addpath (fullfile (pwd, "src"));' \
+	  --eval 'doctest ({"src", "inst"});'
 
 run: all
 	$(OCTAVE) --silent --persist \
-	  --eval 'pkg load $(DEPENDS);' \
-	  --eval 'addpath (fullfile ([pwd filesep "inst"]));' \
-	  --eval 'addpath (fullfile ([pwd filesep "src"]));'
+	  --eval 'if (! isempty ("$(DEPENDS)")); pkg load $(DEPENDS); endif;' \
+	  --eval 'addpath (fullfile (pwd, "inst"));' \
+	  --eval 'addpath (fullfile (pwd, "src"));'
 
 doc:
 
