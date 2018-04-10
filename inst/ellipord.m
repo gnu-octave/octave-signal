@@ -157,3 +157,651 @@ endfunction
 %!error ellipord ([.1 .1], [.2 .2], 3, 4)
 %!error ellipord ([.1 .2], [.5 .6], 3, 4)
 %!error ellipord ([.1 .5], [.2 .6], 3, 4)
+
+%!demo
+%! fs    = 44100;
+%! Npts  = fs*10;
+%! fpass = 4000;
+%! fstop = 13713;
+%! Rpass = 3;
+%! Rstop = 40;
+%! Wpass = 2/fs * fpass;
+%! Wstop = 2/fs * fstop;
+%! [N, Wn] = ellipord (Wpass, Wstop, Rpass, Rstop)
+%! [B, A] = ellip (N, Rpass, Rstop, Wn);
+%! f = 5000:20000;
+%! W = 2/fs * f;
+%! [H, f] = freqz (B, A, Npts, fs);
+%! plot (f, 20 * log10 (abs (H)));
+%! outline_lp_pass_x = [f(2)  , fpass(1), fpass(1)];
+%! outline_lp_pass_y = [-Rpass, -Rpass  , -80];
+%! outline_lp_stop_x = [f(2)  , fstop(1), fstop(1), max(f)];
+%! outline_lp_stop_y = [0     , 0       , -Rstop  , -Rstop];
+%! hold on
+%! plot (outline_lp_pass_x, outline_lp_pass_y, "m", outline_lp_stop_x, outline_lp_stop_y, "m");
+%! ylim ([-80, 0]);
+%! grid on
+%! xlabel ("Frequency (Hz)");
+%! ylabel ("Attenuation (dB)");
+%! title ("2nd order digital elliptical low-pass (without margin)");
+
+%!demo
+%! fs    = 44100;
+%! Npts  = fs*10;
+%! fpass = 4000;
+%! fstop = 13712;
+%! Rpass = 3;
+%! Rstop = 40;
+%! Wpass = 2/fs * fpass;
+%! Wstop = 2/fs * fstop;
+%! [N, Wn] = ellipord (Wpass, Wstop, Rpass, Rstop)
+%! [B, A] = ellip (N, Rpass, Rstop, Wn);
+%! f = 5000:20000;
+%! W = 2/fs * f;
+%! [H, f] = freqz (B, A, Npts, fs);
+%! plot (f, 20 * log10 (abs (H)));
+%! outline_lp_pass_x = [f(2)  , fpass(1), fpass(1)];
+%! outline_lp_pass_y = [-Rpass, -Rpass  , -80];
+%! outline_lp_stop_x = [f(2)  , fstop(1), fstop(1), max(f)];
+%! outline_lp_stop_y = [0     , 0       , -Rstop  , -Rstop];
+%! hold on
+%! plot (outline_lp_pass_x, outline_lp_pass_y, "m", outline_lp_stop_x, outline_lp_stop_y, "m");
+%! ylim ([-80, 0]);
+%! grid on
+%! xlabel ("Frequency (Hz)");
+%! ylabel ("Attenuation (dB)");
+%! title ("3rd order digital elliptical low-pass (just exceeds 2nd order i.e. large margin)");
+
+%!demo
+%! fs    = 44100;
+%! Npts  = fs*10;
+%! fstop = 4000;
+%! fpass = 13713;
+%! Rpass = 3;
+%! Rstop = 40;
+%! Wpass = 2/fs * fpass;
+%! Wstop = 2/fs * fstop;
+%! [N, Wn] = ellipord (Wpass, Wstop, Rpass, Rstop)
+%! [B, A] = ellip (N, Rpass, Rstop, Wn, "high");
+%! f = 5000:20000;
+%! W = 2/fs * f;
+%! [H, f] = freqz (B, A, Npts, fs);
+%! plot (f, 20 * log10 (abs (H)));
+%! outline_hp_pass_x = [fpass(1), fpass(1), max(f)];
+%! outline_hp_pass_y = [-80     , -Rpass  , -Rpass];
+%! outline_hp_stop_x = [min(f)  , fstop(1), fstop(1), max(f)];
+%! outline_hp_stop_y = [-Rstop  , -Rstop  , 0       , 0     ];
+%! hold on
+%! plot (outline_hp_pass_x, outline_hp_pass_y, "m", outline_hp_stop_x, outline_hp_stop_y, "m");
+%! ylim ([-80, 0]);
+%! grid on
+%! xlabel ("Frequency (Hz)");
+%! ylabel ("Attenuation (dB)");
+%! title ("2nd order digital elliptical high-pass (without margin)");
+
+%!demo
+%! fs    = 44100;
+%! Npts  = fs*10;
+%! fstop = 4000;
+%! fpass = 13712;
+%! Rpass = 3;
+%! Rstop = 40;
+%! Wpass = 2/fs * fpass;
+%! Wstop = 2/fs * fstop;
+%! [N, Wn] = ellipord (Wpass, Wstop, Rpass, Rstop)
+%! [B, A] = ellip (N, Rpass, Rstop, Wn, "high");
+%! f = 5000:20000;
+%! W = 2/fs * f;
+%! [H, f] = freqz (B, A, Npts, fs);
+%! plot (f, 20 * log10 (abs (H)));
+%! outline_hp_pass_x = [fpass(1), fpass(1), max(f)];
+%! outline_hp_pass_y = [-80     , -Rpass  , -Rpass];
+%! outline_hp_stop_x = [min(f)  , fstop(1), fstop(1), max(f)];
+%! outline_hp_stop_y = [-Rstop  , -Rstop  , 0       , 0     ];
+%! hold on
+%! plot (outline_hp_pass_x, outline_hp_pass_y, "m", outline_hp_stop_x, outline_hp_stop_y, "m");
+%! ylim ([-80, 0]);
+%! grid on
+%! xlabel ("Frequency (Hz)");
+%! ylabel ("Attenuation (dB)");
+%! title ("3rd order digital elliptical high-pass (just exceeds 2nd order i.e. large margin)");
+
+%!demo
+%! fs    = 44100;
+%! Npts  = fs*10;
+%! fpass = [9500 9750];
+%! fstop = [8500 10261];
+%! Rpass = 3;
+%! Rstop = 40;
+%! Wpass = 2/fs * fpass;
+%! Wstop = 2/fs * fstop;
+%! [N, Wn] = ellipord (Wpass, Wstop, Rpass, Rstop)
+%! [B, A] = ellip (N, Rpass, Rstop, Wn);
+%! f = 5000:20000;
+%! W = 2/fs * f;
+%! [H, f] = freqz (B, A, Npts, fs);
+%! plot (f, 20 * log10 (abs (H)))
+%! outline_bp_pass_x = [fpass(1), fpass(1), fpass(2), fpass(2)];
+%! outline_bp_pass_y = [-80     , -Rpass  , -Rpass  , -80];
+%! outline_bp_stop_x = [min(f)  , fstop(1), fstop(1), fstop(2), fstop(2), max(f)];
+%! outline_bp_stop_y = [-Rstop  , -Rstop  , 0       , 0       , -Rstop  , -Rstop];
+%! hold on
+%! plot (outline_bp_pass_x, outline_bp_pass_y, "m", outline_bp_stop_x, outline_bp_stop_y, "m")
+%! ylim ([-80, 0]);
+%! grid on
+%! xlabel ("Frequency (Hz)");
+%! ylabel ("Attenuation (dB)");
+%! title ("4th order digital elliptical band-pass (without margin) limitation on upper freq");
+
+%!demo
+%! fs    = 44100;
+%! Npts  = fs*10;
+%! fpass = [9500 9750];
+%! fstop = [9000 10700];
+%! Rpass = 3;
+%! Rstop = 40;
+%! Wpass = 2/fs * fpass;
+%! Wstop = 2/fs * fstop;
+%! [N, Wn] = ellipord (Wpass, Wstop, Rpass, Rstop)
+%! [B, A] = ellip (N, Rpass, Rstop, Wn);
+%! f = 5000:20000;
+%! W = 2/fs * f;
+%! [H, f] = freqz (B, A, Npts, fs);
+%! plot (f, 20 * log10 (abs (H)))
+%! outline_bp_pass_x = [fpass(1), fpass(1), fpass(2), fpass(2)];
+%! outline_bp_pass_y = [-80     , -Rpass  , -Rpass  , -80];
+%! outline_bp_stop_x = [min(f)  , fstop(1), fstop(1), fstop(2), fstop(2), max(f)];
+%! outline_bp_stop_y = [-Rstop  , -Rstop  , 0       , 0       , -Rstop  , -Rstop];
+%! hold on
+%! plot (outline_bp_pass_x, outline_bp_pass_y, "m", outline_bp_stop_x, outline_bp_stop_y, "m")
+%! ylim ([-80, 0]);
+%! grid on
+%! xlabel ("Frequency (Hz)");
+%! ylabel ("Attenuation (dB)");
+%! title ("4th order digital elliptical band-pass (without margin) limitation on lower freq");
+
+%!demo
+%! fs    = 44100;
+%! Npts  = fs*10;
+%! fpass = [9500 9750];
+%! fstop = [8500 10260];
+%! Rpass = 3;
+%! Rstop = 40;
+%! Wpass = 2/fs * fpass;
+%! Wstop = 2/fs * fstop;
+%! [N, Wn] = ellipord (Wpass, Wstop, Rpass, Rstop)
+%! [B, A] = ellip (N, Rpass, Rstop, Wn);
+%! f = 5000:20000;
+%! W = 2/fs * f;
+%! [H, f] = freqz (B, A, Npts, fs);
+%! plot (f, 20 * log10 (abs (H)))
+%! outline_bp_pass_x = [fpass(1), fpass(1), fpass(2), fpass(2)];
+%! outline_bp_pass_y = [-80     , -Rpass  , -Rpass  , -80];
+%! outline_bp_stop_x = [min(f)  , fstop(1), fstop(1), fstop(2), fstop(2), max(f)];
+%! outline_bp_stop_y = [-Rstop  , -Rstop  , 0       , 0       , -Rstop  , -Rstop];
+%! hold on
+%! plot (outline_bp_pass_x, outline_bp_pass_y, "m", outline_bp_stop_x, outline_bp_stop_y, "m")
+%! ylim ([-80, 0]);
+%! grid on
+%! xlabel ("Frequency (Hz)");
+%! ylabel ("Attenuation (dB)");
+%! title ("6th order digital elliptical band-pass (just exceeds 4th order i.e. large margin) limitation on upper freq");
+
+%!demo
+%! fs    = 44100;
+%! Npts  = fs*10;
+%! fpass = [9500 9750];
+%! fstop = [9001 10700];
+%! Rpass = 3;
+%! Rstop = 40;
+%! Wpass = 2/fs * fpass;
+%! Wstop = 2/fs * fstop;
+%! [N, Wn] = ellipord (Wpass, Wstop, Rpass, Rstop)
+%! [B, A] = ellip (N, Rpass, Rstop, Wn);
+%! f = 5000:20000;
+%! W = 2/fs * f;
+%! [H, f] = freqz (B, A, Npts, fs);
+%! plot (f, 20 * log10 (abs (H)))
+%! outline_bp_pass_x = [fpass(1), fpass(1), fpass(2), fpass(2)];
+%! outline_bp_pass_y = [-80     , -Rpass  , -Rpass  , -80];
+%! outline_bp_stop_x = [min(f)  , fstop(1), fstop(1), fstop(2), fstop(2), max(f)];
+%! outline_bp_stop_y = [-Rstop  , -Rstop  , 0       , 0       , -Rstop  , -Rstop];
+%! hold on
+%! plot (outline_bp_pass_x, outline_bp_pass_y, "m", outline_bp_stop_x, outline_bp_stop_y, "m")
+%! ylim ([-80, 0]);
+%! grid on
+%! xlabel ("Frequency (Hz)");
+%! ylabel ("Attenuation (dB)");
+%! title ("6th order digital elliptical band-pass (just exceeds 4th order i.e. large margin) limitation on lower freq");
+
+%!demo
+%! fs    = 44100;
+%! Npts  = fs*10;
+%! fstop = [9875 10126.5823];
+%! fpass = [8500 11073];
+%! Rpass = 0.5;
+%! Rstop = 40;
+%! Wpass = 2/fs * fpass;
+%! Wstop = 2/fs * fstop;
+%! [N, Wn] = ellipord (Wpass, Wstop, Rpass, Rstop)
+%! [B, A] = ellip (N, Rpass, Rstop, Wn, "stop");
+%! f = 5000:20000;
+%! W = 2/fs * f;
+%! [H, f] = freqz (B, A, Npts, fs);
+%! plot (f, 20 * log10 (abs (H)))
+%! outline_notch_pass_x_a = [min(f)  , fpass(1), fpass(1)];
+%! outline_notch_pass_x_b = [fpass(2), fpass(2), max(f)];
+%! outline_notch_pass_y_a = [-Rpass  , -Rpass  , -80];
+%! outline_notch_pass_y_b = [-80     , -Rpass  , -Rpass];
+%! outline_notch_stop_x   = [min(f)  , fstop(1), fstop(1), fstop(2), fstop(2), max(f)];
+%! outline_notch_stop_y   = [0       , 0       , -Rstop  , -Rstop  , 0       , 0 ];
+%! hold on
+%! plot (outline_notch_pass_x_a, outline_notch_pass_y_a, "m", outline_notch_pass_x_b, outline_notch_pass_y_b, "m", outline_notch_stop_x, outline_notch_stop_y, "m")
+%! ylim ([-80, 0]);
+%! grid on
+%! xlabel ("Frequency (Hz)");
+%! ylabel ("Attenuation (dB)");
+%! title ("4th order digital elliptical notch (without margin) limit on upper freq");
+
+%!demo
+%! fs    = 44100;
+%! Npts  = fs*10;
+%! fstop = [9875 10126.5823];
+%! fpass = [8952 12000];
+%! Rpass = 0.5;
+%! Rstop = 40;
+%! Wpass = 2/fs * fpass;
+%! Wstop = 2/fs * fstop;
+%! [N, Wn] = ellipord (Wpass, Wstop, Rpass, Rstop)
+%! [B, A] = ellip (N, Rpass, Rstop, Wn, "stop");
+%! f = 5000:20000;
+%! W = 2/fs * f;
+%! [H, f] = freqz (B, A, Npts, fs);
+%! plot (f, 20 * log10 (abs (H)))
+%! outline_notch_pass_x_a = [min(f)  , fpass(1), fpass(1)];
+%! outline_notch_pass_x_b = [fpass(2), fpass(2), max(f)];
+%! outline_notch_pass_y_a = [-Rpass  , -Rpass  , -80];
+%! outline_notch_pass_y_b = [-80     , -Rpass  , -Rpass];
+%! outline_notch_stop_x   = [min(f)  , fstop(1), fstop(1), fstop(2), fstop(2), max(f)];
+%! outline_notch_stop_y   = [0       , 0       , -Rstop  , -Rstop  , 0       , 0 ];
+%! hold on
+%! plot (outline_notch_pass_x_a, outline_notch_pass_y_a, "m", outline_notch_pass_x_b, outline_notch_pass_y_b, "m", outline_notch_stop_x, outline_notch_stop_y, "m")
+%! ylim ([-80, 0]);
+%! grid on
+%! xlabel ("Frequency (Hz)");
+%! ylabel ("Attenuation (dB)");
+%! title ("4th order digital elliptical notch (without margin) limit on lower freq");
+
+%!demo
+%! fs    = 44100;
+%! Npts  = fs*10;
+%! fstop = [9875 10126.5823];
+%! fpass = [8500 11072];
+%! Rpass = 0.5;
+%! Rstop = 40;
+%! Wpass = 2/fs * fpass;
+%! Wstop = 2/fs * fstop;
+%! [N, Wn] = ellipord (Wpass, Wstop, Rpass, Rstop)
+%! [B, A] = ellip (N, Rpass, Rstop, Wn, "stop");
+%! f = 5000:20000;
+%! W = 2/fs * f;
+%! [H, f] = freqz (B, A, Npts, fs);
+%! plot (f, 20 * log10 (abs (H)))
+%! outline_notch_pass_x_a = [min(f)  , fpass(1), fpass(1)];
+%! outline_notch_pass_x_b = [fpass(2), fpass(2), max(f)];
+%! outline_notch_pass_y_a = [-Rpass  , -Rpass  , -80];
+%! outline_notch_pass_y_b = [-80     , -Rpass  , -Rpass];
+%! outline_notch_stop_x   = [min(f)  , fstop(1), fstop(1), fstop(2), fstop(2), max(f)];
+%! outline_notch_stop_y   = [0       , 0       , -Rstop  , -Rstop  , 0       , 0 ];
+%! hold on
+%! plot (outline_notch_pass_x_a, outline_notch_pass_y_a, "m", outline_notch_pass_x_b, outline_notch_pass_y_b, "m", outline_notch_stop_x, outline_notch_stop_y, "m")
+%! ylim ([-80, 0]);
+%! grid on
+%! xlabel ("Frequency (Hz)");
+%! ylabel ("Attenuation (dB)");
+%! title ("6th order digital elliptical notch (just exceeds 4th order) limit on upper freq");
+
+%!demo
+%! fs    = 44100;
+%! Npts  = fs*10;
+%! fstop = [9875 10126.5823];
+%! fpass = [8953 12000];
+%! Rpass = 0.5;
+%! Rstop = 40;
+%! Wpass = 2/fs * fpass;
+%! Wstop = 2/fs * fstop;
+%! [N, Wn] = ellipord (Wpass, Wstop, Rpass, Rstop)
+%! [B, A] = ellip (N, Rpass, Rstop, Wn, "stop");
+%! f = 5000:20000;
+%! W = 2/fs * f;
+%! [H, f] = freqz (B, A, Npts, fs);
+%! plot (f, 20 * log10 (abs (H)))
+%! outline_notch_pass_x_a = [min(f)  , fpass(1), fpass(1)];
+%! outline_notch_pass_x_b = [fpass(2), fpass(2), max(f)];
+%! outline_notch_pass_y_a = [-Rpass  , -Rpass  , -80];
+%! outline_notch_pass_y_b = [-80     , -Rpass  , -Rpass];
+%! outline_notch_stop_x   = [min(f)  , fstop(1), fstop(1), fstop(2), fstop(2), max(f)];
+%! outline_notch_stop_y   = [0       , 0       , -Rstop  , -Rstop  , 0       , 0 ];
+%! hold on
+%! plot (outline_notch_pass_x_a, outline_notch_pass_y_a, "m", outline_notch_pass_x_b, outline_notch_pass_y_b, "m", outline_notch_stop_x, outline_notch_stop_y, "m")
+%! ylim ([-80, 0]);
+%! grid on
+%! xlabel ("Frequency (Hz)");
+%! ylabel ("Attenuation (dB)");
+%! title ("6th order digital elliptical notch (just exceeds 4th order) limit on lower freq");
+
+%!demo
+%! fpass = 4000;
+%! fstop = 20224;
+%! Rpass = 3;
+%! Rstop = 40;
+%! Wpass = 2*pi * fpass;
+%! Wstop = 2*pi * fstop;
+%! [N, Wn] = ellipord (Wpass, Wstop, Rpass, Rstop, "s")
+%! [B, A] = ellip (N, Rpass, Rstop, Wn, "s");
+%! f = 1000:1000000;
+%! W = 2*pi * f;
+%! H = freqs (B, A, W);
+%! semilogx(f, 20 * log10 (abs (H)))
+%! outline_lp_pass_x = [f(2)  , fpass(1), fpass(1)];
+%! outline_lp_pass_y = [-Rpass, -Rpass  , -80];
+%! outline_lp_stop_x = [f(2)  , fstop(1), fstop(1), max(f)];
+%! outline_lp_stop_y = [0     , 0       , -Rstop  , -Rstop];
+%! hold on
+%! plot (outline_lp_pass_x, outline_lp_pass_y, "m", outline_lp_stop_x, outline_lp_stop_y, "m")
+%! ylim ([-80, 0]);
+%! grid on
+%! xlabel ("Frequency (Hz)");
+%! ylabel ("Attenuation (dB)");
+%! title ("2nd order analog elliptical low-pass (without margin)");
+
+%!demo
+%! fpass = 4000;
+%! fstop = 20223;
+%! Rpass = 3;
+%! Rstop = 40;
+%! Wpass = 2*pi * fpass;
+%! Wstop = 2*pi * fstop;
+%! [N, Wn] = ellipord (Wpass, Wstop, Rpass, Rstop, "s")
+%! [B, A] = ellip (N, Rpass, Rstop, Wn, "s");
+%! f = 1000:1000000;
+%! W = 2*pi * f;
+%! H = freqs (B, A, W);
+%! semilogx (f, 20 * log10 (abs (H)))
+%! outline_lp_pass_x = [f(2)  , fpass(1), fpass(1)];
+%! outline_lp_pass_y = [-Rpass, -Rpass  , -80];
+%! outline_lp_stop_x = [f(2)  , fstop(1), fstop(1), max(f)];
+%! outline_lp_stop_y = [0     , 0       , -Rstop  , -Rstop];
+%! hold on
+%! plot (outline_lp_pass_x, outline_lp_pass_y, "m", outline_lp_stop_x, outline_lp_stop_y, "m")
+%! ylim ([-80, 0]);
+%! grid on
+%! xlabel ("Frequency (Hz)");
+%! ylabel ("Attenuation (dB)");
+%! title ("3rd order analog elliptical low-pass (just exceeds 2nd order i.e. large margin)");
+
+%!demo
+%! fstop = 4000;
+%! fpass = 20224;
+%! Rpass = 3;
+%! Rstop = 40;
+%! Wpass = 2*pi * fpass;
+%! Wstop = 2*pi * fstop;
+%! [N, Wn] = ellipord (Wpass, Wstop, Rpass, Rstop, "s")
+%! [B, A] = ellip (N, Rpass, Rstop, Wn, "high", "s");
+%! f = 1000:100000;
+%! W = 2*pi * f;
+%! H = freqs (B, A, W);
+%! semilogx (f, 20 * log10 (abs (H)))
+%! outline_hp_pass_x = [fpass(1), fpass(1), max(f)];
+%! outline_hp_pass_y = [-80     , -Rpass  , -Rpass];
+%! outline_hp_stop_x = [f(2)    , fstop(1), fstop(1), max(f)];
+%! outline_hp_stop_y = [-Rstop  , -Rstop  , 0       , 0     ];
+%! hold on
+%! plot (outline_hp_pass_x, outline_hp_pass_y, "m", outline_hp_stop_x, outline_hp_stop_y, "m")
+%! ylim ([-80, 0]);
+%! grid on
+%! xlabel ("Frequency (Hz)");
+%! ylabel ("Attenuation (dB)");
+%! title ("2nd order analog elliptical high-pass (without margin)");
+
+%!demo
+%! fstop = 4000;
+%! fpass = 20223;
+%! Rpass = 3;
+%! Rstop = 40;
+%! Wpass = 2*pi * fpass;
+%! Wstop = 2*pi * fstop;
+%! [N, Wn] = ellipord (Wpass, Wstop, Rpass, Rstop, "s")
+%! [B, A] = ellip (N, Rpass, Rstop, Wn, "high", "s");
+%! f = 1000:100000;
+%! W = 2*pi * f;
+%! H = freqs (B, A, W);
+%! semilogx (f, 20 * log10 (abs (H)))
+%! outline_hp_pass_x = [fpass(1), fpass(1), max(f)];
+%! outline_hp_pass_y = [-80     , -Rpass  , -Rpass];
+%! outline_hp_stop_x = [f(2)    , fstop(1), fstop(1), max(f)];
+%! outline_hp_stop_y = [-Rstop  , -Rstop  , 0       , 0     ];
+%! hold on
+%! plot (outline_hp_pass_x, outline_hp_pass_y, "m", outline_hp_stop_x, outline_hp_stop_y, "m")
+%! ylim ([-80, 0]);
+%! grid on
+%! xlabel ("Frequency (Hz)");
+%! ylabel ("Attenuation (dB)");
+%! title ("3rd order analog elliptical high-pass (just exceeds 2nd order i.e. large margin)");
+
+%!demo
+%! fpass = [9875 10126.5823];
+%! fstop = [9000 10657];
+%! Rpass = 3;
+%! Rstop = 40;
+%! fcenter = sqrt (fpass(1) * fpass(2));
+%! Wpass = 2*pi * fpass;
+%! Wstop = 2*pi * fstop;
+%! [N, Wn] = ellipord (Wpass, Wstop, Rpass, Rstop, "s")
+%! [B, A] = ellip (N, Rpass, Rstop, Wn, "s");
+%! f = 5000:15000;
+%! W = 2*pi * f;
+%! H = freqs (B, A, W);
+%! plot (f, 20 * log10 (abs (H)))
+%! outline_bp_pass_x = [fpass(1), fpass(1), fpass(2), fpass(2)];
+%! outline_bp_pass_y = [-80     , -Rpass  , -Rpass  , -80];
+%! outline_bp_stop_x = [f(2)    , fstop(1), fstop(1), fstop(2), fstop(2), max(f)];
+%! outline_bp_stop_y = [-Rstop  , -Rstop  , 0       , 0       , -Rstop  , -Rstop];
+%! hold on
+%! plot (outline_bp_pass_x, outline_bp_pass_y, "m", outline_bp_stop_x, outline_bp_stop_y, "m")
+%! ylim ([-80, 0]);
+%! grid on
+%! xlabel ("Frequency (Hz)");
+%! ylabel ("Attenuation (dB)");
+%! title ("4th order analog elliptical band-pass (without margin) limitation on upper freq");
+
+%!demo
+%! fpass = [9875 10126.5823];
+%! fstop = [9384 12000];
+%! Rpass = 3;
+%! Rstop = 40;
+%! fcenter = sqrt (fpass(1) * fpass(2));
+%! Wpass = 2*pi * fpass;
+%! Wstop = 2*pi * fstop;
+%! [N, Wn] = ellipord (Wpass, Wstop, Rpass, Rstop, "s")
+%! [B, A] = ellip (N, Rpass, Rstop, Wn, "s");
+%! f = 5000:15000;
+%! W = 2*pi * f;
+%! H = freqs (B, A, W);
+%! plot (f, 20 * log10 (abs (H)))
+%! outline_bp_pass_x = [fpass(1), fpass(1), fpass(2), fpass(2)];
+%! outline_bp_pass_y = [-80     , -Rpass  , -Rpass  , -80];
+%! outline_bp_stop_x = [f(2)    , fstop(1), fstop(1), fstop(2), fstop(2), max(f)];
+%! outline_bp_stop_y = [-Rstop  , -Rstop  , 0       , 0       , -Rstop  , -Rstop];
+%! hold on
+%! plot (outline_bp_pass_x, outline_bp_pass_y, "m", outline_bp_stop_x, outline_bp_stop_y, "m")
+%! ylim ([-80, 0]);
+%! grid on
+%! xlabel ("Frequency (Hz)");
+%! ylabel ("Attenuation (dB)");
+%! title ("4th order analog elliptical band-pass (without margin) limitation on lower freq");
+
+%!demo
+%! fpass = [9875 10126.5823];
+%! fstop = [9000 10656];
+%! Rpass = 3;
+%! Rstop = 40;
+%! fcenter = sqrt (fpass(1) * fpass(2));
+%! Wpass = 2*pi * fpass;
+%! Wstop = 2*pi * fstop;
+%! [N, Wn] = ellipord (Wpass, Wstop, Rpass, Rstop, "s")
+%! [B, A] = ellip (N, Rpass, Rstop, Wn, "s");
+%! f = 5000:15000;
+%! W = 2*pi * f;
+%! H = freqs (B, A, W);
+%! plot (f, 20 * log10 (abs (H)))
+%! outline_bp_pass_x = [fpass(1), fpass(1), fpass(2), fpass(2)];
+%! outline_bp_pass_y = [-80     , -Rpass  , -Rpass  , -80];
+%! outline_bp_stop_x = [f(2)    , fstop(1), fstop(1), fstop(2), fstop(2), max(f)];
+%! outline_bp_stop_y = [-Rstop  , -Rstop  , 0       , 0       , -Rstop  , -Rstop];
+%! hold on
+%! plot (outline_bp_pass_x, outline_bp_pass_y, "m", outline_bp_stop_x, outline_bp_stop_y, "m")
+%! ylim ([-80, 0]);
+%! grid on
+%! xlabel ("Frequency (Hz)");
+%! ylabel ("Attenuation (dB)");
+%! title ("6th order analog elliptical band-pass (just exceeds 4th order i.e. large margin) limitation on upper freq");
+
+%!demo
+%! fpass = [9875 10126.5823];
+%! fstop = [9385 12000];
+%! Rpass = 3;
+%! Rstop = 40;
+%! fcenter = sqrt (fpass(1) * fpass(2));
+%! Wpass = 2*pi * fpass;
+%! Wstop = 2*pi * fstop;
+%! [N, Wn] = ellipord (Wpass, Wstop, Rpass, Rstop, "s")
+%! [B, A] = ellip (N, Rpass, Rstop, Wn, "s");
+%! f = 5000:15000;
+%! W = 2*pi * f;
+%! H = freqs (B, A, W);
+%! plot (f, 20 * log10 (abs (H)))
+%! outline_bp_pass_x = [fpass(1), fpass(1), fpass(2), fpass(2)];
+%! outline_bp_pass_y = [-80     , -Rpass  , -Rpass  , -80];
+%! outline_bp_stop_x = [f(2)    , fstop(1), fstop(1), fstop(2), fstop(2), max(f)];
+%! outline_bp_stop_y = [-Rstop  , -Rstop  , 0       , 0       , -Rstop  , -Rstop];
+%! hold on
+%! plot (outline_bp_pass_x, outline_bp_pass_y, "m", outline_bp_stop_x, outline_bp_stop_y, "m")
+%! ylim ([-80, 0]);
+%! grid on
+%! xlabel ("Frequency (Hz)");
+%! ylabel ("Attenuation (dB)");
+%! title ("6th order analog elliptical band-pass (just exceeds 4th order i.e. large margin) limitation on lower freq");
+
+%!demo
+%! fstop = [9875 10126.5823];
+%! fpass = [9000 10657];
+%! Rpass = 3;
+%! Rstop = 40;
+%! fcenter = sqrt (fpass(1) * fpass(2));
+%! Wpass = 2*pi * fpass;
+%! Wstop = 2*pi * fstop;
+%! [N, Wn] = ellipord (Wpass, Wstop, Rpass, Rstop, "s")
+%! [B, A] = ellip (N, Rpass, Rstop, Wn, "stop", "s");
+%! f = 5000:15000;
+%! W = 2*pi * f;
+%! H = freqs (B, A, W);
+%! plot (f, 20 * log10 (abs (H)))
+%! outline_notch_pass_x_a = [f(2)    , fpass(1), fpass(1)];
+%! outline_notch_pass_x_b = [fpass(2), fpass(2), max(f)];
+%! outline_notch_pass_y_a = [-Rpass  , -Rpass  , -80];
+%! outline_notch_pass_y_b = [-80     , -Rpass  , -Rpass];
+%! outline_notch_stop_x   = [f(2)    , fstop(1), fstop(1), fstop(2), fstop(2), max(f)];
+%! outline_notch_stop_y   = [0       , 0       , -Rstop  , -Rstop  , 0       , 0 ];
+%! hold on
+%! plot (outline_notch_pass_x_a, outline_notch_pass_y_a, "m", outline_notch_pass_x_b, outline_notch_pass_y_b, "m", outline_notch_stop_x, outline_notch_stop_y, "m")
+%! ylim ([-80, 0]);
+%! grid on
+%! xlabel ("Frequency (Hz)");
+%! ylabel ("Attenuation (dB)");
+%! title ("4th order analog elliptical notch (without margin) limit on upper freq");
+
+%!demo
+%! fstop = [9875 10126.5823];
+%! fpass = [9384 12000];
+%! Rpass = 3;
+%! Rstop = 40;
+%! fcenter = sqrt (fpass(1) * fpass(2));
+%! Wpass = 2*pi * fpass;
+%! Wstop = 2*pi * fstop;
+%! [N, Wn] = ellipord (Wpass, Wstop, Rpass, Rstop, "s")
+%! [B, A] = ellip (N, Rpass, Rstop, Wn, "stop", "s");
+%! f = 5000:15000;
+%! W = 2*pi * f;
+%! H = freqs (B, A, W);
+%! plot (f, 20 * log10 (abs (H)))
+%! outline_notch_pass_x_a = [f(2)    , fpass(1), fpass(1)];
+%! outline_notch_pass_x_b = [fpass(2), fpass(2), max(f)];
+%! outline_notch_pass_y_a = [-Rpass  , -Rpass  , -80];
+%! outline_notch_pass_y_b = [-80     , -Rpass  , -Rpass];
+%! outline_notch_stop_x   = [f(2)    , fstop(1), fstop(1), fstop(2), fstop(2), max(f)];
+%! outline_notch_stop_y   = [0       , 0       , -Rstop  , -Rstop  , 0       , 0 ];
+%! hold on
+%! plot (outline_notch_pass_x_a, outline_notch_pass_y_a, "m", outline_notch_pass_x_b, outline_notch_pass_y_b, "m", outline_notch_stop_x, outline_notch_stop_y, "m")
+%! ylim ([-80, 0]);
+%! grid on
+%! xlabel ("Frequency (Hz)");
+%! ylabel ("Attenuation (dB)");
+%! title ("4th order analog elliptical notch (without margin) limit on lower freq");
+
+%!demo
+%! fstop = [9875 10126.5823];
+%! fpass = [9000 10656];
+%! Rpass = 3;
+%! Rstop = 40;
+%! fcenter = sqrt (fpass(1) * fpass(2));
+%! Wpass = 2*pi * fpass;
+%! Wstop = 2*pi * fstop;
+%! [N, Wn] = ellipord (Wpass, Wstop, Rpass, Rstop, "s")
+%! [B, A] = ellip (N, Rpass, Rstop, Wn, "stop", "s");
+%! f = 5000:15000;
+%! W = 2*pi * f;
+%! H = freqs (B, A, W);
+%! plot (f, 20 * log10 (abs (H)))
+%! outline_notch_pass_x_a = [f(2)    , fpass(1), fpass(1)];
+%! outline_notch_pass_x_b = [fpass(2), fpass(2), max(f)];
+%! outline_notch_pass_y_a = [-Rpass  , -Rpass  , -80];
+%! outline_notch_pass_y_b = [-80     , -Rpass  , -Rpass];
+%! outline_notch_stop_x   = [f(2)    , fstop(1), fstop(1), fstop(2), fstop(2), max(f)];
+%! outline_notch_stop_y   = [0       , 0       , -Rstop  , -Rstop  , 0       , 0 ];
+%! hold on
+%! plot (outline_notch_pass_x_a, outline_notch_pass_y_a, "m", outline_notch_pass_x_b, outline_notch_pass_y_b, "m", outline_notch_stop_x, outline_notch_stop_y, "m")
+%! ylim ([-80, 0]);
+%! grid on
+%! xlabel ("Frequency (Hz)");
+%! ylabel ("Attenuation (dB)");
+%! title ("6th order analog elliptical notch (just exceeds 4th order) limit on upper freq");
+
+%!demo
+%! fstop = [9875 10126.5823];
+%! fpass = [9385 12000];
+%! Rpass = 3;
+%! Rstop = 40;
+%! fcenter = sqrt (fpass(1) * fpass(2));
+%! Wpass = 2*pi * fpass;
+%! Wstop = 2*pi * fstop;
+%! [N, Wn] = ellipord (Wpass, Wstop, Rpass, Rstop, "s")
+%! [B, A] = ellip (N, Rpass, Rstop, Wn, "stop", "s");
+%! f = 5000:15000;
+%! W = 2*pi * f;
+%! H = freqs (B, A, W);
+%! plot (f, 20 * log10 (abs (H)))
+%! outline_notch_pass_x_a = [f(2)    , fpass(1), fpass(1)];
+%! outline_notch_pass_x_b = [fpass(2), fpass(2), max(f)];
+%! outline_notch_pass_y_a = [-Rpass  , -Rpass  , -80];
+%! outline_notch_pass_y_b = [-80     , -Rpass  , -Rpass];
+%! outline_notch_stop_x   = [f(2)    , fstop(1), fstop(1), fstop(2), fstop(2), max(f)];
+%! outline_notch_stop_y   = [0       , 0       , -Rstop  , -Rstop  , 0       , 0 ];
+%! hold on
+%! plot (outline_notch_pass_x_a, outline_notch_pass_y_a, "m", outline_notch_pass_x_b, outline_notch_pass_y_b, "m", outline_notch_stop_x, outline_notch_stop_y, "m")
+%! ylim ([-80, 0]);
+%! grid on
+%! xlabel ("Frequency (Hz)");
+%! ylabel ("Attenuation (dB)");
+%! title ("6th order analog elliptical notch (just exceeds 4th order) limit on lower freq");
