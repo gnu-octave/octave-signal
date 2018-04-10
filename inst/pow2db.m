@@ -15,43 +15,53 @@
 ## <https://www.gnu.org/licenses/>.
 
 ## -*- texinfo -*-
-## @deftypefn {Function File} {@var{db} =} pow2db (@var{pow})
-## Convert power value to its corresponding dB value
+## @deftypefn {Function File} {} pow2db (@var{x})
+## Convert power to decibels (dB).
 ##
-## @var{pow} is the power value and @var{db} is the corosponding decibel value
+## The decibel value of @var{x} is defined as
+## @tex
+## $d = 10 * \log_{10} (x)$.
+## @end tex
+## @ifnottex
+## @var{d} = @code{10 * log10 (x)}.
+## @end ifnottex
+##
+## If @var{x} is a vector, matrix, or N-dimensional array, the decibel value
+## is computed over the elements of @var{x}.
 ##
 ## Examples:
 ##
 ## @example
 ## @group
-## pow2db([0, 10, 100])
+## pow2db ([0, 10, 100])
 ## @result{} -Inf 10 20
 ## @end group
 ## @end example
 ## @seealso{db2pow}
 ## @end deftypefn
 
-function db = pow2db (pow)
+function y = pow2db (x)
 
   if (nargin != 1)
     print_usage ();
   endif
 
-  if (sum (pow < 0) != 0)
-    error("pow2db: power values must be non-negative real values");
+  if (any (x < 0))
+    error ("pow2db: X must be non-negative");
   endif
 
-  db = 10 .* log10 (pow);
+  y = 10 .* log10 (x);
 
 endfunction
 
 %!shared pow
 %! pow = [0, 10, 20, 60, 100];
 
-%!assert (pow2db(pow), [-Inf, 10.000, 13.010, 17.782, 20.000], 0.01)
-%!assert (pow2db(pow'), [-Inf; 10.000; 13.010; 17.782; 20.000], 0.01)
+%!assert (pow2db (pow), [-Inf, 10.000, 13.010, 17.782, 20.000], 0.01)
+%!assert (pow2db (pow'), [-Inf; 10.000; 13.010; 17.782; 20.000], 0.01)
 
 ## Test input validation
 %!error pow2db ()
-%!error <pow2db: power values must be non-negative real values> pow2db(-5)
-%!error <pow2db: power values must be non-negative real values> pow2db([-5 7])
+%!error pow2db (1, 2)
+%!error <pow2db: X must be non-negative> pow2db (-5)
+%!error <pow2db: X must be non-negative> pow2db ([-5 7])

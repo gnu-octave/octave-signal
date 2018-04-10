@@ -120,8 +120,10 @@ Power Spectrum Analysis
   cohere
   cpsd
   csd
+  db2pow
   mscohere
   pburg
+  pow2db
   pwelch
   pyulear
   tfe

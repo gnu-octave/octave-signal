@@ -15,29 +15,38 @@
 ## <https://www.gnu.org/licenses/>.
 
 ## -*- texinfo -*-
-## @deftypefn {Function File} {@var{pow} =} db2pow (@var{db})
-## Convert dB value to its corresponding power value
+## @deftypefn {Function File} {} db2pow (@var{x})
+## Convert decibels (dB) to power.
 ##
-## @var{db} is the decibel value and @var{pow} is the corosponding power value
+## The power of @var{x} is defined as
+## @tex
+## $p = 10^{x/10}$.
+## @end tex
+## @ifnottex
+## @var{p} = @code{10 ^ (x/10)}.
+## @end ifnottex
+##
+## If @var{x} is a vector, matrix, or N-dimensional array, the power is
+## computed over the elements of @var{x}.
 ##
 ## Example:
 ##
 ## @example
 ## @group
-## db2pow([-10, 0, 10])
+## db2pow ([-10, 0, 10])
 ## @result{} 0.10000 1.00000 10.00000
 ## @end group
 ## @end example
 ## @seealso{pow2db}
 ## @end deftypefn
 
-function pow = db2pow (db)
+function y = db2pow (x)
 
   if (nargin != 1)
     print_usage ();
   endif
 
-  pow = 10.^(db/10);
+  y = 10 .^ (x ./ 10);
 
 endfunction
 
@@ -45,8 +54,9 @@ endfunction
 %!shared db
 %! db = [-10, 0, 10, 20, 25];
 
-%!assert (db2pow(db), [0.10000, 1.00000, 10.00000, 100.00000, 316.22777], 0.00001)
-%!assert (db2pow(db'), [0.10000; 1.00000; 10.00000; 100.00000; 316.22777], 0.00001)
+%!assert (db2pow (db), [0.10000, 1.00000, 10.00000, 100.00000, 316.22777], 0.00001)
+%!assert (db2pow (db'), [0.10000; 1.00000; 10.00000; 100.00000; 316.22777], 0.00001)
 
 ## Test input validation
 %!error db2pow ()
+%!error db2pow (1, 2)
