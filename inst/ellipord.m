@@ -17,6 +17,7 @@
 ## -*- texinfo -*-
 ## @deftypefn  {Function File} {@var{n} =} ellipord (@var{wp}, @var{ws}, @var{rp}, @var{rs})
 ## @deftypefnx {Function File} {@var{n} =} ellipord ([@var{wp1}, @var{wp2}], [@var{ws1}, @var{ws2}], @var{rp}, @var{rs})
+## @deftypefnx {Function File} {@var{n} =} ellipord ([@var{wp1}, @var{wp2}], [@var{ws1}, @var{ws2}], @var{rp}, @var{rs}, 's')
 ## @deftypefnx {Function File} {[@var{n}, @var{wc}] =} ellipord (@dots{})
 ## Compute the minimum filter order of an elliptic filter with the desired
 ## response characteristics.  The filter frequency band edges are specified
@@ -38,45 +39,85 @@
 ## (@var{wp1} < @var{ws1} < @var{ws2} < @var{wp2}), the filter is a band-stop
 ## or band-reject filter.
 ##
+## For Laplace space filters, an additional input parameter ('s') must be entered.
+## In that case W is in rad/s.
+##
 ## Reference: Lamar, Marcus Vinicius, @cite{Notas de aula da disciplina TE 456 -
 ## Circuitos Analogicos II}, UFPR, 2001/2002.
 ## @seealso{buttord, cheb1ord, cheb2ord, ellip}
 ## @end deftypefn
 
-function [n, Wp] = ellipord(Wp, Ws, Rp, Rs)
+function [n, Wp] = ellipord(Wp, Ws, Rp, Rs, opt)
 
-  if (nargin != 4)
+  if (nargin != 4 && nargin != 5)
     print_usage ();
+  endif;
+
+  if (nargin == 5 && strcmp(opt,'s'))
+    s_domain = 1;
   else
+    s_domain = 0;
+  endif;
+
+  if s_domain == 0
     validate_filter_bands ("ellipord", Wp, Ws);
+  else
+    validate_filter_bandss ("ellipord", Wp, Ws);
   endif
 
-  ## sampling frequency of 2 Hz
-  T = 2;
+  if s_domain == 1
+    Wpw = Wp; # No prewarp in case of analog filter
+    Wsw = Ws; # No prewarp in case of analog filter
+  else
+    ## sampling frequency of 2 Hz
+    T = 2;
 
-  Wpw = tan(pi.*Wp./T); # prewarp
-  Wsw = tan(pi.*Ws./T); # prewarp
+    Wpw = (2/T)*tan(pi.*Wp./T); # prewarp
+    Wsw = (2/T)*tan(pi.*Ws./T); # prewarp
+  endif
 
   ## pass/stop band to low pass filter transform:
   if (length(Wpw)==2 && length(Wsw)==2)
+
+    if Wpw(1) > Wsw(1) % Band pass filter
+
+      if Wpw(1)*Wpw(2) < Wsw(1)*Wsw(2)  %Modify band edges if not symmetrical
+        Wsw(2) = Wpw(1)*Wpw(2)/Wsw(1); % smaller stopband
+        %Wpw(2) = Wsw(1)*Wsw(2)/Wpw(1); % larger passband (less efficient for BP)
+      else
+        Wsw(1) = Wpw(1)*Wpw(2)/Wsw(2); % smaller stopband
+        %Wpw(1) = Wsw(1)*Wsw(2)/Wpw(2); % larger stopband (less efficient for BP)
+      end;
+
+      w02 = Wpw(1)*Wpw(2);
+      wp=Wpw(2)-Wpw(1);
+      ws=Wsw(2)-Wsw(1);
+
+    else               % Notch filter
+
+      if Wpw(1)*Wpw(2) > Wsw(1)*Wsw(2)  %Modify band edges if not symmetrical
+        %Wsw(2) = Wpw(1)*Wpw(2)/Wsw(1); % larger stopband
+        Wpw(2) = Wsw(1)*Wsw(2)/Wpw(1); % smaller passband (less efficient for notch)
+      else
+        %Wsw(1) = Wpw(1)*Wpw(2)/Wsw(2); % larger stopband
+        Wpw(1) = Wsw(1)*Wsw(2)/Wpw(2); % smaller passband (less efficient for notch)
+      end;
+
+      w02 = Wpw(1)*Wpw(2);
+      wp=w02/(Wpw(2)-Wpw(1));
+      ws=w02/(Wsw(2)-Wsw(1));
+    end
+    ws=ws/wp;
     wp=1;
-    w02 = Wpw(1) * Wpw(2);      # Central frequency of stop/pass band (square)
-    w3 = w02/Wsw(2);
-    w4 = w02/Wsw(1);
-    if (w3 > Wsw(1))
-      ws = (Wsw(2)-w3)/(Wpw(2)-Wpw(1));
-    elseif (w4 < Wsw(2))
-      ws = (w4-Wsw(1))/(Wpw(2)-Wpw(1));
-    else
-      ws = (Wsw(2)-Wsw(1))/(Wpw(2)-Wpw(1));
-    endif
-  elseif (Wpw > Wsw)
+
+  elseif (Wpw > Wsw)   % High pass filter
     wp = Wsw;
     ws = Wpw;
-  else
+  else                 % Low pass filter
     wp = Wpw;
     ws = Wsw;
-  endif
+  end
+
 
   k=wp/ws;
   k1=sqrt(1-k^2);
@@ -85,6 +126,14 @@ function [n, Wp] = ellipord(Wp, Ws, Rp, Rs)
   D=(10^(0.1*Rs)-1)/(10^(0.1*Rp)-1);
 
   n=ceil(log10(16*D)/log10(1/q));
+
+  if s_domain == 1 # No prewarp in case of analog filter
+    Wp = Wpw;
+  else
+    ## sampling frequency of 2 Hz
+    T = 2;
+    Wp = atan(Wpw/(2/T)) * (T/pi); # inverse prewarp after evt. symmetrisation
+  end
 
 endfunction
 
