@@ -96,7 +96,7 @@ endfunction
 %!test
 %! [zc, zr] = cplxreal (roots ([1, 0, 0, 1]));
 %! assert (zc, complex (0.5, sin (pi/3)), 10*eps)
-%! assert (zr, -1)
+%! assert (zr, -1, 2*eps)
 
 ## Test input validation
 %!error cplxreal ()
