@@ -1,6 +1,12 @@
 Summary of important user-visible changes for signal 1.4.0:
 ----------------------------------------------------------
 
+ ** The buttord, cheb1ord, cheb2ord, and ellipord functions now support
+    analog filter design with the "s" option.
+
+ ** The cheb1ord and cheb2ord functions will now compute the filter order
+    for band-stop or notch filters.
+
  ** The following new functions have been added to the signal package:
 
       cconv
