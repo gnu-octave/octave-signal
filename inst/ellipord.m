@@ -1,5 +1,5 @@
-## Copyright (C) 2001 Paulo Neis <p_neis@yahoo.com.br>
-## Copyright (C) 2018 Charles Praplan <charles.praplan@alumni.epfl.ch>
+## Copyright (C) 2001 Paulo Neis
+## Copyright (C) 2018 Charles Praplan
 ##
 ## This program is free software: you can redistribute it and/or modify
 ## it under the terms of the GNU General Public License as published by
@@ -77,8 +77,8 @@ function [n, Wp] = ellipord (Wp, Ws, Rp, Rs, opt)
     ## sampling frequency of 2 Hz
     T = 2;
 
-    Wpw = (2/T) .* tan (pi .* Wp ./ T); # prewarp
-    Wsw = (2/T) .* tan (pi .* Ws ./ T); # prewarp
+    Wpw = (2 / T) .* tan (pi .* Wp ./ T);     # prewarp
+    Wsw = (2 / T) .* tan (pi .* Ws ./ T);     # prewarp
   endif
 
   ## pass/stop band to low pass filter transform:
@@ -143,7 +143,7 @@ function [n, Wp] = ellipord (Wp, Ws, Rp, Rs, opt)
     Wp = Wpw;
   else
     # Inverse frequency warping for discrete-time filter
-    Wp = atan (Wpw .* (T/2)) .* (T/pi);
+    Wp = atan (Wpw .* (T / 2)) .* (T / pi);
   endif
 
 endfunction
@@ -157,11 +157,11 @@ endfunction
 %! Rstop = 40;
 %! Wpass = 2/fs * fpass;
 %! Wstop = 2/fs * fstop;
-%! [N, Wn] = ellipord (Wpass, Wstop, Rpass, Rstop)
-%! [B, A] = ellip (N, Rpass, Rstop, Wn);
+%! [n, Wn] = ellipord (Wpass, Wstop, Rpass, Rstop)
+%! [b, a] = ellip (n, Rpass, Rstop, Wn);
 %! f = 0:fs/2;
 %! W = f * (2 * pi / fs);
-%! [H] = freqz (B, A, W);
+%! H = freqz (b, a, W);
 %! plot (f, 20 * log10 (abs (H)));
 %! outline_lp_pass_x = [f(2)  , fpass(1), fpass(1)];
 %! outline_lp_pass_y = [-Rpass, -Rpass  , -80];
@@ -184,11 +184,11 @@ endfunction
 %! Rstop = 40;
 %! Wpass = 2/fs * fpass;
 %! Wstop = 2/fs * fstop;
-%! [N, Wn] = ellipord (Wpass, Wstop, Rpass, Rstop)
-%! [B, A] = ellip (N, Rpass, Rstop, Wn);
+%! [n, Wn] = ellipord (Wpass, Wstop, Rpass, Rstop)
+%! [b, a] = ellip (n, Rpass, Rstop, Wn);
 %! f = 0:fs/2;
 %! W = f * (2 * pi / fs);
-%! [H] = freqz (B, A, W);
+%! H = freqz (b, a, W);
 %! plot (f, 20 * log10 (abs (H)));
 %! outline_lp_pass_x = [f(2)  , fpass(1), fpass(1)];
 %! outline_lp_pass_y = [-Rpass, -Rpass  , -80];
@@ -211,11 +211,11 @@ endfunction
 %! Rstop = 40;
 %! Wpass = 2/fs * fpass;
 %! Wstop = 2/fs * fstop;
-%! [N, Wn] = ellipord (Wpass, Wstop, Rpass, Rstop)
-%! [B, A] = ellip (N, Rpass, Rstop, Wn, "high");
+%! [n, Wn] = ellipord (Wpass, Wstop, Rpass, Rstop)
+%! [b, a] = ellip (n, Rpass, Rstop, Wn, "high");
 %! f = 0:fs/2;
 %! W = f * (2 * pi / fs);
-%! [H] = freqz (B, A, W);
+%! H = freqz (b, a, W);
 %! plot (f, 20 * log10 (abs (H)));
 %! outline_hp_pass_x = [fpass(1), fpass(1), max(f)];
 %! outline_hp_pass_y = [-80     , -Rpass  , -Rpass];
@@ -238,11 +238,11 @@ endfunction
 %! Rstop = 40;
 %! Wpass = 2/fs * fpass;
 %! Wstop = 2/fs * fstop;
-%! [N, Wn] = ellipord (Wpass, Wstop, Rpass, Rstop)
-%! [B, A] = ellip (N, Rpass, Rstop, Wn, "high");
+%! [n, Wn] = ellipord (Wpass, Wstop, Rpass, Rstop)
+%! [b, a] = ellip (n, Rpass, Rstop, Wn, "high");
 %! f = 0:fs/2;
 %! W = f * (2 * pi / fs);
-%! [H] = freqz (B, A, W);
+%! H = freqz (b, a, W);
 %! plot (f, 20 * log10 (abs (H)));
 %! outline_hp_pass_x = [fpass(1), fpass(1), max(f)];
 %! outline_hp_pass_y = [-80     , -Rpass  , -Rpass];
@@ -265,11 +265,11 @@ endfunction
 %! Rstop = 40;
 %! Wpass = 2/fs * fpass;
 %! Wstop = 2/fs * fstop;
-%! [N, Wn] = ellipord (Wpass, Wstop, Rpass, Rstop)
-%! [B, A] = ellip (N, Rpass, Rstop, Wn);
+%! [n, Wn] = ellipord (Wpass, Wstop, Rpass, Rstop)
+%! [b, a] = ellip (n, Rpass, Rstop, Wn);
 %! f = 5000:15000;
 %! W = f * (2 * pi / fs);
-%! [H] = freqz (B, A, W);
+%! H = freqz (b, a, W);
 %! plot (f, 20 * log10 (abs (H)))
 %! outline_bp_pass_x = [fpass(1), fpass(1), fpass(2), fpass(2)];
 %! outline_bp_pass_y = [-80     , -Rpass  , -Rpass  , -80];
@@ -277,7 +277,7 @@ endfunction
 %! outline_bp_stop_y = [-Rstop  , -Rstop  , 0       , 0       , -Rstop  , -Rstop];
 %! hold on
 %! plot (outline_bp_pass_x, outline_bp_pass_y, "m", outline_bp_stop_x, outline_bp_stop_y, "m")
-%! xlim([f(1), f(end)]);
+%! xlim ([f(1), f(end)]);
 %! ylim ([-80, 0]);
 %! grid on
 %! xlabel ("Frequency (Hz)");
@@ -293,11 +293,11 @@ endfunction
 %! Rstop = 40;
 %! Wpass = 2/fs * fpass;
 %! Wstop = 2/fs * fstop;
-%! [N, Wn] = ellipord (Wpass, Wstop, Rpass, Rstop)
-%! [B, A] = ellip (N, Rpass, Rstop, Wn);
+%! [n, Wn] = ellipord (Wpass, Wstop, Rpass, Rstop)
+%! [b, a] = ellip (n, Rpass, Rstop, Wn);
 %! f = 5000:15000;
 %! W = f * (2 * pi / fs);
-%! [H] = freqz (B, A, W);
+%! H = freqz (b, a, W);
 %! plot (f, 20 * log10 (abs (H)))
 %! outline_bp_pass_x = [fpass(1), fpass(1), fpass(2), fpass(2)];
 %! outline_bp_pass_y = [-80     , -Rpass  , -Rpass  , -80];
@@ -305,7 +305,7 @@ endfunction
 %! outline_bp_stop_y = [-Rstop  , -Rstop  , 0       , 0       , -Rstop  , -Rstop];
 %! hold on
 %! plot (outline_bp_pass_x, outline_bp_pass_y, "m", outline_bp_stop_x, outline_bp_stop_y, "m")
-%! xlim([f(1), f(end)]);
+%! xlim ([f(1), f(end)]);
 %! ylim ([-80, 0]);
 %! grid on
 %! xlabel ("Frequency (Hz)");
@@ -321,11 +321,11 @@ endfunction
 %! Rstop = 40;
 %! Wpass = 2/fs * fpass;
 %! Wstop = 2/fs * fstop;
-%! [N, Wn] = ellipord (Wpass, Wstop, Rpass, Rstop)
-%! [B, A] = ellip (N, Rpass, Rstop, Wn);
+%! [n, Wn] = ellipord (Wpass, Wstop, Rpass, Rstop)
+%! [b, a] = ellip (n, Rpass, Rstop, Wn);
 %! f = 5000:15000;
 %! W = f * (2 * pi / fs);
-%! [H] = freqz (B, A, W);
+%! H = freqz (b, a, W);
 %! plot (f, 20 * log10 (abs (H)))
 %! outline_bp_pass_x = [fpass(1), fpass(1), fpass(2), fpass(2)];
 %! outline_bp_pass_y = [-80     , -Rpass  , -Rpass  , -80];
@@ -333,7 +333,7 @@ endfunction
 %! outline_bp_stop_y = [-Rstop  , -Rstop  , 0       , 0       , -Rstop  , -Rstop];
 %! hold on
 %! plot (outline_bp_pass_x, outline_bp_pass_y, "m", outline_bp_stop_x, outline_bp_stop_y, "m")
-%! xlim([f(1), f(end)]);
+%! xlim ([f(1), f(end)]);
 %! ylim ([-80, 0]);
 %! grid on
 %! xlabel ("Frequency (Hz)");
@@ -349,11 +349,11 @@ endfunction
 %! Rstop = 40;
 %! Wpass = 2/fs * fpass;
 %! Wstop = 2/fs * fstop;
-%! [N, Wn] = ellipord (Wpass, Wstop, Rpass, Rstop)
-%! [B, A] = ellip (N, Rpass, Rstop, Wn);
+%! [n, Wn] = ellipord (Wpass, Wstop, Rpass, Rstop)
+%! [b, a] = ellip (n, Rpass, Rstop, Wn);
 %! f = 5000:15000;
 %! W = f * (2 * pi / fs);
-%! [H] = freqz (B, A, W);
+%! H = freqz (b, a, W);
 %! plot (f, 20 * log10 (abs (H)))
 %! outline_bp_pass_x = [fpass(1), fpass(1), fpass(2), fpass(2)];
 %! outline_bp_pass_y = [-80     , -Rpass  , -Rpass  , -80];
@@ -361,7 +361,7 @@ endfunction
 %! outline_bp_stop_y = [-Rstop  , -Rstop  , 0       , 0       , -Rstop  , -Rstop];
 %! hold on
 %! plot (outline_bp_pass_x, outline_bp_pass_y, "m", outline_bp_stop_x, outline_bp_stop_y, "m")
-%! xlim([f(1), f(end)]);
+%! xlim ([f(1), f(end)]);
 %! ylim ([-80, 0]);
 %! grid on
 %! xlabel ("Frequency (Hz)");
@@ -377,11 +377,11 @@ endfunction
 %! Rstop = 40;
 %! Wpass = 2/fs * fpass;
 %! Wstop = 2/fs * fstop;
-%! [N, Wn] = ellipord (Wpass, Wstop, Rpass, Rstop)
-%! [B, A] = ellip (N, Rpass, Rstop, Wn, "stop");
+%! [n, Wn] = ellipord (Wpass, Wstop, Rpass, Rstop)
+%! [b, a] = ellip (n, Rpass, Rstop, Wn, "stop");
 %! f = 5000:15000;
 %! W = f * (2 * pi / fs);
-%! [H] = freqz (B, A, W);
+%! H = freqz (b, a, W);
 %! plot (f, 20 * log10 (abs (H)))
 %! outline_notch_pass_x_a = [min(f)  , fpass(1), fpass(1)];
 %! outline_notch_pass_x_b = [fpass(2), fpass(2), max(f)];
@@ -391,7 +391,7 @@ endfunction
 %! outline_notch_stop_y   = [0       , 0       , -Rstop  , -Rstop  , 0       , 0 ];
 %! hold on
 %! plot (outline_notch_pass_x_a, outline_notch_pass_y_a, "m", outline_notch_pass_x_b, outline_notch_pass_y_b, "m", outline_notch_stop_x, outline_notch_stop_y, "m")
-%! xlim([f(1), f(end)]);
+%! xlim ([f(1), f(end)]);
 %! ylim ([-80, 0]);
 %! grid on
 %! xlabel ("Frequency (Hz)");
@@ -407,11 +407,11 @@ endfunction
 %! Rstop = 40;
 %! Wpass = 2/fs * fpass;
 %! Wstop = 2/fs * fstop;
-%! [N, Wn] = ellipord (Wpass, Wstop, Rpass, Rstop)
-%! [B, A] = ellip (N, Rpass, Rstop, Wn, "stop");
+%! [n, Wn] = ellipord (Wpass, Wstop, Rpass, Rstop)
+%! [b, a] = ellip (n, Rpass, Rstop, Wn, "stop");
 %! f = 5000:15000;
 %! W = f * (2 * pi / fs);
-%! [H] = freqz (B, A, W);
+%! H = freqz (b, a, W);
 %! plot (f, 20 * log10 (abs (H)))
 %! outline_notch_pass_x_a = [min(f)  , fpass(1), fpass(1)];
 %! outline_notch_pass_x_b = [fpass(2), fpass(2), max(f)];
@@ -421,7 +421,7 @@ endfunction
 %! outline_notch_stop_y   = [0       , 0       , -Rstop  , -Rstop  , 0       , 0 ];
 %! hold on
 %! plot (outline_notch_pass_x_a, outline_notch_pass_y_a, "m", outline_notch_pass_x_b, outline_notch_pass_y_b, "m", outline_notch_stop_x, outline_notch_stop_y, "m")
-%! xlim([f(1), f(end)]);
+%! xlim ([f(1), f(end)]);
 %! ylim ([-80, 0]);
 %! grid on
 %! xlabel ("Frequency (Hz)");
@@ -437,11 +437,11 @@ endfunction
 %! Rstop = 40;
 %! Wpass = 2/fs * fpass;
 %! Wstop = 2/fs * fstop;
-%! [N, Wn] = ellipord (Wpass, Wstop, Rpass, Rstop)
-%! [B, A] = ellip (N, Rpass, Rstop, Wn, "stop");
+%! [n, Wn] = ellipord (Wpass, Wstop, Rpass, Rstop)
+%! [b, a] = ellip (n, Rpass, Rstop, Wn, "stop");
 %! f = 5000:15000;
 %! W = f * (2 * pi / fs);
-%! [H] = freqz (B, A, W);
+%! H = freqz (b, a, W);
 %! plot (f, 20 * log10 (abs (H)))
 %! outline_notch_pass_x_a = [min(f)  , fpass(1), fpass(1)];
 %! outline_notch_pass_x_b = [fpass(2), fpass(2), max(f)];
@@ -451,7 +451,7 @@ endfunction
 %! outline_notch_stop_y   = [0       , 0       , -Rstop  , -Rstop  , 0       , 0 ];
 %! hold on
 %! plot (outline_notch_pass_x_a, outline_notch_pass_y_a, "m", outline_notch_pass_x_b, outline_notch_pass_y_b, "m", outline_notch_stop_x, outline_notch_stop_y, "m")
-%! xlim([f(1), f(end)]);
+%! xlim ([f(1), f(end)]);
 %! ylim ([-80, 0]);
 %! grid on
 %! xlabel ("Frequency (Hz)");
@@ -467,11 +467,11 @@ endfunction
 %! Rstop = 40;
 %! Wpass = 2/fs * fpass;
 %! Wstop = 2/fs * fstop;
-%! [N, Wn] = ellipord (Wpass, Wstop, Rpass, Rstop)
-%! [B, A] = ellip (N, Rpass, Rstop, Wn, "stop");
+%! [n, Wn] = ellipord (Wpass, Wstop, Rpass, Rstop)
+%! [b, a] = ellip (n, Rpass, Rstop, Wn, "stop");
 %! f = 5000:15000;
 %! W = f * (2 * pi / fs);
-%! [H] = freqz (B, A, W);
+%! H = freqz (b, a, W);
 %! plot (f, 20 * log10 (abs (H)))
 %! outline_notch_pass_x_a = [min(f)  , fpass(1), fpass(1)];
 %! outline_notch_pass_x_b = [fpass(2), fpass(2), max(f)];
@@ -481,7 +481,7 @@ endfunction
 %! outline_notch_stop_y   = [0       , 0       , -Rstop  , -Rstop  , 0       , 0 ];
 %! hold on
 %! plot (outline_notch_pass_x_a, outline_notch_pass_y_a, "m", outline_notch_pass_x_b, outline_notch_pass_y_b, "m", outline_notch_stop_x, outline_notch_stop_y, "m")
-%! xlim([f(1), f(end)]);
+%! xlim ([f(1), f(end)]);
 %! ylim ([-80, 0]);
 %! grid on
 %! xlabel ("Frequency (Hz)");
@@ -495,11 +495,11 @@ endfunction
 %! Rstop = 40;
 %! Wpass = 2*pi * fpass;
 %! Wstop = 2*pi * fstop;
-%! [N, Wn] = ellipord (Wpass, Wstop, Rpass, Rstop, "s")
-%! [B, A] = ellip (N, Rpass, Rstop, Wn, "s");
+%! [n, Wn] = ellipord (Wpass, Wstop, Rpass, Rstop, "s")
+%! [b, a] = ellip (n, Rpass, Rstop, Wn, "s");
 %! f = 1000:10:100000;
 %! W = 2*pi * f;
-%! H = freqs (B, A, W);
+%! H = freqs (b, a, W);
 %! semilogx(f, 20 * log10 (abs (H)))
 %! outline_lp_pass_x = [f(2)  , fpass(1), fpass(1)];
 %! outline_lp_pass_y = [-Rpass, -Rpass  , -80];
@@ -520,11 +520,11 @@ endfunction
 %! Rstop = 40;
 %! Wpass = 2*pi * fpass;
 %! Wstop = 2*pi * fstop;
-%! [N, Wn] = ellipord (Wpass, Wstop, Rpass, Rstop, "s")
-%! [B, A] = ellip (N, Rpass, Rstop, Wn, "s");
+%! [n, Wn] = ellipord (Wpass, Wstop, Rpass, Rstop, "s")
+%! [b, a] = ellip (n, Rpass, Rstop, Wn, "s");
 %! f = 1000:10:100000;
 %! W = 2*pi * f;
-%! H = freqs (B, A, W);
+%! H = freqs (b, a, W);
 %! semilogx (f, 20 * log10 (abs (H)))
 %! outline_lp_pass_x = [f(2)  , fpass(1), fpass(1)];
 %! outline_lp_pass_y = [-Rpass, -Rpass  , -80];
@@ -545,11 +545,11 @@ endfunction
 %! Rstop = 40;
 %! Wpass = 2*pi * fpass;
 %! Wstop = 2*pi * fstop;
-%! [N, Wn] = ellipord (Wpass, Wstop, Rpass, Rstop, "s")
-%! [B, A] = ellip (N, Rpass, Rstop, Wn, "high", "s");
+%! [n, Wn] = ellipord (Wpass, Wstop, Rpass, Rstop, "s")
+%! [b, a] = ellip (n, Rpass, Rstop, Wn, "high", "s");
 %! f = 1000:10:100000;
 %! W = 2*pi * f;
-%! H = freqs (B, A, W);
+%! H = freqs (b, a, W);
 %! semilogx (f, 20 * log10 (abs (H)))
 %! outline_hp_pass_x = [fpass(1), fpass(1), max(f)];
 %! outline_hp_pass_y = [-80     , -Rpass  , -Rpass];
@@ -570,11 +570,11 @@ endfunction
 %! Rstop = 40;
 %! Wpass = 2*pi * fpass;
 %! Wstop = 2*pi * fstop;
-%! [N, Wn] = ellipord (Wpass, Wstop, Rpass, Rstop, "s")
-%! [B, A] = ellip (N, Rpass, Rstop, Wn, "high", "s");
+%! [n, Wn] = ellipord (Wpass, Wstop, Rpass, Rstop, "s")
+%! [b, a] = ellip (n, Rpass, Rstop, Wn, "high", "s");
 %! f = 1000:10:100000;
 %! W = 2*pi * f;
-%! H = freqs (B, A, W);
+%! H = freqs (b, a, W);
 %! semilogx (f, 20 * log10 (abs (H)))
 %! outline_hp_pass_x = [fpass(1), fpass(1), max(f)];
 %! outline_hp_pass_y = [-80     , -Rpass  , -Rpass];
@@ -596,11 +596,11 @@ endfunction
 %! fcenter = sqrt (fpass(1) * fpass(2));
 %! Wpass = 2*pi * fpass;
 %! Wstop = 2*pi * fstop;
-%! [N, Wn] = ellipord (Wpass, Wstop, Rpass, Rstop, "s")
-%! [B, A] = ellip (N, Rpass, Rstop, Wn, "s");
+%! [n, Wn] = ellipord (Wpass, Wstop, Rpass, Rstop, "s")
+%! [b, a] = ellip (n, Rpass, Rstop, Wn, "s");
 %! f = 5000:15000;
 %! W = 2*pi * f;
-%! H = freqs (B, A, W);
+%! H = freqs (b, a, W);
 %! plot (f, 20 * log10 (abs (H)))
 %! outline_bp_pass_x = [fpass(1), fpass(1), fpass(2), fpass(2)];
 %! outline_bp_pass_y = [-80     , -Rpass  , -Rpass  , -80];
@@ -608,7 +608,7 @@ endfunction
 %! outline_bp_stop_y = [-Rstop  , -Rstop  , 0       , 0       , -Rstop  , -Rstop];
 %! hold on
 %! plot (outline_bp_pass_x, outline_bp_pass_y, "m", outline_bp_stop_x, outline_bp_stop_y, "m")
-%! xlim([f(1), f(end)]);
+%! xlim ([f(1), f(end)]);
 %! ylim ([-80, 0]);
 %! grid on
 %! xlabel ("Frequency (Hz)");
@@ -623,11 +623,11 @@ endfunction
 %! fcenter = sqrt (fpass(1) * fpass(2));
 %! Wpass = 2*pi * fpass;
 %! Wstop = 2*pi * fstop;
-%! [N, Wn] = ellipord (Wpass, Wstop, Rpass, Rstop, "s")
-%! [B, A] = ellip (N, Rpass, Rstop, Wn, "s");
+%! [n, Wn] = ellipord (Wpass, Wstop, Rpass, Rstop, "s")
+%! [b, a] = ellip (n, Rpass, Rstop, Wn, "s");
 %! f = 5000:15000;
 %! W = 2*pi * f;
-%! H = freqs (B, A, W);
+%! H = freqs (b, a, W);
 %! plot (f, 20 * log10 (abs (H)))
 %! outline_bp_pass_x = [fpass(1), fpass(1), fpass(2), fpass(2)];
 %! outline_bp_pass_y = [-80     , -Rpass  , -Rpass  , -80];
@@ -635,7 +635,7 @@ endfunction
 %! outline_bp_stop_y = [-Rstop  , -Rstop  , 0       , 0       , -Rstop  , -Rstop];
 %! hold on
 %! plot (outline_bp_pass_x, outline_bp_pass_y, "m", outline_bp_stop_x, outline_bp_stop_y, "m")
-%! xlim([f(1), f(end)]);
+%! xlim ([f(1), f(end)]);
 %! ylim ([-80, 0]);
 %! grid on
 %! xlabel ("Frequency (Hz)");
@@ -650,11 +650,11 @@ endfunction
 %! fcenter = sqrt (fpass(1) * fpass(2));
 %! Wpass = 2*pi * fpass;
 %! Wstop = 2*pi * fstop;
-%! [N, Wn] = ellipord (Wpass, Wstop, Rpass, Rstop, "s")
-%! [B, A] = ellip (N, Rpass, Rstop, Wn, "s");
+%! [n, Wn] = ellipord (Wpass, Wstop, Rpass, Rstop, "s")
+%! [b, a] = ellip (n, Rpass, Rstop, Wn, "s");
 %! f = 5000:15000;
 %! W = 2*pi * f;
-%! H = freqs (B, A, W);
+%! H = freqs (b, a, W);
 %! plot (f, 20 * log10 (abs (H)))
 %! outline_bp_pass_x = [fpass(1), fpass(1), fpass(2), fpass(2)];
 %! outline_bp_pass_y = [-80     , -Rpass  , -Rpass  , -80];
@@ -662,7 +662,7 @@ endfunction
 %! outline_bp_stop_y = [-Rstop  , -Rstop  , 0       , 0       , -Rstop  , -Rstop];
 %! hold on
 %! plot (outline_bp_pass_x, outline_bp_pass_y, "m", outline_bp_stop_x, outline_bp_stop_y, "m")
-%! xlim([f(1), f(end)]);
+%! xlim ([f(1), f(end)]);
 %! ylim ([-80, 0]);
 %! grid on
 %! xlabel ("Frequency (Hz)");
@@ -677,11 +677,11 @@ endfunction
 %! fcenter = sqrt (fpass(1) * fpass(2));
 %! Wpass = 2*pi * fpass;
 %! Wstop = 2*pi * fstop;
-%! [N, Wn] = ellipord (Wpass, Wstop, Rpass, Rstop, "s")
-%! [B, A] = ellip (N, Rpass, Rstop, Wn, "s");
+%! [n, Wn] = ellipord (Wpass, Wstop, Rpass, Rstop, "s")
+%! [b, a] = ellip (n, Rpass, Rstop, Wn, "s");
 %! f = 5000:15000;
 %! W = 2*pi * f;
-%! H = freqs (B, A, W);
+%! H = freqs (b, a, W);
 %! plot (f, 20 * log10 (abs (H)))
 %! outline_bp_pass_x = [fpass(1), fpass(1), fpass(2), fpass(2)];
 %! outline_bp_pass_y = [-80     , -Rpass  , -Rpass  , -80];
@@ -689,7 +689,7 @@ endfunction
 %! outline_bp_stop_y = [-Rstop  , -Rstop  , 0       , 0       , -Rstop  , -Rstop];
 %! hold on
 %! plot (outline_bp_pass_x, outline_bp_pass_y, "m", outline_bp_stop_x, outline_bp_stop_y, "m")
-%! xlim([f(1), f(end)]);
+%! xlim ([f(1), f(end)]);
 %! ylim ([-80, 0]);
 %! grid on
 %! xlabel ("Frequency (Hz)");
@@ -704,11 +704,11 @@ endfunction
 %! fcenter = sqrt (fpass(1) * fpass(2));
 %! Wpass = 2*pi * fpass;
 %! Wstop = 2*pi * fstop;
-%! [N, Wn] = ellipord (Wpass, Wstop, Rpass, Rstop, "s")
-%! [B, A] = ellip (N, Rpass, Rstop, Wn, "stop", "s");
+%! [n, Wn] = ellipord (Wpass, Wstop, Rpass, Rstop, "s")
+%! [b, a] = ellip (n, Rpass, Rstop, Wn, "stop", "s");
 %! f = 5000:15000;
 %! W = 2*pi * f;
-%! H = freqs (B, A, W);
+%! H = freqs (b, a, W);
 %! plot (f, 20 * log10 (abs (H)))
 %! outline_notch_pass_x_a = [f(2)    , fpass(1), fpass(1)];
 %! outline_notch_pass_x_b = [fpass(2), fpass(2), max(f)];
@@ -718,7 +718,7 @@ endfunction
 %! outline_notch_stop_y   = [0       , 0       , -Rstop  , -Rstop  , 0       , 0 ];
 %! hold on
 %! plot (outline_notch_pass_x_a, outline_notch_pass_y_a, "m", outline_notch_pass_x_b, outline_notch_pass_y_b, "m", outline_notch_stop_x, outline_notch_stop_y, "m")
-%! xlim([f(1), f(end)]);
+%! xlim ([f(1), f(end)]);
 %! ylim ([-80, 0]);
 %! grid on
 %! xlabel ("Frequency (Hz)");
@@ -733,11 +733,11 @@ endfunction
 %! fcenter = sqrt (fpass(1) * fpass(2));
 %! Wpass = 2*pi * fpass;
 %! Wstop = 2*pi * fstop;
-%! [N, Wn] = ellipord (Wpass, Wstop, Rpass, Rstop, "s")
-%! [B, A] = ellip (N, Rpass, Rstop, Wn, "stop", "s");
+%! [n, Wn] = ellipord (Wpass, Wstop, Rpass, Rstop, "s")
+%! [b, a] = ellip (n, Rpass, Rstop, Wn, "stop", "s");
 %! f = 5000:15000;
 %! W = 2*pi * f;
-%! H = freqs (B, A, W);
+%! H = freqs (b, a, W);
 %! plot (f, 20 * log10 (abs (H)))
 %! outline_notch_pass_x_a = [f(2)    , fpass(1), fpass(1)];
 %! outline_notch_pass_x_b = [fpass(2), fpass(2), max(f)];
@@ -747,7 +747,7 @@ endfunction
 %! outline_notch_stop_y   = [0       , 0       , -Rstop  , -Rstop  , 0       , 0 ];
 %! hold on
 %! plot (outline_notch_pass_x_a, outline_notch_pass_y_a, "m", outline_notch_pass_x_b, outline_notch_pass_y_b, "m", outline_notch_stop_x, outline_notch_stop_y, "m")
-%! xlim([f(1), f(end)]);
+%! xlim ([f(1), f(end)]);
 %! ylim ([-80, 0]);
 %! grid on
 %! xlabel ("Frequency (Hz)");
@@ -762,11 +762,11 @@ endfunction
 %! fcenter = sqrt (fpass(1) * fpass(2));
 %! Wpass = 2*pi * fpass;
 %! Wstop = 2*pi * fstop;
-%! [N, Wn] = ellipord (Wpass, Wstop, Rpass, Rstop, "s")
-%! [B, A] = ellip (N, Rpass, Rstop, Wn, "stop", "s");
+%! [n, Wn] = ellipord (Wpass, Wstop, Rpass, Rstop, "s")
+%! [b, a] = ellip (n, Rpass, Rstop, Wn, "stop", "s");
 %! f = 5000:15000;
 %! W = 2*pi * f;
-%! H = freqs (B, A, W);
+%! H = freqs (b, a, W);
 %! plot (f, 20 * log10 (abs (H)))
 %! outline_notch_pass_x_a = [f(2)    , fpass(1), fpass(1)];
 %! outline_notch_pass_x_b = [fpass(2), fpass(2), max(f)];
@@ -776,7 +776,7 @@ endfunction
 %! outline_notch_stop_y   = [0       , 0       , -Rstop  , -Rstop  , 0       , 0 ];
 %! hold on
 %! plot (outline_notch_pass_x_a, outline_notch_pass_y_a, "m", outline_notch_pass_x_b, outline_notch_pass_y_b, "m", outline_notch_stop_x, outline_notch_stop_y, "m")
-%! xlim([f(1), f(end)]);
+%! xlim ([f(1), f(end)]);
 %! ylim ([-80, 0]);
 %! grid on
 %! xlabel ("Frequency (Hz)");
@@ -791,11 +791,11 @@ endfunction
 %! fcenter = sqrt (fpass(1) * fpass(2));
 %! Wpass = 2*pi * fpass;
 %! Wstop = 2*pi * fstop;
-%! [N, Wn] = ellipord (Wpass, Wstop, Rpass, Rstop, "s")
-%! [B, A] = ellip (N, Rpass, Rstop, Wn, "stop", "s");
+%! [n, Wn] = ellipord (Wpass, Wstop, Rpass, Rstop, "s")
+%! [b, a] = ellip (n, Rpass, Rstop, Wn, "stop", "s");
 %! f = 5000:15000;
 %! W = 2*pi * f;
-%! H = freqs (B, A, W);
+%! H = freqs (b, a, W);
 %! plot (f, 20 * log10 (abs (H)))
 %! outline_notch_pass_x_a = [f(2)    , fpass(1), fpass(1)];
 %! outline_notch_pass_x_b = [fpass(2), fpass(2), max(f)];
@@ -805,14 +805,191 @@ endfunction
 %! outline_notch_stop_y   = [0       , 0       , -Rstop  , -Rstop  , 0       , 0 ];
 %! hold on
 %! plot (outline_notch_pass_x_a, outline_notch_pass_y_a, "m", outline_notch_pass_x_b, outline_notch_pass_y_b, "m", outline_notch_stop_x, outline_notch_stop_y, "m")
-%! xlim([f(1), f(end)]);
+%! xlim ([f(1), f(end)]);
 %! ylim ([-80, 0]);
 %! grid on
 %! xlabel ("Frequency (Hz)");
 %! ylabel ("Attenuation (dB)");
 %! title ("6th order analog elliptical notch (just exceeds 4th order) limit on lower freq");
 
-%% Test input validation
+
+%!test
+%! # Analog band-pass
+%! [n, Wn] = ellipord (2 * pi * [9875, 10126.5823], ...
+%!                     2 * pi * [9000, 10657], 3, 40, "s");
+%! assert (n, 2);
+%! assert (round (Wn), [62046, 63627]);
+
+%!test
+%! # Analog band-pass
+%! [n, Wn] = ellipord (2 * pi * [9875, 10126.5823], ...
+%!                     2 * pi * [9384, 12000], 3, 40, "s");
+%! assert (n, 2);
+%! assert (round (Wn), [62046, 63627]);
+
+%!test
+%! # Analog band-pass
+%! [n, Wn] = ellipord (2 * pi * [9875, 10126.5823], ...
+%!                     2 * pi * [9000, 10656], 3, 40, "s");
+%! assert (n, 3);
+%! assert (round (Wn), [62046, 63627]);
+
+%!test
+%! # Analog band-pass
+%! [n, Wn] = ellipord (2 * pi * [9875, 10126.5823], ...
+%!                     2 * pi * [9385, 12000], 3, 40, "s");
+%! assert (n, 3);
+%! assert (round (Wn), [62046, 63627]);
+
+%!test
+%! # Analog high-pass
+%! [n, Wn] = ellipord (2 * pi * 20224, 2 * pi * 4000, 3, 40, "s");
+%! assert (n, 2);
+%! assert (round (Wn), 127071);
+
+%!test
+%! # Analog high-pass
+%! [n, Wn] = ellipord (2 * pi * 20223, 2 * pi * 4000, 3, 40, "s");
+%! assert (n, 3);
+%! assert (round (Wn), 127065);
+
+%!test
+%! # Analog low-pass
+%! [n, Wn] = ellipord (2 * pi * 4000, 2 * pi * 20224, 3, 40, "s");
+%! assert (n, 2);
+%! assert (round (Wn), 25133);
+
+%!test
+%! # Analog low-pass
+%! [n, Wn] = ellipord (2 * pi * 4000, 2 * pi * 20223, 3, 40, "s");
+%! assert (n, 3);
+%! assert (round (Wn), 25133);
+
+%!test
+%! # Analog notch (narrow band-stop)
+%! [n, Wn] = ellipord (2 * pi * [9000, 10657], ...
+%!                     2 * pi * [9875, 10126.5823], 3, 40, "s");
+%! assert (n, 2);
+%! assert (round (Wn), [58958, 66960]);
+
+%!test
+%! # Analog notch (narrow band-stop)
+%! [n, Wn] = ellipord (2 * pi * [9384, 12000], ...
+%!                     2 * pi * [9875, 10126.5823], 3, 40, "s");
+%! assert (n, 2);
+%! assert (round (Wn), [58961 , 66956]);
+
+%!test
+%! # Analog notch (narrow band-stop)
+%! [n, Wn] = ellipord (2 * pi * [9000, 10656], ...
+%!                     2 * pi * [9875, 10126.5823], 3, 40, "s");
+%! assert (n, 3);
+%! assert (round (Wn), [58964, 66954]);
+
+%!test
+%! # Analog notch (narrow band-stop)
+%! [n, Wn] = ellipord (2 * pi * [9385, 12000], ...
+%!                     2 * pi * [9875, 10126.5823], 3, 40, "s");
+%! assert (n, 3);
+%! assert (round (Wn), [58968, 66949]);
+
+%!test
+%! # Digital band-pass
+%! fs = 44100;
+%! [n, Wn] = ellipord (2 / fs * [9500, 9750], 2 / fs * [8500, 10261], 3, 40);
+%! Wn = Wn * fs / 2;
+%! assert (n, 2);
+%! assert (round (Wn), [9500, 9750]);
+
+%!test
+%! # Digital band-pass
+%! fs = 44100;
+%! [n, Wn] = ellipord (2 / fs * [9500, 9750], 2 / fs * [9000, 10700], 3, 40);
+%! Wn = Wn * fs / 2;
+%! assert (n, 2);
+%! assert (round (Wn), [9500, 9750]);
+
+%!test
+%! # Digital band-pass
+%! fs = 44100;
+%! [n, Wn] = ellipord (2 / fs * [9500, 9750], 2 / fs * [8500, 10260], 3, 40);
+%! Wn = Wn * fs / 2;
+%! assert (n, 3);
+%! assert (round (Wn), [9500, 9750]);
+
+%!test
+%! # Digital band-pass
+%! fs = 44100;
+%! [n, Wn] = ellipord (2 / fs * [9500, 9750], 2 / fs * [9001, 10700], 3, 40);
+%! Wn = Wn * fs / 2;
+%! assert (n, 3);
+%! assert (round (Wn), [9500, 9750]);
+
+%!test
+%! # Digital high-pass
+%! fs = 44100;
+%! [n, Wn] = ellipord (2 / fs * 13713, 2 / fs * 4000, 3, 40);
+%! Wn = Wn * fs / 2;
+%! assert (n, 2);
+%! assert (round (Wn), 13713);
+
+%!test
+%! # Digital high-pass
+%! fs = 44100;
+%! [n, Wn] = ellipord (2 / fs * 13712, 2 / fs * 4000, 3, 40);
+%! Wn = Wn * fs / 2;
+%! assert (n, 3);
+%! assert (round (Wn), 13712);
+
+%!test
+%! # Digital low-pass
+%! fs = 44100;
+%! [n, Wn] = ellipord (2 / fs * 4000, 2 / fs * 13713, 3, 40);
+%! Wn = Wn * fs / 2;
+%! assert (n, 2);
+%! assert (round (Wn), 4000);
+
+%!test
+%! # Digital low-pass
+%! fs = 44100;
+%! [n, Wn] = ellipord (2 / fs * 4000, 2 / fs * 13712, 3, 40);
+%! Wn = Wn * fs / 2;
+%! assert (n, 3);
+%! assert (round (Wn), 4000);
+
+%!test
+%! # Digital notch (narrow band-stop)
+%! fs = 44100;
+%! [n, Wn] = ellipord (2 / fs * [8500, 11073], 2 / fs * [9875, 10126.5823], 0.5, 40);
+%! Wn = Wn * fs / 2;
+%! assert (n, 2);
+%! assert (round (Wn), [8952, 11073]);
+
+%!test
+%! # Digital notch (narrow band-stop)
+%! fs = 44100;
+%! [n, Wn] = ellipord (2 / fs * [8952, 12000], 2 / fs * [9875, 10126.5823], 0.5, 40);
+%! Wn = Wn * fs / 2;
+%! assert (n, 2);
+%! assert (round (Wn), [8952, 11073]);
+
+%!test
+%! # Digital notch (narrow band-stop)
+%! fs = 44100;
+%! [n, Wn] = ellipord (2 / fs * [8500, 11072], 2 / fs * [9875, 10126.5823], 0.5, 40);
+%! Wn = Wn * fs / 2;
+%! assert (n, 3);
+%! assert (round (Wn), [8953, 11072]);
+
+%!test
+%! # Digital notch (narrow band-stop)
+%! fs = 44100;
+%! [n, Wn] = ellipord (2 / fs * [8953, 12000], 2 / fs * [9875, 10126.5823], 0.5, 40);
+%! Wn = Wn * fs / 2;
+%! assert (n, 3);
+%! assert (round (Wn), [8953, 11072]);
+
+## Test input validation
 %!error ellipord ()
 %!error ellipord (.1)
 %!error ellipord (.1, .2)
@@ -820,180 +997,3 @@ endfunction
 %!error ellipord ([.1 .1], [.2 .2], 3, 4)
 %!error ellipord ([.1 .2], [.5 .6], 3, 4)
 %!error ellipord ([.1 .5], [.2 .6], 3, 4)
-
-%!test
-%! # Ana BP
-%! [N, Wn] = ellipord (2 * pi * [9875, 10126.5823], ...
-%!                     2 * pi * [9000, 10657], 3, 40, "s");
-%! assert (N, 2);
-%! assert (round (Wn), [62046, 63627]);
-
-%!test
-%! # Ana BP
-%! [N, Wn] = ellipord (2 * pi * [9875, 10126.5823], ...
-%!                     2 * pi * [9384, 12000], 3, 40, "s");
-%! assert (N, 2);
-%! assert (round (Wn), [62046, 63627]);
-
-%!test
-%! # Ana BP
-%! [N, Wn] = ellipord (2 * pi * [9875, 10126.5823], ...
-%!                     2 * pi * [9000, 10656], 3, 40, "s");
-%! assert (N, 3);
-%! assert (round (Wn), [62046, 63627]);
-
-%!test
-%! # Ana BP
-%! [N, Wn] = ellipord (2 * pi * [9875, 10126.5823], ...
-%!                     2 * pi * [9385, 12000], 3, 40, "s");
-%! assert (N, 3);
-%! assert (round (Wn), [62046, 63627]);
-
-%!test
-%! # Ana HP
-%! [N, Wn] = ellipord (2 * pi * 20224, 2 * pi * 4000, 3, 40, "s");
-%! assert (N, 2);
-%! assert (round (Wn), 127071);
-
-%!test
-%! # Ana HP
-%! [N, Wn] = ellipord (2 * pi * 20223, 2 * pi * 4000, 3, 40, "s");
-%! assert (N, 3);
-%! assert (round (Wn), 127065);
-
-%!test
-%! # Ana LP
-%! [N, Wn] = ellipord (2 * pi * 4000, 2 * pi * 20224, 3, 40, "s");
-%! assert (N, 2);
-%! assert (round (Wn), 25133);
-
-%!test
-%! # Ana LP
-%! [N, Wn] = ellipord (2 * pi * 4000, 2 * pi * 20223, 3, 40, "s");
-%! assert (N, 3);
-%! assert (round (Wn), 25133);
-
-%!test
-%! # Ana Notch
-%! [N, Wn] = ellipord (2 * pi * [9000, 10657], ...
-%!                     2 * pi * [9875, 10126.5823], 3, 40, "s");
-%! assert (N, 2);
-%! assert (round (Wn), [58958, 66960]);
-
-%!test
-%! # Ana Notch
-%! [N, Wn] = ellipord (2 * pi * [9384, 12000], ...
-%!                     2 * pi * [9875, 10126.5823], 3, 40, "s");
-%! assert (N, 2);
-%! assert (round (Wn), [58961 , 66956]);
-
-%!test
-%! # Ana Notch
-%! [N, Wn] = ellipord (2 * pi * [9000, 10656], ...
-%!                     2 * pi * [9875, 10126.5823], 3, 40, "s");
-%! assert (N, 3);
-%! assert (round (Wn), [58964, 66954]);
-
-%!test
-%! # Ana Notch
-%! [N, Wn] = ellipord (2 * pi * [9385, 12000], ...
-%!                     2 * pi * [9875, 10126.5823], 3, 40, "s");
-%! assert (N, 3);
-%! assert (round (Wn), [58968, 66949]);
-
-%!test
-%! # Dig BP
-%! fs = 44100;
-%! [N, Wn] = ellipord (2 / fs * [9500, 9750], 2 / fs * [8500, 10261], 3, 40);
-%! Wn = Wn * fs / 2;
-%! assert (N, 2);
-%! assert (round (Wn), [9500, 9750]);
-
-%!test
-%! # Dig BP
-%! fs = 44100;
-%! [N, Wn] = ellipord (2 / fs * [9500, 9750], 2 / fs * [9000, 10700], 3, 40);
-%! Wn = Wn * fs / 2;
-%! assert (N, 2);
-%! assert (round (Wn), [9500, 9750]);
-
-%!test
-%! # Dig BP
-%! fs = 44100;
-%! [N, Wn] = ellipord (2 / fs * [9500, 9750], 2 / fs * [8500, 10260], 3, 40);
-%! Wn = Wn * fs / 2;
-%! assert (N, 3);
-%! assert (round (Wn), [9500, 9750]);
-
-%!test
-%! # Dig BP
-%! fs = 44100;
-%! [N, Wn] = ellipord (2 / fs * [9500, 9750], 2 / fs * [9001, 10700], 3, 40);
-%! Wn = Wn * fs / 2;
-%! assert (N, 3);
-%! assert (round (Wn), [9500, 9750]);
-
-%!test
-%! # Dig HP
-%! fs = 44100;
-%! [N, Wn] = ellipord (2 / fs * 13713, 2 / fs * 4000, 3, 40);
-%! Wn = Wn * fs / 2;
-%! assert (N, 2);
-%! assert (round (Wn), 13713);
-
-%!test
-%! # Dig HP
-%! fs = 44100;
-%! [N, Wn] = ellipord (2 / fs * 13712, 2 / fs * 4000, 3, 40);
-%! Wn = Wn * fs / 2;
-%! assert (N, 3);
-%! assert (round (Wn), 13712);
-
-%!test
-%! # Dig LP
-%! fs = 44100;
-%! [N, Wn] = ellipord (2 / fs * 4000, 2 / fs * 13713, 3, 40);
-%! Wn = Wn * fs / 2;
-%! assert (N, 2);
-%! assert (round (Wn), 4000);
-
-%!test
-%! # Dig LP
-%! fs = 44100;
-%! [N, Wn] = ellipord (2 / fs * 4000, 2 / fs * 13712, 3, 40);
-%! Wn = Wn * fs / 2;
-%! assert (N, 3);
-%! assert (round (Wn), 4000);
-
-%!test
-%! # Dig Notch
-%! fs = 44100;
-%! [N, Wn] = ellipord (2 / fs * [8500, 11073], 2 / fs * [9875, 10126.5823], 0.5, 40);
-%! Wn = Wn * fs / 2;
-%! assert (N, 2);
-%! assert (round (Wn), [8952, 11073]);
-
-%!test
-%! # Dig Notch
-%! fs = 44100;
-%! [N, Wn] = ellipord (2 / fs * [8952, 12000], 2 / fs * [9875, 10126.5823], 0.5, 40);
-%! Wn = Wn * fs / 2;
-%! assert (N, 2);
-%! assert (round (Wn), [8952, 11073]);
-
-%!test
-%! # Dig Notch
-%! fs = 44100;
-%! [N, Wn] = ellipord (2 / fs * [8500, 11072], 2 / fs * [9875, 10126.5823], 0.5, 40);
-%! Wn = Wn * fs / 2;
-%! assert (N, 3);
-%! assert (round (Wn), [8953, 11072]);
-
-%!test
-%! # Dig Notch
-%! fs = 44100;
-%! [N, Wn] = ellipord (2 / fs * [8953, 12000], 2 / fs * [9875, 10126.5823], 0.5, 40);
-%! Wn = Wn * fs / 2;
-%! assert (N, 3);
-%! assert (round (Wn), [8953, 11072]);
-

@@ -1,5 +1,5 @@
-## Copyright (C) 1999 Paul Kienzle <pkienzle@users.sf.net>
-## Copyright (C) 2018 Charles Praplan <charles.praplan@alumni.epfl.ch>
+## Copyright (C) 1999 Paul Kienzle
+## Copyright (C) 2018 Charles Praplan
 ##
 ## This program is free software: you can redistribute it and/or modify
 ## it under the terms of the GNU General Public License as published by
@@ -21,7 +21,6 @@
 ## @deftypefnx {Function File} {@var{n} =} buttord ([@var{wp1}, @var{wp2}], [@var{ws1}, @var{ws2}], @var{rp}, @var{rs}, "s")
 ## @deftypefnx {Function File} {[@var{n}, @var{wc_p}] =} buttord (@dots{})
 ## @deftypefnx {Function File} {[@var{n}, @var{wc_p}, @var{wc_s}] =} buttord (@dots{})
-##
 ## Compute the minimum filter order of a Butterworth filter with the desired
 ## response characteristics.  The filter frequency band edges are specified by
 ## the passband frequency @var{wp} and stopband frequency @var{ws}.  Frequencies
@@ -47,8 +46,9 @@
 ## (@var{wp1} < @var{ws1} < @var{ws2} < @var{wp2}), the filter is a band-stop
 ## or band-reject filter.
 ##
-## For Laplace space filters, an additional input parameter ("s") must be
-## entered. In that case W is in rad/s.
+## If the optional argument @code{"s"} is given, the minimum order for an analog
+## elliptic filter is computed.  All frequencies @var{wp} and @var{ws} are
+## specified in radians per second.
 ##
 ## Theory: For Low pass filters, |H(W)|^2 = 1/[1+(W/Wc)^(2N)] = 10^(-R/10).
 ## With some algebra, you can solve simultaneously for Wc and N given
@@ -59,8 +59,6 @@
 ## For other types of filter, before making the above calculation, the
 ## requirements must be transformed to LP requirements. After calculation, Wc
 ## must be transformed back to original filter type.
-##
-##
 ## @seealso{butter, cheb1ord, cheb2ord, ellipord}
 ## @end deftypefn
 
@@ -85,37 +83,46 @@ function [n, Wc_p, Wc_s] = buttord (Wp, Ws, Rp, Rs, opt)
   endif
 
   if (s_domain)
-    Wpw = Wp;                                 # No prewarp for analog filter
-    Wsw = Ws;                                 # No prewarp for analog filter
+    # No prewarp in case of analog filter
+    Wpw = Wp;
+    Wsw = Ws;
   else
     ## sampling frequency of 2 Hz
     T = 2;
 
-    Wpw = (2 / T) * tan (pi .* Wp ./ T);      # prewarp
-    Wsw = (2 / T) * tan (pi .* Ws ./ T);      # prewarp
+    Wpw = (2 / T) .* tan (pi .* Wp ./ T);     # prewarp
+    Wsw = (2 / T) .* tan (pi .* Ws ./ T);     # prewarp
   endif
 
   ## pass/stop band to low pass filter transform:
   if (length (Wpw) == 2 && length (Wsw) == 2)
 
-    if (Wpw(1) > Wsw(1))                      # Band pass filter
+    ## Band-pass filter
+    if (Wpw(1) > Wsw(1))
 
-      if (Wpw(1) * Wpw(2) < Wsw(1) * Wsw(2))  # Modify band edges if not sym.
-        Wsw(2) = Wpw(1) * Wpw(2) / Wsw(1);    #   smaller stopband
+      ## Modify band edges if not symmetrical.  For a band-pass filter,
+      ## the lower or upper stopband limit is moved, resulting in a smaller
+      ## stopband than the caller requested.
+      if (Wpw(1) * Wpw(2) < Wsw(1) * Wsw(2))
+        Wsw(2) = Wpw(1) * Wpw(2) / Wsw(1);
       else
-        Wsw(1) = Wpw(1) * Wpw(2) / Wsw(2);    #   smaller stopband
+        Wsw(1) = Wpw(1) * Wpw(2) / Wsw(2);
       endif
 
       w02 = Wpw(1) * Wpw(2);
       wp = Wpw(2) - Wpw(1);
       ws = Wsw(2) - Wsw(1);
 
-    else                                      # Notch filter
+    ## Band-stop / band-reject / notch filter
+    else
 
-      if (Wpw(1) * Wpw(2) > Wsw(1) * Wsw(2))  # Modify band edges if not sym.
-        Wpw(2) = Wsw(1) * Wsw(2) / Wpw(1);    # smaller passband
+      ## Modify band edges if not symmetrical.  For a band-stop filter,
+      ## the lower or upper passband limit is moved, resulting in a smaller
+      ## rejection band than the caller requested.
+      if (Wpw(1) * Wpw(2) > Wsw(1) * Wsw(2))
+        Wpw(2) = Wsw(1) * Wsw(2) / Wpw(1);
       else
-        Wpw(1) = Wsw(1) * Wsw(2) / Wpw(2);    # smaller passband
+        Wpw(1) = Wsw(1) * Wsw(2) / Wpw(2);
       endif
 
       w02 = Wpw(1) * Wpw(2);
@@ -125,14 +132,16 @@ function [n, Wc_p, Wc_s] = buttord (Wp, Ws, Rp, Rs, opt)
     ws = ws / wp;
     wp = 1;
 
-  elseif (Wpw > Wsw)                          # High pass filter
+  ## High-pass filter
+  elseif (Wpw > Wsw)
     wp = Wsw;
     ws = Wpw;
-  else                                        # Low pass filter
+
+  ## Low-pass filter
+  else
     wp = Wpw;
     ws = Wsw;
   endif
-
 
   ## compute minimum n which satisfies all band edge conditions
   qs = log (10 ^ (Rs / 10) - 1);
@@ -140,12 +149,16 @@ function [n, Wc_p, Wc_s] = buttord (Wp, Ws, Rp, Rs, opt)
   n = ceil (max (0.5 * (qs - qp) ./ log (ws./wp)));
 
   ## compute -3dB cutoff given Wp, Rp and n
-  if (length (Wpw) == 2 && length (Wsw) == 2)   # Band pass or notch filter
 
-    if (Wpw(1) > Wsw(1))                        # Band pass filter
+  if (length (Wpw) == 2 && length (Wsw) == 2)
+
+    ## Band-pass filter
+    if (Wpw(1) > Wsw(1))
       w_prime_p = exp (log (Wpw) - qp / 2 / n); #   same formula as for LP
       w_prime_s = exp (log (Wsw) - qs / 2 / n); #           "
-    else                                        # Notch filter
+
+    ## Band-stop / band-reject / notch filter
+    else
       w_prime_p = exp( log (Wpw) + qp / 2 / n); #   same formula as for HP
       w_prime_s = exp( log (Wsw) + qs / 2 / n); #           "
     endif
@@ -160,7 +173,7 @@ function [n, Wc_p, Wc_s] = buttord (Wp, Ws, Rp, Rs, opt)
     w0 = sqrt (prod (Wpw));
     Q = w0 / diff (Wpw);                      # BW at -Rp dB not at -3dB
     wc = Wpw;
-    W_prime = w_prime_p(1) / wc(1);           # same with with w_prime(2)/wc(2)
+    W_prime = w_prime_p(1) / wc(1);           # same with w_prime(2)/wc(2)
     wa = abs (W_prime + sqrt (W_prime ^ 2 + 4 * Q ^ 2)) / (2 * Q / w0);
     wb = abs (W_prime - sqrt (W_prime ^ 2 + 4 * Q ^ 2)) / (2 * Q / w0);
     Wcw_p = [wb wa];
@@ -174,22 +187,31 @@ function [n, Wc_p, Wc_s] = buttord (Wp, Ws, Rp, Rs, opt)
     wb =abs (W_prime - sqrt (W_prime ^ 2 + 4 * Q ^ 2)) / (2 * Q / w0);
     Wcw_s = [wb wa];
 
-  elseif (Wpw > Wsw)                          # High pass filter
-    Wcw_p = exp (log (Wpw) + qp / 2 / n);     #   -3dB cutoff to match pass band
-    Wcw_s = exp (log (Wsw) + qs / 2 / n);     #   -3dB cutoff to match stop band
-  else                                        # Low pass filter
-    Wcw_p = exp (log (Wpw) - qp / 2 / n);     #   -3dB cutoff to match pass band
-    Wcw_s = exp( log (Wsw) - qs / 2 / n);     #   -3dB cutoff to match stop band
+  ## High-pass filter
+  elseif (Wpw > Wsw)
+    ## -3dB cutoff freq to match pass band
+    Wcw_p = exp (log (Wpw) + qp / 2 / n);
+
+    ## -3dB cutoff freq to match stop band
+    Wcw_s = exp (log (Wsw) + qs / 2 / n);
+
+  ## Low-pass filter
+  else
+    ## -3dB cutoff freq to match pass band
+    Wcw_p = exp (log (Wpw) - qp / 2 / n);
+
+    ## -3dB cutoff freq to match stop band
+    Wcw_s = exp( log (Wsw) - qs / 2 / n);
   endif
 
-  if (s_domain)                               # No prewarp for analog filter
+  if (s_domain)
+    # No prewarp in case of analog filter
     Wc_p = Wcw_p;
     Wc_s = Wcw_s;
   else
-    ## sampling frequency of 2 Hz
-    T = 2;
-    Wc_p = atan (Wcw_p / (2 / T)) * (T / pi); # inv. prewarp after evt. symmetr.
-    Wc_s = atan (Wcw_s / (2 / T)) * (T / pi); # inv. prewarp after evt. symmetr.
+    # Inverse frequency warping for discrete-time filter
+    Wc_p = atan (Wcw_p .* (T / 2)) .* (T / pi);
+    Wc_s = atan (Wcw_s .* (T / 2)) .* (T / pi);
   endif
 
 endfunction
@@ -203,11 +225,11 @@ endfunction
 %! Rstop = 26;
 %! Wpass = 2 / fs * fpass;
 %! Wstop = 2 / fs * fstop;
-%! [N, Wn_p, Wn_s] = buttord (Wpass, Wstop, Rpass, Rstop);
-%! [B, A] = butter (N, Wn_p);
+%! [n, Wn_p, Wn_s] = buttord (Wpass, Wstop, Rpass, Rstop)
+%! [b, a] = butter (n, Wn_p);
 %! f = 8000:12000;
 %! W = 2 * pi * f;
-%! [H,f] = freqz (B, A, Npts, fs);
+%! [H, f] = freqz (b, a, Npts, fs);
 %! plot (f, 20 * log10 (abs (H)));
 %! title ("Digital Butterworth low-pass : matching pass band");
 %! xlabel ("Frequency (Hz)");
@@ -231,11 +253,11 @@ endfunction
 %! Rstop = 26;
 %! Wpass = 2 / fs * fpass;
 %! Wstop = 2 / fs * fstop;
-%! [N, Wn_p, Wn_s] = buttord (Wpass, Wstop, Rpass, Rstop);
-%! [B, A] = butter (N, Wn_s);
+%! [n, Wn_p, Wn_s] = buttord (Wpass, Wstop, Rpass, Rstop)
+%! [b, a] = butter (n, Wn_s);
 %! f = 8000:12000;
 %! W = 2 * pi * f;
-%! [H,f] = freqz (B, A, Npts, fs);
+%! [H, f] = freqz (b, a, Npts, fs);
 %! plot (f, 20 * log10 (abs (H)));
 %! title ("Digital Butterworth low-pass : matching stop band");
 %! xlabel ("Frequency (Hz)");
@@ -259,11 +281,11 @@ endfunction
 %! Rstop = 26;
 %! Wpass = 2 / fs * fpass;
 %! Wstop = 2 / fs * fstop;
-%! [N, Wn_p, Wn_s] = buttord (Wpass, Wstop, Rpass, Rstop);
-%! [B, A] = butter (N, Wn_p, "high");
+%! [n, Wn_p, Wn_s] = buttord (Wpass, Wstop, Rpass, Rstop)
+%! [b, a] = butter (n, Wn_p, "high");
 %! f = 8000:12000;
 %! W = 2 * pi * f;
-%! [H,f] = freqz (B, A, Npts, fs);
+%! [H, f] = freqz (b, a, Npts, fs);
 %! plot (f, 20 * log10 (abs (H)));
 %! title ("Digital Butterworth high-pass : matching pass band");
 %! xlabel ("Frequency (Hz)");
@@ -287,11 +309,11 @@ endfunction
 %! Rstop = 26;
 %! Wpass = 2 / fs * fpass;
 %! Wstop = 2 / fs * fstop;
-%! [N, Wn_p, Wn_s] = buttord (Wpass, Wstop, Rpass, Rstop);
-%! [B, A] = butter (N, Wn_s, "high");
+%! [n, Wn_p, Wn_s] = buttord (Wpass, Wstop, Rpass, Rstop)
+%! [b, a] = butter (n, Wn_s, "high");
 %! f = 8000:12000;
 %! W = 2 * pi * f;
-%! [H,f] = freqz (B, A, Npts, fs);
+%! [H, f] = freqz (b, a, Npts, fs);
 %! plot (f, 20 * log10 (abs (H)))
 %! title ("Digital Butterworth high-pass : matching stop band");
 %! xlabel ("Frequency (Hz)");
@@ -307,18 +329,18 @@ endfunction
 %! ylim ([-80, 0]);
 
 %!demo
-%! fs = 44100;
+%! fs    = 44100;
 %! fpass = [9500 9750];
 %! fstop = [8500 10051];
 %! Rpass = 1;
 %! Rstop = 26;
 %! Wpass = 2 / fs * fpass;
 %! Wstop = 2 / fs * fstop;
-%! [N, Wn_p, Wn_s] = buttord (Wpass, Wstop, Rpass, Rstop);
-%! [B, A] = butter (N, Wn_p);
+%! [n, Wn_p, Wn_s] = buttord (Wpass, Wstop, Rpass, Rstop)
+%! [b, a] = butter (n, Wn_p);
 %! f = (8000:12000)';
 %! W = f * (2 * pi / fs);
-%! [H] = freqz (B, A, W);
+%! H = freqz (b, a, W);
 %! plot (f, 20 * log10 (abs (H)));
 %! title ("Digital Butterworth band-pass : matching pass band, limit on upper freq");
 %! xlabel ("Frequency (Hz)");
@@ -336,18 +358,18 @@ endfunction
 %! ylim ([-80, 0]);
 
 %!demo
-%! fs = 44100;
+%! fs    = 44100;
 %! fpass = [9500 9750];
 %! fstop = [8500 10051];
 %! Rpass = 1;
 %! Rstop = 26;
 %! Wpass = 2 / fs * fpass;
 %! Wstop = 2 / fs * fstop;
-%! [N, Wn_p, Wn_s] = buttord (Wpass, Wstop, Rpass, Rstop);
-%! [B, A] = butter (N, Wn_s);
+%! [n, Wn_p, Wn_s] = buttord (Wpass, Wstop, Rpass, Rstop)
+%! [b, a] = butter (n, Wn_s);
 %! f = (8000:12000)';
 %! W = f * (2 * pi / fs);
-%! [H] = freqz (B, A, W);
+%! H = freqz (b, a, W);
 %! plot (f, 20 * log10 (abs (H)));
 %! title ("Digital Butterworth band-pass : matching stop band, limit on upper freq");
 %! xlabel ("Frequency (Hz)");
@@ -365,18 +387,18 @@ endfunction
 %! ylim ([-80, 0]);
 
 %!demo
-%! fs = 44100;
+%! fs    = 44100;
 %! fpass = [9500 9750];
 %! fstop = [9204 10700];
 %! Rpass = 1;
 %! Rstop = 26;
 %! Wpass = 2 / fs * fpass;
 %! Wstop = 2 / fs * fstop;
-%! [N, Wn_p, Wn_s] = buttord (Wpass, Wstop, Rpass, Rstop);
-%! [B, A] = butter (N, Wn_p);
+%! [n, Wn_p, Wn_s] = buttord (Wpass, Wstop, Rpass, Rstop)
+%! [b, a] = butter (n, Wn_p);
 %! f = (8000:12000)';
 %! W = f * (2 * pi / fs);
-%! [H] = freqz (B, A, W);
+%! H = freqz (b, a, W);
 %! plot (f, 20 * log10 (abs (H)));
 %! title ("Digital Butterworth band-pass : matching pass band, limit on lower freq");
 %! xlabel ("Frequency (Hz)");
@@ -394,18 +416,18 @@ endfunction
 %! ylim ([-80, 0]);
 
 %!demo
-%! fs = 44100;
+%! fs    = 44100;
 %! fpass = [9500 9750];
 %! fstop = [9204 10700];
 %! Rpass = 1;
 %! Rstop = 26;
 %! Wpass = 2 / fs * fpass;
 %! Wstop = 2 / fs * fstop;
-%! [N, Wn_p, Wn_s] = buttord (Wpass, Wstop, Rpass, Rstop);
-%! [B, A] = butter (N, Wn_s);
+%! [n, Wn_p, Wn_s] = buttord (Wpass, Wstop, Rpass, Rstop)
+%! [b, a] = butter (n, Wn_s);
 %! f = (8000:12000)';
 %! W = f * (2 * pi / fs);
-%! [H] = freqz (B, A, W);
+%! H = freqz (b, a, W);
 %! plot (f, 20 * log10 (abs (H)));
 %! title ("Digital Butterworth band-pass : matching stop band, limit on lower freq");
 %! xlabel ("Frequency (Hz)");
@@ -423,18 +445,18 @@ endfunction
 %! ylim ([-80, 0]);
 
 %!demo
-%! fs = 44100;
+%! fs    = 44100;
 %! fstop = [9875, 10126.5823];
 %! fpass = [8500 10833];
 %! Rpass = 0.5;
 %! Rstop = 40;
 %! Wpass = 2 / fs * fpass;
 %! Wstop = 2 / fs * fstop;
-%! [N, Wn_p, Wn_s] = buttord (Wpass, Wstop, Rpass, Rstop);
-%! [B, A] = butter (N, Wn_p, "stop");
+%! [n, Wn_p, Wn_s] = buttord (Wpass, Wstop, Rpass, Rstop)
+%! [b, a] = butter (n, Wn_p, "stop");
 %! f = (8000:12000)';
 %! W = f * (2 * pi / fs);
-%! [H] = freqz (B, A, W);
+%! H = freqz (b, a, W);
 %! plot (f, 20 * log10 (abs (H)));
 %! title ("Digital Butterworth notch : matching pass band, limit on upper freq");
 %! xlabel ("Frequency (Hz)");
@@ -455,18 +477,18 @@ endfunction
 %! ylim ([-80, 0]);
 
 %!demo
-%! fs = 44100;
+%! fs    = 44100;
 %! fstop = [9875, 10126.5823];
 %! fpass = [8500 10833];
 %! Rpass = 0.5;
 %! Rstop = 40;
 %! Wpass = 2 / fs * fpass;
 %! Wstop = 2 / fs * fstop;
-%! [N, Wn_p, Wn_s] = buttord (Wpass, Wstop, Rpass, Rstop);
-%! [B, A] = butter (N, Wn_s, "stop");
+%! [n, Wn_p, Wn_s] = buttord (Wpass, Wstop, Rpass, Rstop)
+%! [b, a] = butter (n, Wn_s, "stop");
 %! f = (8000:12000)';
 %! W = f * (2 * pi / fs);
-%! [H] = freqz (B, A, W);
+%! H = freqz (b, a, W);
 %! plot (f, 20 * log10 (abs (H)));
 %! title ("Digital Butterworth notch : matching stop band, limit on upper freq");
 %! xlabel ("Frequency (Hz)");
@@ -487,18 +509,18 @@ endfunction
 %! ylim ([-80, 0]);
 
 %!demo
-%! fs = 44100;
+%! fs    = 44100;
 %! fstop = [9875, 10126.5823];
 %! fpass = [9183 11000];
 %! Rpass = 0.5;
 %! Rstop = 40;
 %! Wpass = 2 / fs * fpass;
 %! Wstop = 2 / fs * fstop;
-%! [N, Wn_p, Wn_s] = buttord (Wpass, Wstop, Rpass, Rstop);
-%! [B, A] = butter (N, Wn_p, "stop");
+%! [n, Wn_p, Wn_s] = buttord (Wpass, Wstop, Rpass, Rstop)
+%! [b, a] = butter (n, Wn_p, "stop");
 %! f = (8000:12000)';
 %! W = f * (2 * pi / fs);
-%! [H] = freqz (B, A, W);
+%! H = freqz (b, a, W);
 %! plot (f, 20 * log10 (abs (H)));
 %! title ("Digital Butterworth notch : matching pass band, limit on lower freq");
 %! xlabel ("Frequency (Hz)");
@@ -519,18 +541,18 @@ endfunction
 %! ylim ([-80, 0]);
 
 %!demo
-%! fs = 44100;
+%! fs    = 44100;
 %! fstop = [9875, 10126.5823];
 %! fpass = [9183 11000];
 %! Rpass = 0.5;
 %! Rstop = 40;
 %! Wpass = 2 / fs * fpass;
 %! Wstop = 2 / fs * fstop;
-%! [N, Wn_p, Wn_s] = buttord (Wpass, Wstop, Rpass, Rstop);
-%! [B, A] = butter (N, Wn_s, "stop");
+%! [n, Wn_p, Wn_s] = buttord (Wpass, Wstop, Rpass, Rstop)
+%! [b, a] = butter (n, Wn_s, "stop");
 %! f = (8000:12000)';
 %! W = f * (2 * pi / fs);
-%! [H] = freqz (B, A, W);
+%! H = freqz (b, a, W);
 %! plot (f, 20 * log10 (abs (H)));
 %! title ("Digital Butterworth notch : matching stop band, limit on lower freq");
 %! xlabel ("Frequency (Hz)");
@@ -557,11 +579,11 @@ endfunction
 %! Rstop = 26;
 %! Wpass = 2 * pi * fpass;
 %! Wstop = 2 * pi * fstop;
-%! [N, Wn_p, Wn_s] = buttord (Wpass, Wstop, Rpass, Rstop, "s");
-%! [B, A]          = butter (N, Wn_p, "s");
+%! [n, Wn_p, Wn_s] = buttord (Wpass, Wstop, Rpass, Rstop, "s")
+%! [b, a] = butter (n, Wn_p, "s");
 %! f = 1000:10:100000;
 %! W = 2 * pi * f;
-%! [H] = freqs (B, A, W);
+%! H = freqs (b, a, W);
 %! semilogx (f, 20 * log10 (abs (H)))
 %! title ("Analog Butterworth low-pass : matching pass band");
 %! xlabel ("Frequency (Hz)");
@@ -583,11 +605,11 @@ endfunction
 %! Rstop = 26;
 %! Wpass = 2 * pi * fpass;
 %! Wstop = 2 * pi * fstop;
-%! [N, Wn_p, Wn_s] = buttord (Wpass, Wstop, Rpass, Rstop, "s");
-%! [B, A]          = butter (N, Wn_s, "s");
+%! [n, Wn_p, Wn_s] = buttord (Wpass, Wstop, Rpass, Rstop, "s")
+%! [b, a] = butter (n, Wn_s, "s");
 %! f = 1000:10:100000;
 %! W = 2 * pi * f;
-%! [H] = freqs (B, A, W);
+%! H = freqs (b, a, W);
 %! semilogx (f, 20 * log10 (abs (H)));
 %! title ("Analog Butterworth low-pass : matching stop band");
 %! xlabel ("Frequency (Hz)");
@@ -609,11 +631,11 @@ endfunction
 %! Rstop = 26;
 %! Wpass = 2 * pi * fpass;
 %! Wstop = 2 * pi * fstop;
-%! [N, Wn_p, Wn_s] = buttord (Wpass, Wstop, Rpass, Rstop, "s");
-%! [B, A] = butter (N, Wn_p, "high", "s");
+%! [n, Wn_p, Wn_s] = buttord (Wpass, Wstop, Rpass, Rstop, "s")
+%! [b, a] = butter (n, Wn_p, "high", "s");
 %! f = 1000:10:100000;
 %! W = 2 * pi * f;
-%! [H] = freqs (B, A, W);
+%! H = freqs (b, a, W);
 %! semilogx (f, 20 * log10 (abs (H)));
 %! title ("Analog Butterworth high-pass : matching pass band");
 %! xlabel ("Frequency (Hz)");
@@ -635,11 +657,11 @@ endfunction
 %! Rstop = 26;
 %! Wpass = 2 * pi * fpass;
 %! Wstop = 2 * pi * fstop;
-%! [N, Wn_p, Wn_s] = buttord (Wpass, Wstop, Rpass, Rstop, "s");
-%! [B, A]          = butter (N, Wn_s, "high", "s");
+%! [n, Wn_p, Wn_s] = buttord (Wpass, Wstop, Rpass, Rstop, "s")
+%! [b, a] = butter (n, Wn_s, "high", "s");
 %! f = 1000:10:100000;
 %! W = 2 * pi * f;
-%! [H] = freqs (B, A, W);
+%! H = freqs (b, a, W);
 %! semilogx (f, 20 * log10 (abs (H)));
 %! title ("Analog Butterworth high-pass : matching stop band");
 %! xlabel ("Frequency (Hz)");
@@ -661,11 +683,11 @@ endfunction
 %! Rstop = 26;
 %! Wpass = 2 * pi * fpass;
 %! Wstop = 2 * pi * fstop;
-%! [N, Wn_p, Wn_s] = buttord (Wpass, Wstop, Rpass, Rstop, "s");
-%! [B, A]  = butter (N, Wn_p, "s");
+%! [n, Wn_p, Wn_s] = buttord (Wpass, Wstop, Rpass, Rstop, "s")
+%! [b, a] = butter (n, Wn_p, "s");
 %! f = 8000:12000;
 %! W = 2 * pi * f;
-%! [H] = freqs (B, A, W);
+%! H = freqs (b, a, W);
 %! plot (f, 20 * log10 (abs (H)));
 %! title ("Analog Butterworth band-pass : matching pass band, limit on upper freq");
 %! xlabel ("Frequency (Hz)");
@@ -689,11 +711,11 @@ endfunction
 %! Rstop = 26;
 %! Wpass = 2 * pi * fpass;
 %! Wstop = 2 * pi * fstop;
-%! [N, Wn_p, Wn_s] = buttord (Wpass, Wstop, Rpass, Rstop, "s");
-%! [B, A] = butter (N, Wn_s, "s");
+%! [n, Wn_p, Wn_s] = buttord (Wpass, Wstop, Rpass, Rstop, "s")
+%! [b, a] = butter (n, Wn_s, "s");
 %! f = 8000:12000;
 %! W = 2 * pi * f;
-%! [H] = freqs (B, A, W);
+%! H = freqs (b, a, W);
 %! plot (f, 20 * log10 (abs (H)));
 %! title ("Analog Butterworth band-pass : matching stop band, limit on upper freq");
 %! xlabel ("Frequency (Hz)");
@@ -717,11 +739,11 @@ endfunction
 %! Rstop = 26;
 %! Wpass = 2 * pi * fpass;
 %! Wstop = 2 * pi * fstop;
-%! [N, Wn_p, Wn_s] = buttord (Wpass, Wstop, Rpass, Rstop, "s");
-%! [B, A] = butter (N, Wn_p, "s");
+%! [n, Wn_p, Wn_s] = buttord (Wpass, Wstop, Rpass, Rstop, "s")
+%! [b, a] = butter (n, Wn_p, "s");
 %! f = 8000:12000;
 %! W = 2 * pi * f;
-%! [H] = freqs (B, A, W);
+%! H = freqs (b, a, W);
 %! plot (f, 20 * log10 (abs (H)));
 %! title ("Analog Butterworth band-pass : matching pass band, limit on lower freq");
 %! xlabel ("Frequency (Hz)");
@@ -745,11 +767,11 @@ endfunction
 %! Rstop = 26;
 %! Wpass = 2 * pi * fpass;
 %! Wstop = 2 * pi * fstop;
-%! [N, Wn_p, Wn_s] = buttord (Wpass, Wstop, Rpass, Rstop, "s");
-%! [B, A] = butter (N, Wn_s, "s");
+%! [n, Wn_p, Wn_s] = buttord (Wpass, Wstop, Rpass, Rstop, "s")
+%! [b, a] = butter (n, Wn_s, "s");
 %! f = 8000:12000;
 %! W = 2 * pi * f;
-%! [H] = freqs (B, A, W);
+%! H = freqs (b, a, W);
 %! plot (f, 20 * log10 (abs (H)));
 %! title ("Analog Butterworth band-pass : matching stop band, limit on lower freq");
 %! xlabel ("Frequency (Hz)");
@@ -773,11 +795,11 @@ endfunction
 %! Rstop = 26;
 %! Wpass = 2 * pi * fpass;
 %! Wstop = 2 * pi * fstop;
-%! [N, Wn_p, Wn_s] = buttord (Wpass, Wstop, Rpass, Rstop, "s");
-%! [B, A] = butter (N, Wn_p, "stop", "s");
+%! [n, Wn_p, Wn_s] = buttord (Wpass, Wstop, Rpass, Rstop, "s")
+%! [b, a] = butter (n, Wn_p, "stop", "s");
 %! f = 8000:12000;
 %! W = 2 * pi * f;
-%! [H] = freqs (B, A, W);
+%! H = freqs (b, a, W);
 %! plot (f, 20 * log10 (abs (H)));
 %! title ("Analog Butterworth notch : matching pass band, limit on upper freq");
 %! xlabel ("Frequency (Hz)");
@@ -804,11 +826,11 @@ endfunction
 %! Rstop = 26;
 %! Wpass = 2 * pi * fpass;
 %! Wstop = 2 * pi * fstop;
-%! [N, Wn_p, Wn_s] = buttord (Wpass, Wstop, Rpass, Rstop, "s");
-%! [B, A] = butter (N, Wn_s, "stop", "s");
+%! [n, Wn_p, Wn_s] = buttord (Wpass, Wstop, Rpass, Rstop, "s")
+%! [b, a] = butter (n, Wn_s, "stop", "s");
 %! f = 8000:12000;
 %! W = 2 * pi * f;
-%! [H] = freqs (B, A, W);
+%! H = freqs (b, a, W);
 %! plot (f, 20 * log10 (abs (H)));
 %! title ("Analog Butterworth notch : matching stop band, limit on upper freq");
 %! xlabel ("Frequency (Hz)");
@@ -835,11 +857,11 @@ endfunction
 %! Rstop = 26;
 %! Wpass = 2 * pi * fpass;
 %! Wstop = 2 * pi * fstop;
-%! [N, Wn_p, Wn_s] = buttord (Wpass, Wstop, Rpass, Rstop, "s");
-%! [B, A] = butter (N, Wn_p, "stop", "s");
+%! [n, Wn_p, Wn_s] = buttord (Wpass, Wstop, Rpass, Rstop, "s")
+%! [b, a] = butter (n, Wn_p, "stop", "s");
 %! f = 8000:12000;
 %! W = 2 * pi * f;
-%! [H] = freqs (B, A, W);
+%! H = freqs (b, a, W);
 %! plot (f, 20 * log10 (abs (H)));
 %! title ("Analog Butterworth notch : matching pass band, limit on lower freq");
 %! xlabel ("Frequency (Hz)");
@@ -866,11 +888,11 @@ endfunction
 %! Rstop = 26;
 %! Wpass = 2 * pi * fpass;
 %! Wstop = 2 * pi * fstop;
-%! [N, Wn_p, Wn_s] = buttord (Wpass, Wstop, Rpass, Rstop, "s");
-%! [B, A] = butter (N, Wn_s, "stop", "s");
+%! [n, Wn_p, Wn_s] = buttord (Wpass, Wstop, Rpass, Rstop, "s")
+%! [b, a] = butter (n, Wn_s, "stop", "s");
 %! f = 8000:12000;
 %! W = 2 * pi * f;
-%! [H] = freqs (B, A, W);
+%! H = freqs (b, a, W);
 %! plot (f, 20 * log10 (abs (H)));
 %! title ("Analog Butterworth notch : matching stop band, limit on lower freq");
 %! xlabel ("Frequency (Hz)");
@@ -891,7 +913,227 @@ endfunction
 %! ylim ([-80, 0]);
 
 
-%% Test input validation
+%!test
+%! # Analog band-pass
+%! [n, Wn_p, Wn_s] = buttord (2 * pi * [9875, 10126.5823], ...
+%!                            2 * pi * [9000, 10436], 1, 26, "s");
+%! assert (n, 4);
+%! assert (round (Wn_p), [61903, 63775]);
+%! assert (round (Wn_s), [61575, 64114]);
+
+%!test
+%! # Analog band-pass
+%! [n, Wn_p, Wn_s] = buttord (2 * pi * [9875, 10126.5823], ...
+%!                            2 * pi * [9582, 11000], 1, 26, "s");
+%! assert (n, 4);
+%! assert (round (Wn_p), [61903, 63775]);
+%! assert (round (Wn_s), [61575, 64115]);
+
+%!test
+%! # Analog band-pass
+%! [n, Wn_p, Wn_s] = buttord (2 * pi * [9875, 10126.5823], ...
+%!                            2 * pi * [9000, 10437], 1, 26, "s");
+%! assert (n, 3);
+%! assert (round (Wn_p), [61850, 63830]);
+%! assert (round (Wn_s), [61848, 63831]);
+
+%!test
+%! # Analog band-pass
+%! [n, Wn_p, Wn_s] = buttord (2 * pi * [9875, 10126.5823], ...
+%!                            2 * pi * [9581, 11000], 1, 26, "s");
+%! assert (n, 3);
+%! assert (round (Wn_p), [61850, 63830]);
+%! assert (round (Wn_s), [61847, 63832]);
+
+%!test
+%! # Analog high-pass
+%! [n, Wn_p, Wn_s] = buttord (2 * pi * 13583, 2 * pi * 4000, 1, 26, "s");
+%! assert (n, 4);
+%! assert (round (Wn_p), 72081);
+%! assert (round (Wn_s), 53101);
+
+%!test
+%! # Analog high-pass
+%! [n, Wn_p, Wn_s] = buttord (2 * pi * 13584, 2 * pi * 4000, 1, 26, "s");
+%! assert (n, 3);
+%! assert (round (Wn_p), 68140);
+%! assert (round (Wn_s), 68138);
+
+%!test
+%! # Analog low-pass
+%! [n, Wn_p, Wn_s] = buttord (2 * pi * 4000, 2 * pi * 13583, 1, 26, "s");
+%! assert (n, 4);
+%! assert (round (Wn_p), 29757);
+%! assert (round (Wn_s), 40394);
+
+%!test
+%! # Analog low-pass
+%! [n, Wn_p, Wn_s] = buttord (2 * pi * 4000, 2 * pi * 13584, 1, 26, "s");
+%! assert (n, 3);
+%! assert (round (Wn_p), 31481);
+%! assert (round (Wn_s), 31482);
+
+%!test
+%! # Analog notch (narrow band-stop)
+%! [n, Wn_p, Wn_s] = buttord (2 * pi * [9000, 10436], ...
+%!                            2 * pi * [9875, 10126.5823], 1, 26, "s");
+%! assert (n, 4);
+%! assert (round (Wn_p), [60607, 65138]);
+%! assert (round (Wn_s), [61184, 64524]);
+
+%!test
+%! # Analog notch (narrow band-stop)
+%! [n, Wn_p, Wn_s] = buttord (2 * pi * [9582, 11000], ...
+%!                            2 * pi * [9875, 10126.5823], 1, 26, "s");
+%! assert (n, 4);
+%! assert (round (Wn_p), [60606, 65139]);
+%! assert (round (Wn_s), [61184, 64524]);
+
+%!test
+%! # Analog notch (narrow band-stop)
+%! [n, Wn_p, Wn_s] = buttord (2 * pi * [9000, 10437], ...
+%!                            2 * pi * [9875, 10126.5823], 1, 26, "s");
+%! assert (n, 3);
+%! assert (round (Wn_p), [60722, 65015]);
+%! assert (round (Wn_s), [60726, 65011]);
+
+%!test
+%! # Analog notch (narrow band-stop)
+%! [n, Wn_p, Wn_s] = buttord (2 * pi * [9581, 11000], ...
+%!                            2 * pi * [9875, 10126.5823], 1, 26, "s");
+%! assert (n, 3);
+%! assert (round (Wn_p), [60721, 65016]);
+%! assert (round (Wn_s), [60726, 65011]);
+
+%!test
+%! # Digital band-pass
+%! fs = 44100;
+%! [n, Wn_p, Wn_s] = buttord (2 / fs * [9500, 9750], ...
+%!                            2 / fs * [8500, 10051], 1, 26);
+%! Wn_p = Wn_p * fs / 2;
+%! Wn_s = Wn_s * fs / 2;
+%! assert (n, 4);
+%! assert (round (Wn_p), [9477, 9773]);
+%! assert (round (Wn_s), [9425, 9826]);
+
+%!test
+%! # Digital band-pass
+%! fs = 44100;
+%! [n, Wn_p, Wn_s] = buttord (2 / fs * [9500, 9750], ...
+%!                            2 / fs * [9204, 10700], 1, 26);
+%! Wn_p = Wn_p * fs / 2;
+%! Wn_s = Wn_s * fs / 2;
+%! assert (n, 4);
+%! assert (round (Wn_p), [9477, 9773]);
+%! assert (round (Wn_s), [9425, 9826]);
+
+%!test
+%! # Digital band-pass
+%! fs = 44100;
+%! [n, Wn_p, Wn_s] = buttord (2 / fs * [9500, 9750], ...
+%!                            2 / fs * [8500, 10052], 1, 26);
+%! Wn_p = Wn_p * fs / 2;
+%! Wn_s = Wn_s * fs / 2;
+%! assert (n, 3);
+%! assert (round (Wn_p), [9469, 9782]);
+%! assert (round (Wn_s), [9468, 9782]);
+
+%!test
+%! # Digital band-pass
+%! fs = 44100;
+%! [n, Wn_p, Wn_s] = buttord (2 / fs * [9500, 9750], ...
+%!                            2 / fs * [9203, 10700], 1, 26);
+%! Wn_p = Wn_p * fs / 2;
+%! Wn_s = Wn_s * fs / 2;
+%! assert (n, 3);
+%! assert (round (Wn_p), [9469, 9782]);
+%! assert (round (Wn_s), [9468, 9782]);
+
+%!test
+%! # Digital high-pass
+%! fs = 44100;
+%! [n, Wn_p, Wn_s] = buttord (2 / fs * 10987, 2 / fs * 4000, 1, 26);
+%! Wn_p = Wn_p * fs / 2;
+%! Wn_s = Wn_s * fs / 2;
+%! assert (n, 4);
+%! assert (round (Wn_p), 9808);
+%! assert (round (Wn_s), 7780);
+
+%!test
+%! # Digital high-pass
+%! fs = 44100;
+%! [n, Wn_p, Wn_s] = buttord (2 / fs * 10988, 2 / fs * 4000, 1, 26);
+%! Wn_p = Wn_p * fs / 2;
+%! Wn_s = Wn_s * fs / 2;
+%! assert (n, 3);
+%! assert (round (Wn_p), 9421);
+%! assert (round (Wn_s), 9421);
+
+%!test
+%! # Digital low-pass
+%! fs = 44100;
+%! [n, Wn_p, Wn_s] = buttord (2 / fs * 4000, 2 / fs * 10987, 1, 26);
+%! Wn_p = Wn_p * fs / 2;
+%! Wn_s = Wn_s * fs / 2;
+%! assert (n, 4);
+%! assert (round (Wn_p), 4686);
+%! assert (round (Wn_s), 6176);
+
+%!test
+%! # Digital low-pass
+%! fs = 44100;
+%! [n, Wn_p, Wn_s] = buttord (2 / fs * 4000, 2 / fs * 10988, 1, 26);
+%! Wn_p = Wn_p * fs / 2;
+%! Wn_s = Wn_s * fs / 2;
+%! assert (n, 3);
+%! assert (round (Wn_p), 4936);
+%! assert (round (Wn_s), 4936);
+
+%!test
+%! # Digital notch (narrow band-stop)
+%! fs = 44100;
+%! [n, Wn_p, Wn_s] = buttord (2 / fs * [8500, 10833], ...
+%!                            2 / fs * [9875,  10126.5823], 0.5, 40);
+%! Wn_p = Wn_p * fs / 2;
+%! Wn_s = Wn_s * fs / 2;
+%! assert (n, 4);
+%! assert (round (Wn_p), [9369, 10640]);
+%! assert (round (Wn_s), [9605, 10400]);
+
+%!test
+%! # Digital notch (narrow band-stop)
+%! fs = 44100;
+%! [n, Wn_p, Wn_s] = buttord (2 / fs * [9183, 11000], ...
+%!                            2 / fs * [9875,  10126.5823], 0.5, 40);
+%! Wn_p = Wn_p * fs / 2;
+%! Wn_s = Wn_s * fs / 2;
+%! assert (n, 4);
+%! assert (round (Wn_p), [9370, 10640]);
+%! assert (round (Wn_s), [9605, 10400]);
+
+%!test
+%! # Digital notch (narrow band-stop)
+%! fs = 44100;
+%! [n, Wn_p, Wn_s] = buttord (2 / fs * [8500, 10834], ...
+%!                            2 / fs * [9875, 10126.5823], 0.5, 40);
+%! Wn_p = Wn_p * fs / 2;
+%! Wn_s = Wn_s * fs / 2;
+%! assert (n, 3);
+%! assert (round (Wn_p), [9421, 10587]);
+%! assert (round (Wn_s), [9422, 10587]);
+
+%!test
+%! # Digital notch (narrow band-stop)
+%! fs = 44100;
+%! [n, Wn_p, Wn_s] = buttord (2 / fs * [9182, 11000], ...
+%!                            2 / fs * [9875, 10126.5823], 0.5, 40);
+%! Wn_p = Wn_p * fs / 2;
+%! Wn_s = Wn_s * fs / 2;
+%! assert (n, 3);
+%! assert (round (Wn_p), [9421, 10587]);
+%! assert (round (Wn_s), [9422, 10587]);
+
+## Test input validation
 %!error buttord ()
 %!error buttord (.1)
 %!error buttord (.1, .2)
@@ -899,223 +1141,3 @@ endfunction
 %!error buttord ([.1 .1], [.2 .2], 3, 4)
 %!error buttord ([.1 .2], [.5 .6], 3, 4)
 %!error buttord ([.1 .5], [.2 .6], 3, 4)
-
-%!test
-%! # Ana BP
-%! [N, Wn_p, Wn_s] = buttord (2 * pi * [9875, 10126.5823], ...
-%!                            2 * pi * [9000, 10436], 1, 26, "s");
-%! assert (N, 4);
-%! assert (round (Wn_p), [61903, 63775]);
-%! assert (round (Wn_s), [61575, 64114]);
-
-%!test
-%! # Ana BP
-%! [N, Wn_p, Wn_s] = buttord (2 * pi * [9875, 10126.5823], ...
-%!                            2 * pi * [9582, 11000], 1, 26, "s");
-%! assert (N, 4);
-%! assert (round (Wn_p), [61903, 63775]);
-%! assert (round (Wn_s), [61575, 64115]);
-
-%!test
-%! # Ana BP
-%! [N, Wn_p, Wn_s] = buttord (2 * pi * [9875, 10126.5823], ...
-%!                            2 * pi * [9000, 10437], 1, 26, "s");
-%! assert (N, 3);
-%! assert (round (Wn_p), [61850, 63830]);
-%! assert (round (Wn_s), [61848, 63831]);
-
-%!test
-%! # Ana BP
-%! [N, Wn_p, Wn_s] = buttord (2 * pi * [9875, 10126.5823], ...
-%!                            2 * pi * [9581, 11000], 1, 26, "s");
-%! assert (N, 3);
-%! assert (round (Wn_p), [61850, 63830]);
-%! assert (round (Wn_s), [61847, 63832]);
-
-%!test
-%! # Ana HP
-%! [N, Wn_p, Wn_s] = buttord (2 * pi * 13583, 2 * pi * 4000, 1, 26, "s");
-%! assert (N, 4);
-%! assert (round (Wn_p), 72081);
-%! assert (round (Wn_s), 53101);
-
-%!test
-%! # Ana HP
-%! [N, Wn_p, Wn_s] = buttord (2 * pi * 13584, 2 * pi * 4000, 1, 26, "s");
-%! assert (N, 3);
-%! assert (round (Wn_p), 68140);
-%! assert (round (Wn_s), 68138);
-
-%!test
-%! # Ana LP
-%! [N, Wn_p, Wn_s] = buttord (2 * pi * 4000, 2 * pi * 13583, 1, 26, "s");
-%! assert (N, 4);
-%! assert (round (Wn_p), 29757);
-%! assert (round (Wn_s), 40394);
-
-%!test
-%! # Ana LP
-%! [N, Wn_p, Wn_s] = buttord (2 * pi * 4000, 2 * pi * 13584, 1, 26, "s");
-%! assert (N, 3);
-%! assert (round (Wn_p), 31481);
-%! assert (round (Wn_s), 31482);
-
-%!test
-%! # Ana Notch
-%! [N, Wn_p, Wn_s] = buttord (2 * pi * [9000, 10436], ...
-%!                            2 * pi * [9875, 10126.5823], 1, 26, "s");
-%! assert (N, 4);
-%! assert (round (Wn_p), [60607, 65138]);
-%! assert (round (Wn_s), [61184, 64524]);
-
-%!test
-%! # Ana Notch
-%! [N, Wn_p, Wn_s] = buttord (2 * pi * [9582, 11000], ...
-%!                            2 * pi * [9875, 10126.5823], 1, 26, "s");
-%! assert (N, 4);
-%! assert (round (Wn_p), [60606, 65139]);
-%! assert (round (Wn_s), [61184, 64524]);
-
-%!test
-%! # Ana Notch
-%! [N, Wn_p, Wn_s] = buttord (2 * pi * [9000, 10437], ...
-%!                            2 * pi * [9875, 10126.5823], 1, 26, "s");
-%! assert (N, 3);
-%! assert (round (Wn_p), [60722, 65015]);
-%! assert (round (Wn_s), [60726, 65011]);
-
-%!test
-%! # Ana Notch
-%! [N, Wn_p, Wn_s] = buttord (2 * pi * [9581, 11000], ...
-%!                            2 * pi * [9875, 10126.5823], 1, 26, "s");
-%! assert (N, 3);
-%! assert (round (Wn_p), [60721, 65016]);
-%! assert (round (Wn_s), [60726, 65011]);
-
-%!test
-%! # Dig BP
-%! fs = 44100;
-%! [N, Wn_p, Wn_s] = buttord (2 / fs * [9500, 9750], ...
-%!                            2 / fs * [8500, 10051], 1, 26);
-%! Wn_p = Wn_p * fs / 2;
-%! Wn_s = Wn_s * fs / 2;
-%! assert (N, 4);
-%! assert (round (Wn_p), [9477, 9773]);
-%! assert (round (Wn_s), [9425, 9826]);
-
-%!test
-%! # Dig BP
-%! fs = 44100;
-%! [N, Wn_p, Wn_s] = buttord (2 / fs * [9500, 9750], ...
-%!                            2 / fs * [9204, 10700], 1, 26);
-%! Wn_p = Wn_p * fs / 2;
-%! Wn_s = Wn_s * fs / 2;
-%! assert (N, 4);
-%! assert (round (Wn_p), [9477, 9773]);
-%! assert (round (Wn_s), [9425, 9826]);
-
-%!test
-%! # Dig BP
-%! fs = 44100;
-%! [N, Wn_p, Wn_s] = buttord (2 / fs * [9500, 9750], ...
-%!                            2 / fs * [8500, 10052], 1, 26);
-%! Wn_p = Wn_p * fs / 2;
-%! Wn_s = Wn_s * fs / 2;
-%! assert (N, 3);
-%! assert (round (Wn_p), [9469, 9782]);
-%! assert (round (Wn_s), [9468, 9782]);
-
-%!test
-%! # Dig BP
-%! fs = 44100;
-%! [N, Wn_p, Wn_s] = buttord (2 / fs * [9500, 9750], ...
-%!                            2 / fs * [9203, 10700], 1, 26);
-%! Wn_p = Wn_p * fs / 2;
-%! Wn_s = Wn_s * fs / 2;
-%! assert (N, 3);
-%! assert (round (Wn_p), [9469, 9782]);
-%! assert (round (Wn_s), [9468, 9782]);
-
-%!test
-%! # Dig HP
-%! fs = 44100;
-%! [N, Wn_p, Wn_s] = buttord (2 / fs * 10987, 2 / fs * 4000, 1, 26);
-%! Wn_p = Wn_p * fs / 2;
-%! Wn_s = Wn_s * fs / 2;
-%! assert (N, 4);
-%! assert (round (Wn_p), 9808);
-%! assert (round (Wn_s), 7780);
-
-%!test
-%! # Dig HP
-%! fs = 44100;
-%! [N, Wn_p, Wn_s] = buttord (2 / fs * 10988, 2 / fs * 4000, 1, 26);
-%! Wn_p = Wn_p * fs / 2;
-%! Wn_s = Wn_s * fs / 2;
-%! assert (N, 3);
-%! assert (round (Wn_p), 9421);
-%! assert (round (Wn_s), 9421);
-
-%!test
-%! # Dig LP
-%! fs = 44100;
-%! [N, Wn_p, Wn_s] = buttord (2 / fs * 4000, 2 / fs * 10987, 1, 26);
-%! Wn_p = Wn_p * fs / 2;
-%! Wn_s = Wn_s * fs / 2;
-%! assert (N, 4);
-%! assert (round (Wn_p), 4686);
-%! assert (round (Wn_s), 6176);
-
-%!test
-%! # Dig LP
-%! fs = 44100;
-%! [N, Wn_p, Wn_s] = buttord (2 / fs * 4000, 2 / fs * 10988, 1, 26);
-%! Wn_p = Wn_p * fs / 2;
-%! Wn_s = Wn_s * fs / 2;
-%! assert (N, 3);
-%! assert (round (Wn_p), 4936);
-%! assert (round (Wn_s), 4936);
-
-%!test
-%! # Dig Notch
-%! fs = 44100;
-%! [N, Wn_p, Wn_s] = buttord (2 / fs * [8500, 10833], ...
-%!                            2 / fs * [9875,  10126.5823], 0.5, 40);
-%! Wn_p = Wn_p * fs / 2;
-%! Wn_s = Wn_s * fs / 2;
-%! assert (N, 4);
-%! assert (round (Wn_p), [9369, 10640]);
-%! assert (round (Wn_s), [9605, 10400]);
-
-%!test
-%! # Dig Notch
-%! fs = 44100;
-%! [N, Wn_p, Wn_s] = buttord (2 / fs * [9183, 11000], ...
-%!                            2 / fs * [9875,  10126.5823], 0.5, 40);
-%! Wn_p = Wn_p * fs / 2;
-%! Wn_s = Wn_s * fs / 2;
-%! assert (N, 4);
-%! assert (round (Wn_p), [9370, 10640]);
-%! assert (round (Wn_s), [9605, 10400]);
-
-%!test
-%! # Dig Notch
-%! fs = 44100;
-%! [N, Wn_p, Wn_s] = buttord (2 / fs * [8500, 10834], ...
-%!                            2 / fs * [9875, 10126.5823], 0.5, 40);
-%! Wn_p = Wn_p * fs / 2;
-%! Wn_s = Wn_s * fs / 2;
-%! assert (N, 3);
-%! assert (round (Wn_p), [9421, 10587]);
-%! assert (round (Wn_s), [9422, 10587]);
-
-%!test
-%! # Dig Notch
-%! fs = 44100;
-%! [N, Wn_p, Wn_s] = buttord (2 / fs * [9182, 11000], ...
-%!                            2 / fs * [9875, 10126.5823], 0.5, 40);
-%! Wn_p = Wn_p * fs / 2;
-%! Wn_s = Wn_s * fs / 2;
-%! assert (N, 3);
-%! assert (round (Wn_p), [9421, 10587]);
-%! assert (round (Wn_s), [9422, 10587]);
