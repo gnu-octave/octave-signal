@@ -27,9 +27,8 @@ Created: 2015-12-13
  One dimensional median filter, for real double variables.
  */
 
-//#ifdef HAVE_CONFIG_H
-//#  include "config.h"
-//#endif
+#include <algorithm>
+#include <memory>
 
 #include "oct.h"
 #include "defun-dld.h"
@@ -44,7 +43,7 @@ enum pad_type { zero_pad, truncate };
 // Keeps NaNs at the "top" (after Inf)
 class sorted_window
 {
-  double *buf;
+  std::unique_ptr<double[]> buf;
   octave_idx_type  numel;
   octave_idx_type  numNaN;
   bool nan_if_any_is;
@@ -70,16 +69,8 @@ public:
   // If  skip_nan  then the median will consider only valid numbers within
   // the window.  
   sorted_window (octave_idx_type width, bool skip_nan = true)
-    {
-      numel = 0;
-      nan_if_any_is = ! skip_nan;
-      buf = new double [width];
-    }
-
-  ~sorted_window ()
-    {
-      delete [] buf;
-    }
+    : buf (new double [width]), numel (0), numNaN (0),
+      nan_if_any_is (! skip_nan) { }
 
   // Initialize to contain  seed,  and  zeros  additional zeros.
   void init (const double *seed, octave_idx_type num, octave_idx_type stride,
@@ -88,7 +79,7 @@ public:
       numel = zeros;
       numNaN = 0;
 
-      bzero (buf, zeros * sizeof (double));
+      std::fill_n (&buf[0], zeros, 0.0);
 
       // Insert from seed.  Could sort if it is large
       num *= stride;
@@ -106,7 +97,7 @@ public:
           n_pos = find (next);
           p_pos = find (prev, n_pos);
           if (n_pos != p_pos)
-            std::copy_backward (buf + n_pos, buf + p_pos, buf + p_pos + 1);
+            std::copy_backward (&buf[n_pos], &buf[p_pos], &buf[p_pos + 1]);
         }
       else if (next > prev)
         {
@@ -114,7 +105,7 @@ public:
           n_pos = find (next, p_pos);
           if (n_pos != p_pos)
             {
-              std::copy (buf + p_pos + 1, buf + n_pos, buf + p_pos);
+              std::copy (&buf[p_pos + 1], &buf[n_pos], &buf[p_pos]);
               n_pos--;            // position shifts due to deletion of p_pos
             }
         }
@@ -123,13 +114,13 @@ public:
           if (next == next)
             {
               n_pos = find (next);
-              std::copy_backward (buf + n_pos, buf + numel - 1, buf + numel);
+              std::copy_backward (&buf[n_pos], &buf[numel - 1], &buf[numel]);
               numNaN--;
             }
           else if (prev == prev)
             {
               p_pos = find (prev);
-              std::copy (buf + p_pos + 1, buf + numel, buf + p_pos);
+              std::copy (&buf[p_pos + 1], &buf[numel], &buf[p_pos]);
               n_pos = numel - 1;
               numNaN++;
             }
@@ -151,7 +142,7 @@ public:
         {
           n_pos = find (next);
           if (n_pos < numel)
-            std::copy_backward (buf + n_pos, buf + numel, buf + numel + 1);
+            std::copy_backward (&buf[n_pos], &buf[numel], &buf[numel + 1]);
         }
       else              // NaN stored at end, so nothing to move.
         {
@@ -170,7 +161,7 @@ public:
       if (prev == prev)
         {
           p_pos = find (prev);
-          std::copy (buf + p_pos + 1, buf + numel, buf + p_pos);
+          std::copy (&buf[p_pos + 1], &buf[numel], &buf[p_pos]);
         }
       else                  // NaN stored at end, so nothing to move.
         numNaN--;
