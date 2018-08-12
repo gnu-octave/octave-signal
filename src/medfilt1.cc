@@ -35,8 +35,17 @@ Created: 2015-12-13
 #include "error.h"
 #include "ov.h"
 
-enum nan_handling { include_nan, omit_nan };
-enum pad_type { PAD_OPT_ZERO, PAD_OPT_TRUNCATE };
+enum nan_opt_type
+{
+  NAN_OPT_INCLUDE,
+  NAN_OPT_OMIT
+};
+
+enum pad_opt_type
+{
+  PAD_OPT_ZERO,
+  PAD_OPT_TRUNCATE
+};
 
 // Keep a sorted sliding window of values.
 // There is no error checking, to keep things fast.
@@ -211,13 +220,13 @@ medfilt1_vector (double *x, double *y, octave_idx_type n,
                     octave_idx_type leading, octave_idx_type trailing,
                     octave_idx_type start_middle, octave_idx_type end_middle,
                     octave_idx_type last, octave_idx_type initial_fill,
-                    pad_type padding, sorted_window& sw)
+                    pad_opt_type pad_opt, sorted_window& sw)
 {
   sw.init (x, initial_fill, stride,
-           (padding == PAD_OPT_ZERO) ? (n - initial_fill) : 0);
+           (pad_opt == PAD_OPT_ZERO) ? (n - initial_fill) : 0);
 
   // Partial window at the start
-  if (padding == PAD_OPT_ZERO)
+  if (pad_opt == PAD_OPT_ZERO)
     for (octave_idx_type i = 0; i < start_middle; i += stride)
       {
         sw.replace (x[i + leading], 0);
@@ -246,7 +255,7 @@ medfilt1_vector (double *x, double *y, octave_idx_type n,
     }
 
   // Partial window at the end
-  if (padding == PAD_OPT_ZERO)
+  if (pad_opt == PAD_OPT_ZERO)
     for (octave_idx_type i = end_middle; i < last; i += stride)
       {
         sw.replace (0, x[i - trailing]);
@@ -295,8 +304,8 @@ to bring them up to size @var{n}.\n\
     print_usage ();
 
   octave_idx_type n = 3, dim = 0;
-  nan_handling nan_flag = include_nan;
-  pad_type     padding  = PAD_OPT_ZERO;
+  nan_opt_type nan_opt = NAN_OPT_INCLUDE;
+  pad_opt_type pad_opt = PAD_OPT_ZERO;
 
   int nargin = args.length ();
 
@@ -312,9 +321,9 @@ to bring them up to size @var{n}.\n\
 
       std::string s = args(nargin - 1).string_value ();
       if (! strcasecmp (s.c_str (), "omitnan"))
-        nan_flag = omit_nan;
+        nan_opt = NAN_OPT_OMIT;
       else if (! strcasecmp (s.c_str (), "truncate"))
-        padding = PAD_OPT_TRUNCATE;
+        pad_opt = PAD_OPT_TRUNCATE;
       else if (strcasecmp (s.c_str (), "includenan")
                && strcasecmp (s.c_str (), "zeropad"))  // the defaults
         error ("medfilt1: Invalid NAN_FLAG or PADDING value '%s'", s.c_str ());
@@ -386,7 +395,7 @@ to bring them up to size @var{n}.\n\
     double *p_in = x.fortran_vec ();
     double *p_out = retval.fortran_vec ();
 
-    sorted_window sw (n, nan_flag);
+    sorted_window sw (n, nan_opt == NAN_OPT_OMIT);
 
     // how far ahead should data be put in window
     octave_idx_type leading = ((n - 1) / 2) * x_stride;
@@ -434,7 +443,7 @@ to bring them up to size @var{n}.\n\
         medfilt1_vector (p_in + x_offset, p_out + x_offset, n, x_len,
                             x_offset, x_stride, leading, trailing,
                             start_middle, end_middle, last, initial_fill,
-                            padding, sw);
+                            pad_opt, sw);
         if (x_stride == 1)
           x_offset += x_len;
         else
