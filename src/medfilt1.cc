@@ -36,7 +36,7 @@ Created: 2015-12-13
 #include "ov.h"
 
 enum nan_handling { include_nan, omit_nan };
-enum pad_type { zero_pad, truncate };
+enum pad_type { PAD_OPT_ZERO, PAD_OPT_TRUNCATE };
 
 // Keep a sorted sliding window of values.
 // There is no error checking, to keep things fast.
@@ -214,10 +214,10 @@ medfilt1_vector (double *x, double *y, octave_idx_type n,
                     pad_type padding, sorted_window& sw)
 {
   sw.init (x, initial_fill, stride,
-           (padding == zero_pad) ? (n - initial_fill) : 0);
+           (padding == PAD_OPT_ZERO) ? (n - initial_fill) : 0);
 
   // Partial window at the start
-  if (padding == zero_pad)
+  if (padding == PAD_OPT_ZERO)
     for (octave_idx_type i = 0; i < start_middle; i += stride)
       {
         sw.replace (x[i + leading], 0);
@@ -246,7 +246,7 @@ medfilt1_vector (double *x, double *y, octave_idx_type n,
     }
 
   // Partial window at the end
-  if (padding == zero_pad)
+  if (padding == PAD_OPT_ZERO)
     for (octave_idx_type i = end_middle; i < last; i += stride)
       {
         sw.replace (0, x[i - trailing]);
@@ -296,7 +296,7 @@ to bring them up to size @var{n}.\n\
 
   octave_idx_type n = 3, dim = 0;
   nan_handling nan_flag = include_nan;
-  pad_type     padding  = zero_pad;
+  pad_type     padding  = PAD_OPT_ZERO;
 
   int nargin = args.length ();
 
@@ -314,7 +314,7 @@ to bring them up to size @var{n}.\n\
       if (! strcasecmp (s.c_str (), "omitnan"))
         nan_flag = omit_nan;
       else if (! strcasecmp (s.c_str (), "truncate"))
-        padding = truncate;
+        padding = PAD_OPT_TRUNCATE;
       else if (strcasecmp (s.c_str (), "includenan")
                && strcasecmp (s.c_str (), "zeropad"))  // the defaults
         error ("medfilt1: Invalid NAN_FLAG or PADDING value '%s'", s.c_str ());
