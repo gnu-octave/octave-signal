@@ -1,3 +1,12 @@
+Summary of important user-visible changes for signal 1.4.1:
+----------------------------------------------------------
+
+ ** Build failures introduced in the previous release on BSD and Windows
+    systems have been fixed.
+
+ ** The compiled functions have been made compatible with recent changes in
+    the development version of Octave.
+
 Summary of important user-visible changes for signal 1.4.0:
 ----------------------------------------------------------
 
