@@ -21,10 +21,11 @@ along with this program; see the file COPYING.  If not, see
 #include <octave/oct.h>
 #include <octave/defun-dld.h>
 #include <octave/error.h>
-#include <octave/gripes.h>
 #include <octave/pager.h>
 #include <octave/quit.h>
 #include <octave/variables.h>
+
+#include "octave-compat.h"
 
 DEFUN_DLD (sosfilt, args, ,
   "-*- texinfo -*-\n\
@@ -56,7 +57,7 @@ section 1, etc.  The b0 entry must be nonzero for each section.\n\
 
   if (error_state)
     {
-      gripe_wrong_type_arg ("sosfilt", args(0));
+      err_wrong_type_arg ("sosfilt", args(0));
       return retval;
     }
 
@@ -70,7 +71,7 @@ section 1, etc.  The b0 entry must be nonzero for each section.\n\
 
   if (error_state)
     {
-      gripe_wrong_type_arg ("sosfilt", args(1));
+      err_wrong_type_arg ("sosfilt", args(1));
       return retval;
     }
 

@@ -35,6 +35,8 @@ Created: 2015-12-13
 #include "error.h"
 #include "ov.h"
 
+#include "octave-compat.h"
+
 enum nan_opt_type
 {
   NAN_OPT_INCLUDE,
@@ -333,9 +335,9 @@ to bring them up to size @var{n}.\n\
 
   if (nargin >= 2)
     {
-      if (args(1).is_numeric_type ())
+      if (octave::signal::isnumeric (args(1)))
         {
-          if (args(1).numel () != 1 || args(1).is_complex_type ())
+          if (args(1).numel () != 1 || octave::signal::iscomplex (args(1)))
             error ("medfilt1: N must be a real scalar");
           else
             n = args(1).idx_type_value ();
@@ -345,11 +347,11 @@ to bring them up to size @var{n}.\n\
                args(1).type_name ().c_str ());
     if (nargin >= 4)
       {
-        if (args(3).is_numeric_type ())
+        if (octave::signal::isnumeric (args(3)))
           {
             if (args(3).numel () != 1)
               error ("medfilt1: DIM must be a scalar");
-            else if (args(3).is_complex_type ())
+            else if (octave::signal::iscomplex (args(3)))
               error ("medfilt1: DIM must be real");
 
             dim = round (args(3).double_value ());

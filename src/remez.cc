@@ -36,6 +36,7 @@ along with this program; see the file COPYING.  If not, see
   T *buf = &(buf ## _vector[0])
 #endif
 
+#include "octave-compat.h"
 
 #define CONST const
 #define BANDPASS       1
@@ -789,7 +790,7 @@ Frequency is in the range (0, 1), with 1 being the Nyquist frequency.\n\
     return retval;
   }
 
-  int numtaps = NINT (args(0).double_value()) + 1; // #coeff = filter order+1
+  int numtaps = octave::math::nint (args(0).double_value ()) + 1;
   if (numtaps < 4) {
     error("remez: number of taps must be an integer greater than 3");
     return retval;
@@ -846,7 +847,7 @@ Frequency is in the range (0, 1), with 1 being the Nyquist frequency.\n\
     if (args(4).is_string() && !args(3).is_string())
       stype = args(4).string_value();
     else if (args(4).is_real_scalar())
-      density = NINT (args(4).double_value());
+      density = octave::math::nint (args(4).double_value ());
     else {
       error("remez: incorrect argument list");
       return retval;
@@ -855,7 +856,7 @@ Frequency is in the range (0, 1), with 1 being the Nyquist frequency.\n\
   if (nargin > 5) {
     if (args(5).is_real_scalar()
         && !args(4).is_real_scalar())
-      density = NINT (args(5).double_value());
+      density = octave::math::nint (args(5).double_value ());
     else {
       error("remez: incorrect argument list");
       return retval;

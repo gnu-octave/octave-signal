@@ -39,13 +39,13 @@ all: $(OCT_FILES)
 %.o: %.cc
 	$(MKOCTFILE) $(CXXFLAGS_PKG) -c $< -o $@
 
-%.oct: %.cc
+%.oct: %.cc octave-compat.h
 	$(MKOCTFILE) $(CXXFLAGS_PKG) $< -o $@
 
 cl2bp.oct: $(CL2BP_OBJECTS)
 	$(MKOCTFILE) $(CXXFLAGS_PKG) $^ -o $@
 
-$(CL2BP_OBJECTS): cl2bp_lib.h
+$(CL2BP_OBJECTS): cl2bp_lib.h octave-compat.h
 
 PKG_ADD PKG_DEL: $(OCT_SOURCES)
 	$(SED) -n -e 's/.*$@: \(.*\)/\1/p' $^ > $@-t

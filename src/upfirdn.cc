@@ -21,10 +21,11 @@ along with this program; see the file COPYING.  If not, see
 #include <octave/oct.h>
 #include <octave/defun-dld.h>
 #include <octave/error.h>
-#include <octave/gripes.h>
 #include <octave/pager.h>
 #include <octave/quit.h>
 #include <octave/variables.h>
+
+#include "octave-compat.h"
 
 template<class MT>
 MT upfirdn (MT &x, ColumnVector &h, octave_idx_type p, octave_idx_type q)
@@ -109,7 +110,7 @@ Upsample, FIR filtering, and downsample.\n\
 
   if (error_state)
     {
-      gripe_wrong_type_arg ("upfirdn", args(1));
+      err_wrong_type_arg ("upfirdn", args(1));
       return retval;
     }
 
@@ -117,7 +118,7 @@ Upsample, FIR filtering, and downsample.\n\
 
   if (error_state)
     {
-      gripe_wrong_type_arg ("upfirdn", args(2));
+      err_wrong_type_arg ("upfirdn", args(2));
       return retval;
     }
 
@@ -125,29 +126,29 @@ Upsample, FIR filtering, and downsample.\n\
 
   if (error_state)
     {
-      gripe_wrong_type_arg ("upfirdn", args(3));
+      err_wrong_type_arg ("upfirdn", args(3));
       return retval;
     }
 
   // Do the dispatching
-  if (args (0).is_real_type ())
+  if (octave::signal::isreal (args (0)))
     {
       Matrix x = args (0).matrix_value ();
       if (error_state)
         {
-          gripe_wrong_type_arg ("upfirdn", args(0));
+          err_wrong_type_arg ("upfirdn", args(0));
           return retval;
         }
 
       Matrix y = upfirdn (x, h, p, q);
       retval (0) = y;
     }
-  else if (args (0).is_complex_type ())
+  else if (octave::signal::iscomplex (args (0)))
     {
       ComplexMatrix x = args (0).complex_matrix_value ();
       if (error_state)
         {
-          gripe_wrong_type_arg ("upfirdn", args(0));
+          err_wrong_type_arg ("upfirdn", args(0));
           return retval;
         }
 
@@ -156,7 +157,7 @@ Upsample, FIR filtering, and downsample.\n\
     }
   else
     {
-      gripe_wrong_type_arg ("upfirdn", args(0));
+      err_wrong_type_arg ("upfirdn", args(0));
       return retval;
     }
 
