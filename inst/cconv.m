@@ -113,9 +113,9 @@ endfunction
 %!shared x
 %! x = [1, 2, 3, 4, 5];
 
-%!assert (cconv (x, 1), [1, 2, 3, 4, 5])
-%!assert (cconv (x', 1), [1; 2; 3; 4; 5])
-%!assert (cconv (x, [1 1]), [1, 3, 5, 7, 9, 5])
+%!assert (cconv (x, 1), [1, 2, 3, 4, 5], 2*eps)
+%!assert (cconv (x', 1), [1; 2; 3; 4; 5], 2*eps)
+%!assert (real (cconv (x, [1 1])), [1, 3, 5, 7, 9, 5], 2*eps)
 %!assert (cconv (x, [1 1], 3), [8, 12, 10])
 
 %!assert (cconv ([2 1 2 1], [1 2 3 4]), [2 5 10 16 12 11 4], 1e-14)
