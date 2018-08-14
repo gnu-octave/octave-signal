@@ -60,6 +60,11 @@ function y = filtfilt(b, a, x)
   if la < n, a(n) = 0; endif
   if lb < n, b(n) = 0; endif
 
+  if (rows (x) <= lrefl)
+    error ("filtfilt: X must be a vector or matrix with length greater than %d",
+           lrefl);
+  endif
+
   ## Compute a the initial state taking inspiration from
   ## Likhterov & Kopeika, 2003. "Hardware-efficient technique for
   ##     minimizing startup transients in Direct Form II digital filters"
@@ -90,6 +95,9 @@ endfunction
 %!error filtfilt ();
 
 %!error filtfilt (1, 2, 3, 4);
+
+%!error filtfilt ([0.28, 0.71, 0.28], 1, rand ())
+%!error filtfilt ([0.28, 0.71, 0.28], 1, rand (6, 1))
 
 %!test
 %! randn('state',0);
