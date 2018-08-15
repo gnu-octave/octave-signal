@@ -19,8 +19,10 @@ PACKAGE := $(shell $(SED) -n -e 's/^Name: *\(\w\+\)/\1/p' DESCRIPTION)
 VERSION := $(shell $(SED) -n -e 's/^Version: *\(\w\+\)/\1/p' DESCRIPTION)
 DEPENDS := $(shell $(SED) -n -e 's/^Depends[^,]*, *\(.*\)/\1/p' DESCRIPTION | $(SED) 's/ *([^()]*)//g; s/ *, */ /g')
 
-HG_ID        := $(shell hg identify --id | sed -e 's/+//' )
-HG_TIMESTAMP := $(firstword $(shell hg log --rev $(HG_ID) --template '{date|hgdate}'))
+HG           := hg
+HG_CMD        = $(HG) --config alias.$(1)=$(1) --config defaults.$(1)= $(1)
+HG_ID        := $(shell $(call HG_CMD,identify) --id | sed -e 's/+//' )
+HG_TIMESTAMP := $(firstword $(shell $(call HG_CMD,log) --rev $(HG_ID) --template '{date|hgdate}'))
 
 TAR_REPRODUCIBLE_OPTIONS := --sort=name --mtime="@$(HG_TIMESTAMP)" --owner=0 --group=0 --numeric-owner
 TAR_OPTIONS  := --format=ustar $(TAR_REPRODUCIBLE_OPTIONS)
@@ -51,7 +53,7 @@ help:
 $(RELEASE_DIR): .hg/dirstate
 	@echo "Creating package version $(VERSION) release ..."
 	-rm -rf $@
-	hg archive --exclude ".hg*" --exclude Makefile --type files --rev $(HG_ID) $@
+	$(call HG_CMD,archive) --exclude ".hg*" --exclude Makefile --type files --rev $(HG_ID) $@
 	chmod -R a+rX,u+w,go-w $@
 
 $(RELEASE_TARBALL): $(RELEASE_DIR)
