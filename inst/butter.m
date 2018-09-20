@@ -17,37 +17,69 @@
 ## <https://www.gnu.org/licenses/>.
 
 ## -*- texinfo -*-
-## @deftypefn  {Function File} {[@var{b}, @var{a}] =} butter (@var{n}, @var{w})
-## @deftypefnx {Function File} {[@var{b}, @var{a}] =} butter (@var{n}, @var{w}, "high")
-## @deftypefnx {Function File} {[@var{b}, @var{a}] =} butter (@var{n}, [@var{wl}, @var{wh}])
-## @deftypefnx {Function File} {[@var{b}, @var{a}] =} butter (@var{n}, [@var{wl}, @var{wh}], "stop")
+## @deftypefn  {Function File} {[@var{b}, @var{a}] =} butter (@var{n}, @var{wc})
+## @deftypefnx {Function File} {[@var{b}, @var{a}] =} butter (@var{n}, @var{wc}, @var{filter_type})
 ## @deftypefnx {Function File} {[@var{z}, @var{p}, @var{g}] =} butter (@dots{})
 ## @deftypefnx {Function File} {[@var{a}, @var{b}, @var{c}, @var{d}] =} butter (@dots{})
 ## @deftypefnx {Function File} {[@dots{}] =} butter (@dots{}, "s")
 ## Generate a Butterworth filter.
 ## Default is a discrete space (Z) filter.
 ##
-## [b,a] = butter(n, Wc)
-##    low pass filter with cutoff pi*Wc radians
+## The cutoff frequency, @var{wc} should be specified in radians for
+## analog filters.  For digital filters, it must be a value between zero
+## and one.  For bandpass filters, @var{wc} is a two-element vector
+## with @code{w(1) < w(2)}.
 ##
-## [b,a] = butter(n, Wc, 'high')
-##    high pass filter with cutoff pi*Wc radians
+## The filter type must be one of @qcode{"low"}, @qcode{"high"},
+## @qcode{"bandpass"}, or @qcode{"stop"}.  The default is @qcode{"low"}
+## if @var{wc} is a scalar and @qcode{"bandpass"} if @var{wc} is a
+## two-element vector.
 ##
-## [b,a] = butter(n, [Wl, Wh])
-##    band pass filter with edges pi*Wl and pi*Wh radians
+## If the final input argument is @qcode{"s"} design an analog Laplace
+## space filter.
 ##
-## [b,a] = butter(n, [Wl, Wh], 'stop')
-##    band reject filter with edges pi*Wl and pi*Wh radians
+## Low pass filter with cutoff @code{pi*Wc} radians:
 ##
-## [z,p,g] = butter(...)
-##    return filter as zero-pole-gain rather than coefficients of the
-##    numerator and denominator polynomials.
+## @example
+## [b, a] = butter (n, Wc)
+## @end example
 ##
-## [...] = butter(...,'s')
-##     return a Laplace space filter, W can be larger than 1.
+## High pass filter with cutoff @code{pi*Wc} radians:
 ##
-## [a,b,c,d] = butter(...)
-##  return  state-space matrices
+## @example
+## [b, a] = butter (n, Wc, "high")
+## @end example
+##
+## Band pass filter with edges @code{pi*Wl} and @code{pi*Wh} radians:
+##
+## @example
+## [b, a] = butter (n, [Wl, Wh])
+## @end example
+##
+## Band reject filter with edges @code{pi*Wl} and @code{pi*Wh} radians:
+##
+## @example
+## [b, a] = butter (n, [Wl, Wh], "stop")
+## @end example
+##
+## Return filter as zero-pole-gain rather than coefficients of the
+## numerator and denominator polynomials:
+##
+## @example
+## [z, p, g] = butter (@dots{})
+## @end example
+##
+## Return a Laplace space filter, @var{Wc} can be larger than 1:
+##
+## @example
+## [@dots{}] = butter (@dots, "s")
+## @end example
+##
+## Return state-space matrices:
+##
+## @example
+## [a, b, c, d] = butter (@dots{})
+## @end example
 ##
 ## References:
 ##
@@ -55,50 +87,90 @@
 ## Macmillan Publishing Company.
 ## @end deftypefn
 
-function [a, b, c, d] = butter (n, w, varargin)
+function [a, b, c, d] = butter (n, wc, varargin)
 
   if (nargin > 4 || nargin < 2 || nargout > 4)
     print_usage ();
   endif
 
-  ## interpret the input parameters
+  type = "lowpass";
+  stop = false;
+  digital = true;
+
   if (! (isscalar (n) && (n == fix (n)) && (n > 0)))
     error ("butter: filter order N must be a positive integer");
   endif
 
-  stop = false;
-  digital = true;
-  for i = 1:numel (varargin)
-    switch (varargin{i})
-      case "s"
-        digital = false;
-      case "z"
-        digital = true;
-      case {"high", "stop"}
-        stop = true;
-      case {"low", "pass"}
-        stop = false;
-      otherwise
-        error ("butter: expected [high|stop] or [s|z]");
-    endswitch
-  endfor
-
-  if (! ((numel (w) <= 2) && (rows (w) == 1 || columns (w) == 1)))
-    error ("butter: frequency must be given as WC or [WL, WH]");
-  elseif ((numel (w) == 2) && (w(2) <= w(1)))
-    error ("butter: W(1) must be less than W(2)");
+  if (! isvector (wc) || numel (wc) > 2)
+    error ("butter: cutoff frequency must be given as WC or [WL, WH]");
   endif
 
-  if (digital && ! all ((w >= 0) & (w <= 1)))
-    error ("butter: all elements of W must be in the range [0,1]");
-  elseif (! digital && ! all (w >= 0))
-    error ("butter: all elements of W must be in the range [0,inf]");
+  if (numel (wc) == 2)
+    if (wc(1) > wc(2))
+      error ("butter: W(1) must be less than W(2)");
+    endif
+    type = "bandpass";
+    stop = false;
+  endif
+
+  ## Is final argument "s" (or "z")?
+  if (numel (varargin) > 0)
+    switch (varargin{end})
+      case "s"
+        digital = false;
+        varargin(end) = [];
+      case "z"
+        ## This is the default setting.
+        ## Accept "z" for backward compatibility with older versions
+        ## of Octave's signal processing package.
+        varargin(end) = [];
+    endswitch
+  endif
+
+  ## Is filter type specified?
+  if (numel (varargin) > 0)
+    switch (varargin{end})
+      case {"high", "stop"}
+        type = varargin{end};
+        stop = true;
+        varargin(end) = [];
+      case {"low", "bandpass"}
+        type = varargin{end};
+        stop = false;
+        varargin(end) = [];
+      case "pass"
+        ## Accept "pass" for backward compatibility with older versions
+        ## of Octave's signal processing package.
+        type = "bandpass";
+        stop = false;
+        varargin(end) = [];
+      otherwise
+        error ("butter: expected 'high', 'stop', 'low', 'bandpass', or 's'");
+    endswitch
+  endif
+
+  if (numel (varargin) > 0)
+    ## Invalid arguments.  For example: butter (n, wc, "s", "high").
+    print_usage ();
+  endif
+
+  switch (type)
+    case {"stop", "bandpass"}
+      if (numel (wc) != 2)
+        error ("butter: Wc must be two elements for stop and bandpass filters");
+      endif
+  endswitch
+
+  if (digital && ! all ((wc >= 0) & (wc <= 1)))
+    error ("butter: all elements of Wc must be in the range [0,1]");
+  elseif (! digital && ! all (wc >= 0))
+    error ("butter: all elements of Wc must be in the range [0,inf]");
   endif
 
   ## Prewarp to the band edges to s plane
   if (digital)
     T = 2;       # sampling frequency of 2 Hz
-    w = 2 / T * tan (pi * w / T);
+    wc = 2 / T * tan (pi * wc / T);
   endif
 
   ## Generate splane poles for the prototype Butterworth filter
@@ -112,7 +184,7 @@ function [a, b, c, d] = butter (n, w, varargin)
   gain = C^n;
 
   ## splane frequency transform
-  [zero, pole, gain] = sftrans (zero, pole, gain, w, stop);
+  [zero, pole, gain] = sftrans (zero, pole, gain, wc, stop);
 
   ## Use bilinear transform to convert poles to the z plane
   if (digital)
@@ -179,6 +251,11 @@ endfunction
 %!error [a, b] = butter (1, 2, 3, 4, 5)
 %!error [a, b] = butter (.5, .2)
 %!error [a, b] = butter (3, .2, "invalid")
+
+%!error [a, b] = butter (9, .6, "stop")
+%!error [a, b] = butter (9, .6, "bandpass")
+
+%!error [a, b] = butter (9, .6, "s", "high")
 
 %% Test output orientation
 %!test
