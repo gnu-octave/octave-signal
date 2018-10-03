@@ -7,6 +7,12 @@ Summary of important user-visible changes for signal 1.4.1:
  ** The compiled functions have been made compatible with recent changes in
     the development version of Octave.
 
+ ** Minor bug fixes and documentation improvements have been made to the
+    following functions:
+
+      butter          filtfilt        tukeywin
+
+
 Summary of important user-visible changes for signal 1.4.0:
 ----------------------------------------------------------
 
