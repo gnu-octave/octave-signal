@@ -21,8 +21,8 @@
 ## cosine-tapered window) of length @var{m}.  @var{r} defines the ratio
 ## between the constant section and and the cosine section.  It has to be
 ## between 0 and 1.  The function returns a Hanning window for @var{r}
-## equal to 0 and a full box for @var{r} equals to 1.  The default value of
-## @var{r} is 1/2.
+## equal to 1 and a rectangular window for @var{r} equal to 0.
+## The default value of @var{r} is 1/2.
 ##
 ## For a definition of the Tukey window, see e.g. Fredric J. Harris,
 ## "On the Use of Windows for Harmonic Analysis with the Discrete Fourier
