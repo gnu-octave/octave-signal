@@ -1,4 +1,4 @@
-## Copyright (C) 2013-2018 Mike Miller
+## Copyright (C) 2013-2019 Mike Miller
 ##
 ## This program is free software: you can redistribute it and/or modify
 ## it under the terms of the GNU General Public License as published by

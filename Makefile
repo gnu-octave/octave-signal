@@ -2,7 +2,7 @@
 ##
 ## Copyright 2015-2016 Carnë Draug
 ## Copyright 2015-2016 Oliver Heimlich
-## Copyright 2015-2018 Mike Miller
+## Copyright 2015-2019 Mike Miller
 ##
 ## Copying and distribution of this file, with or without modification,
 ## are permitted in any medium without royalty provided the copyright

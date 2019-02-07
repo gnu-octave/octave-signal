@@ -1,6 +1,6 @@
 # Makefile for the signal package for GNU Octave
 #
-# Copyright (C) 2012-2018 Mike Miller
+# Copyright (C) 2012-2019 Mike Miller
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
