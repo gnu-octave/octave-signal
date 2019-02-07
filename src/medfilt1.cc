@@ -217,8 +217,7 @@ public:
 // The output is placed into y, with the same stride.
 static inline void
 medfilt1_vector (double *x, double *y, octave_idx_type n,
-                    octave_idx_type len,
-                    octave_idx_type offset, octave_idx_type stride,
+                    octave_idx_type len, octave_idx_type stride,
                     octave_idx_type leading, octave_idx_type trailing,
                     octave_idx_type start_middle, octave_idx_type end_middle,
                     octave_idx_type last, octave_idx_type initial_fill,
@@ -442,10 +441,9 @@ to bring them up to size @var{n}.\n\
 
     for (octave_idx_type num = 0; num < x_num; num++)
       {
-        medfilt1_vector (p_in + x_offset, p_out + x_offset, n, x_len,
-                            x_offset, x_stride, leading, trailing,
-                            start_middle, end_middle, last, initial_fill,
-                            pad_opt, sw);
+        medfilt1_vector (p_in + x_offset, p_out + x_offset, n, x_len, x_stride,
+                         leading, trailing, start_middle, end_middle, last,
+                         initial_fill, pad_opt, sw);
         if (x_stride == 1)
           x_offset += x_len;
         else

@@ -28,6 +28,14 @@ along with this program; see the file COPYING.  If not, see
 #define M_PI 3.14159265358979323846
 #endif
 
+#if defined (__cplusplus) && __cplusplus > 201402L
+#  define ATTR_FALLTHROUGH [[fallthrough]]
+#elif defined (__GNUC__) && __GNUC__ >= 7
+#  define ATTR_FALLTHROUGH __attribute__ ((__fallthrough__))
+#else
+#  define ATTR_FALLTHROUGH ((void) 0)
+#endif
+
 #if DEBUG_ULTRWIN
 #define SHOW1(x) fprintf(stderr, "%c%+.3e", " 1"[(x) > .5], (x) - ((x) > .5))
 #endif
@@ -188,7 +196,9 @@ ultraspherical_window(int n, double mu, double par, uswpt_t type, int even_norm,
         find_zero(n-1, mu, 1, 0, 0, 0, DIVS) / cos(M_PI * par / n);
       break;
 
-    case uswpt_AttFirst: if (par < 0) break; /* Falling... */
+    case uswpt_AttFirst:
+      if (par < 0) break;
+      ATTR_FALLTHROUGH;
 
     case uswpt_AttLast:
       if (type == uswpt_AttLast && mu >= 0 && par < 0);

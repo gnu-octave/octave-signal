@@ -701,7 +701,7 @@ int remez(double h[], int numtaps,
       CalcError(r, ad, x, y, gridsize, Grid, D, W, E);
       int err = Search(r, Ext, gridsize, E);
       if (err) return err;
-      for(int i=0; i <= r; i++) assert(Ext[i]<gridsize);
+      for(i=0; i <= r; i++) assert(Ext[i]<gridsize);
       if (isDone(r, Ext, E))
         break;
     }
