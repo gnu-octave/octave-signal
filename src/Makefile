@@ -19,7 +19,7 @@
 MKOCTFILE ?= mkoctfile
 SED       ?= sed
 
-CXXFLAGS_PKG := -Wall -Wno-deprecated-declarations $(CXXFLAGS_PKG_APPEND)
+PKG_CXXFLAGS := -Wall -Wno-deprecated-declarations $(PKG_CXXFLAGS_APPEND)
 
 OCT_FILES = \
   __fwht__.oct \
@@ -37,13 +37,13 @@ OCT_SOURCES = $(patsubst %.oct,%.cc,$(OCT_FILES))
 all: $(OCT_FILES)
 
 %.o: %.cc
-	$(MKOCTFILE) $(CXXFLAGS_PKG) -c $< -o $@
+	$(MKOCTFILE) $(PKG_CXXFLAGS) -c $< -o $@
 
 %.oct: %.cc octave-compat.h
-	$(MKOCTFILE) $(CXXFLAGS_PKG) $< -o $@
+	$(MKOCTFILE) $(PKG_CXXFLAGS) $< -o $@
 
 cl2bp.oct: $(CL2BP_OBJECTS)
-	$(MKOCTFILE) $(CXXFLAGS_PKG) $^ -o $@
+	$(MKOCTFILE) $(PKG_CXXFLAGS) $^ -o $@
 
 $(CL2BP_OBJECTS): cl2bp_lib.h octave-compat.h
 
