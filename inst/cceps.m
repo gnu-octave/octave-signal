@@ -1,4 +1,5 @@
 ## Copyright (C) 1994 Dept of Probability Theory and Statistics TU Wien <Andreas.Weingessel@ci.tuwien.ac.at>
+## Copyright (C) 2019 Mike Miller
 ##
 ## This program is free software: you can redistribute it and/or modify
 ## it under the terms of the GNU General Public License as published by
@@ -22,16 +23,12 @@
 ## method is applied.  The default is not to do this.
 ## @end deftypefn
 
-## Author: Andreas Weingessel <Andreas.Weingessel@ci.tuwien.ac.at>
-## Apr 1, 1994
-## Last modified by AW on Nov 8, 1994
-
 function cep = cceps (x, c)
 
   if (nargin == 1)
-    c = 0;
+    c = false;
   elseif (nargin != 2)
-    print_usage;
+    print_usage ();
   endif
 
   [nr, nc] = size (x);
@@ -40,12 +37,11 @@ function cep = cceps (x, c)
       x = x';
       nr = nc;
     else
-      error ("cceps: x must be a vector");
+      error ("cceps: X must be a vector");
     endif
   endif
 
-  bad_signal_message = ["cceps:  bad signal x, ", ...
-                        "some Fourier coefficients are zero."];
+  bad_signal_message = "cceps: signal X has some zero Fourier coefficients";
 
   F = fft (x);
   if (min (abs (F)) == 0)
@@ -54,7 +50,7 @@ function cep = cceps (x, c)
 
   ## determine if correction necessary
   half = fix (nr / 2);
-  cor = 0;
+  cor = false;
   if (2 * half == nr)
     cor = (c && (real (F (half + 1)) < 0));
     if (cor)
@@ -77,3 +73,15 @@ function cep = cceps (x, c)
   endif
 
 endfunction
+
+%!test
+%! x = randn (256, 1);
+%! c = cceps (x);
+%! assert (size (c), size (x))
+
+## Test input validation
+%!error cceps ()
+%!error cceps (1, 2, 3)
+%!error cceps (ones (4))
+%!error cceps (0)
+%!error cceps (zeros (10, 1))
