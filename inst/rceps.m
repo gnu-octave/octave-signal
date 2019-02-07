@@ -51,13 +51,13 @@ function [y, ym] = rceps(x)
     n=length(x);
     if rows(x)==1
       if rem(n,2)==1
-        ym = [y(1), 2*y(2:n/2+1), zeros(1,n/2)];
+        ym = [y(1), 2*y(2:fix(n/2)+1), zeros(1,fix(n/2))];
       else
         ym = [y(1), 2*y(2:n/2), y(n/2+1), zeros(1,n/2-1)];
       endif
     else
       if rem(n,2)==1
-        ym = [y(1,:); 2*y(2:n/2+1,:); zeros(n/2,columns(y))];
+        ym = [y(1,:); 2*y(2:fix(n/2)+1,:); zeros(fix(n/2),columns(y))];
       else
         ym = [y(1,:); 2*y(2:n/2,:); y(n/2+1,:); zeros(n/2-1,columns(y))];
       endif
