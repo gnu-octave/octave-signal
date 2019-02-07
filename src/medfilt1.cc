@@ -360,7 +360,8 @@ to bring them up to size @var{n}.\n\
                      args(3).double_value ());
             //if (dim < 1 || dim > signal.dims ().length ())
             if (dim < 1)
-              error ("medfilt1: DIM must be positive, not %d", dim);
+              error ("medfilt1: DIM must be positive, not %ld",
+                     static_cast<long> (dim));
           }
         else
           error ("medfilt1: Invalid type for DIM: %s",

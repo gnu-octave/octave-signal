@@ -140,7 +140,7 @@ IEEE Trans. on Signal Processing, 46(2):497-501, February 1998.\n\
     cl2bp(h, m, w1, w2, up, lo, L, 1.e-5, 20, cancel_handler);
   }
   catch (std::exception &ex) {
-    error(ex.what());
+    error("%s", ex.what());
     return retval;
   }
 
