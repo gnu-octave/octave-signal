@@ -72,7 +72,7 @@
 ## Return a Laplace space filter, @var{Wc} can be larger than 1:
 ##
 ## @example
-## [@dots{}] = butter (@dots, "s")
+## [@dots{}] = butter (@dots{}, "s")
 ## @end example
 ##
 ## Return state-space matrices:
