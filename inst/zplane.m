@@ -90,46 +90,37 @@ function zplane(z, p = [])
   ymin = ymin - yfluff;
   ymax = ymax + yfluff;
 
-  text();
-  plot_with_labels(z, "o");
-  plot_with_labels(p, "x");
-  refresh;
-
-  r = exp(2i*pi*[0:100]/100);
-  plot(real(r), imag(r),'k'); hold on;
+  r = exp (2i * pi * [0:100] / 100);
+  plot (real (r), imag (r), "k");
   axis equal;
   grid on;
-  axis(1.05*[xmin, xmax, ymin, ymax]);
-  if (!isempty(p))
-    h = plot(real(p), imag(p), "bx");
-    set (h, 'MarkerSize', 7);
-  endif
-  if (!isempty(z))
-    h = plot(real(z), imag(z), "bo");
-    set (h, 'MarkerSize', 7);
-  endif
+  axis (1.05 * [xmin, xmax, ymin, ymax]);
+
+  hold on;
+  plot_with_labels (z, "o");
+  plot_with_labels (p, "x");
   hold off;
 
 endfunction
 
-function plot_with_labels(x, symbol)
+function plot_with_labels (x, symbol)
 
-  if ( !isempty(x) )
+  if (! isempty(x))
+    colors = get (gca (), "colororder");
+    for c = 1:columns (x)
+      color = colors(mod (c, rows (colors)), :);
+      plot (real (x(:,c)), imag (x(:,c)), "color", color, ...
+            "linestyle", "none", "marker", symbol);
 
-    x_u = unique(x(:));
-
-    for i = 1:length(x_u)
-      n = sum(x_u(i) == x(:));
-      if (n > 1)
-        text(real(x_u(i)), imag(x_u(i)), [" " num2str(n)]);
-      endif
+      x_u = unique (x(:,c));
+      for i = 1:length (x_u)
+        n = sum (x_u(i) == x(:,c));
+        if (n > 1)
+          label = sprintf (" ^%d", n);
+          text (real (x_u(i)), imag (x_u(i)), label, "color", color);
+        endif
+      endfor
     endfor
-
-    col = "rgbcmy";
-    for c = 1:columns(x)
-      plot(real( x(:,c) ), imag( x(:,c) ), [col(mod(c,6)),symbol ";;"]);
-    endfor
-
   endif
 
 endfunction
