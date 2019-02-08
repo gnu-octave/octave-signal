@@ -1,6 +1,7 @@
 ## Copyright (C) 1999 Paul Kienzle <pkienzle@users.sf.net>
 ## Copyright (C) 2003 Doug Stewart <dastew@sympatico.ca>
 ## Copyright (C) 2011 Alexander Klein <alexander.klein@math.uni-giessen.de>
+## Copyright (C) 2018 John W. Eaton
 ##
 ## This program is free software: you can redistribute it and/or modify
 ## it under the terms of the GNU General Public License as published by

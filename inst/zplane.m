@@ -1,5 +1,6 @@
 ## Copyright (C) 1999, 2001 Paul Kienzle <pkienzle@users.sf.net>
 ## Copyright (C) 2004 Stefan van der Walt <stefan@sun.ac.za>
+## Copyright (C) 2019 Mike Miller
 ##
 ## This program is free software: you can redistribute it and/or modify
 ## it under the terms of the GNU General Public License as published by
