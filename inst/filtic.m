@@ -72,6 +72,8 @@ function zf = filtic(b,a,y,x)
     zf(nz)=b(nz+1)*x(i)-a(nz+1)*y(i);
   endfor
 
+  zf = zf ./ a(1);
+
 endfunction
 
 %!test
@@ -139,3 +141,11 @@ endfunction
 %! y=[yy(N+2) yy(N+1)];
 %! zf=filtic(b,a,y);
 %! assert(zf,zf_ref,8*eps);
+
+## Case when a(1) != 1
+%!test
+%! a = [2, -3, 1];
+%! b = [4, -3];
+%! y = [0; 1];
+%! z = filtic (b, a, y);
+%! assert (z, [-0.5; 0]);
