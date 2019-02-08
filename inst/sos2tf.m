@@ -77,20 +77,46 @@ function [B,A] = sos2tf(sos, g = 1)
     A=A(1:nA-1);
     nA=length(A);
   endwhile
-  B = B * g;
+
+  B = B .* prod (g);
 
 endfunction
 
 %!test
-%! B=[1   1];
-%! A=[1 0.5];
-%! [sos,g] = tf2sos(B,A);
-%! [Bh,Ah] = sos2tf(sos,g);
-%! assert({Bh,Ah},{B,A},10*eps);
+%! B = [1, 1];
+%! A = [1, 0.5];
+%! [sos, g] = tf2sos (B, A);
+%! [Bh, Ah] = sos2tf (sos, g);
+%! assert (g, 1);
+%! assert (Bh, B, 10*eps);
+%! assert (Ah, A, 10*eps);
 
 %!test
-%! B=[1 0 0 0 0   1];
-%! A=[1 0 0 0 0 0.9];
-%! [sos,g] = tf2sos(B,A);
-%! [Bh,Ah] = sos2tf(sos,g);
-%! assert({Bh,Ah},{B,A},100*eps);
+%! B = [1, 0, 0, 0, 0, 1];
+%! A = [1, 0, 0, 0, 0, 0.9];
+%! [sos, g] = tf2sos (B, A);
+%! [Bh, Ah] = sos2tf (sos, g);
+%! assert (g, 1);
+%! assert (Bh, B, 100*eps);
+%! assert (Ah, A, 100*eps);
+
+## Test that gain is applied to the B vector
+%!test
+%! B = [1, 1];
+%! A = [1, 0.5];
+%! [sos, g] = tf2sos (B, A);
+%! [Bh, Ah] = sos2tf (sos, 2);
+%! assert (g, 1);
+%! assert (Bh, 2 * B, 10*eps);
+%! assert (Ah, A, 10*eps);
+
+## Test that a vector of gain is applied as the total product
+%!test
+%! B = [1, 1];
+%! A = [1, 0.5];
+%! [sos, g] = tf2sos (B, A);
+%! [Bh, Ah] = sos2tf (sos, [2, 2, 2]);
+%! assert (g, 1);
+%! assert (Bh, 8 * B, 10*eps);
+%! assert (Ah, A, 10*eps);
+
