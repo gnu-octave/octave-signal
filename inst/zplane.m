@@ -18,19 +18,16 @@
 ## -*- texinfo -*-
 ## @deftypefn  {Function File} {} zplane (@var{z}, @var{p})
 ## @deftypefnx {Function File} {} zplane (@var{b}, @var{a})
+## Plot the poles and zeros on a complex plane.  If the arguments are column
+## vectors @var{z} and @var{p}, the complex zeros @var{z} and poles @var{p}
+## are displayed. If the arguments are row vectors @var{b} and @var{a}, the
+## zeros and poles of the transfer function represented by these filter
+## coefficients are displayed.
 ##
-## Plot the poles and zeros.  If the arguments are row vectors then they
-## represent filter coefficients (numerator polynomial b and denominator
-## polynomial a), but if they are column vectors or matrices then they
-## represent poles and zeros.
+## If @var{z} and @var{p} are matrices, the columns are distinct sets of zeros
+## and poles and are displayed together in distinct colors.
 ##
-## This is a horrid interface, but I didn't choose it; better would be
-## to accept b,a or z,p,g like other functions.  The saving grace is
-## that poly(x) always returns a row vector and roots(x) always returns
-## a column vector, so it is usually right.  You must only be careful
-## when you are creating filters by hand.
-##
-## Note that due to the nature of the roots() function, poles and zeros
+## Note that due to the nature of the @code{roots} function, poles and zeros
 ## may be displayed as occurring around a circle rather than at a single
 ## point.
 ##
@@ -48,7 +45,8 @@
 ## @end group
 ## @end example
 ##
-## The denominator a defaults to 1, and the poles p defaults to [].
+## If called with only one argument, the poles @var{p} defaults to an empty
+## vector, and the denominator coefficient vector @var{a} defaults to 1.
 ## @end deftypefn
 
 ## FIXME: Consider a plot-like interface:
@@ -129,37 +127,44 @@ endfunction
 %! ## construct target system:
 %! ##   symmetric zero-pole pairs at r*exp(iw),r*exp(-iw)
 %! ##   zero-pole singletons at s
-%! pw=[0.2, 0.4, 0.45, 0.95];   #pw = [0.4];
-%! pr=[0.98, 0.98, 0.98, 0.96]; #pr = [0.85];
-%! ps=[];
-%! zw=[0.3];  # zw=[];
-%! zr=[0.95]; # zr=[];
-%! zs=[];
+%! pw = [0.2, 0.4, 0.45, 0.95];   # pw = [0.4];
+%! pr = [0.98, 0.98, 0.98, 0.96]; # pr = [0.85];
+%! ps = [];
+%! zw = [0.3];  # zw=[];
+%! zr = [0.95]; # zr=[];
+%! zs = [];
 %!
 %! ## system function for target system
-%! p=[[pr, pr].*exp(1i*pi*[pw, -pw]), ps]';
-%! z=[[zr, zr].*exp(1i*pi*[zw, -zw]), zs]';
-%! M = length(z); N = length(p);
-%! sys_a = [ zeros(1, M-N), real(poly(p)) ];
-%! sys_b = [ zeros(1, N-M), real(poly(z)) ];
-%! disp("The first two graphs should be identical, with poles at (r,w)=");
-%! disp(sprintf(" (%.2f,%.2f)", [pr ; pw]));
-%! disp("and zeros at (r,w)=");
-%! disp(sprintf(" (%.2f,%.2f)", [zr ; zw]));
-%! disp("with reflection across the horizontal plane");
-%! subplot(231);
-%! zplane(sys_b, sys_a);
-%! title("transfer function form");
-%! subplot(232);
-%! zplane(z,p);
-%! title("pole-zero form");
-%! subplot(233);
-%! zplane(z);
-%! title("empty p");
-%! subplot(234);
-%! zplane(sys_b);
-%! title("empty a");
-%! disp("The matrix plot has 2 sets of points, one inside the other");
-%! subplot(235);
-%! zplane([z, 0.7*z], [p, 0.7*p]);
-%! title("matrix");
+%! p = [[pr, pr] .* exp(1i * pi * [pw, -pw]), ps]';
+%! z = [[zr, zr] .* exp(1i * pi * [zw, -zw]), zs]';
+%! M = length(z);
+%! N = length(p);
+%! sys_a = [zeros(1, M-N), real(poly(p))];
+%! sys_b = [zeros(1, N-M), real(poly(z))];
+%!
+%! disp ("The first two graphs should be identical, with poles at (r,w) =");
+%! disp (sprintf(" (%.2f,%.2f)", [pr; pw]));
+%! disp ("and zeros at (r,w) =");
+%! disp (sprintf(" (%.2f,%.2f)", [zr; zw]));
+%! disp ("with reflection across the horizontal axis");
+%!
+%! subplot (2, 3, 1);
+%! zplane (sys_b, sys_a);
+%! title ("Transfer function form");
+%!
+%! subplot (2, 3, 2);
+%! zplane (z, p);
+%! title ("Zero pole form");
+%!
+%! subplot (2, 3, 3);
+%! zplane (z);
+%! title ("Zeros only, p=[]");
+%!
+%! subplot (2, 3, 4);
+%! zplane (sys_b);
+%! title ("Numerator only, a=1");
+%!
+%! disp ("The matrix plot has 2 sets of points, one inside the other");
+%! subplot (2, 3, 5);
+%! zplane ([z, 0.7*z], [p, 0.7*p]);
+%! title ("Matrix of zeros and poles");
