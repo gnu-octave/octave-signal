@@ -16,7 +16,7 @@
 ## <https://www.gnu.org/licenses/>.
 
 ## -*- texinfo -*-
-## @deftypefn {Function File} {[@var{p}, @var{z}, @var{k}] =} ss2zp (@var{a}, @var{b}, @var{c}, @var{d})
+## @deftypefn {Function File} {[@var{z}, @var{p}, @var{k}] =} ss2zp (@var{a}, @var{b}, @var{c}, @var{d})
 ## Converts a state space representation to a set of poles and zeros;
 ## @var{k} is a gain associated with the zeros.
 ##
