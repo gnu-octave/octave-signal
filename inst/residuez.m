@@ -76,7 +76,7 @@ function [r, p, f, m] = residuez(B, A, tol)
   [r,p,f,m]=residue(conj(fliplr(NUM)),conj(fliplr(DEN)));
   p = 1 ./ p;
   r = r .* ((-p) .^m);
-  if f, f = conj(fliplr(f)); endif
+  f = conj(fliplr(f));
 
 endfunction
 
@@ -170,3 +170,10 @@ endfunction
 %! assert(p(is),pise,100*eps);
 %! assert(f,[],100*eps);
 %! assert(m,[1;1;1;1;1],100*eps);
+
+%!test # bug 57359
+%! [r,p,k] = residuez([1 1 1.5 .5],[1 1.5 .5]);
+%! [rs,is] = sort(r);
+%! assert(r(is), [-1; 2], 100*eps);
+%! assert(p(is), [-0.5; -1], 100*eps);
+%! assert(k, [0 1], 100*eps);
