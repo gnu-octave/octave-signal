@@ -157,6 +157,7 @@ System Identification
   invfreqs
   invfreqz
   levinson
+  lpc
 Sample Rate Change
   data2fun
   decimate
