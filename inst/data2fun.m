@@ -1,4 +1,4 @@
-## Copyright (C) 2011 Juan Pablo Carbajal <carbajal@ifi.uzh.ch>
+## Copyright (C) 2020 Juan Pablo Carbajal
 ##
 ## This program is free software: you can redistribute it and/or modify
 ## it under the terms of the GNU General Public License as published by
@@ -135,6 +135,10 @@ endfunction
 
 %!test
 %! unwind_protect
+%!   # Change to temporary folder in case tester cannot write current folder
+%!   olddir = pwd();
+%!   cd(tempdir());
+%!
 %!   [fhandle fname] = data2fun (t, y, "file", "testdata2fun");
 %!   yt = testdata2fun (t);
 %!   assert (y, yt);
@@ -142,21 +146,32 @@ endfunction
 %! unwind_protect_cleanup
 %!   unlink (fname);
 %!   unlink ([fname(1:end-2) ".mat"]);
+%!   cd(olddir)
 %! end_unwind_protect
 
 %!test
 %! unwind_protect
+%!   # Change to temporary folder in case tester cannot write current folder
+%!   olddir = pwd();
+%!   cd(tempdir());
+%!
 %!   [fhandle fname] = data2fun (t, y, "file", "");
-%!   yt = testdata2fun (t);
+%!   # generate commmand to execute using random file name
+%!   cmd = sprintf ("yt = %s(t);", nthargout (2, @fileparts, fname));
+%!   eval (cmd);
 %!   assert (y, yt);
 %!   assert (y, fhandle (t));
 %! unwind_protect_cleanup
 %!   unlink (fname);
 %!   unlink ([fname(1:end-2) ".mat"]);
+%!   cd(olddir)
 %! end_unwind_protect
 
 %!test
 %! unwind_protect
+%!   # Change to temporary folder in case tester cannot write current folder
+%!   olddir = pwd();
+%!   cd(tempdir());
 %!   [fhandle fname] = data2fun (t, y, "file", "testdata2fun", "interp", "linear");
 %!   yt = testdata2fun (t);
 %!   assert (y, yt);
@@ -164,6 +179,7 @@ endfunction
 %! unwind_protect_cleanup
 %!   unlink (fname);
 %!   unlink ([fname(1:end-2) ".mat"]);
+%!   cd(olddir)
 %! end_unwind_protect
 
 ## Test input validation
