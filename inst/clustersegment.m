@@ -1,4 +1,4 @@
-## Copyright (C) 2010 Juan Pablo Carbajal <carbajal@ifi.uzh.ch>
+## Copyright (C) 2021 Juan Pablo Carbajal
 ##
 ## This program is free software: you can redistribute it and/or modify
 ## it under the terms of the GNU General Public License as published by
@@ -37,18 +37,18 @@
 function contRange = clustersegment(xhi)
 
   ## Find discontinuities
-  bool_discon = diff(xhi,1,2);
-  [Np Na] = size(xhi);
-  contRange = cell(1,Np);
+  bool_discon = diff (xhi, 1, 2);
+  [Np Na]     = size (xhi);
+  contRange   = cell (1, Np);
 
   for i = 1:Np
-    idxUp = find(bool_discon(i,:)>0)+1;
-    idxDwn = find(bool_discon(i,:)<0);
-    tLen = length(idxUp) + length(idxDwn);
+    idxUp  = find (bool_discon(i,:) > 0) + 1;
+    idxDwn = find (bool_discon(i,:) < 0);
+    tLen   = length (idxUp) + length (idxDwn);
 
-    if xhi(i,1)==1
+    if xhi(i,1) == 1
       ## first event was down
-      contRange{i}(1) = 1;
+      contRange{i}(1)          = 1;
       contRange{i}(2:2:tLen+1) = idxDwn;
       contRange{i}(3:2:tLen+1) = idxUp;
     else
@@ -57,14 +57,14 @@ function contRange = clustersegment(xhi)
       contRange{i}(2:2:tLen) = idxDwn;
     endif
 
-    if xhi(i,end)==1
+    if xhi(i,end) == 1
       ## last event was up
       contRange{i}(end+1) = Na;
     endif
 
-    tLen = length(contRange{i});
-    if tLen ~=0
-      contRange{i}=reshape(contRange{i},2,tLen/2);
+    tLen = length (contRange{i});
+    if tLen ~= 0
+      contRange{i} = reshape (contRange{i}, 2, tLen / 2);
     endif
 
   endfor
