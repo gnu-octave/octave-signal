@@ -107,51 +107,19 @@ Upsample, FIR filtering, and downsample.\n\
     }
 
   ColumnVector h (args (1).vector_value ());
-
-  if (error_state)
-    {
-      err_wrong_type_arg ("upfirdn", args(1));
-      return retval;
-    }
-
   octave_idx_type p = args (2).idx_type_value ();
-
-  if (error_state)
-    {
-      err_wrong_type_arg ("upfirdn", args(2));
-      return retval;
-    }
-
   octave_idx_type q = args (3).idx_type_value ();
-
-  if (error_state)
-    {
-      err_wrong_type_arg ("upfirdn", args(3));
-      return retval;
-    }
 
   // Do the dispatching
   if (octave::signal::isreal (args (0)))
     {
       Matrix x = args (0).matrix_value ();
-      if (error_state)
-        {
-          err_wrong_type_arg ("upfirdn", args(0));
-          return retval;
-        }
-
       Matrix y = upfirdn (x, h, p, q);
       retval (0) = y;
     }
   else if (octave::signal::iscomplex (args (0)))
     {
       ComplexMatrix x = args (0).complex_matrix_value ();
-      if (error_state)
-        {
-          err_wrong_type_arg ("upfirdn", args(0));
-          return retval;
-        }
-
       ComplexMatrix y = upfirdn (x, h, p, q);
       retval (0) = y;
     }

@@ -55,12 +55,6 @@ section 1, etc.  The b0 entry must be nonzero for each section.\n\
 
   Matrix sos( args(0).matrix_value() );
 
-  if (error_state)
-    {
-      err_wrong_type_arg ("sosfilt", args(0));
-      return retval;
-    }
-
   if (sos.columns() != 6)
     {
       error("Second-order section matrix must be a non-empty Lx6 matrix");
@@ -68,12 +62,6 @@ section 1, etc.  The b0 entry must be nonzero for each section.\n\
     }
 
   Matrix x( args(1).matrix_value() );
-
-  if (error_state)
-    {
-      err_wrong_type_arg ("sosfilt", args(1));
-      return retval;
-    }
 
   int n=x.rows();
   int m=x.columns();
