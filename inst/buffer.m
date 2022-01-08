@@ -1,4 +1,4 @@
-## Copyright (C) 2008 David Bateman <adb014@gmail.com>
+## Copyright (C) 2008-2022 David Bateman <adb014@gmail.com>
 ##
 ## This program is free software: you can redistribute it and/or modify
 ## it under the terms of the GNU General Public License as published by
@@ -120,7 +120,7 @@ function [y, z, opt] = buffer (x, n, p, opt)
           endwhile
           [i, j] = ind2sub([n-p, m], l);
           if (all ([i, j] == [n-p, m]))
-            off --;
+            off--;
           endif
           y (:, end - off + 2 : end) = [];
         else
