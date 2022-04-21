@@ -67,7 +67,7 @@ function [zc, zr] = cplxreal (z, tol, dim)
 
   nz = length (z);
   idx = nz;
-  while ((idx > 0) && ((abs (imag (zcp(idx))) ./ abs (zcp(idx))) <= tol))
+  while ((idx > 0) && (zcp(idx) == 0 || (abs (imag (zcp(idx))) ./ abs (zcp(idx))) <= tol))
     zcp(idx) = real (zcp(idx));
     idx--;
   endwhile
@@ -97,6 +97,18 @@ endfunction
 %! [zc, zr] = cplxreal (roots ([1, 0, 0, 1]));
 %! assert (zc, complex (0.5, sin (pi/3)), 10*eps)
 %! assert (zr, -1, 2*eps)
+
+## Test with 2 real zeros, one of them equal to 0
+%!test
+%! [zc, zr] = cplxreal (roots ([1, 0, 0, 1, 0]));
+%! assert (zc, complex (0.5, sin (pi/3)), 10*eps)
+%! assert (zr, [-1; 0], 2*eps)
+
+## Test with 3 real zeros, two of them equal to 0
+%!test
+%! [zc, zr] = cplxreal (roots ([1, 0, 0, 1, 0, 0]));
+%! assert (zc, complex (0.5, sin (pi/3)), 10*eps)
+%! assert (zr, [-1; 0; 0], 2*eps)
 
 ## Test input validation
 %!error cplxreal ()
