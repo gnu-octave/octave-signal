@@ -43,7 +43,6 @@ MT upfirdn (MT &x, ColumnVector &h, octave_idx_type p, octave_idx_type q)
     }
 
   octave_idx_type Lh = h.numel ();
-  const double r = p/(static_cast<double> (q));
 
   const octave_idx_type Ly = ceil (static_cast<double> ((rx-1)*p + Lh) /
                                    static_cast<double> (q));
@@ -51,38 +50,14 @@ MT upfirdn (MT &x, ColumnVector &h, octave_idx_type p, octave_idx_type q)
   MT y (Ly, cx, 0.0);
 
   for (octave_idx_type c = 0; c < cx; c++)
-    {
-      octave_idx_type m = 0;
-      while (m < Ly)
+      for (octave_idx_type m = 0; m < Ly; m++)
         {
-          const octave_idx_type n = floor (m/r);
+          const octave_idx_type n = (m * q) / p;
           const octave_idx_type lm = (m * q) % p;
-          octave_idx_type k = 0;
-          typename MT::element_type accum;
-          accum = 0.0;
-          do
-            {
-              octave_idx_type ix = n - k;
-              if (ix >= rx)
-                {
-                  k ++;
-                  continue;
-                }
-
-              const octave_idx_type ih = k * p + lm;
-              if ((ih >= Lh) | (ix < 0))
-                break;
-
-              accum += h (ih) * x (ix, c);
-              k++;
-            }
-          while (1);
-
-          y (m, c) = accum;
-          m ++;
+          y (m,c) = 0.0;
+          for (octave_idx_type k = std::max (0L, n-rx+1); k <= n && k*p + lm < Lh; k++)
+              y (m,c) += h (k*p + lm) * x (n-k, c);
         }
-
-    }
 
   if (isrowvector)
     y = y.transpose ();
