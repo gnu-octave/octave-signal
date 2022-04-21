@@ -131,7 +131,7 @@ endfunction
 %!  yz=filter(bz,az,[1 zeros(1,n-1)]);
 %!
 %!  # find rms error
-%!  err=sqrt(sum((yz*fs.-ys).^2)/length(ys));
+%!  err=sqrt(sum((yz*fs-ys).^2)/length(ys));
 %!  endfunction
 %!
 %!assert(stozerr([1],[1 1],100),0,0.0001);

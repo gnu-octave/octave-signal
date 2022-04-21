@@ -96,7 +96,7 @@ check: all
 	  --eval 'if (! isempty ("$(DEPENDS)")); pkg load $(DEPENDS); endif;' \
 	  --eval 'addpath (fullfile (pwd, "inst"));' \
 	  --eval 'addpath (fullfile (pwd, "src"));' \
-	  --eval 'runtests ("inst"); runtests ("src");'
+	  --eval 'oruntests ("inst"); oruntests ("src");'
 
 doctest: all
 	$(OCTAVE) --silent \
