@@ -21,10 +21,15 @@
 ## This function exists for @sc{matlab} compatibility only, and is equivalent
 ## to @code{cheby2 (@var{n}, @var{Rs}, 1, "s")}.
 ##
+## Demo
+## @example
+## demo cheb2ap
+## @end example
+##
 ## @seealso{cheby2}
 ## @end deftypefn
 
-function [z, p, g] = cheb2ap (n, Rp)
+function [z, p, g] = cheb2ap (n, Rs)
 
   if (nargin != 2)
     print_usage();
@@ -36,3 +41,17 @@ function [z, p, g] = cheb2ap (n, Rp)
   [z, p, g] = cheby2 (n, Rs, 1, "s");
 
 endfunction
+%!error <N must> cheb2ap (-1, 3)
+%!error <RS must> cheb2ap (3, -1)
+
+#From Steven T. Karris "Signals and Systems Second Edition"  [pg. 11-36]
+%!demo
+%! w=0:0.01:1000;
+%! [z, p, k] = cheb2ap (3, 3);
+%! [b, a] = zp2tf (z, p, k);
+%! Gs = freqs (b, a, w);
+%! semilogx (w, abs (Gs));
+%! xlabel('Frequency in rad/sec')
+%! ylabel('Magnitude of G(s)');
+%! title('Type 2 Chebyshev Low-Pass Filter, k=3, 3 dB ripple in stop band')
+%! grid;
