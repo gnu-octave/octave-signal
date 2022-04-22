@@ -9,7 +9,7 @@
 ## notice and this notice are preserved.  This file is offered as-is,
 ## without any warranty.
 
-MKOCTFILE := mkoctfile
+MKOCTFILE ?= mkoctfile
 OCTAVE    ?= octave
 SED       := sed
 SHA256SUM := sha256sum
@@ -91,12 +91,14 @@ all:
 	cd src && $(MAKE) $@
 	cd src && $(MAKE) PKG_ADD PKG_DEL
 
+# using __run_test_suite__ as is available in octave 3.8+
 check: all
 	$(OCTAVE) --silent \
 	  --eval 'if (! isempty ("$(DEPENDS)")); pkg load $(DEPENDS); endif;' \
 	  --eval 'addpath (fullfile (pwd, "inst"));' \
 	  --eval 'addpath (fullfile (pwd, "src"));' \
-	  --eval 'oruntests ("inst"); oruntests ("src");'
+	  --eval 'if exist("oruntests") == 2, runtestsfunc=@oruntests;, else runtestsfunc=@runtests;, endif;' \
+	  --eval 'runtestsfunc ("inst"); runtestsfunc ("src");'
 
 doctest: all
 	$(OCTAVE) --silent \
