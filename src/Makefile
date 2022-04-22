@@ -19,7 +19,7 @@
 MKOCTFILE ?= mkoctfile
 SED       ?= sed
 
-PKG_CXXFLAGS := -Wall -Wno-deprecated-declarations $(PKG_CXXFLAGS_APPEND)
+PKG_CXXFLAGS := -Wall $(PKG_CXXFLAGS_APPEND)
 
 OCT_FILES = \
   __fwht__.oct \
