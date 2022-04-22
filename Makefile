@@ -10,7 +10,7 @@
 ## without any warranty.
 
 MKOCTFILE := mkoctfile
-OCTAVE    := octave
+OCTAVE    ?= octave
 SED       := sed
 SHA256SUM := sha256sum
 TAR       := tar
