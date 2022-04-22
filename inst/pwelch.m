@@ -80,7 +80,7 @@
 ##             value is window=sqrt(length(x)) rounded up to the
 ##             nearest integer power of 2; see 'sloppy' argument.
 ##
-## @iten overlap
+## @item overlap
 ##   [real scalar] segment overlap expressed as a multiple of
 ##             window or segment length.   0 <= overlap < 1,
 ##             The default is overlap=0.5 .
@@ -94,7 +94,7 @@
 ##             Nfft values smaller than the length of the data
 ##             segment (or window) are ignored silently.
 ##
-## @iten Fs
+## @item Fs
 ##  [real scalar] sampling frequency (Hertz); default=1.0
 ##
 ## @item conf
@@ -199,7 +199,7 @@
 ##           spectral density of x.  First column is the lower
 ##           bound.  Second column is the upper bound.
 ##
-##   @iten freq
+##   @item freq
 ##     [real column vector] frequency values
 ## @end table
 ##
