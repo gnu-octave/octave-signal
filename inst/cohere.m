@@ -14,15 +14,17 @@
 ## along with this program; see the file COPYING. If not, see
 ## <https://www.gnu.org/licenses/>.
 
-## Usage:
-##   [Pxx,freq] = cohere(x,y,Nfft,Fs,window,overlap,range,plot_type,detrend)
+## -*- texinfo -*-
+## @deftypefn {Function File} {[@var{Pxx}, @var{freq}]} = cohere(@var{x},@var{y},@var{Nfft},@var{Fs},@var{window},@var{overlap},@var{range},@var{plot_type},@var{detrend})
+## Estimate (mean square) coherence of signals "x" and "y".
 ##
-##     Estimate (mean square) coherence of signals "x" and "y".
-##     Use the Welch (1967) periodogram/FFT method.
-##     Compatible with Matlab R11 cohere and earlier.
-##     See "help pwelch" for description of arguments, hints and references
-##     --- especially hint (7) for Matlab R11 defaults.
+## Use the Welch (1967) periodogram/FFT method.
 ##
+## Compatible with Matlab R11 cohere and earlier.
+##
+## See "help pwelch" for description of arguments, hints and references
+## --- especially hint (7) for Matlab R11 defaults.
+## @end deftypefn
 
 function varargout = cohere(varargin)
 

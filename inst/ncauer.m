@@ -14,22 +14,35 @@
 ## along with this program; see the file COPYING. If not, see
 ## <https://www.gnu.org/licenses/>.
 
-## usage: [Zz, Zp, Zg] = ncauer(Rp, Rs, n)
-##
+## -*- texinfo -*-
+## @deftypefn {Function File} {[@var{z}, @var{p}, @var{g}] =} cauer(@var{Rp}, @var{Rs}, @var{n})
 ## Analog prototype for Cauer filter.
-## [z, p, g]=ncauer(Rp, Rs, ws)
-## Rp = Passband ripple
-## Rs = Stopband ripple
-## Ws = Desired order
+##
+## @table @asis
+## @item Rp
+## Passband ripple
+## @item Rs
+## Stopband ripple
+## @item n
+## Desired order
+## @item z
+## complex vector of zeros for the model.
+## @item p
+## complex vector of poles for the model.
+## @item g
+## gain value.
+## @end table
 ##
 ## References:
 ##
 ## - Serra, Celso Penteado, Teoria e Projeto de Filtros, Campinas: CARTGRAF,
 ##   1983.
+##
 ## - Lamar, Marcus Vinicius, Notas de aula da disciplina TE 456 - Circuitos
 ##   Analogicos II, UFPR, 2001/2002.
+## @end deftypefn
 
-function [zer, pol, T0]=ncauer(Rp, Rs, n)
+function [zer, pol, T0] = ncauer (Rp, Rs, n)
 
   ## Cutoff frequency = 1:
   wp=1;

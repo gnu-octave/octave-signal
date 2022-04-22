@@ -14,14 +14,17 @@
 ## along with this program; see the file COPYING. If not, see
 ## <https://www.gnu.org/licenses/>.
 
-## Usage:
-##   [Pxx,freq] = tfe(x,y,Nfft,Fs,window,overlap,range,plot_type,detrend)
+## -*- texinfo -*-
+## @deftypefn {Function File} {[Pxx,freq] =} tfe(x,y,Nfft,Fs,window,overlap,range,plot_type,detrend)
+## Estimate transfer function of system with input "x" and output "y".
 ##
-##     Estimate transfer function of system with input "x" and output "y".
-##     Use the Welch (1967) periodogram/FFT method.
-##     Compatible with Matlab R11 tfe and earlier.
-##     See "help pwelch" for description of arguments, hints and references
-##     --- especially hint (7) for Matlab R11 defaults.
+## Use the Welch (1967) periodogram/FFT method.
+##
+## Compatible with Matlab R11 tfe and earlier.
+##
+## See "help pwelch" for description of arguments, hints and references
+## --- especially hint (7) for Matlab R11 defaults.
+## @end deftypefn
 
 function varargout = tfe(varargin)
 

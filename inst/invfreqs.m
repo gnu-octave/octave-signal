@@ -15,23 +15,32 @@
 ## along with this program; see the file COPYING. If not, see
 ## <https://www.gnu.org/licenses/>.
 
-## Usage: [B,A] = invfreqs(H,F,nB,nA)
-##        [B,A] = invfreqs(H,F,nB,nA,W)
-##        [B,A] = invfreqs(H,F,nB,nA,W,iter,tol,'trace')
-##
+## -*- texinfo -*-
+## @deftypefn {Function File} {[B,A] =} invfreqs(H,F,nB,nA)
+## @deftypefnx {} {[B,A] =} invfreqs(H,F,nB,nA,W)
+## @deftypefnx {} {[B,A] =} invfreqs(H,F,nB,nA,W,iter,tol,'trace')
 ## Fit filter B(s)/A(s)to the complex frequency response H at frequency
-## points F.  A and B are real polynomial coefficients of order nA and nB.
+## points F.
+##
+## A and B are real polynomial coefficients of order nA and nB.
+##
 ## Optionally, the fit-errors can be weighted vs frequency according to
 ## the weights W.
+##
 ## Note: all the guts are in invfreq.m
 ##
 ## H: desired complex frequency response
+##
 ## F: frequency (must be same length as H)
+##
 ## nA: order of the denominator polynomial A
+##
 ## nB: order of the numerator polynomial B
+##
 ## W: vector of weights (must be same length as F)
 ##
 ## Example:
+## @example
 ##       B = [1/2 1];
 ##       A = [1 1];
 ##       w = linspace(0,4,128);
@@ -42,6 +51,8 @@
 ##       legend('Original','Measured');
 ##       err = norm(H-Hh);
 ##       disp(sprintf('L2 norm of frequency response error = %f',err));
+## @end example
+## @end deftypefn
 
 ## FIXME: check invfreq.m for todo's
 

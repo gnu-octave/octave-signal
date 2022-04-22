@@ -17,13 +17,15 @@
 ## along with this program; see the file COPYING. If not, see
 ## <https://www.gnu.org/licenses/>.
 
-## usage: [B,A] = invfreq(H,F,nB,nA)
-##        [B,A] = invfreq(H,F,nB,nA,W)
-##        [B,A] = invfreq(H,F,nB,nA,W,[],[],plane)
-##        [B,A] = invfreq(H,F,nB,nA,W,iter,tol,plane)
-##
+## -*- texinfo -*-
+## @deftypefn {Function File} {[B,A] =} invfreq(H,F,nB,nA)
+## @deftypefnx {} {[B,A] =} invfreq(H,F,nB,nA,W)
+## @deftypefnx {} {[B,A] =} invfreq(H,F,nB,nA,W,[],[],plane)
+## @deftypefnx {} {[B,A] =} invfreq(H,F,nB,nA,W,iter,tol,plane)
 ## Fit filter B(z)/A(z) or B(s)/A(s) to complex frequency response at
-## frequency points F. A and B are real polynomial coefficients of order
+## frequency points F.
+##
+## A and B are real polynomial coefficients of order
 ## nA and nB respectively.  Optionally, the fit-errors can be weighted vs
 ## frequency according to the weights W. Also, the transform plane can be
 ## specified as either 's' for continuous time or 'z' for discrete time. 'z'
@@ -32,26 +34,38 @@
 ##
 ## H: desired complex frequency response
 ##     It is assumed that A and B are real polynomials, hence H is one-sided.
+##
 ## F: vector of frequency samples in radians
+##
 ## nA: order of denominator polynomial A
+##
 ## nB: order of numerator polynomial B
+##
 ## plane='z': F on unit circle (discrete-time spectra, z-plane design)
+##
 ## plane='s': F on jw axis     (continuous-time spectra, s-plane design)
+##
 ## H(k) = spectral samples of filter frequency response at points zk,
 ##  where zk=exp(sqrt(-1)*F(k)) when plane='z' (F(k) in [0,.5])
 ##     and zk=(sqrt(-1)*F(k)) when plane='s' (F(k) nonnegative)
+##
 ## Example:
+## @example
 ##     [B,A] = butter(12,1/4);
 ##     [H,w] = freqz(B,A,128);
 ##     [Bh,Ah] = invfreq(H,F,4,4);
 ##     Hh = freqz(Bh,Ah);
 ##     disp(sprintf('||frequency response error|| = %f',norm(H-Hh)));
+## @end example
 ##
-## References: J. O. Smith, "Techniques for Digital Filter Design and System
+## References:
+##
+## J. O. Smith, "Techniques for Digital Filter Design and System
 ##      Identification with Application to the Violin, Ph.D. Dissertation,
 ##      Elec. Eng. Dept., Stanford University, June 1983, page 50; or,
 ##
 ## http://ccrma.stanford.edu/~jos/filters/FFT_Based_Equation_Error_Method.html
+## @end deftypefn
 
 ## FIXME: implement Steiglitz-McBride iterations
 ## FIXME: improve numerical stability for high order filters (matlab is a bit better)

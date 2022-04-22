@@ -14,71 +14,98 @@
 ## along with this program; see the file COPYING. If not, see
 ## <https://www.gnu.org/licenses/>.
 
-## usage:
-##    [psd,f_out] = pyulear(x,poles,freq,Fs,range,method,plot_type)
-##
+## -*- texinfo -*-
+## @deftypefn {Function File} {[psd,f_out] =} pyulear(x,poles,freq,Fs,range,method,plot_type)
 ## Calculates a Yule-Walker autoregressive (all-pole) model of the data "x"
-## and computes the power spectrum of the model.  This is a wrapper for
-## functions "aryule" and "ar_psd" which perform the argument checking.
+## and computes the power spectrum of the model.
+##
+## This is a wrapper for functions "aryule" and "ar_psd" which perform the
+## argument checking.
+##
 ## See "help aryule" and "help ar_psd" for further details.
 ##
 ## ARGUMENTS:
+##
 ##     All but the first two arguments are optional and may be empty.
-##   x       %% [vector] sampled data
+## @table @asis
+##   @item x
+##     [vector] sampled data
 ##
-##   poles   %% [integer scalar] required number of poles of the AR model
+##   @item poles
+##     [integer scalar] required number of poles of the AR model
 ##
-##   freq    %% [real vector] frequencies at which power spectral density
-##           %%               is calculated
-##           %% [integer scalar] number of uniformly distributed frequency
-##           %%          values at which spectral density is calculated.
-##           %%          [default=256]
+##   @item freq
+##     [real vector] frequencies at which power spectral density
+##           is calculated
 ##
-##   Fs      %% [real scalar] sampling frequency (Hertz) [default=1]
+##     [integer scalar] number of uniformly distributed frequency
+##           values at which spectral density is calculated.
+##           [default=256]
 ##
+##   @item Fs
+##     [real scalar] sampling frequency (Hertz) [default=1]
+## @end table
 ##
 ## CONTROL-STRING ARGUMENTS -- each of these arguments is a character string.
+##
 ##   Control-string arguments can be in any order after the other arguments.
 ##
+## @table @asis
+##   @item range
+##     'half',  'onesided' : frequency range of the spectrum is
+##           from zero up to but not including sample_f/2.  Power
+##           from negative frequencies is added to the positive
+##           side of the spectrum.
 ##
-##   range   %% 'half',  'onesided' : frequency range of the spectrum is
-##           %%       from zero up to but not including sample_f/2.  Power
-##           %%       from negative frequencies is added to the positive
-##           %%       side of the spectrum.
-##           %% 'whole', 'twosided' : frequency range of the spectrum is
-##           %%       -sample_f/2 to sample_f/2, with negative frequencies
-##           %%       stored in "wrap around" order after the positive
-##           %%       frequencies; e.g. frequencies for a 10-point 'twosided'
-##           %%       spectrum are 0 0.1 0.2 0.3 0.4 0.5 -0.4 -0.3 -0.2 -0.1
-##           %% 'shift', 'centerdc' : same as 'whole' but with the first half
-##           %%       of the spectrum swapped with second half to put the
-##           %%       zero-frequency value in the middle. (See "help
-##           %%       fftshift". If "freq" is vector, 'shift' is ignored.
-##           %% If model coefficients "ar_coeffs" are real, the default
-##           %% range is 'half', otherwise default range is 'whole'.
+##     'whole', 'twosided' : frequency range of the spectrum is
+##           -sample_f/2 to sample_f/2, with negative frequencies
+##           stored in "wrap around" order after the positive
+##           frequencies; e.g. frequencies for a 10-point 'twosided'
+##           spectrum are 0 0.1 0.2 0.3 0.4 0.5 -0.4 -0.3 -0.2 -0.1
 ##
-##   method  %% 'fft':  use FFT to calculate power spectrum.
-##           %% 'poly': calculate power spectrum as a polynomial of 1/z
-##           %% N.B. this argument is ignored if the "freq" argument is a
-##           %%      vector.  The default is 'poly' unless the "freq"
-##           %%      argument is an integer power of 2.
+##      'shift', 'centerdc' : same as 'whole' but with the first half
+##           of the spectrum swapped with second half to put the
+##           zero-frequency value in the middle. (See "help
+##           fftshift". If "freq" is vector, 'shift' is ignored.
 ##
-## plot_type %% 'plot', 'semilogx', 'semilogy', 'loglog', 'squared' or 'db':
-##           %% specifies the type of plot.  The default is 'plot', which
-##           %% means linear-linear axes. 'squared' is the same as 'plot'.
-##           %% 'dB' plots "10*log10(psd)".  This argument is ignored and a
-##           %% spectrum is not plotted if the caller requires a returned
-##           %% value.
+##      If model coefficients "ar_coeffs" are real, the default
+##      range is 'half', otherwise default range is 'whole'.
+##
+##   @item method
+##      'fft':  use FFT to calculate power spectrum.
+##
+##      'poly': calculate power spectrum as a polynomial of 1/z
+##           N.B. this argument is ignored if the "freq" argument is a
+##           vector.  The default is 'poly' unless the "freq"
+##           argument is an integer power of 2.
+##
+## @item plot_type 
+##    'plot', 'semilogx', 'semilogy', 'loglog', 'squared' or 'db':
+##           specifies the type of plot.  The default is 'plot', which
+##           means linear-linear axes. 'squared' is the same as 'plot'.
+##           'dB' plots "10*log10(psd)".  This argument is ignored and a
+##           spectrum is not plotted if the caller requires a returned
+##           value.
+## @end table
 ##
 ## RETURNED VALUES:
+##
 ##     If return values are not required by the caller, the spectrum
 ##     is plotted and nothing is returned.
-##   psd     %% [real vector] power-spectrum estimate
-##   f_out   %% [real vector] frequency values
+##
+## @table @asis
+##   @item psd
+##   [real vector] power-spectrum estimate
+##   @item f_out
+##   [real vector] frequency values
+## @end table
 ##
 ## HINTS
+##
 ##   This function is a wrapper for aryule and ar_psd.
+##
 ##   See "help aryule", "help ar_psd".
+## @end deftypefn
 
 function [psd,f_out]=pyulear(x,poles,varargin)
 

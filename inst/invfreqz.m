@@ -15,28 +15,38 @@
 ## along with this program; see the file COPYING. If not, see
 ## <https://www.gnu.org/licenses/>.
 
-## usage: [B,A] = invfreqz(H,F,nB,nA)
-##        [B,A] = invfreqz(H,F,nB,nA,W)
-##        [B,A] = invfreqz(H,F,nB,nA,W,iter,tol,'trace')
-##
+## -*- texinfo -*-
+## @deftypefn {Function File} {[B,A] =} invfreqz(H,F,nB,nA)
+## @deftypefnx {} {[B,A] =} invfreqz(H,F,nB,nA,W)
+## @deftypefnx {} {[B,A] =} invfreqz(H,F,nB,nA,W,iter,tol,'trace')
 ## Fit filter B(z)/A(z)to the complex frequency response H at frequency
-## points F.  A and B are real polynomial coefficients of order nA and nB.
+## points F.
+##
+## A and B are real polynomial coefficients of order nA and nB.
 ## Optionally, the fit-errors can be weighted vs frequency according to
 ## the weights W.
+##
 ## Note: all the guts are in invfreq.m
 ##
 ## H: desired complex frequency response
+##
 ## F: normalized frequency (0 to pi) (must be same length as H)
+##
 ## nA: order of the denominator polynomial A
+##
 ## nB: order of the numerator polynomial B
+##
 ## W: vector of weights (must be same length as F)
 ##
 ## Example:
+## @example
 ##     [B,A] = butter(4,1/4);
 ##     [H,F] = freqz(B,A);
 ##     [Bh,Ah] = invfreq(H,F,4,4);
 ##     Hh = freqz(Bh,Ah);
 ##     disp(sprintf('||frequency response error|| = %f',norm(H-Hh)));
+## @end example
+## @end deftypefn
 
 ## FIXME: check invfreq.m for todo's
 

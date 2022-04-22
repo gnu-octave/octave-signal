@@ -14,13 +14,16 @@
 ## along with this program; see the file COPYING. If not, see
 ## <https://www.gnu.org/licenses/>.
 
-## Usage:
-##   [Pxx,freq] = csd(x,y,Nfft,Fs,window,overlap,range,plot_type,detrend)
+## -*- texinfo -*-
+## @deftypefn {Function File} {[@var{Pxx},@var{freq}]} = csd(@var{x}, @var{y}, @var{Nfft}, @var{Fs}, @var{window}, @var{overlap}, @var{range}, @var{plot_type}, @var{detrend})
+## Estimate cross power spectrum of data "x" and "y" by the Welch (1967)
+## periodogram/FFT method.
 ##
-##     Estimate cross power spectrum of data "x" and "y" by the Welch (1967)
-##     periodogram/FFT method.  Compatible with Matlab R11 csd and earlier.
-##     See "help pwelch" for description of arguments, hints and references
-##     --- especially hint (7) for Matlab R11 defaults.
+## Compatible with Matlab R11 csd and earlier.
+##
+## See "help pwelch" for description of arguments, hints and references
+## --- especially hint (7) for Matlab R11 defaults.
+## @end deftypefn
 
 function varargout = csd(varargin)
 
