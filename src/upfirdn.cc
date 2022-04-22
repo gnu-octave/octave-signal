@@ -49,14 +49,17 @@ MT upfirdn (MT &x, ColumnVector &h, octave_idx_type p, octave_idx_type q)
 
   MT y (Ly, cx, 0.0);
 
+  octave_idx_type zero = 0;
+
   for (octave_idx_type c = 0; c < cx; c++)
       for (octave_idx_type m = 0; m < Ly; m++)
         {
           const octave_idx_type n = (m * q) / p;
           const octave_idx_type lm = (m * q) % p;
           y (m,c) = 0.0;
-          for (octave_idx_type k = std::max (0L, n-rx+1); k <= n && k*p + lm < Lh; k++)
-              y (m,c) += h (k*p + lm) * x (n-k, c);
+          for (octave_idx_type k = std::max (zero, n-rx+1);
+               k <= n && k*p + lm < Lh; k++)
+            y (m,c) += h (k*p + lm) * x (n-k, c);
         }
 
   if (isrowvector)
