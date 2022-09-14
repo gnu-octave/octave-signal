@@ -74,6 +74,13 @@ function b = fir2(n, f, m, grid_n, ramp_n, window)
   if nargin < 4, grid_n=[]; endif
   if nargin < 5, ramp_n=[]; endif
 
+  if (! (isscalar (n) && (n == fix (n)) && (n >= 0)))
+    error ("fir2: n must be a non negative integer");
+  else
+    # ensure n is used as a double type
+    n = double(n);
+  endif
+
   ## find the window parameter, or default to hamming
   w=[];
   if length(grid_n)>1, w=grid_n; grid_n=[]; endif
@@ -188,6 +195,14 @@ endfunction
 %! assert (h(3) <= 1e-1)
 %! assert (h(4) <= 1/sqrt (2))
 %! assert (h(5), 1, 2e-3)
+
+%!test #bug 59066
+%! f = [0, 0.45, 0.45, 0.55, 0.55, 1]; m = [1, 1, 0, 0, 1, 1];
+%! b = fir2 (int32(50), f, m);
+%! assert(numel(b), 51)
+%!
+%! fail ("fir2 (50.1, f, m)", "fir2: n must be a non negative integer")
+%! fail ("fir2 (-1, f, m)", "fir2: n must be a non negative integer")
 
 %!demo
 %! f=[0, 0.3, 0.3, 0.6, 0.6, 1]; m=[0, 0, 1, 1/2, 0, 0];
