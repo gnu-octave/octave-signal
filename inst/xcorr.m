@@ -1,6 +1,7 @@
 ## Copyright (C) 1999-2001 Paul Kienzle <pkienzle@users.sf.net>
 ## Copyright (C) 2004 <asbjorn.sabo@broadpark.no>
 ## Copyright (C) 2008, 2010 Peter Lanspeary <peter.lanspeary@.adelaide.edu.au>
+## Copyright (C) 2022 Octave-Forge community <maintainers@octave.org>
 ##
 ## This program is free software: you can redistribute it and/or modify
 ## it under the terms of the GNU General Public License as published by
@@ -77,7 +78,7 @@
 ## return the biased average, R/N,
 ## @item unbiased
 ## return the unbiased average, R(k)/(N-|k|),
-## @item coeff
+## @item coeff or normalized
 ## return the correlation coefficient, R/(rms(x).rms(y)),
 ## where "k" is the lag, and "N" is the length of @var{X}.
 ## If omitted, the default value is "none".
@@ -135,26 +136,36 @@
 ## If length(x) == length(y) + k, then you can use the simpler
 ##    ( hankel(x(1:k),x(k:N-k)) * y ) ./ N
 
-function [R, lags] = xcorr (X, Y, maxlag, scale)
+function [R, lags] = xcorr (X, varargin)
 
   if (nargin < 1 || nargin > 4)
     print_usage;
   endif
 
-  ## assign arguments that are missing from the list
-  ## or reassign (right shift) them according to data type
-  if nargin==1
-    Y=[]; maxlag=[]; scale=[];
-  elseif nargin==2
-    maxlag=[]; scale=[];
-    if ischar(Y), scale=Y; Y=[];
-    elseif isscalar(Y), maxlag=Y; Y=[];
+  ## assign optional arguments according to data type
+  maxlag=[]; scale=[]; Y=[];
+
+  for idx=1:length(varargin)
+    arg = varargin{idx};
+    if ischar(arg)
+      if isempty(scale)
+        scale = arg;
+      else
+        error ("xcorr: unexpected char value '%s' when scale is already set to '%s'", arg, scale);
+      endif
+    elseif isscalar(arg)
+      if isempty(maxlag)
+        maxlag = arg;
+      else
+        error ("xcorr: unexpected scalar value '%f' when maxlag is already set to '%f'", arg, maxlag);
+      endif
+    elseif idx == 1
+      Y = arg;
+    else
+      error ("xcorr: unknown optional input variable at position %d", idx);
     endif
-  elseif nargin==3
-    scale=[];
-    if ischar(maxlag), scale=maxlag; maxlag=[]; endif
-    if isscalar(Y), maxlag=Y; Y=[]; endif
-  endif
+
+  endfor
 
   ## assign defaults to missing arguments
   if isvector(X)
@@ -167,7 +178,7 @@ function [R, lags] = xcorr (X, Y, maxlag, scale)
   if isempty(scale), scale='none'; endif
 
   ## check argument values
-  if isempty(X) || isscalar(X) || ischar(Y) || ! ismatrix(X)
+  if isempty(X) || isscalar(X) || ! ismatrix(X)
     error("xcorr: X must be a vector or matrix");
   endif
   if isscalar(Y) || ischar(Y) || (!isempty(Y) && !isvector(Y))
@@ -179,6 +190,7 @@ function [R, lags] = xcorr (X, Y, maxlag, scale)
   if !isscalar(maxlag) || !isreal(maxlag) || maxlag<0 || fix(maxlag)!=maxlag
     error("xcorr: maxlag must be a single non-negative integer");
   endif
+
   ##
   ## sanity check on number of requested lags
   ##   Correlations for lags in excess of +/-(N-1)
@@ -248,7 +260,7 @@ function [R, lags] = xcorr (X, Y, maxlag, scale)
     R = R ./ N;
   elseif strcmp(scale, 'unbiased')
     R = R ./ ( [ N-maxlag:N-1, N, N-1:-1:N-maxlag ]' * ones(1,columns(R)) );
-  elseif strcmp(scale, 'coeff')
+  elseif strcmp(scale, 'coeff') || strcmp(scale, 'normalized')
     ## R = R ./ R(maxlag+1) works only for autocorrelation
     ## For cross correlation coeff, divide by rms(X)*rms(Y).
     if !isvector(X)
@@ -328,3 +340,91 @@ endfunction
 ##  endfor
 ##endif
 ##--------------------------------------------------------------
+
+%!shared x, y
+%! x = 0.5.^(0:15);
+%! y = circshift(x,5);
+
+## Test input validation
+%!error xcorr ()
+%!error xcorr (1)
+%!error xcorr (x, 1, x)
+%!error xcorr (x, 'none', x)
+%!error xcorr (x, x, 'invalid')
+%!error xcorr (x, 'invalid')
+
+%!test
+%! [c,lags] = xcorr(x);
+%! # largest spike at 0 lag, where X matches itself - ie the center
+%! [m, im] = max(c);
+%! assert(m, 4/3, 1e-6)
+%! assert(im, (numel(lags)+1)/2);
+%!
+%! [c1,lags1] = xcorr(x, x);
+%! [m, im] = max(c1);
+%! assert(m, 4/3, 1e-6)
+%! assert(im, (numel(lags1)+1)/2);
+%! assert(c1, c, 2*eps);
+%! assert(lags1, lags);
+
+%!test
+%! [c,lags] = xcorr(x,y);
+%! # largest spike at 0 lag, where X matches Y
+%! [m, im] = max(c);
+%! assert(m, 4/3, 1e-6)
+%! assert(lags(im), -5);
+
+%!test
+%! [c0,lags0] = xcorr(x,y);
+%! [c1,lags1] = xcorr(x,y, 'none');
+%! assert(c0, c1);
+%! assert(lags0, lags1);
+
+%!test
+%! [c0,lags0] = xcorr(x,y);
+%! [c1,lags1] = xcorr(x,y, 'normalized');
+%! assert(lags0, lags1);
+%! [m, im] = max(c1);
+%! # at 0 lag, should be 1
+%! assert(m, 1, 1e-6);
+%! [c2,lags2] = xcorr(x,y, 'coeff');
+%! assert(c1, c2);
+%! assert(lags1, lags2);
+
+%!test
+%! [c0,lags0] = xcorr(x,y);
+%! [c1,lags1] = xcorr(x,y, 'biased');
+%! assert(lags0, lags1);
+%! [m, im] = max(c1);
+%! assert(m, 1/12, 1e-6);
+%!
+%! [c1,lags1] = xcorr(x, 'biased');
+%! assert(lags0, lags1);
+%! [m, im] = max(c1);
+%! assert(m, 1/12, 1e-6);
+
+%!test
+%! [c0,lags0] = xcorr(x,y);
+%! [c1,lags1] = xcorr(x,y, 'unbiased');
+%! assert(lags0, lags1);
+%! [m, im] = max(c1);
+%! assert(m, 1/8.25, 1e-6);
+
+%!test
+%! [c,lags] = xcorr(x,y, 10);
+%! [m, im] = max(c);
+%! assert(lags(im), -5);
+%! assert(lags(1), -10);
+%! assert(lags(end), 10);
+%!
+%! [c,lags] = xcorr(x,10);
+%! [m, im] = max(c);
+%! assert(lags(1), -10);
+%! assert(lags(end), 10);
+
+%!test
+%! [c0,lags0] = xcorr(x,y, 'normalized', 10);
+%! [c1,lags1] = xcorr(x,y, 10, 'normalized');
+%! assert(c0, c1);
+%! assert(lags0, lags1);
+
