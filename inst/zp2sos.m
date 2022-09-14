@@ -1,4 +1,5 @@
 ## Copyright (C) 2005 Julius O. Smith III <jos@ccrma.stanford.edu>
+## Copyright (C) 2021 Charles Praplan
 ##
 ## This program is free software: you can redistribute it and/or modify
 ## it under the terms of the GNU General Public License as published by
@@ -28,8 +29,7 @@
 ## @item
 ## @var{p} = column-vector containing the filter poles
 ## @item
-## @var{k} = overall filter gain factor
-## If not given the gain is assumed to be 1.
+## @var{k} = overall filter gain factor. If not given the gain is assumed to be 1.
 ## @end itemize
 ##
 ## RETURNED:
@@ -40,8 +40,8 @@
 ## @var{sos} = [@var{B1}.' @var{A1}.'; ...; @var{BN}.' @var{AN}.']
 ## @end example
 ## where
-## @code{@var{B1}.' = [b0 b1 b2] and @var{A1}.' = [1 a1 a2]} for
-## section 1, etc.  The b0 entry must be nonzero for each section.
+## @code{@var{B1}.' = [b0 b1 b2] and @var{A1}.' = [a0 a1 a2]} for
+## section 1, etc.
 ## See @code{filter} for documentation of the second-order direct-form filter
 ## coefficients @var{B}i and %@var{A}i, i=1:N.
 ##
@@ -61,90 +61,120 @@
 ## sos =
 ##    1.0000    0.6180    1.0000    1.0000    0.6051    0.9587
 ##    1.0000   -1.6180    1.0000    1.0000   -1.5843    0.9587
-##    1.0000    1.0000         0    1.0000    0.9791         0
+##         0    1.0000    1.0000         0    1.0000    0.9791
 ##
 ## g =
 ##     1
 ## @end example
 ##
-## @seealso{sos2pz, sos2tf, tf2sos, zp2tf, tf2zp}
+## @seealso{sos2zp, sos2tf, tf2sos, zp2tf, tf2zp}
 ## @end deftypefn
 
-function [sos,g] = zp2sos(z,p,k)
+function [SOS,G] = zp2sos(z,p,k,DoNotCombineReal)
 
   if nargin<3, k=1; endif
   if nargin<2, p=[]; endif
 
-  [zc,zr] = cplxreal(z(:));
-  [pc,pr] = cplxreal(p(:));
+  DoNotCombineReal = 1;
 
-  ## zc,zr,pc,pr
+  [zc, zr] = cplxreal (z(:));
+  [pc, pr] = cplxreal (p(:));
 
-  nzc=length(zc);
-  npc=length(pc);
+  nzc = length (zc);
+  npc = length (pc);
 
-  nzr=length(zr);
-  npr=length(pr);
+  nzr = length (zr);
+  npr = length (pr);
 
-  ## Pair up real zeros:
-  if nzr
-    if mod(nzr,2)==1, zr=[zr;0]; nzr=nzr+1; endif
-    nzrsec = nzr/2;
-    zrms = -zr(1:2:nzr-1)-zr(2:2:nzr);
-    zrp = zr(1:2:nzr-1).*zr(2:2:nzr);
-  else
-    nzrsec = 0;
-  endif
+  if DoNotCombineReal
 
-  ## Pair up real poles:
-  if npr
-    if mod(npr,2)==1, pr=[pr;0]; npr=npr+1; endif
-    nprsec = npr/2;
-    prms = -pr(1:2:npr-1)-pr(2:2:npr);
-    prp = pr(1:2:npr-1).*pr(2:2:npr);
-  else
-    nprsec = 0;
-  endif
+    # Handling complex conjugate poles
+    for count = 1:npc
+      SOS(count, 4:6) = [1, -2 * real(pc(count)), abs(pc(count))^2];
+    endfor
 
-  nsecs = max(nzc+nzrsec,npc+nprsec);
+    # Handling real poles
+    for count = 1:npr
+      SOS(count + npc, 4:6) = [0, 1, -pr(count)];
+    endfor
 
-  ## Convert complex zeros and poles to real 2nd-order section form:
-  zcm2r = -2*real(zc);
-  zca2 = abs(zc).^2;
-  pcm2r = -2*real(pc);
-  pca2 = abs(pc).^2;
+    # Handling complex conjugate zeros
+    for count = 1:nzc
+      SOS(count, 1:3) = [1, -2 * real(zc(count)), abs(zc(count))^2];
+    endfor
 
-  sos = zeros(nsecs,6);
-  sos(:,1) = ones(nsecs,1); # all 2nd-order polynomials are monic
-  sos(:,4) = ones(nsecs,1);
+    # Handling real zeros
+    for count = 1:nzr
+      SOS(count+nzc, 1:3) = [0, 1, -zr(count)];
+    endfor
 
-  nzrl=nzc+nzrsec; # index of last real zero section
-  nprl=npc+nprsec; # index of last real pole section
-
-  for i=1:nsecs
-
-    if i<=nzc # lay down a complex zero pair:
-      sos(i,2:3) = [zcm2r(i) zca2(i)];
-    elseif i<=nzrl # lay down a pair of real zeros:
-      sos(i,2:3) = [zrms(i-nzc) zrp(i-nzc)];
+    # Completing SOS if needed (sections without pole or zero)
+    if npc + npr > nzc + nzr
+      for count = nzc + nzr + 1 : npc + npr % sections without zero
+        SOS(count, 1:3) = [0, 0, 1];
+      end
+    else
+      for count = npc + npr + 1 : nzc + nzr % sections without pole
+        SOS(count, 4:6) = [0, 0, 1];
+      endfor
     endif
 
-    if i<=npc # lay down a complex pole pair:
-      sos(i,5:6) = [pcm2r(i) pca2(i)];
-    elseif i<=nprl # lay down a pair of real poles:
-      sos(i,5:6) = [prms(i-npc) prp(i-npc)];
+  else
+
+    # Handling complex conjugate poles
+    for count = 1:npc
+      SOS(count, 4:6) = [1, -2 * real(pc(count)), abs(pc(count))^2];
+    endfor
+
+    # Handling pair of real poles
+    for count = 1:floor(npr/2)
+       SOS(count+npc, 4:6) = [1, - pr(2 * count - 1) - pr(2 * count), pr(2 * count - 1) * pr(2 * count)];
+    endfor
+
+    # Handling last real pole (if any)
+    if mod (npr,2) == 1
+      SOS(npc + floor (npr / 2) + 1, 4:6)= [0, 1, -pr(end)];
     endif
-  endfor
+
+
+    # Handling complex conjugate zeros
+    for count = 1:nzc
+      SOS(count, 1:3)= [1, -2 * real(zc(count)), abs(zc(count))^2];
+    endfor
+
+    # Handling pair of real zeros
+    for count = 1:floor(nzr / 2)
+       SOS(count+nzc, 1:3)= [1, - zr(2 * count - 1) - zr(2 * count), zr(2 * count - 1) * zr(2 * count)];
+    endfor
+
+    # Handling last real zero (if any)
+    if mod (nzr, 2) == 1
+      SOS(nzc + floor (nzr / 2) + 1, 1:3) = [0, 1, -zr(end)];
+    endif
+
+    # Completing SOS if needed (sections without pole or zero)
+    if npc + ceil(npr / 2) > nzc + ceil(nzr / 2)
+      for count = nzc + ceil (nzr / 2) + 1 : npc + ceil (npr / 2) % sections without zero
+        SOS(count, 1:3) = [0, 0, 1];
+      endfor
+    else
+      for count = npc + ceil(npr / 2) + 1:nzc + ceil (nzr / 2) % sections without pole
+        SOS(count, 4:6) = [0, 0, 1];
+      endfor
+    endif
+  endif
+
+  if ~exist ('SOS')
+    SOS=[0, 0, 1, 0, 0, 1];
+  endif
 
   ## If no output argument for the overall gain, combine it into the
   ## first section.
   if (nargout < 2)
-    sos(1,1:3) *= k;
+    SOS(1,1:3) = k * SOS(1,1:3);
   else
-    g = k;
+    G = k;
   endif
-
-endfunction
 
 %!test
 %! B=[1 0 0 0 0 1]; A=[1 0 0 0 0 .9];
@@ -152,3 +182,32 @@ endfunction
 %! [sos,g] = zp2sos(z,p,k);
 %! [Bh,Ah] = sos2tf(sos,g);
 %! assert({Bh,Ah},{B,A},100*eps);
+
+%!test
+%! sos = zp2sos ([]);
+%! assert (sos, [0, 0, 1, 0, 0, 1], 100*eps);
+
+%!test
+%! sos = zp2sos ([], []);
+%! assert (sos, [0, 0, 1, 0, 0, 1], 100*eps);
+
+%!test
+%! sos = zp2sos ([], [], 2);
+%! assert (sos, [0, 0, 2, 0, 0, 1], 100*eps);
+
+%!test
+%! [sos, g] = zp2sos ([], [], 2);
+%! assert (sos, [0, 0, 1, 0, 0, 1], 100*eps);
+%! assert (g, 2, 100*eps);
+
+%!test
+%! sos = zp2sos([], [0], 1);
+%! assert (sos, [0, 0, 1, 0, 1, 0], 100*eps);
+
+%!test
+%! sos = zp2sos([0], [], 1);
+%! assert (sos, [0, 1, 0, 0, 0, 1], 100*eps);
+
+%!test
+%! sos = zp2sos([-1-j -1+j], [-1-2j -1+2j], 10);
+%! assert (sos, [10, 20, 20, 1, 2, 5], 100*eps);
