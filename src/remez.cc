@@ -763,7 +763,7 @@ DEFUN_DLD (remez, args, ,
 Parks-McClellan optimal FIR filter design.\n\
 @table @var\n\
 @item n\n\
-gives the number of taps in the returned filter\n\
+gives the filter order, where the generated filter length taps is n+1\n\
 @item f\n\
 gives frequency at the band edges [b1 e1 b2 e2 b3 e3 @dots{}]\n\
 @item a\n\
