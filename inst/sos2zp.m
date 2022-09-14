@@ -1,4 +1,5 @@
 ## Copyright (C) 2005 Julius O. Smith III <jos@ccrma.stanford.edu>
+## Copyright (C) 2021 Charles Praplan
 ##
 ## This program is free software: you can redistribute it and/or modify
 ## it under the terms of the GNU General Public License as published by
@@ -29,8 +30,13 @@
 ## @var{sos} = [@var{B1}.' @var{A1}.'; ...; @var{BN}.' @var{AN}.']
 ## @end example
 ## where
-## @code{@var{B1}.' = [b0 b1 b2] and @var{A1}.' = [1 a1 a2]} for
-## section 1, etc.  The b0 entry must be nonzero for each section.
+## @code{@var{B1}.' = [b0 b1 b2] and @var{A1}.' = [a0 a1 a2]} for
+## section 1, etc.
+##
+## a0 is usually equal to 1 because all 2nd order transfer functions can
+## be scaled so that a0 = 1.
+## However, this is not mandatory for this implementation, which supports
+## all kinds of transfer functions, including first order transfer functions.
 ## See @code{filter} for documentation of the second-order direct-form filter
 ## coefficients @var{B}i and @var{A}i.
 ##
@@ -75,22 +81,43 @@ function [z,p,k] = sos2zp (sos, g = 1)
     print_usage;
   endif
 
-  gains = sos(:,1); # All b0 coeffs
-  k = prod(gains)*g; # pole-zero gain
-  if k==0, error('sos2zp: one or more section gains is zero'); endif
-  sos(:,1:3) = sos(:,1:3)./ [gains gains gains];
-
   [N,m] = size(sos);
   if m~=6, error('sos2zp: sos matrix should be N by 6'); endif
 
-  z = zeros(2*N,1);
-  p = zeros(2*N,1);
+  k = g;
+  for i = 1:N
+    b = sos(i,1:3);
+    N2 = 3;
+    while N2 && b(1)==0 # Removing leading zeros
+      b = b(2:end);
+      N2 = N2 - 1;
+    endwhile
+
+    a = sos(i,4:6);
+    N2 = 3;
+    while N2 && a(1)==0 # Removing leading zeros
+      a = a(2:end);
+      N2--;
+    endwhile
+
+    if isempty (a)
+      warning ('Infinite gain detected');
+      k = Inf;
+    elseif a(1) == 0
+      warning ('Infinite gain detected');
+      k = Inf;
+    elseif isempty (b)
+      k = 0;
+    else
+      k = k * b(1) / a(1);
+    endif
+  endfor
+
+  z = [];
+  p = [];
   for i=1:N
-    ndx = [2*i-1:2*i];
-    zi = roots(sos(i,1:3));
-    z(ndx) = zi;
-    pi = roots(sos(i,4:6));
-    p(ndx) = pi;
+    z=[z; roots(sos(i,1:3))];
+    p=[p; roots(sos(i,4:6))];
   endfor
 
 endfunction
@@ -106,3 +133,45 @@ endfunction
 %! k = 4;
 %! [z2,p2,k2] = sos2zp(sos,1);
 %! assert({cplxpair(z2),cplxpair(p2),k2},{z,p,k},100*eps);
+
+## Test with trailing zero in numerator
+%!test
+%! sos = [1, 1, 0, 1, 1, 0.5];
+%! [Z, P] = sos2zp (sos);
+%! assert (Z, roots (sos(1,1:3)), 10*eps);
+%! assert (P, roots (sos(1,4:6)), 10*eps);
+
+## Test with trailing zero in denominator
+%!test
+%! sos = [0, 1, 1, 1, 0.5, 0];
+%! [Z, P] = sos2zp (sos);
+%! assert (Z, roots (sos(1,1:3)), 10*eps);
+%! assert (P, roots (sos(1,4:6)), 10*eps);
+
+## Test with trailing zero both in numerator and in denominator
+%!test
+%! sos = [1, 1, 0, 1, 0.5, 0];
+%! [Z, P] = sos2zp (sos);
+%! assert (Z, roots (sos(1,1:3)), 10*eps);
+%! assert (P, roots (sos(1,4:6)), 10*eps);
+
+## Test with leading zero in numerator
+%!test
+%! sos = [0, 1, 1, 1, 1, 0.5];
+%! [Z, P] = sos2zp (sos);
+%! assert (Z, roots (sos(1,1:3)), 10*eps);
+%! assert (P, roots (sos(1,4:6)), 10*eps);
+
+## Test with leading zero in denominator
+%!test
+%! sos = [1, 1, 0, 0, 1, 0.5];
+%! [Z, P] = sos2zp (sos);
+%! assert (Z, roots (sos(1,1:3)), 10*eps);
+%! assert (P, roots (sos(1,4:6)), 10*eps);
+
+## Test with leading zero both in numerator and in denominator
+%!test
+%! sos = [0, 1, 1, 0, 1, 0.5];
+%! [Z, P] = sos2zp (sos);
+%! assert (Z, roots (sos(1,1:3)), 10*eps);
+%! assert (P, roots (sos(1,4:6)), 10*eps);
