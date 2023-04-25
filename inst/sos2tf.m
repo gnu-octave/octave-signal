@@ -1,5 +1,5 @@
 ## Copyright (C) 2005 Julius O. Smith III <jos@ccrma.stanford.edu>
-## Copyright (C) 2021 Charles Praplan
+## Copyright (C) 2021-2022 Charles Praplan
 ##
 ## This program is free software: you can redistribute it and/or modify
 ## it under the terms of the GNU General Public License as published by
@@ -80,11 +80,12 @@ function [B,A] = sos2tf(sos, g = 1)
      # This error cannot occur (if the above calls to the conv function
      # are not modified and if the conv function is also not modified)
   endif;
+  clear nA;
 
   # Removing trailing zeros if present in numerator and denominator
   while nB && B(nB)==0 && A(nB)==0
     B = B(1:nB-1);
-    A = A(1:nA-1);
+    A = A(1:nB-1);
     nB = length (B);
   endwhile
 
@@ -178,3 +179,18 @@ endfunction
 %! [Bh, Ah] = sos2tf (sos);
 %! assert (Bh, [1, 1] , 10*eps);
 %! assert (Ah, [1, 0.5], 10*eps);
+
+## Test with 3 trailing zeros both in numerator and in denominator
+%!test
+%! sos = [1, 1, 0, 1, 0.5, 0; 1, 1, 0, 1, 0.5, 0; 1, 1, 0, 1, 0.5, 0];
+%! [Bh, Ah] = sos2tf (sos);
+%! assert (Bh, [1, 3, 3, 1] , 10*eps);
+%! assert (Ah, [1, 1.5 0.75 0.125], 10*eps);
+
+## Test with 3 leading zeros both in numerator and in denominator
+%!test
+%! sos = [0, 1, 1, 0, 1, 0.5; 0, 1, 1, 0, 1, 0.5;0, 1, 1, 0, 1, 0.5];
+%! [Bh, Ah] = sos2tf (sos);
+%! assert (Bh, [1, 3, 3, 1] , 10*eps);
+%! assert (Ah, [1, 1.5 0.75 0.125], 10*eps);
+

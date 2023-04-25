@@ -1,5 +1,5 @@
 ## Copyright (C) 2005 Julius O. Smith III <jos@ccrma.stanford.edu>
-## Copyright (C) 2021 Charles Praplan
+## Copyright (C) 2021-2022 Charles Praplan
 ##
 ## This program is free software: you can redistribute it and/or modify
 ## it under the terms of the GNU General Public License as published by
@@ -61,7 +61,7 @@
 ## sos =
 ##    1.0000    0.6180    1.0000    1.0000    0.6051    0.9587
 ##    1.0000   -1.6180    1.0000    1.0000   -1.5843    0.9587
-##         0    1.0000    1.0000         0    1.0000    0.9791
+##    1.0000    1.0000         0    1.0000    0.9791         0
 ##
 ## g =
 ##     1
@@ -75,7 +75,7 @@ function [SOS,G] = zp2sos(z,p,k,DoNotCombineReal)
   if nargin<3, k=1; endif
   if nargin<2, p=[]; endif
 
-  DoNotCombineReal = 1;
+  DoNotCombineReal = 0;
 
   [zc, zr] = cplxreal (z(:));
   [pc, pr] = cplxreal (p(:));
@@ -165,8 +165,21 @@ function [SOS,G] = zp2sos(z,p,k,DoNotCombineReal)
   endif
 
   if ~exist ('SOS')
-    SOS=[0, 0, 1, 0, 0, 1];
+    SOS=[0, 0, 1, 0, 0, 1]; # leading zeros will be removed
   endif
+
+  # Removing leading zeros if present in numerator and denominator
+  for count = 1:size(SOS,1)
+    B=SOS(count, 1:3);
+    A=SOS(count, 4:6);
+    while B(1)==0 && A(1)==0
+      A(1) = []; # faster than A = circshift(A,-1);
+      A(3) = 0;  #   "
+      B(1) = [];
+      B(3) = 0;
+    endwhile
+    SOS(count,:) = [B,A];
+  endfor
 
   ## If no output argument for the overall gain, combine it into the
   ## first section.
@@ -185,29 +198,30 @@ function [SOS,G] = zp2sos(z,p,k,DoNotCombineReal)
 
 %!test
 %! sos = zp2sos ([]);
-%! assert (sos, [0, 0, 1, 0, 0, 1], 100*eps);
+%! assert (sos, [1, 0, 0, 1, 0, 0], 100*eps);
 
 %!test
 %! sos = zp2sos ([], []);
-%! assert (sos, [0, 0, 1, 0, 0, 1], 100*eps);
+%! assert (sos, [1, 0, 0, 1, 0, 0], 100*eps);
 
 %!test
 %! sos = zp2sos ([], [], 2);
-%! assert (sos, [0, 0, 2, 0, 0, 1], 100*eps);
+%! assert (sos, [2, 0, 0, 1, 0, 0], 100*eps);
 
 %!test
 %! [sos, g] = zp2sos ([], [], 2);
-%! assert (sos, [0, 0, 1, 0, 0, 1], 100*eps);
+%! assert (sos, [1, 0, 0, 1, 0, 0], 100*eps);
 %! assert (g, 2, 100*eps);
 
 %!test
 %! sos = zp2sos([], [0], 1);
-%! assert (sos, [0, 0, 1, 0, 1, 0], 100*eps);
+%! assert (sos, [0, 1, 0, 1, 0, 0], 100*eps);
 
 %!test
 %! sos = zp2sos([0], [], 1);
-%! assert (sos, [0, 1, 0, 0, 0, 1], 100*eps);
+%! assert (sos, [1, 0, 0, 0, 1, 0], 100*eps);
 
 %!test
 %! sos = zp2sos([-1-j -1+j], [-1-2j -1+2j], 10);
 %! assert (sos, [10, 20, 20, 1, 2, 5], 100*eps);
+
