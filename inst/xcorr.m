@@ -161,7 +161,7 @@ function [R, lags] = xcorr (X, varargin)
       endif
     elseif idx == 1
       Y = arg;
-    else
+    elseif (! isempty (arg))
       error ("xcorr: unknown optional input variable at position %d", idx);
     endif
 
