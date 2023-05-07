@@ -79,3 +79,45 @@ function [retval, lags] = xcov (X, Y, maxlag, scale)
   endif
 
 endfunction
+
+## Test input validation
+%!error xcov ()
+
+%!test
+%! x = 1:5;
+%! [c, l] = xcov(x);
+%! assert(c, [-4.0 -4.0 -1.0 4.0 10.0 4.0 -1.0 -4.0 -4.0], 2*eps)
+%! assert(l, [-4 -3 -2 -1 0 1 2 3 4])
+
+%!test
+%! x = 1:5;
+%! y = 1:5;
+%! [c, l] = xcov(x,y);
+%! assert(c, [-4.0 -4.0 -1.0 4.0 10.0 4.0 -1.0 -4.0 -4.0], 2*eps)
+%! assert(l, [-4 -3 -2 -1 0 1 2 3 4])
+%!
+%! y = 1;
+%! [c, l] = xcov(x,y);
+%! assert(c, [4.0 10.0 4.0], 2*eps)
+%! assert(l, [-1 0 1])
+
+%!test
+%! x = 1:5;
+%! y = 1:5;
+%! # maxlag
+%! [c, l] = xcov(x,y, 2);
+%! assert(c, [-1.0 4.0 10.0 4.0 -1.0], 2*eps)
+%! assert(l, [-2 -1 0 1 2])
+
+%!test
+%! x = 1:5;
+%! y = 1:5;
+%! # scale
+%! [c, l] = xcov(x,y, 'none');
+%! assert(c, [-4.0 -4.0 -1.0 4.0 10.0 4.0 -1.0 -4.0 -4.0], 2*eps)
+%! assert(l, [-4 -3 -2 -1 0 1 2 3 4])
+%!
+%! [c, l] = xcov(x,y, 'biased');
+%! assert(c, [-0.8 -0.8 -0.2 0.8  2.0  0.8 -0.2 -0.8 -0.8], 2*eps)
+%! assert(l, [-4 -3 -2 -1 0 1 2 3 4])
+
