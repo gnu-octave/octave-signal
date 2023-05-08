@@ -82,6 +82,12 @@ namespace octave
       return v.is_real_type ();
     }
 
+    inline bool
+    iscell (const octave_value& v)
+    {
+      return v.is_cell ();
+    }
+
 #else
 
     inline bool
@@ -100,6 +106,12 @@ namespace octave
     isreal (const octave_value& v)
     {
       return v.isreal ();
+    }
+
+    inline bool
+    iscell (const octave_value& v)
+    {
+      return v.iscell ();
     }
 
 #endif

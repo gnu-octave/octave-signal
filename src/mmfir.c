@@ -1,0 +1,658 @@
+/*     mmfir.c: MiniMax FIR filter design per McClellan, Parks & Rabiner
+ *        Copyright (c) 2014/15 Rob Sykes <robs@users.sourceforge.net>
+ *
+ * mmfir is free software; you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License as published by the Free Software
+ * Foundation; either version 3 of the License, or (at your option) any later
+ * version.
+ *
+ * mmfir is distributed in the hope that it will be useful, but WITHOUT ANY
+ * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
+ * A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along with
+ * this program; if not, see <http://www.gnu.org/licenses/>.
+ *
+ * Design goals for this implementation:
+ *   Speed:            Medium         Data size:    Medium
+ *   Code size:        Medium         Robustness:   Very high
+ *   Code complexity:  Medium         Portability:  C89 + inline, C++
+ *
+ * Other licences/implementations may be available from the author.
+ */
+
+
+
+#include "mmfir.h"
+
+
+
+#if defined QUAD_PREC
+  #include <quadmath.h>
+#endif
+
+#if defined(__cplusplus)
+  #include <climits>
+  #include <cmath>
+  #include <cstdlib>
+  #include <cstdio>
+  #include <cstring>
+#else
+  #include <limits.h>
+  #include <math.h>
+  #include <stdlib.h>
+  #include <stdio.h>
+  #include <string.h>
+#endif
+
+#if INT_MAX == 2147483647
+  typedef int rand_t;
+#elif LONG_MAX == 2147483647L
+  typedef long rand_t;
+#else
+  #error no suitable int32 type
+#endif
+
+#if defined _MSC_VER
+  #define inline __inline
+#endif
+
+
+
+/* Real-number precision, quad, double or long double (the default). */
+
+#if defined QUAD_PREC /* Very slow without native support. */
+  #define real __float128
+  #define cosr cosq
+  #define sinr sinq
+  #define PIr M_PIq
+#elif defined DOUBLE_PREC
+  #define real double
+  #define cosr cos
+  #define sinr sin
+  #define PIr PI
+#else
+  #define real long double
+  #define cosr cosl
+  #define sinr sinl
+  #define PIr 3.1415926535897932384626433832795029L
+#endif
+
+
+
+#define bandL           (&bandSpecs[0])
+#define bandR           (&bandSpecs[numBands-1])
+#define clamp(x,lo,hi)  (((x)>(hi))?(hi):(((x)<(lo))?(lo):(x)))
+#define debugLevel      (flags & 3)
+#define D(f)            (D0(f) / typeMod(f,T)) /* Desired response fn */
+#define dir(x)          ((x)<0? -1: (x)>0? 1 : 0)
+#define epsilon         1e-11 /* In some circumstances, treat < epsilon as 0 */
+#define E(x)            peaks[x].e
+#define e(x)            space[x].e
+#define F(x)            peaks[x].f
+#define f(x)            space[x].f
+#define maxExtras       (numBands+2)
+#define maxPeaks        (R+1+maxExtras)
+#define PI              3.1415926535897932384626433832795029
+#define rand(r,x)       (ranqd1(r) * ((x) / (65536. * 32768.))) /* in [-x,x) */
+#define ranqd1(r)       ((r) = 1664525 * (r) + 1013904223) /* int32_t r */
+#define returnError(x)  do {report.result=x; goto END;} while(0)
+#define round(x)        (int)floor((x)+.5)
+#define setF(F)         for (f=(F); f>b->freqR; ++b)
+#define userEpsilon     1e-6
+#define W(f)            (W0(f)/(b->weightF?f:1)*typeMod(f,T)) /* Weight fn */
+
+
+
+/* Less problematic (side-effects, compiler bugs) than the equivalent macro: */
+static inline double maxD(double a, double b) {return a>=b? a:b;}
+static inline int    maxI(int    a, int    b) {return a>=b? a:b;}
+
+
+
+/* These 2 macros could be replaced with function pointers to allow
+ * client-supplied, arbitrary weighting or desired amplitude response: */
+
+#if 1
+  /* '...R' values here contain pre-calculated gradient: */
+  #define W0(f) (b->weightL + b->weightR*(f-b->freqL)) /* Weighting function */
+  #define D0(f) (b->ampL    + b->ampR   *(f-b->freqL)) /* Desired response fn */
+#else /* Along the lines of: */
+  extern double (* W0)(double f);
+  extern double (* D0)(double f);
+#endif
+
+
+
+static char const * const errorText[]={
+  "out-of-memory",
+  "number of bands must be at least 1",
+  "filter-order must be at least 1",
+  "band-edge frequencies must increase in [0,1]",
+  "weighting function out-of-range",
+  "amplitude function out-of-range",
+  "type III/IV DC amplitude response must be 0",
+  "type II/III Nyquist amplitude response must be 0",
+};
+
+
+
+/* Type definitions: */
+
+typedef enum {TypeI, TypeII, TypeIII, TypeIV} FirType;
+
+typedef struct {real x, beta, gamma;} LagrangeCoef;
+
+typedef struct {
+  double f;    /* Frequency in [0,1] of this point */
+  double e;    /* Error at this point */
+} Point;
+
+
+
+/* Determine coefs of a 2nd-order polynomial from 3 of its points: */
+
+static void poly2(
+    double x0, double x1, double x2,
+    double y0, double y1, double y2,
+    double * a, double * b, double * c)
+{
+  double a0 = y0/((x0-x1)*(x0-x2));
+  double a1 = y1/((x1-x2)*(x1-x0));
+  double a2 = y2/((x2-x0)*(x2-x1));
+  *a = a0+a1+a2;
+  *b = -(a0*(x1+x2) + a1*(x0+x2) + a2*(x0+x1));
+  *c = a0*x1*x2 + x0*a1*x2 + x0*x1*a2;
+}
+
+
+
+/* Evaluate a 2nd-order polynomial at given point: */
+
+static double poly2Val(double a, double b, double c, double x)
+{
+  return (a*x + b)*x + c;
+}
+
+
+
+/* For filter-response analysis, use a discrete frequency space that is
+ * 'warped' around transition-bands.  The warping function is derived from the
+ * observation by Shpak/Antoniou (1990) that an 'initial guess' for the peak
+ * frequencies based on adjacent-peak spacing proportional to s(n) =
+ * exp(c1+c2*n), improves upon one where the adjacent-peak spacing is constant.
+ *
+ * E.g., for a band-pass filter with band-edges 0, s1, p1, p2, s2, 1, the
+ * analysis points within warped space compared to those in a linear space
+ * might look like the following (second stop-band not shown):
+ *          0                       s1    p1                                  p2
+ * Warped:  o      o     o    o  o oo     oo o  o    o      o      o    o  o oo
+ * Linear:  o o o o o o o o o o o o o     o o o o o o o o o o o o o o o o o o o
+ *
+ * Warp function derivation is as follows: approx. peak position continuous
+ * function, warp(x) =
+ *   x>=1: f(x)-f(0)
+ *   x<1:  2nd-order approximation (since exp. approx. breaks down here)
+ * where f(x) = Indef. integral of s(x) = exp(c1+c2*x)/c2
+ *
+ * Constants c1, c2 are determined empirically.  Dependent constants c3=-f(0),
+ * ca,cb,cc are calculated as follows: c3 = -exp(c1)/c2;
+ *   poly2(0,1,2, 0,warp(1),warp(2), &ca,&cb,&cc);
+ */
+
+static double const c1 = +.1235;
+static double const c2 = -.8;
+
+static double const c3 = 1.41431;
+static double const ca = .214437;
+static double const cb = .006742;
+static double const cc = 0;
+
+
+
+static double warp(double x) /* Calculate warp in arbitrary units: */
+{
+  double t = c1 + c2*x;
+  return x<0? 0 : x<1? poly2Val(ca,cb,cc,x) : x-(t>-38? exp(t)/c2 : 0)-c3;
+}
+
+
+
+static double iwarp(double y) /* Inverse of warp(). */
+{
+  double t, x1=y+c3, x;
+
+  if (y<0)
+    return 0;
+
+  if (y<warp(1))
+    return (-cb + sqrt(cb*cb-4*ca*(cc-y)))/(2*ca);
+
+  /* Newton iteration: */
+  do x=x1, t=c1+c2*x, x1=x-(warp(x)-y)/(1-(t>-38? exp(t) : 0));
+  while (fabs(x1-x)>1e-5);
+  return x1;
+}
+
+
+
+/* Generate a set of warped frequency-space points.
+ * N.B. rand helps to avoid Lagrange interpolation instability: */
+
+static int warpSpace(Point * p, double m, double f1, double f2,
+    int density, int step, rand_t * random)
+{
+  int i, n = (int)ceil(m*density);
+  double scale, df = f2 - f1;
+
+  p->f = f1, p+=step; /* End points must be exact (not calculated). */
+  if (n > 0) {
+    scale = df/warp(1.*n/density);
+    for (i = 1; i < n; ++i)
+      p->f = f1+scale*warp((i+rand(*random, .001))/density), p+=step;
+    p->f = f2; /* End points must be exact (not calculated). */
+  }
+  return 1+n;
+}
+
+
+
+static int warpSpaceR( /* Right of transition-band. */
+    Point * p, double m, double f1, double f2, int density, rand_t * random)
+{
+  return warpSpace(p, m, f1, f2, density, +1, random);
+}
+
+
+
+static int warpSpaceL ( /* Left of transition-band. */
+    Point * p, double m, double f1, double f2, int density, rand_t * random)
+{
+  return warpSpace(p+(int)ceil(m*density), m, f2, f1, density, -1, random);
+}
+
+
+
+static int warpSpaceRL( /* Between transition-bands. */
+    Point * p, double m, double f1, double f2, int density, rand_t * random)
+{
+  double df1 = (f2 - f1) * .5, m1 = m * .5;
+  int n = warpSpaceR(p, m1, f1, f1+df1, density, random);
+  warpSpaceL(p + n-1, m1, f1+df1, f2, density, random);
+  return n*2-1;
+}
+
+
+
+/* Apportion space to each band, taking account of warping: */
+
+static void apportionSpace(mmfirBandSpec * b, int numBands, int n)
+{
+  int i, changed;
+  double sum, t, av;
+
+  do { /* Use an iterative method. */
+    for (av=changed=0, i=0; i<numBands; ++i)
+      av += warp(b[i].portion*n/b[i].ends)/(b[i].portion0/b[i].ends);
+    av/=numBands;
+
+    for (sum=i=0; i<numBands; ++i) {
+      t=iwarp(av*b[i].portion0/b[i].ends)/n*b[i].ends;
+      changed += fabs(t-b[i].portion) > 1e-6;
+      sum+= b[i].portion=t;
+    }
+    for (i=0; i<numBands; b[i++].portion/=sum); /* Normalise. */
+  } while (changed);
+}
+
+
+
+static inline real /* Modifier at given f in [0,1], for filter-type T */
+typeMod(real f, FirType T)
+{
+  switch (T) {
+    case TypeI  : default: return 1;
+    case TypeII : return cosr(f *(PIr*.5)); /* Has zero at f=1. */
+    case TypeIII: return sinr(f * PIr);     /* Has zero at f=0, f=1. */
+    case TypeIV : return sinr(f *(PIr*.5)); /* Has zero at f=0. */
+  }
+}
+
+
+
+/* Calculate the estimated amplitude response at a single, given frequency
+ * using precalculated Lagrange interpolation coefficients. */
+
+static real A(LagrangeCoef const * coefs, int R, double f)
+{
+  int i = 0;
+  real n = 0, d = 0, x = cosr(PIr*f), t;
+  for (; i < R; d += t = coefs[i].beta / t, n += coefs[i].gamma * t, ++i)
+    if (fabs((double)(t = x - coefs[i].x)) < epsilon)
+      return coefs[i].gamma;
+  return n/d;
+}
+
+
+
+mmfirReport mmfir(
+    double            h[],
+    mmfirFilterClass  filterClass,
+    int               N0, /* = filter order + 1 */
+    int               numBands,
+    mmfirBandSpec     bandSpecs[/* numBands */], /* N.B. destroyed. */
+    double            accuracy,
+    double            persistence,
+    double            robustness,
+    double            target,
+    int               flags)
+{
+  int      N = maxI(N0,2);
+  FirType  T = (FirType)((filterClass!=mmfirSymmetric)*2 + !(N&1));
+  int      R = N/2 + !T; /* R = # of cosine functions; num peaks = R+1 */
+
+  mmfirReport report = {mmfirSuccess, 0, 0, 0, 0, {0,0,0}};
+
+  /* For forward-compatibility of the use of the control
+   * variables, (almost) silently ignore out-of-range values: */
+  int      density2 = round(5+5*(
+             report.controls[0]=clamp(accuracy,0,7)     ));
+  int      maxIterations = round(40*pow(1.5,
+             report.controls[1]=clamp(persistence,-5,5) ));
+  int      density = 3+(numBands>2)+round(
+             report.controls[2]=clamp(robustness,0,3)   );
+
+  int      doneInit=0, doLG=1; /* For the lower/higher density passes. */
+  int      spaceLength, i, j, _1; /* _1 holds +/- 1 */
+  int      prevNumPeaks=0;
+  double   f, maxA=0;
+  double   delta_1 = 1e-30; /* 1/delta */
+  double   totalWidth; /* Of given bands; in which peaks will be distributed. */
+  mmfirBandSpec * b;
+
+  /* Allocate the working arrays: */
+  LagrangeCoef * coefs = (LagrangeCoef *)calloc((size_t)(R+1), sizeof(*coefs));
+  Point       * peaks = (Point *)calloc((size_t)(maxPeaks), sizeof(*peaks));
+  double  * prevPeaks =(double *)calloc((size_t)(maxPeaks), sizeof(*prevPeaks));
+  Point      * space0 = 0, * space = 0; /* Need to determine its size first. */
+
+  /* Initial checks: */
+  if (numBands<=0)
+    returnError(mmfirInvalidNumBands);
+  if (N!=N0)
+    returnError(mmfirInvalidOrder);
+  if (bandL->freqL<0 || bandR->freqR>1)
+    returnError(mmfirInvalidFrequency);
+
+  /* Further checks, and pre-calc. linear interp. gradients, etc.: */
+  for (totalWidth=0, b=bandL; b<=bandR; ++b) {
+    double df = b->freqR - b->freqL;
+
+    if (fabs(b->ampL) > 1e+10 || fabs(b->ampR) > 1e+10)
+      returnError(mmfirInvalidAmplitude);
+    else if (filterClass==mmfirDifferentiator)
+      b->ampL *= -1, b->ampR *= -1;
+
+    b->weightF = (fabs(b->ampL) > userEpsilon || fabs(b->ampR) > userEpsilon) &&
+      filterClass==mmfirDifferentiator;
+
+    if (b->weightL < 1e-10 || b->weightL > 1e+10 ||
+        b->weightR < 1e-10 || b->weightR > 1e+10)
+      returnError(mmfirInvalidWeight);
+    else if (b->weightF)
+      b->weightL *= 2, b->weightR *= 2; /* For 2/f weighting. */
+
+    if ((df <= userEpsilon) || (b<bandR && b->freqR>(b+1)->freqL))
+      returnError(mmfirInvalidFrequency);
+
+    b->ampR    = (b->ampR    - b->ampL   ) / df;
+    b->weightR = (b->weightR - b->weightL) / df;
+    totalWidth += df;
+
+    maxA=maxD(maxA, maxD(fabs(b->ampL),fabs(b->ampR)));
+  }
+  if (maxA<1e-20)
+    returnError(mmfirInvalidAmplitude);
+
+  /* Avoid dividing by typeMod(0,T)=0: */
+  if ((T == TypeIII || T == TypeIV) && (b=bandL)->freqL < (f=epsilon)) {
+    if (fabs(b->ampL) > userEpsilon)
+      returnError(mmfirInvalidDcAmplitude);
+
+    b->ampL += b->ampR*(f-b->freqL);
+    b->weightL += b->weightR*(f-b->freqL);
+    totalWidth -= f-b->freqL, b->freqL = f;
+  }
+
+  /* Avoid dividing by typeMod(1,T)=0: */
+  if ((T==TypeII || T==TypeIII) && (b=bandR)->freqR > (f=1-epsilon)) {
+    if (fabs(D0(b->freqR)) > userEpsilon)
+      returnError(mmfirInvalidNyquistAmplitude);
+
+    totalWidth -= b->freqR-f, b->freqR = f;
+  }
+
+  /* Separate any contiguous bands: */
+  for (b=bandL; b<bandR; ++b)
+    if (b->freqR > (f = b[1].freqL-epsilon))
+      totalWidth -= b->freqR-f, b->freqR = f;
+
+  /* Usually, start with a lower density, then switch to the final value: */
+  for (density2=maxI(density,density2);
+      report.result==mmfirSuccess && density<=density2;
+      doLG=0, density+=maxI(density2-density,1)) {
+
+    /* Map current density to a convergence minimality threshold: */
+    double minimalityThreshold = density<density2? density*.35-.45 :
+      (density+35)*.05; /* Though in this case, stability usually prevails. */
+    if (debugLevel>2)
+      fprintf(stderr, "minimalityThreshold: %g\n", minimalityThreshold);
+
+    { /* Allocate & populate the analysis frequency space: */
+      rand_t random = 0;
+
+      for (b=bandL; b<=bandR; ++b) {
+        double df = b->freqR - b->freqL;
+        b->portion = b->portion0 = df/totalWidth;
+        b->ends=2-(b->freqL <= epsilon || b->freqR >= 1-epsilon);
+      }
+      apportionSpace(bandL, numBands, R+1);
+
+      /* Determine # of points in analysis space: */
+      for (spaceLength=0, b=bandL; b<=bandR; b->endP=spaceLength, ++b) {
+        double m = (R+1)*b->portion;
+        if (b->freqL <= epsilon || b->freqR >= 1-epsilon)
+          spaceLength += 1 + (int)ceil(m*density);
+        else
+          spaceLength += 2 * (1 + (int)ceil(m*.5*density)) - 1;
+      }
+
+      /* Allocate space and calculate frequencies: */
+      free(space0);
+      if ((space0 = (Point *)calloc((size_t)(spaceLength+2), sizeof(*space)))) {
+        space = space0+1; /* Simplifies peak detection at edges of space. */
+        for (j=0, b = bandL; b<=bandR; ++b) {
+          double m = (R+1)*b->portion;
+          if (b->freqL <= epsilon)
+            j+= warpSpaceL(space+j, m, b->freqL, b->freqR, density, &random);
+          else if (b->freqR >= 1-epsilon)
+            j+= warpSpaceR(space+j, m, b->freqL, b->freqR, density, &random);
+          else
+            j+= warpSpaceRL(space+j, m, b->freqL, b->freqR, density, &random);
+        }
+      }
+    }
+
+    if (!space0 || !coefs || !peaks || !prevPeaks)
+      returnError(mmfirOutOfMemory);
+
+    /* Initial 'guess' distributes peaks evenly through warped space.  The
+     * offset of half a step at each end facilitates longer filters: */
+    if (!doneInit++) for (i=0; i<=R; ++i)
+      peaks[i].f=space[round((i+.5)/(R+1)*(spaceLength-1))].f;
+
+    report.result=mmfirOngoing;
+    while (1) { /* Perform the Remez exchange (until break, below): */
+      double max, minimality=0, stability=0;
+      int numPeaks, ok, extras=0;
+
+      if (doLG++) { /* Calculate Lagrange coefficients for response estimate: */
+        real denom = 0, numer = 0, t1, t, delta;
+
+        for (i=0; i<=R; ++i)
+          coefs[i].x = cosr(PIr * peaks[i].f);
+
+        for (_1 = -1, b=bandL, i=0; i <= R; ++i) {
+          for (t=1, j=0; j<=R; t1=t, t*=2*(coefs[i].x-coefs[j].x) +(i==j), ++j);
+          if (!t1 || !t)
+            returnError(mmfirNumericalError);
+          coefs[i].beta = 1/t1; /* Value at i==R will not be used.*/
+          setF(peaks[i].f);
+          numer += D(f)/t, denom += (_1 = -_1)/(t*W(f));
+        }
+        if (!numer || !denom)
+          returnError(mmfirNumericalError);
+        delta_1 = 1/(double)(delta = numer/denom);
+
+        for (_1 = -1, b=bandL, i=0; i < R; ++i) {
+          setF(peaks[i].f);
+          coefs[i].gamma = D(f)-(_1 = -_1)*delta/W(f);
+        }
+      }
+
+      /* Stop Remez here if converged or no iterations remain: */
+      if (report.result == mmfirSuccess)
+        break;
+      else if (report.iterations == maxIterations) {
+        report.result = density<density2? mmfirGaveUp1 : mmfirGaveUp;
+        break;
+      }
+      else ++report.iterations;
+
+      /* Evaluate the normalised (i.e. converges to [-1,1]) error function: */
+      for (i=0, b=bandL; b<=bandR; i=b->endP, ++b)
+        #ifdef _OPENMP
+        #pragma omp parallel for
+        #endif
+        for (j=i; j<b->endP; ++j) {
+          double f=space[j].f;
+          space[j].e = delta_1 * (double)(W(f) * (D(f) - A(coefs, R, f)));
+        }
+      report.FEs += spaceLength;
+
+      /* Find and store all local peaks in error magnitude: */
+      b=bandL, numPeaks=0;
+      for (i=0; i<spaceLength; ++i) if (dir(e(i+1)-e(i))!=dir(e(i)-e(i-1))) {
+        double e, A, B, C, fp;
+
+        /* Approx. continuous-space peak (by interpolation in discrete-space):*/
+        setF(f(i));
+        j = i - (f(i) == b->freqR) + (f(i) == b->freqL); /* Band-edge back-off*/
+        poly2(f(j-1), f(j), f(j+1), e(j-1), e(j), e(j+1), &A, &B, &C);
+        fp = B/A*-.5; /* Freq. at which 1st derivative of poly is 0. */
+        ok = j==i || (dir(e(j+1)-e(j))*dir(e(j)-e(j-1)) > 0 &&
+            fp >= f(i-(j<=i)) && fp <= f(i+(j>=i))); /* Band-edge needs care. */
+        f = ok? fp : f, e = ok? poly2Val(A,B,C,f) : e(i);
+
+        /* Store the peak:                             But avoid twin-    \_  */
+        if (!numPeaks || f>peaks[numPeaks-1].f) {   /* peaks in this case:  \ */
+          if (numPeaks == maxPeaks) /* Likely due to numerical error.*/
+            returnError(mmfirTooManyPeaks);
+          peaks[numPeaks].f = f, peaks[numPeaks++].e = e;
+        }
+      }
+
+      if (debugLevel>1) { /* Dump arrays to files for debugging: */
+        char name[9], dummy = (char)sprintf(name, "sp%i", report.iterations);
+        FILE * f = fopen(name,"w") + 0*dummy;
+        for (i=0; i<spaceLength;++i) fprintf(f, "%.16f % .9g\n", f(i), e(i));
+        fclose(f);
+        name[0]='p', f = fopen(name,"w");
+        for (i=0; i<numPeaks;++i) fprintf(f, "%.16f % .9g\n", F(i), E(i));
+        fclose(f);
+      }
+
+      /* Check that there are at least R+1 peaks: */
+      if ((extras = numPeaks - (R+1)) < 0)
+        returnError(mmfirTooFewPeaks); /* Perhaps due to numerical error. */
+
+      /* Before discarding any peaks, check freq. stability of the entire set:*/
+      for (max=1e-9, i=0; i<numPeaks-1; prevPeaks[i]=F(i), ++i)
+        max=maxD(max,fabs(1-(prevPeaks[i+1]-prevPeaks[i])/(F(i+1)-F(i))));
+      prevPeaks[i]=F(i); /* Since for-loop stops one short. */
+      stability = numPeaks == prevNumPeaks? -log10(max) : -9.99;
+      prevNumPeaks = numPeaks;
+
+      /* If >R+1 peaks, reduce to R+1 by discarding lesser peaks/pairs: */
+      while (numPeaks>R+1) {
+        int n=1, try2, d_na, d; /* d = index of peak to discard. */
+
+        /* Find a lesser peak, either overall or at one end: */
+        try2=numPeaks-(R+1)>1, i=try2? 1 : numPeaks-1;
+        for (d_na=d=0; !d_na && i<numPeaks; ++i) {
+          d_na = E(i)*E(i-1)>0? i : d_na; /* Check alternating. */
+          d = fabs(E(i)) < fabs(E(d))? i : d; /* Check magnitude. */
+        }
+        d=d_na? d_na: d; /* Prefer to discard non-alternating. */
+        if (try2 && d && d != numPeaks-1) /* Discard pair only if not at end.*/
+          n=2, d-=fabs(E(d-1))<fabs(E(d+1)); /* Choose lesser adjacent. */
+        memmove(peaks+d, peaks+d+n, (size_t)((numPeaks-=n)-d)*sizeof(*peaks));
+        if (debugLevel>2) fprintf(stderr, "x%i %i:%i\n", d_na, d, n);
+      }
+
+      /* Determine the minimality of the maximum error: */
+      for (max=1+1e-9, i=0; i<=R; max=maxD(max, fabs(E(i))), ++i);
+      minimality = -log10(max-1);
+
+      /* Check for convergence: */
+      if ((minimality>minimalityThreshold && (density<density2 || stability>2))
+          || stability>2.7)
+        report.result = mmfirSuccess;
+
+      if (debugLevel) fprintf(stderr, "%2i %2i %2i % .2f % .2f\n",
+        report.iterations, density, extras, maxD(minimality,-9.99), stability);
+    }
+  }
+
+  if (target && 1/fabs(delta_1) > target)
+    returnError(mmfirMissedTarget);
+
+  { /* Generate filter coefficients: */
+    double * a = (double *)space; /* Reuse space as it's no longer in use. */
+    double _1 = "\1\377"[T>TypeII], phi = (T<TypeIII)*.5, s;
+
+    /* Sample the final estimated response; modify for filter type: */
+    #ifdef _OPENMP
+    #pragma omp parallel for
+    #endif
+    for (i=0; i<=N/2; ++i) {
+      double f=2.*i/N;
+      a[i] = (double)(A(coefs, R, f) * typeMod(f, T));
+    }
+    report.FEs += N/2+1;
+
+    /* --> time-domain using symmetry-aware IDFT (could also use IFFT): */
+    a[N/2] /= 1+T/3;
+    #ifdef _OPENMP
+    #pragma omp parallel for
+    #endif
+    for (i=0; i <(N+1)/2; ++i) {
+      for (s=*a*.5, j=1; j <= N/2; s += sin(PI*((N-1-2.*i)/N*j+phi))*a[j], ++j);
+      h[i] = _1*(h[N-1-i] = 2*s/N);
+    }
+  }
+
+END: /* Free working memory: */
+  free(space0);
+  free(prevPeaks);
+  free(peaks);
+  free(coefs);
+
+  /* Complete and return the report: */
+  report.text = report.result >= mmfirInvocationError?
+    errorText[report.result-mmfirInvocationError] :
+    report.result >= mmfirError?  "numerical-error" :
+    report.result >= mmfirWarning?  "not-converged" : "success";
+  report.minimax = 1/fabs(delta_1);
+  return report;
+}

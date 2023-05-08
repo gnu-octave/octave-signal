@@ -85,6 +85,8 @@ IIR Filter Design
   iirlp2mb
   impinvar
   invimpinvar
+  firpm
+  firpmord
   ncauer
   pei_tseng_notch
   sftrans

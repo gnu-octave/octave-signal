@@ -25,12 +25,14 @@ OCT_FILES = \
   __fwht__.oct \
   __ultrwin__.oct \
   cl2bp.oct \
+  firpm.oct \
   medfilt1.oct \
   remez.oct \
   sosfilt.oct \
   upfirdn.oct
 
 CL2BP_OBJECTS = cl2bp.o cl2bp_lib.o
+FIRPM_OBJECTS = firpm.o mmfir.o
 
 OCT_SOURCES = $(patsubst %.oct,%.cc,$(OCT_FILES))
 
@@ -39,10 +41,16 @@ all: $(OCT_FILES)
 %.o: %.cc
 	$(MKOCTFILE) $(PKG_CXXFLAGS) -c $< -o $@
 
+%.o: %.c
+	$(MKOCTFILE) -c $< -o $@
+
 %.oct: %.cc octave-compat.h
 	$(MKOCTFILE) $(PKG_CXXFLAGS) $< -o $@
 
 cl2bp.oct: $(CL2BP_OBJECTS)
+	$(MKOCTFILE) $(PKG_CXXFLAGS) $^ -o $@
+
+firpm.oct: $(FIRPM_OBJECTS)
 	$(MKOCTFILE) $(PKG_CXXFLAGS) $^ -o $@
 
 $(CL2BP_OBJECTS): cl2bp_lib.h octave-compat.h
