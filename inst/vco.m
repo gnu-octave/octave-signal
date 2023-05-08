@@ -103,6 +103,5 @@ function [y,yn] = vco (x, fc = [], fs = [])
 endfunction
 
 %!error vco
-%!error vco(1)
-%!error vco(1, 1)
+%!error vco([1 2])
 
