@@ -21,6 +21,7 @@ Signals
   udecode
   uencode
   unshiftdata
+  vco
 Signal Measurement
   findpeaks
   peak2peak
