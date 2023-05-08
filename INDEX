@@ -47,6 +47,7 @@ Filter Analysis
   fwhm
   grpdelay
   impz
+  isstable
   zplane
 Filter Conversion
   polystab
