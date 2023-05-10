@@ -1,18 +1,27 @@
-/*        Copyright (c) 2014/15 Rob Sykes <robs@users.sourceforge.net>
- *
- * This file is part of Octave.
- *
- * Octave is free software; you can redistribute it and/or modify it under the
- * terms of the GNU General Public License as published by the Free Software
- * Foundation; either version 3 of the License, or (at your option) any later
- * version.
- *
- * Octave is distributed in the hope that it will be useful, but WITHOUT ANY
- * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
- * A PARTICULAR PURPOSE. See the GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License along with
- * this program; if not, see <http://www.gnu.org/licenses/>.                  */
+////////////////////////////////////////////////////////////////////////
+//
+// Copyright (C) 2014/15/21 Rob Sykes <robs@users.sourceforge.net>
+//
+// See the file COPYRIGHT.md in the top-level directory of this
+// distribution or <https://octave.org/copyright/>.
+//
+// This file is part of Octave.
+//
+// Octave is free software: you can redistribute it and/or modify it
+// under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// Octave is distributed in the hope that it will be useful, but
+// WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with Octave; see the file COPYING.  If not, see
+// <https://www.gnu.org/licenses/>.
+//
+////////////////////////////////////////////////////////////////////////
 
 
 
@@ -20,262 +29,300 @@
 
 #include <octave/oct.h>
 #include <octave/Cell.h>
+#include <ov-fcn-handle.h>
+#include <ov-scalar.h>
+#include <octave/parse.h>
 
 #include "octave-compat.h"
 
-#define AL(x) (int)(sizeof(x)/sizeof(x[0])) // Array-Length
-#define returnError(...) do { error(__VA_ARGS__);\
-  return octave_value_list(); } while (0)
+#define AL(x) (int)(sizeof (x)/sizeof (x[0])) // Array-Length
+#define returnError(...) do { error (__VA_ARGS__);\
+  return octave_value_list (); } while (0)
 
 
 
-DEFUN_DLD (firpm, args, , "\
+enum
+  {
+    RESP_FN_ARG_N,
+    RESP_FN_ARG_F,
+    RESP_FN_ARG_G,
+    RESP_FN_ARG_W,
+    RESP_FN_ARG_VAR
+  };
+
+
+
+static MmfirResult mmfirRespFn (MmfirBandSpec const * bandSpecs,
+    int len, MmfirPoint points[], va_list args)
+{
+  (void)bandSpecs;
+  octave_fcn_handle * const respFnHandle(va_arg (args, octave_fcn_handle *));
+  octave_value_list * const respFnArgs  (va_arg (args, octave_value_list *));
+  ColumnVector G (len);
+  for (int i=0; i<len; ++i) G (i) = points[i].f;
+  (*respFnArgs) (RESP_FN_ARG_G) = G;
+  octave_value_list const result(
+      octave::feval (respFnHandle->function_value (), *respFnArgs, 2));
+  auto const nargout (result.length ());
+  ColumnVector A; if (nargout>0) A=result (0).vector_value ();
+  ColumnVector W; if (nargout>1) W=result (1).vector_value ();
+  if (A.numel ()!=len)
+    {
+      error ("firpm respFn amplitude length %i should be %i", (int)A.numel (), len);
+      return MmfirInvalidAmplitude;
+    }
+  if (W.numel ()!=len && nargout>1)
+    {
+      error ("firpm respFn weight length %i should be %i", (int)W.numel (), len);
+      return MmfirInvalidWeight;
+    }
+  if (nargout>1)
+    for (int i=0; i<len; ++i) points[i].a=A (i), points[i].w=W (i);
+  else
+    for (int i=0; i<len; ++i) points[i].a=A (i), points[i].w=1;
+  return MmfirSuccess;
+}
+
+
+
+static double lgrid (octave_value const & v)
+{
+  double const density(v.double_value ());
+  return log ( std::max (density, 16.)) / log (4) - 2;
+}
+
+
+
+
+DEFUN_DLD (firpm, args, nargout, "\
 -*- texinfo -*-\n\
 @deftypefn  {Loadable Function} {@var{b} =} firpm (@var{n}, @var{f}, @var{a})\n\
-@deftypefnx {Loadable Function} {@var{b} =} firpm (@var{n}, @var{f}, @var{a}, @var{w})\n\
-@deftypefnx {Loadable Function} {@var{b} =} firpm (@var{n}, @var{f}, @var{a}, @var{w}, @var{properties})\n\
-@deftypefnx {Loadable Function} {@var{b} =} firpm (@var{n}, @var{f}, @var{a}, @var{properties})\n\
+@deftypefnx {Loadable Function} {@var{b} =} firpm (@var{n}, @var{f}, @@@var{respFn})\n\
+@deftypefnx {Loadable Function} {@var{b} =} firpm (@var{n}, @var{f}, @{@@@var{respFn}, @dots{}@})\n\
+@deftypefnx {Loadable Function} {@var{b} =} firpm (@dots{}, @var{w})\n\
+@deftypefnx {Loadable Function} {@var{b} =} firpm (@dots{}, @var{class})\n\
+@deftypefnx {Loadable Function} {@var{b} =} firpm (@dots{}, @{@var{accuracy, @dots{}@}})\n\
 @deftypefnx {Loadable Function} {[@var{b}, @var{minimax}] =} firpm (@dots{})\n\
-@deftypefnx {Loadable Function} {[@var{b}, @var{minimax}, @var{result}] =} firpm (@dots{})\n\
+@deftypefnx {Loadable Function} {[@var{b}, @var{minimax}, @var{res}] =} firpm (@dots{})\n\
 @cindex signal processing\n\
 \n\
-Return as column-vector @var{b}, the coefficients of a linear-phase FIR\n\
-filter designed according to given specifications and the `minimax'\n\
-criterion.  The method (per McClellan et al.@footnote{ J. H. McClellan, T.\n\
-W. Parks and L. R. Rabiner, `A Computer Program for Designing Optimum FIR\n\
-Linear Phase Digital Filters', IEEE Trans.@: Audio Electroacoust., vol.@:\n\
-AU-21, 1973, pp.@: 506--525.}) uses successive approximation to minimise the\n\
-maximum weighted error between the desired and actual frequency response of\n\
-the filter.  Filters thus designed are variably described as being `minimax',\n\
+Designs a linear-phase FIR filter according to given specifications and the\n\
+`minimax' criterion.  The method (per McClellan et al.@footnote{ J. H.\n\
+McClellan, T.  W. Parks and L. R.  Rabiner, `A Computer Program for Designing\n\
+Optimum FIR Linear Phase Digital Filters', IEEE Trans.@: Audio Electroacoust.,\n\
+vol.@: AU-21, 1973, pp.@: 506--525.}) uses successive approximation to minimize\n\
+the maximum weighted error between the desired and actual frequency response of\n\
+the filter.  Such filters are variably described as being `minimax',\n\
 `equiripple', or `optimal (in the Chebyshev sense)'.\n\
 \n\
 @heading Arguments\n\
 \n\
 @table @var\n\
 \n\
+@item @dots{}\n\
+Where shown as the first argument to @code{firpm}, indicates that any\n\
+previously-indicated list of arguments may substitute for the ellipsis.\n\
+\n\
 @item n\n\
 A positive integer giving the filter order.\n\
 \n\
 @item f\n\
-A vector of real-numbers, increasing in the range [0,1], giving the\n\
-frequencies of the left and right edges of each band for which a specific\n\
-amplitude response is desired: [l1 r1 l2 r2 @dots{}].  1 represents the\n\
+A vector of real-numbers, increasing in the range [0,1], giving the frequencies\n\
+of the left and right edges of each band for which a specific amplitude\n\
+response is desired: [l1 r1 l2 r2 @dots{}].  1 represents the\n\
 Nyquist-frequency.  Transition-bands are defined implicitly as the regions\n\
 between or outside the given bands.\n\
 \n\
 @item a\n\
 A vector of real-numbers giving the desired amplitude response.  An amplitude\n\
-value is given either for each band edge: [a(l1) a(r1) a(l2) a(r2) @dots{}],\n\
-or for each band: [a1 a2 @dots{}].  In the former case, in-band amplitude is\n\
+value is given either for each band edge: [a(l1) a(r1) a(l2) a(r2) @dots{}], or\n\
+for each band: [a1 a2 @dots{}].  In the former case, in-band amplitude is\n\
 determined by linear interpolation between the given band-edge values.  1\n\
 represents unity-gain, 0 represents infinite attenuation, and @minus{}1\n\
 represents a phase change of pi radians.\n\
 \n\
-@item w\n\
-An optional vector of positive real-numbers giving error-weightings to be\n\
-applied at each given band-edge [w(l1) w(r1) w(l2) w(r2) @dots{}], or for\n\
-each band [w1 w2 @dots{}].  In the former case, in-band weighting is\n\
-determined by linear interpolation between the given band-edge values.  A\n\
-higher relative error weighting yields a lower relative error.\n\
+Note that amplitude response is necessarily zero at @var{f}=0 for type III and\n\
+IV filters, and at @var{f}=1 for type II and III filters.\n\
 \n\
-@item properties\n\
-A value for a `property' is given by a consecutive pair of arguments: the\n\
-first, a string, gives the property name; the second gives its value.\n\
-Available property names are as follows:\n\
+@item @@respFn\n\
+A handle to a `response function' that supplies the desired amplitude response\n\
+and error-weighting.  This, unlike @var{a} above, allows the response to be\n\
+arbitrary (subject to the note above).  @qcode{firpm} invokes the response\n\
+function according to the following syntax:\n\
+\n\
+@example\n\
+@var{ag} = @qcode{respFn} (@var{n},@var{f},@var{g},@var{w}, @dots{})\n\
+[@var{ag} @var{wg}] = @qcode{respFn} (@var{n},@var{f},@var{g},@var{w}, @dots{})\n\
+@var{symmetry} = @qcode{respFn} (\"defaults\", @{@var{n},@var{f},@var{g},@var{w}, @dots{}@})\n\
+@end example\n\
+\n\
+where:\n\
+@itemize\n\
+@item\n\
+@var{n} and @var{f} are as given to @qcode{firpm}.\n\
+\n\
+@item\n\
+@var{w} is as given to @qcode{firpm}, or ones if not given.\n\
+\n\
+@item\n\
+@var{ag} and @var{wg} are the desired amplitude and weighting functions\n\
+evaluated at each frequency in vector @var{g} (which are frequencies within the\n\
+non-transition bands of @var{f}).  Returning @var{ag} alone gives uniform\n\
+weighting.\n\
+\n\
+@item\n\
+@var{symmetry} is either @qcode{\"even\"} or @qcode{\"odd\"}; this provides an\n\
+alternative to using the @var{class} values @qcode{\"symmetric\"}\n\
+and @qcode{\"antisymmetric\"}.\n\
+\n\
+@item\n\
+Per the ellipses shown here and above, when @@@var{respFn} is given contained\n\
+in a cell-array, any additionally contained values are appended to the\n\
+@var{respFn} invocation argument-list.\n\
+\n\
+@end itemize\n\
+\n\
+@item w\n\
+When used in conjunction with @var{a}, @var{w} is a vector of positive\n\
+real-numbers giving error-weightings to be applied at each given band-edge\n\
+[w(l1) w(r1) w(l2) w(r2) @dots{}], or for each band [w1 w2 @dots{}].  In the\n\
+former case, in-band weighting is determined by linear interpolation between\n\
+the given band-edge values.  A higher relative error weighting yields a lower\n\
+relative error.\n\
+\n\
+When used in conjunction with @@@var{respFn}, @var{w} is a vector (constrained\n\
+as above) that is passed through to @var{respFn}.\n\
+\n\
+@item class\n\
+A string, which may be abbreviated, giving the filter-class:\n\
+@itemize\n\
+\n\
+@item\n\
+@qcode{\"symmetric\"} (the default) for type I or II filters,\n\
+\n\
+@item\n\
+@qcode{\"antisymmetric\"} (or @qcode{\"hilbert\"}) for standard type III or IV\n\
+filters,\n\
+\n\
+@item\n\
+@qcode{\"differentiator\"} for type III or IV filters with inverted phase and\n\
+with error-weighting (further to @var{w}) of 2/f applied in the pass-band(s).\n\
+@end itemize\n\
+\n\
+@item accuracy, @dots{}\n\
+Up to three properties contained within a cell-array: @var{accuracy},\n\
+@var{persistence}, @var{robustness}, that respectively control how close the\n\
+computed filter will be to the ideal minimax solution, the number of\n\
+computation iterations over which the required accuracy will be sought, and the\n\
+precision of certain internal processing.  Each can each be set to a small\n\
+positive number (typically @leq{}3), to increase the relevant item; this may\n\
+increase computation time, but the need to do so should be rare.  A value of 0\n\
+can be used to leave an item unchanged.\n\
+\n\
+Alternatively, setting @var{accuracy} @geq{}16 emulates @sc{matlab}'s\n\
+@var{lgrid} argument.\n\
+\n\
+@end table\n\
+\n\
+@heading Results\n\
+\n\
+If a problem occurs during the computation, a diagnostic message will normally\n\
+be displayed.  If this happens, adjusting @var{accuracy}, @var{persistence}, or\n\
+@var{robustness} may provide the solution.  Some filters however, may not be\n\
+realizable due to machine-precision limitations.  If a filter can be computed,\n\
+returned values are as follows:\n\
 \n\
 @table @var\n\
-@item class\n\
-Specifies the filter-class; values are @qcode{\"symmetric\"} (the default) for\n\
-type I or II filters, @qcode{\"antisymmetric\"} for standard type III or IV\n\
-filters, or @qcode{\"differentiator\"} for type III or IV filters with inverted\n\
-phase and with error-weighting (further to @var{w}) of 2/f applied in the\n\
-pass-band(s).  The value-string may be abbreviated.\n\
 \n\
-@ignore\n\
-@c  The usefulness of this is for further consideration.\n\
-@item target\n\
-A positive real number giving a target minimax error; see Diagnostics, below.\n\
-@end ignore\n\
+@item b\n\
+A length @var{N}+1 row-vector containing the computed filter coefficients.\n\
 \n\
-@item accuracy\n\
-Controls how close the computed filter will be to the ideal minimax solution.\n\
+@item minimax\n\
+The absolute value of the minimized, maximum weighted error, or this number\n\
+negated if the required accuracy could not be achieved.\n\
 \n\
-@item persistence\n\
-Controls the number of computation iterations over which the required\n\
-accuracy will be sought.\n\
+@item res\n\
+A structure of data relating to the filter computation and a partial\n\
+response-analysis of the resultant filter; fields are vectors:\n\
+@quotation\n\
+@multitable @columnfractions .125 .6\n\
+@item @code{fgrid}\n\
+@tab Analysis frequencies per @var{f}.\n\
+@item @code{des}\n\
+@tab Desired amplitude response.\n\
+@item @code{wt}\n\
+@tab Error weighting.\n\
+@item @code{H}\n\
+@tab Complex frequency response.\n\
+@item @code{error}\n\
+@tab Desired minus actual amplitude response.\n\
+@item @code{iextr}\n\
+@tab Indices of local peaks in @code{error}.\n\
+@item @code{fextr}\n\
+@tab Frequencies of local peaks in @code{error}.\n\
+@end multitable\n\
+@end quotation\n\
 \n\
-@item robustness\n\
-Controls the precision of certain internal processing.\n\
 @end table\n\
 \n\
-Each of @var{accuracy}, @var{persistence}, and @var{robustness} can be set to\n\
-a small positive number (typically @leq{}3), to increment the controlled\n\
-item; this may increase computation time, but the need to do so should be\n\
-rare.\n\
+Using @var{res} is not recommended because it can be slow to compute and, since\n\
+the analysis excludes transition-bands, any `anomalies'@footnote{ Tapio\n\
+Saram@\"aki, `Finite impulse response filter design', Chapter 4 in `Handbook for\n\
+Digital Signal Processing', edited by S.  K. Mitra and J. F. Kaiser, John Wiley\n\
+and Sons, New York, 1993, pp.@: 155--277.\n\
+(@url{http://www.cs.tut.fi/~ts/Mitra_Kaiser.pdf})} therein are not easy to\n\
+discern.  In general, @code{freqz} suffices to check that the response of the\n\
+computed filter is satisfactory.\n\
 \n\
-@end table\n\
-\n\
-@heading Syntax examples\n\
-\n\
-Type I low-pass; lower relative error in stop-band; increased @var{accuracy}:\n\
-\n\
-@example\n\
-b = firpm(40, [0 0.4 0.5 1], [1 0], [1 10], \"accuracy\", +1);\n\
-@end example\n\
-\n\
-Type II band-pass; amplitude per band-edge; even weight; default\n\
-@var{properties}:\n\
-\n\
-@example\n\
-b = firpm(41, [0 0.5 0.6 0.7 0.8 1], [0 0 1 1 0 0]);\n\
-@end example\n\
-\n\
-Type III differentiator:\n\
-\n\
-@example\n\
-b = firpm(40, [0 0.9], [0 0.9], \"class\", \"differentiator\");\n\
-@end example\n\
-\n\
-Type IV high-pass with gain; @var{class} value abbreviated:\n\
-\n\
-@example\n\
-b = firpm(31, [0 0.5 0.7 1], [0 2.5], \"class\", \"antisym\");\n\
-@end example\n\
-\n\
-To use other units for @var{f}, divide by the value in those units that\n\
-represents the Nyquist-frequency.  For example:\n\
-\n\
+@heading Examples\n\
 @example\n\
 @group\n\
-Fs = 96000;    % Sampling frequency in Hz\n\
-Fn = Fs / 2;   % Nyquist frequency in Hz\n\
-b = firpm(50, [0 20000 28000 48000] / Fn, [1 0]);\n\
+# Low-pass with frequencies in Hz:\n\
+Fs = 96000; Fn = Fs/2; # Sampling & Nyquist frequencies.\n\
+b = firpm (50, [0 20000 28000 48000] / Fn, [1 0]);\n\
 @end group\n\
 @end example\n\
 \n\
-Further syntax examples can be found among the demonstration designs.\n\
+@example\n\
+@group\n\
+# Type IV high-pass:\n\
+b = firpm (31, [0 0.5 0.7 1], [0 1], \"antisym\");\n\
+@end group\n\
+@end example\n\
+\n\
+@example\n\
+@group\n\
+# Inverse-sinc (arbitrary response):\n\
+b = firpm (20, [0 0.5 0.9 1], @@(n,f,g) ...\n\
+    deal((g<=f(2))./sinc (g), (g>=f(3))*9+1));\n\
+@end group\n\
+@end example\n\
+\n\
+@example\n\
+@group\n\
+# Band-pass with filter-response check:\n\
+freqz (firpm (40, [0 3 4 6 8 10]/10, [0 1 0]))\n\
+@end group\n\
+@end example\n\
+\n\
+Further examples can be found in the @code{firpm} and @code{firpmord}\n\
+demonstration scripts.\n\
 \n\
 @heading Compatibility\n\
+Given invalid filter specifications, Octave emits an error and does not produce\n\
+a filter; @sc{matlab} in such circumstances may still produce filter\n\
+coefficients.\n\
 \n\
-For compatibility with other implementations, the following alternative\n\
-syntax is available:\n\
+Unlike with @sc{matlab}, with Octave @var{minimax} can be negative; for\n\
+compatibility, take the absolute value.\n\
 \n\
-@itemize @bullet\n\
-@item\n\
-@var{class} values @qcode{\"bandpass\"} and @qcode{\"hilbert\"} may be used in\n\
-place of @qcode{\"symmetric\"} and @qcode{\"antisymmetric\"} respectively.\n\
-\n\
-@item\n\
-The @var{class} property-name argument can be omitted if its associated value\n\
-argument is not followed by another property pair.\n\
-\n\
-@item\n\
-The single argument @code{@{4^(x+2)@}} can substitute for the pair\n\
-@code{\"accuracy\", +x} (where @code{x} is variable).\n\
-\n\
-@end itemize\n\
-\n\
-For example, the following three invocations are equivalent:\n\
-\n\
-@example\n\
-@group\n\
-firpm(30, [0.1 0.9], 1, \"class\", \"antisymmetric\");\n\
-firpm(30, [0.1 0.9], 1, \"class\", \"hilbert\");\n\
-firpm(30, [0.1 0.9], 1, \"hilbert\");\n\
-@end group\n\
-@end example\n\
-\n\
-as are the following two:\n\
-\n\
-@example\n\
-@group\n\
-firpm(11, [0 0.9], 1, \"accuracy\", +1);\n\
-firpm(11, [0 0.9], 1, @{64@});\n\
-@end group\n\
-@end example\n\
-\n\
-This function is broadly compatible with the Matlab@registeredsymbol{}\n\
-function of the same name. However, the following differences are noted:\n\
-\n\
-@itemize @bullet\n\
-@item\n\
-Octave does not currently support the `function function' invocation form.\n\
-\n\
-@item\n\
-Whereas Matlab produces a type-I filter when an invalid type-II filter has\n\
-been specified, Octave reports an error.\n\
-\n\
-@item\n\
-The filter coefficients are returned by Octave as a column-vector, but by\n\
-Matlab as a row-vector.\n\
-\n\
-@item\n\
-The third returned value differs between the two implementations.\n\
-\n\
-@end itemize\n\
-\n\
-@heading Diagnostics\n\
-\n\
-If a problem occurs during the computation, a diagnostic message will\n\
-normally be displayed.  If this happens, adjusting @var{accuracy},\n\
-@var{persistence}, or @var{robustness} may provide the solution.  Some\n\
-filters however,  may not be realisable due to machine-precision limitations;\n\
-in this case, relaxing the design specification (e.g.@: reducing the\n\
-filter-order) might be an option.\n\
-\n\
-If the computation fails early on, no value will be returned.  Otherwise,\n\
-@var{minimax} is the approximated, minimised, maximum weighted error, and\n\
-@var{result} is zero for success, or non-zero if the required accuracy could\n\
-not be achieved (in which case @var{minimax} may not be accurate).\n\
-\n\
-Returned @var{minimax} and @var{result} values could be used in an iterative\n\
-algorithm to determine the minimum filter order needed to meet a given\n\
-specification (see the @code{firpmord} demonstration code for a simple\n\
-example of this).\n\
-@ignore\n\
-In implementing such an algorithm, giving the @var{target} property can save a\n\
-little time by halting the processing early if the target minimax error can not\n\
-be achieved.  Giving a @var{target} value also suppresses diagnostic display,\n\
-so @var{result} must be used for diagnostics in this case.\n\
-@end ignore\n\
-\n\
-Note that multiplying @var{w} by a constant affects @var{minimax} similarly.\n\
-Hence, in the following example, b1 and b2 are equal, but m1 and m2 are not:\n\
-\n\
-@example\n\
-@group\n\
-[b1 m1] = firpm(20, [0 0.4 0.5 1], [1 0], [1 1/8])\n\
-[b2 m2] = firpm(20, [0 0.4 0.5 1], [1 0], [8   1])\n\
-@end group\n\
-@end example\n\
-\n\
-With this filter design method, transition-band behaviour is not specified,\n\
-which can sometimes cause transition-band `anomalies'.  For this reason (and\n\
-perhaps others), it is wise to check that the actual response of the computed\n\
-filter is satisfactory.  For example:\n\
-\n\
-@example\n\
-@group\n\
-b = firpm(40, [0 3 4 6 8 10]/10, [0 1 0]);\n\
-freqz(b)\n\
-@end group\n\
-@end example\n\
-\n\
-For how to prevent transition-band anomalies (and for general discussion of\n\
-minimax filter design) see Saram@\"aki.@footnote{ Tapio Saram@\"aki, `Finite\n\
-impulse response filter design', Chapter 4 in `Handbook for Digital Signal\n\
-Processing', edited by S.  K. Mitra and J. F. Kaiser, John Wiley and Sons,\n\
-New York, 1993, pp.@: 155--277.\n\
-(@url{http://www.cs.tut.fi/~ts/Mitra_Kaiser.pdf})}\n\
-\n\
-@heading Related documentation\n\
-\n\
-@seealso{firpmord, firls}\n\
+@xseealso{firpmord}\n\
 \n\
 @end deftypefn\n\
 ")
 {
-  int i, arg(0), nargin(args.length ()), N;
+  int i, arg (0), nargin((int)args.length ()), N;
+  octave_value_list respFnArgs;
 
   // The first 3 parameters are mandatory:
   if (nargin < 3)
@@ -288,6 +335,7 @@ New York, 1993, pp.@: 155--277.\n\
   octave_value const & v = args(arg++);
   if (!v.is_real_scalar () || (N = (int)v.scalar_value ()) != v.scalar_value ())
     returnError ("firpm parameter N (filter order) must be an integer");
+  respFnArgs (RESP_FN_ARG_N) = v;
 
   // F[]:
   ColumnVector freqs;
@@ -296,24 +344,45 @@ New York, 1993, pp.@: 155--277.\n\
   if (freqs.numel () < 2 || (freqs.numel () & 1))
     returnError ("firpm parameter F (band-edge frequencies) "
         "must be a real, even-lengthed vector");
-  int numBands(freqs.numel () >> 1);
-  OCTAVE_LOCAL_BUFFER(mmfirBandSpec, bands, numBands);
+  int numBands((int)freqs.numel () >> 1);
+  OCTAVE_LOCAL_BUFFER (MmfirBandSpec, bands, numBands);
   for (i = 0; i < numBands; ++i)
     bands[i].freqL = freqs(2*i), bands[i].freqR = freqs(2*i+1);
+  respFnArgs (RESP_FN_ARG_F) = freqs;
+  respFnArgs (RESP_FN_ARG_G) = ColumnVector();            // Overwritten later.
+  respFnArgs (RESP_FN_ARG_W) = ColumnVector(numBands, 1); // ditto
 
-  // A[]:
-  ColumnVector amps;
-  if (!args(arg).is_string () && (args(arg).is_real_matrix ()
-        || (args(arg).is_real_scalar () && numBands == 1)))
-    amps = args(arg++).vector_value ();
-  bool have2(amps.numel () == numBands * 2);
-  if (amps.numel () != numBands && !have2)
-    returnError ("firpm parameter A must be a real vector of "
-        "response amplitudes: one per band, or per band-edge");
-  for (i = 0; i < numBands; ++i)
-    if (have2)
-      bands[i].ampL = amps(2*i), bands[i].ampR = amps(2*i+1);
-    else bands[i].ampL = bands[i].ampR = amps(i);
+  // @RESP_FN or A[]:
+  octave_fcn_handle * respFnHandle(0);
+  if (args(arg).is_function_handle())
+    respFnHandle = args(arg++).fcn_handle_value ();
+  else if (octave::signal::iscell(args(arg)))
+    {
+      Cell c(args(arg).cell_value ());
+      unsigned k(0);
+      if (c.numel () >= 1 && c(k).is_function_handle ())
+        {
+          respFnHandle = c(k++).fcn_handle_value ();
+          for (; k<c.numel (); ++k) respFnArgs(RESP_FN_ARG_VAR+k-1)=c(k);
+          ++arg;
+        }
+      else returnError ("firpm response function handle is missing");
+    }
+  else // A[]
+    {
+      ColumnVector amps;
+      if (!args(arg).is_string () && (args(arg).is_real_matrix ()
+            || (args(arg).is_real_scalar () && numBands == 1)))
+        amps = args(arg++).vector_value ();
+      bool have2(amps.numel () == numBands * 2);
+      if (amps.numel () != numBands && !have2)
+        returnError ("firpm parameter A must be a real vector of "
+            "response amplitudes: one per band, or per band-edge");
+      for (i = 0; i < numBands; ++i)
+        if (have2)
+          bands[i].ampL = amps(2*i), bands[i].ampR = amps(2*i+1);
+        else bands[i].ampL = bands[i].ampR = amps(i);
+    }
 
   // W[]:
   if (arg < nargin && !args(arg).is_string () && (
@@ -329,61 +398,60 @@ New York, 1993, pp.@: 155--277.\n\
         if (have2)
           bands[i].weightL = weights(2*i), bands[i].weightR = weights(2*i+1);
         else bands[i].weightL = bands[i].weightR = weights(i);
+      respFnArgs (RESP_FN_ARG_W) = weights;
     }
   else for (i = 0; i < numBands; ++i)
     bands[i].weightL = bands[i].weightR = 1;
 
+  // CLASS[]:
+  int Class(-1);
+  if (arg < nargin && args(arg).is_string ())
+  {
+    char const * names[] =
+      {
+        "SYMMETRIC", "BANDPASS", // bandpass is historical
+        "ANTISYMMETRIC", "HILBERT",
+        "DIFFERENTIATOR"
+      };
+    std::string s(args(arg++).string_value ());
+    std::transform(s.begin(), s.end(),s.begin(), ::toupper);
+    for (++Class; Class < AL(names)
+        && std::string(names[Class]).substr (0, s.size ()) != s; ++Class);
+    if (!(Class < AL(names)))
+      returnError ("firpm filter-class must be in "
+          "{'%s', '%s' (or '%s'), '%s'}",
+          names[0], names[2], names[3], names[4]);
+    Class >>= 1; // Shift away alternative names.
+  }
+  if (Class<0 && respFnHandle &&
+      !respFnHandle->function_value ()->is_anonymous_function ())
+    {
+      octave_value_list args;
+      args(0) = respFnHandle->fcn_name ();
+      args(1) = Cell(respFnArgs);
+      octave_value_list result(octave::feval ("__firpm_probe__", args, 1));
+      Class = std::min ((int)result(0).scalar_value (), 2); // For safety.
+    }
+  Class=std::max (Class, 0); // Default is 'symmetric'.
+
   // PROPERTIES:
   static char const * const propertyNames[] =
-    { "ACCURACY", "PERSISTENCE", "ROBUSTNESS", "TARGET", "FLAGS", "CLASS" };
+    { "ACCURACY", "PERSISTENCE", "ROBUSTNESS", "TARGET", "FLAGS" };
   double realProperties[] = { 0, 0, 0, 0, 0 };
-  int Class(0);
-  while (arg < nargin && (args(arg).is_string () || octave::signal::iscell(args(arg))))
+  if (arg < nargin && octave::signal::iscell(args(arg)) )
     {
-      if (octave::signal::iscell(args(arg)))
-        { // Support Matlab's lgrid syntax and emulate its effect:
-          Cell c(args(arg).cell_value ());
-          if (c.numel() == 1 && c(0).is_real_scalar ())
+      Cell c(args(arg).cell_value ());
+      if (c.numel ())
+        {
+          for (i=0; i<AL(realProperties) && i<c.numel (); ++i)
             {
-              double const density(c(0).double_value ());
-              realProperties[0] = log ( std::max (density, 16.)) / log (4) - 2;
-              ++arg;
-              continue;
+              if (!c(i).is_real_scalar ())
+                returnError ("firpm property %s must be a real scalar",
+                    propertyNames[i]);
+              double const d(c(i).double_value ());
+              realProperties[i] = i || d<16? d : lgrid (d);
             }
-          break;
-        }
-
-      std::string name(propertyNames[AL(propertyNames)-1]);
-      if (arg + 1 < nargin && !octave::signal::iscell(args(arg + 1)))
-        name = args(arg++).string_value ();
-      std::transform(name.begin(), name.end(), name.begin(), ::toupper);
-      for (i = 0; i < AL(propertyNames) && name != propertyNames[i]; ++i);
-      if (!(i < AL(propertyNames)))
-        returnError ("firpm unknown PROPERTIES name `%s'", name.c_str ());
-      if (i < AL(realProperties))
-        {
-          if (!args(arg).is_real_scalar ())
-            returnError ("firpm property %s must be a real scalar"
-                , name.c_str ());
-          realProperties[i] = args(arg++).double_value ();
-        }
-      else
-        {
-          char const * names[] =
-            {
-              "symmetric", "bandpass",
-              "antisymmetric", "hilbert",
-              "differentiator"
-            };
-          std::string s(args(arg).is_string ()
-              ? args(arg++).string_value () : ".");
-          for (; Class < AL(names)
-              && std::string(names[Class]).substr (0, s.size()) != s; ++Class);
-          if (!(Class < AL(names)))
-            returnError ("firpm property CLASS must be in "
-                "{'%s' (or '%s'), '%s' (or '%s'), '%s'}",
-                names[0], names[1], names[2], names[3], names[4]);
-          Class >>= 1; // Shift away alternative names.
+          ++arg;
         }
     }
 
@@ -400,11 +468,14 @@ New York, 1993, pp.@: 155--277.\n\
       returnError ("firpm argument # %i is invalid: %s", arg+1, s.c_str ());
     }
 
-  // Convert N from filter-order to # of taps; attempt to generate the filter:
-  OCTAVE_LOCAL_BUFFER (double, h, ++N);
-  mmfirReport report(mmfir (h, (mmfirFilterClass)Class, N, numBands, bands,
+  // Attempt to generate the filter:
+  OCTAVE_LOCAL_BUFFER (double, h, N+1);
+  MmfirState state;
+  MmfirReport report(mmfir (h, (MmfirFilterClass)Class, N+1, numBands, bands,
         realProperties[0], realProperties[1], realProperties[2],
-        realProperties[3], octave::math::nint (realProperties[4])));
+        realProperties[3], octave::math::nint (realProperties[4]),
+        nargout>2? &state : 0,
+        respFnHandle? mmfirRespFn:0, respFnHandle, &respFnArgs));
 
   // Warn if any controls were clamped:
   for (i = 0; i < AL(report.controls); ++i)
@@ -413,34 +484,86 @@ New York, 1993, pp.@: 155--277.\n\
           propertyNames[i], report.controls[i]);
 
   // Check if a filter was generated:
-  if (report.result >= mmfirInvocationError)
+  if (report.result >= MmfirInvocationError)
     returnError ("firpm invocation error: %s", report.text);
-  else if (report.result >= mmfirError)
+  else if (report.result >= MmfirError)
     returnError ("firpm failed to make a filter (result=%i)", report.result);
 
   // Missed-target is handled silently:
-  if (report.result == mmfirMissedTarget)
-    N = 0; // Return empty B.
+  if (report.result == MmfirMissedTarget)
+    N = -1; // Return empty B.
   else // Check if a warning should be issued:
-    if (report.result >= mmfirWarning)
+    if (report.result >= MmfirWarning)
       warning ("firpm %s (result=%i)", report.text, report.result);
 
-  // Copy filter coefficients to an Octave column-vector:
-  ColumnVector b(N);
-  while (N--) b(N) = h[N];
+  // Copy filter coefficients to an Octave row-vector:
+  RowVector b(N+1);
+  for (int i=N+1; i--;) b(i) = h[i];
 
-  // Return [B, MINIMAX, RESULT]:
-  octave_value_list retval;
-  retval(0) = octave_value(b);
-  retval(1) = octave_value(report.minimax);
-  retval(2) = octave_value(report.result); // Numeric (not textual) result.
-  return retval;
+  // Return [B, MINIMAX, RES]:
+  octave_value_list ret;
+  ret(0) = octave_value(b);
+
+  if (nargout>1) // MINIMAX:
+    ret(1) = octave_value(report.minimax * (report.result? -1 : +1));
+
+  if (nargout>2) // RES:
+    {
+      int const S(state.spaceLength);
+      int const P(state.peaksLength);
+      ColumnVector fgrid(S), FP(S), des(S), wt(S), err(S);
+      ColumnVector iextr(P), fextr(P);
+      ComplexColumnVector H(S);
+      double const mulA(Class==2? -1:1);
+      double const mulW(Class==2? .5:1);
+      for (int i=0; i<S; ++i)
+        {
+          fgrid(i)=(state.space)[i].f;
+          FP   (i)=(state.space)[i].f*M_PI;
+          des  (i)=(state.space)[i].a*mulA;
+          wt   (i)=(state.space)[i].w*mulW;
+        }
+      octave_value_list args;
+      octave_scalar one(1);
+      args(0) = ret(0);
+      args(1) = one.as_double ();
+      args(2) = FP;
+      octave_value_list result(octave::feval ("freqz", args, 1));
+      H=result(0).complex_vector_value ();
+      double const offset(Class? +M_PI/2 : 0);
+      for (int i=0; i<S; ++i)
+        {
+          double const a(offset+N/2.*FP(i));
+          double const ampResp(H(i).real ()*cos (a) - H(i).imag ()*sin (a));
+          err(i) = (state.space)[i].a-ampResp; // Negated error.
+        }
+      for (int i=0, j=0; i<P; ++i)
+        {
+          double const f=(state.peaks)[i].f;
+          while (fgrid(j)<f) ++j;
+          int idx=j-(fgrid(j)!=f && fabs (err(j)) < fabs (err(j-1)));
+          iextr(i)=idx+1;
+          fextr(i)=fgrid(idx);
+        }
+      free(state.space);
+      free(state.peaks);
+
+      octave_map m;
+      m.assign ("fgrid", Cell(1,1,fgrid));
+      m.assign ("des"  , Cell(1,1,des  ));
+      m.assign ("wt"   , Cell(1,1,wt   ));
+      m.assign ("H"    , Cell(1,1,H    ));
+      m.assign ("error", Cell(1,1,err  ));
+      m.assign ("iextr", Cell(1,1,iextr));
+      m.assign ("fextr", Cell(1,1,fextr));
+      ret(2) = m;
+    }
+  return ret;
 }
 
 
 
-/* GNU Octave tests and demos:
-
+/*
                                 Invocation tests
 
 %!error <firpm parameter N \(filter order\) must be an integer> firpm (1.1, 2, 3);
@@ -459,16 +582,16 @@ New York, 1993, pp.@: 155--277.\n\
 %!error <firpm parameter W must be a real vector of error weights: one per band, or per band-edge> firpm (1, [1 2], 1, []);
 %!error <firpm parameter W must be a real vector of error weights: one per band, or per band-edge> firpm (1, [1 2], 1, [1 2 3]);
 
-%!error <firpm property CLASS must be in {'symmetric' \(or 'bandpass'\), 'antisymmetric' \(or 'hilbert'\), 'differentiator'}> firpm (1, [1 2], 1, [1 2], 'diffi');
-%!error <firpm property CLASS must be in {'symmetric' \(or 'bandpass'\), 'antisymmetric' \(or 'hilbert'\), 'differentiator'}> firpm (1, [1 2], 1, [1 2], 'hilberts');
+%!error <firpm filter-class must be in {'SYMMETRIC', 'ANTISYMMETRIC' \(or 'HILBERT'\), 'DIFFERENTIATOR'}> firpm (1, [1 2], 1, [1 2], 'diffi');
+%!error <firpm filter-class must be in {'SYMMETRIC', 'ANTISYMMETRIC' \(or 'HILBERT'\), 'DIFFERENTIATOR'}> firpm (1, [1 2], 1, [1 2], 'hilberts');
 
-%!error <firpm property ACCURACY must be a real scalar> firpm (1, [1 2], 1, [1 2], 'accuracy', 'antisymmetric');
-%!error <firpm property PERSISTENCE must be a real scalar> firpm (1, [1 2], 1, [1 2], 'persistence', [1 1]);
+%!error <firpm property ACCURACY must be a real scalar> firpm (1, [1 2], 1, [1 2], {'antisymmetric'});
+%!error <firpm property PERSISTENCE must be a real scalar> firpm (1, [1 2], 1, [1 2], {0, [1 1]});
 
 %!error <firpm argument # 4 is invalid: \(0,1\)> firpm (1, [1 2], 1, i);
 %!error <firpm argument # 4 is invalid: {}\(0x0\)> firpm (2, [0 1], [1 0], {}, 1);
 
-%!warning <firpm property ROBUSTNESS was clamped to 0> firpm (1, [.1 .9], 1, [1 2], 'robustness',-1);
+%!warning <firpm property ROBUSTNESS was clamped to 0> firpm (1, [.1 .9], 1, [1 2], {0,0,-1});
 %!error <firpm failed to make a filter \(result=4\)> firpm (2, [.1 .9], 1);
 
 %!error <band-edge frequencies must increase in \[0,1\]> firpm (1, [1 2], 1, [1 2], 'diff');
@@ -504,9 +627,9 @@ The b0 values come from a reference implementation.
 %!   0.00838126690529
 %!  -0.00576879446491
 %!  -0.01306844322361
-%! ];
-%! [b m r] = firpm (20, [0 .2 .3 .4 .5 .7 .9 1], [0 .2 0 0 .5 .7 0 0], [1 4 16 64], 'b', {256});
-%! assert (b0, b, 1e-5); assert (r, 0); assert (m, 0.21493, -5e-5);
+%! ]';
+%! [b m] = firpm (20, [0 .2 .3 .4 .5 .7 .9 1], [0 .2 0 0 .5 .7 0 0], [1 4 16 64], 'b', {256});
+%! assert (b0, b, 1e-5); assert (m, 0.21493, -5e-5);
 
 %!test b0 = [
 %!  -0.00025230206347
@@ -530,9 +653,9 @@ The b0 values come from a reference implementation.
 %!  -0.02291167335102
 %!   0.01634334994986
 %!   0.00025230206347
-%! ];
-%! [b m r] = firpm (20, [0 .2 .3 .4 .5 .7 .9 1], [0 .2 0 0 .5 .7 0 0], [1 4 16 64], 'h', {256});
-%! assert (b0, b, 1e-5); assert (r, 0); assert (m, 0.19499, -5e-5);
+%! ]';
+%! [b m] = firpm (20, [0 .2 .3 .4 .5 .7 .9 1], [0 .2 0 0 .5 .7 0 0], [1 4 16 64], 'h', {256});
+%! assert (b0, b, 1e-5); assert (m, 0.19499, -5e-5);
 
 %!test b0 = [
 %!  -0.00377491711564
@@ -556,9 +679,9 @@ The b0 values come from a reference implementation.
 %!   0.01857378491500
 %!  -0.00749876297245
 %!   0.00377491711564
-%! ];
-%! [b m r] = firpm (20, [0 .2 .3 .4 .5 .7 .9 1], [0 .2 0 0 .5 .7 0 0], [1 4 16 64], 'd', {256});
-%! assert (b0, b, 1e-5); assert (r, 0); assert (m, 0.49129, -5e-5);
+%! ]';
+%! [b m] = firpm (20, [0 .2 .3 .4 .5 .7 .9 1], [0 .2 0 0 .5 .7 0 0], [1 4 16 64], 'd', {256});
+%! assert (b0, b, 1e-5); assert (m, 0.49129, -5e-5);
 
 %!test b0 = [
 %!   0.00110112420442
@@ -583,9 +706,9 @@ The b0 values come from a reference implementation.
 %!   0.03890416611405
 %!   0.00032786748236
 %!   0.00110112420442
-%! ];
-%! [b m r] = firpm (21, [0 .2 .3 .4 .5 .7 .9 1], [0 .2 0 0 .5 .7 0 0], [1 4 16 64], 'b', {256});
-%! assert (b0, b, 1e-5); assert (r, 0); assert (m, 0.19215, -5e-5);
+%! ]';
+%! [b m] = firpm (21, [0 .2 .3 .4 .5 .7 .9 1], [0 .2 0 0 .5 .7 0 0], [1 4 16 64], 'b', {256});
+%! assert (b0, b, 1e-5); assert (m, 0.19215, -5e-5);
 
 %!test b0 = [
 %!   0.00688473243750
@@ -610,9 +733,9 @@ The b0 values come from a reference implementation.
 %!  -0.00792901881787
 %!   0.00142370547227
 %!  -0.00688473243750
-%! ];
-%! [b m r] = firpm (21, [0 .2 .3 .4 .5 .7 .9 1], [0 .2 0 0 .5 .7 0 0], [1 4 16 64], 'h', {256});
-%! assert (b0, b, 1e-5); assert (r, 0); assert (m, 0.20726, -5e-5);
+%! ]';
+%! [b m] = firpm (21, [0 .2 .3 .4 .5 .7 .9 1], [0 .2 0 0 .5 .7 0 0], [1 4 16 64], 'h', {256});
+%! assert (b0, b, 1e-5); assert (m, 0.20726, -5e-5);
 
 %!test b0 = [
 %!  -0.00164508269033
@@ -637,294 +760,270 @@ The b0 values come from a reference implementation.
 %!  -0.00268424782721
 %!  -0.00067200008069
 %!   0.00164508269033
-%! ];
-%! [b m r] = firpm (21, [0 .2 .3 .4 .5 .7 .9 1], [0 .2 0 0 .5 .7 0 0], [1 4 16 64], 'd', {256});
-%! assert (b0, b, 1e-5); assert (r, 0); assert (m, 0.47868, -5e-5);
+%! ]';
+%! [b m] = firpm (21, [0 .2 .3 .4 .5 .7 .9 1], [0 .2 0 0 .5 .7 0 0], [1 4 16 64], 'd', {256});
+%! assert (b0, b, 1e-5); assert (m, 0.47868, -5e-5);
 
 
 
 %!test b0=[
-%!   0.01402447013732010
-%!  -0.00187656470348210
-%!  -0.03037226560233987
-%!   0.01238671724689763
-%!   0.01701736750357643
-%!   0.00130000669025103
-%!   0.01887058201233184
-%!  -0.04786566643294526
-%!  -0.02646470269612746
-%!   0.05579339917757684
-%!   0.00111880676596655
-%!   0.05887956174380488
-%!  -0.03589764058661398
-%!  -0.22983989436822705
-%!   0.17175369560988285
-%!   0.28425948627067166 ]';
-%! [b m r] = firpm (31 , [0 .3 .4 .7 .8 1], [0 1 0], [10 1 10], 'accuracy', 1, 'class', 'a');
-%! assert (b', [-b0 fliplr(b0)], 5e-9);
-%! assert (r, 0); assert (m, 0.059734, -5e-5);
+%!  -0.01402452049012097
+%!   0.001876620211412957
+%!   0.03037229727821556
+%!  -0.01238680025691372
+%!  -0.0170173995332925
+%!  -0.001299983105532321
+%!  -0.01887047540094186
+%!   0.0478657090945251
+%!   0.02646457824791903
+%!  -0.05579347345500663
+%!  -0.001118815789852797
+%!  -0.05887946612620026
+%!   0.03589780658038378
+%!   0.229839817358415
+%!  -0.1717538614573135
+%!  -0.2842595261696291 ]';
+%! [b m] = firpm (31 , [0 .3 .4 .7 .8 1], [0 1 0], [10 1 10], 'a', {1});
+%! assert (b, [b0 fliplr(-b0)], 5e-9);
+%! assert (m, 0.059734, -5e-5);
+
+%!test b0 = [
+%!  -8.876086291046802e-04
+%!   2.355569104748801e-02
+%!  -8.241671888096303e-04
+%!  -4.470074798008300e-02
+%!  -2.808154545387648e-03
+%!   8.170132813894931e-02
+%!  -1.058582827015804e-03
+%!  -1.777420298924492e-01
+%!  -2.265334116571183e-02
+%!   5.239577857603830e-01
+%!   8.489449590726375e-01
+%!   5.239577857603830e-01
+%!  -2.265334116571183e-02
+%!  -1.777420298924492e-01
+%!  -1.058582827015804e-03
+%!   8.170132813894931e-02
+%!  -2.808154545387648e-03
+%!  -4.470074798008300e-02
+%!  -8.241671888096303e-04
+%!   2.355569104748801e-02
+%!  -8.876086291046802e-04
+%! ]';
+%! [b m] = firpm (N=20, [0 .4 .6 1], {@(n,f,g,w,v1) deal ((log2 (v1/n+w(2)+g)).*(g<=f(2)), ones (size(g))),2*N});
+%! assert (b0, b, 1e-5); assert (m, .0210628, -5e-5);
 
 
 
-%!test [b m r] = firpm (40, [0 .5 .6 1], [1 0]);
-%! assert (r, 0); assert (m, 0.010304, -5e-5);
+%!test [b m] = firpm (40, [0 .5 .6 1], [1 0]);
+%! assert (m, 0.010304, -5e-5);
 
-%!test [b m r] = firpm (40, [0 .25 .3 .6 .65 1], [0 1 0]);
-%! assert (r, 0); assert (m, 0.055834, -5e-5);
+%!test [b m] = firpm (40, [0 .25 .3 .6 .65 1], [0 1 0]);
+%! assert (m, 0.055834, -5e-5);
 
-%!test [b m r] = firpm (30, [0 .2 .4 .6 .8 1], [1 .5 0]);
-%! assert (r, 0); assert (m, 5.6274e-04, -5e-5);
+%!test [b m] = firpm (30, [0 .2 .4 .6 .8 1], [1 .5 0]);
+%! assert (m, 5.6277e-04, -5e-5);
 
 %!test
-%! [b m r] = firpm (40, [0 .2 .3 .4 .5 .6 .7 .8 .9 1], [1 0 1 0 1], [11 100 7 10 5]);
-%! assert (r, 0); assert (m, 0.25720, -5e-5);
+%! [b m] = firpm (40, [0 .2 .3 .4 .5 .6 .7 .8 .9 1], [1 0 1 0 1], [11 100 7 10 5]);
+%! assert (m, 0.25723, -5e-5);
 
-%!test [b m r] = firpm (80, [0 .2 .3 1], [1 -1]);
-%! assert (r, 0); assert (m, 6.6123e-04, -5e-5);
+%!test [b m] = firpm (80, [0 .2 .3 1], [1 -1]);
+%! assert (m, 6.6123e-04, -5e-5);
 
-%!test [b m r] = firpm (40, [0 2.5/pi], [0 2.5], [.5], 'class', 'differentiator');
-%! assert (r, 0); assert (m, 2.5226e-06, -5e-5);
+%!test [b m] = firpm (40, [0 2.5/pi], [0 2.5], [.5], 'differentiator');
+%! assert (m, 2.5226e-06, -5e-5);
 
-%!test [b m r] = firpm (59, [0 .2 .3 1], [0 1 0 0], 'd');
-%! assert (r, 0); assert (m, 0.0073785, -5e-5);
+%!test [b m] = firpm (59, [0 .2 .3 1], [0 1 0 0], 'd');
+%! assert (m, 0.0073785, -5e-5);
 
-%!test [b m r] = firpm (31, [0 .5 .7 1], [0 1], 'class', 'antisymmetric');
-%! assert (r, 0); assert (m, 0.0015660, -5e-5);
+%!test [b m] = firpm (31, [0 .5 .7 1], [0 1], 'antisymmetric');
+%! assert (m, 0.0015660, -5e-5);
 
-%!test assert (firpm (31, [0 .5 .7 1], [0 1], 'class', 'antisymmetric'), firpm (31, [0 .5 .7 1], [0 1], 'hilbert'))
+%!test assert (firpm (31, [0 .5 .7 1], [0 1], 'antisymmetric'), firpm (31, [0 .5 .7 1], [0 1], 'hilbert'))
 
-%!test [b m r] = firpm (30, [.1 .9], 1, 'class', 'antisymmetric');
-%! assert (r, 0); assert (m, 0.0027064, -5e-5);
+%!test [b m] = firpm (30, [.1 .9], 1, 'antisymmetric');
+%! assert (m, 0.0027064, -5e-5);
 
-%!test [b m r] = firpm (1000, [0 .4 .41 1], [1 0]);
-%! assert (r, 0); assert (m, 5.2892e-05, -5e-5);
+%!test [b m] = firpm (1000, [0 .4 .41 1], [1 0]);
+%! assert (m, 5.2892e-05, -5e-5);
 
-%!test [b m r] = firpm (120, [0 .5 .55 .75 .75 1], [1 0 0], [1 1 4 64 64 64]);
-%! assert (r, 0); assert (m, 0.0048543, -5e-5);
+%!test [b m] = firpm (120, [0 .5 .55 .75 .75 1], [1 0 0], [1 1 4 64 64 64]);
+%! assert (m, 0.0048543, -5e-5);
 
-%!test [b m r] = firpm (11, [0 2*.45], .5, 'class', 'symmetric');
-%! assert (r, 0); assert (m, 0.045066, -5e-5);
+%!test [b m] = firpm (11, [0 2*.45], .5, 'symmetric');
+%! assert (m, 0.045066, -5e-5);
 
-%!warning <firpm not-converged \(result=1\)> firpm (298, [0 .28 .33 .48 .53 1], [0 1 0], [93 68 89]);
+%!warning <firpm not-converged \(result=1\)> firpm (298, [0 .28 .33 .48 .53 1], [0 1 0], [93 68 89], {0,-1});
 
-%!test [b m r] = firpm (298, [0 .28 .33 .48 .53 1], [0 1 0], [93 68 89], 'persistence', 3);
-%! assert (r, 0); assert (m, 6.8598e-05, -5e-5);
+%!test [b m] = firpm (298, [0 .28 .33 .48 .53 1], [0 1 0], [93 68 89]);
+%! assert (m, 6.86519e-05, -5e-5);
 
-%!test assert (firpm (11, [0 2*.45], .5, 'class', 'symmetric'), firpm (11, [0 2*.45], .5, 'bandpass'))
-%!test assert (firpm (11, [0 2*.45], .5, 'class', 'symmetric'), firpm (11, [0 2*.45], .5))
+%!test assert (firpm (11, [0 2*.45], .5, 'symmetric'), firpm (11, [0 2*.45], .5, 'bandpass'))
+%!test assert (firpm (11, [0 2*.45], .5, 'symmetric'), firpm (11, [0 2*.45], .5))
 
 %!assert (firpm (20, [0 .3 .5 1], [1 1 0 0]), firpm (20, [0 .3 .5 1], [1 0]))
 
 
 
 %!test assert (
-%!  firpm(30, [0.1 0.9], 1, "class", "antisymmetric"),
-%!  firpm(30, [0.1 0.9], 1, "class", "hilbert"))
+%!  firpm (30, [0.1 0.9], 1, "antisymmetric"),
+%!  firpm (30, [0.1 0.9], 1, "hilbert"))
 %!test assert (
-%!  firpm(30, [0.1 0.9], 1, "class", "hilbert"),
-%!  firpm(30, [0.1 0.9], 1, "hilbert"))
-%!test assert (
-%!  firpm(11, [0 0.9], 1, "accuracy", 1),
-%!  firpm(11, [0 0.9], 1, {64}))
+%!  firpm (11, [0 0.9], 1, {1}),
+%!  firpm (11, [0 0.9], 1, {64}))
 
 
 
 %!test
-%! [b1 m1] = firpm(20, [0 0.4 0.5 1], [1 0], [1 1/8]);
-%! [b2 m2] = firpm(20, [0 0.4 0.5 1], [1 0], [8   1]);
+%! [b1 m1] = firpm (20, [0 0.4 0.5 1], [1 0], [1 1/8]);
+%! [b2 m2] = firpm (20, [0 0.4 0.5 1], [1 0], [8   1]);
 %! assert (b1, b2)
 %! assert (m1 * 8, m2)
 
 
 
 %!
-%! # N.B. Demos 1-7 are purposely common with firls
-%!
 %!demo
 %!
-%! b = firpm (40, [0 .5 .6 1], [1 0]);
+%! N=38; F=[0 .47 .53 1]; A=[1 1 0 0]; W=[1 1]; ant=0;
+%! [b m r] = firpm (N, F, A, W, 'sa'(1+ant));
 %!
-%! clf
-%! [h f] = freqz (b, 1, 2^14);
-%! plot (f/pi, 20*log10 (abs (h))); grid ('on')
-%! axis ([0 1 -55 2])
-%! title ('firpm type-I low-pass filter design');
-%! ylabel ('Magnitude response (dB)'); xlabel ('Frequency (normalized)')
-%! axes ('position', [.21 .55 .3 .2])
-%! plot (f/pi, 20*log10 (abs (h))); grid ('on')
-%! axis ([0 .52 -(e=1.1e-1) e])
-%! title ('Pass-band detail')
-%! axes ('position', [.21 .2 .3 .2])
-%! stem (b, '.'); grid ('on')
+%! mul=[1 i](1+ant);
+%! clf; [h f] = freqz (b); plot (f/pi, real (mul*h.*exp (i*f*N/2)),
+%!     f=F(1:2),(a=A(1:2))-(M=m/W(1)),'r', f, a+M,'r',
+%!     f=F(3:4),(a=A(3:4))-(M=m/W(2)),'r', f, a+M,'r',
+%!     r.fextr, real ((mul*r.H.*exp (i*r.fgrid*pi*N/2))(r.iextr)),'ko')
+%! grid on; axis ([0 1 -.1 1.1]); set (gca, 'xtick', [0:.1:1], 'ytick', [0:.1:1])
+%! title (sprintf ('firpm type-I low-pass filter (order=%i)', length (b) - 1));
+%! ylabel ('Amplitude response'); xlabel ('Frequency (normalized)')
+%! axes ('position', [.58 .35 .3 .5])
+%! stem (b); grid off
 %! title ('Impulse response')
-%! axis ([1 length(b) -.2 .6])
+%! axis ([1 length(b) -.15 .55])
 %! %--------------------------------------------------
 %! % Figure shows transfer and impulse-response of
-%! % low-pass filter design.
+%! % half-band filter design.
 %!
 %!demo
 %!
-%! b = firpm (40, [0 .25 .3 .6 .65 1], [0 1 0]);
+%! N=40; F=[0 .1 .15 .35 .4 1]; A=[1 1 0 0 1 1]; W=[1 1 1]; ant=0;
+%! [b m r] = firpm (N, F, A, W, 'sa'(1+ant));
 %!
-%! clf
-%! [h f] = freqz (b, 1, 2^14);
-%! subplot (2, 2, 1:2)
-%! plot (f/pi, 20*log10 (abs (h))); grid ('on')
-%! axis ([0 1 -50 5])
-%! title ('firpm type-I band-pass filter design');
-%! ylabel ('Magnitude response (dB)'); xlabel ('Frequency (normalized)')
-%! subplot (2, 2, 3)
-%! plot (f/pi, 20*log10 (abs (h))); grid ('on')
-%! axis ([.29 .61 -(e=6e-1) e])
-%! title ('Pass-band detail')
-%! subplot (2, 2, 4)
-%! stem (b, '.'); grid ('on')
+%! mul=[1 i](1+ant);
+%! clf; [h f] = freqz (b); plot (f/pi, real (mul*h.*exp (i*f*N/2)),
+%!     f=F(1:2),(a=A(1:2))-(M=m/W(1)),'r', f, a+M,'r',
+%!     f=F(3:4),(a=A(3:4))-(M=m/W(2)),'r', f, a+M,'r',
+%!     f=F(5:6),(a=A(5:6))-(M=m/W(3)),'r', f, a+M,'r',
+%!     r.fextr, real ((mul*r.H.*exp (i*r.fgrid*pi*N/2))(r.iextr)),'ko')
+%! grid on; axis ([0 1 -.1 1.1]); set (gca, 'xtick', [0:.1:1], 'ytick', [0:.1:1])
+%! title (sprintf ('firpm type-I band-stop filter (order=%i)', length (b) - 1));
+%! ylabel ('Amplitude response'); xlabel ('Frequency (normalized)')
+%! axes ('position', [.55 .2 .3 .4])
+%! stem (b); grid off
 %! title ('Impulse response')
-%! axis ([1 length(b) -.3 .4])
+%! axis ([1 length(b) -.2 .8])
 %! %--------------------------------------------------
 %! % Figure shows transfer and impulse-response of
 %! % band-pass filter design.
 %!
 %!demo
 %!
-%! b = firpm (30, [0 .2 .4 .6 .8 1], [1 .5 0]);
+%! N=41; F=[0 .1 .15 .35 .4 1]; A=[0 0 1 1 0 0]; W=[2 4 3]; ant=1;
+%! [b m r] = firpm (N, F, A, W, 'sa'(1+ant));
 %!
-%! clf
-%! [h f] = freqz (b, 1, 2^14);
-%! plot (f/pi, abs (h)); grid ('on'); axis ([0 1 -.1 1.1])
-%! title ('firpm type-I multi-level filter design');
-%! ylabel ('Magnitude response'); xlabel ('Frequency (normalized)')
-%! axes ('position', [.21 .2 .3 .2])
-%! plot (f/pi, abs (h)); grid ('on'); axis ([.39 .61 .5-(e=1e-3) .5+e])
-%! title ('Mid-band detail')
-%! axes ('position', [.55 .65 .3 .2])
-%! plot (f/pi, abs (h)); grid ('on'); axis ([0 .21 1-(e=1e-3) 1+e])
-%! title ('Pass-band detail')
+%! mul=[1 i](1+ant);
+%! clf; [h f] = freqz (b); plot (f/pi, real (mul*h.*exp (i*f*N/2)),
+%!     f=F(1:2),(a=A(1:2))-(M=m/W(1)),'r', f, a+M,'r',
+%!     f=F(3:4),(a=A(3:4))-(M=m/W(2)),'r', f, a+M,'r',
+%!     f=F(5:6),(a=A(5:6))-(M=m/W(3)),'r', f, a+M,'r',
+%!     r.fextr, real ((mul*r.H.*exp (i*r.fgrid*pi*N/2))(r.iextr)),'ko')
+%! grid on; axis ([0 1 -.1 1.1]); set (gca, 'xtick', [0:.1:1], 'ytick', [0:.1:1])
+%! title (sprintf ('firpm type-IV weighted band-pass filter (order=%i)', length (b) - 1));
+%! ylabel ('Amplitude response'); xlabel ('Frequency (normalized)')
+%! axes ('position', [.55 .4 .3 .4])
+%! stem (b); grid off
+%! title ('Impulse response')
+%! axis ([1 length(b) -.3 .3])
 %! %--------------------------------------------------
-%! % Figure shows transfer of multi-level filter design.
+%! % Figure shows transfer and impulse-response of
+%! % band-pass filter design.
 %!
 %!demo
 %!
-%! b = firpm (40, [0 .2 .3 .4 .5 .6 .7 .8 .9 1], [1 0 1 0 1], [11 100 7 10 5]);
+%! curve = @(a,b,y,z,x) z*(b-a)./((x-a)*z/y+b-x);
+%! respFn = @(n,f,g,w) deal (g>=f(3) & g<=f(4), ...
+%!   (g<=f(2)).*curve (f(2),f(1),w(1),w(3),g) + ...
+%!   (g>=f(3) & g<=f(4))*w(2) + ...
+%!   (g>=f(5) & g<=f(6)).*curve (f(5),f(6),w(1),w(3),g) + ...
+%!   (g>f(7))*w(4)); % NB contiguous bands so > not >=.
+%! b=firpm (127, [0 .2 .24 .26 .3 .5 .5 1], respFn, [10 1 100 10]);
 %!
-%! clf
-%! [h f] = freqz (b, 1, 2^14);
-%! subplot (2, 1, 1)
-%! plot (f/pi, 20*log10 (abs (h))); grid ('on')
-%! axis ([0 1 -60 5]); set (gca, 'xtick', [0:.1:1])
-%! title ('firpm type-I multi-band, multi-weight filter design');
+%! clf; [h f]=freqz (b); plot (f/pi, 20*log10 (abs (h)))
+%! grid on; axis ([0 1 -90 5]); set (gca, 'xtick', [0:.1:1], 'ytick', [-80:10:0])
+%! title (sprintf ('firpm type-II band-pass filter with shaped stop-bands (order=%i)', length (b) - 1));
 %! ylabel ('Magnitude response (dB)'); xlabel ('Frequency (normalized)')
-%! subplot (2, 1, 2)
-%! plot (f/pi, 20*log10 (abs (h))); grid ('on')
-%! axis ([0 1 -.5 .5]); set (gca, 'xtick', [0:.1:1])
-%! title ('Pass-band detail')
 %! %--------------------------------------------------
-%! % Figure shows transfer of multi-band, multi-weight filter design.
+%! % Figure shows transfer of band-pass filter design
+%! % with shaped error-weight in the stop-bands.
 %!
 %!demo
 %!
-%! b = firpm (80, [0 .2 .3 1], [1 -1]);
+%! b = firpm (40, [0 .1 .3 1], [-1 1]);
 %!
-%! clf
-%! [h f] = freqz (b, 1, 2^14);
-%! plot (f/pi, 20*log10 (abs (h))); grid ('on')
-%! axis ([0 1 -60 5])
-%! title ('firpm type-I notch filter design');
+%! clf; [h f] = freqz (b,1,2^14); plot (f/pi, 20*log10 (abs (h)))
+%! grid on; axis ([0 1 -60 5]); set (gca, 'xtick', [0:.1:1])
+%! title (sprintf ('firpm type-I notch filter (order=%i)', length (b) - 1));
 %! ylabel ('Magnitude response (dB)'); xlabel ('Frequency (normalized)')
 %! axes ('position', [.42 .55 .45 .2])
-%! plot (f/pi, 20*log10 (abs (h))); grid ('on')
+%! plot (f/pi, 20*log10 (abs (h))); grid on
 %! axis ([0 1 -(e=1e-2) e])
-%! title ('Pass-band detail')
+%! title ('Pass-bands detail')
 %! axes ('position', [.42 .2 .45 .2])
-%! stem (b, '.'); grid ('on')
+%! stem (b); grid off
 %! title ('Impulse response')
-%! axis ([1 length(b) -.55 .5])
+%! axis ([1 length(b) -.45 .65])
 %! %--------------------------------------------------
 %! % Figure shows transfer and impulse-response of
 %! % notch filter design.
 %!
 %!demo
 %!
-%! b = firpm (1000, [0 .4 .41 1], [1 0]);
+%! b = firpm (1000, [0 .4 .41 1], [1 0], {1});
 %!
-%! clf
-%! [h f] = freqz (b, 1, 2^17);
-%! plot (f/pi, 20*log10 (abs (h))); grid ('on')
-%! title ('firpm type-I brick-wall low-pass filter design');
+%! clf; [h f] = freqz (b, 1, 2^17); plot (f/pi, 20*log10 (abs (h)))
+%! title (sprintf ('firpm type-I brick-wall low-pass filter (order=%i)', length (b) - 1));
 %! ylabel ('Magnitude response (dB)'); xlabel ('Frequency (normalized)')
-%! axis ([0 1 -100 5])
+%! grid on; axis ([0 1 -100 5]); set (gca, 'xtick', [0:.1:1])
 %! axes ('position', [.55 .6 .3 .2])
-%! plot (f/pi, 20*log10 (abs (h))); grid ('on')
+%! plot (f/pi, 20*log10 (abs (h))); grid on
 %! title ('Details')
 %! axis ([.38 .401 -(e=1e-3) e])
 %! axes ('position', [.55 .3 .3 .2])
-%! plot (f/pi, 20*log10 (abs (h))); grid ('on')
+%! plot (f/pi, 20*log10 (abs (h))); grid on
 %! axis ([.409 .43 -86 -85])
 %! axes ('position', [.2 .35 .2 .3])
-%! semilogy (abs (b))
+%! semilogy (abs (b)); grid off
 %! title ('Impulse response magnitude')
-%! axis ([0 length(b)+1 1e-8 1])
+%! axis ([0 length(b)+1 1e-6 1])
 %! %--------------------------------------------------
 %! % Figure shows transfer and impulse-response of
 %! % brick-wall low-pass filter design.
 %!
 %!demo
 %!
-%! b1=firpm (11, [0 2*.45], .5);
-%! b=zeros (length(b1)*2-1, 1); b (1:2:length(b))=b1; b (length(b1))=.5;
+%! b = firpm (20, [0 2.5]/pi, [0 2.5], 'differentiator');
 %!
 %! clf
-%! [h f] = freqz (b, 1, 2^14);
-%! plot (f/pi, abs (h)); grid ('on')
-%! axis ([0 1 0 1.1])
-%! title ('firpm type-I half-band filter design');
-%! ylabel ('Magnitude response'); xlabel ('Frequency (normalized)')
-%! set (gca, 'xtick', [0:.1:1]);
-%! set (gca, 'ytick', [0:.1:1]);
-%! axes ('position', [.58 .35 .3 .5])
-%! stem (b, '.'); grid ('on')
-%! title ('Impulse response')
-%! axis ([1 length(b) -.15 .55])
-%! %--------------------------------------------------
-%! % Figure shows transfer and impulse-response of
-%! % half-band filter design (using an approach that
-%! % uses less CPU and yields exact zero coefficients).
-%!
-%!demo
-%!
-%! b1 = firpm (65, [0 .4 .42 .6 .6 1], [1 0 0], [1 1 2 2 2 64]);
-%! b2 = firpm (65, [0 .4 .42 .7 .7 1], [1 0 0], [1 1 2 32 32 32]);
-%!
-%! clf
+%! [h f] = freqz (b,1,2^12);
 %! subplot (2, 1, 1)
-%! [h f] = freqz (b1, 1, 2^14);
-%! plot (f/pi, 20*log10 (abs (h))); grid ('on')
-%! axis ([0 1 -55 5])
-%! title ('firpm type-II low-pass filter designs with shaped stop-band error');
-%! ylabel ('Magnitude response (dB)')
-%! subplot (2, 1, 2)
-%! [h f] = freqz (b2, 1, 2^14);
-%! plot (f/pi, 20*log10 (abs (h))); grid ('on')
-%! axis ([0 1 -55 5])
-%! ylabel ('Magnitude response (dB)'); xlabel ('Frequency (normalized)')
-%! %--------------------------------------------------
-%! % Figure shows transfer of low-pass filter designs
-%! % with shaped error-weight in the stop-band.
-%!
-%!demo
-%!
-%! b = firpm (40, [0 2.5]/pi, [0 2.5], 'class', 'differentiator');
-%!
-%! clf
-%! [h f] = freqz (b, 1, 2^14);
-%! subplot (2, 1, 1)
-%! plot (f, abs (h)); grid ('on')
-%! title ('firpm type-III differentiator filter design');
+%! plot (f, abs (h)); grid on
+%! title (sprintf ('firpm type-III differentiator filter (order=%i)', length (b) - 1));
 %! ylabel ('Magnitude response'); xlabel ('Frequency (radians/sample)')
 %! axis ([0 pi 0 pi])
 %! subplot (2, 1, 2)
-%! plot (f, abs (abs (h)./f-1)); grid ('on')
-%! axis ([0 2.5 0 1e-6])
+%! plot (f, abs (abs (h)./f-1)); grid on
+%! axis ([0 2.5 0 1e-3])
 %! title ('Pass-band error (inverse-f weighted)')
 %! %--------------------------------------------------
 %! % Figure shows transfer of differentiator filter design.
@@ -933,20 +1032,14 @@ The b0 values come from a reference implementation.
 %!
 %!demo
 %!
-%! b = firpm (30, [.1 .9], 1, 'class', 'antisymmetric');
+%! b = firpm (30, [.05 .95], 1, 'antisymmetric');
 %!
-%! clf
-%! [h f] = freqz (b, 1, 2^14);
-%! plot (f/pi, abs (h)); grid ('on')
-%! title ('firpm type-III hilbert transformer filter design');
+%! clf; [h f] = freqz (b); plot (f/pi, abs (h))
+%! grid on; axis ([0 1 0 1.1]); set (gca, 'xtick', [0:.1:1], 'ytick', [0:.1:1])
+%! title (sprintf ('firpm type-III hilbert transformer filter (order=%i)', length (b) - 1));
 %! ylabel ('Magnitude response'); xlabel ('Frequency (normalized)')
-%! axis ([0 1 0 1.1])
-%! axes ('position', [.3 .55 .45 .2])
-%! plot (f/pi, abs (h)); grid ('on')
-%! axis ([0 1 1-(e=4e-3) 1+e])
-%! title ('Pass-band detail')
-%! axes ('position', [.3 .2 .45 .2])
-%! stem (b, '.'); grid ('on')
+%! axes ('position', [.3 .25 .45 .4])
+%! stem (b); grid off
 %! title ('Impulse response')
 %! axis ([1 length(b) -.7 .7])
 %! %--------------------------------------------------
@@ -954,26 +1047,34 @@ The b0 values come from a reference implementation.
 %! % hilbert filter design.
 %!
 %!demo
+%! cic = @(f) (sin (pi*(t=f+eps*!f)/2)./sin (pi*t/2/10)/10).^4;
 %!
-%! b = firpm (31, [0 .5 .7 1], [0 1], 'class', 'antisymmetric');
+%! b = firpm (30, [0 .5 .7 1], @(n,f,g) deal (a=(g<=f(2))./cic (g), 1./(a+!a)));
 %!
-%! clf
-%! [h f] = freqz (b, 1, 2^14);
-%! plot (f/pi, 20*log10 (abs (h))); grid ('on')
-%! axis ([0 1 -80 5])
-%! title ('firpm type-IV high-pass filter design');
+%! clf; [h f]=freqz (b); plot (f/=pi, 20*log10 (abs (h)))
+%! grid on; axis ([0 1 -60 6]); set (gca, 'xtick', [0:.1:1])
+%! title (sprintf ('firpm type-I CIC-compensation filter (order=%i)', length (b) - 1));
 %! ylabel ('Magnitude response (dB)'); xlabel ('Frequency (normalized)')
-%! axes ('position', [.2 .65 .3 .2])
-%! plot (f/pi, 20*log10 (abs (h))); grid ('on')
-%! axis ([.69 1 -(e=2e-2) e])
-%! title ('Pass-band detail')
-%! axes ('position', [.57 .3 .3 .2])
-%! stem (b, '.'); grid ('on')
-%! title ('Impulse response')
-%! axis ([1 length(b) -.4 .4])
+%! axes ('position', [2 3 4 3]/10)
+%! plot (f, 20*log10 (abs (h).*cic (f))); axis ([0 .55 -.04 .04]); grid on
+%! title ('Compensated filter response')
 %! %--------------------------------------------------
-%! % Figure shows transfer and impulse-response of
-%! % odd-order high-pass filter design.
+%! % Figure shows transfer details of CIC-compensation
+%! % filter design.
 %!
+%!demo
+%! clf; n=30; Fp=.8; for d=linspace (-.5, .5, 10)
+%!
+%! b = firpm (n, [0 Fp], @(n,f,g) (g<=Fp).*cos (g*pi*d))...
+%!   + firpm (n, [0 Fp], @(n,f,g) (g<=Fp).*sin (g*pi*d), 'a');
+%!
+%! [g f]=grpdelay (b);
+%! set (gca,'ColorOrderIndex',1); plot (f/pi, g-n/2); hold ('on'); end;
+%! hold ('off'); grid on; axis ([0 1 -.6 .6]); set (gca, 'xtick', [0 Fp 1], 'ytick', [-.5:.5:.5])
+%! title (sprintf ('firpm type-I fractional-delay filters (order=%i)', length (b) - 1));
+%! ylabel ('Fractional-delay (samples)'); xlabel ('Frequency (normalized)')
+%! %--------------------------------------------------
+%! % Figure shows delay response of (non-linear-phase)
+%! % filter designs with progressive fractional-delay.
 
 */

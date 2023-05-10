@@ -1,18 +1,23 @@
-##         Copyright (c) 2015 Rob Sykes <robs@users.sourceforge.net>
+## Copyright (C) 2015 The Octave Project Developers
+##
+## See the file COPYRIGHT.md in the top-level directory of this
+## distribution or <https://octave.org/copyright/>.
 ##
 ## This file is part of Octave.
 ##
-## Octave is free software; you can redistribute it and/or modify it under the
-## terms of the GNU General Public License as published by the Free Software
-## Foundation; either version 3 of the License, or (at your option) any later
-## version.
+## Octave is free software: you can redistribute it and/or modify it
+## under the terms of the GNU General Public License as published by
+## the Free Software Foundation, either version 3 of the License, or
+## (at your option) any later version.
 ##
-## Octave is distributed in the hope that it will be useful, but WITHOUT ANY
-## WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
-## A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+## Octave is distributed in the hope that it will be useful, but
+## WITHOUT ANY WARRANTY; without even the implied warranty of
+## MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+## GNU General Public License for more details.
 ##
-## You should have received a copy of the GNU General Public License along with
-## this program; if not, see <http://www.gnu.org/licenses/>.
+## You should have received a copy of the GNU General Public License
+## along with Octave; see the file COPYING.  If not, see
+## <https://www.gnu.org/licenses/>.
 
 
 
@@ -201,6 +206,7 @@ numbers, its length not exceeding that of A")
   W = max (D) ./ D;
   N = ceil (L) - 1;                # Filter order.
   N += A(end) != 0 && rem (N, 2);  # Fix-up high-pass/band-stop.
+  A = kron(A, [1;1]);
   if (nargout < 2 && return_as_cell)
     N = {N, Fout, A, W};
   endif
@@ -283,11 +289,11 @@ endfunction
 %! b = firpm (n, f, a, w);
 %!
 %! [h f] = freqz (b, 1, 2^14); clf
-%! plot (fs/2*f/pi, 20*log10 (abs (h))); grid; axis ([0 fs/2 -90 5])
+%! plot (fs/2*f/pi, 20*log10 (abs (h))); grid on; axis ([0 fs/2 -90 5])
 %! ylabel ("Magnitude (dB)"); xlabel ("Frequency (Hz)")
 %! title (sprintf ("Response analysis of firpmord / firpm low-pass filter design (order=%i)", length (b) - 1))
 %! axes ("position", [.24 .4 .4 .3])
-%! plot (fs/2*f/pi, abs (h)); grid; axis ([0 2600 x=.987 2-x])
+%! plot (fs/2*f/pi, abs (h)); grid on; axis ([0 2600 x=.987 2-x])
 %! ylabel ("Magnitude")
 %! title ("Pass-band detail")
 %! %--------------------------------------------------
@@ -301,16 +307,16 @@ endfunction
 %! b = firpm (firpmord ([0.3 0.4], [0 1], [db2mag(-80) .01], "c"){:});
 %!
 %! [h f] = freqz (b, 1, 2^14); clf
-%! plot (f/pi, 20*log10 (abs (h))); grid; axis ([0 1 -110 5])
+%! plot (f/pi, 20*log10 (abs (h))); grid on; axis ([0 1 -110 5])
 %! ylabel ("Magnitude (dB)"); xlabel ("Frequency (normalized)")
 %! title (sprintf ("Response analysis of firpmord / firpm high-pass filter design (order=%i)", length (b) - 1))
 %! axes ("position", [.52 .4 .35 .3])
-%! plot (f/pi, abs (h)); grid; axis ([.39 1 x=.987 2-x])
+%! plot (f/pi, abs (h)); grid on; axis ([.39 1 x=.987 2-x])
 %! ylabel ("Magnitude")
 %! title ("Pass-band detail")
 %! %--------------------------------------------------
 %! % Figure shows analysis of filter designed using
-%! % firpm with firpmord; specs. are met.
+%! % firpm with firpmord; specs. are exceeded.
 %!
 %!demo
 %!
@@ -320,12 +326,12 @@ endfunction
 %! b = firpm (firpmord ([1 2 3 4 5 6 7 8]/10, [0 1 0 1 0], [ds dp], "c"){:});
 %!
 %! [h f] = freqz (b, 1, 2^14); clf
-%! plot (f/pi, 20*log10 (abs (h))); grid; axis ([0 1 -110 5])
+%! plot (f/pi, 20*log10 (abs (h))); grid on; axis ([0 1 -110 5])
 %! ylabel ("Magnitude (dB)"); xlabel ("Frequency (normalized)")
 %! title ("Response analysis of firpmord / firpm multi-band-pass filter design")
 %! title (sprintf ("Response analysis of firpmord / firpm multi-band-pass filter design (order=%i)", length (b) - 1))
 %! axes ("position", [.38 .5 .5 .2])
-%! plot (f/pi, abs (h)); grid; axis ([.11 .79 x=.986 2-x])
+%! plot (f/pi, abs (h)); grid on; axis ([.11 .79 x=.986 2-x])
 %! ylabel ("Magnitude")
 %! title ("Pass-bands detail")
 %! %--------------------------------------------------
@@ -340,11 +346,11 @@ endfunction
 %! b = firpm (firpmord ([2 3 8 9]/32, [0 1 0], [ds dp], "c"){:});
 %!
 %! [h f] = freqz (b, 1, 2^14); clf
-%! plot (f/pi, 20*log10 (abs (h))); grid; axis ([0 1 -50 3])
+%! plot (f/pi, 20*log10 (abs (h))); grid on; axis ([0 1 -50 3])
 %! ylabel ("Magnitude (dB)"); xlabel ("Frequency (normalized)")
 %! title (sprintf ("Response analysis of firpmord / firpm band-pass filter design (order=%i)", length (b) - 1))
 %! axes ("position", [.45 .5 .4 .3])
-%! plot (f/pi, 20*log10 (abs (h)));; grid; axis ([.08 .26 x=-.13 -x])
+%! plot (f/pi, 20*log10 (abs (h))); grid on; axis ([.08 .26 x=-.13 -x])
 %! ylabel ("Magnitude (dB)")
 %! title ("Pass-band detail")
 %! %--------------------------------------------------
@@ -366,7 +372,7 @@ endfunction
 %!     endif
 %!     n += rem (n + rem (type, 2), step);
 %!     [b m] = firpm (n, f, a, w);
-%!     bounds(1 + (met = (m <= max (D)))) = n;
+%!     bounds(1 + (met = (abs(m) <= max (D)))) = n;
 %!     step -= bounds(2) - bounds(1) == type;
 %!     if (met) h = b; endif
 %!   endwhile
@@ -378,11 +384,11 @@ endfunction
 %! b = firpmx (2, [2 3 8 9]/32, [0 1 0], [ds dp]);
 %!
 %! [h f] = freqz (b, 1, 2^14); clf
-%! plot (f/pi, 20*log10 (abs (h))); grid; axis ([0 1 -50 3])
+%! plot (f/pi, 20*log10 (abs (h))); grid on; axis ([0 1 -50 3])
 %! ylabel ("Magnitude (dB)"); xlabel ("Frequency (normalized)")
 %! title (sprintf ("Response analysis of firpmord / iterative-firpm band-pass filter design (order=%i)", length (b) - 1))
 %! axes ("position", [.45 .5 .4 .3])
-%! plot (f/pi, 20*log10 (abs (h)));; grid; axis ([.08 .26 x=-.13 -x])
+%! plot (f/pi, 20*log10 (abs (h))); grid on; axis ([.08 .26 x=-.13 -x])
 %! ylabel ("Magnitude (dB)")
 %! title ("Pass-band detail")
 %! %--------------------------------------------------
