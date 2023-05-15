@@ -43,6 +43,7 @@ Filtering
   sgolayfilt
   sosfilt
 Filter Analysis
+  filternorm
   freqs
   freqs_plot
   fwhm
