@@ -50,6 +50,7 @@ Filter Analysis
   fwhm
   grpdelay
   impz
+  isallpass
   isstable
   phasez
   zplane
