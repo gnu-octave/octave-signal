@@ -51,6 +51,7 @@ Filter Analysis
   grpdelay
   impz
   isallpass
+  isminphase
   isstable
   phasez
   zplane
