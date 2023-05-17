@@ -1,3 +1,17 @@
+Summary of important user-visible changes for signal 1.4.4:
+----------------------------------------------------------
+
+ ** Minor bug fixes and documentation improvements have been made to the
+    following functions:
+
+      sos2tf     xcorr       xcov
+      zp2sos
+
+ ** The following new functions have been added to the signal package:
+
+      firpm      firpmord    istable
+      lpc         vco
+
 Summary of important user-visible changes for signal 1.4.3:
 ----------------------------------------------------------
 
