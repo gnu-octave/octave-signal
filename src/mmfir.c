@@ -43,9 +43,9 @@
 
 
 
-// Real-number precision, quad, double or long double (the default). 
+// Real-number precision, quad, double or long double (the default).
 
-#if defined QUAD_PREC // Very slow without native support. 
+#if defined QUAD_PREC // Very slow without native support.
   typedef __float128 real;
   #define cosr cosq
   #define sinr sinq
@@ -69,7 +69,7 @@
 #define clamp(x,lo,hi)  (((x)>(hi))?(hi):(((x)<(lo))?(lo):(x)))
 #define debugLevel      (flags & 3)
 #define dir(x)          ((x)<0? -1: (x)>0? 1 : 0)
-#define epsilon         1e-11 // In some circumstances, treat < epsilon as 0 
+#define epsilon         1e-11 // In some circumstances, treat < epsilon as 0
 #define E(x)            peaks[x].e
 #define e(x)            space[x].e
 #define F(x)            peaks[x].f
@@ -77,8 +77,8 @@
 #define maxExtras       (numBands+2)
 #define maxPeaks        (R+1+maxExtras)
 #define PI              3.1415926535897932384626433832795029
-#define rand(r,x)       (ranqd1(r) * ((x) / (65536. * 32768.))) // in [-x,x) 
-#define ranqd1(r)       ((r) = 1664525 * (r) + 1013904223) // int32_t r 
+#define rand(r,x)       (ranqd1(r) * ((x) / (65536. * 32768.))) // in [-x,x)
+#define ranqd1(r)       ((r) = 1664525 * (r) + 1013904223) // int32_t r
 #define returnError(x)  do {report.result=x; goto END;} while(0)
 #define iround(x)       (int)floor((x)+.5)
 #define setF(F)         for (f=(F); f>b->freqR; ++b)
@@ -106,7 +106,7 @@ static char const * const errorText[]={
 
 
 
-// Type definitions: 
+// Type definitions:
 
 typedef enum {TypeI, TypeII, TypeIII, TypeIV} FirType;
 
@@ -116,7 +116,7 @@ typedef MmfirPoint Point;
 
 
 
-// Determine coefs of a 2nd-order polynomial from 3 of its points: 
+// Determine coefs of a 2nd-order polynomial from 3 of its points:
 
 static void poly2(
     double x0, double x1, double x2,
@@ -133,7 +133,7 @@ static void poly2(
 
 
 
-// Evaluate a 2nd-order polynomial at given point: 
+// Evaluate a 2nd-order polynomial at given point:
 
 static double poly2Val(double a, double b, double c, double x)
 {
@@ -176,7 +176,7 @@ static double const cc = 0;
 
 
 
-static double warp(double x) // Calculate warp in arbitrary units: 
+static double warp(double x) // Calculate warp in arbitrary units:
 {
   double t = c1 + c2*x;
   return x<0? 0 : x<1? poly2Val(ca,cb,cc,x) : x-(t>-38? exp(t)/c2 : 0)-c3;
@@ -184,7 +184,7 @@ static double warp(double x) // Calculate warp in arbitrary units:
 
 
 
-static double iwarp(double y) // Inverse of warp(). 
+static double iwarp(double y) // Inverse of warp().
 {
   double t, x1=y+c3, x;
 
@@ -194,7 +194,7 @@ static double iwarp(double y) // Inverse of warp().
   if (y<warp(1))
     return (-cb + sqrt(cb*cb-4*ca*(cc-y)))/(2*ca);
 
-  // Newton iteration: 
+  // Newton iteration:
   do x=x1, t=c1+c2*x, x1=x-(warp(x)-y)/(1-(t>-38? exp(t) : 0));
   while (fabs(x1-x)>1e-5);
   return x1;
@@ -211,19 +211,19 @@ static int warpSpace(Point * p, double m, double f1, double f2,
   int i, n = (int)ceil(m*density);
   double scale, df = f2 - f1;
 
-  p->f = f1, p+=step; // End points must be exact (not calculated). 
+  p->f = f1, p+=step; // End points must be exact (not calculated).
   if (n > 0) {
     scale = df/warp(1.*n/density);
     for (i = 1; i < n; ++i)
       p->f = f1+scale*warp((i+rand(*random, .001))/density), p+=step;
-    p->f = f2; // End points must be exact (not calculated). 
+    p->f = f2; // End points must be exact (not calculated).
   }
   return 1+n;
 }
 
 
 
-static int warpSpaceR( // Right of transition-band. 
+static int warpSpaceR( // Right of transition-band.
     Point * p, double m, double f1, double f2, int density, rand_t * random)
 {
   return warpSpace(p, m, f1, f2, density, +1, random);
@@ -231,7 +231,7 @@ static int warpSpaceR( // Right of transition-band.
 
 
 
-static int warpSpaceL ( // Left of transition-band. 
+static int warpSpaceL ( // Left of transition-band.
     Point * p, double m, double f1, double f2, int density, rand_t * random)
 {
   return warpSpace(p+(int)ceil(m*density), m, f2, f1, density, -1, random);
@@ -239,7 +239,7 @@ static int warpSpaceL ( // Left of transition-band.
 
 
 
-static int warpSpaceRL( // Between transition-bands. 
+static int warpSpaceRL( // Between transition-bands.
     Point * p, double m, double f1, double f2, int density, rand_t * random)
 {
   double df1 = (f2 - f1) * .5, m1 = m * .5;
@@ -250,14 +250,14 @@ static int warpSpaceRL( // Between transition-bands.
 
 
 
-// Apportion space to each band, taking account of warping: 
+// Apportion space to each band, taking account of warping:
 
 static void apportionSpace(MmfirBandSpec * b, int numBands, int n)
 {
   int i, changed;
   double sum, t, av;
 
-  do { // Use an iterative method. 
+  do { // Use an iterative method.
     for (av=changed=0, i=0; i<numBands; ++i)
       av += warp(b[i].portion*n/b[i].ends)/(b[i].portion0/b[i].ends);
     av/=numBands;
@@ -267,20 +267,20 @@ static void apportionSpace(MmfirBandSpec * b, int numBands, int n)
       changed += fabs(t-b[i].portion) > 1e-6;
       sum+= b[i].portion=t;
     }
-    for (i=0; i<numBands; b[i++].portion/=sum); // Normalise. 
+    for (i=0; i<numBands; b[i++].portion/=sum); // Normalise.
   } while (changed);
 }
 
 
 
-static inline real // Modifier at given f in [0,1], for filter-type T 
+static inline real // Modifier at given f in [0,1], for filter-type T
 typeMod(real f, FirType T)
 {
   switch (T) {
     case TypeI  : default: return 1;
-    case TypeII : return cosr(f *(PIr*.5)); // Has zero at f=1. 
-    case TypeIII: return sinr(f * PIr);     // Has zero at f=0, f=1. 
-    case TypeIV : return sinr(f *(PIr*.5)); // Has zero at f=0. 
+    case TypeII : return cosr(f *(PIr*.5)); // Has zero at f=1.
+    case TypeIII: return sinr(f * PIr);     // Has zero at f=0, f=1.
+    case TypeIV : return sinr(f *(PIr*.5)); // Has zero at f=0.
   }
 }
 
@@ -347,7 +347,7 @@ static MmfirResult builtInRespFn( // For simple response, given in bandSpecs:
   int i;
   double f;
   for (i=0; i<len; ++i) {
-    setF(p[i].f); // '...R' values here contain pre-calculated gradient: 
+    setF(p[i].f); // '...R' values here contain pre-calculated gradient:
     p[i].w= (b->weightL + b->weightR*(f-b->freqL));
     p[i].a= (b->ampL    + b->ampR   *(f-b->freqL));
   }
@@ -357,7 +357,7 @@ static MmfirResult builtInRespFn( // For simple response, given in bandSpecs:
 
 
 static double minimality_(Point const * p, int len, double threshold)
-{                      // Determine the minimality of the maximum error: 
+{                      // Determine the minimality of the maximum error:
   double max=1+1e-9;
   while (len--) max=maxD(max, fabs(p[len].w));
   return -log10(max-1)-threshold;
@@ -368,9 +368,9 @@ static double minimality_(Point const * p, int len, double threshold)
 MmfirReport mmfir(
     double            h[],
     MmfirFilterClass  filterClass,
-    int               N0, // = filter order + 1 
+    int               N0, // = filter order + 1
     int               numBands,
-    MmfirBandSpec     bandSpecs[/* numBands */], // N.B. destroyed. 
+    MmfirBandSpec     bandSpecs[/* numBands */], // N.B. destroyed.
     double            accuracy,
     double            persistence,
     double            robustness,
@@ -381,7 +381,7 @@ MmfirReport mmfir(
 {
   int      N = maxI(N0,2);
   FirType  T = (FirType)((filterClass!=MmfirSymmetric)*2 + !(N&1));
-  int      R = N/2 + !T; // R = # of cosine functions; num peaks = R+1 
+  int      R = N/2 + !T; // R = # of cosine functions; num peaks = R+1
 
   MmfirReport report = {MmfirSuccess, 0, 0, 0, 0, {0,0,0}};
 
@@ -394,19 +394,19 @@ MmfirReport mmfir(
   int      density = 3+(numBands>2)+iround(
              report.controls[2]=clamp(robustness,0,3)   );
 
-  int      doneInit=0, doLG=1; // For the lower/higher density passes. 
-  int      spaceLength=0, i, j, _1; // _1 holds +/- 1 
+  int      doneInit=0, doLG=1; // For the lower/higher density passes.
+  int      spaceLength=0, i, j, _1; // _1 holds +/- 1
   int      prevNumPeaks=0;
   double   f;
-  double   delta_1 = 1e-30; // 1/delta 
-  double   totalWidth=0; // Of given bands; in which peaks will be distributed. 
+  double   delta_1 = 1e-30; // 1/delta
+  double   totalWidth=0; // Of given bands; in which peaks will be distributed.
   MmfirBandSpec * b;
 
-  // Allocate the working arrays: 
+  // Allocate the working arrays:
   LagrangeCoef * coefs = calloc((size_t)(R+1), sizeof(*coefs));
   Point        * peaks = calloc((size_t)(maxPeaks), sizeof(*peaks));
   Point    * prevPeaks = calloc((size_t)(maxPeaks), sizeof(*prevPeaks));
-  Point       * space0 = 0, * space = 0; // Need to determine its size first. 
+  Point       * space0 = 0, * space = 0; // Need to determine its size first.
 
   MmfirResult err;
   va_list respFnArgs, tmpArgs;
@@ -414,7 +414,7 @@ MmfirReport mmfir(
   if (!respFn)
     respFn = builtInRespFn;
 
-  // Initial checks: 
+  // Initial checks:
   if (numBands<=0)
     returnError(MmfirInvalidNumBands);
   if (N!=N0)
@@ -422,7 +422,7 @@ MmfirReport mmfir(
   if (bandL->freqL<0 || bandR->freqR>1)
     returnError(MmfirInvalidFrequency);
 
-  // Further checks, and pre-calc. linear interp. gradients, etc.: 
+  // Further checks, and pre-calc. linear interp. gradients, etc.:
   for (b=bandL; b<=bandR; ++b) {
     double df = b->freqR - b->freqL;
 
@@ -436,7 +436,7 @@ MmfirReport mmfir(
       b->weightF = filterClass==MmfirDifferentiator &&
         (fabs(b->ampL) > userEpsilon || fabs(b->ampR) > userEpsilon);
       if (b->weightF)
-        b->weightL *= 2, b->weightR *= 2; // For 2/f weighting. 
+        b->weightL *= 2, b->weightR *= 2; // For 2/f weighting.
 
       b->ampR    = (b->ampR    - b->ampL   ) / df;
       b->weightR = (b->weightR - b->weightL) / df;
@@ -446,7 +446,7 @@ MmfirReport mmfir(
     totalWidth += df;
   }
 
-  // Avoid dividing by typeMod(0,T)=0: 
+  // Avoid dividing by typeMod(0,T)=0:
   if ((T == TypeIII || T == TypeIV) && (b=bandL)->freqL < (f=epsilon)) {
     Point p = {b->freqL,0,0,0};
     va_copy(tmpArgs, respFnArgs), err=respFn(b,1,&p,tmpArgs), va_end(tmpArgs);
@@ -460,7 +460,7 @@ MmfirReport mmfir(
     totalWidth -= f-b->freqL, b->freqL = f;
   }
 
-  // Avoid dividing by typeMod(1,T)=0: 
+  // Avoid dividing by typeMod(1,T)=0:
   if ((T==TypeII || T==TypeIII) && (b=bandR)->freqR > (f=1-epsilon)) {
     Point p = {b->freqR,0,0,0};
     va_copy(tmpArgs, respFnArgs), err=respFn(b,1,&p,tmpArgs), va_end(tmpArgs);
@@ -471,23 +471,23 @@ MmfirReport mmfir(
     totalWidth -= b->freqR-f, b->freqR = f;
   }
 
-  // Separate any contiguous bands: 
+  // Separate any contiguous bands:
   for (b=bandL; b<bandR; ++b)
     if (b->freqR > (f = b[1].freqL-epsilon))
       totalWidth -= b->freqR-f, b->freqR = f;
 
-  // Usually, start with a lower density, then switch to the final value: 
+  // Usually, start with a lower density, then switch to the final value:
   for (density2=maxI(density,density2);
       report.result==MmfirSuccess && density<=density2;
       doLG=0, density+=maxI(density2-density,1)) {
 
-    // Map current density to a convergence minimality threshold: 
+    // Map current density to a convergence minimality threshold:
     double minimalityThreshold = density<density2? density*.35-.45 :
-      (density+35)*.05; // Though in this case, stability usually prevails. 
+      (density+35)*.05; // Though in this case, stability usually prevails.
     if (debugLevel>1)
       fprintf(stderr, "minimalityThreshold: %g\n", minimalityThreshold);
 
-    { // Allocate & populate the analysis frequency space: 
+    { // Allocate & populate the analysis frequency space:
       rand_t random = 0;
 
       for (b=bandL; b<=bandR; ++b) {
@@ -497,7 +497,7 @@ MmfirReport mmfir(
       }
       apportionSpace(bandL, numBands, R+1);
 
-      // Determine # of points in analysis space: 
+      // Determine # of points in analysis space:
       for (spaceLength=0, b=bandL; b<=bandR; b->endP=spaceLength, ++b) {
         double m = (R+1)*b->portion;
         if (b->freqL <= epsilon || b->freqR >= 1-epsilon)
@@ -506,10 +506,10 @@ MmfirReport mmfir(
           spaceLength += 2 * (1 + (int)ceil(m*.5*density)) - 1;
       }
 
-      // Allocate space and calculate frequencies: 
+      // Allocate space and calculate frequencies:
       free(space0);
       if ((space0 = (Point *)calloc((size_t)(spaceLength+2), sizeof(*space)))) {
-        space = space0+1; // Simplifies peak detection at edges of space. 
+        space = space0+1; // Simplifies peak detection at edges of space.
         for (j=0, b = bandL; b<=bandR; ++b) {
           double m = (R+1)*b->portion;
           if (b->freqL <= epsilon)
@@ -534,11 +534,11 @@ MmfirReport mmfir(
       peaks[i].f=space[iround((i+.5)/(R+1)*(spaceLength-1))].f;
 
     report.result=MmfirOngoing;
-    while (1) { // Perform the Remez exchange (until break, below): 
+    while (1) { // Perform the Remez exchange (until break, below):
       double max, minimality, stability=0;
       int numPeaks, ok, extras=0;
 
-      if (doLG++) { // Calculate Lagrange coefficients for response estimate: 
+      if (doLG++) { // Calculate Lagrange coefficients for response estimate:
         real denom = 0, numer = 0, t1, t, delta;
 
         err=respFnMod(respFn, T, bandL, R+1, peaks, 0, respFnArgs);
@@ -562,7 +562,7 @@ MmfirReport mmfir(
           coefs[i].gamma = peaks[i].a-(_1 = -_1)*delta/peaks[i].w;
       }
 
-      // Stop Remez here if converged or no iterations remain: 
+      // Stop Remez here if converged or no iterations remain:
       if (report.result == MmfirSuccess)
         break;
       else if (report.iterations == maxIterations) {
@@ -571,18 +571,18 @@ MmfirReport mmfir(
       }
       else ++report.iterations;
 
-      // Evaluate the normalised (i.e. converges to [-1,1]) error function: 
+      // Evaluate the normalised (i.e. converges to [-1,1]) error function:
       for (i=0, b=bandL; b<=bandR; i=b->endP, ++b)
         #ifdef _OPENMP
         #pragma omp parallel for
         #endif
-        for (j=i; j<b->endP; ++j) { // omp needs separate counter j here. 
+        for (j=i; j<b->endP; ++j) { // omp needs separate counter j here.
           Point * const p = space+j;
           p->e = delta_1 * (double)(p->w * (p->a - A(coefs, R, p->f)));
         }
       report.FEs += spaceLength;
 
-      // Find and store all local peaks in error magnitude: 
+      // Find and store all local peaks in error magnitude:
       b=bandL, numPeaks=0;
       for (i=0; i<spaceLength; ++i) if (dir(e(i+1)-e(i))!=dir(e(i)-e(i-1))) {
         double e, A, B, C, fp;
@@ -591,12 +591,12 @@ MmfirReport mmfir(
         setF(f(i));
         j = i - (f(i) == b->freqR) + (f(i) == b->freqL); // Band-edge back-off
         poly2(f(j-1), f(j), f(j+1), e(j-1), e(j), e(j+1), &A, &B, &C);
-        fp = B/A*-.5; // Freq. at which 1st derivative of poly is 0. 
+        fp = B/A*-.5; // Freq. at which 1st derivative of poly is 0.
         ok = j==i || (dir(e(j+1)-e(j))*dir(e(j)-e(j-1)) > 0 &&
-            fp >= f(i-(j<=i)) && fp <= f(i+(j>=i))); // Band-edge needs care. 
+            fp >= f(i-(j<=i)) && fp <= f(i+(j>=i))); // Band-edge needs care.
         f = ok? fp : f, e = ok? poly2Val(A,B,C,f) : e(i);
 
-        // Store the peak:                             But avoid twin-    \_  
+        // Store the peak:                             But avoid twin-    \_
         if (!numPeaks || f>peaks[numPeaks-1].f) {   /* peaks in this case:  \ */
           if (numPeaks == maxPeaks) // Likely due to numerical error.
             returnError(MmfirTooManyPeaks);
@@ -604,7 +604,7 @@ MmfirReport mmfir(
         }
       }
 
-      if (debugLevel>2) { // Dump arrays to files for debugging: 
+      if (debugLevel>2) { // Dump arrays to files for debugging:
         char name[9], dummy = (char)sprintf(name, "sp%i", report.iterations);
         FILE * f = fopen(name,"w") + 0*dummy;
         for (i=0; i<spaceLength;++i) fprintf(f, "%.16f %.9g\n", f(i), e(i));
@@ -614,9 +614,9 @@ MmfirReport mmfir(
         fclose(f);
       }
 
-      // Check that there are at least R+1 peaks: 
+      // Check that there are at least R+1 peaks:
       if ((extras = numPeaks - (R+1)) < 0)
-        returnError(MmfirTooFewPeaks); // Perhaps due to numerical error. 
+        returnError(MmfirTooFewPeaks); // Perhaps due to numerical error.
 
       // Before discarding any peaks, check freq. stability of the entire set:
       if (numPeaks == prevNumPeaks) {
@@ -632,19 +632,19 @@ MmfirReport mmfir(
       memcpy(prevPeaks, peaks, (unsigned)numPeaks*sizeof(*peaks));
       prevNumPeaks = numPeaks;
 
-      // If >R+1 peaks, reduce to R+1 by discarding lesser peaks/pairs: 
+      // If >R+1 peaks, reduce to R+1 by discarding lesser peaks/pairs:
       while (numPeaks>R+1) {
-        int n=1, try2, d_na, d; // d = index of peak to discard. 
+        int n=1, try2, d_na, d; // d = index of peak to discard.
 
-        // Find a lesser peak, either overall or at one end: 
+        // Find a lesser peak, either overall or at one end:
         try2=numPeaks-(R+1)>1, i=try2? 1 : numPeaks-1;
         for (d_na=d=0; !d_na && i<numPeaks; ++i) {
-          d_na = E(i)*E(i-1)>0? i : d_na; // Check alternating. 
-          d = fabs(E(i)) < fabs(E(d))? i : d; // Check magnitude. 
+          d_na = E(i)*E(i-1)>0? i : d_na; // Check alternating.
+          d = fabs(E(i)) < fabs(E(d))? i : d; // Check magnitude.
         }
-        d=d_na? d_na: d; // Prefer to discard non-alternating. 
+        d=d_na? d_na: d; // Prefer to discard non-alternating.
         if (try2 && d && d != numPeaks-1) // Discard pair only if not at end.
-          n=2, d-=fabs(E(d-1))<fabs(E(d+1)); // Choose lesser adjacent. 
+          n=2, d-=fabs(E(d-1))<fabs(E(d+1)); // Choose lesser adjacent.
         memmove(peaks+d, peaks+d+n, (size_t)((numPeaks-=n)-d)*sizeof(*peaks));
         if (debugLevel>1) fprintf(stderr, "x%i %i:%i\n", d_na, d, n);
       }
@@ -660,11 +660,11 @@ MmfirReport mmfir(
   if (target && 1/fabs(delta_1) > target)
     returnError(MmfirMissedTarget);
 
-  { // Generate filter coefficients: 
-    double * a = (double *)prevPeaks; // Reuse, as it's no longer in use. 
-    double _1 = "\1\377"[T>TypeII], phi = (T<TypeIII)*.5, s;
+  { // Generate filter coefficients:
+    double * a = (double *)prevPeaks; // Reuse, as it's no longer in use.
+    double _1 = T>TypeII? -1:1, phi = (T<TypeIII)*.5, s;
 
-    // Sample the final estimated response; modify for filter type: 
+    // Sample the final estimated response; modify for filter type:
     #ifdef _OPENMP
     #pragma omp parallel for
     #endif
@@ -674,7 +674,7 @@ MmfirReport mmfir(
     }
     report.FEs += N/2+1;
 
-    // --> time-domain using symmetry-aware IDFT (could also use IFFT): 
+    // --> time-domain using symmetry-aware IDFT (could also use IFFT):
     a[N/2] /= 1+T/3;
     #ifdef _OPENMP
     #pragma omp parallel for
@@ -712,7 +712,7 @@ END:
   free(peaks);
   free(coefs);
 
-  // Complete and return the report: 
+  // Complete and return the report:
   report.text = report.result >= MmfirInvocationError?
     errorText[report.result-MmfirInvocationError] :
     report.result >= MmfirError?  "numerical-error" :

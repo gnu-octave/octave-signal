@@ -35,6 +35,7 @@
 
 #include "octave-compat.h"
 
+
 #define AL(x) (int)(sizeof (x)/sizeof (x[0])) // Array-Length
 #define returnError(...) do { error (__VA_ARGS__);\
   return octave_value_list (); } while (0)
@@ -294,7 +295,7 @@ b = firpm (31, [0 0.5 0.7 1], [0 1], \"antisym\");\n\
 @group\n\
 # Inverse-sinc (arbitrary response):\n\
 b = firpm (20, [0 0.5 0.9 1], @@(n,f,g) ...\n\
-    deal((g<=f(2))./sinc (g), (g>=f(3))*9+1));\n\
+    deal ((g<=f(2))./sinc (g), (g>=f(3))*9+1));\n\
 @end group\n\
 @end example\n\
 \n\
@@ -359,7 +360,7 @@ compatibility, take the absolute value.\n\
   else if (octave::signal::iscell(args(arg)))
     {
       Cell c(args(arg).cell_value ());
-      unsigned k(0);
+      int k(0);
       if (c.numel () >= 1 && c(k).is_function_handle ())
         {
           respFnHandle = c(k++).fcn_handle_value ();
@@ -592,7 +593,7 @@ compatibility, take the absolute value.\n\
 %!error <firpm argument # 4 is invalid: {}\(0x0\)> firpm (2, [0 1], [1 0], {}, 1);
 
 %!warning <firpm property ROBUSTNESS was clamped to 0> firpm (1, [.1 .9], 1, [1 2], {0,0,-1});
-%!error <firpm failed to make a filter \(result=4\)> firpm (2, [.1 .9], 1);
+%!error <firpm failed to make a filter \(result=[46]\)> firpm (2, [.1 .9], 1);
 
 %!error <band-edge frequencies must increase in \[0,1\]> firpm (1, [1 2], 1, [1 2], 'diff');
 %!error <type II/III Nyquist amplitude response must be 0> firpm (81, [0 .2 .3 1], [1 -1]);
@@ -854,10 +855,10 @@ The b0 values come from a reference implementation.
 %!test [b m] = firpm (11, [0 2*.45], .5, 'symmetric');
 %! assert (m, 0.045066, -5e-5);
 
-%!warning <firpm not-converged \(result=1\)> firpm (298, [0 .28 .33 .48 .53 1], [0 1 0], [93 68 89], {0,-1});
+%!warning <firpm not-converged \(result=1\)> firpm (298, [0 .28 .33 .48 .53 1], [0 1 0], [93 68 89], {50,-1});
 
-%!test [b m] = firpm (298, [0 .28 .33 .48 .53 1], [0 1 0], [93 68 89]);
-%! assert (m, 6.86519e-05, -5e-5);
+%!test [b m] = firpm (298, [0 .28 .33 .48 .53 1], [0 1 0], [93 68 89], {50});
+%! assert (m, 6.86583e-05, -5e-5);
 
 %!test assert (firpm (11, [0 2*.45], .5, 'symmetric'), firpm (11, [0 2*.45], .5, 'bandpass'))
 %!test assert (firpm (11, [0 2*.45], .5, 'symmetric'), firpm (11, [0 2*.45], .5))
@@ -907,29 +908,7 @@ The b0 values come from a reference implementation.
 %!
 %!demo
 %!
-%! N=40; F=[0 .1 .15 .35 .4 1]; A=[1 1 0 0 1 1]; W=[1 1 1]; ant=0;
-%! [b m r] = firpm (N, F, A, W, 'sa'(1+ant));
-%!
-%! mul=[1 i](1+ant);
-%! clf; [h f] = freqz (b); plot (f/pi, real (mul*h.*exp (i*f*N/2)),
-%!     f=F(1:2),(a=A(1:2))-(M=m/W(1)),'r', f, a+M,'r',
-%!     f=F(3:4),(a=A(3:4))-(M=m/W(2)),'r', f, a+M,'r',
-%!     f=F(5:6),(a=A(5:6))-(M=m/W(3)),'r', f, a+M,'r',
-%!     r.fextr, real ((mul*r.H.*exp (i*r.fgrid*pi*N/2))(r.iextr)),'ko')
-%! grid on; axis ([0 1 -.1 1.1]); set (gca, 'xtick', [0:.1:1], 'ytick', [0:.1:1])
-%! title (sprintf ('firpm type-I band-stop filter (order=%i)', length (b) - 1));
-%! ylabel ('Amplitude response'); xlabel ('Frequency (normalized)')
-%! axes ('position', [.55 .2 .3 .4])
-%! stem (b); grid off
-%! title ('Impulse response')
-%! axis ([1 length(b) -.2 .8])
-%! %--------------------------------------------------
-%! % Figure shows transfer and impulse-response of
-%! % band-pass filter design.
-%!
-%!demo
-%!
-%! N=41; F=[0 .1 .15 .35 .4 1]; A=[0 0 1 1 0 0]; W=[2 4 3]; ant=1;
+%! N=41; F=[0 .1 .16 .34 .4 1]; A=[0 0 1 1 0 0]; W=[1 3 2]; ant=1;
 %! [b m r] = firpm (N, F, A, W, 'sa'(1+ant));
 %!
 %! mul=[1 i](1+ant);
@@ -952,12 +931,12 @@ The b0 values come from a reference implementation.
 %!demo
 %!
 %! curve = @(a,b,y,z,x) z*(b-a)./((x-a)*z/y+b-x);
-%! respFn = @(n,f,g,w) deal (g>=f(3) & g<=f(4), ...
+%! respFn = @(n,f,g,w,curve) deal (g>=f(3) & g<=f(4), ...
 %!   (g<=f(2)).*curve (f(2),f(1),w(1),w(3),g) + ...
 %!   (g>=f(3) & g<=f(4))*w(2) + ...
 %!   (g>=f(5) & g<=f(6)).*curve (f(5),f(6),w(1),w(3),g) + ...
 %!   (g>f(7))*w(4)); % NB contiguous bands so > not >=.
-%! b=firpm (127, [0 .2 .24 .26 .3 .5 .5 1], respFn, [10 1 100 10]);
+%! b=firpm (127, [0 .2 .24 .26 .3 .5 .5 1], {respFn, curve}, [10 1 100 10]);
 %!
 %! clf; [h f]=freqz (b); plot (f/pi, 20*log10 (abs (h)))
 %! grid on; axis ([0 1 -90 5]); set (gca, 'xtick', [0:.1:1], 'ytick', [-80:10:0])
@@ -1047,9 +1026,14 @@ The b0 values come from a reference implementation.
 %! % hilbert filter design.
 %!
 %!demo
-%! cic = @(f) (sin (pi*(t=f+eps*!f)/2)./sin (pi*t/2/10)/10).^4;
+%! cic = @(f) (sin (pi*(f+eps*!f)/2)./sin (pi*(f+eps*!f)/2/10)/10).^4;
 %!
-%! b = firpm (30, [0 .5 .7 1], @(n,f,g) deal (a=(g<=f(2))./cic (g), 1./(a+!a)));
+%! if compare_versions(OCTAVE_VERSION, '6', '<')
+%!   eval('b = firpm (30, [0 .5 .7 1], @(n,f,g) deal (a=(g<=f(2))./cic (g), 1./(a+!a)));')
+%! else
+%!   function [ag wg] = resp (n,f,g) ag = (g<=f(2))./cic (g); wg = 1./(ag+!ag); endfunction
+%!   b = firpm (30, [0 .5 .7 1], @resp);
+%! endif
 %!
 %! clf; [h f]=freqz (b); plot (f/=pi, 20*log10 (abs (h)))
 %! grid on; axis ([0 1 -60 6]); set (gca, 'xtick', [0:.1:1])
@@ -1065,8 +1049,8 @@ The b0 values come from a reference implementation.
 %!demo
 %! clf; n=30; Fp=.8; for d=linspace (-.5, .5, 10)
 %!
-%! b = firpm (n, [0 Fp], @(n,f,g) (g<=Fp).*cos (g*pi*d))...
-%!   + firpm (n, [0 Fp], @(n,f,g) (g<=Fp).*sin (g*pi*d), 'a');
+%! b = firpm (n, [0 Fp], {@(n,f,g,w,d,Fp) (g<=Fp).*cos (g*pi*d),d,Fp})...
+%!   + firpm (n, [0 Fp], {@(n,f,g,w,d,Fp) (g<=Fp).*sin (g*pi*d),d,Fp}, 'a');
 %!
 %! [g f]=grpdelay (b);
 %! set (gca,'ColorOrderIndex',1); plot (f/pi, g-n/2); hold ('on'); end;

@@ -27,19 +27,19 @@ extern "C" {
 
 
 typedef enum {
-  MmfirSymmetric,          // Type I/II (symmetric impulse-response). 
-  MmfirAntiSymmetric,      // Type III/IV (anti-symmetric impulse-response). 
-  MmfirDifferentiator      // Ditto, but with passband error-weighting *= 2/f 
+  MmfirSymmetric,          // Type I/II (symmetric impulse-response).
+  MmfirAntiSymmetric,      // Type III/IV (anti-symmetric impulse-response).
+  MmfirDifferentiator      // Ditto, but with passband error-weighting *= 2/f
 } MmfirFilterClass;
 
 
 
 typedef struct {
-  double freqL, freqR;     // Frequency at left & right band-edges. In [0,1] 
-  double ampL, ampR;       // Desired amplitude of response at given edges. 
-  double weightL, weightR; // Error weighting (multiplier) at given edges. 
+  double freqL, freqR;     // Frequency at left & right band-edges. In [0,1]
+  double ampL, ampR;       // Desired amplitude of response at given edges.
+  double weightL, weightR; // Error weighting (multiplier) at given edges.
 
-  // Internal use only: 
+  // Internal use only:
   int ends, weightF, endP, hadRemoval;
   double eAv, ePk;
   double portion0, portion;
@@ -50,18 +50,18 @@ typedef struct {
 typedef enum {
   MmfirSuccess,
 
-  MmfirWarning,            // Section marker 
+  MmfirWarning,            // Section marker
   MmfirGaveUp = MmfirWarning,
-  MmfirGaveUp1,            // During first pass. 
+  MmfirGaveUp1,            // During first pass.
 
-// No filter will be returned: 
+// No filter will be returned:
   MmfirMissedTarget,
-  MmfirError,              // Section marker 
+  MmfirError,              // Section marker
   MmfirTooFewPeaks = MmfirError,
   MmfirTooManyPeaks,
   MmfirNumericalError,
 
-  MmfirInvocationError,    // Section marker 
+  MmfirInvocationError,    // Section marker
   MmfirOutOfMemory = MmfirInvocationError,
   MmfirInvalidNumBands,
   MmfirInvalidOrder,
@@ -71,7 +71,7 @@ typedef enum {
   MmfirInvalidDcAmplitude,
   MmfirInvalidNyquistAmplitude,
 
-// Internal use only: 
+// Internal use only:
   MmfirRuntimeError,
   MmfirOngoing
 } MmfirResult;
@@ -79,25 +79,25 @@ typedef enum {
 
 
 typedef struct {
-  // Useful stuff: 
-  MmfirResult result;      // As defined above. 
-  char const * text;       // Textual version of result. 
-  double minimax;          // Final approximated minimax weighted error. 
+  // Useful stuff:
+  MmfirResult result;      // As defined above.
+  char const * text;       // Textual version of result.
+  double minimax;          // Final approximated minimax weighted error.
 
-  // Academic interest: 
-  int FEs;                 // # of Lagrange interp. fn. evaluations made. 
-  int iterations;          // # of Remez iterations made. 
+  // Academic interest:
+  int FEs;                 // # of Lagrange interp. fn. evaluations made.
+  int iterations;          // # of Remez iterations made.
 
-  double controls[3];      // Allows client to know if these were clamped. 
+  double controls[3];      // Allows client to know if these were clamped.
 } MmfirReport;
 
 
 
 typedef struct {
-  double f;    // Frequency in [0,1] of this point 
-  double a;    // Desired amplitude response @ this point. 
-  double w;    // Error weight @ this point. 
-  double e;    // Internal use only. 
+  double f;    // Frequency in [0,1] of this point
+  double a;    // Desired amplitude response @ this point.
+  double w;    // Error weight @ this point.
+  double e;    // Internal use only.
 } MmfirPoint;
 
 
@@ -112,27 +112,27 @@ typedef struct {
 
 
 typedef MmfirResult (* MmfirRespFn)(
-  MmfirBandSpec     const * bandSpecs,       // As bandSpecs below. 
+  MmfirBandSpec     const * bandSpecs,       // As bandSpecs below.
   int               numPoints,
-  MmfirPoint        points[/* numPoints */], // Provide .a & .w for each .f 
+  MmfirPoint        points[/* numPoints */], // Provide .a & .w for each .f
   va_list           additionalArgs);
 
 
 
 MmfirReport mmfir(
-  double            h[], // In which to store the N filter coeffiecients. 
+  double            h[], // In which to store the N filter coeffiecients.
   MmfirFilterClass  filterClass,
-  int               N,          // = filter order + 1 
+  int               N,          // = filter order + 1
   int               numBands,
-  MmfirBandSpec     bandSpecs[/* numBands */], // N.B. destroyed. 
+  MmfirBandSpec     bandSpecs[/* numBands */], // N.B. destroyed.
   double            accuracy,
   double            persistence,
   double            robustness,
   double            target,
   int               flags,
   MmfirState        * reserved, // Set to 0.
-  MmfirRespFn       respFn,     // Set to 0 if resp. is given in bandSpecs. 
-  ...);             // Additional args for (non-zero) respFn. 
+  MmfirRespFn       respFn,     // Set to 0 if resp. is given in bandSpecs.
+  ...);             // Additional args for (non-zero) respFn.
 
 
 
