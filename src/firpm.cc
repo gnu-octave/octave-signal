@@ -1029,9 +1029,9 @@ The b0 values come from a reference implementation.
 %! cic = @(f) (sin (pi*(f+eps*!f)/2)./sin (pi*(f+eps*!f)/2/10)/10).^4;
 %!
 %! if compare_versions(OCTAVE_VERSION, '6', '<')
-%!   eval('b = firpm (30, [0 .5 .7 1], @(n,f,g) deal (a=(g<=f(2))./cic (g), 1./(a+!a)));')
+%!   eval('b = firpm (30, [0 .5 .7 1], @(n,f,g, w) deal (a=(g<=f(2))./cic (g), 1./(a+!a)));')
 %! else
-%!   function [ag wg] = resp (n,f,g) ag = (g<=f(2))./cic (g); wg = 1./(ag+!ag); endfunction
+%!   function [ag wg] = resp (n,f,g,w) ag = (g<=f(2))./cic (g); wg = 1./(ag+!ag); endfunction
 %!   b = firpm (30, [0 .5 .7 1], @resp);
 %! endif
 %!
