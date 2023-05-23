@@ -1,4 +1,4 @@
-## Copyright (C) 2029-2023 The Octave Project Developers
+## Copyright (C) 2019-2023 The Octave Project Developers
 ##
 ## This program is free software: you can redistribute it and/or modify
 ## it under the terms of the GNU General Public License as published by
