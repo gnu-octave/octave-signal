@@ -49,6 +49,7 @@ Filter Analysis
   grpdelay
   impz
   isstable
+  phasez
   zplane
 Filter Conversion
   polystab
