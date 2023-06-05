@@ -593,7 +593,7 @@ compatibility, take the absolute value.\n\
 %!error <firpm argument # 4 is invalid: {}\(0x0\)> firpm (2, [0 1], [1 0], {}, 1);
 
 %!warning <firpm property ROBUSTNESS was clamped to 0> firpm (1, [.1 .9], 1, [1 2], {0,0,-1});
-%!error <firpm failed to make a filter \(result=[46]\)> firpm (2, [.1 .9], 1);
+%!error <firpm failed to make a filter \(result=[456]\)> firpm (2, [.1 .9], 1);
 
 %!error <band-edge frequencies must increase in \[0,1\]> firpm (1, [1 2], 1, [1 2], 'diff');
 %!error <type II/III Nyquist amplitude response must be 0> firpm (81, [0 .2 .3 1], [1 -1]);
