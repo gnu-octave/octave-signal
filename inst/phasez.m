@@ -128,6 +128,9 @@ function [phi, w] = phasez (b, a, n, region, Fs)
 endfunction
 
 %!demo
+%! N = 2;
+%! b = ones (1, N)/N;
+%! a = 1;
 %! [phi, w] = phasez (b, a)
 
 %! ## test input validation
