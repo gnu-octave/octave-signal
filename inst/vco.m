@@ -21,18 +21,23 @@
 ##
 ## Inputs:
 ## @itemize
+## @item
 ## @var{x} - input data with a range of -1 to 1. A value of -1 means no output, 0 cuoreesponds to @var{fc},
 ## and 1 corresponds to 2*@var{fc}.
 ##
+## @item
 ## @var{fc} - Carrier frequency
 ##
+## @item
 ## @var{fs} - Sampling rate
 ##
+## @item
 ## @var{fmin}, @var{fmax} - Frequency modulation range limits.
 ## @end itemize
 ##
 ## Outputs:
 ## @itemize
+## @item
 ## @var{y} - output signal
 ## @end itemize
 ## @end deftypefn

@@ -1,0 +1,123 @@
+% Copyright (C) 1996-2023 The Octave Project Developers
+%
+% This file is part of Octave.
+%
+% Octave is free software: you can redistribute it and/or modify it
+% under the terms of the GNU General Public License as published by
+% the Free Software Foundation, either version 3 of the License, or
+% (at your option) any later version.
+%
+% Octave is distributed in the hope that it will be useful, but
+% WITHOUT ANY WARRANTY; without even the implied warranty of
+% MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+% GNU General Public License for more details.
+%
+% You should have received a copy of the GNU General Public License
+% along with Octave; see the file COPYING.  If not, see
+% <https://www.gnu.org/licenses/>.
+
+\input texinfo
+@c Octave Signal - Signal Toolkit for GNU octave.
+
+@c For manually generating the documentation use
+@c   LANGUAGE=en makeinfo --html --no-split signal.texi
+
+@c %*** Start of HEADER
+@documentencoding UTF-8
+@setfilename signal.info
+@settitle Octave Signal - Signal Toolkit for GNU octave
+@afourpaper
+@paragraphindent 0
+@finalout
+@c @afourwide
+@c %*** End of the HEADER
+
+@dircategory Math
+@direntry
+* Octave Signal: (signal).          Signal Toolkit for Octave
+@end direntry
+
+@include version.texi
+@include macros.texi
+
+@c -------------------------------------------------------------------------
+@c @contents
+@c -------------------------------------------------------------------------
+@ifnottex
+@node Top
+@top Octave Signal Toolkit
+Copyright © The Octave Project Developers 
+
+Permission is granted to make and distribute verbatim copies of this manual provided the copyright notice
+and this permission notice are preserved on all copies. 
+
+Permission is granted to copy and distribute modified versions of this manual under the conditions for
+verbatim copying, provided that the entire resulting derived work is distributed under the terms of a
+permission notice identical to this one. 
+
+Permission is granted to copy and distribute translations of this manual into another language, under the
+above conditions for modified versions. 
+@end ifnottex
+@c -------------------------------------------------------------------------
+@node Overview
+@chapter Overview
+@cindex Overview
+
+The Signal Toolkit contains signal processing tools, including filtering, windowing and display functions.
+
+@c -------------------------------------------------------------------------
+@node Installing and loading
+@chapter Installing and loading
+@cindex Installing and loading
+
+The Signal Toolkit must be installed and then loaded to be used.
+
+It can be installed in @acronym{GNU} Octave directly from octave-forge,
+
+@section Windows install
+@cindex Windows install
+If running in Windows, the package may already be installed, to check run:
+
+@example
+pkg list signal
+@end example
+
+@section Installing
+@cindex Installing
+With an internet connection available, the Signal package can be installed from
+octave-forge using the following command within @acronym{GNU} Octave:
+
+@example
+pkg install -forge signal
+@end example
+
+The latest released version of the toolkit will be downloaded and installed.
+
+Otherwise, if the package file has already been downloaded it can be installed
+using the follwoing command in @acronym{GNU} Octave:
+
+@example
+pkg install signal-@value{VERSION}.tar.gz
+@end example
+
+@section Loading
+@cindex Loading
+Regardless of the method of installing the toolkit, in order to use its functions,
+the toolkit must be loaded using the pkg load command:
+
+@example
+pkg load signal
+@end example
+
+The toolkit must be loaded on each @acronym{GNU} Octave session.
+
+@c -------------------------------------------------------------------------
+@node Function Reference
+@chapter Function Reference
+@cindex Function Reference
+
+@include functions.texi
+
+@c -------------------------------------------------------------------------
+
+@bye

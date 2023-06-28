@@ -22,13 +22,16 @@
 ##
 ## Inputs:
 ## @itemize
+## @item
 ## @var{B}: Numerator coefficients of the filter
 ##
+## @item
 ## @var{A}: Denominator coeffients of the filter. Can be an empty vector.
 ## @end itemize
 ##
 ## Output:
 ## @itemize
+## @item
 ## @var{FLAG}: Returns a logical output, equal to TRUE if the filter is stable. 
 ## @end itemize
 ##
