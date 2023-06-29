@@ -34,7 +34,7 @@
 ## @example
 ## @group
 ## db2pow ([-10, 0, 10])
-## @result{} 0.10000 1.00000 10.00000
+## @result{} 0.1000 1.0000 10.0000
 ## @end group
 ## @end example
 ## @seealso{pow2db}
