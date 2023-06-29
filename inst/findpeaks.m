@@ -266,7 +266,11 @@ function [pks idx varargout] = findpeaks (data, varargin)
            ceil (min(idx(i)+minD/2,np))).';
     pp      = zeros (1,3);
     # If current peak is not local maxima, then fit parabola to neighbor
-    if any (data(ind) > data(idx(i)))
+    if any (data(idx(i)-1) == data(idx(i)))
+      # sample on left same as peak
+      xm    = 0;
+      pp    = ones (1,3);
+    elseif any (data(ind) > data(idx(i)))
       pp = polyfit (ind, data(ind), 2);
       xm = -pp(2)^2 / (2*pp(1));   # position of extrema
       H  = polyval (pp, xm);      # value at extrema
@@ -380,6 +384,13 @@ endfunction
 %! ## Test input vector is an oversampled sinusoid with clipped peaks
 %! x = min (3, cos (2*pi*[0:8000] ./ 600) + 2.01);
 %! assert (! isempty (findpeaks (x)))
+
+## Test for bug #63987
+%!test
+%! x = [1 10 2 2 1 9 1];
+%! [pks, loc] = findpeaks(x);
+%! assert (loc, [2 6])
+%! assert (pks, [10 9])
 
 %% Test input validation
 %!error findpeaks ()
