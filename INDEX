@@ -176,6 +176,8 @@ Sample Rate Change
   resample
   upfirdn
   upsample
+Pulse Metrics
+  statelevels
 Utility
   buffer
   clustersegment
