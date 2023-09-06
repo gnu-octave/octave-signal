@@ -76,7 +76,7 @@ function [r, p, f, m] = residuez(B, A, tol)
   [r,p,f,m]=residue(conj(fliplr(NUM)),conj(fliplr(DEN)));
   p = 1 ./ p;
   r = r .* ((-p) .^m);
-  f = conj(fliplr(f));
+  f = fliplr(f);
 
 endfunction
 
@@ -147,7 +147,7 @@ endfunction
 %! [rs,is] = sort(r);
 %! assert(rs,[-2+2.5j;7.5+7.5j;-4.5-12j],1E-6);
 %! assert(p(is),[1j;1;1],1E-6);
-%! assert(f,-2j,1E-6);
+%! assert(f,2j,1E-6);
 %! assert(m(is),[1;2;1],1E-6);
 
 %!test
@@ -177,3 +177,34 @@ endfunction
 %! assert(r(is), [-1; 2], 100*eps);
 %! assert(p(is), [-0.5; -1], 100*eps);
 %! assert(k, [0 1], 100*eps);
+
+%!test 
+%! # matlab example
+%! b0 = 0.05634;
+%! b1 = [1  1];
+%! b2 = [1 -1.0166 1];
+%! a1 = [1 -0.683];
+%! a2 = [1 -1.4461 0.7957];
+%! 
+%! b = b0*conv(b1,b2);
+%! a = conv(a1,a2);
+%! 
+%! [r,p,k] = residuez(b,a);
+%! expected_r = [ ...
+%!   -0.115252473987042 - 0.018151109860883i; ...
+%!   -0.115252473987042 + 0.018151109860883i; ...
+%!   0.390513439910336 - 0.000000000000000i; ...
+%! ];
+%! expected_p = [ ...
+%!   0.723050000000000 + 0.522397068808775i; ...
+%!   0.723050000000000 - 0.522397068808775i; ...
+%!   0.683000000000000 + 0.000000000000000i; ...
+%! ];
+%! expected_k = -0.103668491936251;
+%!
+%! [rs,is] = sort(r);
+%! assert(real(r(is)), real(expected_r), 1e-5);
+%! assert(imag(r(is)), imag(expected_r), 1e-5);
+%! assert(r(is), expected_r, 100*eps);
+%! assert(p(is), expected_p, 100*eps);
+%! assert(k, expected_k, 100*eps);
