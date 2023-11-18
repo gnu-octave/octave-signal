@@ -605,11 +605,12 @@ MmfirReport mmfir(
       }
 
       if (debugLevel>2) { // Dump arrays to files for debugging:
-        char name[9], dummy = (char)sprintf(name, "sp%i", report.iterations);
-        FILE * f = fopen(name,"w") + 0*dummy;
+        char name[9];
+        FILE * f = fopen(name,"w");
         for (i=0; i<spaceLength;++i) fprintf(f, "%.16f %.9g\n", f(i), e(i));
         fclose(f);
-        name[0]='p', f = fopen(name,"w");
+        name[0]='p';
+	f = fopen(name,"w");
         for (i=0; i<numPeaks;++i) fprintf(f, "%.16f % .9g\n", F(i), E(i));
         fclose(f);
       }
