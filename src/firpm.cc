@@ -271,7 +271,7 @@ the analysis excludes transition-bands, any `anomalies'@footnote{ Tapio\n\
 Saram@\"aki, `Finite impulse response filter design', Chapter 4 in `Handbook for\n\
 Digital Signal Processing', edited by S.  K. Mitra and J. F. Kaiser, John Wiley\n\
 and Sons, New York, 1993, pp.@: 155--277.\n\
-(@url{http://www.cs.tut.fi/~ts/Mitra_Kaiser.pdf})} therein are not easy to\n\
+(@url{https://homepages.tuni.fi/tapio.saramaki/Mitra_Kaiser.pdf})} therein are not easy to\n\
 discern.  In general, @code{freqz} suffices to check that the response of the\n\
 computed filter is satisfactory.\n\
 \n\
