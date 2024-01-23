@@ -76,7 +76,8 @@ $(RELEASE_DIR): .hg/dirstate
 	-rm -rf $@
 	$(call HG_CMD,archive) --exclude ".hg*" --type files --rev $(HG_ID) $@
 	$(MAKE) BASEDIR=$(BASEDIR) -C $@ build-docs
-	cd "$@" && $(RM) -f Makefile doc/mkfuncdocs.py doc/mkqhcp.py
+	cd "$@" && $(RM) -f Makefile 
+	# doc/mkfuncdocs.py doc/mkqhcp.py
 	chmod -R a+rX,u+w,go-w $@
 
 $(RELEASE_TARBALL): $(RELEASE_DIR)
