@@ -34,7 +34,7 @@
 ## length N) for lag "k" is given by
 ##
 ## @tex
-## $$   R_{xy}(k) = \sum_{i=1}^{N} x_{i+k} \conj(y_i),
+## $$   R_{xy}(k) = \sum_{i=1}^{N} x_{i+k} \overline{y_i}, $$
 ## @end tex
 ## @ifnottex
 ## @example
