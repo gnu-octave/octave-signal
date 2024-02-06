@@ -18,8 +18,8 @@
 ## -*- texinfo -*-
 ## @deftypefn  {Function File} {[@var{b}, @var{a}] =} ellip (@var{n}, @var{rp}, @var{rs}, @var{wp})
 ## @deftypefnx {Function File} {[@var{b}, @var{a}] =} ellip (@var{n}, @var{rp}, @var{rs}, @var{wp}, "high")
-## @deftypefnx {Function File} {[@var{b}, @var{a}] =} ellip (@var{n}, @var{rp}, @var{rs}, @var{[wl}, @var{wh}])
-## @deftypefnx {Function File} {[@var{b}, @var{a}] =} ellip (@var{n}, @var{rp}, @var{rs}, @var{[wl}, @var{wh}], "stop")
+## @deftypefnx {Function File} {[@var{b}, @var{a}] =} ellip (@var{n}, @var{rp}, @var{rs}, [@var{wl}, @var{wh}])
+## @deftypefnx {Function File} {[@var{b}, @var{a}] =} ellip (@var{n}, @var{rp}, @var{rs}, [@var{wl}, @var{wh}], "stop")
 ## @deftypefnx {Function File} {[@var{z}, @var{p}, @var{g}] =} ellip (@dots{})
 ## @deftypefnx {Function File} {[@var{a}, @var{b}, @var{c}, @var{d}] =} ellip (@dots{})
 ## @deftypefnx {Function File} {[@dots{}] =} ellip (@dots{}, "s")

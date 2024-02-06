@@ -57,11 +57,9 @@
 ##
 ## If you want a different sweep shape f(t), use the following:
 ##
-## @group
 ## @verbatim
 ## y = cos (2 * pi * integral (f(t)) + phase);
 ## @end verbatim
-## @end group
 ## @end deftypefn
 
 function y = chirp (t, f0, t1, f1, shape, phase)

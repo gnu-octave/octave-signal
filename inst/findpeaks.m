@@ -71,9 +71,9 @@
 ## Minimum width of peaks (positive integer). The width of the peaks is
 ## estimated using a parabola fitted to the neighborhood of each peak.
 ## The width is caulculated with the formula 
-## @group
+## @verbatim
 ## a * (width - x0)^2 = 1
-## @end group
+## @end verbatim
 ## where a is the the concavity of the parabola and x0 its vertex.
 ## Default value 1.
 ##
