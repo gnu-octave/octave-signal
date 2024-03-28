@@ -27,6 +27,7 @@ along with this program; see the file COPYING.  If not, see
  *************************************************************************/
 
 #include <octave/oct.h>
+#include <cassert>
 #include <cmath>
 
 #ifndef OCTAVE_LOCAL_BUFFER
