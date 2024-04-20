@@ -72,7 +72,7 @@
 ## @item y
 ##  [non-empty vector] system-output time-series data
 ## @item window
-##  [real vector] of window-function values between 0 and 1; the
+##  [real vector] of window-function values; the
 ##             data segment has the same length as the window.
 ##             Default window shape is Hamming.
 ##
@@ -554,7 +554,7 @@ function varargout = pwelch(x,varargin)
           error( 'pwelch: arg %d (window) must be scalar or vector', iarg+1 );
         elseif ( is_win==1 && ( ~isreal(arg) || fix(arg)~=arg || arg<=3 ) )
           error( 'pwelch: arg %d (window) must be integer >3', iarg+1 );
-        elseif ( is_win>1 && ( ~isreal(arg) || any(arg<0) ) )
+        elseif ( is_win>1 && ( ~isreal(arg) ) )
           error( 'pwelch: arg %d (window) vector must be real and >=0',iarg+1);
         endif
         window = arg;
