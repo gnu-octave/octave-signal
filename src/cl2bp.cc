@@ -60,7 +60,7 @@ vector of 3 upper bounds for [stopband1, passband, stopband2]\n\
 vector of 3 lower bounds for [stopband1, passband, stopband2]\n\
 @item gridsize\n\
 search grid size; larger values may improve accuracy,\n\
-but greatly increase calculation time.\n\
+but greatly increase calculation time. Default value is 2048, max value is 1e6.\n\
 @end table\n\
 \n\
 Output:\n\
@@ -105,7 +105,7 @@ IEEE Trans. on Signal Processing, 46(2):497-501, February 1998.\n\
     lo[i] = lo_vector(i);
   }
 
-  const int L = args(5).int_value(true);
+  const int L = (nargin == 5) ? 2048 : args(5).int_value(true);
   if (L > 1000000) {
     error("cl2bp: The \"gridsize\" parameter cannot exceed 1000000");
     return retval;
@@ -147,4 +147,5 @@ IEEE Trans. on Signal Processing, 46(2):497-501, February 1998.\n\
 %!    0.0563980420304213
 %!    0.0000000000000000];
 %! assert(cl2bp(7, 0.25*pi, 0.75*pi, [0.01, 1.04, 0.01], [-0.01, 0.96, -0.01], 2^11), b, 1e-14);
+%! assert(cl2bp(7, 0.25*pi, 0.75*pi, [0.01, 1.04, 0.01], [-0.01, 0.96, -0.01]), b, 1e-14);
 */
