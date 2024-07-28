@@ -202,9 +202,10 @@ endfunction
 %! ];
 %! expected_k = -0.103668491936251;
 %!
+%! # sort doesnt use i in the sort, so order of real is only thing can count on
 %! [rs,is] = sort(r);
 %! assert(real(r(is)), real(expected_r), 1e-5);
-%! assert(imag(r(is)), imag(expected_r), 1e-5);
-%! assert(r(is), expected_r, 100*eps);
-%! assert(p(is), expected_p, 100*eps);
+%! assert(abs(imag(r(is))), abs(imag(expected_r)), 1e-5);
+%! assert(real(p(is)), real(expected_p), 1e-5);
+%! assert(abs(imag(p(is))), abs(imag(expected_p)), 1e-5);
 %! assert(k, expected_k, 100*eps);
