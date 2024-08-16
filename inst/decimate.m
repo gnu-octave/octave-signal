@@ -85,7 +85,7 @@ function y = decimate(x, q, n, ftype)
 
   if (fir)
     b = fir1 (n, 1/q);
-    y = fftfilt (b, x);
+    y = filtfilt (b, 1, x);
   else
     [b, a] = cheby1 (n, 0.05, 0.8/q);
     y = filtfilt (b, a, x);
@@ -115,3 +115,6 @@ endfunction
 %!error decimate (1, 2, 3, 4, 5)
 %!error decimate (1, -1)
 
+%!test
+%! s = decimate(1:100, 2, 'fir');
+%! assert(s, 1:2:100, 1e3*eps);
