@@ -15,6 +15,7 @@ SED       := sed
 SHA256SUM := sha256sum
 TAR       := tar
 MAKEINFO  ?= makeinfo
+MAKEINFO_HTML_OPTIONS := --no-headers --set-customization-variable 'COPIABLE_LINKS 0' --set-customization-variable 'COPIABLE_ANCHORS 0' --no-split 
 
 # work out a possible help generator
 ifeq ($(strip $(QHELPGENERATOR)),)
@@ -152,7 +153,7 @@ doc/functions.texi: $(BASEDIR)/.hg/dirstate
 
 doc/$(PACKAGE).qhc: doc/$(PACKAGE).texi doc/functions.texi doc/version.texi
 	# extract html
-	cd doc && SOURCE_DATE_EPOCH=$(HG_TIMESTAMP) $(MAKEINFO) --html --css-ref=$(PACKAGE).css --no-headers  --no-split $(PACKAGE).texi
+	cd doc && SOURCE_DATE_EPOCH=$(HG_TIMESTAMP) $(MAKEINFO) --html --css-ref=$(PACKAGE).css $(MAKEINFO_HTML_OPTIONS) $(PACKAGE).texi
 	# try also create qch file if can
 	cd doc && ./mkqhcp.py $(PACKAGE) && $(QHELPGENERATOR) $(PACKAGE).qhcp -o $(PACKAGE).qhc
 	cd doc && $(RM) -f $(PACKAGE).qhcp $(PACKAGE).qhp $(PACKAGE).html
