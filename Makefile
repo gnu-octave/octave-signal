@@ -154,9 +154,14 @@ doc/functions.texi: $(BASEDIR)/.hg/dirstate
 doc/$(PACKAGE).qhc: doc/$(PACKAGE).texi doc/functions.texi doc/version.texi
 	# extract html
 	cd doc && SOURCE_DATE_EPOCH=$(HG_TIMESTAMP) $(MAKEINFO) --html --css-ref=$(PACKAGE).css $(MAKEINFO_HTML_OPTIONS) $(PACKAGE).texi
+
+ifeq ($(QHELPGENERATOR),true)
+	$(warning No QHELPGENERATOR ... skipping QT doc build)
+else
 	# try also create qch file if can
 	cd doc && ./mkqhcp.py $(PACKAGE) && $(QHELPGENERATOR) $(PACKAGE).qhcp -o $(PACKAGE).qhc
 	cd doc && $(RM) -f $(PACKAGE).qhcp $(PACKAGE).qhp $(PACKAGE).html
+endif
 
 doc/$(PACKAGE).info: doc/$(PACKAGE).texi doc/functions.texi doc/version.texi
 	cd doc && $(MAKEINFO) $(PACKAGE).texi
