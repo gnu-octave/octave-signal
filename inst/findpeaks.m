@@ -68,14 +68,14 @@
 ## Default value 1.
 ##
 ## @item "MinPeakWidth"
-## Minimum width of peaks (positive integer). The width of the peaks is
+## Minimum width of peaks (non-negative scalar). The width of the peaks is
 ## estimated using a parabola fitted to the neighborhood of each peak.
-## The width is caulculated with the formula 
+## The width is calculated with the formula
 ## @verbatim
-## a * (width - x0)^2 = 1
+## a * width^2 = 1
 ## @end verbatim
-## where a is the the concavity of the parabola and x0 its vertex.
-## Default value 1.
+## where a is the the concavity of the parabola.
+## Default value @code{eps}.
 ##
 ## @item "MaxPeakWidth"
 ## Maximum width of peaks (positive integer).
@@ -137,7 +137,7 @@ function [pks idx varargout] = findpeaks (data, varargin)
     parser.FunctionName = "findpeaks";
     parser.addParamValue ("MinPeakHeight", eps,posscal);
     parser.addParamValue ("MinPeakDistance", 1, posscal);
-    parser.addParamValue ("MinPeakWidth", 1, posscal);
+    parser.addParamValue ("MinPeakWidth", eps, posscal);
     parser.addParamValue ("MaxPeakWidth", Inf, posscal);
     parser.addSwitch ("DoubleSided");
     parser.parse (varargin{:});
@@ -292,7 +292,7 @@ function [pks idx varargout] = findpeaks (data, varargin)
 #    thrsh = min (data(ind([1 end])));
 #    rz    = roots ([pp(1:2) pp(3)-thrsh]);
 #    width = abs (diff (rz));
-    width = sqrt (abs(1 / pp(1))) + xm;
+    width = sqrt (abs(1 / pp(1)));
 
     if ( (width > maxW || width < minW) || ...
         pp(1) > 0 || ...
@@ -401,3 +401,16 @@ endfunction
 %!test assert (findpeaks ([34 134 353 64 134 14 56 67 234 143 64 575 8657]),
 %!              [353 134 234])
 
+%!test <*66241>
+%! # three parabolas, equal height and width
+%! a  = [-2; -2; -2];
+%! x0 = [3.3; 9.8; 15.5];
+%! y0 = [4.1; 4.1; 4.1];
+%! x  = linspace (0, 20, 300);
+%! y  = a .* (x - x0).^2 + y0;
+%! y(end+1,:) = 1.78; # offset
+%! y = max (y);
+%! [pks, loc, ex] = findpeaks (y, "MaxPeakWidth", 15);
+%! assert (numel (pks), numel (x0))
+%! assert (pks, ex.height);
+%! assert (loc(:), mean (ex.roots, 2));
