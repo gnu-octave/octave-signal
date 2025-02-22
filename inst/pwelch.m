@@ -130,13 +130,15 @@
 ##           frequencies; e.g. frequencies for a 10-point 'twosided'
 ##           spectrum are 0 0.1 0.2 0.3 0.4 0.5 -0.4 -0.3 -0.2 -0.1
 ##
-##  'shift', 'centerdc' : same as 'whole' but with the first half
+##  'shift', 'centered', 'centerdc' (deprecated) : same as 'whole' but with the first half
 ##           of the spectrum swapped with second half to put the
-##           zero-frequency value in the middle. (See "help
+##           zero-frequency value in the middle. See "help
 ##           fftshift".
 ##
 ##           If data (x and y) are real, the default range is 'half',
 ##           otherwise default range is 'whole'.
+##
+##  'centerdc' : (deprecated) Use 'centered' instead.
 ##
 ## @item plot_type
 ##   'plot', 'semilogx', 'semilogy', 'loglog', 'squared' or 'db':
@@ -321,7 +323,7 @@
 ##   IEEE Transactions on Audio Electroacoustics, Vol AU-15(6), pp 70-73
 ##
 ##  [2] William H. Press and Saul A. Teukolsky and William T. Vetterling and
-##               Brian P. Flannery",
+##               Brian P. Flannery,
 ##   "Numerical recipes in C, The art of scientific computing", 2nd edition,
 ##      Cambridge University Press, 2002 --- Section 13.7.
 ## @end deftypefn
@@ -464,7 +466,11 @@ function varargout = pwelch(x,varargin)
           range = 0;
         elseif ( strcmp(arg,'whole') || strcmp(arg,'twosided') )
           range = 1;
-        elseif ( strcmp(arg,'shift') || strcmp(arg,'centerdc') )
+        elseif ( strcmp(arg,'shift') || strcmp(arg,'centered') )
+          range = 2;
+        elseif ( strcmp(arg,'centerdc') )
+          warning ("Octave:deprecated-option",
+                 ["pwelch: 'centerdc' is deprecated. Use 'centered' instead"]);
           range = 2;
         elseif ( strcmp(arg,'long-mean') )
           rm_mean = 3;
@@ -555,7 +561,7 @@ function varargout = pwelch(x,varargin)
         elseif ( is_win==1 && ( ~isreal(arg) || fix(arg)~=arg || arg<=3 ) )
           error( 'pwelch: arg %d (window) must be integer >3', iarg+1 );
         elseif ( is_win>1 && ( ~isreal(arg) ) )
-          error( 'pwelch: arg %d (window) vector must be real and >=0',iarg+1);
+          error( 'pwelch: arg %d (window) vector must be real',iarg+1);
         endif
         window = arg;
         is_sloppy = 0;
@@ -944,11 +950,13 @@ function varargout = pwelch(x,varargin)
         elseif ( plot_type == 4 )
           loglog(freq,[abs(spectra(:,ii)) Vxxxx]);
         elseif ( plot_type == 5 )  # db
-          ylabel( 'amplitude (dB)' );
+          %ylabel( 'amplitude (dB)' );
           plot(freq,[10*log10(abs(spectra(:,ii))) 10*log10(abs(Vxxxx))]);
         endif
         title( char(plot_title(spect_type(ii),:)) );
-        ylabel( 'amplitude' );
+        grid on;
+        ylabel( 'power' );
+        xlabel( 'frequency' );
         ## Plot phase of cross spectrum and transfer function
         if ( spect_type(ii)==2 || spect_type(ii)==3 )
           figure();
