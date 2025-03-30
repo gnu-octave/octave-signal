@@ -63,6 +63,7 @@ Filter Conversion
   sos2ss
   sos2tf
   sos2zp
+  sos2cell
   ss2tf
   ss2zp
   tf2sos
