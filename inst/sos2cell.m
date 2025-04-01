@@ -15,8 +15,8 @@
 ## <https:##www.gnu.org/licenses/>.
 
 ## -*- texinfo -*-
-## @deftypefn {Function File} {C = sos2cell (@var{S})}
-## @deftypefnx {Function File} {C = sos2cell (@var{S}, @var{G})}
+## @deftypefn {Function File} {C =} sos2cell (@var{S})
+## @deftypefnx {Function File} {C =} sos2cell (@var{S}, @var{G})
 ## Convert a second-order-section matrix to a cell array.
 ##
 ## @var{S} is an L-by-6 matrix, where each row represents a second-order section in the form:
@@ -30,11 +30,13 @@
 ## @end group
 ## @end example
 ##
-## where @var{Bi} and @var{Ai} are the numerator and denominator coefficients of a linear or quadratic polynomial. The function converts this matrix into a cell array @var{C} with the following format:
+## where @var{Bi} and @var{Ai} are the numerator and denominator coefficients of a linear
+## or quadratic polynomial. The function converts this matrix into a cell array @var{C}
+## with the following format:
 ##
 ## @example
 ## @group
-## C = { {B1, A1}, {B2, A2}, ..., {BL, AL} }
+## C = @{ @{B1, A1@}, @{B2, A2@}, ..., @{BL, AL@} @}
 ## @end group
 ## @end example
 ##
@@ -44,11 +46,11 @@
 ##
 ## @example
 ## @group
-## C = { {G, 1}, {B1, A1}, {B2, A2}, ..., {BL, AL} }
+## C = @{ @{G, 1@}, @{B1, A1@}, @{B2, A2@}, ..., @{BL, AL@} @}
 ## @end group
 ## @end example
 ##
-## where {G, 1} represents the constant gain term applied to the filter.
+## where @{G, 1@} represents the constant gain term applied to the filter.
 ##
 ## @example
 ## @group
