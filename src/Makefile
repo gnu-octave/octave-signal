@@ -42,7 +42,7 @@ all: $(OCT_FILES)
 	$(MKOCTFILE) $(PKG_CXXFLAGS) -c $< -o $@
 
 %.o: %.c
-	$(MKOCTFILE) -c $< -o $@
+	$(MKOCTFILE) $(PKG_CFLAGS) -c $< -o $@
 
 %.oct: %.cc octave-compat.h
 	$(MKOCTFILE) $(PKG_CXXFLAGS) $< -o $@
