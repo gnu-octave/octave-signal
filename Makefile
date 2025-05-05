@@ -11,9 +11,10 @@
 
 MKOCTFILE ?= mkoctfile
 OCTAVE    ?= octave
-SED       := sed
-SHA256SUM := sha256sum
-TAR       := tar
+SED       ?= sed
+SHA256SUM ?= sha256sum
+TAR       ?= tar
+GZIP      ?= gzip
 MAKEINFO  ?= makeinfo
 MAKEINFO_HTML_OPTIONS := --no-headers --set-customization-variable 'COPIABLE_LINKS 0' --set-customization-variable 'COPIABLE_ANCHORS 0' --no-split 
 
@@ -27,7 +28,7 @@ ifeq ($(strip $(QHELPGENERATOR)),)
   # v4 doesnt work
   #  QHELPGENERATOR = qhelpgenerator -qt5
   else ifneq ($(shell qcollectiongenerator -qt5 -v 2>/dev/null),)
-    QHELPGENERATOR = qcollectiongenerator -qt5
+$(GZIP)    QHELPGENERATOR = qcollectiongenerator -qt5
   else
     QHELPGENERATOR = true
   endif
@@ -42,7 +43,7 @@ BASEDIR ?= $(realpath $(CURDIR))
 
 HG           := hg
 HG_CMD        = $(HG) --config alias.$(1)=$(1) --config defaults.$(1)= $(1)
-HG_ID        := $(shell $(call HG_CMD,identify) --id | sed -e 's/+//' )
+HG_ID        := $(shell $(call HG_CMD,identify) --id | $(SED) -e 's/+//' )
 HG_TIMESTAMP := $(firstword $(shell $(call HG_CMD,log) --rev $(HG_ID) --template '{date|hgdate}'))
 
 TAR_REPRODUCIBLE_OPTIONS := --sort=name --mtime="@$(HG_TIMESTAMP)" --owner=0 --group=0 --numeric-owner
@@ -82,7 +83,7 @@ $(RELEASE_DIR): .hg/dirstate
 	chmod -R a+rX,u+w,go-w $@
 
 $(RELEASE_TARBALL): $(RELEASE_DIR)
-	$(TAR) -cf - $(TAR_OPTIONS) $< | gzip -9n > $@
+	$(TAR) -cf - $(TAR_OPTIONS) $< | $(GZIP) -9n > $@
 	-rm -rf $<
 
 $(HTML_DIR): install
@@ -96,7 +97,7 @@ $(HTML_DIR): install
 	chmod -R a+rX,u+w,go-w $@
 
 $(HTML_TARBALL): $(HTML_DIR)
-	$(TAR) -cf - $(TAR_OPTIONS) $< | gzip -9n > $@
+	$(TAR) -cf - $(TAR_OPTIONS) $< | $(GZIP) -9n > $@
 	-rm -rf $<
 
 dist: $(RELEASE_TARBALL)
