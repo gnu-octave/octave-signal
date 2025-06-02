@@ -1,0 +1,331 @@
+---
+layout: "default"
+permalink: "/news/"
+title: "Signal Toolkit - News"
+pkg_name: "signal"
+version: "1.4.6"
+description: "Signal processing tools, including filtering, windowing and display functions."
+navigation:
+- id: "overview"
+  name: "Overview"
+  url: "/index"
+- id: "Functions"
+  name: "Function Reference"
+  url: "/functions"
+- id: "news"
+  name: "News"
+---
+<pre>
+Summary of important user-visible changes for signal 1.4.6:
+----------------------------------------------------------
+
+ ** Minor bug fixes and documentation improvements have been made to the
+    following functions:
+
+    cheb1ap       cl2bp       decimate
+    firpm         pwelch      residuez
+
+ ** The following new functions have been added to the signal package:
+
+    poisswin      taylorwin
+
+Summary of important user-visible changes for signal 1.4.5:
+----------------------------------------------------------
+
+ ** Added qt documentation
+
+ ** Minor bug fixes and documentation improvements have been made to the
+    following functions:
+
+      db2pow      findpeaks   filtfilt
+      firmpm      sos2zp      vco
+
+ ** The following new functions have been added to the signal package:
+
+      filtord     filternorm  isallpass  
+      ismaxphase  isminphase  phasez
+      statelevels
+
+Summary of important user-visible changes for signal 1.4.4:
+----------------------------------------------------------
+
+
+ ** Minor bug fixes and documentation improvements have been made to the
+    following functions:
+
+      sos2tf     xcorr       xcov
+      zp2sos
+
+ ** The following new functions have been added to the signal package:
+
+      firpm      firpmord    istable
+      lpc         vco
+
+Summary of important user-visible changes for signal 1.4.3:
+----------------------------------------------------------
+
+ ** Minor bug fixes and documentation improvements have been made to the
+    following functions:
+
+      fir2       remez       residuez
+      sos2tf     sos2zp      xcorr
+      zp2sos
+
+Summary of important user-visible changes for signal 1.4.2:
+----------------------------------------------------------
+
+ ** The compiled functions have been made compatible with recent changes in
+    the development version of Octave.
+
+ ** Minor bug fixes and documentation improvements have been made to the
+    following functions:
+
+      cplxreal    cheb2ap     buffer
+      data2fun    ss2zp       clustersegmen
+      ncauer      cohere      csd
+      pburg       pwelch      pyulear
+      tfe         invfreq     invfreqs
+      invfreqz    upfirdn
+
+ ** The following new functions have been added to the signal package:
+
+      sos2ss
+
+
+Summary of important user-visible changes for signal 1.4.1:
+----------------------------------------------------------
+
+ ** Build failures introduced in the previous release on BSD and Windows
+    systems have been fixed.
+
+ ** The compiled functions have been made compatible with recent changes in
+    the development version of Octave.
+
+ ** Minor bug fixes and documentation improvements have been made to the
+    following functions:
+
+      butter      rceps       zplane
+      filtfilt    sos2tf
+      filtic      tukeywin
+
+
+Summary of important user-visible changes for signal 1.4.0:
+----------------------------------------------------------
+
+ ** The buttord, cheb1ord, cheb2ord, and ellipord functions now support
+    analog filter design with the "s" option.
+
+ ** The cheb1ord and cheb2ord functions will now compute the filter order
+    for band-stop or notch filters.
+
+ ** The medfilt1 function has been completely rewritten to support additional
+    arguments and options and to improve Matlab compatibility.
+
+ ** The following new functions have been added to the signal package:
+
+      cconv           pow2db          udecode
+      db2pow          rms             uencode
+      peak2peak       rssq            unshiftdata
+      peak2rms        shiftdata
+
+ ** Other functions that have been changed for smaller bugfixes,
+    increased Matlab compatibility, or performance:
+
+      bitrevorder     ellip           primitive
+      buffer          findpeaks       rectpuls
+      butter          fracshift       schtrig
+      cheby1          gauspuls        sigmoid_train
+      cheby2          gausswin        specgram
+      chirp           impz            square
+      cplxreal        invfreqs        tripuls
+      data2fun        invfreqz
+      digitrevorder   marcumq
+
+
+Summary of important user-visible changes for signal 1.3.2:
+----------------------------------------------------------
+
+ ** The package is no longer dependent on the general package.
+
+Summary of important user-visible changes for signal 1.3.1:
+----------------------------------------------------------
+
+ ** The following window functions now accept a Matlab compatible option
+    to select the periodic variant, useful for FFT applications:
+
+      blackmanharris    hann
+      blackmannuttall   nuttallwin
+
+ ** The following filter design functions have improved and more consistent
+    input parameter validation:
+
+      buttord    cheb2ord
+      cheb1ord   ellipord
+
+===============================================================================
+signal-1.3.0   Release Date: 2014-01-26   Release Manager: Mike Miller
+===============================================================================
+
+ ** The following functions are new:
+
+      digitrevorder   upsamplefill
+      primitive       wconv
+      ultrwin
+
+ ** Several bugs have been fixed in the following functions:
+
+      ellipord    ifwht
+      findpeaks   remez
+      fir1        resample
+      fwht        schtrig
+      grpdelay    zp2sos
+
+ ** Replaced line continuation marker "\" by "..." to avoid deprecated syntax
+    warning in Octave 3.8.
+
+ ** The signal package now depends on Octave 3.8 or newer.  The `ellipke'
+    function is required, which used to be provided by the specfun package.
+    Consequently, the signal package no longer depends on specfun.
+
+===============================================================================
+signal-1.2.2   Release Date: 2013-03-25   Release Manager: Mike Miller
+===============================================================================
+
+ ** No change release to correct bad file permissions on previous release.
+
+===============================================================================
+signal-1.2.1   Release Date: 2013-03-17   Release Manager: Mike Miller
+===============================================================================
+
+ ** The following functions are new:
+
+      buttap
+      cheb1ap
+      cheb2ap
+      ellipap
+      findpeaks
+      fwht
+      ifwht
+
+ ** Improved Matlab compatibility for the following window functions:
+
+      barthannwin
+      blackmanharris
+      blackmannuttall
+      chebwin
+      flattopwin
+      nuttallwin
+
+    The changes include always returning a column vector, returning a valid
+    window for a length argument of 1, and making all arguments after the
+    length optional.
+
+ ** Minor updates to documentation for the following functions:
+
+      cpsd
+      mscohere
+      sos2tf
+      sos2zp
+      tfestimate
+      zp2sos
+
+
+ ** signal is no longer dependent on the optim package.
+
+===============================================================================
+signal-1.2.0   Release Date: 2012-09-21   Release Manager: Carnë Draug
+===============================================================================
+
+ ** Improved Matlab compability for the function `fir2'. This changes include
+    always returning vaues in a row (even when the smoothing window is a single
+    column), the default values for grid_n and ramp_n, and returning an error
+    when invalid values are used (instead of silently adjusting them).
+
+ ** Fixed failing tests for the following functions:
+
+      fir1      pei_tseng_notch     residued
+
+ ** The function `rceps' was fixed to work correctly with odd-length inputs.
+
+ ** Bugfix in `xcorr2' introduced in 1.1.2 that would not accept "none" as
+    scale option.
+
+ ** `xcorr2' scaling option "coeff" was changed to return the normalized
+    cross-correlation.
+
+ ** The following functions are new:
+
+      movingrms     schtrig     clustersegment
+
+ ** signal is no longer dependent on the image package.
+
+ ** signal is now dependent on the general package.
+
+===============================================================================
+signal-1.1.3   Release Date: 2012-05-12   Release Manager: Carnë Draug
+===============================================================================
+
+ ** signal is no longer dependent on the audio package.
+
+ ** signal is now dependent on the image package.
+
+ ** The function `marcumq' was imported from the communications package and has
+    been completely rewritten to improve performance and fix computational
+    errors.
+
+ ** Package is no longer automatically loaded.
+
+ ** The functions `__ellip_ws' and `__ellip_ws_min' have been removed (they
+    are now subfunctions of `ncauer'.
+
+ ** The function `blackmanharris' was fixed to have even symmetry.
+
+===============================================================================
+signal-1.1.2   Release Date: 2012-01-06   Release Manager: Lukas Reichlin
+===============================================================================
+
+ * Added the following filter conversion functions:
+    ss2tf
+    ss2zp
+    tf2ss
+    tf2zp
+    zp2ss
+    zp2tf
+
+===============================================================================
+signal-1.1.1   Release Date: 2011-11-06   Release Manager: Juan Pablo Carbajal
+===============================================================================
+
+ * Following function now show help text correctly instead of copyright notice:
+    downsample
+    dst
+    flattopwin
+    fwhm
+    idst
+    square
+    upsample
+ * Apply pathc by Paul Dreik to cl2bp_lib.h.
+
+===============================================================================
+signal-1.1.0   Release Date: 2011-11-04   Release Manager: Juan Pablo Carbajal
+===============================================================================
+
+* Minor bug fixes in:
+ blackmannuttall.m
+ xcorr.m
+ filtfilt.m
+ invfreq.m
+ invfreqs.m
+ resample.m
+
+* New functions added:
+ data2fun.m
+ impinvar.m
+ invimpinvar.m
+ sigmoid_train.m
+ pei_tseng_notch.m
+ iirlp2mb.m
+
+* Not implemented functions removed from the documentation.
+* All demos are now working!
+</pre>

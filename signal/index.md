@@ -1,0 +1,22 @@
+---
+layout: "overview"
+permalink: "/index"
+title: "Signal Toolkit - Overview"
+pkg_name: "signal"
+version: "1.4.6"
+pkg_date: "2024-09-20"
+description: "Signal processing tools, including filtering, windowing and display functions."
+author: "various authors"
+maintainer: "Mike Miller <mtmiller@octave.org>"
+license: "GPLv3+, public domain"
+pkg_url: "https://octave.sourceforge.io/signal/"
+navigation:
+- id: "overview"
+  name: "Overview"
+- id: "Functions"
+  name: "Function Reference"
+  url: "/functions"
+- id: "news"
+  name: "News"
+  url: "/news"
+---
