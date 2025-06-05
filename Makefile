@@ -47,7 +47,7 @@ ifeq ($(vcs),hg)
 release_dir_dep := $(BASEDIR)/.hg/dirstate
 HG           := hg
 HG_CMD        = $(HG) --config alias.$(1)=$(1) --config defaults.$(1)= $(1)
-HG_ID        := $(shell $(call HG_CMD,identify) --id | sed -e 's/+//' )
+HG_ID        := $(shell $(call HG_CMD,identify) --id | $(SED) -e 's/+//' )
 REPO_TIMESTAMP := $(firstword $(shell $(call HG_CMD,log) --rev $(HG_ID) --template '{date|hgdate}'))
 endif
 ifeq ($(vcs),git)
@@ -90,7 +90,7 @@ ifeq (${vcs},hg)
 	$(call HG_CMD,archive) --exclude ".hg*" --type files --rev $(HG_ID) $@
 endif
 ifeq (${vcs},git)
-	git archive --format=tar --prefix="$@/" HEAD | $(TAR) -x
+	$(GIT) archive --format=tar --prefix="$@/" HEAD | $(TAR) -x
 	$(RM) "$@/.gitignore"
 endif
 	$(MAKE) BASEDIR=$(BASEDIR) -C $@ build-docs
