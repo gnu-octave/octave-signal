@@ -33,7 +33,7 @@ function [y, i] = digitrevorder (x, r)
     error ("digitrevorder: R must be an integer between 2 and 36");
   else
     tmp = log (numel (x)) / log (r);
-    if (fix (tmp) != tmp)
+    if (r^round(tmp) != numel(x))
       error ("digitrevorder: X must have length equal to an integer power of %d", r);
     endif
   endif
