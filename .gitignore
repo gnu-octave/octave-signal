@@ -1,0 +1,38 @@
+# compiled files
+src/*.oct
+src/*.o
+src/*/*.o
+
+src/PKG_ADD
+src/PKG_DEL
+
+# emacs backup files
+*~
+
+# vi backup
+*.swp
+*.swo
+
+# dist
+signal-*.tar.gz
+
+# autoconf and autoconf generated files
+src/configure
+src/config.log
+src/config.status
+src/aclocal.m4
+src/autom4te.cache
+src/Makefile
+src/common.mk
+src/config.h*
+src/oct-alt-includes.h
+
+# Other generated files
+doc/*.qch
+doc/*.qhc
+doc/*.html
+doc/*.pdf
+doc/*.info
+doc/version.texi
+doc/functions.texi
+
