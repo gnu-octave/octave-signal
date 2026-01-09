@@ -93,19 +93,22 @@ function [x_r, t_r] = impz(b, a = [1], n = [], fs = 1)
   if nargout >= 1 x_r = x; endif
   if nargout >= 2 t_r = t; endif
   if nargout == 0
-    unwind_protect
-      title "Impulse Response";
-      if (fs > 1000)
+    # scale and work out xlabel
+    if nargin == 4
+      if max(t) < 1
+        label_text = "Time (msec)";
         t = t * 1000;
-        xlabel("Time (msec)");
       else
-        xlabel("Time (sec)");
+        label_text = "Time (sec)";
       endif
-      plot(t, x, "^r;;");
-    unwind_protect_cleanup
-      title ("")
-      xlabel ("")
-    end_unwind_protect
+    else
+      label_text = "samples";
+    endif
+
+    stem(t, x);
+    title("Impulse Response");
+    xlabel(label_text);
+    ylabel("Amplitude");
   endif
 
 endfunction
