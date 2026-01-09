@@ -178,7 +178,7 @@ ifeq ($(QHELPGENERATOR),true)
 else
 	# try also create qch file if can
 	cd doc && ./mkqhcp.py $(PACKAGE) && $(QHELPGENERATOR) $(PACKAGE).qhcp -o $(PACKAGE).qhc
-	cd doc && $(RM) -f $(PACKAGE).qhcp $(PACKAGE).qhp $(PACKAGE).html
+	cd doc && $(RM) -f $(PACKAGE).qhcp $(PACKAGE).qhp
 endif
 
 doc/$(PACKAGE).info: doc/$(PACKAGE).texi doc/functions.texi doc/version.texi
