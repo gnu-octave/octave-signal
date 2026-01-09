@@ -18,21 +18,28 @@ To install, run the octave package manager:
 1. If running Windows, the package may already be installed:
    type pkg list, to view the installed packages.
 
-2. To install from Source Forge:
-   pkg install -forge signal
+   `pkg list`
 
-3. To install from a local tarball.
-   pkg install signal-XXXXXXX.tar.gz
+3. To install from Source Forge:
+
+   `pkg install -forge signal`
+
+4. To install from a local tarball.
+   
+   `pkg install signal-XXXXXXX.tar.gz`
+   
    Where XXXXXXX is the version of the the downloaded tarball.
 
 Usage:
 ======
 
 1. Load the package.
-   pkg load signal
+   
+   `pkg load signal`
+   
    (Required each time Octave is started)
 
-2. Use the function calls from the package.
+3. Use the function calls from the package.
 
 Documentation
 ==============
