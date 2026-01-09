@@ -44,6 +44,14 @@ function y = rssq (varargin)
     print_usage ();
   endif
 
+  if nargin == 2
+    # check the validity of the dim value if provided
+    dimval = varargin{2};
+    if ! isscalar (dimval) || ! isnumeric (dimval) || fix (dimval) != dimval || dimval <= 0
+      error ("rssq: dim should be an integer dimension value")
+    endif
+  endif
+
   y = sqrt (sumsq (varargin{:}));
 
 endfunction
