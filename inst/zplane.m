@@ -90,7 +90,7 @@ function zplane(z, p = [])
   ymax = ymax + yfluff;
 
   r = exp (2i * pi * [0:100] / 100);
-  plot (real (r), imag (r), "k");
+  plot (real (r), imag (r), "k", 'HandleVisibility','off');
   axis equal;
   grid on;
   axis (1.05 * [xmin, xmax, ymin, ymax]);
@@ -99,6 +99,9 @@ function zplane(z, p = [])
   plot_with_labels (z, "o");
   plot_with_labels (p, "x");
   hold off;
+  xlabel ("Real Part");
+  ylabel ("Imaginary Part");
+  title ("Pole-Zero Plot");
 
 endfunction
 
@@ -113,9 +116,9 @@ function plot_with_labels (x, symbol)
 
       x_u = unique (x(:,c));
       for i = 1:length (x_u)
-        n = sum (x_u(i) == x(:,c));
+        n = sum (abs(x_u(i) - x(:,c)) < eps);
         if (n > 1)
-          label = sprintf (" ^%d", n);
+          label = sprintf ("  %d", n);
           text (real (x_u(i)), imag (x_u(i)), label, "color", color);
         endif
       endfor
