@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-## Copyright 2018-2025 John Donoghue
+## Copyright 2018-2026 John Donoghue
 ##
 ## This program is free software: you can redistribute it and/or modify it
 ## under the terms of the GNU General Public License as published by
@@ -16,7 +16,7 @@
 ## along with this program.  If not, see
 ## <https://www.gnu.org/licenses/>.
 
-## mkfuncdocs v1.0.9
+## mkfuncdocs v1.0.10
 ## mkfuncdocs.py will attempt to extract the help texts from functions in src
 ## dirs, extracting only those that are in the specifed INDEX file and output them
 ## to stdout in texi format
@@ -244,20 +244,27 @@ def read_index (filename, ignore):
   category = Group()
   for l in lines:
     if l.startswith("#!"):
-        l = l[2:].strip()
-        category.add_subgroup(l)
+      l = l[2:].strip()
+      category.add_subgroup(l)
     elif l.startswith("#"):
       pass
     elif first:
       index.name = l;
       first = False
+    elif "=" in l:
+      # func = some text work around
+      funcs = l.split("=")
+      f = funcs[0].strip()
+      d = funcs[1].strip()
+      if f not in ignore:
+        category.add_function(f + "=" + d)
     elif l.startswith(" "):
-        l = l.strip()
-        # may be multiple functions here
-        funcs = l.split()
-        for f in funcs:
-          if f not in ignore:
-            category.add_function(l)
+      l = l.strip()
+      # may be multiple functions here
+      funcs = l.split()
+      for f in funcs:
+        if f not in ignore:
+          category.add_function(l)
     else:
       # new category name
       if not category.isempty():
@@ -370,7 +377,12 @@ def process_function_help(g_name, f, options, is_subgroup=False):
       h = ""
       filename = ""
       path = ""
-      if "@" in f:
+      if "=" in f:
+        # we are using func=some inline text
+        x = f.split("=")
+        name = ref = x[0]
+        h = [x[1]]
+      elif "@" in f:
         #print ("class func")
         path = f
         name = "@" + f
@@ -408,7 +420,10 @@ def process_function_help(g_name, f, options, is_subgroup=False):
         ref = f
         filename, lineno = find_func_file(path, options["srcdir"], options["funcprefix"], options['allowscan'])
 
-      if not filename:
+      if h:
+        # we have the text already
+        pass
+      elif not filename:
         sys.stderr.write("Warning: Cant find source file for {}\n".format(f))
       else:
         h = read_help (filename, lineno)
