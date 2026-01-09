@@ -94,7 +94,7 @@ ifeq (${vcs},git)
 	$(RM) "$@/.gitignore"
 endif
 	$(MAKE) BASEDIR=$(BASEDIR) -C $@ build-docs
-	cd "$@" && $(RM) -f Makefile 
+	cd "$@" && $(RM) -f Makefile .hg*
 	# doc/mkfuncdocs.py doc/mkqhcp.py
 	chmod -R a+rX,u+w,go-w $@
 
