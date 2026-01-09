@@ -22,6 +22,16 @@
 ## PKG_DEL: __unload_signal__ ()
 
 function __unload_signal__ ()
+  # unload any compatibility functions
+  try
+    pkg_dir = fileparts (fullfile (mfilename ("fullpath")));
+    if compare_versions(version, "11.0.0", "<")
+      rmpath(fullfile(pkg_dir, "compatibility", "pre-11.0.0"));
+    endif
+  catch
+    # do nothing
+  end_try_catch
+ 
   # on package unload, attempt to unload docs
   try
     pkg_dir = fileparts (fullfile (mfilename ("fullpath")));

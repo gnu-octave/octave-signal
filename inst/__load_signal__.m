@@ -22,6 +22,15 @@
 ## PKG_ADD: __load_signal__ ()
 
 function __load_signal__ ()
+  # load any compatabilty functions
+  try
+    pkg_dir = fileparts (fullfile (mfilename ("fullpath")));
+    if compare_versions(version, "11.0.0", "<")
+      addpath(fullfile(pkg_dir, "compatibility", "pre-11.0.0"));
+    endif
+  catch
+    # do nothing
+  end_try_catch
   # on package load, attempt to load docs
   try
     pkg_dir = fileparts (fullfile (mfilename ("fullpath")));

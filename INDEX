@@ -26,7 +26,8 @@ Signal Measurement
   findpeaks
   peak2peak
   peak2rms
-  rms
+# rms is moved to core octave as of v11
+  rms = rms has moved to the octave core from v11.0.0 onwards
   rssq
 Correlation and Convolution
   cconv

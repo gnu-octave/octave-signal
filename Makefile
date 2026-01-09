@@ -154,7 +154,8 @@ run: all
 	$(OCTAVE) --silent --persist \
 	  --eval 'if (! isempty ("$(DEPENDS)")); pkg load $(DEPENDS); endif;' \
 	  --eval 'addpath (fullfile (pwd, "inst"));' \
-	  --eval 'addpath (fullfile (pwd, "src"));'
+	  --eval 'addpath (fullfile (pwd, "src"));' \
+	  --eval '__load_signal__;'
 
 doc: build-docs
 
