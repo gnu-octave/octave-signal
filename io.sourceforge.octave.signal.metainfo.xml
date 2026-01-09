@@ -23,8 +23,8 @@ without any warranty.
     <keyword>spectral analysis</keyword>
     <keyword>window function</keyword>
   </keywords>
-  <url type="homepage">https://octave.sourceforge.io/signal/</url>
-  <url type="bugtracker">https://savannah.gnu.org/bugs/?group=octave</url>
+  <url type="homepage">https://gnu-octave.github.io/octave-signal/</url>
+  <url type="bugtracker">https://github.com/gnu-octave/octave-signal/</url>
   <metadata_license>FSFAP</metadata_license>
   <project_license>GPL-3.0+</project_license>
   <developer_name>Octave-Forge Community</developer_name>
