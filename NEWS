@@ -1,3 +1,20 @@
+Summary of important user-visible changes for signal 1.4.7:
+----------------------------------------------------------
+
+ ** Minor bug fixes and documentation improvements have been made to the
+    following functions:
+
+    digitrevorder findpeaks   impz
+    pwelch        rssq        zplane
+
+ ** The following new functions have been added to the signal package:
+
+    sos2cell      wvtool
+
+ ** The following functions have been removed from the signal package:
+
+    rms (If installing in octave 11+)
+
 Summary of important user-visible changes for signal 1.4.6:
 ----------------------------------------------------------
 
