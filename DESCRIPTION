@@ -2,7 +2,7 @@ Name: signal
 Version: 1.4.6
 Date: 2024-09-20
 Author: various authors
-Maintainer: Mike Miller <mtmiller@octave.org>
+Maintainer: Octave-Forge community <maintainers@octave.org>
 Title: Signal Processing
 Description: Signal processing tools, including filtering, windowing and display functions.
 Depends: octave (>= 3.8), control (>= 2.4)
