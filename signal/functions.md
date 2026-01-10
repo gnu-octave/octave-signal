@@ -3,7 +3,7 @@ layout: "function_list"
 permalink: "/functions/"
 title: "Signal Toolkit - Functions"
 pkg_name: "signal"
-version: "1.4.6"
+version: "1.4.7"
 description: "Signal processing tools, including filtering, windowing and display functions."
 categories:
 - id: "7_Signals"
@@ -55,7 +55,7 @@ categories:
     url: "/functions/8_rectpuls/"
   - id: "8_sawtooth"
     name: "sawtooth"
-    description: "Generates a sawtooth wave of period ‘2 * pi’ with limits ‘+1/-1’ for ..."
+    description: "Generates a sawtooth wave of period ‘2 * pi’ with limits ‘+1/-1’ for the elem..."
     url: "/functions/8_sawtooth/"
   - id: "8_shanwavf"
     name: "shanwavf"
@@ -97,6 +97,7 @@ categories:
     name: "vco"
     description: "Creates a signal that oscillates at a frequency determined by input X with a ..."
     url: "/functions/3_vco/"
+  groups:
 - id: "18_SignalMeasurement"
   description: "Signal Measurement"
   functions:
@@ -112,14 +113,11 @@ categories:
     name: "peak2rms"
     description: "Compute the ratio of the largest absolute value to the root-mean-square (RMS)..."
     url: "/functions/8_peak2rms/"
-  - id: "3_rms"
-    name: "rms"
-    description: "Compute the root-mean-square (RMS) of the vector X."
-    url: "/functions/3_rms/"
   - id: "4_rssq"
     name: "rssq"
     description: "Compute the root-sum-of-squares (RSS) of the vector X."
     url: "/functions/4_rssq/"
+  groups:
 - id: "27_CorrelationandConvolution"
   description: "Correlation and Convolution"
   functions:
@@ -147,6 +145,7 @@ categories:
     name: "xcov"
     description: "Compute covariance at various lags [=correlation(x-mean(x),y-mean(y))]."
     url: "/functions/4_xcov/"
+  groups:
 - id: "9_Filtering"
   description: "Filtering"
   functions:
@@ -174,6 +173,7 @@ categories:
     name: "sosfilt"
     description: "Second order section IIR filtering of X."
     url: "/functions/7_sosfilt/"
+  groups:
 - id: "15_FilterAnalysis"
   description: "Filter Analysis"
   functions:
@@ -229,6 +229,7 @@ categories:
     name: "zplane"
     description: "Plot the poles and zeros on a complex plane."
     url: "/functions/6_zplane/"
+  groups:
 - id: "17_FilterConversion"
   description: "Filter Conversion"
   functions:
@@ -256,6 +257,10 @@ categories:
     name: "sos2zp"
     description: "Convert series second-order sections to zeros, poles, and gains (pole residue..."
     url: "/functions/6_sos2zp/"
+  - id: "8_sos2cell"
+    name: "sos2cell"
+    description: "Convert a second-order-section matrix to a cell array."
+    url: "/functions/8_sos2cell/"
   - id: "5_ss2tf"
     name: "ss2tf"
     description: "Conversion from state-space to transfer function representation."
@@ -288,6 +293,7 @@ categories:
     name: "zp2tf"
     description: "Converts zeros / poles to a transfer function."
     url: "/functions/5_zp2tf/"
+  groups:
 - id: "17_IIRFilterDesign"
   description: "IIR Filter Design"
   functions:
@@ -373,7 +379,7 @@ categories:
     url: "/functions/5_firpm/"
   - id: "8_firpmord"
     name: "firpmord"
-    description: "Estimate the filter-order needed for ‘firpm’ to design a type-I or type-I..."
+    description: "Estimate the filter-order needed for ‘firpm’ to design a type-I or type-II li..."
     url: "/functions/8_firpmord/"
   - id: "6_ncauer"
     name: "ncauer"
@@ -387,6 +393,7 @@ categories:
     name: "sftrans"
     description: "Transform band edges of a generic lowpass filter (cutoff at W=1) represented ..."
     url: "/functions/7_sftrans/"
+  groups:
 - id: "17_FIRFilterDesign"
   description: "FIR Filter Design"
   functions:
@@ -422,6 +429,7 @@ categories:
     name: "sgolay"
     description: "Computes the filter coefficients for all Savitzsky-Golay smoothing filters of..."
     url: "/functions/6_sgolay/"
+  groups:
 - id: "10_Transforms"
   description: "Transforms"
   functions:
@@ -505,6 +513,7 @@ categories:
     name: "rceps"
     description: "Return the cepstrum of the signal X."
     url: "/functions/5_rceps/"
+  groups:
 - id: "23_PowerSpectrumAnalysis"
   description: "Power Spectrum Analysis"
   functions:
@@ -560,6 +569,7 @@ categories:
     name: "__power"
     description: "Plot the power spectrum of the given ARMA model."
     url: "/functions/7_power/"
+  groups:
 - id: "16_WindowFunctions"
   description: "Window Functions"
   functions:
@@ -651,6 +661,11 @@ categories:
     name: "window"
     description: "Create an M-point window from the function F."
     url: "/functions/6_window/"
+  - id: "6_wvtool"
+    name: "wvtool"
+    description: "Plot time and frequency domain graphs of each vector of window function coeff..."
+    url: "/functions/6_wvtool/"
+  groups:
 - id: "21_SystemIdentification"
   description: "System Identification"
   functions:
@@ -682,6 +697,7 @@ categories:
     name: "lpc"
     description: "Determines the forward linear predictor by minimizing the prediction error in..."
     url: "/functions/3_lpc/"
+  groups:
 - id: "18_SampleRateChange"
   description: "Sample Rate Change"
   functions:
@@ -713,6 +729,7 @@ categories:
     name: "upsample"
     description: "Upsample the signal, inserting N-1 zeros between every element."
     url: "/functions/8_upsample/"
+  groups:
 - id: "13_PulseMetrics"
   description: "Pulse Metrics"
   functions:
@@ -720,6 +737,7 @@ categories:
     name: "statelevels"
     description: "Estimate state-level for bilevel waveform A using histogram method"
     url: "/functions/11_statelevels/"
+  groups:
 - id: "7_Utility"
   description: "Utility"
   functions:
@@ -767,6 +785,7 @@ categories:
     name: "zerocrossing"
     description: "Estimates the points at which a given waveform y=y(x) crosses the x-axis usin..."
     url: "/functions/12_zerocrossing/"
+  groups:
 navigation:
 - id: "overview"
   name: "Overview"
@@ -776,49 +795,67 @@ navigation:
 - id: "7_Signals"
   name: "&nbsp;&nbsp;Signals"
   url: "/functions/#7_Signals"
+  subitems:
 - id: "18_SignalMeasurement"
   name: "&nbsp;&nbsp;Signal Measurement"
   url: "/functions/#18_SignalMeasurement"
+  subitems:
 - id: "27_CorrelationandConvolution"
   name: "&nbsp;&nbsp;Correlation and Convolution"
   url: "/functions/#27_CorrelationandConvolution"
+  subitems:
 - id: "9_Filtering"
   name: "&nbsp;&nbsp;Filtering"
   url: "/functions/#9_Filtering"
+  subitems:
 - id: "15_FilterAnalysis"
   name: "&nbsp;&nbsp;Filter Analysis"
   url: "/functions/#15_FilterAnalysis"
+  subitems:
 - id: "17_FilterConversion"
   name: "&nbsp;&nbsp;Filter Conversion"
   url: "/functions/#17_FilterConversion"
+  subitems:
 - id: "17_IIRFilterDesign"
   name: "&nbsp;&nbsp;IIR Filter Design"
   url: "/functions/#17_IIRFilterDesign"
+  subitems:
 - id: "17_FIRFilterDesign"
   name: "&nbsp;&nbsp;FIR Filter Design"
   url: "/functions/#17_FIRFilterDesign"
+  subitems:
 - id: "10_Transforms"
   name: "&nbsp;&nbsp;Transforms"
   url: "/functions/#10_Transforms"
+  subitems:
 - id: "23_PowerSpectrumAnalysis"
   name: "&nbsp;&nbsp;Power Spectrum Analysis"
   url: "/functions/#23_PowerSpectrumAnalysis"
+  subitems:
 - id: "16_WindowFunctions"
   name: "&nbsp;&nbsp;Window Functions"
   url: "/functions/#16_WindowFunctions"
+  subitems:
 - id: "21_SystemIdentification"
   name: "&nbsp;&nbsp;System Identification"
   url: "/functions/#21_SystemIdentification"
+  subitems:
 - id: "18_SampleRateChange"
   name: "&nbsp;&nbsp;Sample Rate Change"
   url: "/functions/#18_SampleRateChange"
+  subitems:
 - id: "13_PulseMetrics"
   name: "&nbsp;&nbsp;Pulse Metrics"
   url: "/functions/#13_PulseMetrics"
+  subitems:
 - id: "7_Utility"
   name: "&nbsp;&nbsp;Utility"
   url: "/functions/#7_Utility"
+  subitems:
 - id: "news"
   name: "News"
   url: "/news"
+- id: "manual"
+  name: "Manual"
+  url: "/manual"
 ---

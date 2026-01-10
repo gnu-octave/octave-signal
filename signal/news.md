@@ -3,7 +3,7 @@ layout: "default"
 permalink: "/news/"
 title: "Signal Toolkit - News"
 pkg_name: "signal"
-version: "1.4.6"
+version: "1.4.7"
 description: "Signal processing tools, including filtering, windowing and display functions."
 navigation:
 - id: "overview"
@@ -14,8 +14,28 @@ navigation:
   url: "/functions"
 - id: "news"
   name: "News"
+- id: "manual"
+  name: "Manual"
+  url: "/manual"
 ---
 <pre>
+Summary of important user-visible changes for signal 1.4.7:
+----------------------------------------------------------
+
+ ** Minor bug fixes and documentation improvements have been made to the
+    following functions:
+
+    digitrevorder findpeaks   impz
+    pwelch        rssq        zplane
+
+ ** The following new functions have been added to the signal package:
+
+    sos2cell      wvtool
+
+ ** The following new functions have been removed from the signal package:
+
+    rms (If installing in octave 11+)
+
 Summary of important user-visible changes for signal 1.4.6:
 ----------------------------------------------------------
 

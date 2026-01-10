@@ -2,10 +2,10 @@
 layout: "default"
 permalink: "/functions/6_pwelch/"
 pkg_name: "signal"
-pkg_version: "1.4.6"
+pkg_version: "1.4.7"
 pkg_description: "Signal processing tools, including filtering, windowing and display functions."
 title: "Signal Toolkit - pwelch"
-category: "Power Spectrum Analysis"
+category: "Utility"
 func_name: "pwelch"
 navigation:
 - id: "overview"
@@ -17,54 +17,72 @@ navigation:
 - id: "7_Signals"
   name: "&nbsp;&nbsp;Signals"
   url: "/functions/#7_Signals"
+  subitems:
 - id: "18_SignalMeasurement"
   name: "&nbsp;&nbsp;Signal Measurement"
   url: "/functions/#18_SignalMeasurement"
+  subitems:
 - id: "27_CorrelationandConvolution"
   name: "&nbsp;&nbsp;Correlation and Convolution"
   url: "/functions/#27_CorrelationandConvolution"
+  subitems:
 - id: "9_Filtering"
   name: "&nbsp;&nbsp;Filtering"
   url: "/functions/#9_Filtering"
+  subitems:
 - id: "15_FilterAnalysis"
   name: "&nbsp;&nbsp;Filter Analysis"
   url: "/functions/#15_FilterAnalysis"
+  subitems:
 - id: "17_FilterConversion"
   name: "&nbsp;&nbsp;Filter Conversion"
   url: "/functions/#17_FilterConversion"
+  subitems:
 - id: "17_IIRFilterDesign"
   name: "&nbsp;&nbsp;IIR Filter Design"
   url: "/functions/#17_IIRFilterDesign"
+  subitems:
 - id: "17_FIRFilterDesign"
   name: "&nbsp;&nbsp;FIR Filter Design"
   url: "/functions/#17_FIRFilterDesign"
+  subitems:
 - id: "10_Transforms"
   name: "&nbsp;&nbsp;Transforms"
   url: "/functions/#10_Transforms"
+  subitems:
 - id: "23_PowerSpectrumAnalysis"
   name: "&nbsp;&nbsp;Power Spectrum Analysis"
   url: "/functions/#23_PowerSpectrumAnalysis"
+  subitems:
 - id: "16_WindowFunctions"
   name: "&nbsp;&nbsp;Window Functions"
   url: "/functions/#16_WindowFunctions"
+  subitems:
 - id: "21_SystemIdentification"
   name: "&nbsp;&nbsp;System Identification"
   url: "/functions/#21_SystemIdentification"
+  subitems:
 - id: "18_SampleRateChange"
   name: "&nbsp;&nbsp;Sample Rate Change"
   url: "/functions/#18_SampleRateChange"
+  subitems:
 - id: "13_PulseMetrics"
   name: "&nbsp;&nbsp;Pulse Metrics"
   url: "/functions/#13_PulseMetrics"
+  subitems:
 - id: "7_Utility"
   name: "&nbsp;&nbsp;Utility"
   url: "/functions/#7_Utility"
+  subitems:
 - id: "news"
   name: "News"
   url: "/news"
+- id: "manual"
+  name: "Manual"
+  url: "/manual"
 ---
-<dl class="first-deftypefn">
-<dt class="deftypefn" id="index-pwelch_0028x_002c"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">spectra</var>,<var class="var">freq</var>] =</code> <strong class="def-name">pwelch(<var class="var">x</var>,</strong> <code class="def-code-arguments"><var class="var">window</var>, <var class="var">overlap</var>, <var class="var">Nfft</var>, <var class="var">Fs</var>, <var class="var">range</var>, <var class="var">plot_type</var>, <var class="var">detrend</var>, <var class="var">sloppy</var>)</code><a class="copiable-link" href="#index-pwelch_0028x_002c"></a></span></dt>
+<dl class="first-deftypefn def-block">
+<dt class="deftypefn def-line" id="index-pwelch_0028x_002c"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">spectra</var>,<var class="var">freq</var>] =</code> <strong class="def-name">pwelch(<var class="var">x</var>,</strong> <code class="def-code-arguments"><var class="var">window</var>, <var class="var">overlap</var>, <var class="var">Nfft</var>, <var class="var">Fs</var>, <var class="var">range</var>, <var class="var">plot_type</var>, <var class="var">detrend</var>, <var class="var">sloppy</var>)</code><a class="copiable-link" href="#index-pwelch_0028x_002c"></a></span></dt>
 <dd><p>Estimate power spectral density of data &quot;x&quot; by the Welch (1967) periodogram/FFT method.
 </p>
 <p>All arguments except &quot;x&quot; are optional.
@@ -186,13 +204,15 @@ navigation:
            frequencies; e.g. frequencies for a 10-point &rsquo;twosided&rsquo;
            spectrum are 0 0.1 0.2 0.3 0.4 0.5 -0.4 -0.3 -0.2 -0.1
 </p>
-<p>&rsquo;shift&rsquo;, &rsquo;centerdc&rsquo; : same as &rsquo;whole&rsquo; but with the first half
+<p>&rsquo;shift&rsquo;, &rsquo;centered&rsquo;, &rsquo;centerdc&rsquo; (deprecated) : same as &rsquo;whole&rsquo; but with the first half
            of the spectrum swapped with second half to put the
-           zero-frequency value in the middle. (See &quot;help
+           zero-frequency value in the middle. See &quot;help
            fftshift&quot;.
 </p>
 <p>If data (x and y) are real, the default range is &rsquo;half&rsquo;,
            otherwise default range is &rsquo;whole&rsquo;.
+</p>
+<p>&rsquo;centerdc&rsquo; : (deprecated) Use &rsquo;centered&rsquo; instead.
 </p>
 </dd>
 <dt>plot_type</dt>
@@ -385,7 +405,7 @@ navigation:
    IEEE Transactions on Audio Electroacoustics, Vol AU-15(6), pp 70-73
 </p>
 <p>[2] William H. Press and Saul A. Teukolsky and William T. Vetterling and
-               Brian P. Flannery&quot;,
+               Brian P. Flannery,
    &quot;Numerical recipes in C, The art of scientific computing&quot;, 2nd edition,
       Cambridge University Press, 2002 &mdash; Section 13.7.
  </p></dd></dl>

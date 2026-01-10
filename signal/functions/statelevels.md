@@ -2,10 +2,10 @@
 layout: "default"
 permalink: "/functions/11_statelevels/"
 pkg_name: "signal"
-pkg_version: "1.4.6"
+pkg_version: "1.4.7"
 pkg_description: "Signal processing tools, including filtering, windowing and display functions."
 title: "Signal Toolkit - statelevels"
-category: "Pulse Metrics"
+category: "Utility"
 func_name: "statelevels"
 navigation:
 - id: "overview"
@@ -17,60 +17,78 @@ navigation:
 - id: "7_Signals"
   name: "&nbsp;&nbsp;Signals"
   url: "/functions/#7_Signals"
+  subitems:
 - id: "18_SignalMeasurement"
   name: "&nbsp;&nbsp;Signal Measurement"
   url: "/functions/#18_SignalMeasurement"
+  subitems:
 - id: "27_CorrelationandConvolution"
   name: "&nbsp;&nbsp;Correlation and Convolution"
   url: "/functions/#27_CorrelationandConvolution"
+  subitems:
 - id: "9_Filtering"
   name: "&nbsp;&nbsp;Filtering"
   url: "/functions/#9_Filtering"
+  subitems:
 - id: "15_FilterAnalysis"
   name: "&nbsp;&nbsp;Filter Analysis"
   url: "/functions/#15_FilterAnalysis"
+  subitems:
 - id: "17_FilterConversion"
   name: "&nbsp;&nbsp;Filter Conversion"
   url: "/functions/#17_FilterConversion"
+  subitems:
 - id: "17_IIRFilterDesign"
   name: "&nbsp;&nbsp;IIR Filter Design"
   url: "/functions/#17_IIRFilterDesign"
+  subitems:
 - id: "17_FIRFilterDesign"
   name: "&nbsp;&nbsp;FIR Filter Design"
   url: "/functions/#17_FIRFilterDesign"
+  subitems:
 - id: "10_Transforms"
   name: "&nbsp;&nbsp;Transforms"
   url: "/functions/#10_Transforms"
+  subitems:
 - id: "23_PowerSpectrumAnalysis"
   name: "&nbsp;&nbsp;Power Spectrum Analysis"
   url: "/functions/#23_PowerSpectrumAnalysis"
+  subitems:
 - id: "16_WindowFunctions"
   name: "&nbsp;&nbsp;Window Functions"
   url: "/functions/#16_WindowFunctions"
+  subitems:
 - id: "21_SystemIdentification"
   name: "&nbsp;&nbsp;System Identification"
   url: "/functions/#21_SystemIdentification"
+  subitems:
 - id: "18_SampleRateChange"
   name: "&nbsp;&nbsp;Sample Rate Change"
   url: "/functions/#18_SampleRateChange"
+  subitems:
 - id: "13_PulseMetrics"
   name: "&nbsp;&nbsp;Pulse Metrics"
   url: "/functions/#13_PulseMetrics"
+  subitems:
 - id: "7_Utility"
   name: "&nbsp;&nbsp;Utility"
   url: "/functions/#7_Utility"
+  subitems:
 - id: "news"
   name: "News"
   url: "/news"
+- id: "manual"
+  name: "Manual"
+  url: "/manual"
 ---
-<dl class="first-deftypefn">
-<dt class="deftypefn" id="index-statelevels"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">levels</var> =</code> <strong class="def-name">statelevels</strong> <code class="def-code-arguments">(<var class="var">A</var>)</code><a class="copiable-link" href="#index-statelevels"></a></span></dt>
-<dt class="deftypefnx def-cmd-deftypefn" id="index-statelevels-1"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">levels</var> =</code> <strong class="def-name">statelevels</strong> <code class="def-code-arguments">(<var class="var">A</var>, <var class="var">nbins</var>)</code><a class="copiable-link" href="#index-statelevels-1"></a></span></dt>
-<dt class="deftypefnx def-cmd-deftypefn" id="index-statelevels-2"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">levels</var> =</code> <strong class="def-name">statelevels</strong> <code class="def-code-arguments">(<var class="var">A</var>, <var class="var">nbins</var>, <var class="var">method</var>)</code><a class="copiable-link" href="#index-statelevels-2"></a></span></dt>
-<dt class="deftypefnx def-cmd-deftypefn" id="index-statelevels-3"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">levels</var> =</code> <strong class="def-name">statelevels</strong> <code class="def-code-arguments">(<var class="var">A</var>, <var class="var">nbins</var>, <var class="var">method</var>, <var class="var">bounds</var>)</code><a class="copiable-link" href="#index-statelevels-3"></a></span></dt>
-<dt class="deftypefnx def-cmd-deftypefn" id="index-statelevels-4"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">levels</var>, <var class="var">histograms</var>] =</code> <strong class="def-name">statelevels</strong> <code class="def-code-arguments">(&hellip;)</code><a class="copiable-link" href="#index-statelevels-4"></a></span></dt>
-<dt class="deftypefnx def-cmd-deftypefn" id="index-statelevels-5"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">levels</var>, <var class="var">histograms</var>, <var class="var">binlevels</var>] =</code> <strong class="def-name">statelevels</strong> <code class="def-code-arguments">(&hellip;)</code><a class="copiable-link" href="#index-statelevels-5"></a></span></dt>
-<dt class="deftypefnx def-cmd-deftypefn" id="index-statelevels-6"><span class="category-def">Function File: </span><span><strong class="def-name">statelevels</strong> <code class="def-code-arguments">(&hellip;)</code><a class="copiable-link" href="#index-statelevels-6"></a></span></dt>
+<dl class="first-deftypefn def-block">
+<dt class="deftypefn def-line" id="index-statelevels"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">levels</var> =</code> <strong class="def-name">statelevels</strong> <code class="def-code-arguments">(<var class="var">A</var>)</code><a class="copiable-link" href="#index-statelevels"></a></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-statelevels-1"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">levels</var> =</code> <strong class="def-name">statelevels</strong> <code class="def-code-arguments">(<var class="var">A</var>, <var class="var">nbins</var>)</code><a class="copiable-link" href="#index-statelevels-1"></a></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-statelevels-2"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">levels</var> =</code> <strong class="def-name">statelevels</strong> <code class="def-code-arguments">(<var class="var">A</var>, <var class="var">nbins</var>, <var class="var">method</var>)</code><a class="copiable-link" href="#index-statelevels-2"></a></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-statelevels-3"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">levels</var> =</code> <strong class="def-name">statelevels</strong> <code class="def-code-arguments">(<var class="var">A</var>, <var class="var">nbins</var>, <var class="var">method</var>, <var class="var">bounds</var>)</code><a class="copiable-link" href="#index-statelevels-3"></a></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-statelevels-4"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">levels</var>, <var class="var">histograms</var>] =</code> <strong class="def-name">statelevels</strong> <code class="def-code-arguments">(&hellip;)</code><a class="copiable-link" href="#index-statelevels-4"></a></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-statelevels-5"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">levels</var>, <var class="var">histograms</var>, <var class="var">binlevels</var>] =</code> <strong class="def-name">statelevels</strong> <code class="def-code-arguments">(&hellip;)</code><a class="copiable-link" href="#index-statelevels-5"></a></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-statelevels-6"><span class="category-def">Function File: </span><span><strong class="def-name">statelevels</strong> <code class="def-code-arguments">(&hellip;)</code><a class="copiable-link" href="#index-statelevels-6"></a></span></dt>
 <dd><p>Estimate state-level for bilevel waveform <var class="var">A</var> using histogram method
 </p>
 <p>INPUTS:

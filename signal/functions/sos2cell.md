@@ -1,12 +1,12 @@
 ---
 layout: "default"
-permalink: "/functions/7_chebwin/"
+permalink: "/functions/8_sos2cell/"
 pkg_name: "signal"
 pkg_version: "1.4.7"
 pkg_description: "Signal processing tools, including filtering, windowing and display functions."
-title: "Signal Toolkit - chebwin"
+title: "Signal Toolkit - sos2cell"
 category: "Utility"
-func_name: "chebwin"
+func_name: "sos2cell"
 navigation:
 - id: "overview"
   name: "Overview"
@@ -82,44 +82,40 @@ navigation:
   url: "/manual"
 ---
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-chebwin"><span class="category-def">Function File: </span><span><strong class="def-name">chebwin</strong> <code class="def-code-arguments">(<var class="var">m</var>)</code><a class="copiable-link" href="#index-chebwin"></a></span></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-chebwin-1"><span class="category-def">Function File: </span><span><strong class="def-name">chebwin</strong> <code class="def-code-arguments">(<var class="var">m</var>, <var class="var">at</var>)</code><a class="copiable-link" href="#index-chebwin-1"></a></span></dt>
-<dd>
-<p>Return the filter coefficients of a Dolph-Chebyshev window of length <var class="var">m</var>.
- The Fourier transform of the window has a stop-band attenuation of <var class="var">at</var>
- dB.  The default attenuation value is 100 dB.
+<dt class="deftypefn def-line" id="index-sos2cell"><span class="category-def">Function File: </span><span><code class="def-type">C =</code> <strong class="def-name">sos2cell</strong> <code class="def-code-arguments">(<var class="var">S</var>)</code><a class="copiable-link" href="#index-sos2cell"></a></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-sos2cell-1"><span class="category-def">Function File: </span><span><code class="def-type">C =</code> <strong class="def-name">sos2cell</strong> <code class="def-code-arguments">(<var class="var">S</var>, <var class="var">G</var>)</code><a class="copiable-link" href="#index-sos2cell-1"></a></span></dt>
+<dd><p>Convert a second-order-section matrix to a cell array.
 </p>
-<p>For the definition of the Chebyshev window, see
-</p>
-<p>* Peter Lynch, &quot;The Dolph-Chebyshev Window: A Simple Optimal Filter&quot;,
-   Monthly Weather Review, Vol. 125, pp. 655-660, April 1997.
-   (http://www.maths.tcd.ie/~plynch/Publications/Dolph.pdf)
-</p>
-<p>* C. Dolph, &quot;A current distribution for broadside arrays which
-   optimizes the relationship between beam width and side-lobe level&quot;,
-   Proc. IEEE, 34, pp. 335-348.
-</p>
-<p>The window is described in frequency domain by the expression:
+<p><var class="var">S</var> is an L-by-6 matrix, where each row represents a second-order section in the form:
 </p>
 <div class="example">
-<pre class="example-preformatted"> </pre><div class="group"><pre class="example-preformatted">          Cheb(m-1, beta * cos(pi * k/m))
-   W(k) = -------------------------------
-                 Cheb(m-1, beta)
+<pre class="example-preformatted"> </pre><div class="group"><pre class="example-preformatted"> S = [B1 A1;
+      B2 A2;
+      ...
+      BL AL]
  </pre></div><pre class="example-preformatted"> </pre></div>
 
-<p>with
+<p>where <var class="var">Bi</var> and <var class="var">Ai</var> are the numerator and denominator coefficients of a linear
+ or quadratic polynomial. The function converts this matrix into a cell array <var class="var">C</var>
+ with the following format:
 </p>
 <div class="example">
-<pre class="example-preformatted"> </pre><div class="group"><pre class="example-preformatted">   beta = cosh(1/(m-1) * acosh(10^(at/20))
+<pre class="example-preformatted"> </pre><div class="group"><pre class="example-preformatted"> C = { {B1, A1}, {B2, A2}, ..., {BL, AL} }
  </pre></div><pre class="example-preformatted"> </pre></div>
 
-<p>and Cheb(m,x) denoting the m-th order Chebyshev polynomial calculated
- at the point x.
+<p>Each element of the cell array is a cell containing a pair of vectors: <var class="var">Bi</var> and <var class="var">Ai</var>.
 </p>
-<p>Note that the denominator in W(k) above is not computed, and after
- the inverse Fourier transform the window is scaled by making its
- maximum value unitary.
+<p>If an additional gain term <var class="var">G</var> is provided, the function returns:
 </p>
+<div class="example">
+<pre class="example-preformatted"> </pre><div class="group"><pre class="example-preformatted"> C = { {G, 1}, {B1, A1}, {B2, A2}, ..., {BL, AL} }
+ </pre></div><pre class="example-preformatted"> </pre></div>
 
-<p><strong class="strong">See also:</strong> kaiser.
- </p></dd></dl>
+<p>where {G, 1} represents the constant gain term applied to the filter.
+</p>
+<div class="example">
+<pre class="example-preformatted"> </pre><div class="group"><pre class="example-preformatted"> S = [ [1, 2, 3, 4, 5, 6];
+       [7, 8, 9, 10, 11, 12] ];
+ C = sos2cell(S);
+ </pre></div><pre class="example-preformatted"> </pre></div>
+</dd></dl>
