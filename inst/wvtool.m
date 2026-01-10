@@ -187,10 +187,14 @@ function f=wvtool (varargin)
   endfor
 
   # Plots:
-  pos = get (f=figure (gcf),'position');
+  f = gcf();
+  if strcmp (get (0, "defaultfigurevisible"), "on")
+    f = figure(f);
+  endif
+  pos = get (f,'position');
   X = [560 920];
   pos(3) = ifelse (pos(3)==X(2-hz),X(1+hz),pos(3));
-  figure (f,'Name','Window Visualization Tool','position', pos);
+  set (f,'Name','Window Visualization Tool','position', pos);
   clf;
 
   if plots(1)
