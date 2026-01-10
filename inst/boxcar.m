@@ -41,3 +41,5 @@ endfunction
 %!error boxcar (-1)
 %!error boxcar (ones (1, 4))
 %!error boxcar (1, 2)
+
+%!demo wvtool (name='boxcar', window (name,2000));

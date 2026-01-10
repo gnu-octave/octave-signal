@@ -162,8 +162,8 @@ endfunction
 
 %!demo
 %! w=ultrwin(120, -1, 40, "l"); [W,f]=freqz(w); clf
-%! subplot(2,1,1); plot(f/pi, 20*log10(W/abs(W(1)))); grid; axis([0 1 -90 0])
-%! subplot(2,1,2); plot(0:length(w)-1, w); grid
+%! subplot(2,1,1); plot(f/pi, 20*log10(W/abs(W(1)))); grid on; axis([0 1 -90 0])
+%! subplot(2,1,2); plot(0:length(w)-1, w); grid on
 %! %-----------------------------------------------------------
 %! % Figure shows an Ultraspherical window with MU=-1, LATT=40:
 %! % frequency domain above, time domain below.
@@ -173,12 +173,12 @@ endfunction
 %! for beta=2:5
 %!   w=ultrwin(80, -.5, beta); [W,f]=freqz(w);
 %!   plot(f/pi, 20*log10(W/abs(W(1))), c(1+mod(beta, length(c)))); hold on
-%! end; grid; axis([0 1 -140 0]); hold off
+%! end; grid on; axis([0 1 -140 0]); hold off
 %! subplot(2, 1, 2);
 %! for n=2:10
 %!   w=ultrwin(n*20, 1, 3); [W,f]=freqz(w,1,2^11);
 %!   plot(f/pi, 20*log10(W/abs(W(1))), c(1+mod(n, length(c)))); hold on
-%! end; grid; axis([0 .2 -100 0]); hold off
+%! end; grid on; axis([0 .2 -100 0]); hold off
 %! %--------------------------------------------------
 %! % Figure shows transfers of Ultraspherical windows:
 %! % above: varying BETA with fixed N & MU,
@@ -189,12 +189,12 @@ endfunction
 %! for j=0:4
 %!   w=ultrwin(80, j*.6-1.2, 50, "a"); [W,f]=freqz(w);
 %!   plot(f/pi, 20*log10(W/abs(W(1))), c(1+mod(j, length(c)))); hold on
-%! end; grid; axis([0 1 -100 0]); hold off
+%! end; grid on; axis([0 1 -100 0]); hold off
 %! subplot(2, 1, 2);
 %! for j=4:-1:0
 %!   w=ultrwin(80, j*.75-1.5, 50, "l"); [W,f]=freqz(w);
 %!   plot(f/pi, 20*log10(W/abs(W(1))), c(1+mod(j, length(c)))); hold on
-%! end; grid; axis([0 1 -100 0]); hold off
+%! end; grid on; axis([0 1 -100 0]); hold off
 %! %--------------------------------------------------
 %! % Figure shows transfers of Ultraspherical windows:
 %! % above: varying MU with fixed N & ATT,
@@ -205,7 +205,7 @@ endfunction
 %! for k=1:3; switch (k); case 1; w=kaiser(L=159, 7.91);
 %!   case 2; w=ultrwin(L=165, 0, 2.73); case 3; w=ultrwin(L=153, .5, 2.6); end
 %!   subplot(3, 1, 4-k); f=[1:(L-1)/2]*pi;f=sin(fc*f)./f; f=[fliplr(f) fc f]';
-%!   [h,f]=freqz(w.*f,1,2^14); plot(f,20*log10(h)); grid; axis(a,l); l="labely";
+%!   [h,f]=freqz(w.*f,1,2^14); plot(f,20*log10(h)); grid on; axis(a,l); l="labely";
 %! end
 %! %-----------------------------------------------------------
 %! % Figure shows example lowpass filter design (Fp=1, Fs=1.2

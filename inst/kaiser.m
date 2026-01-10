@@ -60,8 +60,8 @@ function w = kaiser (m, beta = 0.5)
 
 endfunction
 
-%!demo
-%! % use demo("kaiserord");
+%!demo wvtool ('kaiser: β = 5.5, 8.2, 10.8', kaiser (m=2000,5.5), kaiser (m,8.2), kaiser (m,10.8));
+%! % See also demo("kaiserord");
 
 %!assert (kaiser (1), 1)
 

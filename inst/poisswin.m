@@ -65,3 +65,4 @@ endfunction
 %!error poisswin (21, {4})
 %!error poisswin (21, 4, 1)
 
+%!demo wvtool ('poisswin: α = 2, 3, 4', poisswin (m=200,2), poisswin (m,3), poisswin (m,4));

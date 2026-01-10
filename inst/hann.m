@@ -63,3 +63,4 @@ endfunction
 %!error hann (-1)
 %!error hann (1, "invalid")
 
+%!demo wvtool (name='hann', window (name,2000));

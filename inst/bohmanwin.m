@@ -51,3 +51,5 @@ endfunction
 %!error bohmanwin (-1)
 %!error bohmanwin (ones (1, 4))
 %!error bohmanwin (1, 2)
+
+%!demo wvtool (name='bohmanwin', window (name,2000));

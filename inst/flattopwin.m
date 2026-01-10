@@ -78,3 +78,4 @@ endfunction
 %!error flattopwin (1, 2, 3)
 %!error flattopwin (1, "invalid")
 
+%!demo wvtool (name='flattopwin', window (name,2000));

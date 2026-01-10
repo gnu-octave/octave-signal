@@ -77,3 +77,4 @@ endfunction
 %!error nuttallwin (1, 2)
 %!error nuttallwin (1, "invalid")
 
+%!demo wvtool (name='nuttallwin', window (name,2000));

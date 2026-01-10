@@ -77,3 +77,4 @@ endfunction
 %!error blackmannuttall (1, 2)
 %!error blackmannuttall (1, "invalid")
 
+%!demo wvtool (name='blackmannuttall', window (name,2000));

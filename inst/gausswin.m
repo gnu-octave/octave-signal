@@ -57,3 +57,5 @@ endfunction
 %!error gausswin (-1)
 %!error gausswin (ones (1, 4))
 %!error gausswin (1, 2, 3)
+
+%!demo wvtool ('gausswin: α = 2.42, 3.16, 3.77', gausswin (m=2000,2.42), gausswin (m,3.16), gausswin (m,3.77));

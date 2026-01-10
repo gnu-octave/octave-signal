@@ -50,3 +50,5 @@ endfunction
 %!error barthannwin (-1)
 %!error barthannwin (ones (1, 4))
 %!error barthannwin (1, 2)
+
+%!demo wvtool (name='barthannwin', window (name,2000));

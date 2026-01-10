@@ -112,3 +112,5 @@ endfunction
 %!error chebwin (-1)
 %!error chebwin (ones (1, 4))
 %!error chebwin (1, 2, 3)
+
+%!demo wvtool ('chebwin: SLL = -60, -80, -100', chebwin (m=2000,60), chebwin(m,80), chebwin(m,100));

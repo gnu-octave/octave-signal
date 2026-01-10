@@ -90,3 +90,4 @@ endfunction
 %!error expwin (21, 4, 1)
 %!error expwin (21, 4, 'canonical', 1)
 
+%!demo wvtool ('expwin: SLL = -40, -60, -80', expwin (m=2000,-40), expwin (m,-60), expwin (m,-80));

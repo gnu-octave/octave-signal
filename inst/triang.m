@@ -52,6 +52,8 @@ endfunction
 %!error triang (ones (1, 4))
 %!error triang (1, 2)
 
+%!demo wvtool (name='triang', window (name,2000));
+
 %!demo
 %! subplot(221);
 %! n=7; k=(n-1)/2; t=[-k:0.1:k]/(k+1);

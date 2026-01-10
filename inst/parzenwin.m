@@ -50,3 +50,5 @@ endfunction
 %!error parzenwin (-1)
 %!error parzenwin (ones (1, 4))
 %!error parzenwin (1, 2)
+
+%!demo wvtool (name='parzenwin', window (name,2000));

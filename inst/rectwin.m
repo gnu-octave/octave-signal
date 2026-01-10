@@ -42,3 +42,5 @@ endfunction
 %!error rectwin (-1)
 %!error rectwin (ones (1, 4))
 %!error rectwin (1, 2)
+
+%!demo wvtool (name='rectwin', window (name,2000));

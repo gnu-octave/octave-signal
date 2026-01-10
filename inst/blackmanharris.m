@@ -76,3 +76,4 @@ endfunction
 %!error blackmanharris (1, 2)
 %!error blackmanharris (1, "invalid")
 
+%!demo wvtool (name='blackmanharris', window (name,2000));

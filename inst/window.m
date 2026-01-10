@@ -41,8 +41,11 @@ endfunction
 %!assert (window (@hamming, 16), window ("hamming", 16))
 %!assert (window (@hanning, 16), window ("hanning", 16))
 %!assert (window (@triang, 16), window ("triang", 16))
+%!assert (window (@gausswin, 16, 2), gausswin (16, 2))
 
 %% Test input validation
 %!error window ()
 %!error window (1)
 %!error window ("hanning")
+
+%!demo wvtool ('window @blackman', window (@blackman, 2000));
