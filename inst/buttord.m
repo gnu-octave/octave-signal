@@ -53,7 +53,7 @@
 ## Theory: For Low pass filters, |H(W)|^2 = 1/[1+(W/Wc)^(2N)] = 10^(-R/10).
 ## With some algebra, you can solve simultaneously for Wc and N given
 ## Ws,Rs and Wp,Rp. Rounding N to the next greater integer, one can recalculate
-## the allowable range for Wc (filter caracteristic touching the pass band edge
+## the allowable range for Wc (filter characteristic touching the pass band edge
 ## or the stop band edge).
 ##
 ## For other types of filter, before making the above calculation, the
@@ -67,7 +67,7 @@ function [n, Wc_p, Wc_s] = buttord (Wp, Ws, Rp, Rs, opt)
   if (nargin < 4 || nargin > 5)
     print_usage ();
   elseif (nargin == 5 && ! strcmp (opt, "s"))
-    error ("ellipord: OPT must be the string \"s\"");
+    error ("buttord: OPT must be the string \"s\"");
   endif
 
   if (nargin == 5 && strcmp (opt, "s"))
