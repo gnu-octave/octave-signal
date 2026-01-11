@@ -57,7 +57,7 @@ function [n, Wc_p, Wc_s] = cheb2ord (Wp, Ws, Rp, Rs, opt)
   if (nargin < 4 || nargin > 5)
     print_usage ();
   elseif (nargin == 5 && ! strcmp (opt, "s"))
-    error ("ellipord: OPT must be the string \"s\"");
+    error ("cheb2ord: OPT must be the string \"s\"");
   endif
 
   if (nargin == 5 && strcmp (opt, "s"))
@@ -140,7 +140,7 @@ function [n, Wc_p, Wc_s] = cheb2ord (Wp, Ws, Rp, Rs, opt)
   pass_atten = 10 ^ (abs (Rp) / 10);
   n = ceil (acosh (sqrt ((stop_atten - 1) / (pass_atten - 1))) / acosh (Wa));
 
-  ## compute stopband frequency limits to make the the filter characteristic
+  ## compute stopband frequency limits to make the filter characteristic
   ## touch either at least one stop band corner or one pass band corner.
 
   epsilon = 1 / sqrt (10 ^ (.1 * abs (Rs)) - 1);
