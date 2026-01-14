@@ -20,7 +20,7 @@
 ## Compute the inverse discrete cosine transform of @var{x}.  If @var{n} is
 ## given, then @var{x} is padded or trimmed to length @var{n} before computing
 ## the transform.  If @var{x} is a matrix, compute the transform along the
-## columns of the the matrix.  The transform is faster if @var{x} is
+## columns of the matrix.  The transform is faster if @var{x} is
 ## real-valued and even length.
 ##
 ## The inverse discrete cosine transform @var{x} can be defined as follows:

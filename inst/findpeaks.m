@@ -74,7 +74,7 @@
 ## @verbatim
 ## a * width^2 = 1
 ## @end verbatim
-## where a is the the concavity of the parabola.
+## where a is the concavity of the parabola.
 ## Default value @code{eps}.
 ##
 ## @item "MaxPeakWidth"

@@ -60,7 +60,7 @@ function [r, p, f, m] = residuez(B, A, tol)
   ##
   ## where R(z) is the parallel one-pole filter bank defined above.
   ## Note, in particular, that the impulse-response of the one-pole
-  ## filter bank is in parallel with that of the the FIR part.  This can
+  ## filter bank is in parallel with that of the FIR part.  This can
   ## be wasteful when matching the initial impulse response is important,
   ## since F(z) can already match the first N terms of the impulse
   ## response. To obtain a decomposition in which the impulse response of

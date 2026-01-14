@@ -36,8 +36,8 @@
 ##
 ## If instead of a function name you supply a pulse shape sampled at
 ## frequency Fs (default 1 Hz),  an interpolated version of the pulse
-## is added at each delay d.  The interpolation stays within the the
-## time range of the delayed pulse.  The interpolation method defaults
+## is added at each delay d.  The interpolation stays within the time
+## range of the delayed pulse.  The interpolation method defaults
 ## to linear, but it can be any interpolation method accepted by the
 ## function interp1.
 ##

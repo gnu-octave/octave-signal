@@ -28,7 +28,7 @@ To install, run the octave package manager:
    
    `pkg install signal-XXXXXXX.tar.gz`
    
-   Where XXXXXXX is the version of the the downloaded tarball.
+   Where XXXXXXX is the version of the downloaded tarball.
 
 Usage:
 ======
