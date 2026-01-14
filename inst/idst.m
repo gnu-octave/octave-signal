@@ -7,7 +7,7 @@
 ## Computes the inverse type I discrete sine transform of @var{y}.  If @var{n} is
 ## given, then @var{y} is padded or trimmed to length @var{n} before computing
 ## the transform.  If @var{y} is a matrix, compute the transform along the
-## columns of the the matrix.
+## columns of the matrix.
 ## @seealso{dst}
 ## @end deftypefn
 

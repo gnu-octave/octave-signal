@@ -68,7 +68,7 @@ function [r, p, f, m] = residued(b, a, toler)
   ## and M is the order of F(z) = length(f)-1 = nb-na.
   ##
   ## Note, in particular, that the impulse-response of the parallel
-  ## (complex) one-pole filter bank starts AFTER that of the the FIR part.
+  ## (complex) one-pole filter bank starts AFTER that of the FIR part.
   ## In the result returned by RESIDUEZ, R(z) is not divided by z^M,
   ## so its impulse response starts at time 0 in parallel with f(n).
   ##
