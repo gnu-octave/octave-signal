@@ -19,7 +19,7 @@
 ## @deftypefnx {Function File} {} tukeywin (@var{m}, @var{r})
 ## Return the filter coefficients of a Tukey window (also known as the
 ## cosine-tapered window) of length @var{m}.  @var{r} defines the ratio
-## between the constant section and and the cosine section.  It has to be
+## between the constant section and the cosine section.  It has to be
 ## between 0 and 1.  The function returns a Hanning window for @var{r}
 ## equal to 1 and a rectangular window for @var{r} equal to 0.
 ## The default value of @var{r} is 1/2.

@@ -63,7 +63,7 @@ function c = xcorr2 (a, b, biasflag = "none")
     b = a;
   endif
   if (ndims (a) != 2 || ndims (b) != 2)
-    error ("xcorr2: input matrices must must have only 2 dimensions");
+    error ("xcorr2: input matrices must have only 2 dimensions");
   endif
 
   ## compute correlation

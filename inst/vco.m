@@ -22,7 +22,7 @@
 ## Inputs:
 ## @itemize
 ## @item
-## @var{x} - input data with a range of -1 to 1. A value of -1 means no output, 0 cuoreesponds to @var{fc},
+## @var{x} - input data with a range of -1 to 1. A value of -1 means no output, 0 corresponds to @var{fc},
 ## and 1 corresponds to 2*@var{fc}.
 ##
 ## @item
@@ -42,7 +42,7 @@
 ## @end itemize
 ## @end deftypefn
 
-function [y,yn] = vco (x, fc = [], fs = [])
+function y = vco (x, fc = [], fs = [])
 
   if (nargin < 1 || nargin > 3)
     print_usage ();
@@ -109,4 +109,3 @@ endfunction
 
 %!error vco
 %!error vco([1 2])
-
