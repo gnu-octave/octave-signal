@@ -318,7 +318,7 @@ endfunction
 %! q = marcumq (a, b);
 %! assert (q, Q, 1e-6);
 
-## The tests for M>1 were generating from Marcum's tables by
+## The tests for M>1 were generated from Marcum's tables by
 ## using the formula
 ##   Q_M(a,b) = Q(a,b) + exp(-(a-b)^2/2)*sum_{k=1}^{M-1}(b/a)^k*exp(-ab)*I_k(ab)
 

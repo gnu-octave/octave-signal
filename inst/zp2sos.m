@@ -43,7 +43,7 @@
 ## @code{@var{B1}.' = [b0 b1 b2] and @var{A1}.' = [a0 a1 a2]} for
 ## section 1, etc.
 ## See @code{filter} for documentation of the second-order direct-form filter
-## coefficients @var{B}i and %@var{A}i, i=1:N.
+## coefficients @var{B}i and @var{A}i, i=1:N.
 ##
 ## @item
 ## @var{g} is the overall gain factor that effectively scales
@@ -188,6 +188,7 @@ function [SOS,G] = zp2sos(z,p,k,DoNotCombineReal)
   else
     G = k;
   endif
+endfunction
 
 %!test
 %! B=[1 0 0 0 0 1]; A=[1 0 0 0 0 .9];

@@ -201,7 +201,7 @@ function [pks idx varargout] = findpeaks (data, varargin)
 
   ## Treat peaks separated less than minD as one
   D  = abs (bsxfun (@minus, idx_s, idx_s.'));
-  D += diag(NA(1,size(D,1)));                # eliminate diagonal cpmparison
+  D += diag(NA(1,size(D,1)));                # eliminate diagonal comparison
   if (any (D(:) < minD))
 
     i          = 1;

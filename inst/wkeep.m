@@ -27,7 +27,7 @@ function y = wkeep(x,l,opt = 'c')
   if(isvector(x))
 
     if(l > length(x))
-      error('l must be or equal the size of x');
+      error('l must be less than or equal to the length of x');
     endif
 
     if(opt=='c')
