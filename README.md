@@ -1,17 +1,22 @@
+GNU Octave Signal Toolkit
+=========================
+
+This is the official repository for the signal package for GNU Octave.
+
 Introduction
-============
+------------
 
 The Signal Toolkit contains signal processing tools, including filtering, windowing and display functions.
 
 Requirements
-============
+------------
 
 * Octave >= 3.8.0
 
 * Control >= 2.4.0
 
 Installing
-==========
+----------
 
 To install, run the octave package manager:
 
@@ -30,8 +35,8 @@ To install, run the octave package manager:
    
    Where XXXXXXX is the version of the downloaded tarball.
 
-Usage:
-======
+Usage
+-----
 
 1. Load the package.
    
@@ -42,11 +47,11 @@ Usage:
 3. Use the function calls from the package.
 
 Documentation
-==============
+-------------
 
 See the function list for [signal](https://gnu-octave.github.io/octave-signal/) for function documentation.
 
 Known limitations and bugs
-==========================
+--------------------------
 
 Please report bugs on the [issue tracker](https://github.com/gnu-octave/octave-signal/issues)
