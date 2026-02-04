@@ -294,7 +294,7 @@ b = firpm (31, [0 0.5 0.7 1], [0 1], \"antisym\");\n\
 @example\n\
 @group\n\
 # Inverse-sinc (arbitrary response):\n\
-b = firpm (20, [0 0.5 0.9 1], @@(n,f,g) ...\n\
+b = firpm (20, [0 0.5 0.9 1], @@(n,f,g,w) ...\n\
     deal ((g<=f(2))./sinc (g), (g>=f(3))*9+1));\n\
 @end group\n\
 @end example\n\
@@ -948,23 +948,26 @@ The b0 values come from a reference implementation.
 %!
 %!demo
 %!
-%! b = firpm (40, [0 .1 .3 1], [-1 1]);
+%! Fn=24; Fc=7; % Nyquist and cut-off frequencies in kHz.
+%! N=[74 128]; width=[1.175 .903];
+%! clf; sp=210; for k=1:2
+%!   F=[0 Fc-width(k) Fc+width(k) Fn]/Fn;
 %!
-%! clf; [h f] = freqz (b,1,2^14); plot (f/pi, 20*log10 (abs (h)))
-%! grid on; axis ([0 1 -60 5]); set (gca, 'xtick', [0:.1:1])
-%! title (sprintf ('firpm type-I notch filter (order=%i)', length (b) - 1));
-%! ylabel ('Magnitude response (dB)'); xlabel ('Frequency (normalized)')
-%! axes ('position', [.42 .55 .45 .2])
-%! plot (f/pi, 20*log10 (abs (h))); grid on
-%! axis ([0 1 -(e=1e-2) e])
-%! title ('Pass-bands detail')
-%! axes ('position', [.42 .2 .45 .2])
-%! stem (b); grid off
-%! title ('Impulse response')
-%! axis ([1 length(b) -.45 .65])
+%!   if (k==2) name='non-'; C=[1 c=-2*cos(pi*Fc/Fn) 1]; b=conv (firpm (N(k)-4, F, ...
+%!     {@(n,f,g,w,fn) deal (1./fn(g),fn(g)), @(x) (2*cos (pi*x)+c).^2}), conv (C,C));
+%!   else name=''; b=firpm (N(k), F, [1 -1]); end
+%!
+%!   [h f] = freqz (b,1,2^13); subplot (++sp);
+%!   plot (x=f/pi*Fn, y=20*log10 (abs (h)), ';×1;', x, y*10^3, ';×10^3;', ...
+%!     'Color',[4 4 4]/7, [t=x(find (y<-3)(1)) t], Y=[-70 14], 'r;3dB corner;');
+%!   title (sprintf (['firpm type-I ' name 'inverting notch filter (order=%i)'], N(k)));
+%!   legend ('location','southeast'); axis (a=[max([Fc-3 0]) min([Fc+5 Fn]) Y]); grid on;
+%!   set (gca, 'xtick', [a(1):.5:a(2)], 'ytick', [a(3):10:a(4)]);
+%!   xlabel ('Frequency (kHz)'); ylabel ('Magnitude response (dB)');
+%! end
 %! %--------------------------------------------------
-%! % Figure shows transfer and impulse-response of
-%! % notch filter design.
+%! % Figure shows transfer function of inverting and
+%! % non-inverting notch filter designs.
 %!
 %!demo
 %!
