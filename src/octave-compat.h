@@ -21,8 +21,21 @@ along with this program; see the file COPYING.  If not, see
 #if ! defined (octave_signal_octave_compat_h)
 #define octave_signal_octave_compat_h
 
-#include <octave/lo-mappers.h>
 #include <octave/version.h>
+
+#if (! defined (OCTAVE_MAJOR_VERSION) || ! defined (OCTAVE_MINOR_VERSION) \
+     || (OCTAVE_MAJOR_VERSION < 11))
+#  include <octave/lo-mappers.h>
+#else
+#  include <octave/mappers.h>
+#endif
+
+#if (! defined (OCTAVE_MAJOR_VERSION) || ! defined (OCTAVE_MINOR_VERSION) \
+     || (OCTAVE_MAJOR_VERSION < 11))
+#  include <octave/lo-specfun.h>
+#else
+#  include <octave/oct-specfun.h>
+#endif
 
 #if (! defined (OCTAVE_MAJOR_VERSION) || ! defined (OCTAVE_MINOR_VERSION) \
      || (OCTAVE_MAJOR_VERSION < 4) \

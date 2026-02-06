@@ -22,7 +22,8 @@ along with this program; see the file COPYING.  If not, see
 #include <cstdlib>
 #include <cstdio>
 #include <octave/oct.h>
-#include <octave/lo-specfun.h>
+
+#include "octave-compat.h"
 
 #if !defined M_PI
 #define M_PI 3.14159265358979323846
