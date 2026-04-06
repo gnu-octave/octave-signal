@@ -133,6 +133,7 @@ Power Spectrum Analysis
   cohere
   cpsd
   csd
+  db
   db2pow
   mscohere
   pburg
