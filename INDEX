@@ -189,11 +189,16 @@ Utility
   buffer
   clustersegment
   fracshift
+  is2rc
+  lar2rc
   marcumq
   primitive
+  rc2is
+  rc2lar
   sampled2continuous
   schtrig
   upsamplefill
   wkeep
   wrev
   zerocrossing
+
