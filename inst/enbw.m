@@ -17,8 +17,17 @@
 ## -*- texinfo -*-
 ## @deftypefn  {Function File} {@var{bw} =} enbw (@var{window})
 ## @deftypefnx {Function File} {@var{bw} =} enbw (@var{window}, @var{fs})
-##
 ## Compute the equivalent noise bandwidth of a window.
+##
+## The equivalent noise bandwidth (ENBW) represents the bandwidth of a
+## rectangular filter that would accumulate the same noise power as the
+## given window.
+##
+## If only @var{window} is specified, the ENBW is returned in bins, which is
+## the normalized bandwidth multiplied by the window length @code{N}.
+##
+## If @var{fs} is provided, the ENBW is returned in the same units as the
+## sampling frequency.
 ##
 ## @end deftypefn
 
