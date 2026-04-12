@@ -150,6 +150,7 @@ Window Functions
   bohmanwin
   boxcar
   chebwin
+  enbw
   expwin
   flattopwin
   gaussian
