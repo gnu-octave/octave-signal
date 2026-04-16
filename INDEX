@@ -32,6 +32,7 @@ Signal Measurement
 Correlation and Convolution
   cconv
   convmtx
+  corrmtx
   wconv
   xcorr
   xcorr2
