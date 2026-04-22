@@ -16,13 +16,30 @@
 
 ## -*- texinfo -*-
 ## @deftypefn {Function File} {@var{y} =} gmonopuls (@var{t},@var{fc})
-## Return the gaussian monopulse.
+## @deftypefnx {Function File} {@var{tc} =} gmonopuls ('cutoff', @var{fc})
+## Return the gaussian monopulse or compute its cutoff time.
 ## @end deftypefn
 
-function y = gmonopuls(t, fc = 1e3)
+function y = gmonopuls (t, fc = 1e3)
 
-  if (nargin<1 || nargin > 2), print_usage; endif
-  if fc < 0 , error("fc must be positive"); endif
+  if (nargin < 1 || nargin > 2)
+    print_usage ();
+  endif
+
+  if (fc < 0)
+    error ("gmonopuls: fc must be positive.");
+  endif
+
+  if (ischar (t))
+    if(!strcmp (t, 'cutoff'))
+      error ("gmonopuls: first argument must be 'cutoff' or a time value vector.");
+    endif
+    ## Second form: gmonopuls('cutoff', fc)
+    ## tc = 1/(pi*fc)
+    y = 1 / (pi * fc);
+    return;
+  endif
+
   y = 2*sqrt(exp(1)) .* pi.*t.*fc.*exp(-2 .* (pi.*t.*fc).^2);
 
 endfunction
