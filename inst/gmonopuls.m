@@ -16,7 +16,7 @@
 
 ## -*- texinfo -*-
 ## @deftypefn {Function File} {@var{y} =} gmonopuls (@var{t},@var{fc})
-## @deftypefnx {Function File} {@var{tc} =} gmonopuls ('cutoff', @var{fc})
+## @deftypefnx {Function File} {@var{tc} =} gmonopuls ("cutoff", @var{fc})
 ## Return the gaussian monopulse or compute its cutoff time.
 ## @end deftypefn
 
@@ -31,10 +31,10 @@ function y = gmonopuls (t, fc = 1e3)
   endif
 
   if (ischar (t))
-    if(!strcmp (t, 'cutoff'))
+    if(!strcmp (t, "cutoff"))
       error ("gmonopuls: first argument must be 'cutoff' or a time value vector.");
     endif
-    ## Second form: gmonopuls('cutoff', fc)
+    ## Second form: gmonopuls("cutoff", fc)
     ## tc = 1/(pi*fc)
     y = 1 / (pi * fc);
     return;
@@ -43,3 +43,26 @@ function y = gmonopuls (t, fc = 1e3)
   y = 2*sqrt(exp(1)) .* pi.*t.*fc.*exp(-2 .* (pi.*t.*fc).^2);
 
 endfunction
+
+%!error <fc must be positive> gmonopuls (1:10, -1)
+%!error <first argument must be 'cutoff' or a time value vector> gmonopuls ("asd", 100)
+
+%!test
+%! fc = 1000;
+%! tc = gmonopuls ("cutoff", fc);
+%! assert (tc, 1/(pi*fc), eps);
+
+%!test
+%! fc = 1000;
+%! sigma = 1/(2*pi*fc);
+%! y_sigma = gmonopuls (sigma, fc);
+%! assert (y_sigma, 1, eps);
+
+%!demo
+%! fc = 1000;
+%! tc = gmonopuls ("cutoff", fc);
+%! t = linspace (-5*tc, 5*tc, 1000);
+%! plot (t, gmonopuls (t, fc));
+%! xlabel ("Time (s)");
+%! ylabel ("Amplitude");
+%! title ("Gaussian Monopulse");
