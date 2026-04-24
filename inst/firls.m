@@ -112,6 +112,7 @@ function coef = firls(N, frequencies, pass, weight, str);
     ## solve for the filter coefficients.
     a = Q \ b;
     coef = [ a(end:-1:2); 2 * a(1); a(2:end) ];
+    coef = coef(:)';
 
   endif
 
