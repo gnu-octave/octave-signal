@@ -18,10 +18,14 @@
 ## @deftypefn  {Function File} {@var{y} =} interp (@var{x}, @var{q})
 ## @deftypefnx {Function File} {@var{y} =} interp (@var{x}, @var{q}, @var{n})
 ## @deftypefnx {Function File} {@var{y} =} interp (@var{x}, @var{q}, @var{n}, @var{Wc})
+## @deftypefnx {Function File} {[@var{y}, @var{b}] =} interp (@dots{}})
 ##
 ## Upsample the signal x by a factor of q, using an order 2*q*n+1 FIR
 ## filter. Note that q must be an integer for this rate change method.
 ## n defaults to 4 and Wc defaults to 0.5.
+##
+## The optional second output @var{b} is the FIR filter coefficients
+## used for interpolation.
 ##
 ## Example
 ## @example
@@ -38,9 +42,10 @@
 ## @seealso{decimate, resample}
 ## @end deftypefn
 
-function y = interp(x, q, n = 4, Wc = 0.5)
-
-  if nargin < 1 || nargin > 4,
+function [y, b] = interp(x, q, n = 4, Wc = 0.5)
+  ## FIXME:this results is differnt from MATLAB's,
+  ## maybe someone can make it compatible.
+  if nargin < 2 || nargin > 4,
     print_usage;
   endif
   if q != fix(q), error("decimate only works with integer q."); endif
@@ -60,9 +65,14 @@ endfunction
 %!demo
 %! ## Generate a signal.
 %! t=0:0.01:2; x=chirp(t,2,.5,10,'quadratic')+sin(2*pi*t*0.4);
-%! y = interp(x(1:4:length(x)),4,4,1);   # interpolate a sub-sample
+%! [y, b] = interp(x(1:4:length(x)),4,4,1);   # interpolate a sub-sample
+%! subplot(2,1,1);
 %! plot(t(1:121)*1000,y(1:121),"r-+;Interpolated;"); hold on;
 %! stem(t(1:4:121)*1000,x(1:4:121),"ob;Original;"); hold off;
+%! subplot(2,1,2);
+%! stem(0:length(b)-1, b);
+%! title("Low-pass Interpolation Filter");
+%! xlabel("Sample index");
 %!
 %! % graph shows interpolated signal following through the
 %! % sample points of the original signal.
