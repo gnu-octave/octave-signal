@@ -59,6 +59,7 @@ function [y, b] = interp(x, q, n = 4, Wc = 0.5)
   b = fir1(2*q*n+1, Wc/q);
   y=q*fftfilt(b, y);
   y(1:q*n+1) = [];  # adjust for zero filter delay
+  b =b(:);
 
 endfunction
 
