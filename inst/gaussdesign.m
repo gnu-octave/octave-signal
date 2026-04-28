@@ -80,9 +80,11 @@ function h = gaussdesign (bt, span = 3, sps = 2)
 endfunction
 
 %!test
-%! h = gaussdesign (0.5);
+%! h = gaussdesign (0.1);
 %! assert (length (h), 3 * 2 + 1);
 %! assert (abs (sum (h) - 1) < 1e-10);
+%! assert (h, [0.0972008, 0.1387605, 0.1718001, 0.1844772, 0.1718001, 0.1387605, 0.0972008], 1e-7);
+
 
 %!error <BT must be positive> gaussdesign (0)
 %!error <BT must be positive> gaussdesign (-1)
