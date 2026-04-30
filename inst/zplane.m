@@ -110,7 +110,7 @@ function plot_with_labels (x, symbol)
   if (! isempty(x))
     colors = get (gca (), "colororder");
     for c = 1:columns (x)
-      color = colors(mod (c, rows (colors)), :);
+      color = colors(mod (c-1, rows (colors))+1, :);
       plot (real (x(:,c)), imag (x(:,c)), "color", color, ...
             "linestyle", "none", "marker", symbol);
 
