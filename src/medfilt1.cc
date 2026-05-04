@@ -340,6 +340,9 @@ to bring them up to size @var{n}.\n\
             error ("medfilt1: N must be a real scalar");
           else
             n = args(1).idx_type_value ();
+
+          if (n < 0)
+            error ("medfilt1: N must be a positive integer");
         }
       else
         error ("medfilt1: Invalid type for N: %s",
