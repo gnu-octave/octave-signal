@@ -104,6 +104,7 @@ FIR Filter Design
   fir1
   fir2
   firls
+  gaussdesign
   kaiserord
   qp_kaiser
   remez
