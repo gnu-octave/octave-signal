@@ -117,7 +117,7 @@
 ##     imagesc(t, f, flipud(log(S(idx,:))));
 ## @end deftypefn
 
-function [S_r, f_r, t_r] = specgram(x, n = min(256, length(x)), Fs = 2, window = hanning(n), overlap = ceil(length(window)/2))
+function [S_r, f_r, t_r] = specgram (x, n, Fs, window, overlap)
 
   if (nargin < 1 || nargin > 5)
     print_usage ();
@@ -128,6 +128,20 @@ function [S_r, f_r, t_r] = specgram(x, n = min(256, length(x)), Fs = 2, window =
   endif
 
   x = x(:);
+
+  ## set default values
+  if (nargin < 2 || isempty (n))
+    n = min (256, length (x));
+  endif
+  if (nargin < 3 || isempty (Fs))
+    Fs = 2;
+  endif
+  if (nargin < 4 || isempty (window))
+    window = hanning (n);
+  endif
+  if (nargin < 5 || isempty (overlap))
+    overlap = ceil (length (window) / 2);
+  endif
 
   ## if only the window length is given, generate hanning window
   if (isscalar (window))
@@ -203,6 +217,16 @@ endfunction
 %!error (isempty(specgram([])));
 %!error (isempty(specgram([1, 2 ; 3, 4])));
 %!error (specgram)
+
+%! ## Test empty [] arguments
+%!test
+%! Fs = 1000;
+%! x = chirp ([0:1/Fs:2], 0, 2, 500);
+%! [S1, f1, t1] = specgram (x, min(256,length(x)), Fs);
+%! [S2, f2, t2] = specgram (x, [], Fs);
+%! assert (S1, S2);
+%! assert (f1, f2);
+%! assert (t1, t2);
 
 %!demo
 %! Fs=1000;
