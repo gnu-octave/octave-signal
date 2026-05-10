@@ -171,6 +171,7 @@ Window Functions
   window
   wvtool
 System Identification
+  ac2poly
   arburg
   aryule
   invfreq
