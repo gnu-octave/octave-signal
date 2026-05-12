@@ -25,7 +25,7 @@
 ##
 ## This function directly calls @code{levinson}.
 ##
-## @seealso{levinson, poly2ac}
+## @seealso{levinson}
 ## @end deftypefn
 
 function [a, e] = ac2poly (r)
@@ -52,3 +52,10 @@ endfunction
 %! [a, e] = ac2poly(r);
 %! assert (a, [1,-2.8281,-1.9687,-0.1875,1.0312,3.6719], 1e-4);
 %! assert (e, 6.8281, 1e-4);
+
+%!test
+%! r = [3, -1, -4, 3, 1, -2];
+%! [a, e] = ac2poly([r', r']);
+%! assert (a(1, :), [1,-2.8281,-1.9687,-0.1875,1.0312,3.6719], 1e-4);
+%! assert (a(2, :), [1,-2.8281,-1.9687,-0.1875,1.0312,3.6719], 1e-4);
+%! assert (e, [6.8281;6.8281], 1e-4);
