@@ -188,6 +188,8 @@ Sample Rate Change
   upsample
 Pulse Metrics
   statelevels
+Plotting
+  strips
 Utility
   buffer
   clustersegment
