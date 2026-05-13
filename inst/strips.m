@@ -82,9 +82,6 @@ function strips (varargin)
     endif
 
     strip_len = ceil (sd * fs);
-    if (strip_len < 1)
-      error ("strips: SD*FS must be at least 1 sample.");
-    endif
 
     if (nargin == 4)
       scale = varargin{4};
