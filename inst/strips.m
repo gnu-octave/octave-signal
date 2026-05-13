@@ -92,6 +92,7 @@ function strips (varargin)
         error ("strips: SCALE must be a numeric scalar.");
       endif
       if (iscomplex (scale))
+        warning ("strips: Complex input detected, using real part only.");
         scale = real (scale);
       endif
     endif
