@@ -14,7 +14,7 @@
 ## along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 ## -*- texinfo -*-
-## @deftypefn {Function File} {@var{levels} =} statelevels (@var{A})
+## @deftypefn  {Function File} {@var{levels} =} statelevels (@var{A})
 ## @deftypefnx {Function File} {@var{levels} =} statelevels (@var{A}, @var{nbins})
 ## @deftypefnx {Function File} {@var{levels} =} statelevels (@var{A}, @var{nbins}, @var{method})
 ## @deftypefnx {Function File} {@var{levels} =} statelevels (@var{A}, @var{nbins}, @var{method}, @var{bounds})
@@ -57,15 +57,19 @@ function varargout = statelevels (A, varargin)
     print_usage()
   endif
 
+ if (isempty (A) || !isvector (A) || !isnumeric (A) || !isreal (A))
+    error ("statelevels: A must be a nonempty real vector.");
+  endif
+
   # Setup arguments based on number of given arguments
   nBins = 100;
   method = 1;
 
   if nargin > 1
-    if !isnumeric (varargin{1})
-      error ('statelevels expects a number for argument 2');
-    endif
     nBins = varargin{1};
+    if (!isnumeric (nBins) || !isscalar (nBins)|| nBins < 1 || nBins != fix (nBins))
+      error ("statelevels: NBINS must be a positive integer.");
+    endif
   endif
  
   if nargin > 2
@@ -218,84 +222,84 @@ endfunction
 
 %!test
 %! l = statelevels(X);
-%! assert(l, [-1.9795 1.9800], 1e5)
+%! assert(l, [-1.9795 1.9800], 1e-4)
 
 %!test
 %! [l, h] = statelevels(X);
-%! assert(l, [-1.9795 1.9800], 1e5)
+%! assert(l, [-1.9795 1.9800], 1e-4)
 %! assert(sum(h), 100)
 %! assert(length(h), 100)
 
 %!test
 %! [l, h, b] = statelevels(X);
-%! assert(l, [-1.9795 1.9800], 1e5)
+%! assert(l, [-1.9795 1.9800], 1e-4)
 %! assert(sum(h), 100)
 %! assert(length(h), 100)
 %! assert(h(1), 4)
 %! assert(h(2), 2)
 %! assert(h(4), 1)
 %! assert(h(11), 0)
-%! assert(b(1), -1.9795, 1e5)
-%! assert(b(2), -1.9395, 1e5)
+%! assert(b(1), -1.9795, 1e-4)
+%! assert(b(2), -1.9395, 1e-4)
 
 %!test
 %! [l, h, b] = statelevels(X, 100);
-%! assert(l, [-1.9795 1.9800], 1e5)
+%! assert(l, [-1.9795 1.9800], 1e-4)
 %! assert(sum(h), 100)
 %! assert(length(h), 100)
 %! assert(h(1), 4)
 %! assert(h(2), 2)
 %! assert(h(4), 1)
 %! assert(h(11), 0)
-%! assert(b(1), -1.9795, 1e5)
-%! assert(b(2), -1.9395, 1e5)
+%! assert(b(1), -1.9795, 1e-4)
+%! assert(b(2), -1.9395, 1e-4)
 
 %!test
 %! [l, h, b] = statelevels(X, 50);
-%! assert(l, [-1.9595 1.9600], 1e5)
+%! assert(l, [-1.9595 1.9600], 1e-4)
 %! assert(sum(h), 100)
 %! assert(length(h), 50)
 %! assert(h(1), 6)
 %! assert(h(2), 3)
 %! assert(h(4), 2)
 %! assert(h(11), 1)
-%! assert(b(1), -1.9595, 1e5)
-%! assert(b(2), -1.8795, 1e5)
+%! assert(b(1), -1.9595, 1e-4)
+%! assert(b(2), -1.8795, 1e-4)
 
 %!test
 %! [l, h, b] = statelevels(X, 100, 'mode');
-%! assert(l, [-1.9795 1.9800], 1e5)
+%! assert(l, [-1.9795 1.9800], 1e-4)
 %! assert(sum(h), 100)
 %! assert(length(h), 100)
 %! assert(h(1), 4)
 %! assert(h(2), 2)
 %! assert(h(4), 1)
 %! assert(h(11), 0)
-%! assert(b(1), -1.9795, 1e5)
-%! assert(b(2), -1.9395, 1e5)
+%! assert(b(1), -1.9795, 1e-4)
+%! assert(b(2), -1.9395, 1e-4)
 
 %!test
 %! [l, h, b] = statelevels(X, 100, 'mean');
-%! assert(l, [-1.0090 0.9532], 1e5)
+%! assert(l, [-1.0090 0.9532], 1e-4)
 %! assert(sum(h), 100)
 %! assert(length(h), 100)
 %! assert(h(1), 4)
 %! assert(h(2), 2)
 %! assert(h(4), 1)
 %! assert(h(11), 0)
-%! assert(b(1), -1.9795, 1e5)
-%! assert(b(2), -1.9395, 1e5)
+%! assert(b(1), -1.9795, 1e-4)
+%! assert(b(2), -1.9395, 1e-4)
 
 %!test
 %! [l, h, b] = statelevels(X, 100, 'mode', [-1.8 1.0]);
-%! assert(l, [-1.7860 0.0060], 1e5)
+%! assert(l, [-1.7860 0.0060], 1e-4)
 %! assert(sum(h), 64)
 %! assert(length(h), 100)
 %! assert(h(1), 1)
 %! assert(h(2), 1)
 %! assert(h(3), 0)
-%! assert(b(1), -1.7860, 1e5)
-%! assert(b(2), -1.7580, 1e5)
+%! assert(b(1), -1.7860, 1e-4)
+%! assert(b(2), -1.7580, 1e-4)
 
 %!demo
 %! # Generate test signal
