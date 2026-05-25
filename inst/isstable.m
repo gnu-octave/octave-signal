@@ -15,7 +15,8 @@
 ## this program; if not, see <http://www.gnu.org/licenses/>.
 
 ## -*- texinfo -*-
-## @deftypefn {Function File} {@var{FLAG} =} isstable (@var{B}, @var{A})
+## @deftypefn  {Function File} {@var{FLAG} =} isstable (@var{B}, @var{A})
+## @deftypefnx {Function File} {@var{FLAG} =} isstable (@var{sos})
 ## Returns a logical output equal to TRUE, if the filter is stable.
 ## This can be done with coeffients of the filer @var{B} and @var{A}.
 ## Alternatively by using a second order sections matrix (SOS).
@@ -78,7 +79,7 @@ function flag = isstable (b, varargin)
       a = a ./ a(1);
     endif
     r = roots (a);
-    if any (abs (r) > 1)
+    if any (abs (r) >= 1)
       flag = false;
     else
       flag = true;
@@ -107,3 +108,8 @@ endfunction
 %! [z,p,g] = butter(6,0.7,'high');
 %! sos = zp2sos(z,p,g);
 %! assert (isstable(sos) , true)
+
+%!test
+%! b = [1 -0.5];
+%! a = [1 -1];
+%! assert (isstable (b,a), false)
