@@ -46,7 +46,7 @@
 ## Normalized FIR filter coefficients.
 ## @end table
 ##
-## @seealso{gaussian}
+## @seealso{gaussian, rcosdesign}
 ## @end deftypefn
 
 function h = gaussdesign (bt, span = 3, sps = 2)
