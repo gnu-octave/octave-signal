@@ -70,7 +70,9 @@ MT upfirdn (MT &x, ColumnVector &h, octave_idx_type p, octave_idx_type q)
 
 DEFUN_DLD (upfirdn, args,,
   "-*- texinfo -*-\n\
-@deftypefn {Loadable Function} {@var{y} =} upfirdn (@var{x}, @var{h}, @var{p}, @var{q})\n\
+@deftypefn  {Loadable Function} {@var{y} =} upfirdn (@var{x}, @var{h})\n\
+@deftypefnx {Loadable Function} {@var{y} =} upfirdn (@var{x}, @var{h}, @var{p})\n\
+@deftypefnx {Loadable Function} {@var{y} =} upfirdn (@var{x}, @var{h}, @var{p}, @var{q})\n\
 Upsample, FIR filtering, and downsample.\n\
 @end deftypefn\n")
 {
@@ -78,15 +80,20 @@ Upsample, FIR filtering, and downsample.\n\
 
   const int nargin = args.length ();
 
-  if (nargin != 4)
+  if (nargin < 2 || nargin > 4)
     {
       print_usage ();
       return retval;
     }
 
   ColumnVector h (args (1).vector_value ());
-  octave_idx_type p = args (2).idx_type_value ();
-  octave_idx_type q = args (3).idx_type_value ();
+  octave_idx_type p = 1;
+  octave_idx_type q = 1;
+
+  if (nargin >= 3)
+    p = args (2).idx_type_value ();
+  if (nargin >= 4)
+    q = args (3).idx_type_value ();
 
   // Do the dispatching
   if (octave::signal::isreal (args (0)))
@@ -113,10 +120,10 @@ Upsample, FIR filtering, and downsample.\n\
 /*
 %!assert (isequal (upfirdn (1:100, 1, 1, 1), 1:100))
 %!assert (isequal (upfirdn (1:100, 1, 1, 2), 1:2:100))
+%!assert (isequal (upfirdn (1:100, 1), 1:100))
 
 %% Test input validation
 %!error upfirdn ()
-%!error upfirdn (1,2)
-%!error upfirdn (1,2,3)
+%!error upfirdn (1)
 %!error upfirdn (1,2,3,4,5)
 */
