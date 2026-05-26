@@ -266,7 +266,7 @@ function [pks idx varargout] = findpeaks (data, varargin)
            ceil (min(idx(i)+minD/2,np))).';
     pp      = zeros (1,3);
     # If current peak is not local maxima, then fit parabola to neighbor
-    if any (data(idx(i)-1) == data(idx(i)))
+    if idx(i) > 1 && any (data(idx(i)-1) == data(idx(i)))
       # sample on left same as peak
       xm    = 0;
       pp    = ones (1,3);
@@ -414,3 +414,10 @@ endfunction
 %! assert (numel (pks), numel (x0))
 %! assert (pks, ex.height);
 %! assert (loc(:), mean (ex.roots, 2));
+
+%!test
+%! # Test for bug #26 accessing idx 0 when first peak at start
+%! x = [10 10 5 2 2 1 9 1];
+%! [pks, loc] = findpeaks(x);
+%! assert (loc, [1 7]);
+%! assert (pks, [10 9]);
