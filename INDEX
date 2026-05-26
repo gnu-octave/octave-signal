@@ -107,6 +107,7 @@ FIR Filter Design
   gaussdesign
   kaiserord
   qp_kaiser
+  rcosdesign
   remez
   sgolay
 Transforms
