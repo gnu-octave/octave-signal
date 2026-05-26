@@ -19,6 +19,7 @@
 ## -*- texinfo -*-
 ## @deftypefn  {Function File} {} zplane (@var{z}, @var{p})
 ## @deftypefnx {Function File} {} zplane (@var{b}, @var{a})
+## @deftypefnx {Function File} {[hz, hp, ht] =} zplane (___)
 ## Plot the poles and zeros on a complex plane.  If the arguments are column
 ## vectors @var{z} and @var{p}, the complex zeros @var{z} and poles @var{p}
 ## are displayed. If the arguments are row vectors @var{b} and @var{a}, the
@@ -48,6 +49,10 @@
 ##
 ## If called with only one argument, the poles @var{p} defaults to an empty
 ## vector, and the denominator coefficient vector @var{a} defaults to 1.
+##
+## If output variables are provided, hz is the handle to the zero lines, hp is the handle to the pole lines
+## of the pole-zero plot. ht is a vector of handles to the axes/unit circle line and to text objects.
+## If there are no zeros or no poles, hz or hp is the empty matrix, [].
 ## @end deftypefn
 
 ## FIXME: Consider a plot-like interface:
@@ -56,7 +61,7 @@
 ##        legends and control over point color and filters of
 ##        different orders.
 
-function zplane(z, p = [])
+function [hz_out, hp_out, ht_out] = zplane(z, p = [])
 
   if (nargin < 1 || nargin > 2)
     print_usage;
@@ -90,28 +95,47 @@ function zplane(z, p = [])
   ymax = ymax + yfluff;
 
   r = exp (2i * pi * [0:100] / 100);
-  plot (real (r), imag (r), "k", 'HandleVisibility','off');
+
+  if (nargout > 0)
+    hz_out = [];
+    hp_out = [];
+    ht_out = [];
+  endif
+
+  htp = plot (real (r), imag (r), "k", 'HandleVisibility','off');
   axis equal;
   grid on;
   axis (1.05 * [xmin, xmax, ymin, ymax]);
 
   hold on;
-  plot_with_labels (z, "o");
-  plot_with_labels (p, "x");
+  [hz, htz] = plot_with_labels (z, "o");
+  [hp, htp] = plot_with_labels (p, "x");
   hold off;
-  xlabel ("Real Part");
-  ylabel ("Imaginary Part");
-  title ("Pole-Zero Plot");
+  hxl = xlabel ("Real Part");
+  hyl = ylabel ("Imaginary Part");
+  htt = title ("Pole-Zero Plot");
+
+ if (nargout > 0)
+   hz_out = hz;
+   hp_out = hp;
+ endif
+ if (nargout > 2)
+    # return all the handles
+    ht_out = [htp; hxl; hyl; htt; htz(:); htp(:)];
+  endif
 
 endfunction
 
-function plot_with_labels (x, symbol)
+function [hplot, htext] = plot_with_labels (x, symbol)
+
+  hplot = [];
+  htext = [];
 
   if (! isempty(x))
     colors = get (gca (), "colororder");
     for c = 1:columns (x)
       color = colors(mod (c-1, rows (colors))+1, :);
-      plot (real (x(:,c)), imag (x(:,c)), "color", color, ...
+      hplot(end+1,1) = plot (real (x(:,c)), imag (x(:,c)), "color", color, ...
             "linestyle", "none", "marker", symbol);
 
       x_u = unique (x(:,c));
@@ -119,7 +143,7 @@ function plot_with_labels (x, symbol)
         n = sum (abs(x_u(i) - x(:,c)) < eps);
         if (n > 1)
           label = sprintf ("  %d", n);
-          text (real (x_u(i)), imag (x_u(i)), label, "color", color);
+          htext(end+1,1) = text (real (x_u(i)), imag (x_u(i)), label, "color", color);
         endif
       endfor
     endfor
@@ -172,3 +196,29 @@ endfunction
 %! subplot (2, 3, 5);
 %! zplane ([z, 0.7*z], [p, 0.7*p]);
 %! title ("Matrix of zeros and poles");
+
+%!error zplane()
+%!error zplane([1], [2], [3])
+
+%!test
+%! hf = figure ("visible", "off");
+%! unwind_protect
+%!   [z,p,k] = ellip(4,3,30,200/500);
+%!   [hz, hp, ht] = zplane (z, p);
+%!   assert (all (ishghandle (hz)));
+%!   assert (all (ishghandle (hp)));
+%!   assert (all (ishghandle (ht)));
+%! unwind_protect_cleanup
+%!   close (hf);
+%! end_unwind_protect
+
+%!test
+%! hf = figure ("visible", "off");
+%! unwind_protect
+%!   [hz, hp, ht] = zplane ([1; 1], []);
+%!   assert (numel (hz), 1);
+%!   assert (isempty (hp));
+%!   assert (! isempty (ht));
+%! unwind_protect_cleanup
+%!   close (hf);
+%! end_unwind_protect
