@@ -74,6 +74,32 @@ DEFUN_DLD (upfirdn, args,,
 @deftypefnx {Loadable Function} {@var{y} =} upfirdn (@var{x}, @var{h}, @var{p})\n\
 @deftypefnx {Loadable Function} {@var{y} =} upfirdn (@var{x}, @var{h}, @var{p}, @var{q})\n\
 Upsample, FIR filtering, and downsample.\n\
+\n\
+@var{x} is the input and @var{y} is the output. The function performs three operations:\n\
+@enumerate\n\
+@item Upsample the input @var{x} by a factor of @var{p} (insert zeros).\n\
+@item FIR filter the upsampled signal with the impulse response @var{h}.\n\
+@item Downsample the result by a factor of @var{q} (keep every @var{q}-th sample).\n\
+@end enumerate\n\
+\n\
+Other input parameters:\n\
+\n\
+@table @var\n\
+@item h\n\
+FIR filter impulse response, specified as a vector.  The filter is applied\n\
+after upsampling and before downsampling.\n\
+\n\
+@item p\n\
+Upsampling factor, should be a positive integer.  @code{@var{p} = 1}\n\
+means no upsampling.  Default: 1.\n\
+\n\
+@item q\n\
+Downsampling factor, should be a positive integer.  @code{@var{q} = 1}\n\
+means no downsampling.  Default: 1.\n\
+@end table\n\
+\n\
+The FIR filter @var{h} should typically be a lowpass filter designed to\n\
+suppress imaging artifacts (for upsampling) and aliasing (for downsampling).\n\
 @end deftypefn\n")
 {
   octave_value_list retval;
