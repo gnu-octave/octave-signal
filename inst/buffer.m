@@ -38,7 +38,7 @@
 ## @var{opt} is the string 'nodelay', then the first value of @var{y}
 ## corresponds to the first value of @var{x}.
 ##
-## In the can of an underlap, @var{opt} must be an integer between 0 and
+## In the case of an underlap, @var{opt} must be an integer between 0 and
 ## @code{-@var{p}}. The represents the initial underlap of the first
 ## column of @var{y}.
 ##
@@ -102,33 +102,15 @@ function [y, z, opt] = buffer (x, n, p, opt)
   elseif (p > 0)
     if (ischar (opt))
       if (strcmp (opt, "nodelay"))
-        y = [y ; zeros(p, m)];
-        if (p > n / 2)
-          is = n - p + 1;
-          in = n - p;
-          ie = is + in - 1;
-          off = 1;
-          while (in > 0)
-            y (is : ie, 1 : end - off) = y (1 : in, 1 + off : end);
-            off++;
-            is = ie + 1;
-            ie = ie + in;
-            if (ie > n)
-              ie = n;
-            endif
-            in = ie - is + 1;
-          endwhile
-          [i, j] = ind2sub([n-p, m], l);
-          if (all ([i, j] == [n-p, m]))
-            off--;
-          endif
-          y (:, end - off + 2 : end) = [];
-        else
-          y (end - p + 1 : end, 1 : end - 1) = y (1 : p, 2 : end);
-          if (sub2ind([n-p, m], p, m) >= l)
-            y (:, end) = [];
-          endif
-        endif
+        m = ceil ((l - p) / (n - p));
+        y = zeros (n, m);
+
+        idx = 1;
+        for k = 1:m
+          last = min (idx + n - 1, l);
+          y (1:last-idx+1, k) = x(idx:last);
+          idx += (n - p);
+        endfor
       else
         error ("buffer: unexpected string argument");
       endif
@@ -219,7 +201,7 @@ endfunction
 %!error (buffer(1:10, 4, 1, 'badstring'))
 %!assert (buffer(1:10, 4, 2,'nodelay'), reshape ([1:4,3:6,5:8,7:10],[4,4]))
 %!assert (buffer(1:10, 4, 3, [11,12,13]),[11,12,13,1:7;12,13,1:8;13,1:9;1:10])
-%!assert (buffer(1:10, 4, 3, 'nodelay'),[1:8;2:9;3:10;4:10,0])
+%!assert (buffer(1:10, 4, 3, 'nodelay'),[1:7;2:8;3:9;4:10])
 %!assert (buffer(1:11,4,-2,1),reshape([2:5,8:11],4,2))
 
 %!test
