@@ -43,7 +43,8 @@
 ## @var{signaltype} is @qcode{"voltage"} (default) or @qcode{"power"}.
 ##
 ## @item db(@var{x}, @var{R})
-## Voltage conversion with resistance @var{R}.
+## Voltage conversion with resistance @var{R}.  @var{R} can be a scalar,
+## vector, matrix, or N-D array with a size compatible with @var{x}.
 ##
 ## @item db(@var{x}, "voltage", @var{R})
 ## Same as @code{db(@var{x}, @var{R})}.
@@ -78,8 +79,6 @@ function dbout = db (x, varargin)
         R = varargin{2};
       endif
     elseif (isnumeric (arg))
-      ## Second argument is resistance R, which should be a positive scalar in doc.
-      ## But matlab don't check(2024b), it allows R to be a vector or matrix.
       signaltype = "voltage";
       R = arg;
       if (nargin == 3)
@@ -97,6 +96,9 @@ function dbout = db (x, varargin)
     endif
     dbout = 10 * log10 (x);
   else
+    if (any (R(:) <= 0))
+      error ('db: all elements of R must be positive.');
+    endif
     dbout = 10 * log10 (abs (x).^2 ./ R);
   endif
 
@@ -128,7 +130,18 @@ endfunction
 %! expected_power = 10*log10(A);
 %! assert (db(A, "power"), expected_power, eps);
 
+%!test
+%! ## R can be an array with compatible size
+%! V = [3.7; 7.4; 18.5; 37];
+%! R = [10, 50, 75];
+%! PdB = db(V, R);
+%! assert (size (PdB), [4, 3]);
+%! assert (PdB(:,1), 10*log10(V.^2/10), eps);
+%! assert (PdB(:,2), 10*log10(V.^2/50), eps);
+%! assert (PdB(:,3), 10*log10(V.^2/75), eps);
+
 %!error db(1, "invalid")
 %!error db(-1, "power")
 %!error db(1, 2, 3)
 %!error db(1, 2, "voltage")
+%!error db(1, -1)
