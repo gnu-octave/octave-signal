@@ -418,3 +418,10 @@ endfunction
 %! [pks, loc] = findpeaks(x);
 %! assert (loc, [1 7]);
 %! assert (pks, [10 9]);
+
+%!test
+%! % test whether doublesided option is needed for data with samples smaller then zero.
+%! fs=1000; f0=5; y=sin([0:fs]/fs*f0*2*pi);
+%! [pks, loc] = findpeaks(y);
+%! assert (loc, [51:200:851]);
+%! assert (pks, [1 1 1 1 1]);
