@@ -20,8 +20,12 @@ function y = downsample (x, n, phase = 0)
 
   if nargin<2 || nargin>3, print_usage; endif
 
-  if phase > n - 1
-    warning("This is incompatible with Matlab (phase = 0:n-1). See octave-forge signal package release notes for details.")
+  if (!isscalar (n) || fix (n) != n || n < 1)
+    error ("downsample: N must be a positive integer.");
+  endif
+
+  if (!isscalar (phase) || fix (phase) != phase || phase < 0 || phase > n-1)
+    warning ("downsample: PHASE should be an integer in the range [0, N-1].");
   endif
 
   if isvector(x)
