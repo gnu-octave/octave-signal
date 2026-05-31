@@ -33,6 +33,10 @@ function [zero, pole, gain] = besselap (n)
   if (!(length(n)==1 && n == round(n) && n > 0))
     error ("besselap: filter order n must be a positive integer");
   endif
+  if n > 25
+    warning("besselap: n>25 may give inaccurate poles");
+  endif
+
 
   p0=1;
   p1=[1 1];
