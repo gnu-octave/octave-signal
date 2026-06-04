@@ -89,11 +89,7 @@ function y = vco (x, fc = [], fs = [])
     fc = (fmin + fmax) / 2;
     kf = (fmax - fmin) / 2 / fs * 2 * pi;
   elseif (isscalar (fc))
-    if x_max == 0
-      kf = 0;
-    else
-      kf = (fc / fs) * 2 * pi;
-    endif
+    kf = (fc / fs) * 2 * pi;
   else
     error ("vco: FC must be a scalar");
   endif
