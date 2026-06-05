@@ -177,9 +177,6 @@ function [pks idx varargout] = findpeaks (data, varargin)
 
   if (dSided)
     [data, __data__] = deal (__data__, data);
-  elseif (min (data) < 0)
-    error ("findpeaks:InvalidArgument",
-           'Data contains negative values. You may want to "DoubleSided" option');
   endif
 
   ## Rough estimates of first and second derivative
@@ -421,3 +418,10 @@ endfunction
 %! [pks, loc] = findpeaks(x);
 %! assert (loc, [1 7]);
 %! assert (pks, [10 9]);
+
+%!test
+%! % test whether doublesided option is needed for data with samples smaller then zero.
+%! fs=1000; f0=5; y=sin([0:fs]/fs*f0*2*pi);
+%! [pks, loc] = findpeaks(y);
+%! assert (loc, [51:200:851]);
+%! assert (pks, [1 1 1 1 1]);
