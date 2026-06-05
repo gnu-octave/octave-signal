@@ -52,15 +52,12 @@ function y = vco (x, fc = [], fs = [])
   ## default FC depends on value of FS and empty arguments may be
   ## used to request default values.
 
-  if (isvector (x) && rows (x) == 1)
+  isrowvec = isrow (x);
+  if isrowvec
     x = x(:);
   endif
 
-  if (any (x(:) > 1 | x(:) < -1))
-    error ("vco: values in X must be in the range [-1, 1]");
-  endif
-
-  if (isempty  (fs))
+  if (isempty (fs))
     fs = 1;
   endif
 
@@ -68,7 +65,11 @@ function y = vco (x, fc = [], fs = [])
     fc = fs / 4;
   endif
 
+  ## x_max is the maximum absolute value in x
   x_max = max (max (abs (x)));
+  if (x_max > 1)
+    error ("vco: values in X must be in the range [-1, 1]");
+  endif
 
   if (numel (fc) == 2)
     fmin = fc(1);
@@ -86,9 +87,9 @@ function y = vco (x, fc = [], fs = [])
     ## the proper value for fc and the proper deviation (+/-) from
     ## that value.
     fc = (fmin + fmax) / 2;
-    kf = (fmax - fmin) / 2 / fs * 2 * pi / x_max;
+    kf = (fmax - fmin) / 2 / fs * 2 * pi;
   elseif (isscalar (fc))
-    kf = (fc / fs) * 2 * pi / x_max;
+    kf = (fc / fs) * 2 * pi;
   else
     error ("vco: FC must be a scalar");
   endif
@@ -102,10 +103,20 @@ function y = vco (x, fc = [], fs = [])
   len = rows (x);
   t = (0 : (1/fs) : ((len-1)/fs))';
 
-  ## Use modulate instead?
+  ## equal to modulate (x, fc, fs, "fm", kf)
   y = cos (2*pi*fc*t + kf*cumsum (x));
+  if (isrowvec)
+    y = y.';
+  endif
 
 endfunction
 
-%!error vco
+%!error vco()
 %!error vco([1 2])
+
+%!test
+%! x = [0, 0.5, 0.8, -0.2];
+%! y1 = vco (x, 10, 100);
+%! y2 = vco (x, [5, 15], 100);
+%! assert (y1, [1.0000, 0.5878, -0.4818, -0.8443], 1e-4);
+%! assert (y2, [1.0000, 0.7071, -0.0941, -0.6129], 1e-4);
