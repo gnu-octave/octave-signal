@@ -186,14 +186,21 @@ function varargout = statelevels (A, varargin)
     f = figure();
     subplot (2, 1, 1);
     plot(A)
+    hold on;
+    colors = get(gca, 'ColorOrder');
+    ## get the second color for plotting the levels
+    secondColor = colors(2, :); 
+    plot([1, length(A)], [S1, S1], '-.', 'Color', secondColor);
+    plot([1, length(A)], [S2, S2], '-.', 'Color', secondColor);
+    hold off;
     title('Signal');
     xlabel('Samples');
-    ylabel('Level');
+    ylabel('Level(Volts)');
 
     subplot (2, 1, 2);
     plot(histVec, histogram);
     title(sprintf('Histogram of signal levels (%d bins)', nBins));
-    xlabel('Level');
+    xlabel('Level(Volts)');
     ylabel('Count');
   endif
 
