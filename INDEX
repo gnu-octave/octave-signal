@@ -96,6 +96,10 @@ IIR Filter Design
   invimpinvar
   firpm
   firpmord
+  lp2bp
+  lp2bs
+  lp2hp
+  lp2lp
   ncauer
   pei_tseng_notch
   sftrans
