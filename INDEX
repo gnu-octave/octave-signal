@@ -48,6 +48,7 @@ Filter Analysis
   filternorm
   filtord
   freqs
+  freqspace
   freqs_plot
   fwhm
   grpdelay
