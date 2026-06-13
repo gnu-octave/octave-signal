@@ -18,13 +18,28 @@
 ## @deftypefn  {Function File} {[@var{bt}, @var{at}] =} lp2bp (@var{b}, @var{a}, @var{Wo}, @var{Bw})
 ## @deftypefnx {Function File} {[@var{At}, @var{Bt}, @var{Ct}, @var{Dt}] =} lp2bp (@var{A}, @var{B}, @var{C}, @var{D}, @var{Wo}, @var{Bw})
 ##
-## [bt, at] = lp2bp(b, a, Wo, Bw) transforms an analog lowpass filter in transfer
-## function form to an analog bandpass filter with center frequency Wo and 
-## bandwidth Bw.
+## Transform an analog lowpass filter prototype to a bandpass filter with a
+## given center frequency and bandwidth.
 ##
-## [At,Bt,Ct,Dt] = lp2bp(A, B, C, D, Wo, Bw)  transforms an analog lowpass filter in state
-## space form to an analog bandpass filter with center frequency Wo and 
-## bandwidth Bw.
+## Two calling forms are available:
+##
+## @table @asis
+## @item Transfer function form
+## [bt, at] = lp2bp (b, a, Wo, Bw)
+##
+## Given a lowpass filter with numerator coefficients @var{b} and denominator
+## coefficients @var{a}, returns the bandpass filter coefficients @var{bt}
+## and @var{at} with center frequency @var{Wo} and bandwidth @var{Bw}
+## (both in rad/s).
+##
+## @item State-space form
+## [At, Bt, Ct, Dt] = lp2bp (A, B, C, D, Wo, Bw)
+##
+## Given a lowpass filter in state-space form (@var{A}, @var{B}, @var{C},
+## @var{D}), returns the transformed state-space matrices (@var{At}, @var{Bt},
+## @var{Ct}, @var{Dt}) for the bandpass filter with center frequency @var{Wo}
+## and bandwidth @var{Bw} (both in rad/s).
+## @end table
 ##
 ## @seealso{lp2lp, lp2hp, lp2bs}
 ## @end deftypefn

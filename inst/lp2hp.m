@@ -18,11 +18,28 @@
 ## @deftypefn  {Function File} {[@var{bt}, @var{at}] =} lp2hp (@var{b}, @var{a}, @var{Wo})
 ## @deftypefnx {Function File} {[@var{At}, @var{Bt}, @var{Ct}, @var{Dt}] =} lp2hp (@var{A}, @var{B}, @var{C}, @var{D}, @var{Wo})
 ##
-## [bt, at] = lp2hp(b, a, Wo) transforms an analog lowpass filter in transfer
-## function form to an analog highpass filter with a different cutoff frequency (Wo).
+## Transform an analog lowpass filter prototype to a highpass filter with a
+## given cutoff frequency.
 ##
-## [At,Bt,Ct,Dt] = lp2hp(A, B, C, D, Wo) transforms an analog lowpass filter in state
-## space form to an analog highpass filter with a different cutoff frequency (Wo).
+## Two calling forms are available:
+##
+## @table @asis
+## @item Transfer function form
+## [bt, at] = lp2hp (b, a, Wo)
+##
+## Given a lowpass filter with numerator coefficients @var{b} and denominator
+## coefficients @var{a}, returns the highpass filter coefficients @var{bt}
+## and @var{at} with cutoff frequency @var{Wo} (in rad/s).
+##
+## @item State-space form
+## [At, Bt, Ct, Dt] = lp2hp (A, B, C, D, Wo)
+##
+## Given a lowpass filter in state-space form (@var{A}, @var{B}, @var{C},
+## @var{D}), returns the transformed state-space matrices (@var{At}, @var{Bt},
+## @var{Ct}, @var{Dt}) for the highpass filter with cutoff frequency @var{Wo}
+## (in rad/s).
+## @end table
+##
 ## @seealso{lp2lp, lp2bp, lp2bs}
 ## @end deftypefn
 
