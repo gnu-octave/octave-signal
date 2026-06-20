@@ -60,6 +60,7 @@ Filter Analysis
   phasez
   zplane
 Filter Conversion
+  cell2sos
   polystab
   residued
   residuez
