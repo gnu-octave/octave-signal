@@ -23,6 +23,36 @@
 ## return the equivalent matrix @var{sos} and an optional overall
 ## gain @var{g}.
 ##
+## A valid @var{cll} input is a cell array of 2-element cell arrays.
+## Each element consists of a numerator vector @code{[b0, b1, b2]} and a
+## denominator vector @code{[1, a1, a2]}.  If the first element contains
+## two scalars @code{@{gn, gd@}}, it is treated as an overall gain.
+##
+## Examples:
+##
+## @example
+## @group
+## ## Two sections, no gain:
+## cll = @{@{[2 4 2] [6 0 2]@}, @{[3 3 0] [6 0 0]@}@};
+## sos = cell2sos (cll)
+##   @result{} sos =
+##       2   4   2   6   0   2
+##       3   3   0   6   0   0
+## @end group
+## @end example
+##
+## @example
+## @group
+## ## With gain:
+## cll = @{@{7 5@}, @{[2 4 2] [6 0 2]@}, @{[3 3 0] [6 0 0]@}@};
+## [sos, g] = cell2sos (cll)
+##   @result{} sos =
+##       2   4   2   6   0   2
+##       3   3   0   6   0   0
+##   @result{} g = 1.4000
+## @end group
+## @end example
+##
 ## @seealso{sos2cell}
 ## @end deftypefn
 
