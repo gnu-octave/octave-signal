@@ -53,6 +53,7 @@ Filter Analysis
   fwhm
   grpdelay
   impz
+  impzlength
   isallpass
   ismaxphase
   isminphase
