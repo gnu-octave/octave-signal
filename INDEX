@@ -59,6 +59,7 @@ Filter Analysis
   isminphase
   isstable
   phasez
+  stepz
   zplane
 Filter Conversion
   cell2sos
