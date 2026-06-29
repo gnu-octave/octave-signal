@@ -137,7 +137,7 @@ static void poly2(
 
 static double poly2Val(double a, double b, double c, double x)
 {
-  return (a*x + b)*x + c;
+  return fma(fma(a, x, b), x, c);
 }
 
 
@@ -663,7 +663,7 @@ MmfirReport mmfir(
 
   { // Generate filter coefficients:
     double * a = (double *)prevPeaks; // Reuse, as it's no longer in use.
-    double _1 = T>TypeII? -1:1, phi = (T<TypeIII)*.5, s;
+    double _1 = T>TypeII? -1:1, phi = (T<TypeIII)*.5;
 
     // Sample the final estimated response; modify for filter type:
     #ifdef _OPENMP
@@ -681,6 +681,8 @@ MmfirReport mmfir(
     #pragma omp parallel for
     #endif
     for (i=0; i <(N+1)/2; ++i) {
+      double s;
+      int j;
       for (s=*a*.5, j=1; j <= N/2; s += sin(PI*((N-1-2.*i)/N*j+phi))*a[j], ++j);
       h[i] = _1*(h[N-1-i] = 2*s/N);
     }
