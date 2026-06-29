@@ -53,11 +53,13 @@ Filter Analysis
   fwhm
   grpdelay
   impz
+  impzlength
   isallpass
   ismaxphase
   isminphase
   isstable
   phasez
+  stepz
   zplane
 Filter Conversion
   cell2sos
