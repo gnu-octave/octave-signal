@@ -91,3 +91,17 @@ function freqs_plot(w, h, freqscale)
   endswitch
 
 endfunction
+
+%!demo
+%! B = [1];
+%! A = [1, sqrt(2), 1];
+%! w = logspace (-2, 2, 200);
+%! H = freqs (B, A, w);
+%! freqs_plot (w, H);
+
+%!demo
+%! B = [1];
+%! A = [1, 0.2, 1];
+%! w = linspace (0, 3, 200);
+%! H = freqs (B, A, w);
+%! freqs_plot (w, H, "linear");

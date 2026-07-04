@@ -98,6 +98,25 @@ endfunction
 %! A = [1 3 2];
 %! freqs (B, A);
 
+%!test
+%! ## Test frequency response of H(s) = 1/(s+1) at known frequencies
+%! B = [1];
+%! A = [1 1];
+%! w = logspace (-1, 1, 10);
+%! H = freqs (B, A, w);
+%! ## H(jw) = 1/(jw+1)
+%! H_expected = 1 ./ (1 + 1j * w);
+%! assert (H, H_expected, 1e-10);
+
+%!test
+%! ## Test with two outputs (H and Wout)
+%! B = [1 0];
+%! A = [1 2 1];
+%! w = logspace (-1, 2, 100);
+%! [H, Wout] = freqs (B, A, w);
+%! assert (H, polyval (B, 1j * w) ./ polyval (A, 1j * w), 1e-10);
+%! assert (Wout, w);
+
 %!error <positive integer> freqs ([1], [1 1], 2.5)
 %!error <positive integer> freqs ([1], [1 1], -1)
 %!error freqs ([1])
