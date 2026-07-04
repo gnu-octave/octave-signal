@@ -15,38 +15,93 @@
 ## <https://www.gnu.org/licenses/>.
 
 ## -*- texinfo -*-
-## @deftypefn {Function File} {} freqs_plot (@var{w}, @var{h})
+## @deftypefn  {Function File} {} freqs_plot (@var{w}, @var{h})
+## @deftypefnx {Function File} {} freqs_plot (@var{w}, @var{h}, @var{freqscale})
 ## Plot the amplitude and phase of the vector @var{h}.
+##
+## The optional argument @var{freqscale} specifies the scaling of the
+## frequency axis.  It can be @qcode{"log"} (default) or @qcode{"linear"}.
+## @seealso{freqs}
 ## @end deftypefn
 
-function freqs_plot(w,h)
+function freqs_plot(w, h, freqscale)
+
+  if (nargin < 2 || nargin > 3)
+    print_usage ();
+  endif
+
+  if (nargin < 3)
+    freqscale = "log";
+  endif
 
   n = length(w);
   mag = 20*log10(abs(h));
   phase = unwrap(arg(h));
   maxmag = max(mag);
 
-  subplot(211);
-  plot(w, mag, ";Magnitude (dB);");
-  title('Frequency response plot by freqs');
-  axis("labely");
-  ylabel("dB");
-  xlabel("");
-  grid("on");
-  if (maxmag - min(mag) > 100) # make 100 a parameter?
-    axis([w(1), w(n), maxmag-100, maxmag]);
-  else
-    axis("autoy");
-  endif
+  switch (freqscale)
+    case "log"
+      ## Kick out zero frequencies (can't plot on log scale)
+      idx = (w > 0);
+      w = w(idx);
+      mag = mag(idx);
+      phase = phase(idx);
 
-  subplot(212);
-  plot(w, phase/(2*pi), ";Phase (radians/2pi);");
-  axis("label");
-  title("");
-  grid("on");
-  axis("autoy");
-  xlabel("Frequency (rad/sec)");
-  ylabel("Cycles");
-  axis([w(1), w(n)]);
+      subplot(211);
+      semilogx(w, mag);
+      xlim([w(1), w(end)]);
+      grid("on");
+      ylabel("Magnitude (dB)");
+      title("Frequency Response");
+
+      subplot(212);
+      semilogx(w, phase*180/pi);
+      xlim([w(1), w(end)]);
+      grid("on");
+      xlabel("Frequency (rad/s)");
+      ylabel("Phase (degrees)");
+
+    case "linear"
+      ## Original style with linear frequency axis
+      subplot(211);
+      plot(w, mag, ";Magnitude (dB);");
+      title('Frequency response plot by freqs');
+      axis("labely");
+      ylabel("dB");
+      xlabel("");
+      grid("on");
+      if (maxmag - min(mag) > 100) # make 100 a parameter?
+        axis([w(1), w(n), maxmag-100, maxmag]);
+      else
+        axis("autoy");
+      endif
+
+      subplot(212);
+      plot(w, phase/(2*pi), ";Phase (radians/2pi);");
+      axis("label");
+      title("");
+      grid("on");
+      axis("autoy");
+      xlabel("Frequency (rad/sec)");
+      ylabel("Cycles");
+      axis([w(1), w(n)]);
+
+    otherwise
+      error('freqs_plot: FREQSCALE must be "log" or "linear"');
+  endswitch
 
 endfunction
+
+%!demo
+%! B = [1];
+%! A = [1, sqrt(2), 1];
+%! w = logspace (-2, 2, 200);
+%! H = freqs (B, A, w);
+%! freqs_plot (w, H);
+
+%!demo
+%! B = [1];
+%! A = [1, 0.2, 1];
+%! w = linspace (0, 3, 200);
+%! H = freqs (B, A, w);
+%! freqs_plot (w, H, "linear");
