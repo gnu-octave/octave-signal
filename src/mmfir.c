@@ -22,6 +22,9 @@
 #if defined QUAD_PREC
   #include <quadmath.h>
 #endif
+#if defined _OPENMP
+  #include <omp.h>
+#endif
 
 #include <limits.h>
 #include <math.h>
@@ -90,6 +93,21 @@
 
 static inline double maxD(double a, double b) {return a>=b? a:b;}
 static inline int    maxI(int    a, int    b) {return a>=b? a:b;}
+
+#if defined _OPENMP
+static int ompThreadCount(size_t iterations, size_t work)
+{
+  size_t const grain = 8192;
+  int const max = omp_get_max_threads();
+  size_t n = (work + grain - 1) / grain;
+
+  if (n > iterations)
+    n = iterations;
+  if (max < 2 || n < 2)
+    return 1;
+  return n < (size_t)max? (int)n : max;
+}
+#endif
 
 
 
@@ -572,14 +590,18 @@ MmfirReport mmfir(
       else ++report.iterations;
 
       // Evaluate the normalised (i.e. converges to [-1,1]) error function:
-      for (i=0, b=bandL; b<=bandR; i=b->endP, ++b)
+      for (i=0, b=bandL; b<=bandR; i=b->endP, ++b) {
         #ifdef _OPENMP
-        #pragma omp parallel for
+        size_t const iterations = (size_t)(b->endP - i);
+        int const threads =
+          ompThreadCount(iterations, iterations * (size_t)R);
+        #pragma omp parallel for if(threads > 1) num_threads(threads)
         #endif
         for (j=i; j<b->endP; ++j) { // omp needs separate counter j here.
           Point * const p = space+j;
           p->e = delta_1 * (double)(p->w * (p->a - A(coefs, R, p->f)));
         }
+      }
       report.FEs += spaceLength;
 
       // Find and store all local peaks in error magnitude:
@@ -667,7 +689,10 @@ MmfirReport mmfir(
 
     // Sample the final estimated response; modify for filter type:
     #ifdef _OPENMP
-    #pragma omp parallel for
+    size_t const sampleIterations = (size_t)(N/2 + 1);
+    int const sampleThreads =
+      ompThreadCount(sampleIterations, sampleIterations * (size_t)R);
+    #pragma omp parallel for if(sampleThreads > 1) num_threads(sampleThreads)
     #endif
     for (i=0; i<=N/2; ++i) {
       double f=2.*i/N;
@@ -678,7 +703,10 @@ MmfirReport mmfir(
     // --> time-domain using symmetry-aware IDFT (could also use IFFT):
     a[N/2] /= 1+T/3;
     #ifdef _OPENMP
-    #pragma omp parallel for
+    size_t const idftIterations = (size_t)((N+1)/2);
+    int const idftThreads =
+      ompThreadCount(idftIterations, idftIterations * (size_t)(N/2));
+    #pragma omp parallel for if(idftThreads > 1) num_threads(idftThreads)
     #endif
     for (i=0; i <(N+1)/2; ++i) {
       double s;
