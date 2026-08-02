@@ -192,51 +192,25 @@ function [pks idx varargout] = findpeaks (data, varargin)
   tf  = data(idx) > minH;
   idx = idx(tf);
 
-  ## sort according to magnitude
-  [~, tmp] = sort (data(idx), "descend");
-  idx_s    = idx(tmp);
-
   ## Treat peaks separated less than minD as one
-  D  = abs (bsxfun (@minus, idx_s, idx_s.'));
-  D += diag(NA(1,size(D,1)));                # eliminate diagonal comparison
-  if (any (D(:) < minD))
+  if (numel (idx) > 1 && minD > 1)
+    ## Process candidates from highest to lowest.  Since idx is sorted by
+    ## position, the candidates neighboring idx(j) form a contiguous range.
+    [~, order] = sort (data(idx), "descend");
+    radius = ceil (minD) - 1;
+    left   = lookup (idx, idx - radius - 1) + 1;
+    right  = lookup (idx, idx + radius);
 
-    i          = 1;
-    peak       = cell ();
-    node2visit = 1:size(D,1);
-    visited    = [];
-    idx_pruned = idx_s;
-
-    ## debug
-##    h = plot(1:length(data),data,"-",idx_s,data(idx_s),'.r',idx_s,data(idx_s),'.g');
-##    set(h(3),"visible","off");
-
-    while (! isempty (node2visit))
-
-      d = D(node2visit(1),:);
-
-      visited       = [visited node2visit(1)];
-      node2visit(1) = [];
-
-      neighs  = setdiff (find (d < minD), visited);
-      if (! isempty (neighs))
-        ## debug
-##        set(h(3),"xdata",idx_s(neighs),"ydata",data(idx_s(neighs)),"visible","on")
-##        pause(0.2)
-##        set(h(3),"visible","off");
-
-        idx_pruned = setdiff (idx_pruned, idx_s(neighs));
-
-        visited    = [visited neighs];
-        node2visit = setdiff (node2visit, visited);
-
-        ## debug
-##        set(h(2),"xdata",idx_pruned,"ydata",data(idx_pruned))
-##        pause
+    blocked = false (size (idx));
+    keep    = false (size (idx));
+    for i = 1:numel (order)
+      j = order(i);
+      if (! blocked(j))
+        keep(j) = true;
+        blocked(left(j):right(j)) = true;
       endif
-
-    endwhile
-    idx = idx_pruned;
+    endfor
+    idx = idx(keep);
   endif
 
   extra = struct ("parabol", [], "height", [], "baseline", [], "roots", []);
@@ -425,3 +399,31 @@ endfunction
 %! [pks, loc] = findpeaks(y);
 %! assert (loc, [51:200:851]);
 %! assert (pks, [1 1 1 1 1]);
+
+%!test
+%! ## MinPeakDistance pruning is greedy in descending peak-height order.
+%! x = zeros (1, 40);
+%! x([10 19 28]) = [10 9 8];
+%! [pks, loc] = findpeaks (x, "MinPeakDistance", 10);
+%! assert (loc, [10 28]);
+%! assert (pks, [10 8]);
+
+%!test
+%! ## Peaks exactly MinPeakDistance apart are retained, while peaks at a
+%! ## fractional distance greater than their index separation are combined.
+%! x = zeros (1, 30);
+%! x([10 12]) = [3 2];
+%! [pks, loc] = findpeaks (x, "MinPeakDistance", 2);
+%! assert (loc, [10 12]);
+%! assert (pks, [3 2]);
+%! [pks, loc] = findpeaks (x, "MinPeakDistance", 2.1);
+%! assert (loc, 10);
+%! assert (pks, 3);
+
+%!test
+%! ## Equal-height peaks are considered from left to right.
+%! x = zeros (1, 30);
+%! x([10 19]) = 3;
+%! [pks, loc] = findpeaks (x, "MinPeakDistance", 10);
+%! assert (loc, 10);
+%! assert (pks, 3);
