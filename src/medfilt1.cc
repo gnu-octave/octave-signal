@@ -339,9 +339,19 @@ to bring them up to size @var{n}.\n\
           if (args(1).numel () != 1 || octave::signal::iscomplex (args(1)))
             error ("medfilt1: N must be a real scalar");
           else
-            n = args(1).idx_type_value ();
+            {
+              // Reject Inf, NaN and non-integers before converting to an
+              // index type, otherwise the conversion yields a bogus window
+              // size (e.g. Inf -> huge allocation).
+              double nd = args(1).double_value ();
+              if (! octave::math::isfinite (nd)
+                  || nd != octave::math::round (nd))
+                error ("medfilt1: N must be a positive integer");
 
-          if (n < 0)
+              n = args(1).idx_type_value ();
+            }
+
+          if (n < 1)
             error ("medfilt1: N must be a positive integer");
         }
       else
@@ -356,11 +366,15 @@ to bring them up to size @var{n}.\n\
             else if (octave::signal::iscomplex (args(3)))
               error ("medfilt1: DIM must be real");
 
-            dim = round (args(3).double_value ());
+            // Reject Inf, NaN and non-integers before converting to an
+            // index type; assigning e.g. Inf to octave_idx_type is undefined.
+            double dimd = args(3).double_value ();
+            if (! octave::math::isfinite (dimd)
+                || dimd != octave::math::round (dimd))
+              error ("medfilt1: DIM must be an integer, not %g", dimd);
 
-            if (dim != args(3).double_value ())
-              error ("medfilt1: DIM must be an integer, not %g",
-                     args(3).double_value ());
+            dim = args(3).idx_type_value ();
+
             //if (dim < 1 || dim > signal.dims ().length ())
             if (dim < 1)
               error ("medfilt1: DIM must be positive, not %ld",
@@ -368,7 +382,7 @@ to bring them up to size @var{n}.\n\
           }
         else
           error ("medfilt1: Invalid type for DIM: %s",
-                 args(1).type_name ().c_str ());
+                 args(3).type_name ().c_str ());
         if (nargin > 4)
           error ("medfilt1: Too many input arguments");
       }
@@ -529,7 +543,16 @@ to bring them up to size @var{n}.\n\
 %! assert (A, [1 2 3 3 3 3 2 1; 6 5 4 3 3 3 2 1; 6 5 4 3 2 1 0 -1; 6 5 4 3 2 1 0 -1]);
 
 # Input checking
-%!error (medfilt1 ([1 2 3], -1));
+%!error <N must be a positive integer> (medfilt1 ([1 2 3], -1));
+%!error <N must be a positive integer> (medfilt1 ([1 2 3], 0));
+%!error <N must be a positive integer> (medfilt1 ([1 2 3], Inf));
+%!error <N must be a positive integer> (medfilt1 ([1 2 3], -Inf));
+%!error <N must be a positive integer> (medfilt1 ([1 2 3], NaN));
+%!error <N must be a positive integer> (medfilt1 ([1 2 3], 2.5));
+%!error <DIM must be an integer> (medfilt1 ([1 2 3], 1, [], Inf));
+%!error <DIM must be an integer> (medfilt1 ([1 2 3], 1, [], NaN));
+%!error <DIM must be an integer> (medfilt1 ([1 2 3], 1, [], 2.5));
+%!error <DIM must be positive> (medfilt1 ([1 2 3], 1, [], 0));
 %!error (medfilt1 ([1 2 3], 1, [], "hello"));
 %!error (medfilt1 ([1 2 3], 1, [], "omitnan", false));
 %!error (medfilt1 ({1 2 3}));
