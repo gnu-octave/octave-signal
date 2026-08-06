@@ -35,3 +35,17 @@ function [z, p, k] = tf2zp (varargin)
   [z, p, k] = zpkdata (tf (varargin{:}), "vector");
 
 endfunction
+
+%!error [b, a] =  eqtflength ();
+%!error [b, a] =  eqtflength (1);
+
+%!test
+%! b = [2 3];
+%! a = [1 1/sqrt(2) 1/4];
+%! 
+%! [b,a] = eqtflength(b,a);
+%! [z,p,k] = tf2zp(b,a);
+%! assert(z, [-1.5; 0]);
+%! assert(p, [ -0.3536 + 0.3536i; -0.3536 - 0.3536i], 1/1e4);
+%! assert(k, 2);
+
