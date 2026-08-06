@@ -42,3 +42,15 @@ function [num, den] = zp2tf (varargin)
   [num, den] = tfdata (zpk (varargin{:}), "vector");
 
 endfunction
+
+%!error [b, a] = zpt2f ()
+%!error [b, a] = zpt2f (1)
+%!error [b, a] = zpt2f (1,2)
+
+%!test
+%! k = 1;
+%! z = [0 0]';
+%! p = roots([1 0.01 1]);
+%! [b,a] = zp2tf(z,p,k);
+%! assert(a, [1.000 0.0100 1.000], 2*eps);
+%! assert(b, [1 0 0]);
