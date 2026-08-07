@@ -27,6 +27,7 @@ navigation:
   name: "&nbsp;&nbsp; Function Reference"
   url: "/manual/#Function-Reference-1"
 ---
+{% raw %}
 <div class="top-level-extent" id="Top">
 <h1 class="top" id="Octave-Signal-Toolkit">Octave Signal Toolkit</h1>
 <p>Copyright © The Octave Project Developers 
@@ -6617,3 +6618,4 @@ and Sons, New York, 1993, pp. 155&ndash;277.
  Gade &amp; H. Herlufsen, &lsquo;Windows to FFT analysis (Part I)&rsquo;, Technical Review 3,
  Bruel &amp; Kjaer, 1987</p>
 </div>
+{% endraw %}
