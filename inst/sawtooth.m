@@ -58,3 +58,33 @@ function y = sawtooth (t,width)
   endif
 
 endfunction
+
+%!test
+%! ## Default sawtooth
+%! t = [0, pi/2, pi, 3*pi/2, 2*pi];
+%! y = sawtooth(t);
+%! expected = [-1, -0.5, 0, 0.5, -1];
+%! assert(y, expected, 10*eps);
+
+%!test
+%! ## Input width of 1 (What default would be)
+%! t = [0, pi/2, pi, 3*pi/2, 2*pi];
+%! y = sawtooth(t, 1);
+%! expected = [-1, -0.5, 0, 0.5, -1];
+%! assert(y, expected, 10*eps);
+
+%!test
+%! # Triangle, Width = 0.5
+%! t = [0, pi/2, pi, 3*pi/2, 2*pi];
+%! y = sawtooth(t, 0.5);
+%! expected = [-1, 0, 1, 0, -1];
+%! assert(y, expected, 10*eps);
+
+%!error sawtooth()
+%!error sawtooth(1,2,3)
+
+%!error <width>
+%! sawtooth(0, -0.1)
+
+%!error <width>
+%! sawtooth(0, 1.1)
