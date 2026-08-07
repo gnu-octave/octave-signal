@@ -85,7 +85,7 @@ navigation:
   name: "Manual"
   url: "/manual"
 ---
-<dl class="first-deftypefn def-block">
+{% raw %}<dl class="first-deftypefn def-block">
 <dt class="deftypefn def-line" id="index-is2rc"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">k</var> =</code> <strong class="def-name">is2rc</strong> <code class="def-code-arguments">(<var class="var">is</var>)</code></span></dt>
 <dd>
 <p>Convert inverse sine parameters to reflection coefficients.
@@ -99,4 +99,4 @@ navigation:
 
 
 <p><strong class="strong">See also:</strong> rc2is.
- </p></dd></dl>
+ </p></dd></dl>{% endraw %}

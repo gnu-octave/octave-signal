@@ -85,4 +85,5 @@ navigation:
   name: "Manual"
   url: "/manual"
 ---
-<pre>undocumented function: varargout = freqspace (varargin)</pre>
+{% raw %}<pre>undocumented function: varargout = freqspace (varargin)</pre>
+{% endraw %}

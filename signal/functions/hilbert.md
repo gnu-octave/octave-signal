@@ -85,7 +85,7 @@ navigation:
   name: "Manual"
   url: "/manual"
 ---
-<dl class="first-deftypefn def-block">
+{% raw %}<dl class="first-deftypefn def-block">
 <dt class="deftypefn def-line" id="index-hilbert"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">h</var> =</code> <strong class="def-name">hilbert</strong> <code class="def-code-arguments">(<var class="var">f</var>, <var class="var">N</var>, <var class="var">dim</var>)</code></span></dt>
 <dd><p>Analytic extension of real valued signal.
 </p>
@@ -103,4 +103,4 @@ navigation:
 <p><code class="code">hilbert (<var class="var">f</var>, [], <var class="var">dim</var>)</code> or
  <code class="code">hilbert (<var class="var">f</var>, <var class="var">N</var>, <var class="var">dim</var>)</code> does the same along
  dimension <var class="var">dim</var>.
- </p></dd></dl>
+ </p></dd></dl>{% endraw %}

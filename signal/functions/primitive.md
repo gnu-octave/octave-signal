@@ -85,7 +85,7 @@ navigation:
   name: "Manual"
   url: "/manual"
 ---
-<dl class="first-deftypefn def-block">
+{% raw %}<dl class="first-deftypefn def-block">
 <dt class="deftypefn def-line" id="index-primitive"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">F</var> =</code> <strong class="def-name">primitive</strong> <code class="def-code-arguments">(<var class="var">f</var>, <var class="var">t</var>, <var class="var">F0</var>)</code></span></dt>
 <dd><p>Calculate the primitive of a function.
 </p>
@@ -110,4 +110,4 @@ navigation:
 
 
 <p><strong class="strong">See also:</strong> quadgk, cumsum.
- </p></dd></dl>
+ </p></dd></dl>{% endraw %}

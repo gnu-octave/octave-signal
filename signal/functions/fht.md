@@ -85,7 +85,7 @@ navigation:
   name: "Manual"
   url: "/manual"
 ---
-<dl class="first-deftypefn def-block">
+{% raw %}<dl class="first-deftypefn def-block">
 <dt class="deftypefn def-line" id="index-fht"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">m</var> =</code> <strong class="def-name">fht</strong> <code class="def-code-arguments">(<var class="var">d</var>)</code></span></dt>
 <dt class="deftypefnx def-cmd-deftypefn def-line" id="index-fht-1"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">m</var> =</code> <strong class="def-name">fht</strong> <code class="def-code-arguments">(<var class="var">d</var>, <var class="var">n</var>)</code></span></dt>
 <dt class="deftypefnx def-cmd-deftypefn def-line" id="index-fht-2"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">m</var> =</code> <strong class="def-name">fht</strong> <code class="def-code-arguments">(<var class="var">d</var>, <var class="var">n</var>, <var class="var">dim</var>)</code></span></dt>
@@ -99,12 +99,12 @@ navigation:
  implemented using different functions.
 </p>
 <p>The definition of the forward hartley transform for vector d,
- <em class="math"> m[K] = \sum_\{i=0\}^\{N-1\} d[i]*(cos[K*2*pi*i/N] + sin[K*2*pi*i/N]), for  0 &lt;= K &lt; N.
- m[K] = \sum_\{i=0\}^\{N-1\} d[i]*CAS[K*i], for  0 &lt;= K &lt; N. </em>
+ <em class="math"> m[K] = \sum_{i=0}^{N-1} d[i]*(cos[K*2*pi*i/N] + sin[K*2*pi*i/N]), for  0 &lt;= K &lt; N.
+ m[K] = \sum_{i=0}^{N-1} d[i]*CAS[K*i], for  0 &lt;= K &lt; N. </em>
 </p>
 <div class="example">
 <pre class="example-preformatted"> fht(1:4)
  </pre></div>
 
 <p><strong class="strong">See also:</strong> ifht, fft.
- </p></dd></dl>
+ </p></dd></dl>{% endraw %}

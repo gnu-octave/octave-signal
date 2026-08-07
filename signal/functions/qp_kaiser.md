@@ -85,7 +85,7 @@ navigation:
   name: "Manual"
   url: "/manual"
 ---
-<dl class="first-deftypefn def-block">
+{% raw %}<dl class="first-deftypefn def-block">
 <dt class="deftypefn def-line" id="index-qp_005fkaiser"><span class="category-def">Function File: </span><span><strong class="def-name">qp_kaiser</strong> <code class="def-code-arguments">(<var class="var">nb</var>, <var class="var">at</var>)</code></span></dt>
 <dt class="deftypefnx def-cmd-deftypefn def-line" id="index-qp_005fkaiser-1"><span class="category-def">Function File: </span><span><strong class="def-name">qp_kaiser</strong> <code class="def-code-arguments">(<var class="var">nb</var>, <var class="var">at</var>, <var class="var">linear</var>)</code></span></dt>
 <dd>
@@ -101,4 +101,4 @@ navigation:
 </p>
 <p>By using a third non-null argument, the minimum-phase calculation is
  omitted at all.
- </p></dd></dl>
+ </p></dd></dl>{% endraw %}

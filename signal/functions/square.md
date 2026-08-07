@@ -85,7 +85,7 @@ navigation:
   name: "Manual"
   url: "/manual"
 ---
-<dl class="first-deftypefn def-block">
+{% raw %}<dl class="first-deftypefn def-block">
 <dt class="deftypefn def-line" id="index-square"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">s</var> =</code> <strong class="def-name">square</strong> <code class="def-code-arguments">(<var class="var">t</var>, <var class="var">duty</var>)</code></span></dt>
 <dt class="deftypefnx def-cmd-deftypefn def-line" id="index-square-1"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">s</var> =</code> <strong class="def-name">square</strong> <code class="def-code-arguments">(<var class="var">t</var>)</code></span></dt>
 <dd><p>Generate a square wave of period 2 pi with limits +1/-1.
@@ -99,4 +99,4 @@ navigation:
  </pre>
 
 <p><strong class="strong">See also:</strong> cos, sawtooth, sin, tripuls.
- </p></dd></dl>
+ </p></dd></dl>{% endraw %}

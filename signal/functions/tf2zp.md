@@ -85,11 +85,11 @@ navigation:
   name: "Manual"
   url: "/manual"
 ---
-<dl class="first-deftypefn def-block">
+{% raw %}<dl class="first-deftypefn def-block">
 <dt class="deftypefn def-line" id="index-tf2zp"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">z</var>, <var class="var">p</var>, <var class="var">k</var>] =</code> <strong class="def-name">tf2zp</strong> <code class="def-code-arguments">(<var class="var">num</var>, <var class="var">den</var>)</code></span></dt>
 <dd><p>Convert transfer functions to poles-and-zero representations.
 </p>
 <p>Returns the zeros and poles of the system defined
  by <var class="var">num</var>/<var class="var">den</var>.
  <var class="var">k</var> is a gain associated with the system zeros.
- </p></dd></dl>
+ </p></dd></dl>{% endraw %}

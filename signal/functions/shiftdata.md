@@ -85,10 +85,10 @@ navigation:
   name: "Manual"
   url: "/manual"
 ---
-<dl class="first-deftypefn def-block">
+{% raw %}<dl class="first-deftypefn def-block">
 <dt class="deftypefn def-line" id="index-shiftdata"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">out perm shifts</var>] =</code> <strong class="def-name">shiftdata</strong> <code class="def-code-arguments">(<var class="var">in</var>)</code></span></dt>
 <dt class="deftypefnx def-cmd-deftypefn def-line" id="index-shiftdata-1"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">out perm shifts</var>] =</code> <strong class="def-name">shiftdata</strong> <code class="def-code-arguments">(<var class="var">in</var>, <var class="var">dim</var>)</code></span></dt>
 <dd><p>Shift data <var class="var">in</var> to permute the dimension <var class="var">dim</var> to the first column.
  </p>
 <p><strong class="strong">See also:</strong> unshiftdata.
- </p></dd></dl>
+ </p></dd></dl>{% endraw %}

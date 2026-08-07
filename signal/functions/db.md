@@ -85,7 +85,7 @@ navigation:
   name: "Manual"
   url: "/manual"
 ---
-<dl class="first-deftypefn def-block">
+{% raw %}<dl class="first-deftypefn def-block">
 <dt class="deftypefn def-line" id="index-db"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">dbout</var> =</code> <strong class="def-name">db</strong> <code class="def-code-arguments">(<var class="var">x</var>)</code></span></dt>
 <dt class="deftypefnx def-cmd-deftypefn def-line" id="index-db-1"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">dbout</var> =</code> <strong class="def-name">db</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">signaltype</var>)</code></span></dt>
 <dt class="deftypefnx def-cmd-deftypefn def-line" id="index-db-2"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">dbout</var> =</code> <strong class="def-name">db</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">R</var>)</code></span></dt>
@@ -127,4 +127,4 @@ navigation:
 
 
 <p><strong class="strong">See also:</strong> pow2db, db2pow.
- </p></dd></dl>
+ </p></dd></dl>{% endraw %}

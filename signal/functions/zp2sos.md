@@ -85,7 +85,7 @@ navigation:
   name: "Manual"
   url: "/manual"
 ---
-<dl class="first-deftypefn def-block">
+{% raw %}<dl class="first-deftypefn def-block">
 <dt class="deftypefn def-line" id="index-zp2sos"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">sos</var>, <var class="var">g</var>] =</code> <strong class="def-name">zp2sos</strong> <code class="def-code-arguments">(<var class="var">z</var>)</code></span></dt>
 <dt class="deftypefnx def-cmd-deftypefn def-line" id="index-zp2sos-1"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">sos</var>, <var class="var">g</var>] =</code> <strong class="def-name">zp2sos</strong> <code class="def-code-arguments">(<var class="var">z</var>, <var class="var">p</var>)</code></span></dt>
 <dt class="deftypefnx def-cmd-deftypefn def-line" id="index-zp2sos-2"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">sos</var>, <var class="var">g</var>] =</code> <strong class="def-name">zp2sos</strong> <code class="def-code-arguments">(<var class="var">z</var>, <var class="var">p</var>, <var class="var">k</var>)</code></span></dt>
@@ -134,4 +134,4 @@ navigation:
 
 
 <p><strong class="strong">See also:</strong> sos2zp, sos2tf, tf2sos, zp2tf, tf2zp.
- </p></dd></dl>
+ </p></dd></dl>{% endraw %}

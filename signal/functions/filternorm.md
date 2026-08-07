@@ -85,7 +85,7 @@ navigation:
   name: "Manual"
   url: "/manual"
 ---
-<dl class="first-deftypefn def-block">
+{% raw %}<dl class="first-deftypefn def-block">
 <dt class="deftypefn def-line" id="index-filternorm"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">L</var> =</code> <strong class="def-name">filternorm</strong> <code class="def-code-arguments">(<var class="var">b</var>, <var class="var">a</var>)</code></span></dt>
 <dt class="deftypefnx def-cmd-deftypefn def-line" id="index-filternorm-1"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">L</var> =</code> <strong class="def-name">filternorm</strong> <code class="def-code-arguments">(<var class="var">b</var>, <var class="var">a</var>, <var class="var">pnorm</var>)</code></span></dt>
 <dt class="deftypefnx def-cmd-deftypefn def-line" id="index-filternorm-2"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">L</var> =</code> <strong class="def-name">filternorm</strong> <code class="def-code-arguments">(<var class="var">b</var>, <var class="var">a</var>, 2, <var class="var">tol</var>)</code></span></dt>
@@ -100,4 +100,4 @@ navigation:
 <pre class="example-preformatted"> [b, a] = butter (8, 0.5);
  filternorm (b, a)
  </pre></div>
-</dd></dl>
+</dd></dl>{% endraw %}

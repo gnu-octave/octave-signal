@@ -85,7 +85,7 @@ navigation:
   name: "Manual"
   url: "/manual"
 ---
-<dl class="first-deftypefn def-block">
+{% raw %}<dl class="first-deftypefn def-block">
 <dt class="deftypefn def-line" id="index-buffer"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">buffer</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">n</var>, <var class="var">p</var>, <var class="var">opt</var>)</code></span></dt>
 <dt class="deftypefnx def-cmd-deftypefn def-line" id="index-buffer-1"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">y</var>, <var class="var">z</var>, <var class="var">opt</var>] =</code> <strong class="def-name">buffer</strong> <code class="def-code-arguments">(&hellip;)</code></span></dt>
 <dd><p>Buffer a signal into a data frame. The arguments to <code class="code">buffer</code> are
@@ -128,4 +128,4 @@ navigation:
 </p>
 <p>Likewise, the output <var class="var">opt</var> is the overlap, or underlap that might
  be used for a future call to <code class="code">code</code> to allow continuous buffering.
- </p></dd></dl>
+ </p></dd></dl>{% endraw %}

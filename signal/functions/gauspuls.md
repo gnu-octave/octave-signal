@@ -85,7 +85,7 @@ navigation:
   name: "Manual"
   url: "/manual"
 ---
-<dl class="first-deftypefn def-block">
+{% raw %}<dl class="first-deftypefn def-block">
 <dt class="deftypefn def-line" id="index-gauspuls"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">yi</var> =</code> <strong class="def-name">gauspuls</strong> <code class="def-code-arguments">(<var class="var">t</var>)</code></span></dt>
 <dt class="deftypefnx def-cmd-deftypefn def-line" id="index-gauspuls-1"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">yi</var> =</code> <strong class="def-name">gauspuls</strong> <code class="def-code-arguments">(<var class="var">t</var>, <var class="var">fc</var>)</code></span></dt>
 <dt class="deftypefnx def-cmd-deftypefn def-line" id="index-gauspuls-2"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">yi</var> =</code> <strong class="def-name">gauspuls</strong> <code class="def-code-arguments">(<var class="var">t</var>, <var class="var">fc</var>, <var class="var">bw</var>)</code></span></dt>
@@ -117,4 +117,4 @@ navigation:
  </li></ul>
 
 <p><strong class="strong">See also:</strong> pulstran, rectpuls, tripuls.
- </p></dd></dl>
+ </p></dd></dl>{% endraw %}

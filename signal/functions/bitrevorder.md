@@ -85,11 +85,11 @@ navigation:
   name: "Manual"
   url: "/manual"
 ---
-<dl class="first-deftypefn def-block">
+{% raw %}<dl class="first-deftypefn def-block">
 <dt class="deftypefn def-line" id="index-bitrevorder"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">bitrevorder</strong> <code class="def-code-arguments">(<var class="var">x</var>)</code></span></dt>
 <dt class="deftypefnx def-cmd-deftypefn def-line" id="index-bitrevorder-1"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">y</var> <var class="var">i</var>] =</code> <strong class="def-name">bitrevorder</strong> <code class="def-code-arguments">(<var class="var">x</var>)</code></span></dt>
 <dd><p>Reorder the elements of the vector <var class="var">x</var> in bit-reversed order.
  Equivalent to calling <code class="code">digitrevorder (<var class="var">x</var>, 2)</code>.
  </p>
 <p><strong class="strong">See also:</strong> digitrevorder, fft, ifft.
- </p></dd></dl>
+ </p></dd></dl>{% endraw %}

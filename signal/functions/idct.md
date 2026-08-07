@@ -85,7 +85,7 @@ navigation:
   name: "Manual"
   url: "/manual"
 ---
-<dl class="first-deftypefn def-block">
+{% raw %}<dl class="first-deftypefn def-block">
 <dt class="deftypefn def-line" id="index-idct"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">idct</strong> <code class="def-code-arguments">(<var class="var">x</var>)</code></span></dt>
 <dt class="deftypefnx def-cmd-deftypefn def-line" id="index-idct-1"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">idct</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">n</var>)</code></span></dt>
 <dd><p>Compute the inverse discrete cosine transform of <var class="var">x</var>.  If <var class="var">n</var> is
@@ -106,4 +106,4 @@ navigation:
 </p>
 
 <p><strong class="strong">See also:</strong> dct, dct2, idct2, dctmtx.
- </p></dd></dl>
+ </p></dd></dl>{% endraw %}

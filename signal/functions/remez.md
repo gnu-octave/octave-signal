@@ -85,7 +85,7 @@ navigation:
   name: "Manual"
   url: "/manual"
 ---
-<dl class="first-deftypefn def-block">
+{% raw %}<dl class="first-deftypefn def-block">
 <dt class="deftypefn def-line" id="index-remez"><span class="category-def">Loadable Function: </span><span><code class="def-type"><var class="var">b</var> =</code> <strong class="def-name">remez</strong> <code class="def-code-arguments">(<var class="var">n</var>, <var class="var">f</var>, <var class="var">a</var>)</code></span></dt>
 <dt class="deftypefnx def-cmd-deftypefn def-line" id="index-remez-1"><span class="category-def">Loadable Function: </span><span><code class="def-type"><var class="var">b</var> =</code> <strong class="def-name">remez</strong> <code class="def-code-arguments">(<var class="var">n</var>, <var class="var">f</var>, <var class="var">a</var>, <var class="var">w</var>)</code></span></dt>
 <dt class="deftypefnx def-cmd-deftypefn def-line" id="index-remez-2"><span class="category-def">Loadable Function: </span><span><code class="def-type"><var class="var">b</var> =</code> <strong class="def-name">remez</strong> <code class="def-code-arguments">(<var class="var">n</var>, <var class="var">f</var>, <var class="var">a</var>, <var class="var">w</var>, <var class="var">ftype</var>)</code></span></dt>
@@ -115,4 +115,4 @@ slower to compute.
 </dl>
 
 <p>Frequency is in the range (0, 1), with 1 being the Nyquist frequency.
-</p></dd></dl>
+</p></dd></dl>{% endraw %}

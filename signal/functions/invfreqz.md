@@ -85,7 +85,7 @@ navigation:
   name: "Manual"
   url: "/manual"
 ---
-<dl class="first-deftypefn def-block">
+{% raw %}<dl class="first-deftypefn def-block">
 <dt class="deftypefn def-line" id="index-invfreqz_0028H_002cF_002cnB_002cnA_0029"><span class="category-def">Function File: </span><span><code class="def-type">[B,A] =</code> <strong class="def-name">invfreqz(H,F,nB,nA)</strong></span></dt>
 <dt class="deftypefnx def-cmd-deftypefn def-line" id="index-invfreqz_0028H_002cF_002cnB_002cnA_002cW_0029"><span><code class="def-type">[B,A] =</code> <strong class="def-name">invfreqz(H,F,nB,nA,W)</strong></span></dt>
 <dt class="deftypefnx def-cmd-deftypefn def-line" id="index-invfreqz_0028H_002cF_002cnB_002cnA_002cW_002citer_002ctol_002c_0027trace_0027_0029"><span><code class="def-type">[B,A] =</code> <strong class="def-name">invfreqz(H,F,nB,nA,W,iter,tol,'trace')</strong></span></dt>
@@ -116,4 +116,4 @@ navigation:
      Hh = freqz(Bh,Ah);
      disp(sprintf('||frequency response error|| = %f',norm(H-Hh)));
  </pre></div>
-</dd></dl>
+</dd></dl>{% endraw %}

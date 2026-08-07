@@ -85,7 +85,7 @@ navigation:
   name: "Manual"
   url: "/manual"
 ---
-<dl class="first-deftypefn def-block">
+{% raw %}<dl class="first-deftypefn def-block">
 <dt class="deftypefn def-line" id="index-levinson"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">a</var>, <var class="var">v</var>, <var class="var">ref</var>] =</code> <strong class="def-name">levinson</strong> <code class="def-code-arguments">(<var class="var">acf</var>)</code></span></dt>
 <dt class="deftypefnx def-cmd-deftypefn def-line" id="index-levinson-1"><span class="category-def">Function File: </span><span><code class="def-type">[&hellip;] =</code> <strong class="def-name">levinson</strong> <code class="def-code-arguments">(<var class="var">acf</var>, <var class="var">p</var>)</code></span></dt>
 <dd>
@@ -108,4 +108,4 @@ navigation:
  [1] Steven M. Kay and Stanley Lawrence Marple Jr.:
    &quot;Spectrum analysis &ndash; a modern perspective&quot;,
    Proceedings of the IEEE, Vol 69, pp 1380-1419, Nov., 1981
- </p></dd></dl>
+ </p></dd></dl>{% endraw %}

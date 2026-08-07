@@ -85,7 +85,7 @@ navigation:
   name: "Manual"
   url: "/manual"
 ---
-<dl class="first-deftypefn def-block">
+{% raw %}<dl class="first-deftypefn def-block">
 <dt class="deftypefn def-line" id="index-rceps"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">y</var>, <var class="var">ym</var>] =</code> <strong class="def-name">rceps</strong> <code class="def-code-arguments">(<var class="var">x</var>)</code></span></dt>
 <dd><p>Return the cepstrum of the signal <var class="var">x</var>.
 </p>
@@ -107,4 +107,4 @@ navigation:
 
 <p>Reference: <cite class="cite">Programs for Digital Signal Processing</cite>, IEEE Press,
  John Wiley &amp; Sons, New York, 1979.
- </p></dd></dl>
+ </p></dd></dl>{% endraw %}

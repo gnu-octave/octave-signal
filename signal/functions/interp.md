@@ -85,7 +85,7 @@ navigation:
   name: "Manual"
   url: "/manual"
 ---
-<dl class="first-deftypefn def-block">
+{% raw %}<dl class="first-deftypefn def-block">
 <dt class="deftypefn def-line" id="index-interp"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">interp</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">q</var>)</code></span></dt>
 <dt class="deftypefnx def-cmd-deftypefn def-line" id="index-interp-1"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">interp</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">q</var>, <var class="var">n</var>)</code></span></dt>
 <dt class="deftypefnx def-cmd-deftypefn def-line" id="index-interp-2"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">interp</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">q</var>, <var class="var">n</var>, <var class="var">Wc</var>)</code></span></dt>
@@ -106,4 +106,4 @@ navigation:
 
 
 <p><strong class="strong">See also:</strong> decimate, resample.
- </p></dd></dl>
+ </p></dd></dl>{% endraw %}

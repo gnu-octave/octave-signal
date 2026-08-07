@@ -85,7 +85,7 @@ navigation:
   name: "Manual"
   url: "/manual"
 ---
-<dl class="first-deftypefn def-block">
+{% raw %}<dl class="first-deftypefn def-block">
 <dt class="deftypefn def-line" id="index-sosfilt"><span class="category-def">Loadable Function: </span><span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">sosfilt</strong> <code class="def-code-arguments">(<var class="var">sos</var>, <var class="var">x</var>)</code></span></dt>
 <dd><p>Second order section IIR filtering of <var class="var">x</var>.  The second order section
 filter is described by the matrix <var class="var">sos</var> with:
@@ -99,4 +99,4 @@ filter is described by the matrix <var class="var">sos</var> with:
 
 <p>where <code class="code"><var class="var">B1</var> = [b0 b1 b2]</code> and <code class="code"><var class="var">A1</var> = [1 a1 a2]</code> for
 section 1, etc.  The b0 entry must be nonzero for each section.
-</p></dd></dl>
+</p></dd></dl>{% endraw %}

@@ -85,7 +85,7 @@ navigation:
   name: "Manual"
   url: "/manual"
 ---
-<dl class="first-deftypefn def-block">
+{% raw %}<dl class="first-deftypefn def-block">
 <dt class="deftypefn def-line" id="index-fwht"><span class="category-def">Function File: </span><span><strong class="def-name">fwht</strong> <code class="def-code-arguments">(<var class="var">x</var>)</code></span></dt>
 <dt class="deftypefnx def-cmd-deftypefn def-line" id="index-fwht-1"><span class="category-def">Function File: </span><span><strong class="def-name">fwht</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">n</var>)</code></span></dt>
 <dt class="deftypefnx def-cmd-deftypefn def-line" id="index-fwht-2"><span class="category-def">Function File: </span><span><strong class="def-name">fwht</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">n</var>, <var class="var">order</var>)</code></span></dt>
@@ -118,4 +118,4 @@ navigation:
 
 
 <p><strong class="strong">See also:</strong> ifwht.
- </p></dd></dl>
+ </p></dd></dl>{% endraw %}

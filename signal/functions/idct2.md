@@ -85,11 +85,11 @@ navigation:
   name: "Manual"
   url: "/manual"
 ---
-<dl class="first-deftypefn def-block">
+{% raw %}<dl class="first-deftypefn def-block">
 <dt class="deftypefn def-line" id="index-idct2"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">idct2</strong> <code class="def-code-arguments">(<var class="var">x</var>)</code></span></dt>
 <dt class="deftypefnx def-cmd-deftypefn def-line" id="index-idct2-1"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">idct2</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">m</var>, <var class="var">n</var>)</code></span></dt>
 <dt class="deftypefnx def-cmd-deftypefn def-line" id="index-idct2-2"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">idct2</strong> <code class="def-code-arguments">(<var class="var">x</var>, [<var class="var">m</var>, <var class="var">n</var>])</code></span></dt>
 <dd><p>Compute the inverse 2-D discrete cosine transform of matrix <var class="var">x</var>.
  If <var class="var">m</var> and <var class="var">n</var> are specified, the input is either padded or truncated
  to have <var class="var">m</var> rows and <var class="var">n</var> columns.
- </p></dd></dl>
+ </p></dd></dl>{% endraw %}

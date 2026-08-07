@@ -85,7 +85,7 @@ navigation:
   name: "Manual"
   url: "/manual"
 ---
-<dl class="first-deftypefn def-block">
+{% raw %}<dl class="first-deftypefn def-block">
 <dt class="deftypefn def-line" id="index-buttord"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">n</var> =</code> <strong class="def-name">buttord</strong> <code class="def-code-arguments">(<var class="var">wp</var>, <var class="var">ws</var>, <var class="var">rp</var>, <var class="var">rs</var>)</code></span></dt>
 <dt class="deftypefnx def-cmd-deftypefn def-line" id="index-buttord-1"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">n</var> =</code> <strong class="def-name">buttord</strong> <code class="def-code-arguments">([<var class="var">wp1</var>, <var class="var">wp2</var>], [<var class="var">ws1</var>, <var class="var">ws2</var>], <var class="var">rp</var>, <var class="var">rs</var>)</code></span></dt>
 <dt class="deftypefnx def-cmd-deftypefn def-line" id="index-buttord-2"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">n</var> =</code> <strong class="def-name">buttord</strong> <code class="def-code-arguments">([<var class="var">wp1</var>, <var class="var">wp2</var>], [<var class="var">ws1</var>, <var class="var">ws2</var>], <var class="var">rp</var>, <var class="var">rs</var>, &quot;s&quot;)</code></span></dt>
@@ -131,4 +131,4 @@ navigation:
  must be transformed back to original filter type.
  </p>
 <p><strong class="strong">See also:</strong> butter, cheb1ord, cheb2ord, ellipord.
- </p></dd></dl>
+ </p></dd></dl>{% endraw %}

@@ -85,7 +85,7 @@ navigation:
   name: "Manual"
   url: "/manual"
 ---
-<dl class="first-deftypefn def-block">
+{% raw %}<dl class="first-deftypefn def-block">
 <dt class="deftypefn def-line" id="index-_0028w_002c"><span class="category-def">Function File: </span><span><code class="def-type">wvtool</code> <strong class="def-name">(<var class="var">w</var>,</strong> <code class="def-code-arguments">&hellip;)</code></span></dt>
 <dt class="deftypefnx def-cmd-deftypefn def-line" id="index-_0028_002e_002e_002e_002c"><span class="category-def">Function File: </span><span><code class="def-type">wvtool</code> <strong class="def-name">(&hellip;,</strong> <code class="def-code-arguments"><var class="var">options</var>)</code></span></dt>
 <dt class="deftypefnx def-cmd-deftypefn def-line" id="index-_0028title_002c"><span class="category-def">Function File: </span><span><code class="def-type">wvtool</code> <strong class="def-name">(<var class="var">title</var>,</strong> <code class="def-code-arguments">&hellip;)</code></span></dt>
@@ -118,4 +118,4 @@ navigation:
 <p>To convert reported bin positions to bandwidth (in bins), multiply by 2.
  To convert bandwidth in bins to normalized bandwidth, divide by the
  window-length.
- </p></dd></dl>
+ </p></dd></dl>{% endraw %}

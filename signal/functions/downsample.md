@@ -85,7 +85,7 @@ navigation:
   name: "Manual"
   url: "/manual"
 ---
-<dl class="first-deftypefn def-block">
+{% raw %}<dl class="first-deftypefn def-block">
 <dt class="deftypefn def-line" id="index-downsample"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">downsample</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">n</var>)</code></span></dt>
 <dt class="deftypefnx def-cmd-deftypefn def-line" id="index-downsample-1"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">downsample</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">n</var>, <var class="var">offset</var>)</code></span></dt>
 <dd><p>Downsample the signal, selecting every <var class="var">n</var>th element.  If <var class="var">x</var>
@@ -99,4 +99,4 @@ navigation:
  sample <var class="var">offset</var>.
  </p>
 <p><strong class="strong">See also:</strong> decimate, interp, resample, upfirdn, upsample.
- </p></dd></dl>
+ </p></dd></dl>{% endraw %}

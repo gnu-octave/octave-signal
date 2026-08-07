@@ -85,7 +85,7 @@ navigation:
   name: "Manual"
   url: "/manual"
 ---
-<dl class="first-deftypefn def-block">
+{% raw %}<dl class="first-deftypefn def-block">
 <dt class="deftypefn def-line" id="index-kaiser"><span class="category-def">Function File: </span><span><strong class="def-name">kaiser</strong> <code class="def-code-arguments">(<var class="var">m</var>)</code></span></dt>
 <dt class="deftypefnx def-cmd-deftypefn def-line" id="index-kaiser-1"><span class="category-def">Function File: </span><span><strong class="def-name">kaiser</strong> <code class="def-code-arguments">(<var class="var">m</var>, <var class="var">beta</var>)</code></span></dt>
 <dd>
@@ -106,4 +106,4 @@ navigation:
 
 
 <p><strong class="strong">See also:</strong> kaiserord.
- </p></dd></dl>
+ </p></dd></dl>{% endraw %}

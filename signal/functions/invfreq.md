@@ -85,7 +85,7 @@ navigation:
   name: "Manual"
   url: "/manual"
 ---
-<dl class="first-deftypefn def-block">
+{% raw %}<dl class="first-deftypefn def-block">
 <dt class="deftypefn def-line" id="index-invfreq_0028H_002cF_002cnB_002cnA_0029"><span class="category-def">Function File: </span><span><code class="def-type">[B,A] =</code> <strong class="def-name">invfreq(H,F,nB,nA)</strong></span></dt>
 <dt class="deftypefnx def-cmd-deftypefn def-line" id="index-invfreq_0028H_002cF_002cnB_002cnA_002cW_0029"><span><code class="def-type">[B,A] =</code> <strong class="def-name">invfreq(H,F,nB,nA,W)</strong></span></dt>
 <dt class="deftypefnx def-cmd-deftypefn def-line" id="index-invfreq_0028H_002cF_002cnB_002cnA_002cW_002c_005b_005d_002c_005b_005d_002cplane_0029"><span><code class="def-type">[B,A] =</code> <strong class="def-name">invfreq(H,F,nB,nA,W,[],[],plane)</strong></span></dt>
@@ -133,4 +133,4 @@ navigation:
       Elec. Eng. Dept., Stanford University, June 1983, page 50; or,
 </p>
 <p>http://ccrma.stanford.edu/~jos/filters/FFT_Based_Equation_Error_Method.html
- </p></dd></dl>
+ </p></dd></dl>{% endraw %}

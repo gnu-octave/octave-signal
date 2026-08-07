@@ -85,7 +85,7 @@ navigation:
   name: "Manual"
   url: "/manual"
 ---
-<dl class="first-deftypefn def-block">
+{% raw %}<dl class="first-deftypefn def-block">
 <dt class="deftypefn def-line" id="index-cheb"><span class="category-def">Function File: </span><span><strong class="def-name">cheb</strong> <code class="def-code-arguments">(<var class="var">n</var>, <var class="var">x</var>)</code></span></dt>
 <dd><p>Returns the value of the nth-order Chebyshev polynomial calculated at
  the point x. The Chebyshev polynomials are defined by the equations:
@@ -98,4 +98,4 @@ navigation:
 
 <p>If x is a vector, the output is a vector of the same size, where each
  element is calculated as y(i) = Tn(x(i)).
- </p></dd></dl>
+ </p></dd></dl>{% endraw %}

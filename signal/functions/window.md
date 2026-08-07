@@ -85,10 +85,10 @@ navigation:
   name: "Manual"
   url: "/manual"
 ---
-<dl class="first-deftypefn def-block">
+{% raw %}<dl class="first-deftypefn def-block">
 <dt class="deftypefn def-line" id="index-window"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">w</var> =</code> <strong class="def-name">window</strong> <code class="def-code-arguments">(<var class="var">f</var>, <var class="var">m</var>)</code></span></dt>
 <dt class="deftypefnx def-cmd-deftypefn def-line" id="index-window-1"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">w</var> =</code> <strong class="def-name">window</strong> <code class="def-code-arguments">(<var class="var">f</var>, <var class="var">m</var>, <var class="var">opts</var>)</code></span></dt>
 <dd><p>Create an <var class="var">m</var>-point window from the function <var class="var">f</var>.  The function
  <var class="var">f</var> can be for example <code class="code">@blackman</code>.  Any additional
  arguments <var class="var">opt</var> are passed to the windowing function.
- </p></dd></dl>
+ </p></dd></dl>{% endraw %}

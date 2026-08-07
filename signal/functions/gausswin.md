@@ -85,7 +85,7 @@ navigation:
   name: "Manual"
   url: "/manual"
 ---
-<dl class="first-deftypefn def-block">
+{% raw %}<dl class="first-deftypefn def-block">
 <dt class="deftypefn def-line" id="index-gausswin"><span class="category-def">Function File: </span><span><strong class="def-name">gausswin</strong> <code class="def-code-arguments">(<var class="var">m</var>)</code></span></dt>
 <dt class="deftypefnx def-cmd-deftypefn def-line" id="index-gausswin-1"><span class="category-def">Function File: </span><span><strong class="def-name">gausswin</strong> <code class="def-code-arguments">(<var class="var">m</var>, <var class="var">a</var>)</code></span></dt>
 <dd>
@@ -97,4 +97,4 @@ navigation:
 <p>w = exp ( -(a*x)^2/2 )
 </p>
 <p>for x = linspace(-(m-1)/m, (m-1)/m, m)
- </p></dd></dl>
+ </p></dd></dl>{% endraw %}

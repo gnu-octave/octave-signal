@@ -85,7 +85,7 @@ navigation:
   name: "Manual"
   url: "/manual"
 ---
-<dl class="first-deftypefn def-block">
+{% raw %}<dl class="first-deftypefn def-block">
 <dt class="deftypefn def-line" id="index-filtic"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">zf</var> =</code> <strong class="def-name">filtic</strong> <code class="def-code-arguments">(<var class="var">b</var>, <var class="var">a</var>, <var class="var">y</var>)</code></span></dt>
 <dt class="deftypefnx def-cmd-deftypefn def-line" id="index-filtic-1"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">zf</var> =</code> <strong class="def-name">filtic</strong> <code class="def-code-arguments">(<var class="var">b</var>, <var class="var">a</var>, <var class="var">y</var>, <var class="var">x</var>)</code></span></dt>
 <dd>
@@ -109,4 +109,4 @@ navigation:
 <p>zf = filtic(b, a, y, x)
     Initial conditions for filter with coefficients a and b
     input vector x and output vector y
- </p></dd></dl>
+ </p></dd></dl>{% endraw %}

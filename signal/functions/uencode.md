@@ -85,11 +85,11 @@ navigation:
   name: "Manual"
   url: "/manual"
 ---
-<dl class="first-deftypefn def-block">
+{% raw %}<dl class="first-deftypefn def-block">
 <dt class="deftypefn def-line" id="index-uencode"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">out</var> =</code> <strong class="def-name">uencode</strong> <code class="def-code-arguments">(<var class="var">in</var>, <var class="var">n</var>)</code></span></dt>
 <dt class="deftypefnx def-cmd-deftypefn def-line" id="index-uencode-1"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">out</var> =</code> <strong class="def-name">uencode</strong> <code class="def-code-arguments">(<var class="var">in</var>, <var class="var">n</var>, <var class="var">v</var>)</code></span></dt>
 <dt class="deftypefnx def-cmd-deftypefn def-line" id="index-uencode-2"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">out</var> =</code> <strong class="def-name">uencode</strong> <code class="def-code-arguments">(<var class="var">in</var>, <var class="var">n</var>, <var class="var">v</var>, <var class="var">signed</var>)</code></span></dt>
 <dd><p>Quantize the entries of the array <var class="var">in</var> using 2^<var class="var">n</var> quantization levels.
  </p>
 <p><strong class="strong">See also:</strong> udecode.
- </p></dd></dl>
+ </p></dd></dl>{% endraw %}

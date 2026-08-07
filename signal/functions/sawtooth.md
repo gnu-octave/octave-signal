@@ -85,7 +85,7 @@ navigation:
   name: "Manual"
   url: "/manual"
 ---
-<dl class="first-deftypefn def-block">
+{% raw %}<dl class="first-deftypefn def-block">
 <dt class="deftypefn def-line" id="index-sawtooth"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">sawtooth</strong> <code class="def-code-arguments">(<var class="var">t</var>)</code></span></dt>
 <dt class="deftypefnx def-cmd-deftypefn def-line" id="index-sawtooth-1"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">sawtooth</strong> <code class="def-code-arguments">(<var class="var">t</var>, <var class="var">width</var>)</code></span></dt>
 <dd><p>Generates a sawtooth wave of period <code class="code">2 * pi</code> with limits <code class="code">+1/-1</code>
@@ -101,4 +101,4 @@ navigation:
 </p>
 <p>If <var class="var">width</var> is not specified, it takes a value of 1, which is a standard
  sawtooth function.
- </p></dd></dl>
+ </p></dd></dl>{% endraw %}

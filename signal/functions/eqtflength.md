@@ -85,7 +85,7 @@ navigation:
   name: "Manual"
   url: "/manual"
 ---
-<dl class="first-deftypefn def-block">
+{% raw %}<dl class="first-deftypefn def-block">
 <dt class="deftypefn def-line" id="index-eqtflength"><span><code class="def-type">[<var class="var">b</var>, <var class="var">a</var>] =</code> <strong class="def-name">eqtflength</strong> <code class="def-code-arguments">(<var class="var">num</var>, <var class="var">den</var>)</code></span></dt>
 <dt class="deftypefnx def-cmd-deftypefn def-line" id="index-eqtflength-1"><span><code class="def-type">[<var class="var">b</var>, <var class="var">a</var>, <var class="var">n</var>, <var class="var">m</var>] =</code> <strong class="def-name">eqtflength</strong> <code class="def-code-arguments">(<var class="var">num</var>, <var class="var">den</var>)</code></span></dt>
 <dd><p>Equalize numerator and denominator polynomial lengths.
@@ -107,4 +107,4 @@ navigation:
 
 
 <p><strong class="strong">See also:</strong> tf2ss, tf2zp.
- </p></dd></dl>
+ </p></dd></dl>{% endraw %}

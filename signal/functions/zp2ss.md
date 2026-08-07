@@ -85,7 +85,7 @@ navigation:
   name: "Manual"
   url: "/manual"
 ---
-<dl class="first-deftypefn def-block">
+{% raw %}<dl class="first-deftypefn def-block">
 <dt class="deftypefn def-line" id="index-zp2ss"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">a</var>, <var class="var">b</var>, <var class="var">c</var>, <var class="var">d</var>] =</code> <strong class="def-name">zp2ss</strong> <code class="def-code-arguments">(<var class="var">z</var>, <var class="var">p</var>, <var class="var">k</var>)</code></span></dt>
 <dd><p>Conversion from zero / pole to state space.
 </p>
@@ -116,4 +116,4 @@ navigation:
  </pre></div><pre class="example-preformatted"> </pre></div>
 </dd>
 </dl>
-</dd></dl>
+</dd></dl>{% endraw %}

@@ -85,7 +85,7 @@ navigation:
   name: "Manual"
   url: "/manual"
 ---
-<dl class="first-deftypefn def-block">
+{% raw %}<dl class="first-deftypefn def-block">
 <dt class="deftypefn def-line" id="index-zplane"><span class="category-def">Function File: </span><span><strong class="def-name">zplane</strong> <code class="def-code-arguments">(<var class="var">z</var>, <var class="var">p</var>)</code></span></dt>
 <dt class="deftypefnx def-cmd-deftypefn def-line" id="index-zplane-1"><span class="category-def">Function File: </span><span><strong class="def-name">zplane</strong> <code class="def-code-arguments">(<var class="var">b</var>, <var class="var">a</var>)</code></span></dt>
 <dt class="deftypefnx def-cmd-deftypefn def-line" id="index-zplane-2"><span class="category-def">Function File: </span><span><code class="def-type">[hz, hp, ht] =</code> <strong class="def-name">zplane</strong> <code class="def-code-arguments">(___)</code></span></dt>
@@ -120,4 +120,4 @@ navigation:
 <p>If output variables are provided, hz is the handle to the zero lines, hp is the handle to the pole lines
  of the pole-zero plot. ht is a vector of handles to the axes/unit circle line and to text objects.
  If there are no zeros or no poles, hz or hp is the empty matrix, [].
- </p></dd></dl>
+ </p></dd></dl>{% endraw %}

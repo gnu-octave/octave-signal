@@ -85,7 +85,7 @@ navigation:
   name: "Manual"
   url: "/manual"
 ---
-<dl class="first-deftypefn def-block">
+{% raw %}<dl class="first-deftypefn def-block">
 <dt class="deftypefn def-line" id="index-findpeaks"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">pks</var>, <var class="var">loc</var>, <var class="var">extra</var>] =</code> <strong class="def-name">findpeaks</strong> <code class="def-code-arguments">(<var class="var">data</var>)</code></span></dt>
 <dt class="deftypefnx def-cmd-deftypefn def-line" id="index-findpeaks-1"><span class="category-def">Function File: </span><span><code class="def-type">&hellip; =</code> <strong class="def-name">findpeaks</strong> <code class="def-code-arguments">(&hellip;, <var class="var">property</var>, <var class="var">value</var>)</code></span></dt>
 <dt class="deftypefnx def-cmd-deftypefn def-line" id="index-findpeaks-2"><span class="category-def">Function File: </span><span><code class="def-type">&hellip; =</code> <strong class="def-name">findpeaks</strong> <code class="def-code-arguments">(&hellip;, &quot;DoubleSided&quot;)</code></span></dt>
@@ -166,4 +166,4 @@ navigation:
 </dl>
 
 <p>Run <code class="command">demo findpeaks</code> to see some examples.
- </p></dd></dl>
+ </p></dd></dl>{% endraw %}

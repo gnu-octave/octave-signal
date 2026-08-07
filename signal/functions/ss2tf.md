@@ -85,7 +85,7 @@ navigation:
   name: "Manual"
   url: "/manual"
 ---
-<dl class="first-deftypefn def-block">
+{% raw %}<dl class="first-deftypefn def-block">
 <dt class="deftypefn def-line" id="index-ss2tf"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">num</var>, <var class="var">den</var>] =</code> <strong class="def-name">ss2tf</strong> <code class="def-code-arguments">(<var class="var">a</var>, <var class="var">b</var>, <var class="var">c</var>, <var class="var">d</var>)</code></span></dt>
 <dd><p>Conversion from state-space to transfer function representation.
  The state space system:
@@ -102,4 +102,4 @@ navigation:
                  den(s)
  </pre></div><pre class="example-preformatted"> </pre></div>
 
-</dd></dl>
+</dd></dl>{% endraw %}

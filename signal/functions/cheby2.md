@@ -85,7 +85,7 @@ navigation:
   name: "Manual"
   url: "/manual"
 ---
-<dl class="first-deftypefn def-block">
+{% raw %}<dl class="first-deftypefn def-block">
 <dt class="deftypefn def-line" id="index-cheby2"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">b</var>, <var class="var">a</var>] =</code> <strong class="def-name">cheby2</strong> <code class="def-code-arguments">(<var class="var">n</var>, <var class="var">rs</var>, <var class="var">wc</var>)</code></span></dt>
 <dt class="deftypefnx def-cmd-deftypefn def-line" id="index-cheby2-1"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">b</var>, <var class="var">a</var>] =</code> <strong class="def-name">cheby2</strong> <code class="def-code-arguments">(<var class="var">n</var>, <var class="var">rs</var>, <var class="var">wc</var>, &quot;high&quot;)</code></span></dt>
 <dt class="deftypefnx def-cmd-deftypefn def-line" id="index-cheby2-2"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">b</var>, <var class="var">a</var>] =</code> <strong class="def-name">cheby2</strong> <code class="def-code-arguments">(<var class="var">n</var>, <var class="var">rs</var>, [<var class="var">wl</var>, <var class="var">wh</var>])</code></span></dt>
@@ -121,4 +121,4 @@ navigation:
 </p>
 <p>Parks &amp; Burrus (1987). Digital Filter Design. New York:
  John Wiley &amp; Sons, Inc.
- </p></dd></dl>
+ </p></dd></dl>{% endraw %}

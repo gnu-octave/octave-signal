@@ -85,7 +85,7 @@ navigation:
   name: "Manual"
   url: "/manual"
 ---
-<dl class="first-deftypefn def-block">
+{% raw %}<dl class="first-deftypefn def-block">
 <dt class="deftypefn def-line" id="index-upsamplefill"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">upsamplefill</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">v</var>)</code></span></dt>
 <dt class="deftypefnx def-cmd-deftypefn def-line" id="index-upsamplefill-1"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">upsamplefill</strong> <code class="def-code-arguments">(&hellip;, <var class="var">copy</var>)</code></span></dt>
 <dd><p>Upsamples a vector interleaving given values or copies of the vector elements.
@@ -117,4 +117,4 @@ navigation:
 
 
 <p><strong class="strong">See also:</strong> upsample.
- </p></dd></dl>
+ </p></dd></dl>{% endraw %}

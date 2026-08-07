@@ -85,7 +85,7 @@ navigation:
   name: "Manual"
   url: "/manual"
 ---
-<dl class="first-deftypefn def-block">
+{% raw %}<dl class="first-deftypefn def-block">
 <dt class="deftypefn def-line" id="index-firpmord"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">n</var>, <var class="var">Fout</var>, <var class="var">a</var>, <var class="var">w</var>] =</code> <strong class="def-name">firpmord</strong> <code class="def-code-arguments">(<var class="var">f</var>, <var class="var">a</var>, <var class="var">d</var>)</code></span></dt>
 <dt class="deftypefnx def-cmd-deftypefn def-line" id="index-firpmord-1"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">n</var>, <var class="var">Fout</var>, <var class="var">a</var>, <var class="var">w</var>] =</code> <strong class="def-name">firpmord</strong> <code class="def-code-arguments">(<var class="var">f</var>, <var class="var">a</var>, <var class="var">d</var>, <var class="var">fs</var>)</code></span></dt>
 <dt class="deftypefnx def-cmd-deftypefn def-line" id="index-firpmord-2"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">c</var> =</code> <strong class="def-name">firpmord</strong> <code class="def-code-arguments">(<var class="var">f</var>, <var class="var">a</var>, <var class="var">d</var>, &quot;cell&quot;)</code></span></dt>
@@ -149,12 +149,12 @@ navigation:
 <div class="example">
 <pre class="example-preformatted"> </pre><div class="group"><pre class="example-preformatted"> # Band-pass:
  c = firpmord ([3 4 8 9], [0 1 0], [1e-3 1e-2 1e-3], 20, &quot;cell&quot;);
- b = firpm (c\{:\});
+ b = firpm (c{:});
  </pre></div><pre class="example-preformatted"> </pre></div>
 
 <div class="example">
 <pre class="example-preformatted"> </pre><div class="group"><pre class="example-preformatted"> # High-pass:
- b = firpm (firpmord ([6.4 8]/16, [0 1], [1e-4 0.01], &quot;c&quot;)\{:\});
+ b = firpm (firpmord ([6.4 8]/16, [0 1], [1e-4 0.01], &quot;c&quot;){:});
  </pre></div><pre class="example-preformatted"> </pre></div>
 
 <p>In cases where elements of <var class="var">d</var> follow a repeating pattern (e.g. all the
@@ -193,4 +193,4 @@ navigation:
 
 <p><strong class="strong">See also:</strong> firpm, kaiserord.
 </p>
-</dd></dl>
+</dd></dl>{% endraw %}

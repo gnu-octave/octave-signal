@@ -85,7 +85,7 @@ navigation:
   name: "Manual"
   url: "/manual"
 ---
-<dl class="first-deftypefn def-block">
+{% raw %}<dl class="first-deftypefn def-block">
 <dt class="deftypefn def-line" id="index-buttap"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">z</var>, <var class="var">p</var>, <var class="var">g</var>] =</code> <strong class="def-name">buttap</strong> <code class="def-code-arguments">(<var class="var">n</var>)</code></span></dt>
 <dd><p>Design lowpass analog Butterworth filter.
 </p>
@@ -94,4 +94,4 @@ navigation:
 </p>
 
 <p><strong class="strong">See also:</strong> butter.
- </p></dd></dl>
+ </p></dd></dl>{% endraw %}

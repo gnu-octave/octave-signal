@@ -85,7 +85,7 @@ navigation:
   name: "Manual"
   url: "/manual"
 ---
-<dl class="first-deftypefn def-block">
+{% raw %}<dl class="first-deftypefn def-block">
 <dt class="deftypefn def-line" id="index-_0028m_0029"><span class="category-def">Function File: </span><span><code class="def-type">taylorwin</code> <strong class="def-name">(<var class="var">m</var>)</strong></span></dt>
 <dt class="deftypefnx def-cmd-deftypefn def-line" id="index-_0028m_002c"><span class="category-def">Function File: </span><span><code class="def-type">taylorwin</code> <strong class="def-name">(<var class="var">m</var>,</strong> <code class="def-code-arguments"><var class="var">nbar</var>)</code></span></dt>
 <dt class="deftypefnx def-cmd-deftypefn def-line" id="index-_0028m_002c-1"><span class="category-def">Function File: </span><span><code class="def-type">taylorwin</code> <strong class="def-name">(<var class="var">m</var>,</strong> <code class="def-code-arguments"><var class="var">nbar</var>, <var class="var">sll</var>)</code></span></dt>
@@ -102,4 +102,4 @@ navigation:
  Doerry, &lsquo;Catalog of Window Taper Functions for Sidelobe Control&rsquo;, 2017.
  </p>
 <p><strong class="strong">See also:</strong> chebwin.
- </p></dd></dl>
+ </p></dd></dl>{% endraw %}

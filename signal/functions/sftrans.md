@@ -85,7 +85,7 @@ navigation:
   name: "Manual"
   url: "/manual"
 ---
-<dl class="first-deftypefn def-block">
+{% raw %}<dl class="first-deftypefn def-block">
 <dt class="deftypefn def-line" id="index-sftrans"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">Sz</var>, <var class="var">Sp</var>, <var class="var">Sg</var>] =</code> <strong class="def-name">sftrans</strong> <code class="def-code-arguments">(<var class="var">Sz</var>, <var class="var">Sp</var>, <var class="var">Sg</var>, <var class="var">W</var>, <var class="var">stop</var>)</code></span></dt>
 <dd>
 <p>Transform band edges of a generic lowpass filter (cutoff at W=1)
@@ -160,4 +160,4 @@ navigation:
 </p>
 <p>Proakis &amp; Manolakis (1992). Digital Signal Processing. New York:
  Macmillan Publishing Company.
- </p></dd></dl>
+ </p></dd></dl>{% endraw %}

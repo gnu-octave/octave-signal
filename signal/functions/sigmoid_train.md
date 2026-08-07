@@ -85,7 +85,7 @@ navigation:
   name: "Manual"
   url: "/manual"
 ---
-<dl class="first-deftypefn def-block">
+{% raw %}<dl class="first-deftypefn def-block">
 <dt class="deftypefn def-line" id="index-sigmoid_005ftrain"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">y</var> <var class="var">s</var>] =</code> <strong class="def-name">sigmoid_train</strong> <code class="def-code-arguments">(<var class="var">t</var>, <var class="var">ranges</var>, <var class="var">rc</var>)</code></span></dt>
 <dd>
 <p>Evaluate a train of sigmoid functions at <var class="var">t</var>.
@@ -103,4 +103,4 @@ navigation:
 </p>
 <p>Run <code class="code">demo sigmoid_train</code> to some examples of the use of this function.
 </p>
-</dd></dl>
+</dd></dl>{% endraw %}

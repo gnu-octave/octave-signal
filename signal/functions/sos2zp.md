@@ -85,7 +85,7 @@ navigation:
   name: "Manual"
   url: "/manual"
 ---
-<dl class="first-deftypefn def-block">
+{% raw %}<dl class="first-deftypefn def-block">
 <dt class="deftypefn def-line" id="index-sos2zp"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">z</var>, <var class="var">p</var>, <var class="var">k</var>] =</code> <strong class="def-name">sos2zp</strong> <code class="def-code-arguments">(<var class="var">sos</var>)</code></span></dt>
 <dt class="deftypefnx def-cmd-deftypefn def-line" id="index-sos2zp-1"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">z</var>, <var class="var">p</var>, <var class="var">k</var>] =</code> <strong class="def-name">sos2zp</strong> <code class="def-code-arguments">(<var class="var">sos</var>, <var class="var">g</var>)</code></span></dt>
 <dd><p>Convert series second-order sections to zeros, poles, and gains
@@ -138,4 +138,4 @@ navigation:
 
 
 <p><strong class="strong">See also:</strong> zp2sos, sos2tf, tf2sos, zp2tf, tf2zp.
- </p></dd></dl>
+ </p></dd></dl>{% endraw %}

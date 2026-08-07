@@ -85,7 +85,7 @@ navigation:
   name: "Manual"
   url: "/manual"
 ---
-<dl class="first-deftypefn def-block">
+{% raw %}<dl class="first-deftypefn def-block">
 <dt class="deftypefn def-line" id="index-aryule"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">a</var> =</code> <strong class="def-name">aryule</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">p</var>)</code></span></dt>
 <dt class="deftypefnx def-cmd-deftypefn def-line" id="index-aryule-1"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">a</var>, <var class="var">v</var>, <var class="var">k</var>] =</code> <strong class="def-name">aryule</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">p</var>)</code></span></dt>
 <dd><p>Fit an AR (<var class="var">p</var>)-model with Yule-Walker estimates.
@@ -117,4 +117,4 @@ navigation:
  truncation errors, which is why you might want to use them.  However,
  lacking a lattice filter processor, I haven&rsquo;t tested that the lattice
  filter coefficients are reasonable.
- </p></dd></dl>
+ </p></dd></dl>{% endraw %}

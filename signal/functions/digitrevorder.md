@@ -85,7 +85,7 @@ navigation:
   name: "Manual"
   url: "/manual"
 ---
-<dl class="first-deftypefn def-block">
+{% raw %}<dl class="first-deftypefn def-block">
 <dt class="deftypefn def-line" id="index-digitrevorder"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">digitrevorder</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">r</var>)</code></span></dt>
 <dt class="deftypefnx def-cmd-deftypefn def-line" id="index-digitrevorder-1"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">y</var>, <var class="var">i</var>] =</code> <strong class="def-name">digitrevorder</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">r</var>)</code></span></dt>
 <dd><p>Reorder the elements of the vector <var class="var">x</var> in digit-reversed order.
@@ -93,4 +93,4 @@ navigation:
  The reordered indices of the elements of <var class="var">x</var> are returned in <var class="var">i</var>.
  </p>
 <p><strong class="strong">See also:</strong> bitrevorder, fft, ifft.
- </p></dd></dl>
+ </p></dd></dl>{% endraw %}

@@ -85,7 +85,7 @@ navigation:
   name: "Manual"
   url: "/manual"
 ---
-<dl class="first-deftypefn def-block">
+{% raw %}<dl class="first-deftypefn def-block">
 <dt class="deftypefn def-line" id="index-meyeraux"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">meyeraux</strong> <code class="def-code-arguments">(<var class="var">x</var>)</code></span></dt>
 <dd><p>Compute the Meyer wavelet auxiliary function.
- </p></dd></dl>
+ </p></dd></dl>{% endraw %}

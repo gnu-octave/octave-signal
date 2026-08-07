@@ -85,9 +85,9 @@ navigation:
   name: "Manual"
   url: "/manual"
 ---
-<dl class="first-deftypefn def-block">
+{% raw %}<dl class="first-deftypefn def-block">
 <dt class="deftypefn def-line" id="index-unshiftdata"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">out</var>] =</code> <strong class="def-name">unshiftdata</strong> <code class="def-code-arguments">(<var class="var">in</var>, <var class="var">perm</var>, <var class="var">shifts</var>)</code></span></dt>
 <dd><p>Reverse what is done by shiftdata.
  </p>
 <p><strong class="strong">See also:</strong> shiftdata.
- </p></dd></dl>
+ </p></dd></dl>{% endraw %}

@@ -85,8 +85,8 @@ navigation:
   name: "Manual"
   url: "/manual"
 ---
-<dl class="first-deftypefn def-block">
+{% raw %}<dl class="first-deftypefn def-block">
 <dt class="deftypefn def-line" id="index-gmonopuls"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">gmonopuls</strong> <code class="def-code-arguments">(<var class="var">t</var>,<var class="var">fc</var>)</code></span></dt>
 <dt class="deftypefnx def-cmd-deftypefn def-line" id="index-gmonopuls-1"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">tc</var> =</code> <strong class="def-name">gmonopuls</strong> <code class="def-code-arguments">(&quot;cutoff&quot;, <var class="var">fc</var>)</code></span></dt>
 <dd><p>Return the gaussian monopulse or compute its cutoff time.
- </p></dd></dl>
+ </p></dd></dl>{% endraw %}

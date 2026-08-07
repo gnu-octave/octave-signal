@@ -85,7 +85,7 @@ navigation:
   name: "Manual"
   url: "/manual"
 ---
-<dl class="first-deftypefn def-block">
+{% raw %}<dl class="first-deftypefn def-block">
 <dt class="deftypefn def-line" id="index-dst"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">dst</strong> <code class="def-code-arguments">(<var class="var">x</var>)</code></span></dt>
 <dt class="deftypefnx def-cmd-deftypefn def-line" id="index-dst-1"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">dst</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">n</var>)</code></span></dt>
 <dd><p>Computes the type I discrete sine transform of <var class="var">x</var>.  If <var class="var">n</var> is given,
@@ -101,4 +101,4 @@ navigation:
  </pre>
 
 <p><strong class="strong">See also:</strong> idst.
- </p></dd></dl>
+ </p></dd></dl>{% endraw %}

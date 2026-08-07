@@ -85,7 +85,7 @@ navigation:
   name: "Manual"
   url: "/manual"
 ---
-<dl class="first-deftypefn def-block">
+{% raw %}<dl class="first-deftypefn def-block">
 <dt class="deftypefn def-line" id="index-statelevels"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">levels</var> =</code> <strong class="def-name">statelevels</strong> <code class="def-code-arguments">(<var class="var">A</var>)</code></span></dt>
 <dt class="deftypefnx def-cmd-deftypefn def-line" id="index-statelevels-1"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">levels</var> =</code> <strong class="def-name">statelevels</strong> <code class="def-code-arguments">(<var class="var">A</var>, <var class="var">nbins</var>)</code></span></dt>
 <dt class="deftypefnx def-cmd-deftypefn def-line" id="index-statelevels-2"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">levels</var> =</code> <strong class="def-name">statelevels</strong> <code class="def-code-arguments">(<var class="var">A</var>, <var class="var">nbins</var>, <var class="var">method</var>)</code></span></dt>
@@ -128,4 +128,4 @@ navigation:
 
 <p>If no outputs are provided, the signal and histogram will be plotted, and display the levels.
 </p>
-</dd></dl>
+</dd></dl>{% endraw %}

@@ -85,7 +85,7 @@ navigation:
   name: "Manual"
   url: "/manual"
 ---
-<dl class="first-deftypefn def-block">
+{% raw %}<dl class="first-deftypefn def-block">
 <dt class="deftypefn def-line" id="index-_003d"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">Pxx</var>,<var class="var">freq</var>]</code> <strong class="def-name">=</strong> <code class="def-code-arguments">csd(<var class="var">x</var>, <var class="var">y</var>, <var class="var">Nfft</var>, <var class="var">Fs</var>, <var class="var">window</var>, <var class="var">overlap</var>, <var class="var">range</var>, <var class="var">plot_type</var>, <var class="var">detrend</var>)</code></span></dt>
 <dd><p>Estimate cross power spectrum of data &quot;x&quot; and &quot;y&quot; by the Welch (1967)
  periodogram/FFT method.
@@ -94,4 +94,4 @@ navigation:
 </p>
 <p>See &quot;help pwelch&quot; for description of arguments, hints and references
  &mdash; especially hint (7) for Matlab R11 defaults.
- </p></dd></dl>
+ </p></dd></dl>{% endraw %}

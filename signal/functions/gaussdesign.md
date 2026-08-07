@@ -85,7 +85,7 @@ navigation:
   name: "Manual"
   url: "/manual"
 ---
-<dl class="first-deftypefn def-block">
+{% raw %}<dl class="first-deftypefn def-block">
 <dt class="deftypefn def-line" id="index-gaussdesign"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">h</var> =</code> <strong class="def-name">gaussdesign</strong> <code class="def-code-arguments">(<var class="var">bt</var>, <var class="var">span</var>, <var class="var">sps</var>)</code></span></dt>
 <dd> 
 <p>Design a Gaussian FIR pulse-shaping filter.
@@ -123,4 +123,4 @@ navigation:
 
 
 <p><strong class="strong">See also:</strong> gaussian, rcosdesign.
- </p></dd></dl>
+ </p></dd></dl>{% endraw %}

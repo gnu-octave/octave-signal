@@ -85,7 +85,7 @@ navigation:
   name: "Manual"
   url: "/manual"
 ---
-<dl class="first-deftypefn def-block">
+{% raw %}<dl class="first-deftypefn def-block">
 <dt class="deftypefn def-line" id="index-fwhm"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">f</var> =</code> <strong class="def-name">fwhm</strong> <code class="def-code-arguments">(<var class="var">y</var>)</code></span></dt>
 <dt class="deftypefnx def-cmd-deftypefn def-line" id="index-fwhm-1"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">f</var> =</code> <strong class="def-name">fwhm</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">y</var>)</code></span></dt>
 <dt class="deftypefnx def-cmd-deftypefn def-line" id="index-fwhm-2"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">f</var> =</code> <strong class="def-name">fwhm</strong> <code class="def-code-arguments">(&hellip;, &quot;zero&quot;)</code></span></dt>
@@ -114,4 +114,4 @@ navigation:
  does not cut horizontal line at <em class="math">rlevel*max(y)</em> or
  <em class="math">rlevel*(max(y)+min(y))</em> or alevel, respectively).
 </p>
-</dd></dl>
+</dd></dl>{% endraw %}

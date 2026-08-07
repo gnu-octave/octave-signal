@@ -85,10 +85,10 @@ navigation:
   name: "Manual"
   url: "/manual"
 ---
-<dl class="first-deftypefn def-block">
+{% raw %}<dl class="first-deftypefn def-block">
 <dt class="deftypefn def-line" id="index-enbw"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">bw</var> =</code> <strong class="def-name">enbw</strong> <code class="def-code-arguments">(<var class="var">window</var>)</code></span></dt>
 <dt class="deftypefnx def-cmd-deftypefn def-line" id="index-enbw-1"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">bw</var> =</code> <strong class="def-name">enbw</strong> <code class="def-code-arguments">(<var class="var">window</var>, <var class="var">fs</var>)</code></span></dt>
 <dd>
 <p>Compute the equivalent noise bandwidth of a window.
 </p>
-</dd></dl>
+</dd></dl>{% endraw %}

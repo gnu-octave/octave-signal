@@ -85,7 +85,7 @@ navigation:
   name: "Manual"
   url: "/manual"
 ---
-<dl class="first-deftypefn def-block">
+{% raw %}<dl class="first-deftypefn def-block">
 <dt class="deftypefn def-line" id="index-grpdelay"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">g</var>, <var class="var">w</var>] =</code> <strong class="def-name">grpdelay</strong> <code class="def-code-arguments">(<var class="var">b</var>)</code></span></dt>
 <dt class="deftypefnx def-cmd-deftypefn def-line" id="index-grpdelay-1"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">g</var>, <var class="var">w</var>] =</code> <strong class="def-name">grpdelay</strong> <code class="def-code-arguments">(<var class="var">b</var>, <var class="var">a</var>)</code></span></dt>
 <dt class="deftypefnx def-cmd-deftypefn def-line" id="index-grpdelay-2"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">g</var>, <var class="var">w</var>] =</code> <strong class="def-name">grpdelay</strong> <code class="def-code-arguments">(&hellip;, <var class="var">n</var>)</code></span></dt>
@@ -135,7 +135,7 @@ navigation:
  is set to zero.  (The group delay approaches infinity when
  there are poles or zeros very close to the unit circle in the z plane.)
 </p>
-<p>Theory: group delay, g(w) = -d/dw [arg\{H(e^jw)\}],  is the rate of change of
+<p>Theory: group delay, g(w) = -d/dw [arg{H(e^jw)}],  is the rate of change of
  phase with respect to frequency.  It can be computed as:
 </p>
 <div class="example">
@@ -179,4 +179,4 @@ navigation:
  is converted to the FIR filter conv(b,fliplr(conj(a))).
  For further details, see
  http://ccrma.stanford.edu/~jos/filters/Numerical_Computation_Group_Delay.html
- </p></dd></dl>
+ </p></dd></dl>{% endraw %}

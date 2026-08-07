@@ -85,7 +85,7 @@ navigation:
   name: "Manual"
   url: "/manual"
 ---
-<dl class="first-deftypefn def-block">
+{% raw %}<dl class="first-deftypefn def-block">
 <dt class="deftypefn def-line" id="index-rc2lar"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">g</var> =</code> <strong class="def-name">rc2lar</strong> <code class="def-code-arguments">(<var class="var">k</var>)</code></span></dt>
 <dd>
 <p>Convert reflection coefficients to log area ratio.
@@ -99,4 +99,4 @@ navigation:
 
 
 <p><strong class="strong">See also:</strong> lar2rc.
- </p></dd></dl>
+ </p></dd></dl>{% endraw %}

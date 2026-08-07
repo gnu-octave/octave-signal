@@ -85,11 +85,11 @@ navigation:
   name: "Manual"
   url: "/manual"
 ---
-<dl class="first-deftypefn def-block">
+{% raw %}<dl class="first-deftypefn def-block">
 <dt class="deftypefn def-line" id="index-besselap"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">zero</var>, <var class="var">pole</var>, <var class="var">gain</var>] =</code> <strong class="def-name">besselap</strong> <code class="def-code-arguments">(<var class="var">n</var>)</code></span></dt>
 <dd><p>Return bessel analog filter prototype.
 </p>
 <p>References:
 </p>
 <p>http://en.wikipedia.org/wiki/Bessel_polynomials
- </p></dd></dl>
+ </p></dd></dl>{% endraw %}

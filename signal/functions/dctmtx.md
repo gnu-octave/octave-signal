@@ -85,7 +85,7 @@ navigation:
   name: "Manual"
   url: "/manual"
 ---
-<dl class="first-deftypefn def-block">
+{% raw %}<dl class="first-deftypefn def-block">
 <dt class="deftypefn def-line" id="index-dctmtx"><span class="category-def">Function File: </span><span><strong class="def-name">dctmtx</strong> <code class="def-code-arguments">(<var class="var">n</var>)</code></span></dt>
 <dd><p>Return the DCT transformation matrix of size <var class="var">n</var>-by-<var class="var">n</var>.
 </p>
@@ -105,4 +105,4 @@ navigation:
 </p>
 
 <p><strong class="strong">See also:</strong> dct, idct, dct2, idct2.
- </p></dd></dl>
+ </p></dd></dl>{% endraw %}

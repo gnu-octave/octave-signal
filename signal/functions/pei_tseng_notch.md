@@ -85,7 +85,7 @@ navigation:
   name: "Manual"
   url: "/manual"
 ---
-<dl class="first-deftypefn def-block">
+{% raw %}<dl class="first-deftypefn def-block">
 <dt class="deftypefn def-line" id="index-pei_005ftseng_005fnotch"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">b</var>, <var class="var">a</var>] =</code> <strong class="def-name">pei_tseng_notch</strong> <code class="def-code-arguments">(<var class="var">frequencies</var>, <var class="var">bandwidths</var>)</code></span></dt>
 <dd><p>Return coefficients for an IIR notch-filter with one or more filter frequencies and according (very narrow) bandwidths
  to be used with <code class="code">filter</code> or <code class="code">filtfilt</code>.
@@ -98,4 +98,4 @@ navigation:
  &quot;IIR Multiple Notch Filter Design Based on Allpass Filter&quot;
  1996 IEEE Tencon
  doi: 10.1109/TENCON.1996.608814)
- </p></dd></dl>
+ </p></dd></dl>{% endraw %}

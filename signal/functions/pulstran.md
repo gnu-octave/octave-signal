@@ -85,7 +85,7 @@ navigation:
   name: "Manual"
   url: "/manual"
 ---
-<dl class="first-deftypefn def-block">
+{% raw %}<dl class="first-deftypefn def-block">
 <dt class="deftypefn def-line" id="index-pulstran"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">pulstran</strong> <code class="def-code-arguments">(<var class="var">t</var>, <var class="var">d</var>, <var class="var">func</var>, &hellip;)</code></span></dt>
 <dt class="deftypefnx def-cmd-deftypefn def-line" id="index-pulstran-1"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">pulstran</strong> <code class="def-code-arguments">(<var class="var">t</var>, <var class="var">d</var>, <var class="var">p</var>)</code></span></dt>
 <dt class="deftypefnx def-cmd-deftypefn def-line" id="index-pulstran-2"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">pulstran</strong> <code class="def-code-arguments">(<var class="var">t</var>, <var class="var">d</var>, <var class="var">p</var>, <var class="var">Fs</var>)</code></span></dt>
@@ -119,4 +119,4 @@ navigation:
  w = boxcar(10);  # pulse width of 1 millisecond at 10 kHz
  auplot (pulstran (0:1/fs:0.1, 0:1/f0:0.1, w, 10000), fs);
  </pre></div>
-</dd></dl>
+</dd></dl>{% endraw %}

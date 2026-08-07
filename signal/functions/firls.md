@@ -85,7 +85,7 @@ navigation:
   name: "Manual"
   url: "/manual"
 ---
-<dl class="first-deftypefn def-block">
+{% raw %}<dl class="first-deftypefn def-block">
 <dt class="deftypefn def-line" id="index-firls"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">b</var> =</code> <strong class="def-name">firls</strong> <code class="def-code-arguments">(<var class="var">n</var>, <var class="var">f</var>, <var class="var">a</var>)</code></span></dt>
 <dt class="deftypefnx def-cmd-deftypefn def-line" id="index-firls-1"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">b</var> =</code> <strong class="def-name">firls</strong> <code class="def-code-arguments">(<var class="var">n</var>, <var class="var">f</var>, <var class="var">a</var>, <var class="var">w</var>)</code></span></dt>
 <dd>
@@ -112,4 +112,4 @@ navigation:
 </p>
 <p>I. Selesnick, &quot;Linear-Phase FIR Filter Design by Least Squares,&quot;
  http://cnx.org/content/m10577
- </p></dd></dl>
+ </p></dd></dl>{% endraw %}

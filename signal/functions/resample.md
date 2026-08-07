@@ -85,7 +85,7 @@ navigation:
   name: "Manual"
   url: "/manual"
 ---
-<dl class="first-deftypefn def-block">
+{% raw %}<dl class="first-deftypefn def-block">
 <dt class="deftypefn def-line" id="index-resample"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">y</var>, <var class="var">h</var>] =</code> <strong class="def-name">resample</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">p</var>, <var class="var">q</var>)</code></span></dt>
 <dt class="deftypefnx def-cmd-deftypefn def-line" id="index-resample-1"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">resample</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">p</var>, <var class="var">q</var>, <var class="var">h</var>)</code></span></dt>
 <dd><p>Change the sample rate of <var class="var">x</var> by a factor of <var class="var">p</var>/<var class="var">q</var>.  This is
@@ -100,4 +100,4 @@ navigation:
 <p>Ref [2] A. V. Oppenheim, R. W. Schafer and J. R. Buck,
  Discrete-time signal processing, Signal processing series,
  Prentice-Hall, 1999
- </p></dd></dl>
+ </p></dd></dl>{% endraw %}

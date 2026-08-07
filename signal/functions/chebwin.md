@@ -85,7 +85,7 @@ navigation:
   name: "Manual"
   url: "/manual"
 ---
-<dl class="first-deftypefn def-block">
+{% raw %}<dl class="first-deftypefn def-block">
 <dt class="deftypefn def-line" id="index-chebwin"><span class="category-def">Function File: </span><span><strong class="def-name">chebwin</strong> <code class="def-code-arguments">(<var class="var">m</var>)</code></span></dt>
 <dt class="deftypefnx def-cmd-deftypefn def-line" id="index-chebwin-1"><span class="category-def">Function File: </span><span><strong class="def-name">chebwin</strong> <code class="def-code-arguments">(<var class="var">m</var>, <var class="var">at</var>)</code></span></dt>
 <dd>
@@ -126,4 +126,4 @@ navigation:
 </p>
 
 <p><strong class="strong">See also:</strong> kaiser.
- </p></dd></dl>
+ </p></dd></dl>{% endraw %}

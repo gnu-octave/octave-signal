@@ -85,7 +85,7 @@ navigation:
   name: "Manual"
   url: "/manual"
 ---
-<dl class="first-deftypefn def-block">
+{% raw %}<dl class="first-deftypefn def-block">
 <dt class="deftypefn def-line" id="index-xcov"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">R</var>, <var class="var">lag</var>] =</code> <strong class="def-name">xcov</strong> <code class="def-code-arguments">( <var class="var">X</var> )</code></span></dt>
 <dt class="deftypefnx def-cmd-deftypefn def-line" id="index-xcov-1"><span class="category-def">Function File: </span><span><code class="def-type">&hellip; =</code> <strong class="def-name">xcov</strong> <code class="def-code-arguments">( <var class="var">X</var>, <var class="var">Y</var> )</code></span></dt>
 <dt class="deftypefnx def-cmd-deftypefn def-line" id="index-xcov-2"><span class="category-def">Function File: </span><span><code class="def-type">&hellip; =</code> <strong class="def-name">xcov</strong> <code class="def-code-arguments">( &hellip;, <var class="var">maxlag</var>)</code></span></dt>
@@ -130,4 +130,4 @@ navigation:
 </p>
 
 <p><strong class="strong">See also:</strong> xcorr.
- </p></dd></dl>
+ </p></dd></dl>{% endraw %}

@@ -85,7 +85,7 @@ navigation:
   name: "Manual"
   url: "/manual"
 ---
-<dl class="first-deftypefn def-block">
+{% raw %}<dl class="first-deftypefn def-block">
 <dt class="deftypefn def-line" id="index-cheb1ap"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">z</var>, <var class="var">p</var>, <var class="var">g</var>] =</code> <strong class="def-name">cheb1ap</strong> <code class="def-code-arguments">(<var class="var">n</var>, <var class="var">Rp</var>)</code></span></dt>
 <dd><p>Design lowpass analog Chebyshev type I filter.
 </p>
@@ -118,4 +118,4 @@ navigation:
  </pre></div>
 
 <p><strong class="strong">See also:</strong> buttap, cheby1, cheb2ap, ellipap.
- </p></dd></dl>
+ </p></dd></dl>{% endraw %}

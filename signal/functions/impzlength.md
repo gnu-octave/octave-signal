@@ -85,7 +85,7 @@ navigation:
   name: "Manual"
   url: "/manual"
 ---
-<dl class="first-deftypefn def-block">
+{% raw %}<dl class="first-deftypefn def-block">
 <dt class="deftypefn def-line" id="index-impzlength"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">len</var> =</code> <strong class="def-name">impzlength</strong> <code class="def-code-arguments">(<var class="var">b</var>)</code></span></dt>
 <dt class="deftypefnx def-cmd-deftypefn def-line" id="index-impzlength-1"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">len</var> =</code> <strong class="def-name">impzlength</strong> <code class="def-code-arguments">(<var class="var">b</var>, <var class="var">a</var>)</code></span></dt>
 <dt class="deftypefnx def-cmd-deftypefn def-line" id="index-impzlength-2"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">len</var> =</code> <strong class="def-name">impzlength</strong> <code class="def-code-arguments">(<var class="var">sos</var>)</code></span></dt>
@@ -117,7 +117,7 @@ navigation:
  magnitude) is determined by counting poles at the same complex
  coordinate within tolerance.
 
-</li><li> For a stable IIR filter (dominant pole magnitude <em class="math">&lt; 1 - 10^\{-5\}</em>),
+</li><li> For a stable IIR filter (dominant pole magnitude <em class="math">&lt; 1 - 10^{-5}</em>),
  the effective length is estimated as
 
 <p><code class="code">floor (M * log10 (tol) / log10 (maxpole)) + delay</code>
@@ -125,7 +125,7 @@ navigation:
 <p>where <em class="math">M</em> is the multiplicity of the dominant pole and <em class="math">d</em>
  is the initial delay (number of leading zeros in <var class="var">b</var>).
 </p>
-</li><li> For an unstable IIR filter (dominant pole magnitude <em class="math">&gt; 1 + 10^\{-4\}</em>),
+</li><li> For an unstable IIR filter (dominant pole magnitude <em class="math">&gt; 1 + 10^{-4}</em>),
  a heuristic formula is used:
 
 <p><code class="code">floor (6 / log10 (maxpole))</code>
@@ -148,4 +148,4 @@ navigation:
 </p>
 
 <p><strong class="strong">See also:</strong> impz, stepz.
- </p></dd></dl>
+ </p></dd></dl>{% endraw %}

@@ -85,7 +85,7 @@ navigation:
   name: "Manual"
   url: "/manual"
 ---
-<dl class="first-deftypefn def-block">
+{% raw %}<dl class="first-deftypefn def-block">
 <dt class="deftypefn def-line" id="index-tfe_0028x_002cy_002cNfft_002cFs_002cwindow_002coverlap_002crange_002cplot_005ftype_002cdetrend_0029"><span class="category-def">Function File: </span><span><code class="def-type">[Pxx,freq] =</code> <strong class="def-name">tfe(x,y,Nfft,Fs,window,overlap,range,plot_type,detrend)</strong></span></dt>
 <dd><p>Estimate transfer function of system with input &quot;x&quot; and output &quot;y&quot;.
 </p>
@@ -95,4 +95,4 @@ navigation:
 </p>
 <p>See &quot;help pwelch&quot; for description of arguments, hints and references
  &mdash; especially hint (7) for Matlab R11 defaults.
- </p></dd></dl>
+ </p></dd></dl>{% endraw %}

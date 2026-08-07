@@ -85,7 +85,7 @@ navigation:
   name: "Manual"
   url: "/manual"
 ---
-<dl class="first-deftypefn def-block">
+{% raw %}<dl class="first-deftypefn def-block">
 <dt class="deftypefn def-line" id="index-cconv"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">c</var> =</code> <strong class="def-name">cconv</strong> <code class="def-code-arguments">(<var class="var">a</var>, <var class="var">b</var>, <var class="var">n</var>)</code></span></dt>
 <dt class="deftypefnx def-cmd-deftypefn def-line" id="index-cconv-1"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">c</var> =</code> <strong class="def-name">cconv</strong> <code class="def-code-arguments">(<var class="var">a</var>, <var class="var">b</var>)</code></span></dt>
 <dd><p>Compute the modulo-N circular convolution.
@@ -114,4 +114,4 @@ navigation:
 
 
 <p><strong class="strong">See also:</strong> conv, circshift.
- </p></dd></dl>
+ </p></dd></dl>{% endraw %}

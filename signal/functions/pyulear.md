@@ -85,7 +85,7 @@ navigation:
   name: "Manual"
   url: "/manual"
 ---
-<dl class="first-deftypefn def-block">
+{% raw %}<dl class="first-deftypefn def-block">
 <dt class="deftypefn def-line" id="index-pyulear_0028x_002cpoles_002cfreq_002cFs_002crange_002cmethod_002cplot_005ftype_0029"><span class="category-def">Function File: </span><span><code class="def-type">[psd,f_out] =</code> <strong class="def-name">pyulear(x,poles,freq,Fs,range,method,plot_type)</strong></span></dt>
 <dd><p>Calculates a Yule-Walker autoregressive (all-pole) model of the data &quot;x&quot;
  and computes the power spectrum of the model.
@@ -185,4 +185,4 @@ navigation:
 <p>This function is a wrapper for aryule and ar_psd.
 </p>
 <p>See &quot;help aryule&quot;, &quot;help ar_psd&quot;.
- </p></dd></dl>
+ </p></dd></dl>{% endraw %}

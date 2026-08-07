@@ -85,11 +85,11 @@ navigation:
   name: "Manual"
   url: "/manual"
 ---
-<dl class="first-deftypefn def-block">
+{% raw %}<dl class="first-deftypefn def-block">
 <dt class="deftypefn def-line" id="index-udecode"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">out</var> =</code> <strong class="def-name">udecode</strong> <code class="def-code-arguments">(<var class="var">in</var>, <var class="var">n</var>)</code></span></dt>
 <dt class="deftypefnx def-cmd-deftypefn def-line" id="index-udecode-1"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">out</var> =</code> <strong class="def-name">udecode</strong> <code class="def-code-arguments">(<var class="var">in</var>, <var class="var">n</var>, <var class="var">v</var>)</code></span></dt>
 <dt class="deftypefnx def-cmd-deftypefn def-line" id="index-udecode-2"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">out</var> =</code> <strong class="def-name">udecode</strong> <code class="def-code-arguments">(<var class="var">in</var>, <var class="var">n</var>, <var class="var">v</var>, <var class="var">overflows</var>)</code></span></dt>
 <dd><p>Invert the operation of uencode.
  </p>
 <p><strong class="strong">See also:</strong> uencode.
- </p></dd></dl>
+ </p></dd></dl>{% endraw %}

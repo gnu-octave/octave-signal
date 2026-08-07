@@ -85,7 +85,7 @@ navigation:
   name: "Manual"
   url: "/manual"
 ---
-<dl class="first-deftypefn def-block">
+{% raw %}<dl class="first-deftypefn def-block">
 <dt class="deftypefn def-line" id="index-czt"><span class="category-def">Function File: </span><span><strong class="def-name">czt</strong> <code class="def-code-arguments">(<var class="var">x</var>)</code></span></dt>
 <dt class="deftypefnx def-cmd-deftypefn def-line" id="index-czt-1"><span class="category-def">Function File: </span><span><strong class="def-name">czt</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">m</var>)</code></span></dt>
 <dt class="deftypefnx def-cmd-deftypefn def-line" id="index-czt-2"><span class="category-def">Function File: </span><span><strong class="def-name">czt</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">m</var>, <var class="var">w</var>)</code></span></dt>
@@ -110,4 +110,4 @@ navigation:
      m=length(x), w=exp(-j*2*pi/m), a=1
 </p>
 <p>If x is a matrix, the transform will be performed column-by-column.
- </p></dd></dl>
+ </p></dd></dl>{% endraw %}

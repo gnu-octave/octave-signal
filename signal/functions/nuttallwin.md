@@ -85,7 +85,7 @@ navigation:
   name: "Manual"
   url: "/manual"
 ---
-<dl class="first-deftypefn def-block">
+{% raw %}<dl class="first-deftypefn def-block">
 <dt class="deftypefn def-line" id="index-nuttallwin"><span class="category-def">Function File: </span><span><strong class="def-name">nuttallwin</strong> <code class="def-code-arguments">(<var class="var">m</var>)</code></span></dt>
 <dt class="deftypefnx def-cmd-deftypefn def-line" id="index-nuttallwin-1"><span class="category-def">Function File: </span><span><strong class="def-name">nuttallwin</strong> <code class="def-code-arguments">(<var class="var">m</var>, &quot;periodic&quot;)</code></span></dt>
 <dt class="deftypefnx def-cmd-deftypefn def-line" id="index-nuttallwin-2"><span class="category-def">Function File: </span><span><strong class="def-name">nuttallwin</strong> <code class="def-code-arguments">(<var class="var">m</var>, &quot;symmetric&quot;)</code></span></dt>
@@ -99,4 +99,4 @@ navigation:
 </p>
 
 <p><strong class="strong">See also:</strong> blackman, blackmanharris.
- </p></dd></dl>
+ </p></dd></dl>{% endraw %}

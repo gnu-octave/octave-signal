@@ -85,7 +85,7 @@ navigation:
   name: "Manual"
   url: "/manual"
 ---
-<dl class="first-deftypefn def-block">
+{% raw %}<dl class="first-deftypefn def-block">
 <dt class="deftypefn def-line" id="index-rcosdesign"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">b</var> =</code> <strong class="def-name">rcosdesign</strong> <code class="def-code-arguments">(<var class="var">beta</var>, <var class="var">span</var>, <var class="var">sps</var>)</code></span></dt>
 <dt class="deftypefnx def-cmd-deftypefn def-line" id="index-rcosdesign-1"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">b</var> =</code> <strong class="def-name">rcosdesign</strong> <code class="def-code-arguments">(<var class="var">beta</var>, <var class="var">span</var>, <var class="var">sps</var>, <var class="var">shape</var>)</code></span></dt>
 <dd>
@@ -115,4 +115,4 @@ navigation:
 
 
 <p><strong class="strong">See also:</strong> gaussdesign.
- </p></dd></dl>
+ </p></dd></dl>{% endraw %}

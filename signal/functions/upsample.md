@@ -85,7 +85,7 @@ navigation:
   name: "Manual"
   url: "/manual"
 ---
-<dl class="first-deftypefn def-block">
+{% raw %}<dl class="first-deftypefn def-block">
 <dt class="deftypefn def-line" id="index-upsample"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">upsample</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">n</var>)</code></span></dt>
 <dt class="deftypefnx def-cmd-deftypefn def-line" id="index-upsample-1"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">upsample</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">n</var>, <var class="var">offset</var>)</code></span></dt>
 <dd><p>Upsample the signal, inserting <var class="var">n</var>-1 zeros between every element.
@@ -96,4 +96,4 @@ navigation:
  the block of <var class="var">n</var> zeros.
  </p>
 <p><strong class="strong">See also:</strong> decimate, downsample, interp, resample, upfirdn.
- </p></dd></dl>
+ </p></dd></dl>{% endraw %}

@@ -85,7 +85,7 @@ navigation:
   name: "Manual"
   url: "/manual"
 ---
-<dl class="first-deftypefn def-block">
+{% raw %}<dl class="first-deftypefn def-block">
 <dt class="deftypefn def-line" id="index-sos2cell"><span class="category-def">Function File: </span><span><code class="def-type">C =</code> <strong class="def-name">sos2cell</strong> <code class="def-code-arguments">(<var class="var">S</var>)</code></span></dt>
 <dt class="deftypefnx def-cmd-deftypefn def-line" id="index-sos2cell-1"><span class="category-def">Function File: </span><span><code class="def-type">C =</code> <strong class="def-name">sos2cell</strong> <code class="def-code-arguments">(<var class="var">S</var>, <var class="var">G</var>)</code></span></dt>
 <dd><p>Convert a second-order-section matrix to a cell array.
@@ -104,7 +104,7 @@ navigation:
  with the following format:
 </p>
 <div class="example">
-<pre class="example-preformatted"> </pre><div class="group"><pre class="example-preformatted"> C = \{ \{B1, A1\}, \{B2, A2\}, ..., \{BL, AL\} \}
+<pre class="example-preformatted"> </pre><div class="group"><pre class="example-preformatted"> C = { {B1, A1}, {B2, A2}, ..., {BL, AL} }
  </pre></div><pre class="example-preformatted"> </pre></div>
 
 <p>Each element of the cell array is a cell containing a pair of vectors: <var class="var">Bi</var> and <var class="var">Ai</var>.
@@ -112,14 +112,14 @@ navigation:
 <p>If an additional gain term <var class="var">G</var> is provided, the function returns:
 </p>
 <div class="example">
-<pre class="example-preformatted"> </pre><div class="group"><pre class="example-preformatted"> C = \{ \{G, 1\}, \{B1, A1\}, \{B2, A2\}, ..., \{BL, AL\} \}
+<pre class="example-preformatted"> </pre><div class="group"><pre class="example-preformatted"> C = { {G, 1}, {B1, A1}, {B2, A2}, ..., {BL, AL} }
  </pre></div><pre class="example-preformatted"> </pre></div>
 
-<p>where \{G, 1\} represents the constant gain term applied to the filter.
+<p>where {G, 1} represents the constant gain term applied to the filter.
 </p>
 <div class="example">
 <pre class="example-preformatted"> </pre><div class="group"><pre class="example-preformatted"> S = [ [1, 2, 3, 4, 5, 6];
        [7, 8, 9, 10, 11, 12] ];
  C = sos2cell(S);
  </pre></div><pre class="example-preformatted"> </pre></div>
-</dd></dl>
+</dd></dl>{% endraw %}

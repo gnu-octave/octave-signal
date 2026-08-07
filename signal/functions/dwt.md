@@ -85,7 +85,7 @@ navigation:
   name: "Manual"
   url: "/manual"
 ---
-<dl class="first-deftypefn def-block">
+{% raw %}<dl class="first-deftypefn def-block">
 <dt class="deftypefn def-line" id="index-dwt"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">u</var>, <var class="var">v</var>] =</code> <strong class="def-name">dwt</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">wname</var>)</code></span></dt>
 <dt class="deftypefnx def-cmd-deftypefn def-line" id="index-dwt-1"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">u</var>, <var class="var">v</var>] =</code> <strong class="def-name">dwt</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">Hp</var>, <var class="var">Gp</var>)</code></span></dt>
 <dt class="deftypefnx def-cmd-deftypefn def-line" id="index-dwt-2"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">u</var>, <var class="var">v</var>] =</code> <strong class="def-name">dwt</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">Hp</var>, <var class="var">Gp</var>, &hellip;)</code></span></dt>
@@ -116,4 +116,4 @@ navigation:
 <dd><p>Signal vector of difference, detail.
  </p></dd>
 </dl>
-</dd></dl>
+</dd></dl>{% endraw %}

@@ -85,7 +85,7 @@ navigation:
   name: "Manual"
   url: "/manual"
 ---
-<dl class="first-deftypefn def-block">
+{% raw %}<dl class="first-deftypefn def-block">
 <dt class="deftypefn def-line" id="index-bilinear"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">Zb</var>, <var class="var">Za</var>] =</code> <strong class="def-name">bilinear</strong> <code class="def-code-arguments">(<var class="var">Sb</var>, <var class="var">Sa</var>, <var class="var">T</var>)</code></span></dt>
 <dt class="deftypefnx def-cmd-deftypefn def-line" id="index-bilinear-1"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">Zb</var>, <var class="var">Za</var>] =</code> <strong class="def-name">bilinear</strong> <code class="def-code-arguments">(<var class="var">Sz</var>, <var class="var">Sp</var>, <var class="var">Sg</var>, <var class="var">T</var>)</code></span></dt>
 <dt class="deftypefnx def-cmd-deftypefn def-line" id="index-bilinear-2"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">Zz</var>, <var class="var">Zp</var>, <var class="var">Zg</var>] =</code> <strong class="def-name">bilinear</strong> <code class="def-code-arguments">(&hellip;)</code></span></dt>
@@ -146,4 +146,4 @@ navigation:
 </p>
 <p>Proakis &amp; Manolakis (1992). Digital Signal Processing. New York:
  Macmillan Publishing Company.
- </p></dd></dl>
+ </p></dd></dl>{% endraw %}

@@ -85,7 +85,7 @@ navigation:
   name: "Manual"
   url: "/manual"
 ---
-<dl class="first-deftypefn def-block">
+{% raw %}<dl class="first-deftypefn def-block">
 <dt class="deftypefn def-line" id="index-cplxreal"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">zc</var>, <var class="var">zr</var>] =</code> <strong class="def-name">cplxreal</strong> <code class="def-code-arguments">(<var class="var">z</var>)</code></span></dt>
 <dt class="deftypefnx def-cmd-deftypefn def-line" id="index-cplxreal-1"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">zc</var>, <var class="var">zr</var>] =</code> <strong class="def-name">cplxreal</strong> <code class="def-code-arguments">(<var class="var">z</var>, <var class="var">tol</var>)</code></span></dt>
 <dt class="deftypefnx def-cmd-deftypefn def-line" id="index-cplxreal-2"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">zc</var>, <var class="var">zr</var>] =</code> <strong class="def-name">cplxreal</strong> <code class="def-code-arguments">(<var class="var">z</var>, <var class="var">tol</var>, <var class="var">dim</var>)</code></span></dt>
@@ -108,4 +108,4 @@ navigation:
  differing imaginary parts.
  </p>
 <p><strong class="strong">See also:</strong> cplxpair.
- </p></dd></dl>
+ </p></dd></dl>{% endraw %}

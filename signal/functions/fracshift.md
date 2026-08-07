@@ -85,7 +85,7 @@ navigation:
   name: "Manual"
   url: "/manual"
 ---
-<dl class="first-deftypefn def-block">
+{% raw %}<dl class="first-deftypefn def-block">
 <dt class="deftypefn def-line" id="index-fracshift"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">y</var>, <var class="var">h</var>] =</code> <strong class="def-name">fracshift</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">d</var>)</code></span></dt>
 <dt class="deftypefnx def-cmd-deftypefn def-line" id="index-fracshift-1"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">fracshift</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">d</var>, <var class="var">h</var>)</code></span></dt>
 <dd><p>Shift the series <var class="var">x</var> by a (possibly fractional) number of samples <var class="var">d</var>.
@@ -93,4 +93,4 @@ navigation:
  Kaiser-windowed sinecard.
  </p>
 <p><strong class="strong">See also:</strong> circshift.
- </p></dd></dl>
+ </p></dd></dl>{% endraw %}

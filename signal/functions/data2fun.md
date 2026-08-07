@@ -85,7 +85,7 @@ navigation:
   name: "Manual"
   url: "/manual"
 ---
-<dl class="first-deftypefn def-block">
+{% raw %}<dl class="first-deftypefn def-block">
 <dt class="deftypefn def-line" id="index-data2fun"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">fhandle</var>, <var class="var">fullname</var>] =</code> <strong class="def-name">data2fun</strong> <code class="def-code-arguments">(<var class="var">ti</var>, <var class="var">yi</var>)</code></span></dt>
 <dt class="deftypefnx def-cmd-deftypefn def-line" id="index-data2fun-1"><span class="category-def">Function File: </span><span><code class="def-type">[&hellip;] =</code> <strong class="def-name">data2fun</strong> <code class="def-code-arguments">(&hellip;, <var class="var">property</var>, <var class="var">value</var>)</code></span></dt>
 <dd><p>Create a vectorized function based on data samples using interpolation.
@@ -115,4 +115,4 @@ navigation:
 
 
 <p><strong class="strong">See also:</strong> interp1.
- </p></dd></dl>
+ </p></dd></dl>{% endraw %}

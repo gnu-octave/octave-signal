@@ -85,7 +85,7 @@ navigation:
   name: "Manual"
   url: "/manual"
 ---
-<dl class="first-deftypefn def-block">
+{% raw %}<dl class="first-deftypefn def-block">
 <dt class="deftypefn def-line" id="index-tukeywin"><span class="category-def">Function File: </span><span><strong class="def-name">tukeywin</strong> <code class="def-code-arguments">(<var class="var">m</var>)</code></span></dt>
 <dt class="deftypefnx def-cmd-deftypefn def-line" id="index-tukeywin-1"><span class="category-def">Function File: </span><span><strong class="def-name">tukeywin</strong> <code class="def-code-arguments">(<var class="var">m</var>, <var class="var">r</var>)</code></span></dt>
 <dd><p>Return the filter coefficients of a Tukey window (also known as the
@@ -101,4 +101,4 @@ navigation:
  Page 67, Equation 38.
  </p>
 <p><strong class="strong">See also:</strong> hanning.
- </p></dd></dl>
+ </p></dd></dl>{% endraw %}

@@ -85,7 +85,7 @@ navigation:
   name: "Manual"
   url: "/manual"
 ---
-<dl class="first-deftypefn def-block">
+{% raw %}<dl class="first-deftypefn def-block">
 <dt class="deftypefn def-line" id="index-xcorr"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">R</var>, <var class="var">lag</var>] =</code> <strong class="def-name">xcorr</strong> <code class="def-code-arguments">( <var class="var">X</var> )</code></span></dt>
 <dt class="deftypefnx def-cmd-deftypefn def-line" id="index-xcorr-1"><span class="category-def">Function File: </span><span><code class="def-type">&hellip; =</code> <strong class="def-name">xcorr</strong> <code class="def-code-arguments">( <var class="var">X</var>, <var class="var">Y</var> )</code></span></dt>
 <dt class="deftypefnx def-cmd-deftypefn def-line" id="index-xcorr-2"><span class="category-def">Function File: </span><span><code class="def-type">&hellip; =</code> <strong class="def-name">xcorr</strong> <code class="def-code-arguments">( &hellip;, <var class="var">maxlag</var>)</code></span></dt>
@@ -103,7 +103,7 @@ navigation:
 </p>
 <div class="example">
 <pre class="example-preformatted"> </pre><div class="group"><pre class="example-preformatted">            N
- R_xy(k) = sum x_\{i+k\} conj(y_i),
+ R_xy(k) = sum x_{i+k} conj(y_i),
            i=1
  </pre></div><pre class="example-preformatted"> </pre></div>
 
@@ -188,4 +188,4 @@ navigation:
 </p>
 
 <p><strong class="strong">See also:</strong> xcov.
- </p></dd></dl>
+ </p></dd></dl>{% endraw %}

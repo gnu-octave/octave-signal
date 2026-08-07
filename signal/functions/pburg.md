@@ -85,7 +85,7 @@ navigation:
   name: "Manual"
   url: "/manual"
 ---
-<dl class="first-deftypefn def-block">
+{% raw %}<dl class="first-deftypefn def-block">
 <dt class="deftypefn def-line" id="index-pburg_0028x_002c"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">psd</var>,<var class="var">f_out</var>] =</code> <strong class="def-name">pburg(<var class="var">x</var>,</strong> <code class="def-code-arguments"><var class="var">poles</var>, <var class="var">freq</var>, <var class="var">Fs</var>, <var class="var">range</var>, <var class="var">method</var>, <var class="var">plot_type</var>, <var class="var">criterion</var>)</code></span></dt>
 <dd><p>Calculate Burg maximum-entropy power spectral density.
 </p>
@@ -199,4 +199,4 @@ navigation:
 <p>This function is a wrapper for arburg and ar_psd.
 </p>
 <p>See &quot;help arburg&quot;, &quot;help ar_psd&quot;.
- </p></dd></dl>
+ </p></dd></dl>{% endraw %}

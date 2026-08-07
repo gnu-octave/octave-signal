@@ -85,7 +85,7 @@ navigation:
   name: "Manual"
   url: "/manual"
 ---
-<dl class="first-deftypefn def-block">
+{% raw %}<dl class="first-deftypefn def-block">
 <dt class="deftypefn def-line" id="index-sos2tf"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">b</var>, <var class="var">a</var>] =</code> <strong class="def-name">sos2tf</strong> <code class="def-code-arguments">(<var class="var">sos</var>)</code></span></dt>
 <dt class="deftypefnx def-cmd-deftypefn def-line" id="index-sos2tf-1"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">b</var>, <var class="var">a</var>] =</code> <strong class="def-name">sos2tf</strong> <code class="def-code-arguments">(<var class="var">sos</var>, <var class="var">g</var>)</code></span></dt>
 <dd><p>Convert series second-order sections to transfer function.
@@ -119,4 +119,4 @@ navigation:
 </p>
 
 <p><strong class="strong">See also:</strong> tf2sos, zp2sos, sos2pz, zp2tf, tf2zp.
- </p></dd></dl>
+ </p></dd></dl>{% endraw %}

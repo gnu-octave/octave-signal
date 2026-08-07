@@ -85,7 +85,7 @@ navigation:
   name: "Manual"
   url: "/manual"
 ---
-<dl class="first-deftypefn def-block">
+{% raw %}<dl class="first-deftypefn def-block">
 <dt class="deftypefn def-line" id="index-strips"><span class="category-def">Function File: </span><span><strong class="def-name">strips</strong> <code class="def-code-arguments">(<var class="var">x</var>)</code></span></dt>
 <dt class="deftypefnx def-cmd-deftypefn def-line" id="index-strips-1"><span class="category-def">Function File: </span><span><strong class="def-name">strips</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">n</var>)</code></span></dt>
 <dt class="deftypefnx def-cmd-deftypefn def-line" id="index-strips-2"><span class="category-def">Function File: </span><span><strong class="def-name">strips</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">sd</var>, <var class="var">fs</var>)</code></span></dt>
@@ -106,4 +106,4 @@ navigation:
 </p>
 <p>If <var class="var">x</var> is a matrix, each column is plotted as a separate strip.
 </p>
-</dd></dl>
+</dd></dl>{% endraw %}

@@ -85,7 +85,7 @@ navigation:
   name: "Manual"
   url: "/manual"
 ---
-<dl class="first-deftypefn def-block">
+{% raw %}<dl class="first-deftypefn def-block">
 <dt class="deftypefn def-line" id="index-dct"><span class="category-def">Function File: </span><span><strong class="def-name">dct</strong> <code class="def-code-arguments">(<var class="var">x</var>)</code></span></dt>
 <dt class="deftypefnx def-cmd-deftypefn def-line" id="index-dct-1"><span class="category-def">Function File: </span><span><strong class="def-name">dct</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">n</var>)</code></span></dt>
 <dd><p>Compute the discrete cosine transform of <var class="var">x</var>.  If <var class="var">n</var> is given,
@@ -108,4 +108,4 @@ navigation:
 </p>
 
 <p><strong class="strong">See also:</strong> idct, dct2, idct2, dctmtx.
- </p></dd></dl>
+ </p></dd></dl>{% endraw %}

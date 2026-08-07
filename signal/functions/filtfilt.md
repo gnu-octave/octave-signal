@@ -85,7 +85,7 @@ navigation:
   name: "Manual"
   url: "/manual"
 ---
-<dl class="first-deftypefn def-block">
+{% raw %}<dl class="first-deftypefn def-block">
 <dt class="deftypefn def-line" id="index-filtfilt"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">filtfilt</strong> <code class="def-code-arguments">(<var class="var">b</var>, <var class="var">a</var>, <var class="var">x</var>)</code></span></dt>
 <dd>
 <p>Forward and reverse filter the signal. This corrects for phase
@@ -102,4 +102,4 @@ navigation:
  y = filtfilt(b,a,x); z = filter(b,a,x); # apply filter
  plot(t,x,';data;',t,y,';filtfilt;',t,z,';filter;')
  </pre></div><pre class="example-preformatted"> </pre></div>
-</dd></dl>
+</dd></dl>{% endraw %}

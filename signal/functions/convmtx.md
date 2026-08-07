@@ -85,7 +85,7 @@ navigation:
   name: "Manual"
   url: "/manual"
 ---
-<dl class="first-deftypefn def-block">
+{% raw %}<dl class="first-deftypefn def-block">
 <dt class="deftypefn def-line" id="index-convmtx"><span class="category-def">Function File: </span><span><strong class="def-name">convmtx</strong> <code class="def-code-arguments">(<var class="var">a</var>, <var class="var">n</var>)</code></span></dt>
 <dd><p>If <var class="var">a</var> is a column vector and <var class="var">x</var> is a column vector
  of length <var class="var">n</var>, then
@@ -106,4 +106,4 @@ navigation:
  </p></dd></dl>
 
 <p><strong class="strong">See also:</strong> conv.
-</p>
+</p>{% endraw %}

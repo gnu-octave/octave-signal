@@ -85,7 +85,7 @@ navigation:
   name: "Manual"
   url: "/manual"
 ---
-<dl class="first-deftypefn def-block">
+{% raw %}<dl class="first-deftypefn def-block">
 <dt class="deftypefn def-line" id="index-zp2tf"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">num</var>, <var class="var">den</var>] =</code> <strong class="def-name">zp2tf</strong> <code class="def-code-arguments">(<var class="var">z</var>, <var class="var">p</var>, <var class="var">k</var>)</code></span></dt>
 <dd><p>Converts zeros / poles to a transfer function.
 </p>
@@ -100,4 +100,4 @@ navigation:
 <dd><p>Real scalar (leading coefficient).
  </p></dd>
 </dl>
-</dd></dl>
+</dd></dl>{% endraw %}

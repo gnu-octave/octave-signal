@@ -85,7 +85,7 @@ navigation:
   name: "Manual"
   url: "/manual"
 ---
-<dl class="first-deftypefn def-block">
+{% raw %}<dl class="first-deftypefn def-block">
 <dt class="deftypefn def-line" id="index-impz"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">x</var>, <var class="var">t</var>] =</code> <strong class="def-name">impz</strong> <code class="def-code-arguments">(<var class="var">b</var>)</code></span></dt>
 <dt class="deftypefnx def-cmd-deftypefn def-line" id="index-impz-1"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">x</var>, <var class="var">t</var>] =</code> <strong class="def-name">impz</strong> <code class="def-code-arguments">(<var class="var">b</var>, <var class="var">a</var>)</code></span></dt>
 <dt class="deftypefnx def-cmd-deftypefn def-line" id="index-impz-2"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">x</var>, <var class="var">t</var>] =</code> <strong class="def-name">impz</strong> <code class="def-code-arguments">(<var class="var">b</var>, <var class="var">a</var>, <var class="var">n</var>)</code></span></dt>
@@ -105,4 +105,4 @@ navigation:
 </p>
 
 <p><strong class="strong">See also:</strong> freqz, zplane, stepz,impzlength.
- </p></dd></dl>
+ </p></dd></dl>{% endraw %}

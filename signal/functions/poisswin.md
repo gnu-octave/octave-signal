@@ -85,8 +85,8 @@ navigation:
   name: "Manual"
   url: "/manual"
 ---
-<dl class="first-deftypefn def-block">
+{% raw %}<dl class="first-deftypefn def-block">
 <dt class="deftypefn def-line" id="index-_0028m_002c"><span class="category-def">Function File: </span><span><code class="def-type">poisswin</code> <strong class="def-name">(<var class="var">m</var>,</strong> <code class="def-code-arguments"><var class="var">alpha</var>)</code></span></dt>
 <dd><p>Return the coefficients of a Poisson (a.k.a. exponential) window<a class="footnote" id="DOCF1" href="#FOOT1"><sup>1</sup></a> of length <var class="var">m</var> and adjustable parameter
  <var class="var">alpha</var>.
- </p></dd></dl>
+ </p></dd></dl>{% endraw %}

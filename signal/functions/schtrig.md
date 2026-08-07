@@ -85,7 +85,7 @@ navigation:
   name: "Manual"
   url: "/manual"
 ---
-<dl class="first-deftypefn def-block">
+{% raw %}<dl class="first-deftypefn def-block">
 <dt class="deftypefn def-line" id="index-_0028x_002clvl_002crst_003d1_0029"><span class="category-def"><var class="var">v</var> =: </span><span><code class="def-type">schtrig</code> <strong class="def-name">(<var class="var">x</var>,<var class="var">lvl</var>,<var class="var">rst</var>=1)</strong></span></dt>
 <dt class="deftypefnx def-cmd-deftypefn def-line" id="index-_0028_002e_002e_002e_0029"><span class="category-def">[<var class="var">v</var>,<var class="var">rng</var>] =: </span><span><code class="def-type">schtrig</code> <strong class="def-name">(&hellip;)</strong></span></dt>
 <dd><p>Implements a multisignal Schmitt trigger with levels <var class="var">lvl</var>.
@@ -129,4 +129,4 @@ navigation:
 </p>
 
 <p><strong class="strong">See also:</strong> clustersegment.
- </p></dd></dl>
+ </p></dd></dl>{% endraw %}

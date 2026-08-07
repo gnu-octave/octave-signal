@@ -85,7 +85,7 @@ navigation:
   name: "Manual"
   url: "/manual"
 ---
-<dl class="first-deftypefn def-block">
+{% raw %}<dl class="first-deftypefn def-block">
 <dt class="deftypefn def-line" id="index-gaussian"><span class="category-def">Function File: </span><span><strong class="def-name">gaussian</strong> <code class="def-code-arguments">(<var class="var">m</var>)</code></span></dt>
 <dt class="deftypefnx def-cmd-deftypefn def-line" id="index-gaussian-1"><span class="category-def">Function File: </span><span><strong class="def-name">gaussian</strong> <code class="def-code-arguments">(<var class="var">m</var>, <var class="var">a</var>)</code></span></dt>
 <dd>
@@ -100,4 +100,4 @@ navigation:
 <p>Width a is measured in frequency units (sample rate/num samples).
  It should be f when multiplying in the time domain, but 1/f when
  multiplying in the frequency domain (for use in convolutions).
- </p></dd></dl>
+ </p></dd></dl>{% endraw %}

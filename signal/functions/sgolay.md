@@ -85,7 +85,7 @@ navigation:
   name: "Manual"
   url: "/manual"
 ---
-<dl class="first-deftypefn def-block">
+{% raw %}<dl class="first-deftypefn def-block">
 <dt class="deftypefn def-line" id="index-sgolay"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">f</var> =</code> <strong class="def-name">sgolay</strong> <code class="def-code-arguments">(<var class="var">p</var>, <var class="var">n</var>)</code></span></dt>
 <dt class="deftypefnx def-cmd-deftypefn def-line" id="index-sgolay-1"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">f</var> =</code> <strong class="def-name">sgolay</strong> <code class="def-code-arguments">(<var class="var">p</var>, <var class="var">n</var>, <var class="var">m</var>)</code></span></dt>
 <dt class="deftypefnx def-cmd-deftypefn def-line" id="index-sgolay-2"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">f</var> =</code> <strong class="def-name">sgolay</strong> <code class="def-code-arguments">(<var class="var">p</var>, <var class="var">n</var>, <var class="var">m</var>, <var class="var">ts</var>)</code></span></dt>
@@ -111,4 +111,4 @@ navigation:
 </p>
 
 <p><strong class="strong">See also:</strong> sgolayfilt.
- </p></dd></dl>
+ </p></dd></dl>{% endraw %}

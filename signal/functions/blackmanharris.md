@@ -85,7 +85,7 @@ navigation:
   name: "Manual"
   url: "/manual"
 ---
-<dl class="first-deftypefn def-block">
+{% raw %}<dl class="first-deftypefn def-block">
 <dt class="deftypefn def-line" id="index-blackmanharris"><span class="category-def">Function File: </span><span><strong class="def-name">blackmanharris</strong> <code class="def-code-arguments">(<var class="var">m</var>)</code></span></dt>
 <dt class="deftypefnx def-cmd-deftypefn def-line" id="index-blackmanharris-1"><span class="category-def">Function File: </span><span><strong class="def-name">blackmanharris</strong> <code class="def-code-arguments">(<var class="var">m</var>, &quot;periodic&quot;)</code></span></dt>
 <dt class="deftypefnx def-cmd-deftypefn def-line" id="index-blackmanharris-2"><span class="category-def">Function File: </span><span><strong class="def-name">blackmanharris</strong> <code class="def-code-arguments">(<var class="var">m</var>, &quot;symmetric&quot;)</code></span></dt>
@@ -98,4 +98,4 @@ navigation:
 </p>
 
 <p><strong class="strong">See also:</strong> rectwin, bartlett.
- </p></dd></dl>
+ </p></dd></dl>{% endraw %}

@@ -85,7 +85,7 @@ navigation:
   name: "Manual"
   url: "/manual"
 ---
-<dl class="first-deftypefn def-block">
+{% raw %}<dl class="first-deftypefn def-block">
 <dt class="deftypefn def-line" id="index-flattopwin"><span class="category-def">Function File: </span><span><strong class="def-name">flattopwin</strong> <code class="def-code-arguments">(<var class="var">m</var>)</code></span></dt>
 <dt class="deftypefnx def-cmd-deftypefn def-line" id="index-flattopwin-1"><span class="category-def">Function File: </span><span><strong class="def-name">flattopwin</strong> <code class="def-code-arguments">(<var class="var">m</var>, &quot;periodic&quot;)</code></span></dt>
 <dt class="deftypefnx def-cmd-deftypefn def-line" id="index-flattopwin-2"><span class="category-def">Function File: </span><span><strong class="def-name">flattopwin</strong> <code class="def-code-arguments">(<var class="var">m</var>, &quot;symmetric&quot;)</code></span></dt>
@@ -112,4 +112,4 @@ navigation:
 </p>
 <p>[1] Gade, S; Herlufsen, H; (1987) &quot;Use of weighting functions in DFT/FFT
  analysis (Part I)&quot;, Bruel &amp; Kjaer Technical Review No.3.
- </p></dd></dl>
+ </p></dd></dl>{% endraw %}

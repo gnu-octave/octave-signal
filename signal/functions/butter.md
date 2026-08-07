@@ -85,7 +85,7 @@ navigation:
   name: "Manual"
   url: "/manual"
 ---
-<dl class="first-deftypefn def-block">
+{% raw %}<dl class="first-deftypefn def-block">
 <dt class="deftypefn def-line" id="index-butter"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">b</var>, <var class="var">a</var>] =</code> <strong class="def-name">butter</strong> <code class="def-code-arguments">(<var class="var">n</var>, <var class="var">wc</var>)</code></span></dt>
 <dt class="deftypefnx def-cmd-deftypefn def-line" id="index-butter-1"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">b</var>, <var class="var">a</var>] =</code> <strong class="def-name">butter</strong> <code class="def-code-arguments">(<var class="var">n</var>, <var class="var">wc</var>, <var class="var">filter_type</var>)</code></span></dt>
 <dt class="deftypefnx def-cmd-deftypefn def-line" id="index-butter-2"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">z</var>, <var class="var">p</var>, <var class="var">g</var>] =</code> <strong class="def-name">butter</strong> <code class="def-code-arguments">(&hellip;)</code></span></dt>
@@ -154,4 +154,4 @@ navigation:
 </p>
 <p>Proakis &amp; Manolakis (1992). Digital Signal Processing. New York:
  Macmillan Publishing Company.
- </p></dd></dl>
+ </p></dd></dl>{% endraw %}

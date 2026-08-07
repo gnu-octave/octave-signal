@@ -85,7 +85,7 @@ navigation:
   name: "Manual"
   url: "/manual"
 ---
-<dl class="first-deftypefn def-block">
+{% raw %}<dl class="first-deftypefn def-block">
 <dt class="deftypefn def-line" id="index-dftmtx"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">d</var> =</code> <strong class="def-name">dftmtx</strong> <code class="def-code-arguments">(<var class="var">n</var>)</code></span></dt>
 <dd><p>Compute the <var class="var">n</var>-by-<var class="var">n</var> Fourier transformation matrix.  This is
  the matrix <var class="var">d</var> such that the Fourier transform of a column vector of
@@ -96,4 +96,4 @@ navigation:
  <code class="code">ifft</code> functions directly.
  </p>
 <p><strong class="strong">See also:</strong> fft, ifft.
- </p></dd></dl>
+ </p></dd></dl>{% endraw %}

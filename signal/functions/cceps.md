@@ -85,10 +85,10 @@ navigation:
   name: "Manual"
   url: "/manual"
 ---
-<dl class="first-deftypefn def-block">
+{% raw %}<dl class="first-deftypefn def-block">
 <dt class="deftypefn def-line" id="index-cceps"><span class="category-def">Function File: </span><span><strong class="def-name">cceps</strong> <code class="def-code-arguments">(<var class="var">x</var>)</code></span></dt>
 <dt class="deftypefnx def-cmd-deftypefn def-line" id="index-cceps-1"><span class="category-def">Function File: </span><span><strong class="def-name">cceps</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">correct</var>)</code></span></dt>
 <dd><p>Return the complex cepstrum of the vector <var class="var">x</var>.
  If the optional argument <var class="var">correct</var> has the value 1, a correction
  method is applied.  The default is not to do this.
- </p></dd></dl>
+ </p></dd></dl>{% endraw %}

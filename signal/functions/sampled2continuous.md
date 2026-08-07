@@ -85,7 +85,7 @@ navigation:
   name: "Manual"
   url: "/manual"
 ---
-<dl class="first-deftypefn def-block">
+{% raw %}<dl class="first-deftypefn def-block">
 <dt class="deftypefn def-line" id="index-sampled2continuous"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">xt</var> =</code> <strong class="def-name">sampled2continuous</strong> <code class="def-code-arguments">(<var class="var">xn</var>, <var class="var">T</var>, <var class="var">t</var>)</code></span></dt>
 <dd>
 <p>Calculate the x(t) reconstructed
@@ -99,4 +99,4 @@ navigation:
 <p>This function can be used to calculate sampling rate
  effects on aliasing, actual signal reconstruction
  from discrete samples.
- </p></dd></dl>
+ </p></dd></dl>{% endraw %}

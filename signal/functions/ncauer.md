@@ -85,7 +85,7 @@ navigation:
   name: "Manual"
   url: "/manual"
 ---
-<dl class="first-deftypefn def-block">
+{% raw %}<dl class="first-deftypefn def-block">
 <dt class="deftypefn def-line" id="index-cauer_0028Rp_002c"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">z</var>, <var class="var">p</var>, <var class="var">g</var>] =</code> <strong class="def-name">cauer(<var class="var">Rp</var>,</strong> <code class="def-code-arguments"><var class="var">Rs</var>, <var class="var">n</var>)</code></span></dt>
 <dd><p>Analog prototype for Cauer filter.
 </p>
@@ -117,4 +117,4 @@ navigation:
 </p>
 <p>- Lamar, Marcus Vinicius, Notas de aula da disciplina TE 456 - Circuitos
    Analogicos II, UFPR, 2001/2002.
- </p></dd></dl>
+ </p></dd></dl>{% endraw %}

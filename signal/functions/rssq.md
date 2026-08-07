@@ -85,7 +85,7 @@ navigation:
   name: "Manual"
   url: "/manual"
 ---
-<dl class="first-deftypefn def-block">
+{% raw %}<dl class="first-deftypefn def-block">
 <dt class="deftypefn def-line" id="index-rssq"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">rssq</strong> <code class="def-code-arguments">(<var class="var">x</var>)</code></span></dt>
 <dt class="deftypefnx def-cmd-deftypefn def-line" id="index-rssq-1"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">rssq</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">dim</var>)</code></span></dt>
 <dd><p>Compute the root-sum-of-squares (RSS) of the vector <var class="var">x</var>.
@@ -103,4 +103,4 @@ navigation:
 <p>If the optional argument <var class="var">dim</var> is given, operate along this dimension.
  </p>
 <p><strong class="strong">See also:</strong> mean, meansq, sumsq, rms.
- </p></dd></dl>
+ </p></dd></dl>{% endraw %}

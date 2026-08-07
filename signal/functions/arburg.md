@@ -85,7 +85,7 @@ navigation:
   name: "Manual"
   url: "/manual"
 ---
-<dl class="first-deftypefn def-block">
+{% raw %}<dl class="first-deftypefn def-block">
 <dt class="deftypefn def-line" id="index-arburg"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">a</var>, <var class="var">v</var>, <var class="var">k</var>] =</code> <strong class="def-name">arburg</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">poles</var>)</code></span></dt>
 <dt class="deftypefnx def-cmd-deftypefn def-line" id="index-arburg-1"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">a</var>, <var class="var">v</var>, <var class="var">k</var>] =</code> <strong class="def-name">arburg</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">poles</var>, <var class="var">criterion</var>)</code></span></dt>
 <dd>
@@ -181,4 +181,4 @@ navigation:
 </p>
 
 <p><strong class="strong">See also:</strong> ar_psd.
- </p></dd></dl>
+ </p></dd></dl>{% endraw %}

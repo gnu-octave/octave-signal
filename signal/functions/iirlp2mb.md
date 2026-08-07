@@ -85,7 +85,7 @@ navigation:
   name: "Manual"
   url: "/manual"
 ---
-<pre> IIR Low Pass Filter to Multiband Filter Transformation
+{% raw %}<pre> IIR Low Pass Filter to Multiband Filter Transformation
 
  [Num,Den,AllpassNum,AllpassDen] = iirlp2mb(B,A,Wo,Wt)
  [Num,Den,AllpassNum,AllpassDen] = iirlp2mb(B,A,Wo,Wt,Pass)
@@ -114,3 +114,4 @@ navigation:
  [B, A] = butter(6, 0.5);
  [Num, Den] = iirlp2mb(B, A, 0.5, [.2 .4 .6 .8]);
 </pre>
+{% endraw %}

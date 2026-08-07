@@ -85,9 +85,9 @@ navigation:
   name: "Manual"
   url: "/manual"
 ---
-<dl class="first-deftypefn def-block">
+{% raw %}<dl class="first-deftypefn def-block">
 <dt class="deftypefn def-line" id="index-wkeep"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">wkeep</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">l</var>)</code></span></dt>
 <dt class="deftypefnx def-cmd-deftypefn def-line" id="index-wkeep-1"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">wkeep</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">l</var>, <var class="var">opt</var>)</code></span></dt>
 <dd><p>Extract the elements of <var class="var">x</var> of size <var class="var">l</var> from the center, the right
  or the left.
- </p></dd></dl>
+ </p></dd></dl>{% endraw %}

@@ -85,9 +85,9 @@ navigation:
   name: "Manual"
   url: "/manual"
 ---
-<dl class="first-deftypefn def-block">
+{% raw %}<dl class="first-deftypefn def-block">
 <dt class="deftypefn def-line" id="index-ss2zp"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">z</var>, <var class="var">p</var>, <var class="var">k</var>] =</code> <strong class="def-name">ss2zp</strong> <code class="def-code-arguments">(<var class="var">a</var>, <var class="var">b</var>, <var class="var">c</var>, <var class="var">d</var>)</code></span></dt>
 <dd><p>Converts a state space representation to a set of poles and zeros;
  <var class="var">k</var> is a gain associated with the zeros.
 </p>
-</dd></dl>
+</dd></dl>{% endraw %}

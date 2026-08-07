@@ -85,7 +85,7 @@ navigation:
   name: "Manual"
   url: "/manual"
 ---
-<dl class="first-deftypefn def-block">
+{% raw %}<dl class="first-deftypefn def-block">
 <dt class="deftypefn def-line" id="index-_005f_005fpower"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">P</var>, <var class="var">w</var>] =</code> <strong class="def-name">__power</strong> <code class="def-code-arguments">(<var class="var">b</var>, <var class="var">a</var>)</code></span></dt>
 <dt class="deftypefnx def-cmd-deftypefn def-line" id="index-_005f_005fpower-1"><span class="category-def">Function File: </span><span><code class="def-type">[&hellip;] =</code> <strong class="def-name">__power</strong> <code class="def-code-arguments">(<var class="var">b</var>, <var class="var">a</var>, <var class="var">nfft</var>)</code></span></dt>
 <dt class="deftypefnx def-cmd-deftypefn def-line" id="index-_005f_005fpower-2"><span class="category-def">Function File: </span><span><code class="def-type">[&hellip;] =</code> <strong class="def-name">__power</strong> <code class="def-code-arguments">(<var class="var">b</var>, <var class="var">a</var>, <var class="var">nfft</var>, <var class="var">Fs</var>)</code></span></dt>
@@ -106,4 +106,4 @@ navigation:
 <p>Returns P, the magnitude vector, and w, the frequencies at which it
  is sampled.  If there are no return values requested, then plot the power
  spectrum and don&rsquo;t return anything.
- </p></dd></dl>
+ </p></dd></dl>{% endraw %}

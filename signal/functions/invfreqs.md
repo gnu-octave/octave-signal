@@ -85,7 +85,7 @@ navigation:
   name: "Manual"
   url: "/manual"
 ---
-<dl class="first-deftypefn def-block">
+{% raw %}<dl class="first-deftypefn def-block">
 <dt class="deftypefn def-line" id="index-invfreqs_0028H_002cF_002cnB_002cnA_0029"><span class="category-def">Function File: </span><span><code class="def-type">[B,A] =</code> <strong class="def-name">invfreqs(H,F,nB,nA)</strong></span></dt>
 <dt class="deftypefnx def-cmd-deftypefn def-line" id="index-invfreqs_0028H_002cF_002cnB_002cnA_002cW_0029"><span><code class="def-type">[B,A] =</code> <strong class="def-name">invfreqs(H,F,nB,nA,W)</strong></span></dt>
 <dt class="deftypefnx def-cmd-deftypefn def-line" id="index-invfreqs_0028H_002cF_002cnB_002cnA_002cW_002citer_002ctol_002c_0027trace_0027_0029"><span><code class="def-type">[B,A] =</code> <strong class="def-name">invfreqs(H,F,nB,nA,W,iter,tol,'trace')</strong></span></dt>
@@ -122,4 +122,4 @@ navigation:
        err = norm(H-Hh);
        disp(sprintf('L2 norm of frequency response error = %f',err));
  </pre></div>
-</dd></dl>
+</dd></dl>{% endraw %}

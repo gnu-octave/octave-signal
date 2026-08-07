@@ -85,7 +85,7 @@ navigation:
   name: "Manual"
   url: "/manual"
 ---
-<dl class="first-deftypefn def-block">
+{% raw %}<dl class="first-deftypefn def-block">
 <dt class="deftypefn def-line" id="index-isallpass"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">L</var> =</code> <strong class="def-name">isallpass</strong> <code class="def-code-arguments">(<var class="var">b</var>, <var class="var">a</var>)</code></span></dt>
 <dt class="deftypefnx def-cmd-deftypefn def-line" id="index-isallpass-1"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">L</var> =</code> <strong class="def-name">isallpass</strong> <code class="def-code-arguments">(<var class="var">sos</var>)</code></span></dt>
 <dd>
@@ -107,4 +107,4 @@ navigation:
 </p>
 <p>Ref [2] Vaidyanathan, P. P. Multirate Systems and Filter Banks.
  1st edition, Pearson College Div, 1992.
- </p></dd></dl>
+ </p></dd></dl>{% endraw %}

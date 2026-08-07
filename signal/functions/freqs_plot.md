@@ -85,7 +85,7 @@ navigation:
   name: "Manual"
   url: "/manual"
 ---
-<dl class="first-deftypefn def-block">
+{% raw %}<dl class="first-deftypefn def-block">
 <dt class="deftypefn def-line" id="index-freqs_005fplot"><span class="category-def">Function File: </span><span><strong class="def-name">freqs_plot</strong> <code class="def-code-arguments">(<var class="var">w</var>, <var class="var">h</var>)</code></span></dt>
 <dt class="deftypefnx def-cmd-deftypefn def-line" id="index-freqs_005fplot-1"><span class="category-def">Function File: </span><span><strong class="def-name">freqs_plot</strong> <code class="def-code-arguments">(<var class="var">w</var>, <var class="var">h</var>, <var class="var">freqscale</var>)</code></span></dt>
 <dd><p>Plot the amplitude and phase of the vector <var class="var">h</var>.
@@ -94,4 +94,4 @@ navigation:
  frequency axis.  It can be <code class="code">&quot;log&quot;</code> (default) or <code class="code">&quot;linear&quot;</code>.
  </p>
 <p><strong class="strong">See also:</strong> freqs.
- </p></dd></dl>
+ </p></dd></dl>{% endraw %}

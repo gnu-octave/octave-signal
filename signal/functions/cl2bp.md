@@ -85,7 +85,7 @@ navigation:
   name: "Manual"
   url: "/manual"
 ---
-<dl class="first-deftypefn def-block">
+{% raw %}<dl class="first-deftypefn def-block">
 <dt class="deftypefn def-line" id="index-cl2bp"><span class="category-def">Loadable Function: </span><span><code class="def-type"><var class="var">h</var> =</code> <strong class="def-name">cl2bp</strong> <code class="def-code-arguments">(<var class="var">m</var>, <var class="var">w1</var>, <var class="var">w2</var>, <var class="var">up</var>, <var class="var">lo</var>)</code></span></dt>
 <dt class="deftypefnx def-cmd-deftypefn def-line" id="index-cl2bp-1"><span class="category-def">Loadable Function: </span><span><code class="def-type"><var class="var">h</var> =</code> <strong class="def-name">cl2bp</strong> <code class="def-code-arguments">(<var class="var">m</var>, <var class="var">w1</var>, <var class="var">w2</var>, <var class="var">up</var>, <var class="var">lo</var>, <var class="var">gridsize</var>)</code></span></dt>
 <dd>
@@ -135,4 +135,4 @@ IEEE Trans. on Signal Processing, 46(2):497-501, February 1998.
 </p></dd></dl>
 
 <p><strong class="strong">See also:</strong> remez.
-</p>
+</p>{% endraw %}

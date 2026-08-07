@@ -85,7 +85,7 @@ navigation:
   name: "Manual"
   url: "/manual"
 ---
-<dl class="first-deftypefn def-block">
+{% raw %}<dl class="first-deftypefn def-block">
 <dt class="deftypefn def-line" id="index-ac2poly"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">a</var> =</code> <strong class="def-name">ac2poly</strong> <code class="def-code-arguments">(<var class="var">r</var>)</code></span></dt>
 <dt class="deftypefnx def-cmd-deftypefn def-line" id="index-ac2poly-1"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">a</var>, <var class="var">e</var>] =</code> <strong class="def-name">ac2poly</strong> <code class="def-code-arguments">(<var class="var">r</var>)</code></span></dt>
 <dd><p>Convert autocorrelation sequence to prediction polynomial.
@@ -98,4 +98,4 @@ navigation:
 </p>
 
 <p><strong class="strong">See also:</strong> levinson.
- </p></dd></dl>
+ </p></dd></dl>{% endraw %}

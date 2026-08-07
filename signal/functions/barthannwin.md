@@ -85,10 +85,10 @@ navigation:
   name: "Manual"
   url: "/manual"
 ---
-<dl class="first-deftypefn def-block">
+{% raw %}<dl class="first-deftypefn def-block">
 <dt class="deftypefn def-line" id="index-barthannwin"><span class="category-def">Function File: </span><span><strong class="def-name">barthannwin</strong> <code class="def-code-arguments">(<var class="var">m</var>)</code></span></dt>
 <dd><p>Return the filter coefficients of a modified Bartlett-Hann window of length
  <var class="var">m</var>.
  </p>
 <p><strong class="strong">See also:</strong> rectwin, bartlett.
- </p></dd></dl>
+ </p></dd></dl>{% endraw %}

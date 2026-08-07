@@ -85,7 +85,7 @@ navigation:
   name: "Manual"
   url: "/manual"
 ---
-<dl class="first-deftypefn def-block">
+{% raw %}<dl class="first-deftypefn def-block">
 <dt class="deftypefn def-line" id="index-pwelch_0028x_002c"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">spectra</var>,<var class="var">freq</var>] =</code> <strong class="def-name">pwelch(<var class="var">x</var>,</strong> <code class="def-code-arguments"><var class="var">window</var>, <var class="var">overlap</var>, <var class="var">Nfft</var>, <var class="var">Fs</var>, <var class="var">range</var>, <var class="var">plot_type</var>, <var class="var">detrend</var>, <var class="var">sloppy</var>)</code></span></dt>
 <dd><p>Estimate power spectral density of data &quot;x&quot; by the Welch (1967) periodogram/FFT method.
 </p>
@@ -412,4 +412,4 @@ navigation:
                Brian P. Flannery,
    &quot;Numerical recipes in C, The art of scientific computing&quot;, 2nd edition,
       Cambridge University Press, 2002 &mdash; Section 13.7.
- </p></dd></dl>
+ </p></dd></dl>{% endraw %}

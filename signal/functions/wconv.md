@@ -85,7 +85,7 @@ navigation:
   name: "Manual"
   url: "/manual"
 ---
-<dl class="first-deftypefn def-block">
+{% raw %}<dl class="first-deftypefn def-block">
 <dt class="deftypefn def-line" id="index-wconv"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">wconv</strong> <code class="def-code-arguments">(<var class="var">type</var>, <var class="var">x</var>, <var class="var">f</var>)</code></span></dt>
 <dt class="deftypefnx def-cmd-deftypefn def-line" id="index-wconv-1"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">wconv</strong> <code class="def-code-arguments">(<var class="var">type</var>, <var class="var">x</var>, <var class="var">f</var>, <var class="var">shape</var>)</code></span></dt>
 <dd><p>1-D or 2-D convolution.
@@ -112,4 +112,4 @@ navigation:
 <dd><p>Convoluted signal.
  </p></dd>
 </dl>
-</dd></dl>
+</dd></dl>{% endraw %}

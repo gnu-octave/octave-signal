@@ -85,7 +85,7 @@ navigation:
   name: "Manual"
   url: "/manual"
 ---
-<dl class="first-deftypefn def-block">
+{% raw %}<dl class="first-deftypefn def-block">
 <dt class="deftypefn def-line" id="index-movingrms"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">rmsx</var>,<var class="var">w</var>] =</code> <strong class="def-name">movingrms</strong> <code class="def-code-arguments">(<var class="var">x</var>,<var class="var">w</var>,<var class="var">rc</var>,<var class="var">Fs</var>=1)</code></span></dt>
 <dd><p>Calculate moving RMS value of the signal in <var class="var">x</var>.
 </p>
@@ -97,4 +97,4 @@ navigation:
 </p>
 
 <p><strong class="strong">See also:</strong> sigmoid_train.
- </p></dd></dl>
+ </p></dd></dl>{% endraw %}

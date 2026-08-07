@@ -85,7 +85,7 @@ navigation:
   name: "Manual"
   url: "/manual"
 ---
-<dl class="first-deftypefn def-block">
+{% raw %}<dl class="first-deftypefn def-block">
 <dt class="deftypefn def-line" id="index-filtord"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">n</var> =</code> <strong class="def-name">filtord</strong> <code class="def-code-arguments">(<var class="var">b</var>, <var class="var">a</var>)</code></span></dt>
 <dt class="deftypefnx def-cmd-deftypefn def-line" id="index-filtord-1"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">n</var> =</code> <strong class="def-name">filtord</strong> <code class="def-code-arguments">(<var class="var">sos</var>)</code></span></dt>
 <dd>
@@ -99,4 +99,4 @@ navigation:
 <pre class="example-preformatted"> [b, a] = butter (8, 0.5);
  filtord (b, a)
  </pre></div>
-</dd></dl>
+</dd></dl>{% endraw %}

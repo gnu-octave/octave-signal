@@ -85,7 +85,7 @@ navigation:
   name: "Manual"
   url: "/manual"
 ---
-<dl class="first-deftypefn def-block">
+{% raw %}<dl class="first-deftypefn def-block">
 <dt class="deftypefn def-line" id="index-vco"><span><code class="def-type">y =</code> <strong class="def-name">vco</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">fc</var>, <var class="var">fs</var>)</code></span></dt>
 <dt class="deftypefnx def-cmd-deftypefn def-line" id="index-vco-1"><span><code class="def-type">y =</code> <strong class="def-name">vco</strong> <code class="def-code-arguments">(<var class="var">x</var>, [<var class="var">fmin</var>, <var class="var">fmax</var>], <var class="var">fs</var>)</code></span></dt>
 <dd><p>Creates a signal that oscillates at a frequency determined by input <var class="var">x</var> with a sampling frequency <var class="var">fs</var>.
@@ -106,4 +106,4 @@ navigation:
  </p><ul class="itemize mark-bullet">
 <li><var class="var">y</var> - output signal
  </li></ul>
-</dd></dl>
+</dd></dl>{% endraw %}

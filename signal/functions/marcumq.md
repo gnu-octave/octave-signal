@@ -85,7 +85,7 @@ navigation:
   name: "Manual"
   url: "/manual"
 ---
-<dl class="first-deftypefn def-block">
+{% raw %}<dl class="first-deftypefn def-block">
 <dt class="deftypefn def-line" id="index-marcumq"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">q</var> =</code> <strong class="def-name">marcumq</strong> <code class="def-code-arguments">(<var class="var">a</var>, <var class="var">b</var>)</code></span></dt>
 <dt class="deftypefnx def-cmd-deftypefn def-line" id="index-marcumq-1"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">q</var> =</code> <strong class="def-name">marcumq</strong> <code class="def-code-arguments">(<var class="var">a</var>, <var class="var">b</var>, <var class="var">m</var>)</code></span></dt>
 <dt class="deftypefnx def-cmd-deftypefn def-line" id="index-marcumq-2"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">q</var> =</code> <strong class="def-name">marcumq</strong> <code class="def-code-arguments">(<var class="var">a</var>, <var class="var">b</var>, <var class="var">m</var>, <var class="var">tol</var>)</code></span></dt>
@@ -109,4 +109,4 @@ navigation:
 <p>Reference: R.T. Short, &quot;Computation of Noncentral Chi-squared
  and Rice Random Variables&quot;, www.phaselockedsystems.com/publications
 </p>
-</dd></dl>
+</dd></dl>{% endraw %}

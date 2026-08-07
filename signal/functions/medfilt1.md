@@ -85,7 +85,7 @@ navigation:
   name: "Manual"
   url: "/manual"
 ---
-<dl class="first-deftypefn def-block">
+{% raw %}<dl class="first-deftypefn def-block">
 <dt class="deftypefn def-line" id="index-medfilt1"><span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">medfilt1</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">n</var>)</code></span></dt>
 <dt class="deftypefnx def-cmd-deftypefn def-line" id="index-medfilt1-1"><span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">medfilt1</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">n</var>, [], <var class="var">dim</var>)</code></span></dt>
 <dt class="deftypefnx def-cmd-deftypefn def-line" id="index-medfilt1-2"><span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">medfilt1</strong> <code class="def-code-arguments">(..., <var class="var">NaN_flag</var>, <var class="var">padding</var>)</code></span></dt>
@@ -114,4 +114,4 @@ to bring them up to size <var class="var">n</var>.
 </p>
 
 <p><strong class="strong">See also:</strong> filter, medfilt2.
-</p></dd></dl>
+</p></dd></dl>{% endraw %}

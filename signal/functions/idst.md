@@ -85,7 +85,7 @@ navigation:
   name: "Manual"
   url: "/manual"
 ---
-<dl class="first-deftypefn def-block">
+{% raw %}<dl class="first-deftypefn def-block">
 <dt class="deftypefn def-line" id="index-idst"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">idst</strong> <code class="def-code-arguments">(<var class="var">x</var>)</code></span></dt>
 <dt class="deftypefnx def-cmd-deftypefn def-line" id="index-idst-1"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">idst</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">n</var>)</code></span></dt>
 <dd><p>Computes the inverse type I discrete sine transform of <var class="var">y</var>.  If <var class="var">n</var> is
@@ -94,4 +94,4 @@ navigation:
  columns of the matrix.
  </p>
 <p><strong class="strong">See also:</strong> dst.
- </p></dd></dl>
+ </p></dd></dl>{% endraw %}

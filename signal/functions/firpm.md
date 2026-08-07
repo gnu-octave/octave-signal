@@ -85,13 +85,13 @@ navigation:
   name: "Manual"
   url: "/manual"
 ---
-<dl class="first-deftypefn def-block">
+{% raw %}<dl class="first-deftypefn def-block">
 <dt class="deftypefn def-line" id="index-firpm"><span class="category-def">Loadable Function: </span><span><code class="def-type"><var class="var">b</var> =</code> <strong class="def-name">firpm</strong> <code class="def-code-arguments">(<var class="var">n</var>, <var class="var">f</var>, <var class="var">a</var>)</code></span></dt>
 <dt class="deftypefnx def-cmd-deftypefn def-line" id="index-firpm-1"><span class="category-def">Loadable Function: </span><span><code class="def-type"><var class="var">b</var> =</code> <strong class="def-name">firpm</strong> <code class="def-code-arguments">(<var class="var">n</var>, <var class="var">f</var>, @<var class="var">respFn</var>)</code></span></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-firpm-2"><span class="category-def">Loadable Function: </span><span><code class="def-type"><var class="var">b</var> =</code> <strong class="def-name">firpm</strong> <code class="def-code-arguments">(<var class="var">n</var>, <var class="var">f</var>, \{@<var class="var">respFn</var>, &hellip;\})</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-firpm-2"><span class="category-def">Loadable Function: </span><span><code class="def-type"><var class="var">b</var> =</code> <strong class="def-name">firpm</strong> <code class="def-code-arguments">(<var class="var">n</var>, <var class="var">f</var>, {@<var class="var">respFn</var>, &hellip;})</code></span></dt>
 <dt class="deftypefnx def-cmd-deftypefn def-line" id="index-firpm-3"><span class="category-def">Loadable Function: </span><span><code class="def-type"><var class="var">b</var> =</code> <strong class="def-name">firpm</strong> <code class="def-code-arguments">(&hellip;, <var class="var">w</var>)</code></span></dt>
 <dt class="deftypefnx def-cmd-deftypefn def-line" id="index-firpm-4"><span class="category-def">Loadable Function: </span><span><code class="def-type"><var class="var">b</var> =</code> <strong class="def-name">firpm</strong> <code class="def-code-arguments">(&hellip;, <var class="var">class</var>)</code></span></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-firpm-5"><span class="category-def">Loadable Function: </span><span><code class="def-type"><var class="var">b</var> =</code> <strong class="def-name">firpm</strong> <code class="def-code-arguments">(&hellip;, \{<var class="var">accuracy, &hellip;\}</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-firpm-5"><span class="category-def">Loadable Function: </span><span><code class="def-type"><var class="var">b</var> =</code> <strong class="def-name">firpm</strong> <code class="def-code-arguments">(&hellip;, {<var class="var">accuracy, &hellip;}</var>)</code></span></dt>
 <dt class="deftypefnx def-cmd-deftypefn def-line" id="index-firpm-6"><span class="category-def">Loadable Function: </span><span><code class="def-type">[<var class="var">b</var>, <var class="var">minimax</var>] =</code> <strong class="def-name">firpm</strong> <code class="def-code-arguments">(&hellip;)</code></span></dt>
 <dt class="deftypefnx def-cmd-deftypefn def-line" id="index-firpm-7"><span class="category-def">Loadable Function: </span><span><code class="def-type">[<var class="var">b</var>, <var class="var">minimax</var>, <var class="var">res</var>] =</code> <strong class="def-name">firpm</strong> <code class="def-code-arguments">(&hellip;)</code></span></dt>
 <dd><a class="index-entry-id" id="index-signal-processing"></a>
@@ -143,7 +143,7 @@ function according to the following syntax:
 <div class="example">
 <pre class="example-preformatted"><var class="var">ag</var> = <code class="code">respFn</code> (<var class="var">n</var>,<var class="var">f</var>,<var class="var">g</var>,<var class="var">w</var>, ...)
 [<var class="var">ag</var> <var class="var">wg</var>] = <code class="code">respFn</code> (<var class="var">n</var>,<var class="var">f</var>,<var class="var">g</var>,<var class="var">w</var>, ...)
-<var class="var">symmetry</var> = <code class="code">respFn</code> (&quot;defaults&quot;, \{<var class="var">n</var>,<var class="var">f</var>,<var class="var">g</var>,<var class="var">w</var>, ...\})
+<var class="var">symmetry</var> = <code class="code">respFn</code> (&quot;defaults&quot;, {<var class="var">n</var>,<var class="var">f</var>,<var class="var">g</var>,<var class="var">w</var>, ...})
 </pre></div>
 
 <p>where:
@@ -288,4 +288,4 @@ compatibility, take the absolute value.
 
 <p><strong class="strong">See also:</strong> firpmord.
 </p>
-</dd></dl>
+</dd></dl>{% endraw %}

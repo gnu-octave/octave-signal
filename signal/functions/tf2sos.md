@@ -85,7 +85,7 @@ navigation:
   name: "Manual"
   url: "/manual"
 ---
-<dl class="first-deftypefn def-block">
+{% raw %}<dl class="first-deftypefn def-block">
 <dt class="deftypefn def-line" id="index-tf2sos"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">sos</var>, <var class="var">g</var>] =</code> <strong class="def-name">tf2sos</strong> <code class="def-code-arguments">(<var class="var">b</var>, <var class="var">a</var>)</code></span></dt>
 <dt class="deftypefnx def-cmd-deftypefn def-line" id="index-tf2sos-1"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">sos</var> =</code> <strong class="def-name">tf2sos</strong> <code class="def-code-arguments">(<var class="var">b</var>, <var class="var">a</var>)</code></span></dt>
 <dd><p>Convert direct-form filter coefficients to series second-order sections.
@@ -130,4 +130,4 @@ navigation:
 
 
 <p><strong class="strong">See also:</strong> sos2tf, zp2sos, sos2pz, zp2tf, tf2zp.
- </p></dd></dl>
+ </p></dd></dl>{% endraw %}

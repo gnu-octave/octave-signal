@@ -85,7 +85,7 @@ navigation:
   name: "Manual"
   url: "/manual"
 ---
-<dl class="first-deftypefn def-block">
+{% raw %}<dl class="first-deftypefn def-block">
 <dt class="deftypefn def-line" id="index-lpc"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">a</var> =</code> <strong class="def-name">lpc</strong> <code class="def-code-arguments">(<var class="var">x</var>)</code></span></dt>
 <dt class="deftypefnx def-cmd-deftypefn def-line" id="index-lpc-1"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">a</var> =</code> <strong class="def-name">lpc</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">p</var>)</code></span></dt>
 <dt class="deftypefnx def-cmd-deftypefn def-line" id="index-lpc-2"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">a</var>, <var class="var">g</var>] =</code> <strong class="def-name">lpc</strong> <code class="def-code-arguments">(&hellip;)</code></span></dt>
@@ -110,4 +110,4 @@ navigation:
 </p>
 
 <p><strong class="strong">See also:</strong> aryule,levinson.
- </p></dd></dl>
+ </p></dd></dl>{% endraw %}

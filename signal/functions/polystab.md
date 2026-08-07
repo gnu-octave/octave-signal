@@ -85,8 +85,9 @@ navigation:
   name: "Manual"
   url: "/manual"
 ---
-<pre> b = polystab(a)
+{% raw %}<pre> b = polystab(a)
 
  Stabilize the polynomial transfer function by replacing all roots
  outside the unit circle with their reflection inside the unit circle.
 </pre>
+{% endraw %}

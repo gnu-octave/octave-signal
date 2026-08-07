@@ -85,7 +85,7 @@ navigation:
   name: "Manual"
   url: "/manual"
 ---
-<dl class="first-deftypefn def-block">
+{% raw %}<dl class="first-deftypefn def-block">
 <dt class="deftypefn def-line" id="index-ar_005fpsd"><span class="category-def">Function File: </span><span><strong class="def-name">ar_psd</strong> <code class="def-code-arguments">(<var class="var">a</var>, <var class="var">v</var>)</code></span></dt>
 <dt class="deftypefnx def-cmd-deftypefn def-line" id="index-ar_005fpsd-1"><span class="category-def">Function File: </span><span><strong class="def-name">ar_psd</strong> <code class="def-code-arguments">(<var class="var">a</var>, <var class="var">v</var>, <var class="var">freq</var>)</code></span></dt>
 <dt class="deftypefnx def-cmd-deftypefn def-line" id="index-ar_005fpsd-2"><span class="category-def">Function File: </span><span><strong class="def-name">ar_psd</strong> <code class="def-code-arguments">(<var class="var">a</var>, <var class="var">v</var>, <var class="var">freq</var>, <var class="var">Fs</var>)</code></span></dt>
@@ -189,4 +189,4 @@ navigation:
    &quot;Spectrum analysis &ndash; a modern perspective&quot;,
    Proceedings of the IEEE, Vol 69, pp 1380-1419, Nov., 1981
 </p>
-</dd></dl>
+</dd></dl>{% endraw %}

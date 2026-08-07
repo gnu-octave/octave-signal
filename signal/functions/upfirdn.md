@@ -85,7 +85,7 @@ navigation:
   name: "Manual"
   url: "/manual"
 ---
-<dl class="first-deftypefn def-block">
+{% raw %}<dl class="first-deftypefn def-block">
 <dt class="deftypefn def-line" id="index-upfirdn"><span class="category-def">Loadable Function: </span><span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">upfirdn</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">h</var>)</code></span></dt>
 <dt class="deftypefnx def-cmd-deftypefn def-line" id="index-upfirdn-1"><span class="category-def">Loadable Function: </span><span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">upfirdn</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">h</var>, <var class="var">p</var>)</code></span></dt>
 <dt class="deftypefnx def-cmd-deftypefn def-line" id="index-upfirdn-2"><span class="category-def">Loadable Function: </span><span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">upfirdn</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">h</var>, <var class="var">p</var>, <var class="var">q</var>)</code></span></dt>
@@ -119,4 +119,4 @@ means no downsampling.  Default: 1.
 
 <p>The FIR filter <var class="var">h</var> should typically be a lowpass filter designed to
 suppress imaging artifacts (for upsampling) and aliasing (for downsampling).
-</p></dd></dl>
+</p></dd></dl>{% endraw %}

@@ -85,7 +85,7 @@ navigation:
   name: "Manual"
   url: "/manual"
 ---
-<dl class="first-deftypefn def-block">
+{% raw %}<dl class="first-deftypefn def-block">
 <dt class="deftypefn def-line" id="index-chirp"><span class="category-def">Function File: </span><span><strong class="def-name">chirp</strong> <code class="def-code-arguments">(<var class="var">t</var>)</code></span></dt>
 <dt class="deftypefnx def-cmd-deftypefn def-line" id="index-chirp-1"><span class="category-def">Function File: </span><span><strong class="def-name">chirp</strong> <code class="def-code-arguments">(<var class="var">t</var>, <var class="var">f0</var>)</code></span></dt>
 <dt class="deftypefnx def-cmd-deftypefn def-line" id="index-chirp-2"><span class="category-def">Function File: </span><span><strong class="def-name">chirp</strong> <code class="def-code-arguments">(<var class="var">t</var>, <var class="var">f0</var>, <var class="var">t1</var>)</code></span></dt>
@@ -131,4 +131,4 @@ navigation:
 <p>If you want a different sweep shape f(t), use the following:
 </p>
 <pre class="verbatim"> y = cos (2 * pi * integral (f(t)) + phase);
- </pre></dd></dl>
+ </pre></dd></dl>{% endraw %}

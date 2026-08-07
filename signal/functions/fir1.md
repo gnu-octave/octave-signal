@@ -85,7 +85,7 @@ navigation:
   name: "Manual"
   url: "/manual"
 ---
-<dl class="first-deftypefn def-block">
+{% raw %}<dl class="first-deftypefn def-block">
 <dt class="deftypefn def-line" id="index-fir1"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">b</var> =</code> <strong class="def-name">fir1</strong> <code class="def-code-arguments">(<var class="var">n</var>, <var class="var">w</var>)</code></span></dt>
 <dt class="deftypefnx def-cmd-deftypefn def-line" id="index-fir1-1"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">b</var> =</code> <strong class="def-name">fir1</strong> <code class="def-code-arguments">(<var class="var">n</var>, <var class="var">w</var>, <var class="var">type</var>)</code></span></dt>
 <dt class="deftypefnx def-cmd-deftypefn def-line" id="index-fir1-2"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">b</var> =</code> <strong class="def-name">fir1</strong> <code class="def-code-arguments">(<var class="var">n</var>, <var class="var">w</var>, <var class="var">type</var>, <var class="var">window</var>)</code></span></dt>
@@ -121,4 +121,4 @@ navigation:
  </pre></div>
 
 <p><strong class="strong">See also:</strong> filter, fir2.
- </p></dd></dl>
+ </p></dd></dl>{% endraw %}

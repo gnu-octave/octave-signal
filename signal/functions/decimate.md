@@ -85,7 +85,7 @@ navigation:
   name: "Manual"
   url: "/manual"
 ---
-<dl class="first-deftypefn def-block">
+{% raw %}<dl class="first-deftypefn def-block">
 <dt class="deftypefn def-line" id="index-decimate"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">decimate</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">q</var>)</code></span></dt>
 <dt class="deftypefnx def-cmd-deftypefn def-line" id="index-decimate-1"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">decimate</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">q</var>, <var class="var">n</var>)</code></span></dt>
 <dt class="deftypefnx def-cmd-deftypefn def-line" id="index-decimate-2"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">decimate</strong> <code class="def-code-arguments">(&hellip;, &quot;fir&quot;)</code></span></dt>
@@ -115,4 +115,4 @@ navigation:
  stem (t(1:121) * 1000, x(1:121), &quot;-g;Original;&quot;); hold on; # original
  stem (t(1:4:121) * 1000, y(1:31), &quot;-r;Decimated;&quot;); hold off; # decimated
  </pre></div>
-</dd></dl>
+</dd></dl>{% endraw %}

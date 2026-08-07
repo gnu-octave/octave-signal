@@ -85,7 +85,7 @@ navigation:
   name: "Manual"
   url: "/manual"
 ---
-<dl class="first-deftypefn def-block">
+{% raw %}<dl class="first-deftypefn def-block">
 <dt class="deftypefn def-line" id="index-_0028m_002c"><span class="category-def">Function File: </span><span><code class="def-type">expwin</code> <strong class="def-name">(<var class="var">m</var>,</strong> <code class="def-code-arguments"><var class="var">alpha</var>)</code></span></dt>
 <dt class="deftypefnx def-cmd-deftypefn def-line" id="index-_0028m_002c-1"><span class="category-def">Function File: </span><span><code class="def-type">expwin</code> <strong class="def-name">(<var class="var">m</var>,</strong> <code class="def-code-arguments"><var class="var">sll</var>)</code></span></dt>
 <dt class="deftypefnx def-cmd-deftypefn def-line" id="index-_0028_002e_002e_002e_002c"><span class="category-def">Function File: </span><span><code class="def-type">expwin</code> <strong class="def-name">(&hellip;,</strong> <code class="def-code-arguments">&quot;canonical&quot;)</code></span></dt>
@@ -101,4 +101,4 @@ navigation:
 </p>
 
 <p><strong class="strong">See also:</strong> kaiser, poisswin.
- </p></dd></dl>
+ </p></dd></dl>{% endraw %}

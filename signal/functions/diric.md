@@ -85,9 +85,9 @@ navigation:
   name: "Manual"
   url: "/manual"
 ---
-<dl class="first-deftypefn def-block">
+{% raw %}<dl class="first-deftypefn def-block">
 <dt class="deftypefn def-line" id="index-diric"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">diric</strong> <code class="def-code-arguments">(<var class="var">x</var>,<var class="var">n</var>)</code></span></dt>
 <dd><p>Compute the dirichlet function.
  </p>
 <p><strong class="strong">See also:</strong> sinc, gauspuls, sawtooth.
- </p></dd></dl>
+ </p></dd></dl>{% endraw %}

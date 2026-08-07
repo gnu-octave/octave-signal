@@ -85,7 +85,7 @@ navigation:
   name: "Manual"
   url: "/manual"
 ---
-<dl class="first-deftypefn def-block">
+{% raw %}<dl class="first-deftypefn def-block">
 <dt class="deftypefn def-line" id="index-pow2db"><span class="category-def">Function File: </span><span><strong class="def-name">pow2db</strong> <code class="def-code-arguments">(<var class="var">x</var>)</code></span></dt>
 <dd><p>Convert power to decibels (dB).
 </p>
@@ -103,4 +103,4 @@ navigation:
  </pre></div><pre class="example-preformatted"> </pre></div>
 
 <p><strong class="strong">See also:</strong> db2pow.
- </p></dd></dl>
+ </p></dd></dl>{% endraw %}

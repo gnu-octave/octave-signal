@@ -85,10 +85,10 @@ navigation:
   name: "Manual"
   url: "/manual"
 ---
-<dl class="first-deftypefn def-block">
+{% raw %}<dl class="first-deftypefn def-block">
 <dt class="deftypefn def-line" id="index-zerocrossing"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">x0</var> =</code> <strong class="def-name">zerocrossing</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">y</var>)</code></span></dt>
 <dd><p>Estimates the points at which a given waveform y=y(x) crosses the
  x-axis using linear interpolation.
  </p>
 <p><strong class="strong">See also:</strong> fzero, roots.
- </p></dd></dl>
+ </p></dd></dl>{% endraw %}

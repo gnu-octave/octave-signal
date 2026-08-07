@@ -85,7 +85,7 @@ navigation:
   name: "Manual"
   url: "/manual"
 ---
-<dl class="first-deftypefn def-block">
+{% raw %}<dl class="first-deftypefn def-block">
 <dt class="deftypefn def-line" id="index-residued"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">r</var>, <var class="var">p</var>, <var class="var">f</var>, <var class="var">m</var>] =</code> <strong class="def-name">residued</strong> <code class="def-code-arguments">(<var class="var">b</var>, <var class="var">a</var>)</code></span></dt>
 <dd><p>Compute the partial fraction expansion (PFE) of filter
  <em class="math">H(z) = B(z)/A(z)</em>.  In the usual PFE function <code class="code">residuez</code>, the
@@ -117,4 +117,4 @@ navigation:
 </p>
 
 <p><strong class="strong">See also:</strong> residue, residued.
- </p></dd></dl>
+ </p></dd></dl>{% endraw %}

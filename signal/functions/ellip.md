@@ -85,7 +85,7 @@ navigation:
   name: "Manual"
   url: "/manual"
 ---
-<dl class="first-deftypefn def-block">
+{% raw %}<dl class="first-deftypefn def-block">
 <dt class="deftypefn def-line" id="index-ellip"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">b</var>, <var class="var">a</var>] =</code> <strong class="def-name">ellip</strong> <code class="def-code-arguments">(<var class="var">n</var>, <var class="var">rp</var>, <var class="var">rs</var>, <var class="var">wp</var>)</code></span></dt>
 <dt class="deftypefnx def-cmd-deftypefn def-line" id="index-ellip-1"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">b</var>, <var class="var">a</var>] =</code> <strong class="def-name">ellip</strong> <code class="def-code-arguments">(<var class="var">n</var>, <var class="var">rp</var>, <var class="var">rs</var>, <var class="var">wp</var>, &quot;high&quot;)</code></span></dt>
 <dt class="deftypefnx def-cmd-deftypefn def-line" id="index-ellip-2"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">b</var>, <var class="var">a</var>] =</code> <strong class="def-name">ellip</strong> <code class="def-code-arguments">(<var class="var">n</var>, <var class="var">rp</var>, <var class="var">rs</var>, [<var class="var">wl</var>, <var class="var">wh</var>])</code></span></dt>
@@ -124,4 +124,4 @@ navigation:
 <p>- Oppenheim, Alan V., Discrete Time Signal Processing, Hardcover, 1999.
  - Parente Ribeiro, E., Notas de aula da disciplina TE498 -  Processamento
    Digital de Sinais, UFPR, 2001/2002.
- </p></dd></dl>
+ </p></dd></dl>{% endraw %}

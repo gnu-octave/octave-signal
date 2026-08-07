@@ -85,7 +85,7 @@ navigation:
   name: "Manual"
   url: "/manual"
 ---
-<dl class="first-deftypefn def-block">
+{% raw %}<dl class="first-deftypefn def-block">
 <dt class="deftypefn def-line" id="index-dct2"><span class="category-def">Function File: </span><span><strong class="def-name">dct2</strong> <code class="def-code-arguments">(<var class="var">x</var>)</code></span></dt>
 <dt class="deftypefnx def-cmd-deftypefn def-line" id="index-dct2-1"><span class="category-def">Function File: </span><span><strong class="def-name">dct2</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">m</var>, <var class="var">n</var>)</code></span></dt>
 <dt class="deftypefnx def-cmd-deftypefn def-line" id="index-dct2-2"><span class="category-def">Function File: </span><span><strong class="def-name">dct2</strong> <code class="def-code-arguments">(<var class="var">x</var>, [<var class="var">m</var>, <var class="var">n</var>])</code></span></dt>
@@ -94,4 +94,4 @@ navigation:
  to the desired size.
  </p>
 <p><strong class="strong">See also:</strong> dct, idct, idct2.
- </p></dd></dl>
+ </p></dd></dl>{% endraw %}

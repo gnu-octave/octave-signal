@@ -85,7 +85,7 @@ navigation:
   name: "Manual"
   url: "/manual"
 ---
-<dl class="first-deftypefn def-block">
+{% raw %}<dl class="first-deftypefn def-block">
 <dt class="deftypefn def-line" id="index-mscohere"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">Pxx</var>, <var class="var">freq</var>] =</code> <strong class="def-name">mscohere</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">y</var>)</code></span></dt>
 <dt class="deftypefnx def-cmd-deftypefn def-line" id="index-mscohere-1"><span class="category-def">Function File: </span><span><code class="def-type">[&hellip;] =</code> <strong class="def-name">mscohere</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">y</var>, <var class="var">window</var>)</code></span></dt>
 <dt class="deftypefnx def-cmd-deftypefn def-line" id="index-mscohere-2"><span class="category-def">Function File: </span><span><code class="def-type">[&hellip;] =</code> <strong class="def-name">mscohere</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">y</var>, <var class="var">window</var>, <var class="var">overlap</var>)</code></span></dt>
@@ -98,4 +98,4 @@ navigation:
  Use the Welch (1967) periodogram/FFT method.
  </p>
 <p><strong class="strong">See also:</strong> pwelch.
- </p></dd></dl>
+ </p></dd></dl>{% endraw %}

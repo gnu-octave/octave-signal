@@ -85,7 +85,7 @@ navigation:
   name: "Manual"
   url: "/manual"
 ---
-<dl class="first-deftypefn def-block">
+{% raw %}<dl class="first-deftypefn def-block">
 <dt class="deftypefn def-line" id="index-specgram"><span class="category-def">Function File: </span><span><strong class="def-name">specgram</strong> <code class="def-code-arguments">(<var class="var">x</var>)</code></span></dt>
 <dt class="deftypefnx def-cmd-deftypefn def-line" id="index-specgram-1"><span class="category-def">Function File: </span><span><strong class="def-name">specgram</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">n</var>)</code></span></dt>
 <dt class="deftypefnx def-cmd-deftypefn def-line" id="index-specgram-2"><span class="category-def">Function File: </span><span><strong class="def-name">specgram</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">n</var>, <var class="var">Fs</var>)</code></span></dt>
@@ -184,4 +184,4 @@ navigation:
  the image:
 </p>
 <p>imagesc(t, f, flipud(log(S(idx,:))));
- </p></dd></dl>
+ </p></dd></dl>{% endraw %}

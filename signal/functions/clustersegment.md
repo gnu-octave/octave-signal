@@ -85,7 +85,7 @@ navigation:
   name: "Manual"
   url: "/manual"
 ---
-<dl class="first-deftypefn def-block">
+{% raw %}<dl class="first-deftypefn def-block">
 <dt class="deftypefn def-line" id="index-clustersegment"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">clusteridx</var> =</code> <strong class="def-name">clustersegment</strong> <code class="def-code-arguments">(<var class="var">unos</var>)</code></span></dt>
 <dd><p>Calculate boundary indexes of clusters of 1&rsquo;s.
 </p>
@@ -103,4 +103,4 @@ navigation:
 <p>The function works by finding the indexes of jumps between consecutive
  values in the rows of <var class="var">unos</var>.
 </p>
-</dd></dl>
+</dd></dl>{% endraw %}

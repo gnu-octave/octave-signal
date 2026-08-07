@@ -85,7 +85,7 @@ navigation:
   name: "Manual"
   url: "/manual"
 ---
-<dl class="first-deftypefn def-block">
+{% raw %}<dl class="first-deftypefn def-block">
 <dt class="deftypefn def-line" id="index-ismaxphase"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">L</var> =</code> <strong class="def-name">ismaxphase</strong> <code class="def-code-arguments">(<var class="var">b</var>, <var class="var">a</var>)</code></span></dt>
 <dt class="deftypefnx def-cmd-deftypefn def-line" id="index-ismaxphase-1"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">L</var> =</code> <strong class="def-name">ismaxphase</strong> <code class="def-code-arguments">(<var class="var">sos</var>)</code></span></dt>
 <dt class="deftypefnx def-cmd-deftypefn def-line" id="index-ismaxphase-2"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">L</var> =</code> <strong class="def-name">ismaxphase</strong> <code class="def-code-arguments">(&hellip;, <var class="var">tol</var>)</code></span></dt>
@@ -105,4 +105,4 @@ navigation:
 
 <p>Ref [1] Oppenheim, Alan, and Ronald Schafer. Discrete-Time Signal Processing.
  3rd edition, Pearson, 2009.
- </p></dd></dl>
+ </p></dd></dl>{% endraw %}

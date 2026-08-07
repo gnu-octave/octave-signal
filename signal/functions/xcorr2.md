@@ -85,7 +85,7 @@ navigation:
   name: "Manual"
   url: "/manual"
 ---
-<dl class="first-deftypefn def-block">
+{% raw %}<dl class="first-deftypefn def-block">
 <dt class="deftypefn def-line" id="index-xcorr2"><span class="category-def">Function File: </span><span><strong class="def-name">xcorr2</strong> <code class="def-code-arguments">(<var class="var">a</var>)</code></span></dt>
 <dt class="deftypefnx def-cmd-deftypefn def-line" id="index-xcorr2-1"><span class="category-def">Function File: </span><span><strong class="def-name">xcorr2</strong> <code class="def-code-arguments">(<var class="var">a</var>, <var class="var">b</var>)</code></span></dt>
 <dt class="deftypefnx def-cmd-deftypefn def-line" id="index-xcorr2-2"><span class="category-def">Function File: </span><span><strong class="def-name">xcorr2</strong> <code class="def-code-arguments">(&hellip;, <var class="var">scale</var>)</code></span></dt>
@@ -121,4 +121,4 @@ navigation:
 
 
 <p><strong class="strong">See also:</strong> conv2, corr2, xcorr.
- </p></dd></dl>
+ </p></dd></dl>{% endraw %}

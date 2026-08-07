@@ -85,7 +85,7 @@ navigation:
   name: "Manual"
   url: "/manual"
 ---
-<dl class="first-deftypefn def-block">
+{% raw %}<dl class="first-deftypefn def-block">
 <dt class="deftypefn def-line" id="index-mexihat"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">psi</var>, <var class="var">x</var>] =</code> <strong class="def-name">mexihat</strong> <code class="def-code-arguments">(<var class="var">lb</var>, <var class="var">ub</var>, <var class="var">n</var>)</code></span></dt>
 <dd><p>Compute the Mexican hat wavelet.
- </p></dd></dl>
+ </p></dd></dl>{% endraw %}

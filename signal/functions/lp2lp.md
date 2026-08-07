@@ -85,7 +85,7 @@ navigation:
   name: "Manual"
   url: "/manual"
 ---
-<dl class="first-deftypefn def-block">
+{% raw %}<dl class="first-deftypefn def-block">
 <dt class="deftypefn def-line" id="index-lp2lp"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">bt</var>, <var class="var">at</var>] =</code> <strong class="def-name">lp2lp</strong> <code class="def-code-arguments">(<var class="var">b</var>, <var class="var">a</var>, <var class="var">Wo</var>)</code></span></dt>
 <dt class="deftypefnx def-cmd-deftypefn def-line" id="index-lp2lp-1"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">At</var>, <var class="var">Bt</var>, <var class="var">Ct</var>, <var class="var">Dt</var>] =</code> <strong class="def-name">lp2lp</strong> <code class="def-code-arguments">(<var class="var">A</var>, <var class="var">B</var>, <var class="var">C</var>, <var class="var">D</var>, <var class="var">Wo</var>)</code></span></dt>
 <dd>
@@ -114,4 +114,4 @@ navigation:
 
 
 <p><strong class="strong">See also:</strong> lp2hp, lp2bp, lp2bs.
- </p></dd></dl>
+ </p></dd></dl>{% endraw %}

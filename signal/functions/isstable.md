@@ -85,7 +85,7 @@ navigation:
   name: "Manual"
   url: "/manual"
 ---
-<dl class="first-deftypefn def-block">
+{% raw %}<dl class="first-deftypefn def-block">
 <dt class="deftypefn def-line" id="index-isstable"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">FLAG</var> =</code> <strong class="def-name">isstable</strong> <code class="def-code-arguments">(<var class="var">B</var>, <var class="var">A</var>)</code></span></dt>
 <dt class="deftypefnx def-cmd-deftypefn def-line" id="index-isstable-1"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">FLAG</var> =</code> <strong class="def-name">isstable</strong> <code class="def-code-arguments">(<var class="var">sos</var>)</code></span></dt>
 <dd><p>Returns a logical output equal to TRUE, if the filter is stable.
@@ -119,4 +119,4 @@ navigation:
    flag = isstable (sos)
    flag = 1
  </pre></div>
-</dd></dl>
+</dd></dl>{% endraw %}
