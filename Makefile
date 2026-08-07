@@ -195,7 +195,7 @@ build-docs: doc/$(PACKAGE).qhc  doc/$(PACKAGE).info
 # Doc cache
 .PHONY: doc-cache clean-doc-cache
 doc-cache:
-	cd doc && ./mkdoccache.m ../inst
+	cd doc && ./mkdoccache.m ../inst ../inst/compatibility/pre-11.0.0/
 
 clean-doc-cache:
 	$(RM) -f inst/doc-cache src/doc-cache
