@@ -23,6 +23,15 @@ function v = square (t, duty = 50)
   if (nargin < 1 || nargin > 2)
     print_usage;
   endif
+
+  if ! (isscalar(t)  || isnumeric(t))
+    error ("square: Expected t as numeric scalar");
+  endif
+  if ! (isscalar(duty)  || isnumeric(duty)) || duty < 0 || duty > 100
+    error ("square: Expected duty as numeric scalar between 0 ..to 1");
+  endif
+
+
   duty /= 100;
   t    /= 2*pi;
 
@@ -30,3 +39,28 @@ function v = square (t, duty = 50)
   v(t-floor(t) >= duty) = -1;
 
 endfunction
+
+%!error a = square ()
+%!error a = square ("test")
+%!error a = square (1,2,3)
+%!error a = square ([1], "t")
+%!error a = square ([1], -1)
+%!error a = square ([1], 101)
+
+%!test
+%! t = [0:.1:2*pi];
+%! v = square(t);
+%! assert(sum(v == 1), 32);
+%! assert(sum(v == -1), 31);
+%! v1 = square(t, 50);
+%! assert(sum(v1 == 1), 32);
+%! assert(sum(v1 == -1), 31);
+%! v2 = square(t, 1);
+%! assert(sum(v2 == 1), 1);
+%! assert(sum(v2 == -1), 62);
+%! v3 = square(t, 10);
+%! assert(sum(v3 == 1), 7);
+%! assert(sum(v3 == -1), 56);
+%! v4 = square(t, 100);
+%! assert(sum(v4 == 1), 63);
+%! assert(sum(v4 == -1), 0);
