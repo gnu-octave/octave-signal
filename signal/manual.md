@@ -3,7 +3,7 @@ layout: "default"
 permalink: "/manual/"
 title: "Signal Toolkit - Manual"
 pkg_name: "signal"
-version: "1.4.7"
+version: "1.4.8"
 description: "Signal processing tools, including filtering, windowing and display functions."
 navigation:
 - id: "overview"
@@ -79,7 +79,7 @@ octave-forge using the following command within <abbr class="acronym">GNU</abbr>
 using the follwoing command in <abbr class="acronym">GNU</abbr> Octave:
 </p>
 <div class="example">
-<pre class="example-preformatted">pkg install signal-1.4.7.tar.gz
+<pre class="example-preformatted">pkg install signal-1.4.8.tar.gz
 </pre></div>
 </div>
 <div class="section-level-extent" id="Loading">
@@ -107,8 +107,8 @@ the toolkit must be loaded using the pkg load command:
 <h4 class="subsection">3.1.1 buffer</h4>
 <a class="index-entry-id" id="index-buffer"></a>
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-buffer-2"><span class="category-def">Function File: </span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">buffer</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">n</var>, <var class="var">p</var>, <var class="var">opt</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-buffer-3"><span class="category-def">Function File: </span><code class="def-type">[<var class="var">y</var>, <var class="var">z</var>, <var class="var">opt</var>] =</code> <strong class="def-name">buffer</strong> <code class="def-code-arguments">(&hellip;)</code></dt>
+<dt class="deftypefn def-line" id="index-buffer-2"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">buffer</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">n</var>, <var class="var">p</var>, <var class="var">opt</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-buffer-3"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">y</var>, <var class="var">z</var>, <var class="var">opt</var>] =</code> <strong class="def-name">buffer</strong> <code class="def-code-arguments">(&hellip;)</code></span></dt>
 <dd><p>Buffer a signal into a data frame. The arguments to <code class="code">buffer</code> are
 </p>
 <dl class="table">
@@ -133,7 +133,7 @@ the toolkit must be loaded using the pkg load command:
 <var class="var">opt</var> is the string &rsquo;nodelay&rsquo;, then the first value of <var class="var">y</var>
  corresponds to the first value of <var class="var">x</var>.
 </p>
-<p>In the can of an underlap, <var class="var">opt</var> must be an integer between 0 and
+<p>In the case of an underlap, <var class="var">opt</var> must be an integer between 0 and
 <code class="code">-<var class="var">p</var></code>. The represents the initial underlap of the first
  column of <var class="var">y</var>.
 </p>
@@ -154,12 +154,12 @@ the toolkit must be loaded using the pkg load command:
 <h4 class="subsection">3.1.2 chirp</h4>
 <a class="index-entry-id" id="index-chirp"></a>
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-chirp-1"><span class="category-def">Function File: </span><strong class="def-name">chirp</strong> <code class="def-code-arguments">(<var class="var">t</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-chirp-2"><span class="category-def">Function File: </span><strong class="def-name">chirp</strong> <code class="def-code-arguments">(<var class="var">t</var>, <var class="var">f0</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-chirp-3"><span class="category-def">Function File: </span><strong class="def-name">chirp</strong> <code class="def-code-arguments">(<var class="var">t</var>, <var class="var">f0</var>, <var class="var">t1</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-chirp-4"><span class="category-def">Function File: </span><strong class="def-name">chirp</strong> <code class="def-code-arguments">(<var class="var">t</var>, <var class="var">f0</var>, <var class="var">t1</var>, <var class="var">f1</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-chirp-5"><span class="category-def">Function File: </span><strong class="def-name">chirp</strong> <code class="def-code-arguments">(<var class="var">t</var>, <var class="var">f0</var>, <var class="var">t1</var>, <var class="var">f1</var>, <var class="var">shape</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-chirp-6"><span class="category-def">Function File: </span><strong class="def-name">chirp</strong> <code class="def-code-arguments">(<var class="var">t</var>, <var class="var">f0</var>, <var class="var">t1</var>, <var class="var">f1</var>, <var class="var">shape</var>, <var class="var">phase</var>)</code></dt>
+<dt class="deftypefn def-line" id="index-chirp-1"><span class="category-def">Function File: </span><span><strong class="def-name">chirp</strong> <code class="def-code-arguments">(<var class="var">t</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-chirp-2"><span class="category-def">Function File: </span><span><strong class="def-name">chirp</strong> <code class="def-code-arguments">(<var class="var">t</var>, <var class="var">f0</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-chirp-3"><span class="category-def">Function File: </span><span><strong class="def-name">chirp</strong> <code class="def-code-arguments">(<var class="var">t</var>, <var class="var">f0</var>, <var class="var">t1</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-chirp-4"><span class="category-def">Function File: </span><span><strong class="def-name">chirp</strong> <code class="def-code-arguments">(<var class="var">t</var>, <var class="var">f0</var>, <var class="var">t1</var>, <var class="var">f1</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-chirp-5"><span class="category-def">Function File: </span><span><strong class="def-name">chirp</strong> <code class="def-code-arguments">(<var class="var">t</var>, <var class="var">f0</var>, <var class="var">t1</var>, <var class="var">f1</var>, <var class="var">shape</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-chirp-6"><span class="category-def">Function File: </span><span><strong class="def-name">chirp</strong> <code class="def-code-arguments">(<var class="var">t</var>, <var class="var">f0</var>, <var class="var">t1</var>, <var class="var">f1</var>, <var class="var">shape</var>, <var class="var">phase</var>)</code></span></dt>
 <dd>
 <p>Evaluate a chirp signal at time <var class="var">t</var>.  A chirp signal is a frequency
  swept cosine wave.
@@ -203,7 +203,7 @@ the toolkit must be loaded using the pkg load command:
 <h4 class="subsection">3.1.3 cmorwavf</h4>
 <a class="index-entry-id" id="index-cmorwavf"></a>
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-cmorwavf-1"><span class="category-def">Function File: </span><code class="def-type">[<var class="var">psi</var>, <var class="var">x</var>] =</code> <strong class="def-name">cmorwavf</strong> <code class="def-code-arguments">(<var class="var">lb</var>, <var class="var">ub</var>, <var class="var">n</var>, <var class="var">fb</var>, <var class="var">fc</var>)</code></dt>
+<dt class="deftypefn def-line" id="index-cmorwavf-1"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">psi</var>, <var class="var">x</var>] =</code> <strong class="def-name">cmorwavf</strong> <code class="def-code-arguments">(<var class="var">lb</var>, <var class="var">ub</var>, <var class="var">n</var>, <var class="var">fb</var>, <var class="var">fc</var>)</code></span></dt>
 <dd><p>Compute the Complex Morlet wavelet.
 </p></dd></dl>
 </div>
@@ -211,7 +211,7 @@ the toolkit must be loaded using the pkg load command:
 <h4 class="subsection">3.1.4 diric</h4>
 <a class="index-entry-id" id="index-diric"></a>
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-diric-1"><span class="category-def">Function File: </span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">diric</strong> <code class="def-code-arguments">(<var class="var">x</var>,<var class="var">n</var>)</code></dt>
+<dt class="deftypefn def-line" id="index-diric-1"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">diric</strong> <code class="def-code-arguments">(<var class="var">x</var>,<var class="var">n</var>)</code></span></dt>
 <dd><p>Compute the dirichlet function.
 </p>
 <p><strong class="strong">See also:</strong> sinc, gauspuls, sawtooth.
@@ -221,11 +221,34 @@ the toolkit must be loaded using the pkg load command:
 <h4 class="subsection">3.1.5 gauspuls</h4>
 <a class="index-entry-id" id="index-gauspuls"></a>
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-gauspuls-1"><span class="category-def">Function File: </span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">gauspuls</strong> <code class="def-code-arguments">(<var class="var">t</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-gauspuls-2"><span class="category-def">Function File: </span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">gauspuls</strong> <code class="def-code-arguments">(<var class="var">t</var>, <var class="var">fc</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-gauspuls-3"><span class="category-def">Function File: </span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">gauspuls</strong> <code class="def-code-arguments">(<var class="var">t</var>, <var class="var">fc</var>, <var class="var">bw</var>)</code></dt>
+<dt class="deftypefn def-line" id="index-gauspuls-1"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">yi</var> =</code> <strong class="def-name">gauspuls</strong> <code class="def-code-arguments">(<var class="var">t</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-gauspuls-2"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">yi</var> =</code> <strong class="def-name">gauspuls</strong> <code class="def-code-arguments">(<var class="var">t</var>, <var class="var">fc</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-gauspuls-3"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">yi</var> =</code> <strong class="def-name">gauspuls</strong> <code class="def-code-arguments">(<var class="var">t</var>, <var class="var">fc</var>, <var class="var">bw</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-gauspuls-4"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">yi</var> =</code> <strong class="def-name">gauspuls</strong> <code class="def-code-arguments">(<var class="var">t</var>, <var class="var">fc</var>, <var class="var">bw</var>, <var class="var">bwr</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-gauspuls-5"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">yi</var>, <var class="var">yq</var>] =</code> <strong class="def-name">gauspuls</strong> <code class="def-code-arguments">(&hellip;)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-gauspuls-6"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">yi</var>, <var class="var">yq</var>, <var class="var">ye</var>] =</code> <strong class="def-name">gauspuls</strong> <code class="def-code-arguments">(&hellip;)</code></span></dt>
 <dd><p>Generate a Gaussian modulated sinusoidal pulse sampled at times <var class="var">t</var>.
 </p>
+<p>The input arguments are:
+</p><ul class="itemize mark-bullet">
+<li><var class="var">t</var> : vector of time values (in seconds) at which the pulse is
+ evaluated.
+</li><li><var class="var">fc</var> : center frequency in Hz (default 1000).  Must be a
+ non-negative real scalar.
+</li><li><var class="var">bw</var> : fractional bandwidth (default 0.5).  Must be a positive
+ real scalar.  The bandwidth is measured at the reference level given by
+<var class="var">bwr</var>.
+</li><li><var class="var">bwr</var> : reference level in dB (default -6).  Must be a negative
+ real scalar.  The pulse&rsquo;s envelope amplitude at the band edges is
+<code class="code">10^(<var class="var">bwr</var>/20)</code> times the peak amplitude.
+</li></ul>
+<p>The output arguments are:
+</p><ul class="itemize mark-bullet">
+<li><var class="var">yi</var> : inphase (cosine) component of the pulse.
+</li><li><var class="var">yq</var> : quadrature (sine) component of the pulse.
+</li><li><var class="var">ye</var> : envelope of the pulse
+ (same as <code class="code">sqrt (<var class="var">yi</var>.^2 + <var class="var">yq</var>.^2)</code>).
+</li></ul>
 <p><strong class="strong">See also:</strong> pulstran, rectpuls, tripuls.
 </p></dd></dl>
 </div>
@@ -233,15 +256,16 @@ the toolkit must be loaded using the pkg load command:
 <h4 class="subsection">3.1.6 gmonopuls</h4>
 <a class="index-entry-id" id="index-gmonopuls"></a>
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-gmonopuls-1"><span class="category-def">Function File: </span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">gmonopuls</strong> <code class="def-code-arguments">(<var class="var">t</var>,<var class="var">fc</var>)</code></dt>
-<dd><p>Return the gaussian monopulse.
+<dt class="deftypefn def-line" id="index-gmonopuls-1"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">gmonopuls</strong> <code class="def-code-arguments">(<var class="var">t</var>,<var class="var">fc</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-gmonopuls-2"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">tc</var> =</code> <strong class="def-name">gmonopuls</strong> <code class="def-code-arguments">(&quot;cutoff&quot;, <var class="var">fc</var>)</code></span></dt>
+<dd><p>Return the gaussian monopulse or compute its cutoff time.
 </p></dd></dl>
 </div>
 <div class="subsection-level-extent" id="mexihat">
 <h4 class="subsection">3.1.7 mexihat</h4>
 <a class="index-entry-id" id="index-mexihat"></a>
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-mexihat-1"><span class="category-def">Function File: </span><code class="def-type">[<var class="var">psi</var>, <var class="var">x</var>] =</code> <strong class="def-name">mexihat</strong> <code class="def-code-arguments">(<var class="var">lb</var>, <var class="var">ub</var>, <var class="var">n</var>)</code></dt>
+<dt class="deftypefn def-line" id="index-mexihat-1"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">psi</var>, <var class="var">x</var>] =</code> <strong class="def-name">mexihat</strong> <code class="def-code-arguments">(<var class="var">lb</var>, <var class="var">ub</var>, <var class="var">n</var>)</code></span></dt>
 <dd><p>Compute the Mexican hat wavelet.
 </p></dd></dl>
 </div>
@@ -249,7 +273,7 @@ the toolkit must be loaded using the pkg load command:
 <h4 class="subsection">3.1.8 meyeraux</h4>
 <a class="index-entry-id" id="index-meyeraux"></a>
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-meyeraux-1"><span class="category-def">Function File: </span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">meyeraux</strong> <code class="def-code-arguments">(<var class="var">x</var>)</code></dt>
+<dt class="deftypefn def-line" id="index-meyeraux-1"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">meyeraux</strong> <code class="def-code-arguments">(<var class="var">x</var>)</code></span></dt>
 <dd><p>Compute the Meyer wavelet auxiliary function.
 </p></dd></dl>
 </div>
@@ -257,7 +281,7 @@ the toolkit must be loaded using the pkg load command:
 <h4 class="subsection">3.1.9 morlet</h4>
 <a class="index-entry-id" id="index-morlet"></a>
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-morlet-1"><span class="category-def">Function File: </span><code class="def-type">[<var class="var">psi</var>, <var class="var">x</var>] =</code> <strong class="def-name">morlet</strong> <code class="def-code-arguments">(<var class="var">lb</var>, <var class="var">ub</var>, <var class="var">n</var>)</code></dt>
+<dt class="deftypefn def-line" id="index-morlet-1"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">psi</var>, <var class="var">x</var>] =</code> <strong class="def-name">morlet</strong> <code class="def-code-arguments">(<var class="var">lb</var>, <var class="var">ub</var>, <var class="var">n</var>)</code></span></dt>
 <dd><p>Compute the Morlet wavelet.
 </p></dd></dl>
 </div>
@@ -265,10 +289,10 @@ the toolkit must be loaded using the pkg load command:
 <h4 class="subsection">3.1.10 pulstran</h4>
 <a class="index-entry-id" id="index-pulstran"></a>
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-pulstran-1"><span class="category-def">Function File: </span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">pulstran</strong> <code class="def-code-arguments">(<var class="var">t</var>, <var class="var">d</var>, <var class="var">func</var>, &hellip;)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-pulstran-2"><span class="category-def">Function File: </span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">pulstran</strong> <code class="def-code-arguments">(<var class="var">t</var>, <var class="var">d</var>, <var class="var">p</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-pulstran-3"><span class="category-def">Function File: </span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">pulstran</strong> <code class="def-code-arguments">(<var class="var">t</var>, <var class="var">d</var>, <var class="var">p</var>, <var class="var">Fs</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-pulstran-4"><span class="category-def">Function File: </span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">pulstran</strong> <code class="def-code-arguments">(<var class="var">t</var>, <var class="var">d</var>, <var class="var">p</var>, <var class="var">Fs</var>, <var class="var">method</var>)</code></dt>
+<dt class="deftypefn def-line" id="index-pulstran-1"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">pulstran</strong> <code class="def-code-arguments">(<var class="var">t</var>, <var class="var">d</var>, <var class="var">func</var>, &hellip;)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-pulstran-2"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">pulstran</strong> <code class="def-code-arguments">(<var class="var">t</var>, <var class="var">d</var>, <var class="var">p</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-pulstran-3"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">pulstran</strong> <code class="def-code-arguments">(<var class="var">t</var>, <var class="var">d</var>, <var class="var">p</var>, <var class="var">Fs</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-pulstran-4"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">pulstran</strong> <code class="def-code-arguments">(<var class="var">t</var>, <var class="var">d</var>, <var class="var">p</var>, <var class="var">Fs</var>, <var class="var">method</var>)</code></span></dt>
 <dd>
 <p>Generate the signal y=sum(func(t+d,...)) for each d.  If d is a
  matrix of two columns, the first column is the delay d and the second
@@ -285,8 +309,8 @@ the toolkit must be loaded using the pkg load command:
 </pre></div>
 <p>If instead of a function name you supply a pulse shape sampled at
  frequency Fs (default 1 Hz),  an interpolated version of the pulse
- is added at each delay d.  The interpolation stays within the the
- time range of the delayed pulse.  The interpolation method defaults
+ is added at each delay d.  The interpolation stays within the time
+ range of the delayed pulse.  The interpolation method defaults
  to linear, but it can be any interpolation method accepted by the
  function interp1.
 </p>
@@ -303,8 +327,8 @@ the toolkit must be loaded using the pkg load command:
 <h4 class="subsection">3.1.11 rectpuls</h4>
 <a class="index-entry-id" id="index-rectpuls"></a>
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-rectpuls-1"><span class="category-def">Function File: </span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">rectpuls</strong> <code class="def-code-arguments">(<var class="var">t</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-rectpuls-2"><span class="category-def">Function File: </span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">rectpuls</strong> <code class="def-code-arguments">(<var class="var">t</var>, <var class="var">w</var>)</code></dt>
+<dt class="deftypefn def-line" id="index-rectpuls-1"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">rectpuls</strong> <code class="def-code-arguments">(<var class="var">t</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-rectpuls-2"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">rectpuls</strong> <code class="def-code-arguments">(<var class="var">t</var>, <var class="var">w</var>)</code></span></dt>
 <dd><p>Generate a rectangular pulse over the interval [-<var class="var">w</var>/2,<var class="var">w</var>/2),
  sampled at times <var class="var">t</var>.  This is useful with the function <code class="code">pulstran</code>
  for generating a series of pulses.
@@ -323,8 +347,8 @@ the toolkit must be loaded using the pkg load command:
 <h4 class="subsection">3.1.12 sawtooth</h4>
 <a class="index-entry-id" id="index-sawtooth"></a>
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-sawtooth-1"><span class="category-def">Function File: </span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">sawtooth</strong> <code class="def-code-arguments">(<var class="var">t</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-sawtooth-2"><span class="category-def">Function File: </span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">sawtooth</strong> <code class="def-code-arguments">(<var class="var">t</var>, <var class="var">width</var>)</code></dt>
+<dt class="deftypefn def-line" id="index-sawtooth-1"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">sawtooth</strong> <code class="def-code-arguments">(<var class="var">t</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-sawtooth-2"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">sawtooth</strong> <code class="def-code-arguments">(<var class="var">t</var>, <var class="var">width</var>)</code></span></dt>
 <dd><p>Generates a sawtooth wave of period <code class="code">2 * pi</code> with limits <code class="code">+1/-1</code>
   for the elements of <var class="var">t</var>.
 </p>
@@ -344,7 +368,7 @@ the toolkit must be loaded using the pkg load command:
 <h4 class="subsection">3.1.13 shanwavf</h4>
 <a class="index-entry-id" id="index-shanwavf"></a>
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-shanwavf-1"><span class="category-def">Function File: </span><code class="def-type">[<var class="var">psi</var>, <var class="var">x</var>] =</code> <strong class="def-name">shanwavf</strong> <code class="def-code-arguments">(<var class="var">lb</var>, <var class="var">ub</var>, <var class="var">n</var>, <var class="var">fb</var>, <var class="var">fc</var>)</code></dt>
+<dt class="deftypefn def-line" id="index-shanwavf-1"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">psi</var>, <var class="var">x</var>] =</code> <strong class="def-name">shanwavf</strong> <code class="def-code-arguments">(<var class="var">lb</var>, <var class="var">ub</var>, <var class="var">n</var>, <var class="var">fb</var>, <var class="var">fc</var>)</code></span></dt>
 <dd><p>Compute the Complex Shannon wavelet.
 </p></dd></dl>
 </div>
@@ -352,8 +376,8 @@ the toolkit must be loaded using the pkg load command:
 <h4 class="subsection">3.1.14 shiftdata</h4>
 <a class="index-entry-id" id="index-shiftdata"></a>
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-shiftdata-1"><span class="category-def">Function File: </span><code class="def-type">[<var class="var">out perm shifts</var>] =</code> <strong class="def-name">shiftdata</strong> <code class="def-code-arguments">(<var class="var">in</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-shiftdata-2"><span class="category-def">Function File: </span><code class="def-type">[<var class="var">out perm shifts</var>] =</code> <strong class="def-name">shiftdata</strong> <code class="def-code-arguments">(<var class="var">in</var>, <var class="var">dim</var>)</code></dt>
+<dt class="deftypefn def-line" id="index-shiftdata-1"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">out perm shifts</var>] =</code> <strong class="def-name">shiftdata</strong> <code class="def-code-arguments">(<var class="var">in</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-shiftdata-2"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">out perm shifts</var>] =</code> <strong class="def-name">shiftdata</strong> <code class="def-code-arguments">(<var class="var">in</var>, <var class="var">dim</var>)</code></span></dt>
 <dd><p>Shift data <var class="var">in</var> to permute the dimension <var class="var">dim</var> to the first column.
 </p>
 <p><strong class="strong">See also:</strong> unshiftdata.
@@ -363,7 +387,7 @@ the toolkit must be loaded using the pkg load command:
 <h4 class="subsection">3.1.15 sigmoid_train</h4>
 <a class="index-entry-id" id="index-sigmoid_005ftrain"></a>
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-sigmoid_005ftrain-1"><span class="category-def">Function File: </span><code class="def-type">[<var class="var">y</var> <var class="var">s</var>] =</code> <strong class="def-name">sigmoid_train</strong> <code class="def-code-arguments">(<var class="var">t</var>, <var class="var">ranges</var>, <var class="var">rc</var>)</code></dt>
+<dt class="deftypefn def-line" id="index-sigmoid_005ftrain-1"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">y</var> <var class="var">s</var>] =</code> <strong class="def-name">sigmoid_train</strong> <code class="def-code-arguments">(<var class="var">t</var>, <var class="var">ranges</var>, <var class="var">rc</var>)</code></span></dt>
 <dd>
 <p>Evaluate a train of sigmoid functions at <var class="var">t</var>.
 </p>
@@ -386,12 +410,12 @@ the toolkit must be loaded using the pkg load command:
 <h4 class="subsection">3.1.16 specgram</h4>
 <a class="index-entry-id" id="index-specgram"></a>
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-specgram-1"><span class="category-def">Function File: </span><strong class="def-name">specgram</strong> <code class="def-code-arguments">(<var class="var">x</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-specgram-2"><span class="category-def">Function File: </span><strong class="def-name">specgram</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">n</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-specgram-3"><span class="category-def">Function File: </span><strong class="def-name">specgram</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">n</var>, <var class="var">Fs</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-specgram-4"><span class="category-def">Function File: </span><strong class="def-name">specgram</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">n</var>, <var class="var">Fs</var>, <var class="var">window</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-specgram-5"><span class="category-def">Function File: </span><strong class="def-name">specgram</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">n</var>, <var class="var">Fs</var>, <var class="var">window</var>, <var class="var">overlap</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-specgram-6"><span class="category-def">Function File: </span><code class="def-type">[<var class="var">S</var>, <var class="var">f</var>, <var class="var">t</var>] =</code> <strong class="def-name">specgram</strong> <code class="def-code-arguments">(&hellip;)</code></dt>
+<dt class="deftypefn def-line" id="index-specgram-1"><span class="category-def">Function File: </span><span><strong class="def-name">specgram</strong> <code class="def-code-arguments">(<var class="var">x</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-specgram-2"><span class="category-def">Function File: </span><span><strong class="def-name">specgram</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">n</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-specgram-3"><span class="category-def">Function File: </span><span><strong class="def-name">specgram</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">n</var>, <var class="var">Fs</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-specgram-4"><span class="category-def">Function File: </span><span><strong class="def-name">specgram</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">n</var>, <var class="var">Fs</var>, <var class="var">window</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-specgram-5"><span class="category-def">Function File: </span><span><strong class="def-name">specgram</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">n</var>, <var class="var">Fs</var>, <var class="var">window</var>, <var class="var">overlap</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-specgram-6"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">S</var>, <var class="var">f</var>, <var class="var">t</var>] =</code> <strong class="def-name">specgram</strong> <code class="def-code-arguments">(&hellip;)</code></span></dt>
 <dd>
 <p>Generate a spectrogram for the signal <var class="var">x</var>.  The signal is chopped into
  overlapping segments of length <var class="var">n</var>, and each segment is windowed and
@@ -488,8 +512,8 @@ the toolkit must be loaded using the pkg load command:
 <h4 class="subsection">3.1.17 square</h4>
 <a class="index-entry-id" id="index-square"></a>
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-square-1"><span class="category-def">Function File: </span><code class="def-type"><var class="var">s</var> =</code> <strong class="def-name">square</strong> <code class="def-code-arguments">(<var class="var">t</var>, <var class="var">duty</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-square-2"><span class="category-def">Function File: </span><code class="def-type"><var class="var">s</var> =</code> <strong class="def-name">square</strong> <code class="def-code-arguments">(<var class="var">t</var>)</code></dt>
+<dt class="deftypefn def-line" id="index-square-1"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">s</var> =</code> <strong class="def-name">square</strong> <code class="def-code-arguments">(<var class="var">t</var>, <var class="var">duty</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-square-2"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">s</var> =</code> <strong class="def-name">square</strong> <code class="def-code-arguments">(<var class="var">t</var>)</code></span></dt>
 <dd><p>Generate a square wave of period 2 pi with limits +1/-1.
 </p>
 <p>If <var class="var">duty</var> is specified, it is the percentage of time the square
@@ -506,9 +530,9 @@ the toolkit must be loaded using the pkg load command:
 <h4 class="subsection">3.1.18 tripuls</h4>
 <a class="index-entry-id" id="index-tripuls"></a>
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-tripuls-1"><span class="category-def">Function File: </span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">tripuls</strong> <code class="def-code-arguments">(<var class="var">t</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-tripuls-2"><span class="category-def">Function File: </span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">tripuls</strong> <code class="def-code-arguments">(<var class="var">t</var>, <var class="var">w</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-tripuls-3"><span class="category-def">Function File: </span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">tripuls</strong> <code class="def-code-arguments">(<var class="var">t</var>, <var class="var">w</var>, <var class="var">skew</var>)</code></dt>
+<dt class="deftypefn def-line" id="index-tripuls-1"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">tripuls</strong> <code class="def-code-arguments">(<var class="var">t</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-tripuls-2"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">tripuls</strong> <code class="def-code-arguments">(<var class="var">t</var>, <var class="var">w</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-tripuls-3"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">tripuls</strong> <code class="def-code-arguments">(<var class="var">t</var>, <var class="var">w</var>, <var class="var">skew</var>)</code></span></dt>
 <dd><p>Generate a triangular pulse over the interval [-<var class="var">w</var>/2,<var class="var">w</var>/2),
  sampled at times <var class="var">t</var>.  This is useful with the function <code class="code">pulstran</code>
  for generating a series of pulses.
@@ -532,9 +556,9 @@ the toolkit must be loaded using the pkg load command:
 <h4 class="subsection">3.1.19 udecode</h4>
 <a class="index-entry-id" id="index-udecode"></a>
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-udecode-1"><span class="category-def">Function File: </span><code class="def-type"><var class="var">out</var> =</code> <strong class="def-name">udecode</strong> <code class="def-code-arguments">(<var class="var">in</var>, <var class="var">n</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-udecode-2"><span class="category-def">Function File: </span><code class="def-type"><var class="var">out</var> =</code> <strong class="def-name">udecode</strong> <code class="def-code-arguments">(<var class="var">in</var>, <var class="var">n</var>, <var class="var">v</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-udecode-3"><span class="category-def">Function File: </span><code class="def-type"><var class="var">out</var> =</code> <strong class="def-name">udecode</strong> <code class="def-code-arguments">(<var class="var">in</var>, <var class="var">n</var>, <var class="var">v</var>, <var class="var">overflows</var>)</code></dt>
+<dt class="deftypefn def-line" id="index-udecode-1"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">out</var> =</code> <strong class="def-name">udecode</strong> <code class="def-code-arguments">(<var class="var">in</var>, <var class="var">n</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-udecode-2"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">out</var> =</code> <strong class="def-name">udecode</strong> <code class="def-code-arguments">(<var class="var">in</var>, <var class="var">n</var>, <var class="var">v</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-udecode-3"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">out</var> =</code> <strong class="def-name">udecode</strong> <code class="def-code-arguments">(<var class="var">in</var>, <var class="var">n</var>, <var class="var">v</var>, <var class="var">overflows</var>)</code></span></dt>
 <dd><p>Invert the operation of uencode.
 </p>
 <p><strong class="strong">See also:</strong> uencode.
@@ -544,9 +568,9 @@ the toolkit must be loaded using the pkg load command:
 <h4 class="subsection">3.1.20 uencode</h4>
 <a class="index-entry-id" id="index-uencode"></a>
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-uencode-1"><span class="category-def">Function File: </span><code class="def-type"><var class="var">out</var> =</code> <strong class="def-name">uencode</strong> <code class="def-code-arguments">(<var class="var">in</var>, <var class="var">n</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-uencode-2"><span class="category-def">Function File: </span><code class="def-type"><var class="var">out</var> =</code> <strong class="def-name">uencode</strong> <code class="def-code-arguments">(<var class="var">in</var>, <var class="var">n</var>, <var class="var">v</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-uencode-3"><span class="category-def">Function File: </span><code class="def-type"><var class="var">out</var> =</code> <strong class="def-name">uencode</strong> <code class="def-code-arguments">(<var class="var">in</var>, <var class="var">n</var>, <var class="var">v</var>, <var class="var">signed</var>)</code></dt>
+<dt class="deftypefn def-line" id="index-uencode-1"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">out</var> =</code> <strong class="def-name">uencode</strong> <code class="def-code-arguments">(<var class="var">in</var>, <var class="var">n</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-uencode-2"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">out</var> =</code> <strong class="def-name">uencode</strong> <code class="def-code-arguments">(<var class="var">in</var>, <var class="var">n</var>, <var class="var">v</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-uencode-3"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">out</var> =</code> <strong class="def-name">uencode</strong> <code class="def-code-arguments">(<var class="var">in</var>, <var class="var">n</var>, <var class="var">v</var>, <var class="var">signed</var>)</code></span></dt>
 <dd><p>Quantize the entries of the array <var class="var">in</var> using 2^<var class="var">n</var> quantization levels.
 </p>
 <p><strong class="strong">See also:</strong> udecode.
@@ -556,7 +580,7 @@ the toolkit must be loaded using the pkg load command:
 <h4 class="subsection">3.1.21 unshiftdata</h4>
 <a class="index-entry-id" id="index-unshiftdata"></a>
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-unshiftdata-1"><span class="category-def">Function File: </span><code class="def-type">[<var class="var">out</var>] =</code> <strong class="def-name">unshiftdata</strong> <code class="def-code-arguments">(<var class="var">in</var>, <var class="var">perm</var>, <var class="var">shifts</var>)</code></dt>
+<dt class="deftypefn def-line" id="index-unshiftdata-1"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">out</var>] =</code> <strong class="def-name">unshiftdata</strong> <code class="def-code-arguments">(<var class="var">in</var>, <var class="var">perm</var>, <var class="var">shifts</var>)</code></span></dt>
 <dd><p>Reverse what is done by shiftdata.
 </p>
 <p><strong class="strong">See also:</strong> shiftdata.
@@ -566,13 +590,13 @@ the toolkit must be loaded using the pkg load command:
 <h4 class="subsection">3.1.22 vco</h4>
 <a class="index-entry-id" id="index-vco"></a>
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-vco-1"><span class="category-def">: </span><code class="def-type">y =</code> <strong class="def-name">vco</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">fc</var>, <var class="var">fs</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-vco-2"><span class="category-def">: </span><code class="def-type">y =</code> <strong class="def-name">vco</strong> <code class="def-code-arguments">(<var class="var">x</var>, [<var class="var">fmin</var>, <var class="var">fmax</var>], <var class="var">fs</var>)</code></dt>
+<dt class="deftypefn def-line" id="index-vco-1"><span><code class="def-type">y =</code> <strong class="def-name">vco</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">fc</var>, <var class="var">fs</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-vco-2"><span><code class="def-type">y =</code> <strong class="def-name">vco</strong> <code class="def-code-arguments">(<var class="var">x</var>, [<var class="var">fmin</var>, <var class="var">fmax</var>], <var class="var">fs</var>)</code></span></dt>
 <dd><p>Creates a signal that oscillates at a frequency determined by input <var class="var">x</var> with a sampling frequency <var class="var">fs</var>.
 </p>
 <p>Inputs:
 </p><ul class="itemize mark-bullet">
-<li><var class="var">x</var> - input data with a range of -1 to 1. A value of -1 means no output, 0 cuoreesponds to <var class="var">fc</var>,
+<li><var class="var">x</var> - input data with a range of -1 to 1. A value of -1 means no output, 0 corresponds to <var class="var">fc</var>,
  and 1 corresponds to 2*<var class="var">fc</var>.
 </li><li><var class="var">fc</var> - Carrier frequency
 </li><li><var class="var">fs</var> - Sampling rate
@@ -593,9 +617,9 @@ the toolkit must be loaded using the pkg load command:
 <h4 class="subsection">3.2.1 findpeaks</h4>
 <a class="index-entry-id" id="index-findpeaks"></a>
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-findpeaks-1"><span class="category-def">Function File: </span><code class="def-type">[<var class="var">pks</var>, <var class="var">loc</var>, <var class="var">extra</var>] =</code> <strong class="def-name">findpeaks</strong> <code class="def-code-arguments">(<var class="var">data</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-findpeaks-2"><span class="category-def">Function File: </span><code class="def-type">&hellip; =</code> <strong class="def-name">findpeaks</strong> <code class="def-code-arguments">(&hellip;, <var class="var">property</var>, <var class="var">value</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-findpeaks-3"><span class="category-def">Function File: </span><code class="def-type">&hellip; =</code> <strong class="def-name">findpeaks</strong> <code class="def-code-arguments">(&hellip;, &quot;DoubleSided&quot;)</code></dt>
+<dt class="deftypefn def-line" id="index-findpeaks-1"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">pks</var>, <var class="var">loc</var>, <var class="var">extra</var>] =</code> <strong class="def-name">findpeaks</strong> <code class="def-code-arguments">(<var class="var">data</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-findpeaks-2"><span class="category-def">Function File: </span><span><code class="def-type">&hellip; =</code> <strong class="def-name">findpeaks</strong> <code class="def-code-arguments">(&hellip;, <var class="var">property</var>, <var class="var">value</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-findpeaks-3"><span class="category-def">Function File: </span><span><code class="def-type">&hellip; =</code> <strong class="def-name">findpeaks</strong> <code class="def-code-arguments">(&hellip;, &quot;DoubleSided&quot;)</code></span></dt>
 <dd><p>Finds peaks on <var class="var">data</var>.
 </p>
 <p>Peaks of a positive array of data are defined as local maxima. For
@@ -654,7 +678,7 @@ the toolkit must be loaded using the pkg load command:
  estimated using a parabola fitted to the neighborhood of each peak.
  The width is calculated with the formula
 </p><pre class="verbatim"> a * width^2 = 1
-</pre><p>where a is the the concavity of the parabola.
+</pre><p>where a is the concavity of the parabola.
  Default value <code class="code">eps</code>.
 </p>
 </dd>
@@ -677,8 +701,8 @@ the toolkit must be loaded using the pkg load command:
 <h4 class="subsection">3.2.2 peak2peak</h4>
 <a class="index-entry-id" id="index-peak2peak"></a>
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-peak2peak-1"><span class="category-def">Function File: </span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">peak2peak</strong> <code class="def-code-arguments">(<var class="var">x</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-peak2peak-2"><span class="category-def">Function File: </span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">peak2peak</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">dim</var>)</code></dt>
+<dt class="deftypefn def-line" id="index-peak2peak-1"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">peak2peak</strong> <code class="def-code-arguments">(<var class="var">x</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-peak2peak-2"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">peak2peak</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">dim</var>)</code></span></dt>
 <dd><p>Compute the difference between the maximum and minimum values in the vector
 <var class="var">x</var>.
 </p>
@@ -694,8 +718,8 @@ the toolkit must be loaded using the pkg load command:
 <h4 class="subsection">3.2.3 peak2rms</h4>
 <a class="index-entry-id" id="index-peak2rms"></a>
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-peak2rms-1"><span class="category-def">Function File: </span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">peak2rms</strong> <code class="def-code-arguments">(<var class="var">x</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-peak2rms-2"><span class="category-def">Function File: </span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">peak2rms</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">dim</var>)</code></dt>
+<dt class="deftypefn def-line" id="index-peak2rms-1"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">peak2rms</strong> <code class="def-code-arguments">(<var class="var">x</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-peak2rms-2"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">peak2rms</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">dim</var>)</code></span></dt>
 <dd><p>Compute the ratio of the largest absolute value to the root-mean-square
  (RMS) value of the vector <var class="var">x</var>.
 </p>
@@ -716,8 +740,8 @@ the toolkit must be loaded using the pkg load command:
 <h4 class="subsection">3.2.5 rssq</h4>
 <a class="index-entry-id" id="index-rssq"></a>
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-rssq-1"><span class="category-def">Function File: </span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">rssq</strong> <code class="def-code-arguments">(<var class="var">x</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-rssq-2"><span class="category-def">Function File: </span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">rssq</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">dim</var>)</code></dt>
+<dt class="deftypefn def-line" id="index-rssq-1"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">rssq</strong> <code class="def-code-arguments">(<var class="var">x</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-rssq-2"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">rssq</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">dim</var>)</code></span></dt>
 <dd><p>Compute the root-sum-of-squares (RSS) of the vector <var class="var">x</var>.
 </p>
 <p>The root-sum-of-squares is defined as
@@ -742,8 +766,8 @@ the toolkit must be loaded using the pkg load command:
 <h4 class="subsection">3.3.1 cconv</h4>
 <a class="index-entry-id" id="index-cconv"></a>
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-cconv-1"><span class="category-def">Function File: </span><code class="def-type"><var class="var">c</var> =</code> <strong class="def-name">cconv</strong> <code class="def-code-arguments">(<var class="var">a</var>, <var class="var">b</var>, <var class="var">n</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-cconv-2"><span class="category-def">Function File: </span><code class="def-type"><var class="var">c</var> =</code> <strong class="def-name">cconv</strong> <code class="def-code-arguments">(<var class="var">a</var>, <var class="var">b</var>)</code></dt>
+<dt class="deftypefn def-line" id="index-cconv-1"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">c</var> =</code> <strong class="def-name">cconv</strong> <code class="def-code-arguments">(<var class="var">a</var>, <var class="var">b</var>, <var class="var">n</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-cconv-2"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">c</var> =</code> <strong class="def-name">cconv</strong> <code class="def-code-arguments">(<var class="var">a</var>, <var class="var">b</var>)</code></span></dt>
 <dd><p>Compute the modulo-N circular convolution.
 </p>
 <p><var class="var">a</var> and <var class="var">b</var> are input vectors and <var class="var">c</var> is the modolo-<var class="var">n</var>
@@ -772,7 +796,7 @@ the toolkit must be loaded using the pkg load command:
 <h4 class="subsection">3.3.2 convmtx</h4>
 <a class="index-entry-id" id="index-convmtx"></a>
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-convmtx-1"><span class="category-def">Function File: </span><strong class="def-name">convmtx</strong> <code class="def-code-arguments">(<var class="var">a</var>, <var class="var">n</var>)</code></dt>
+<dt class="deftypefn def-line" id="index-convmtx-1"><span class="category-def">Function File: </span><span><strong class="def-name">convmtx</strong> <code class="def-code-arguments">(<var class="var">a</var>, <var class="var">n</var>)</code></span></dt>
 <dd><p>If <var class="var">a</var> is a column vector and <var class="var">x</var> is a column vector
  of length <var class="var">n</var>, then
 </p>
@@ -792,12 +816,53 @@ the toolkit must be loaded using the pkg load command:
 </p></dd></dl>
 <p><strong class="strong">See also:</strong> conv.
 </p></div>
+<div class="subsection-level-extent" id="corrmtx">
+<h4 class="subsection">3.3.3 corrmtx</h4>
+<a class="index-entry-id" id="index-corrmtx"></a>
+<dl class="first-deftypefn def-block">
+<dt class="deftypefn def-line" id="index-corrmtx-1"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">H</var> =</code> <strong class="def-name">corrmtx</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">m</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-corrmtx-2"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">H</var> =</code> <strong class="def-name">corrmtx</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">m</var>, <var class="var">method</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-corrmtx-3"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">H</var>, <var class="var">R</var>] =</code> <strong class="def-name">corrmtx</strong> <code class="def-code-arguments">(&hellip;)</code></span></dt>
+<dd><p>Build a data matrix for autocorrelation matrix estimation.
+</p>
+<p>Given a vector <var class="var">x</var> of length <em class="math">N</em> and a model order <var class="var">m</var>,
+ compute the rectangular Toeplitz matrix <var class="var">H</var> such that <var class="var">H</var>&rsquo;*<var class="var">H</var>
+ is a biased estimate of the autocorrelation matrix. The size of <var class="var">H</var>
+ depends on the selected <var class="var">method</var>:
+</p>
+<dl class="table">
+<dt>&rsquo;autocorrelation&rsquo; (default)</dt>
+<dd><p>Uses both prewindowed and postwindowed data.
+</p>
+</dd>
+<dt>&rsquo;prewindowed&rsquo;</dt>
+<dd><p>Uses prewindowed data only.
+</p>
+</dd>
+<dt>&rsquo;postwindowed&rsquo;</dt>
+<dd><p>Uses postwindowed data only.
+</p>
+</dd>
+<dt>&rsquo;covariance&rsquo;</dt>
+<dd><p>Uses nonwindowed data.
+</p>
+</dd>
+<dt>&rsquo;modified&rsquo;</dt>
+<dd><p>Uses forward and backward prediction error estimates.
+</p></dd>
+</dl>
+<p>The optional second output <var class="var">R</var> is the biased autocorrelation matrix
+ estimate <var class="var">H</var>&rsquo;*<var class="var">H</var>.
+</p>
+<p><strong class="strong">See also:</strong> aryule.
+</p></dd></dl>
+</div>
 <div class="subsection-level-extent" id="wconv">
-<h4 class="subsection">3.3.3 wconv</h4>
+<h4 class="subsection">3.3.4 wconv</h4>
 <a class="index-entry-id" id="index-wconv"></a>
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-wconv-1"><span class="category-def">Function File: </span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">wconv</strong> <code class="def-code-arguments">(<var class="var">type</var>, <var class="var">x</var>, <var class="var">f</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-wconv-2"><span class="category-def">Function File: </span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">wconv</strong> <code class="def-code-arguments">(<var class="var">type</var>, <var class="var">x</var>, <var class="var">f</var>, <var class="var">shape</var>)</code></dt>
+<dt class="deftypefn def-line" id="index-wconv-1"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">wconv</strong> <code class="def-code-arguments">(<var class="var">type</var>, <var class="var">x</var>, <var class="var">f</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-wconv-2"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">wconv</strong> <code class="def-code-arguments">(<var class="var">type</var>, <var class="var">x</var>, <var class="var">f</var>, <var class="var">shape</var>)</code></span></dt>
 <dd><p>1-D or 2-D convolution.
 </p>
 <p><strong class="strong">Inputs</strong>
@@ -824,13 +889,13 @@ the toolkit must be loaded using the pkg load command:
 </dd></dl>
 </div>
 <div class="subsection-level-extent" id="xcorr">
-<h4 class="subsection">3.3.4 xcorr</h4>
+<h4 class="subsection">3.3.5 xcorr</h4>
 <a class="index-entry-id" id="index-xcorr"></a>
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-xcorr-1"><span class="category-def">Function File: </span><code class="def-type">[<var class="var">R</var>, <var class="var">lag</var>] =</code> <strong class="def-name">xcorr</strong> <code class="def-code-arguments">( <var class="var">X</var> )</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-xcorr-2"><span class="category-def">Function File: </span><code class="def-type">&hellip; =</code> <strong class="def-name">xcorr</strong> <code class="def-code-arguments">( <var class="var">X</var>, <var class="var">Y</var> )</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-xcorr-3"><span class="category-def">Function File: </span><code class="def-type">&hellip; =</code> <strong class="def-name">xcorr</strong> <code class="def-code-arguments">( &hellip;, <var class="var">maxlag</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-xcorr-4"><span class="category-def">Function File: </span><code class="def-type">&hellip; =</code> <strong class="def-name">xcorr</strong> <code class="def-code-arguments">( &hellip;, <var class="var">scale</var>)</code></dt>
+<dt class="deftypefn def-line" id="index-xcorr-1"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">R</var>, <var class="var">lag</var>] =</code> <strong class="def-name">xcorr</strong> <code class="def-code-arguments">( <var class="var">X</var> )</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-xcorr-2"><span class="category-def">Function File: </span><span><code class="def-type">&hellip; =</code> <strong class="def-name">xcorr</strong> <code class="def-code-arguments">( <var class="var">X</var>, <var class="var">Y</var> )</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-xcorr-3"><span class="category-def">Function File: </span><span><code class="def-type">&hellip; =</code> <strong class="def-name">xcorr</strong> <code class="def-code-arguments">( &hellip;, <var class="var">maxlag</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-xcorr-4"><span class="category-def">Function File: </span><span><code class="def-type">&hellip; =</code> <strong class="def-name">xcorr</strong> <code class="def-code-arguments">( &hellip;, <var class="var">scale</var>)</code></span></dt>
 <dd><p>Estimates the cross-correlation.
 </p>
 <p>Estimate the cross correlation R_xy(k) of vector arguments <var class="var">X</var> and <var class="var">Y</var>
@@ -928,12 +993,12 @@ the toolkit must be loaded using the pkg load command:
 </p></dd></dl>
 </div>
 <div class="subsection-level-extent" id="xcorr2">
-<h4 class="subsection">3.3.5 xcorr2</h4>
+<h4 class="subsection">3.3.6 xcorr2</h4>
 <a class="index-entry-id" id="index-xcorr2"></a>
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-xcorr2-1"><span class="category-def">Function File: </span><strong class="def-name">xcorr2</strong> <code class="def-code-arguments">(<var class="var">a</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-xcorr2-2"><span class="category-def">Function File: </span><strong class="def-name">xcorr2</strong> <code class="def-code-arguments">(<var class="var">a</var>, <var class="var">b</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-xcorr2-3"><span class="category-def">Function File: </span><strong class="def-name">xcorr2</strong> <code class="def-code-arguments">(&hellip;, <var class="var">scale</var>)</code></dt>
+<dt class="deftypefn def-line" id="index-xcorr2-1"><span class="category-def">Function File: </span><span><strong class="def-name">xcorr2</strong> <code class="def-code-arguments">(<var class="var">a</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-xcorr2-2"><span class="category-def">Function File: </span><span><strong class="def-name">xcorr2</strong> <code class="def-code-arguments">(<var class="var">a</var>, <var class="var">b</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-xcorr2-3"><span class="category-def">Function File: </span><span><strong class="def-name">xcorr2</strong> <code class="def-code-arguments">(&hellip;, <var class="var">scale</var>)</code></span></dt>
 <dd><p>Compute the 2D cross-correlation of matrices <var class="var">a</var> and <var class="var">b</var>.
 </p>
 <p>If <var class="var">b</var> is not specified, computes autocorrelation of <var class="var">a</var>, i.e.,
@@ -967,13 +1032,13 @@ the toolkit must be loaded using the pkg load command:
 </p></dd></dl>
 </div>
 <div class="subsection-level-extent" id="xcov">
-<h4 class="subsection">3.3.6 xcov</h4>
+<h4 class="subsection">3.3.7 xcov</h4>
 <a class="index-entry-id" id="index-xcov"></a>
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-xcov-1"><span class="category-def">Function File: </span><code class="def-type">[<var class="var">R</var>, <var class="var">lag</var>] =</code> <strong class="def-name">xcov</strong> <code class="def-code-arguments">( <var class="var">X</var> )</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-xcov-2"><span class="category-def">Function File: </span><code class="def-type">&hellip; =</code> <strong class="def-name">xcov</strong> <code class="def-code-arguments">( <var class="var">X</var>, <var class="var">Y</var> )</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-xcov-3"><span class="category-def">Function File: </span><code class="def-type">&hellip; =</code> <strong class="def-name">xcov</strong> <code class="def-code-arguments">( &hellip;, <var class="var">maxlag</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-xcov-4"><span class="category-def">Function File: </span><code class="def-type">&hellip; =</code> <strong class="def-name">xcov</strong> <code class="def-code-arguments">( &hellip;, <var class="var">scale</var>)</code></dt>
+<dt class="deftypefn def-line" id="index-xcov-1"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">R</var>, <var class="var">lag</var>] =</code> <strong class="def-name">xcov</strong> <code class="def-code-arguments">( <var class="var">X</var> )</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-xcov-2"><span class="category-def">Function File: </span><span><code class="def-type">&hellip; =</code> <strong class="def-name">xcov</strong> <code class="def-code-arguments">( <var class="var">X</var>, <var class="var">Y</var> )</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-xcov-3"><span class="category-def">Function File: </span><span><code class="def-type">&hellip; =</code> <strong class="def-name">xcov</strong> <code class="def-code-arguments">( &hellip;, <var class="var">maxlag</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-xcov-4"><span class="category-def">Function File: </span><span><code class="def-type">&hellip; =</code> <strong class="def-name">xcov</strong> <code class="def-code-arguments">( &hellip;, <var class="var">scale</var>)</code></span></dt>
 <dd><p>Compute covariance at various lags [=correlation(x-mean(x),y-mean(y))].
 </p>
 <dl class="table">
@@ -1023,7 +1088,7 @@ the toolkit must be loaded using the pkg load command:
 <h4 class="subsection">3.4.1 filtfilt</h4>
 <a class="index-entry-id" id="index-filtfilt"></a>
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-filtfilt-1"><span class="category-def">Function File: </span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">filtfilt</strong> <code class="def-code-arguments">(<var class="var">b</var>, <var class="var">a</var>, <var class="var">x</var>)</code></dt>
+<dt class="deftypefn def-line" id="index-filtfilt-1"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">filtfilt</strong> <code class="def-code-arguments">(<var class="var">b</var>, <var class="var">a</var>, <var class="var">x</var>)</code></span></dt>
 <dd>
 <p>Forward and reverse filter the signal. This corrects for phase
  distortion introduced by a one-pass filter, though it does square the
@@ -1045,8 +1110,8 @@ the toolkit must be loaded using the pkg load command:
 <h4 class="subsection">3.4.2 filtic</h4>
 <a class="index-entry-id" id="index-filtic"></a>
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-filtic-1"><span class="category-def">Function File: </span><code class="def-type"><var class="var">zf</var> =</code> <strong class="def-name">filtic</strong> <code class="def-code-arguments">(<var class="var">b</var>, <var class="var">a</var>, <var class="var">y</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-filtic-2"><span class="category-def">Function File: </span><code class="def-type"><var class="var">zf</var> =</code> <strong class="def-name">filtic</strong> <code class="def-code-arguments">(<var class="var">b</var>, <var class="var">a</var>, <var class="var">y</var>, <var class="var">x</var>)</code></dt>
+<dt class="deftypefn def-line" id="index-filtic-1"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">zf</var> =</code> <strong class="def-name">filtic</strong> <code class="def-code-arguments">(<var class="var">b</var>, <var class="var">a</var>, <var class="var">y</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-filtic-2"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">zf</var> =</code> <strong class="def-name">filtic</strong> <code class="def-code-arguments">(<var class="var">b</var>, <var class="var">a</var>, <var class="var">y</var>, <var class="var">x</var>)</code></span></dt>
 <dd>
 <p>Set initial condition vector for filter function
  The vector zf has the same values that would be obtained
@@ -1074,9 +1139,9 @@ the toolkit must be loaded using the pkg load command:
 <h4 class="subsection">3.4.3 medfilt1</h4>
 <a class="index-entry-id" id="index-medfilt1"></a>
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-medfilt1-1"><span class="category-def">: </span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">medfilt1</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">n</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-medfilt1-2"><span class="category-def">: </span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">medfilt1</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">n</var>, [], <var class="var">dim</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-medfilt1-3"><span class="category-def">: </span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">medfilt1</strong> <code class="def-code-arguments">(..., <var class="var">NaN_flag</var>, <var class="var">padding</var>)</code></dt>
+<dt class="deftypefn def-line" id="index-medfilt1-1"><span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">medfilt1</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">n</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-medfilt1-2"><span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">medfilt1</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">n</var>, [], <var class="var">dim</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-medfilt1-3"><span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">medfilt1</strong> <code class="def-code-arguments">(..., <var class="var">NaN_flag</var>, <var class="var">padding</var>)</code></span></dt>
 <dd>
 <p>Apply a one dimensional median filter with a window size of <var class="var">n</var> to
 the data <var class="var">x</var>, which must be real, double and full.
@@ -1107,7 +1172,7 @@ to bring them up to size <var class="var">n</var>.
 <h4 class="subsection">3.4.4 movingrms</h4>
 <a class="index-entry-id" id="index-movingrms"></a>
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-movingrms-1"><span class="category-def">Function File: </span><code class="def-type">[<var class="var">rmsx</var>,<var class="var">w</var>] =</code> <strong class="def-name">movingrms</strong> <code class="def-code-arguments">(<var class="var">x</var>,<var class="var">w</var>,<var class="var">rc</var>,<var class="var">Fs</var>=1)</code></dt>
+<dt class="deftypefn def-line" id="index-movingrms-1"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">rmsx</var>,<var class="var">w</var>] =</code> <strong class="def-name">movingrms</strong> <code class="def-code-arguments">(<var class="var">x</var>,<var class="var">w</var>,<var class="var">rc</var>,<var class="var">Fs</var>=1)</code></span></dt>
 <dd><p>Calculate moving RMS value of the signal in <var class="var">x</var>.
 </p>
 <p>The signal is convoluted against a sigmoid window of width <var class="var">w</var> and
@@ -1123,13 +1188,13 @@ to bring them up to size <var class="var">n</var>.
 <h4 class="subsection">3.4.5 sgolayfilt</h4>
 <a class="index-entry-id" id="index-sgolayfilt"></a>
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-sgolayfilt-1"><span class="category-def">Function File: </span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">sgolayfilt</strong> <code class="def-code-arguments">(<var class="var">x</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-sgolayfilt-2"><span class="category-def">Function File: </span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">sgolayfilt</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">p</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-sgolayfilt-3"><span class="category-def">Function File: </span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">sgolayfilt</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">p</var>, <var class="var">n</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-sgolayfilt-4"><span class="category-def">Function File: </span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">sgolayfilt</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">p</var>, <var class="var">n</var>, <var class="var">m</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-sgolayfilt-5"><span class="category-def">Function File: </span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">sgolayfilt</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">p</var>, <var class="var">n</var>, <var class="var">m</var>, <var class="var">ts</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-sgolayfilt-6"><span class="category-def">Function File: </span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">sgolayfilt</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">p</var>, <var class="var">n</var>, <var class="var">m</var>, <var class="var">ts</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-sgolayfilt-7"><span class="category-def">Function File: </span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">sgolayfilt</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">f</var>)</code></dt>
+<dt class="deftypefn def-line" id="index-sgolayfilt-1"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">sgolayfilt</strong> <code class="def-code-arguments">(<var class="var">x</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-sgolayfilt-2"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">sgolayfilt</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">p</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-sgolayfilt-3"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">sgolayfilt</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">p</var>, <var class="var">n</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-sgolayfilt-4"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">sgolayfilt</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">p</var>, <var class="var">n</var>, <var class="var">m</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-sgolayfilt-5"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">sgolayfilt</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">p</var>, <var class="var">n</var>, <var class="var">m</var>, <var class="var">ts</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-sgolayfilt-6"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">sgolayfilt</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">p</var>, <var class="var">n</var>, <var class="var">m</var>, <var class="var">ts</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-sgolayfilt-7"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">sgolayfilt</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">f</var>)</code></span></dt>
 <dd><p>Smooth the data in x with a Savitsky-Golay smoothing filter of
  polynomial order p and length n, n odd, n &gt; p.  By default, p=3
  and n=p+2 or n=p+3 if p is even.
@@ -1157,7 +1222,7 @@ to bring them up to size <var class="var">n</var>.
 <h4 class="subsection">3.4.6 sosfilt</h4>
 <a class="index-entry-id" id="index-sosfilt"></a>
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-sosfilt-1"><span class="category-def">Loadable Function: </span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">sosfilt</strong> <code class="def-code-arguments">(<var class="var">sos</var>, <var class="var">x</var>)</code></dt>
+<dt class="deftypefn def-line" id="index-sosfilt-1"><span class="category-def">Loadable Function: </span><span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">sosfilt</strong> <code class="def-code-arguments">(<var class="var">sos</var>, <var class="var">x</var>)</code></span></dt>
 <dd><p>Second order section IIR filtering of <var class="var">x</var>.  The second order section
 filter is described by the matrix <var class="var">sos</var> with:
 </p>
@@ -1180,9 +1245,9 @@ section 1, etc.  The b0 entry must be nonzero for each section.
 <h4 class="subsection">3.5.1 filternorm</h4>
 <a class="index-entry-id" id="index-filternorm"></a>
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-filternorm-1"><span class="category-def">Function File: </span><code class="def-type"><var class="var">L</var> =</code> <strong class="def-name">filternorm</strong> <code class="def-code-arguments">(<var class="var">b</var>, <var class="var">a</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-filternorm-2"><span class="category-def">Function File: </span><code class="def-type"><var class="var">L</var> =</code> <strong class="def-name">filternorm</strong> <code class="def-code-arguments">(<var class="var">b</var>, <var class="var">a</var>, <var class="var">pnorm</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-filternorm-3"><span class="category-def">Function File: </span><code class="def-type"><var class="var">L</var> =</code> <strong class="def-name">filternorm</strong> <code class="def-code-arguments">(<var class="var">b</var>, <var class="var">a</var>, 2, <var class="var">tol</var>)</code></dt>
+<dt class="deftypefn def-line" id="index-filternorm-1"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">L</var> =</code> <strong class="def-name">filternorm</strong> <code class="def-code-arguments">(<var class="var">b</var>, <var class="var">a</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-filternorm-2"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">L</var> =</code> <strong class="def-name">filternorm</strong> <code class="def-code-arguments">(<var class="var">b</var>, <var class="var">a</var>, <var class="var">pnorm</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-filternorm-3"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">L</var> =</code> <strong class="def-name">filternorm</strong> <code class="def-code-arguments">(<var class="var">b</var>, <var class="var">a</var>, 2, <var class="var">tol</var>)</code></span></dt>
 <dd>
 <p>Compute the 2-norm of a digital filter defined by the numerator coefficients,
 <var class="var">b</var>, and the denominator coefficients, <var class="var">a</var>. It is also possible to
@@ -1200,8 +1265,8 @@ section 1, etc.  The b0 entry must be nonzero for each section.
 <h4 class="subsection">3.5.2 filtord</h4>
 <a class="index-entry-id" id="index-filtord"></a>
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-filtord-1"><span class="category-def">Function File: </span><code class="def-type"><var class="var">n</var> =</code> <strong class="def-name">filtord</strong> <code class="def-code-arguments">(<var class="var">b</var>, <var class="var">a</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-filtord-2"><span class="category-def">Function File: </span><code class="def-type"><var class="var">n</var> =</code> <strong class="def-name">filtord</strong> <code class="def-code-arguments">(<var class="var">sos</var>)</code></dt>
+<dt class="deftypefn def-line" id="index-filtord-1"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">n</var> =</code> <strong class="def-name">filtord</strong> <code class="def-code-arguments">(<var class="var">b</var>, <var class="var">a</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-filtord-2"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">n</var> =</code> <strong class="def-name">filtord</strong> <code class="def-code-arguments">(<var class="var">sos</var>)</code></span></dt>
 <dd>
 <p>Returns the filter order <var class="var">n</var> for a filter defined by the numerator
  coefficients, <var class="var">b</var>, and the denominator coefficients, <var class="var">a</var>.
@@ -1219,12 +1284,17 @@ section 1, etc.  The b0 entry must be nonzero for each section.
 <h4 class="subsection">3.5.3 freqs</h4>
 <a class="index-entry-id" id="index-freqs"></a>
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-freqs-1"><span class="category-def">Function File: </span><code class="def-type"><var class="var">h</var> =</code> <strong class="def-name">freqs</strong> <code class="def-code-arguments">(<var class="var">b</var>, <var class="var">a</var>, <var class="var">w</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-freqs-2"><span class="category-def">Function File: </span><strong class="def-name">freqs</strong> <code class="def-code-arguments">(<var class="var">b</var>, <var class="var">a</var>, <var class="var">w</var>)</code></dt>
-<dd>
-<p>Compute the s-plane frequency response of the IIR filter B(s)/A(s) as
- H = polyval(B,j*W)./polyval(A,j*W).  If called with no output
- argument, a plot of magnitude and phase are displayed.
+<dt class="deftypefn def-line" id="index-freqs-1"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">h</var> =</code> <strong class="def-name">freqs</strong> <code class="def-code-arguments">(<var class="var">b</var>, <var class="var">a</var>, <var class="var">w</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-freqs-2"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">h</var>, <var class="var">wout</var>] =</code> <strong class="def-name">freqs</strong> <code class="def-code-arguments">(<var class="var">b</var>, <var class="var">a</var>, <var class="var">n</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-freqs-3"><span class="category-def">Function File: </span><span><strong class="def-name">freqs</strong> <code class="def-code-arguments">(&hellip;)</code></span></dt>
+<dd><p>Compute the s-plane frequency response of the analog filter B(s)/A(s).
+</p>
+<p>The frequency response is evaluated at the angular frequencies specified
+ by vector <var class="var">w</var> (in rad/s).  If the third argument is a scalar integer
+<var class="var">n</var>, or if it is omitted, the frequency response is computed at
+<var class="var">n</var> logarithmically spaced frequencies (default <var class="var">n</var> = 200).
+</p>
+<p>If no output argument is requested, the magnitude and phase are plotted.
 </p>
 <p>Example:
 </p><div class="example">
@@ -1238,20 +1308,53 @@ section 1, etc.  The b0 entry must be nonzero for each section.
 <h4 class="subsection">3.5.4 freqs_plot</h4>
 <a class="index-entry-id" id="index-freqs_005fplot"></a>
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-freqs_005fplot-1"><span class="category-def">Function File: </span><strong class="def-name">freqs_plot</strong> <code class="def-code-arguments">(<var class="var">w</var>, <var class="var">h</var>)</code></dt>
+<dt class="deftypefn def-line" id="index-freqs_005fplot-1"><span class="category-def">Function File: </span><span><strong class="def-name">freqs_plot</strong> <code class="def-code-arguments">(<var class="var">w</var>, <var class="var">h</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-freqs_005fplot-2"><span class="category-def">Function File: </span><span><strong class="def-name">freqs_plot</strong> <code class="def-code-arguments">(<var class="var">w</var>, <var class="var">h</var>, <var class="var">freqscale</var>)</code></span></dt>
 <dd><p>Plot the amplitude and phase of the vector <var class="var">h</var>.
+</p>
+<p>The optional argument <var class="var">freqscale</var> specifies the scaling of the
+ frequency axis.  It can be <code class="code">&quot;log&quot;</code> (default) or <code class="code">&quot;linear&quot;</code>.
+</p>
+<p><strong class="strong">See also:</strong> freqs.
+</p></dd></dl>
+</div>
+<div class="subsection-level-extent" id="freqspace">
+<h4 class="subsection">3.5.5 freqspace</h4>
+<a class="index-entry-id" id="index-freqspace"></a>
+<dl class="first-deftypefn def-block">
+<dt class="deftypefn def-line" id="index-freqspace-1"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">f</var> =</code> <strong class="def-name">freqspace</strong> <code class="def-code-arguments">(<var class="var">N</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-freqspace-2"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">f</var> =</code> <strong class="def-name">freqspace</strong> <code class="def-code-arguments">(<var class="var">N</var>, &quot;whole&quot;)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-freqspace-3"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">f1</var>, <var class="var">f2</var>] =</code> <strong class="def-name">freqspace</strong> <code class="def-code-arguments">(<var class="var">n</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-freqspace-4"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">f1</var>, <var class="var">f2</var>] =</code> <strong class="def-name">freqspace</strong> <code class="def-code-arguments">([<var class="var">m</var>, <var class="var">n</var>])</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-freqspace-5"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">x</var>, <var class="var">y</var>] =</code> <strong class="def-name">freqspace</strong> <code class="def-code-arguments">(&hellip;, &quot;meshgrid&quot;)</code></span></dt>
+<dd><p>Generate frequency spacing for frequency responses.
+</p>
+<p>For one-dimensional usage, <code class="code">freqspace (<var class="var">N</var>)</code> returns <var class="var">N</var>
+ equally-spaced points along the upper half of the unit circle, with
+ normalized frequency in [0, 1].  When &quot;whole&quot; is specified, returns points
+ along the entire unit circle, ranging from [0, 2).
+</p>
+<p>For two-dimensional usage, <code class="code">[<var class="var">f1</var>, <var class="var">f2</var>] = freqspace (<var class="var">n</var>)</code>
+ returns two frequency vectors for an <var class="var">n</var>-<var class="var">n</var> matrix;
+<code class="code">[<var class="var">f1</var>, <var class="var">f2</var>] = freqspace ([<var class="var">m</var>, <var class="var">n</var>])</code> returns
+ vectors for an <var class="var">m</var>-<var class="var">n</var> matrix.  The 2-D frequency vectors are
+ equally spaced between -1 and 1, where 1 corresponds to the Nyquist
+ frequency.
+</p>
+<p>When &quot;meshgrid&quot; is specified, it is equivalent to calling <code class="code">freqspace</code>
+ followed by <code class="code">meshgrid</code> on the results.
 </p></dd></dl>
 </div>
 <div class="subsection-level-extent" id="fwhm">
-<h4 class="subsection">3.5.5 fwhm</h4>
+<h4 class="subsection">3.5.6 fwhm</h4>
 <a class="index-entry-id" id="index-fwhm"></a>
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-fwhm-1"><span class="category-def">Function File: </span><code class="def-type"><var class="var">f</var> =</code> <strong class="def-name">fwhm</strong> <code class="def-code-arguments">(<var class="var">y</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-fwhm-2"><span class="category-def">Function File: </span><code class="def-type"><var class="var">f</var> =</code> <strong class="def-name">fwhm</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">y</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-fwhm-3"><span class="category-def">Function File: </span><code class="def-type"><var class="var">f</var> =</code> <strong class="def-name">fwhm</strong> <code class="def-code-arguments">(&hellip;, &quot;zero&quot;)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-fwhm-4"><span class="category-def">Function File: </span><code class="def-type"><var class="var">f</var> =</code> <strong class="def-name">fwhm</strong> <code class="def-code-arguments">(&hellip;, &quot;min&quot;)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-fwhm-5"><span class="category-def">Function File: </span><code class="def-type"><var class="var">f</var> =</code> <strong class="def-name">fwhm</strong> <code class="def-code-arguments">(&hellip;, &quot;alevel&quot;, <var class="var">level</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-fwhm-6"><span class="category-def">Function File: </span><code class="def-type"><var class="var">f</var> =</code> <strong class="def-name">fwhm</strong> <code class="def-code-arguments">(&hellip;, &quot;rlevel&quot;, <var class="var">level</var>)</code></dt>
+<dt class="deftypefn def-line" id="index-fwhm-1"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">f</var> =</code> <strong class="def-name">fwhm</strong> <code class="def-code-arguments">(<var class="var">y</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-fwhm-2"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">f</var> =</code> <strong class="def-name">fwhm</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">y</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-fwhm-3"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">f</var> =</code> <strong class="def-name">fwhm</strong> <code class="def-code-arguments">(&hellip;, &quot;zero&quot;)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-fwhm-4"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">f</var> =</code> <strong class="def-name">fwhm</strong> <code class="def-code-arguments">(&hellip;, &quot;min&quot;)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-fwhm-5"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">f</var> =</code> <strong class="def-name">fwhm</strong> <code class="def-code-arguments">(&hellip;, &quot;alevel&quot;, <var class="var">level</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-fwhm-6"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">f</var> =</code> <strong class="def-name">fwhm</strong> <code class="def-code-arguments">(&hellip;, &quot;rlevel&quot;, <var class="var">level</var>)</code></span></dt>
 <dd>
 <p>Compute peak full-width at half maximum (FWHM) or at another level of peak
  maximum for vector or matrix data <var class="var">y</var>, optionally sampled as <em class="math">y(x)</em>.
@@ -1277,18 +1380,18 @@ section 1, etc.  The b0 entry must be nonzero for each section.
 </dd></dl>
 </div>
 <div class="subsection-level-extent" id="grpdelay">
-<h4 class="subsection">3.5.6 grpdelay</h4>
+<h4 class="subsection">3.5.7 grpdelay</h4>
 <a class="index-entry-id" id="index-grpdelay"></a>
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-grpdelay-1"><span class="category-def">Function File: </span><code class="def-type">[<var class="var">g</var>, <var class="var">w</var>] =</code> <strong class="def-name">grpdelay</strong> <code class="def-code-arguments">(<var class="var">b</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-grpdelay-2"><span class="category-def">Function File: </span><code class="def-type">[<var class="var">g</var>, <var class="var">w</var>] =</code> <strong class="def-name">grpdelay</strong> <code class="def-code-arguments">(<var class="var">b</var>, <var class="var">a</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-grpdelay-3"><span class="category-def">Function File: </span><code class="def-type">[<var class="var">g</var>, <var class="var">w</var>] =</code> <strong class="def-name">grpdelay</strong> <code class="def-code-arguments">(&hellip;, <var class="var">n</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-grpdelay-4"><span class="category-def">Function File: </span><code class="def-type">[<var class="var">g</var>, <var class="var">w</var>] =</code> <strong class="def-name">grpdelay</strong> <code class="def-code-arguments">(&hellip;, <var class="var">n</var>, &quot;whole&quot;)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-grpdelay-5"><span class="category-def">Function File: </span><code class="def-type">[<var class="var">g</var>, <var class="var">f</var>] =</code> <strong class="def-name">grpdelay</strong> <code class="def-code-arguments">(&hellip;, <var class="var">n</var>, <var class="var">Fs</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-grpdelay-6"><span class="category-def">Function File: </span><code class="def-type">[<var class="var">g</var>, <var class="var">f</var>] =</code> <strong class="def-name">grpdelay</strong> <code class="def-code-arguments">(&hellip;, <var class="var">n</var>, &quot;whole&quot;, <var class="var">Fs</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-grpdelay-7"><span class="category-def">Function File: </span><code class="def-type">[<var class="var">g</var>, <var class="var">w</var>] =</code> <strong class="def-name">grpdelay</strong> <code class="def-code-arguments">(&hellip;, <var class="var">w</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-grpdelay-8"><span class="category-def">Function File: </span><code class="def-type">[<var class="var">g</var>, <var class="var">f</var>] =</code> <strong class="def-name">grpdelay</strong> <code class="def-code-arguments">(&hellip;, <var class="var">f</var>, <var class="var">Fs</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-grpdelay-9"><span class="category-def">Function File: </span><strong class="def-name">grpdelay</strong> <code class="def-code-arguments">(&hellip;)</code></dt>
+<dt class="deftypefn def-line" id="index-grpdelay-1"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">g</var>, <var class="var">w</var>] =</code> <strong class="def-name">grpdelay</strong> <code class="def-code-arguments">(<var class="var">b</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-grpdelay-2"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">g</var>, <var class="var">w</var>] =</code> <strong class="def-name">grpdelay</strong> <code class="def-code-arguments">(<var class="var">b</var>, <var class="var">a</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-grpdelay-3"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">g</var>, <var class="var">w</var>] =</code> <strong class="def-name">grpdelay</strong> <code class="def-code-arguments">(&hellip;, <var class="var">n</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-grpdelay-4"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">g</var>, <var class="var">w</var>] =</code> <strong class="def-name">grpdelay</strong> <code class="def-code-arguments">(&hellip;, <var class="var">n</var>, &quot;whole&quot;)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-grpdelay-5"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">g</var>, <var class="var">f</var>] =</code> <strong class="def-name">grpdelay</strong> <code class="def-code-arguments">(&hellip;, <var class="var">n</var>, <var class="var">Fs</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-grpdelay-6"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">g</var>, <var class="var">f</var>] =</code> <strong class="def-name">grpdelay</strong> <code class="def-code-arguments">(&hellip;, <var class="var">n</var>, &quot;whole&quot;, <var class="var">Fs</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-grpdelay-7"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">g</var>, <var class="var">w</var>] =</code> <strong class="def-name">grpdelay</strong> <code class="def-code-arguments">(&hellip;, <var class="var">w</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-grpdelay-8"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">g</var>, <var class="var">f</var>] =</code> <strong class="def-name">grpdelay</strong> <code class="def-code-arguments">(&hellip;, <var class="var">f</var>, <var class="var">Fs</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-grpdelay-9"><span class="category-def">Function File: </span><span><strong class="def-name">grpdelay</strong> <code class="def-code-arguments">(&hellip;)</code></span></dt>
 <dd><p>Compute the group delay of a filter.
 </p>
 <p>[g, w] = grpdelay(b)
@@ -1371,32 +1474,95 @@ section 1, etc.  The b0 entry must be nonzero for each section.
 </p></dd></dl>
 </div>
 <div class="subsection-level-extent" id="impz">
-<h4 class="subsection">3.5.7 impz</h4>
+<h4 class="subsection">3.5.8 impz</h4>
 <a class="index-entry-id" id="index-impz"></a>
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-impz-1"><span class="category-def">Function File: </span><code class="def-type">[<var class="var">x</var>, <var class="var">t</var>] =</code> <strong class="def-name">impz</strong> <code class="def-code-arguments">(<var class="var">b</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-impz-2"><span class="category-def">Function File: </span><code class="def-type">[<var class="var">x</var>, <var class="var">t</var>] =</code> <strong class="def-name">impz</strong> <code class="def-code-arguments">(<var class="var">b</var>, <var class="var">a</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-impz-3"><span class="category-def">Function File: </span><code class="def-type">[<var class="var">x</var>, <var class="var">t</var>] =</code> <strong class="def-name">impz</strong> <code class="def-code-arguments">(<var class="var">b</var>, <var class="var">a</var>, <var class="var">n</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-impz-4"><span class="category-def">Function File: </span><code class="def-type">[<var class="var">x</var>, <var class="var">t</var>] =</code> <strong class="def-name">impz</strong> <code class="def-code-arguments">(<var class="var">b</var>, <var class="var">a</var>, <var class="var">n</var>, <var class="var">fs</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-impz-5"><span class="category-def">Function File: </span><strong class="def-name">impz</strong> <code class="def-code-arguments">(&hellip;)</code></dt>
+<dt class="deftypefn def-line" id="index-impz-1"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">x</var>, <var class="var">t</var>] =</code> <strong class="def-name">impz</strong> <code class="def-code-arguments">(<var class="var">b</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-impz-2"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">x</var>, <var class="var">t</var>] =</code> <strong class="def-name">impz</strong> <code class="def-code-arguments">(<var class="var">b</var>, <var class="var">a</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-impz-3"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">x</var>, <var class="var">t</var>] =</code> <strong class="def-name">impz</strong> <code class="def-code-arguments">(<var class="var">b</var>, <var class="var">a</var>, <var class="var">n</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-impz-4"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">x</var>, <var class="var">t</var>] =</code> <strong class="def-name">impz</strong> <code class="def-code-arguments">(<var class="var">b</var>, <var class="var">a</var>, <var class="var">n</var>, <var class="var">fs</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-impz-5"><span class="category-def">Function File: </span><span><strong class="def-name">impz</strong> <code class="def-code-arguments">(&hellip;)</code></span></dt>
 <dd>
-<p>Generate impulse-response characteristics of the filter. The filter
- coefficients correspond to the the z-plane rational function with
- numerator b and denominator a.  If a is not specified, it defaults to
- 1. If n is not specified, or specified as [], it will be chosen such
- that the signal has a chance to die down to -120dB, or to not explode
- beyond 120dB, or to show five periods if there is no significant
- damping. If no return arguments are requested, plot the results.
+<p>Generate impulse-response characteristics of the filter.
 </p>
-<p><strong class="strong">See also:</strong> freqz, zplane.
+<p>The filter coefficients correspond to the z-plane rational function
+ with numerator b and denominator a.  If a is not specified, it
+ defaults to 1.  When <var class="var">n</var> is a scalar, it specifies the number of
+ points to compute (default: determined by <code class="code">impzlength</code>).  When
+<var class="var">n</var> is a vector of non-negative integers, the response is
+ computed only at those sample indices.  The sampling frequency
+<var class="var">fs</var> (default: 1) controls the time spacing in the output
+<var class="var">t</var>.  With no output arguments, the result is plotted.
+</p>
+<p><strong class="strong">See also:</strong> freqz, zplane, stepz,impzlength.
+</p></dd></dl>
+</div>
+<div class="subsection-level-extent" id="impzlength">
+<h4 class="subsection">3.5.9 impzlength</h4>
+<a class="index-entry-id" id="index-impzlength"></a>
+<dl class="first-deftypefn def-block">
+<dt class="deftypefn def-line" id="index-impzlength-1"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">len</var> =</code> <strong class="def-name">impzlength</strong> <code class="def-code-arguments">(<var class="var">b</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-impzlength-2"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">len</var> =</code> <strong class="def-name">impzlength</strong> <code class="def-code-arguments">(<var class="var">b</var>, <var class="var">a</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-impzlength-3"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">len</var> =</code> <strong class="def-name">impzlength</strong> <code class="def-code-arguments">(<var class="var">sos</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-impzlength-4"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">len</var> =</code> <strong class="def-name">impzlength</strong> <code class="def-code-arguments">(&hellip;, <var class="var">tol</var>)</code></span></dt>
+<dd><p>Return the impulse response length of the specified filter.
+</p>
+<p>For a finite impulse response (FIR) filter specified by the numerator
+ coefficients <var class="var">b</var>, the length is simply the number of coefficients
+ in <var class="var">b</var>.
+</p>
+<p>For an infinite impulse response (IIR) filter specified by the numerator
+<var class="var">b</var> and denominator <var class="var">a</var> polynomials in z^-1, the function
+ computes an effective impulse response sequence length.
+</p>
+<p>The filter can also be specified by a <var class="var">K</var>-by-6 second-order sections
+ matrix <var class="var">sos</var>, where <var class="var">K</var> is the number of sections.  In this case,
+ the matrix is converted to transfer function form <var class="var">b</var> and <var class="var">a</var>
+ before computing the length.
+</p>
+<p>The algorithm proceeds as follows:
+</p>
+<ol class="enumerate">
+<li> If the filter is FIR, the length is simply length (<var class="var">b</var>).
+</li><li> The poles of the transfer function are computed as the roots of the
+ denominator polynomial <var class="var">a</var>.
+</li><li> The multiplicity of the dominant pole (the pole with the largest
+ magnitude) is determined by counting poles at the same complex
+ coordinate within tolerance.
+</li><li> For a stable IIR filter (dominant pole magnitude <em class="math">&lt; 1 - 10^{-5}</em>),
+ the effective length is estimated as
+<p><code class="code">floor (M * log10 (tol) / log10 (maxpole)) + delay</code>
+</p>
+<p>where <em class="math">M</em> is the multiplicity of the dominant pole and <em class="math">d</em>
+ is the initial delay (number of leading zeros in <var class="var">b</var>).
+</p>
+</li><li> For an unstable IIR filter (dominant pole magnitude <em class="math">&gt; 1 + 10^{-4}</em>),
+ a heuristic formula is used:
+<p><code class="code">floor (6 / log10 (maxpole))</code>
+</p>
+</li><li> For filters with poles near the unit circle (oscillatory behavior), the
+ length is the maximum of: five periods of the slowest oscillation,
+ and the decay length of damped poles, plus the initial delay.
+</li></ol>
+<p>The optional argument <var class="var">tol</var> specifies the tolerance used to
+ estimate the effective length of an IIR filter&rsquo;s impulse response.
+ The default tolerance is 5e-5.  Increasing <var class="var">tol</var> estimates a
+ shorter effective length, while decreasing <var class="var">tol</var> produces a longer
+ effective length.
+</p>
+<p>The returned value <var class="var">len</var> is the effective impulse response length
+ of the specified filter.  This function is used by <code class="code">impz</code> and
+<code class="code">stepz</code> to determine the number of points to plot.
+</p>
+<p><strong class="strong">See also:</strong> impz, stepz.
 </p></dd></dl>
 </div>
 <div class="subsection-level-extent" id="isallpass">
-<h4 class="subsection">3.5.8 isallpass</h4>
+<h4 class="subsection">3.5.10 isallpass</h4>
 <a class="index-entry-id" id="index-isallpass"></a>
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-isallpass-1"><span class="category-def">Function File: </span><code class="def-type"><var class="var">L</var> =</code> <strong class="def-name">isallpass</strong> <code class="def-code-arguments">(<var class="var">b</var>, <var class="var">a</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-isallpass-2"><span class="category-def">Function File: </span><code class="def-type"><var class="var">L</var> =</code> <strong class="def-name">isallpass</strong> <code class="def-code-arguments">(<var class="var">sos</var>)</code></dt>
+<dt class="deftypefn def-line" id="index-isallpass-1"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">L</var> =</code> <strong class="def-name">isallpass</strong> <code class="def-code-arguments">(<var class="var">b</var>, <var class="var">a</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-isallpass-2"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">L</var> =</code> <strong class="def-name">isallpass</strong> <code class="def-code-arguments">(<var class="var">sos</var>)</code></span></dt>
 <dd>
 <p>Determine whether a digital filter is allpass. The filter might be defined
  by the numerator coefficients, <var class="var">b</var>, and the denominator coefficients,
@@ -1418,12 +1584,12 @@ section 1, etc.  The b0 entry must be nonzero for each section.
 </p></dd></dl>
 </div>
 <div class="subsection-level-extent" id="ismaxphase">
-<h4 class="subsection">3.5.9 ismaxphase</h4>
+<h4 class="subsection">3.5.11 ismaxphase</h4>
 <a class="index-entry-id" id="index-ismaxphase"></a>
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-ismaxphase-1"><span class="category-def">Function File: </span><code class="def-type"><var class="var">L</var> =</code> <strong class="def-name">ismaxphase</strong> <code class="def-code-arguments">(<var class="var">b</var>, <var class="var">a</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-ismaxphase-2"><span class="category-def">Function File: </span><code class="def-type"><var class="var">L</var> =</code> <strong class="def-name">ismaxphase</strong> <code class="def-code-arguments">(<var class="var">sos</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-ismaxphase-3"><span class="category-def">Function File: </span><code class="def-type"><var class="var">L</var> =</code> <strong class="def-name">ismaxphase</strong> <code class="def-code-arguments">(&hellip;, <var class="var">tol</var>)</code></dt>
+<dt class="deftypefn def-line" id="index-ismaxphase-1"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">L</var> =</code> <strong class="def-name">ismaxphase</strong> <code class="def-code-arguments">(<var class="var">b</var>, <var class="var">a</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-ismaxphase-2"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">L</var> =</code> <strong class="def-name">ismaxphase</strong> <code class="def-code-arguments">(<var class="var">sos</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-ismaxphase-3"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">L</var> =</code> <strong class="def-name">ismaxphase</strong> <code class="def-code-arguments">(&hellip;, <var class="var">tol</var>)</code></span></dt>
 <dd>
 <p>Determine whether a digital filter is maximum phase (maximum energy-delay).
  The filter might be defined by the numerator coefficients, <var class="var">b</var>, and the
@@ -1442,12 +1608,12 @@ section 1, etc.  The b0 entry must be nonzero for each section.
 </p></dd></dl>
 </div>
 <div class="subsection-level-extent" id="isminphase">
-<h4 class="subsection">3.5.10 isminphase</h4>
+<h4 class="subsection">3.5.12 isminphase</h4>
 <a class="index-entry-id" id="index-isminphase"></a>
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-isminphase-1"><span class="category-def">Function File: </span><code class="def-type"><var class="var">L</var> =</code> <strong class="def-name">isminphase</strong> <code class="def-code-arguments">(<var class="var">b</var>, <var class="var">a</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-isminphase-2"><span class="category-def">Function File: </span><code class="def-type"><var class="var">L</var> =</code> <strong class="def-name">isminphase</strong> <code class="def-code-arguments">(<var class="var">sos</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-isminphase-3"><span class="category-def">Function File: </span><code class="def-type"><var class="var">L</var> =</code> <strong class="def-name">isminphase</strong> <code class="def-code-arguments">(&hellip;, <var class="var">tol</var>)</code></dt>
+<dt class="deftypefn def-line" id="index-isminphase-1"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">L</var> =</code> <strong class="def-name">isminphase</strong> <code class="def-code-arguments">(<var class="var">b</var>, <var class="var">a</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-isminphase-2"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">L</var> =</code> <strong class="def-name">isminphase</strong> <code class="def-code-arguments">(<var class="var">sos</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-isminphase-3"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">L</var> =</code> <strong class="def-name">isminphase</strong> <code class="def-code-arguments">(&hellip;, <var class="var">tol</var>)</code></span></dt>
 <dd>
 <p>Determine whether a digital filter is minimum phase. The filter might be defined
  by the numerator coefficients, <var class="var">b</var>, and the denominator coefficients,
@@ -1465,10 +1631,11 @@ section 1, etc.  The b0 entry must be nonzero for each section.
 </p></dd></dl>
 </div>
 <div class="subsection-level-extent" id="isstable">
-<h4 class="subsection">3.5.11 isstable</h4>
+<h4 class="subsection">3.5.13 isstable</h4>
 <a class="index-entry-id" id="index-isstable"></a>
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-isstable-1"><span class="category-def">Function File: </span><code class="def-type"><var class="var">FLAG</var> =</code> <strong class="def-name">isstable</strong> <code class="def-code-arguments">(<var class="var">B</var>, <var class="var">A</var>)</code></dt>
+<dt class="deftypefn def-line" id="index-isstable-1"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">FLAG</var> =</code> <strong class="def-name">isstable</strong> <code class="def-code-arguments">(<var class="var">B</var>, <var class="var">A</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-isstable-2"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">FLAG</var> =</code> <strong class="def-name">isstable</strong> <code class="def-code-arguments">(<var class="var">sos</var>)</code></span></dt>
 <dd><p>Returns a logical output equal to TRUE, if the filter is stable.
  This can be done with coeffients of the filer <var class="var">B</var> and <var class="var">A</var>.
  Alternatively by using a second order sections matrix (SOS).
@@ -1499,16 +1666,16 @@ section 1, etc.  The b0 entry must be nonzero for each section.
 </dd></dl>
 </div>
 <div class="subsection-level-extent" id="phasez">
-<h4 class="subsection">3.5.12 phasez</h4>
+<h4 class="subsection">3.5.14 phasez</h4>
 <a class="index-entry-id" id="index-phasez"></a>
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-phasez-1"><span class="category-def">Function File: </span><code class="def-type">[<var class="var">phi</var>, <var class="var">w</var>] =</code> <strong class="def-name">phasez</strong> <code class="def-code-arguments">(<var class="var">b</var>, <var class="var">a</var>, <var class="var">n</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-phasez-2"><span class="category-def">Function File: </span><code class="def-type">[<var class="var">phi</var>, <var class="var">w</var>] =</code> <strong class="def-name">phasez</strong> <code class="def-code-arguments">(<var class="var">b</var>, <var class="var">a</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-phasez-3"><span class="category-def">Function File: </span><code class="def-type">[<var class="var">phi</var>, <var class="var">w</var>] =</code> <strong class="def-name">phasez</strong> <code class="def-code-arguments">(<var class="var">sos</var>, <var class="var">n</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-phasez-4"><span class="category-def">Function File: </span><code class="def-type">[<var class="var">phi</var>, <var class="var">w</var>] =</code> <strong class="def-name">phasez</strong> <code class="def-code-arguments">(<var class="var">sos</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-phasez-5"><span class="category-def">Function File: </span><code class="def-type">[<var class="var">phi</var>, <var class="var">w</var>] =</code> <strong class="def-name">phasez</strong> <code class="def-code-arguments">(&hellip;, <var class="var">n</var>, &quot;whole&quot;)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-phasez-6"><span class="category-def">Function File: </span><code class="def-type">[<var class="var">phi</var>, <var class="var">w</var>] =</code> <strong class="def-name">phasez</strong> <code class="def-code-arguments">(&hellip;, <var class="var">n</var>, Fs)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-phasez-7"><span class="category-def">Function File: </span><strong class="def-name">phasez</strong> <code class="def-code-arguments">(&hellip;)</code></dt>
+<dt class="deftypefn def-line" id="index-phasez-1"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">phi</var>, <var class="var">w</var>] =</code> <strong class="def-name">phasez</strong> <code class="def-code-arguments">(<var class="var">b</var>, <var class="var">a</var>, <var class="var">n</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-phasez-2"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">phi</var>, <var class="var">w</var>] =</code> <strong class="def-name">phasez</strong> <code class="def-code-arguments">(<var class="var">b</var>, <var class="var">a</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-phasez-3"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">phi</var>, <var class="var">w</var>] =</code> <strong class="def-name">phasez</strong> <code class="def-code-arguments">(<var class="var">sos</var>, <var class="var">n</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-phasez-4"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">phi</var>, <var class="var">w</var>] =</code> <strong class="def-name">phasez</strong> <code class="def-code-arguments">(<var class="var">sos</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-phasez-5"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">phi</var>, <var class="var">w</var>] =</code> <strong class="def-name">phasez</strong> <code class="def-code-arguments">(&hellip;, <var class="var">n</var>, &quot;whole&quot;)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-phasez-6"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">phi</var>, <var class="var">w</var>] =</code> <strong class="def-name">phasez</strong> <code class="def-code-arguments">(&hellip;, <var class="var">n</var>, Fs)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-phasez-7"><span class="category-def">Function File: </span><span><strong class="def-name">phasez</strong> <code class="def-code-arguments">(&hellip;)</code></span></dt>
 <dd>
 <p>Compute the phase response of digital filter defined either by its
  coefficients (<var class="var">b</var> and <var class="var">a</var> are the numerator and denominator
@@ -1542,12 +1709,37 @@ section 1, etc.  The b0 entry must be nonzero for each section.
 <p><strong class="strong">See also:</strong> freqz, phasedelay.
 </p></dd></dl>
 </div>
+<div class="subsection-level-extent" id="stepz">
+<h4 class="subsection">3.5.15 stepz</h4>
+<a class="index-entry-id" id="index-stepz"></a>
+<dl class="first-deftypefn def-block">
+<dt class="deftypefn def-line" id="index-stepz-1"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">x</var>, <var class="var">t</var>] =</code> <strong class="def-name">stepz</strong> <code class="def-code-arguments">(<var class="var">b</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-stepz-2"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">x</var>, <var class="var">t</var>] =</code> <strong class="def-name">stepz</strong> <code class="def-code-arguments">(<var class="var">b</var>, <var class="var">a</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-stepz-3"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">x</var>, <var class="var">t</var>] =</code> <strong class="def-name">stepz</strong> <code class="def-code-arguments">(<var class="var">b</var>, <var class="var">a</var>, <var class="var">n</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-stepz-4"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">x</var>, <var class="var">t</var>] =</code> <strong class="def-name">stepz</strong> <code class="def-code-arguments">(<var class="var">b</var>, <var class="var">a</var>, <var class="var">n</var>, <var class="var">fs</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-stepz-5"><span class="category-def">Function File: </span><span><strong class="def-name">stepz</strong> <code class="def-code-arguments">(&hellip;)</code></span></dt>
+<dd>
+<p>Generate step-response characteristics of the filter.
+</p>
+<p>The filter coefficients correspond to the z-plane rational function
+ with numerator b and denominator a.  If a is not specified, it
+ defaults to 1.  When <var class="var">n</var> is a scalar, it specifies the number of
+ points to compute (default: determined by <code class="code">impzlength</code>).  When
+<var class="var">n</var> is a vector of non-negative integers, the response is
+ computed only at those sample indices.  The sampling frequency
+<var class="var">fs</var> (default: 1) controls the time spacing in the output
+<var class="var">t</var>.  With no output arguments, the result is plotted.
+</p>
+<p><strong class="strong">See also:</strong> freqz, zplane, impz, impzlength.
+</p></dd></dl>
+</div>
 <div class="subsection-level-extent" id="zplane">
-<h4 class="subsection">3.5.13 zplane</h4>
+<h4 class="subsection">3.5.16 zplane</h4>
 <a class="index-entry-id" id="index-zplane"></a>
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-zplane-1"><span class="category-def">Function File: </span><strong class="def-name">zplane</strong> <code class="def-code-arguments">(<var class="var">z</var>, <var class="var">p</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-zplane-2"><span class="category-def">Function File: </span><strong class="def-name">zplane</strong> <code class="def-code-arguments">(<var class="var">b</var>, <var class="var">a</var>)</code></dt>
+<dt class="deftypefn def-line" id="index-zplane-1"><span class="category-def">Function File: </span><span><strong class="def-name">zplane</strong> <code class="def-code-arguments">(<var class="var">z</var>, <var class="var">p</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-zplane-2"><span class="category-def">Function File: </span><span><strong class="def-name">zplane</strong> <code class="def-code-arguments">(<var class="var">b</var>, <var class="var">a</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-zplane-3"><span class="category-def">Function File: </span><span><code class="def-type">[hz, hp, ht] =</code> <strong class="def-name">zplane</strong> <code class="def-code-arguments">(___)</code></span></dt>
 <dd><p>Plot the poles and zeros on a complex plane.  If the arguments are column
  vectors <var class="var">z</var> and <var class="var">p</var>, the complex zeros <var class="var">z</var> and poles <var class="var">p</var>
  are displayed. If the arguments are row vectors <var class="var">b</var> and <var class="var">a</var>, the
@@ -1573,6 +1765,10 @@ section 1, etc.  The b0 entry must be nonzero for each section.
 </pre></div></div>
 <p>If called with only one argument, the poles <var class="var">p</var> defaults to an empty
  vector, and the denominator coefficient vector <var class="var">a</var> defaults to 1.
+</p>
+<p>If output variables are provided, hz is the handle to the zero lines, hp is the handle to the pole lines
+ of the pole-zero plot. ht is a vector of handles to the axes/unit circle line and to text objects.
+ If there are no zeros or no poles, hz or hp is the empty matrix, [].
 </p></dd></dl>
 <hr>
 </div>
@@ -1580,11 +1776,75 @@ section 1, etc.  The b0 entry must be nonzero for each section.
 <div class="section-level-extent" id="Filter-Conversion">
 <h3 class="section" id="Filter-Conversion-1">3.6 Filter Conversion</h3>
 <a class="index-entry-id" id="index-Filter-Conversion"></a>
+<div class="subsection-level-extent" id="cell2sos">
+<h4 class="subsection">3.6.1 cell2sos</h4>
+<a class="index-entry-id" id="index-cell2sos"></a>
+<dl class="first-deftypefn def-block">
+<dt class="deftypefn def-line" id="index-cell2sos-1"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">sos</var> =</code> <strong class="def-name">cell2sos</strong> <code class="def-code-arguments">(<var class="var">cll</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-cell2sos-2"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">sos</var>, <var class="var">g</var>] =</code> <strong class="def-name">cell2sos</strong> <code class="def-code-arguments">(<var class="var">cll</var>)</code></span></dt>
+<dd><p>Convert a second-order-section cell array to matrix form.
+</p>
+<p>Given a cell array <var class="var">cll</var> representing second-order sections,
+ return the equivalent matrix <var class="var">sos</var> and an optional overall
+ gain <var class="var">g</var>.
+</p>
+<p>A valid <var class="var">cll</var> input is a cell array of 2-element cell arrays.
+ Each element consists of a numerator vector <code class="code">[b0, b1, b2]</code> and a
+ denominator vector <code class="code">[1, a1, a2]</code>.  If the first element contains
+ two scalars <code class="code">{gn, gd}</code>, it is treated as an overall gain.
+</p>
+<p>Examples:
+</p>
+<div class="example">
+<div class="group"><pre class="example-preformatted"> ## Two sections, no gain:
+ cll = {{[2 4 2] [6 0 2]}, {[3 3 0] [6 0 0]}};
+ sos = cell2sos (cll)
+   &rArr; sos =
+       2   4   2   6   0   2
+       3   3   0   6   0   0
+</pre></div></div>
+<div class="example">
+<div class="group"><pre class="example-preformatted"> ## With gain:
+ cll = {{7 5}, {[2 4 2] [6 0 2]}, {[3 3 0] [6 0 0]}};
+ [sos, g] = cell2sos (cll)
+   &rArr; sos =
+       2   4   2   6   0   2
+       3   3   0   6   0   0
+   &rArr; g = 1.4000
+</pre></div></div>
+<p><strong class="strong">See also:</strong> sos2cell.
+</p></dd></dl>
+</div>
+<div class="subsection-level-extent" id="eqtflength">
+<h4 class="subsection">3.6.2 eqtflength</h4>
+<a class="index-entry-id" id="index-eqtflength"></a>
+<dl class="first-deftypefn def-block">
+<dt class="deftypefn def-line" id="index-eqtflength-1"><span><code class="def-type">[<var class="var">b</var>, <var class="var">a</var>] =</code> <strong class="def-name">eqtflength</strong> <code class="def-code-arguments">(<var class="var">num</var>, <var class="var">den</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-eqtflength-2"><span><code class="def-type">[<var class="var">b</var>, <var class="var">a</var>, <var class="var">n</var>, <var class="var">m</var>] =</code> <strong class="def-name">eqtflength</strong> <code class="def-code-arguments">(<var class="var">num</var>, <var class="var">den</var>)</code></span></dt>
+<dd><p>Equalize numerator and denominator polynomial lengths.
+</p>
+<p>Pads the shorter polynomial with trailing zeros so that the returned
+ numerator <var class="var">b</var> and denominator <var class="var">a</var> have equal length while
+ representing the same discrete-time transfer function.
+</p>
+<p>Outputs <var class="var">n</var> and <var class="var">m</var> are the numerator and
+ denominator orders, respectively, excluding trailing zeros.
+</p>
+<p>Example:
+</p>
+<div class="example">
+<pre class="example-preformatted"> [b, a] = eqtflength ([1 2], [1 0.5 0.25])
+      b = [1 2 0]
+      a = [1 0.5 0.25]
+</pre></div>
+<p><strong class="strong">See also:</strong> tf2ss, tf2zp.
+</p></dd></dl>
+</div>
 <div class="subsection-level-extent" id="residued">
-<h4 class="subsection">3.6.1 residued</h4>
+<h4 class="subsection">3.6.3 residued</h4>
 <a class="index-entry-id" id="index-residued"></a>
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-residued-1"><span class="category-def">Function File: </span><code class="def-type">[<var class="var">r</var>, <var class="var">p</var>, <var class="var">f</var>, <var class="var">m</var>] =</code> <strong class="def-name">residued</strong> <code class="def-code-arguments">(<var class="var">b</var>, <var class="var">a</var>)</code></dt>
+<dt class="deftypefn def-line" id="index-residued-1"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">r</var>, <var class="var">p</var>, <var class="var">f</var>, <var class="var">m</var>] =</code> <strong class="def-name">residued</strong> <code class="def-code-arguments">(<var class="var">b</var>, <var class="var">a</var>)</code></span></dt>
 <dd><p>Compute the partial fraction expansion (PFE) of filter
 <em class="math">H(z) = B(z)/A(z)</em>.  In the usual PFE function <code class="code">residuez</code>, the
  IIR part (poles <var class="var">p</var> and residues <var class="var">r</var>) is driven <em class="emph">in parallel</em>
@@ -1615,10 +1875,10 @@ section 1, etc.  The b0 entry must be nonzero for each section.
 </p></dd></dl>
 </div>
 <div class="subsection-level-extent" id="residuez">
-<h4 class="subsection">3.6.2 residuez</h4>
+<h4 class="subsection">3.6.4 residuez</h4>
 <a class="index-entry-id" id="index-residuez"></a>
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-residuez-1"><span class="category-def">Function File: </span><code class="def-type">[<var class="var">r</var>, <var class="var">p</var>, <var class="var">f</var>, <var class="var">m</var>] =</code> <strong class="def-name">residuez</strong> <code class="def-code-arguments">(<var class="var">b</var>, <var class="var">a</var>)</code></dt>
+<dt class="deftypefn def-line" id="index-residuez-1"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">r</var>, <var class="var">p</var>, <var class="var">f</var>, <var class="var">m</var>] =</code> <strong class="def-name">residuez</strong> <code class="def-code-arguments">(<var class="var">b</var>, <var class="var">a</var>)</code></span></dt>
 <dd><p>Compute the partial fraction expansion of filter <em class="math">H(z) = B(z)/A(z)</em>.
 </p>
 <p>INPUTS:
@@ -1644,11 +1904,11 @@ section 1, etc.  The b0 entry must be nonzero for each section.
 </p></dd></dl>
 </div>
 <div class="subsection-level-extent" id="sos2cell">
-<h4 class="subsection">3.6.3 sos2cell</h4>
+<h4 class="subsection">3.6.5 sos2cell</h4>
 <a class="index-entry-id" id="index-sos2cell"></a>
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-sos2cell-1"><span class="category-def">Function File: </span><code class="def-type">C =</code> <strong class="def-name">sos2cell</strong> <code class="def-code-arguments">(<var class="var">S</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-sos2cell-2"><span class="category-def">Function File: </span><code class="def-type">C =</code> <strong class="def-name">sos2cell</strong> <code class="def-code-arguments">(<var class="var">S</var>, <var class="var">G</var>)</code></dt>
+<dt class="deftypefn def-line" id="index-sos2cell-1"><span class="category-def">Function File: </span><span><code class="def-type">C =</code> <strong class="def-name">sos2cell</strong> <code class="def-code-arguments">(<var class="var">S</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-sos2cell-2"><span class="category-def">Function File: </span><span><code class="def-type">C =</code> <strong class="def-name">sos2cell</strong> <code class="def-code-arguments">(<var class="var">S</var>, <var class="var">G</var>)</code></span></dt>
 <dd><p>Convert a second-order-section matrix to a cell array.
 </p>
 <p><var class="var">S</var> is an L-by-6 matrix, where each row represents a second-order section in the form:
@@ -1683,21 +1943,21 @@ section 1, etc.  The b0 entry must be nonzero for each section.
 </dd></dl>
 </div>
 <div class="subsection-level-extent" id="sos2ss">
-<h4 class="subsection">3.6.4 sos2ss</h4>
+<h4 class="subsection">3.6.6 sos2ss</h4>
 <a class="index-entry-id" id="index-sos2ss"></a>
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-sos2ss-1"><span class="category-def">Function File: </span><code class="def-type">[<var class="var">a</var>, <var class="var">b</var>, <var class="var">c</var>, <var class="var">d</var>] =</code> <strong class="def-name">sos2ss</strong> <code class="def-code-arguments">(<var class="var">sos</var>)</code></dt>
+<dt class="deftypefn def-line" id="index-sos2ss-1"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">a</var>, <var class="var">b</var>, <var class="var">c</var>, <var class="var">d</var>] =</code> <strong class="def-name">sos2ss</strong> <code class="def-code-arguments">(<var class="var">sos</var>)</code></span></dt>
 <dd><p>Convert series second-order sections to state-space.
 </p>
 <p><strong class="strong">See also:</strong> sos2ss, ss2tf.
 </p></dd></dl>
 </div>
 <div class="subsection-level-extent" id="sos2tf">
-<h4 class="subsection">3.6.5 sos2tf</h4>
+<h4 class="subsection">3.6.7 sos2tf</h4>
 <a class="index-entry-id" id="index-sos2tf"></a>
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-sos2tf-1"><span class="category-def">Function File: </span><code class="def-type">[<var class="var">b</var>, <var class="var">a</var>] =</code> <strong class="def-name">sos2tf</strong> <code class="def-code-arguments">(<var class="var">sos</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-sos2tf-2"><span class="category-def">Function File: </span><code class="def-type">[<var class="var">b</var>, <var class="var">a</var>] =</code> <strong class="def-name">sos2tf</strong> <code class="def-code-arguments">(<var class="var">sos</var>, <var class="var">g</var>)</code></dt>
+<dt class="deftypefn def-line" id="index-sos2tf-1"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">b</var>, <var class="var">a</var>] =</code> <strong class="def-name">sos2tf</strong> <code class="def-code-arguments">(<var class="var">sos</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-sos2tf-2"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">b</var>, <var class="var">a</var>] =</code> <strong class="def-name">sos2tf</strong> <code class="def-code-arguments">(<var class="var">sos</var>, <var class="var">g</var>)</code></span></dt>
 <dd><p>Convert series second-order sections to transfer function.
 </p>
 <p>INPUTS:
@@ -1730,11 +1990,11 @@ section 1, etc.  The b0 entry must be nonzero for each section.
 </p></dd></dl>
 </div>
 <div class="subsection-level-extent" id="sos2zp">
-<h4 class="subsection">3.6.6 sos2zp</h4>
+<h4 class="subsection">3.6.8 sos2zp</h4>
 <a class="index-entry-id" id="index-sos2zp"></a>
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-sos2zp-1"><span class="category-def">Function File: </span><code class="def-type">[<var class="var">z</var>, <var class="var">p</var>, <var class="var">k</var>] =</code> <strong class="def-name">sos2zp</strong> <code class="def-code-arguments">(<var class="var">sos</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-sos2zp-2"><span class="category-def">Function File: </span><code class="def-type">[<var class="var">z</var>, <var class="var">p</var>, <var class="var">k</var>] =</code> <strong class="def-name">sos2zp</strong> <code class="def-code-arguments">(<var class="var">sos</var>, <var class="var">g</var>)</code></dt>
+<dt class="deftypefn def-line" id="index-sos2zp-1"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">z</var>, <var class="var">p</var>, <var class="var">k</var>] =</code> <strong class="def-name">sos2zp</strong> <code class="def-code-arguments">(<var class="var">sos</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-sos2zp-2"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">z</var>, <var class="var">p</var>, <var class="var">k</var>] =</code> <strong class="def-name">sos2zp</strong> <code class="def-code-arguments">(<var class="var">sos</var>, <var class="var">g</var>)</code></span></dt>
 <dd><p>Convert series second-order sections to zeros, poles, and gains
  (pole residues).
 </p>
@@ -1784,10 +2044,10 @@ section 1, etc.  The b0 entry must be nonzero for each section.
 </p></dd></dl>
 </div>
 <div class="subsection-level-extent" id="ss2tf">
-<h4 class="subsection">3.6.7 ss2tf</h4>
+<h4 class="subsection">3.6.9 ss2tf</h4>
 <a class="index-entry-id" id="index-ss2tf"></a>
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-ss2tf-1"><span class="category-def">Function File: </span><code class="def-type">[<var class="var">num</var>, <var class="var">den</var>] =</code> <strong class="def-name">ss2tf</strong> <code class="def-code-arguments">(<var class="var">a</var>, <var class="var">b</var>, <var class="var">c</var>, <var class="var">d</var>)</code></dt>
+<dt class="deftypefn def-line" id="index-ss2tf-1"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">num</var>, <var class="var">den</var>] =</code> <strong class="def-name">ss2tf</strong> <code class="def-code-arguments">(<var class="var">a</var>, <var class="var">b</var>, <var class="var">c</var>, <var class="var">d</var>)</code></span></dt>
 <dd><p>Conversion from state-space to transfer function representation.
  The state space system:
 </p><div class="example">
@@ -1804,21 +2064,21 @@ section 1, etc.  The b0 entry must be nonzero for each section.
 </dd></dl>
 </div>
 <div class="subsection-level-extent" id="ss2zp">
-<h4 class="subsection">3.6.8 ss2zp</h4>
+<h4 class="subsection">3.6.10 ss2zp</h4>
 <a class="index-entry-id" id="index-ss2zp"></a>
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-ss2zp-1"><span class="category-def">Function File: </span><code class="def-type">[<var class="var">z</var>, <var class="var">p</var>, <var class="var">k</var>] =</code> <strong class="def-name">ss2zp</strong> <code class="def-code-arguments">(<var class="var">a</var>, <var class="var">b</var>, <var class="var">c</var>, <var class="var">d</var>)</code></dt>
+<dt class="deftypefn def-line" id="index-ss2zp-1"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">z</var>, <var class="var">p</var>, <var class="var">k</var>] =</code> <strong class="def-name">ss2zp</strong> <code class="def-code-arguments">(<var class="var">a</var>, <var class="var">b</var>, <var class="var">c</var>, <var class="var">d</var>)</code></span></dt>
 <dd><p>Converts a state space representation to a set of poles and zeros;
 <var class="var">k</var> is a gain associated with the zeros.
 </p>
 </dd></dl>
 </div>
 <div class="subsection-level-extent" id="tf2sos">
-<h4 class="subsection">3.6.9 tf2sos</h4>
+<h4 class="subsection">3.6.11 tf2sos</h4>
 <a class="index-entry-id" id="index-tf2sos"></a>
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-tf2sos-1"><span class="category-def">Function File: </span><code class="def-type">[<var class="var">sos</var>, <var class="var">g</var>] =</code> <strong class="def-name">tf2sos</strong> <code class="def-code-arguments">(<var class="var">b</var>, <var class="var">a</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-tf2sos-2"><span class="category-def">Function File: </span><code class="def-type"><var class="var">sos</var> =</code> <strong class="def-name">tf2sos</strong> <code class="def-code-arguments">(<var class="var">b</var>, <var class="var">a</var>)</code></dt>
+<dt class="deftypefn def-line" id="index-tf2sos-1"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">sos</var>, <var class="var">g</var>] =</code> <strong class="def-name">tf2sos</strong> <code class="def-code-arguments">(<var class="var">b</var>, <var class="var">a</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-tf2sos-2"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">sos</var> =</code> <strong class="def-name">tf2sos</strong> <code class="def-code-arguments">(<var class="var">b</var>, <var class="var">a</var>)</code></span></dt>
 <dd><p>Convert direct-form filter coefficients to series second-order sections.
 </p>
 <p>INPUTS:
@@ -1858,10 +2118,10 @@ section 1, etc.  The b0 entry must be nonzero for each section.
 </p></dd></dl>
 </div>
 <div class="subsection-level-extent" id="tf2ss">
-<h4 class="subsection">3.6.10 tf2ss</h4>
+<h4 class="subsection">3.6.12 tf2ss</h4>
 <a class="index-entry-id" id="index-tf2ss"></a>
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-tf2ss-1"><span class="category-def">Function File: </span><code class="def-type">[<var class="var">a</var>, <var class="var">b</var>, <var class="var">c</var>, <var class="var">d</var>] =</code> <strong class="def-name">tf2ss</strong> <code class="def-code-arguments">(<var class="var">num</var>, <var class="var">den</var>)</code></dt>
+<dt class="deftypefn def-line" id="index-tf2ss-1"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">a</var>, <var class="var">b</var>, <var class="var">c</var>, <var class="var">d</var>] =</code> <strong class="def-name">tf2ss</strong> <code class="def-code-arguments">(<var class="var">num</var>, <var class="var">den</var>)</code></span></dt>
 <dd><p>Conversion from transfer function to state-space.
  The state space system:
 </p><div class="example">
@@ -1881,10 +2141,10 @@ section 1, etc.  The b0 entry must be nonzero for each section.
 </p></dd></dl>
 </div>
 <div class="subsection-level-extent" id="tf2zp">
-<h4 class="subsection">3.6.11 tf2zp</h4>
+<h4 class="subsection">3.6.13 tf2zp</h4>
 <a class="index-entry-id" id="index-tf2zp"></a>
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-tf2zp-1"><span class="category-def">Function File: </span><code class="def-type">[<var class="var">z</var>, <var class="var">p</var>, <var class="var">k</var>] =</code> <strong class="def-name">tf2zp</strong> <code class="def-code-arguments">(<var class="var">num</var>, <var class="var">den</var>)</code></dt>
+<dt class="deftypefn def-line" id="index-tf2zp-1"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">z</var>, <var class="var">p</var>, <var class="var">k</var>] =</code> <strong class="def-name">tf2zp</strong> <code class="def-code-arguments">(<var class="var">num</var>, <var class="var">den</var>)</code></span></dt>
 <dd><p>Convert transfer functions to poles-and-zero representations.
 </p>
 <p>Returns the zeros and poles of the system defined
@@ -1893,13 +2153,13 @@ section 1, etc.  The b0 entry must be nonzero for each section.
 </p></dd></dl>
 </div>
 <div class="subsection-level-extent" id="zp2sos">
-<h4 class="subsection">3.6.12 zp2sos</h4>
+<h4 class="subsection">3.6.14 zp2sos</h4>
 <a class="index-entry-id" id="index-zp2sos"></a>
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-zp2sos-1"><span class="category-def">Function File: </span><code class="def-type">[<var class="var">sos</var>, <var class="var">g</var>] =</code> <strong class="def-name">zp2sos</strong> <code class="def-code-arguments">(<var class="var">z</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-zp2sos-2"><span class="category-def">Function File: </span><code class="def-type">[<var class="var">sos</var>, <var class="var">g</var>] =</code> <strong class="def-name">zp2sos</strong> <code class="def-code-arguments">(<var class="var">z</var>, <var class="var">p</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-zp2sos-3"><span class="category-def">Function File: </span><code class="def-type">[<var class="var">sos</var>, <var class="var">g</var>] =</code> <strong class="def-name">zp2sos</strong> <code class="def-code-arguments">(<var class="var">z</var>, <var class="var">p</var>, <var class="var">k</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-zp2sos-4"><span class="category-def">Function File: </span><code class="def-type"><var class="var">sos</var> =</code> <strong class="def-name">zp2sos</strong> <code class="def-code-arguments">(&hellip;)</code></dt>
+<dt class="deftypefn def-line" id="index-zp2sos-1"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">sos</var>, <var class="var">g</var>] =</code> <strong class="def-name">zp2sos</strong> <code class="def-code-arguments">(<var class="var">z</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-zp2sos-2"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">sos</var>, <var class="var">g</var>] =</code> <strong class="def-name">zp2sos</strong> <code class="def-code-arguments">(<var class="var">z</var>, <var class="var">p</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-zp2sos-3"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">sos</var>, <var class="var">g</var>] =</code> <strong class="def-name">zp2sos</strong> <code class="def-code-arguments">(<var class="var">z</var>, <var class="var">p</var>, <var class="var">k</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-zp2sos-4"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">sos</var> =</code> <strong class="def-name">zp2sos</strong> <code class="def-code-arguments">(&hellip;)</code></span></dt>
 <dd><p>Convert filter poles and zeros to second-order sections.
 </p>
 <p>INPUTS:
@@ -1918,7 +2178,7 @@ section 1, etc.  The b0 entry must be nonzero for each section.
 <code class="code"><var class="var">B1</var>.' = [b0 b1 b2] and <var class="var">A1</var>.' = [a0 a1 a2]</code> for
  section 1, etc.
  See <code class="code">filter</code> for documentation of the second-order direct-form filter
- coefficients <var class="var">B</var>i and %<var class="var">A</var>i, i=1:N.
+ coefficients <var class="var">B</var>i and <var class="var">A</var>i, i=1:N.
 </p>
 </li><li><var class="var">g</var> is the overall gain factor that effectively scales
  any one of the <var class="var">B</var>i vectors.
@@ -1941,10 +2201,10 @@ section 1, etc.  The b0 entry must be nonzero for each section.
 </p></dd></dl>
 </div>
 <div class="subsection-level-extent" id="zp2ss">
-<h4 class="subsection">3.6.13 zp2ss</h4>
+<h4 class="subsection">3.6.15 zp2ss</h4>
 <a class="index-entry-id" id="index-zp2ss"></a>
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-zp2ss-1"><span class="category-def">Function File: </span><code class="def-type">[<var class="var">a</var>, <var class="var">b</var>, <var class="var">c</var>, <var class="var">d</var>] =</code> <strong class="def-name">zp2ss</strong> <code class="def-code-arguments">(<var class="var">z</var>, <var class="var">p</var>, <var class="var">k</var>)</code></dt>
+<dt class="deftypefn def-line" id="index-zp2ss-1"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">a</var>, <var class="var">b</var>, <var class="var">c</var>, <var class="var">d</var>] =</code> <strong class="def-name">zp2ss</strong> <code class="def-code-arguments">(<var class="var">z</var>, <var class="var">p</var>, <var class="var">k</var>)</code></span></dt>
 <dd><p>Conversion from zero / pole to state space.
 </p>
 <p><strong class="strong">Inputs</strong>
@@ -1976,10 +2236,10 @@ section 1, etc.  The b0 entry must be nonzero for each section.
 </dd></dl>
 </div>
 <div class="subsection-level-extent" id="zp2tf">
-<h4 class="subsection">3.6.14 zp2tf</h4>
+<h4 class="subsection">3.6.16 zp2tf</h4>
 <a class="index-entry-id" id="index-zp2tf"></a>
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-zp2tf-1"><span class="category-def">Function File: </span><code class="def-type">[<var class="var">num</var>, <var class="var">den</var>] =</code> <strong class="def-name">zp2tf</strong> <code class="def-code-arguments">(<var class="var">z</var>, <var class="var">p</var>, <var class="var">k</var>)</code></dt>
+<dt class="deftypefn def-line" id="index-zp2tf-1"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">num</var>, <var class="var">den</var>] =</code> <strong class="def-name">zp2tf</strong> <code class="def-code-arguments">(<var class="var">z</var>, <var class="var">p</var>, <var class="var">k</var>)</code></span></dt>
 <dd><p>Converts zeros / poles to a transfer function.
 </p>
 <p><strong class="strong">Inputs</strong>
@@ -2004,7 +2264,7 @@ section 1, etc.  The b0 entry must be nonzero for each section.
 <h4 class="subsection">3.7.1 besselap</h4>
 <a class="index-entry-id" id="index-besselap"></a>
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-besselap-1"><span class="category-def">Function File: </span><code class="def-type">[<var class="var">zero</var>, <var class="var">pole</var>, <var class="var">gain</var>] =</code> <strong class="def-name">besselap</strong> <code class="def-code-arguments">(<var class="var">n</var>)</code></dt>
+<dt class="deftypefn def-line" id="index-besselap-1"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">zero</var>, <var class="var">pole</var>, <var class="var">gain</var>] =</code> <strong class="def-name">besselap</strong> <code class="def-code-arguments">(<var class="var">n</var>)</code></span></dt>
 <dd><p>Return bessel analog filter prototype.
 </p>
 <p>References:
@@ -2016,11 +2276,11 @@ section 1, etc.  The b0 entry must be nonzero for each section.
 <h4 class="subsection">3.7.2 besself</h4>
 <a class="index-entry-id" id="index-besself"></a>
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-besself-1"><span class="category-def">Function File: </span><code class="def-type">[<var class="var">b</var>, <var class="var">a</var>] =</code> <strong class="def-name">besself</strong> <code class="def-code-arguments">(<var class="var">n</var>, <var class="var">w</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-besself-2"><span class="category-def">Function File: </span><code class="def-type">[<var class="var">b</var>, <var class="var">a</var>] =</code> <strong class="def-name">besself</strong> <code class="def-code-arguments">(<var class="var">n</var>, <var class="var">w</var>, &quot;high&quot;)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-besself-3"><span class="category-def">Function File: </span><code class="def-type">[<var class="var">z</var>, <var class="var">p</var>, <var class="var">g</var>] =</code> <strong class="def-name">besself</strong> <code class="def-code-arguments">(&hellip;)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-besself-4"><span class="category-def">Function File: </span><code class="def-type">[<var class="var">a</var>, <var class="var">b</var>, <var class="var">c</var>, <var class="var">d</var>] =</code> <strong class="def-name">besself</strong> <code class="def-code-arguments">(&hellip;)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-besself-5"><span class="category-def">Function File: </span><code class="def-type">[&hellip;] =</code> <strong class="def-name">besself</strong> <code class="def-code-arguments">(&hellip;, &quot;z&quot;)</code></dt>
+<dt class="deftypefn def-line" id="index-besself-1"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">b</var>, <var class="var">a</var>] =</code> <strong class="def-name">besself</strong> <code class="def-code-arguments">(<var class="var">n</var>, <var class="var">w</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-besself-2"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">b</var>, <var class="var">a</var>] =</code> <strong class="def-name">besself</strong> <code class="def-code-arguments">(<var class="var">n</var>, <var class="var">w</var>, &quot;high&quot;)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-besself-3"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">z</var>, <var class="var">p</var>, <var class="var">g</var>] =</code> <strong class="def-name">besself</strong> <code class="def-code-arguments">(&hellip;)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-besself-4"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">a</var>, <var class="var">b</var>, <var class="var">c</var>, <var class="var">d</var>] =</code> <strong class="def-name">besself</strong> <code class="def-code-arguments">(&hellip;)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-besself-5"><span class="category-def">Function File: </span><span><code class="def-type">[&hellip;] =</code> <strong class="def-name">besself</strong> <code class="def-code-arguments">(&hellip;, &quot;z&quot;)</code></span></dt>
 <dd><p>Generate a Bessel filter.
  Default is a Laplace space (s) filter.
 </p>
@@ -2050,9 +2310,9 @@ section 1, etc.  The b0 entry must be nonzero for each section.
 <h4 class="subsection">3.7.3 bilinear</h4>
 <a class="index-entry-id" id="index-bilinear"></a>
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-bilinear-1"><span class="category-def">Function File: </span><code class="def-type">[<var class="var">Zb</var>, <var class="var">Za</var>] =</code> <strong class="def-name">bilinear</strong> <code class="def-code-arguments">(<var class="var">Sb</var>, <var class="var">Sa</var>, <var class="var">T</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-bilinear-2"><span class="category-def">Function File: </span><code class="def-type">[<var class="var">Zb</var>, <var class="var">Za</var>] =</code> <strong class="def-name">bilinear</strong> <code class="def-code-arguments">(<var class="var">Sz</var>, <var class="var">Sp</var>, <var class="var">Sg</var>, <var class="var">T</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-bilinear-3"><span class="category-def">Function File: </span><code class="def-type">[<var class="var">Zz</var>, <var class="var">Zp</var>, <var class="var">Zg</var>] =</code> <strong class="def-name">bilinear</strong> <code class="def-code-arguments">(&hellip;)</code></dt>
+<dt class="deftypefn def-line" id="index-bilinear-1"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">Zb</var>, <var class="var">Za</var>] =</code> <strong class="def-name">bilinear</strong> <code class="def-code-arguments">(<var class="var">Sb</var>, <var class="var">Sa</var>, <var class="var">T</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-bilinear-2"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">Zb</var>, <var class="var">Za</var>] =</code> <strong class="def-name">bilinear</strong> <code class="def-code-arguments">(<var class="var">Sz</var>, <var class="var">Sp</var>, <var class="var">Sg</var>, <var class="var">T</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-bilinear-3"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">Zz</var>, <var class="var">Zp</var>, <var class="var">Zg</var>] =</code> <strong class="def-name">bilinear</strong> <code class="def-code-arguments">(&hellip;)</code></span></dt>
 <dd><p>Transform a s-plane filter specification into a z-plane
  specification. Filters can be specified in either zero-pole-gain or
  transfer function form. The input form does not have to match the
@@ -2114,7 +2374,7 @@ section 1, etc.  The b0 entry must be nonzero for each section.
 <h4 class="subsection">3.7.4 buttap</h4>
 <a class="index-entry-id" id="index-buttap"></a>
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-buttap-1"><span class="category-def">Function File: </span><code class="def-type">[<var class="var">z</var>, <var class="var">p</var>, <var class="var">g</var>] =</code> <strong class="def-name">buttap</strong> <code class="def-code-arguments">(<var class="var">n</var>)</code></dt>
+<dt class="deftypefn def-line" id="index-buttap-1"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">z</var>, <var class="var">p</var>, <var class="var">g</var>] =</code> <strong class="def-name">buttap</strong> <code class="def-code-arguments">(<var class="var">n</var>)</code></span></dt>
 <dd><p>Design lowpass analog Butterworth filter.
 </p>
 <p>This function exists for <small class="sc">MATLAB</small> compatibility only, and is equivalent
@@ -2127,11 +2387,11 @@ section 1, etc.  The b0 entry must be nonzero for each section.
 <h4 class="subsection">3.7.5 butter</h4>
 <a class="index-entry-id" id="index-butter"></a>
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-butter-1"><span class="category-def">Function File: </span><code class="def-type">[<var class="var">b</var>, <var class="var">a</var>] =</code> <strong class="def-name">butter</strong> <code class="def-code-arguments">(<var class="var">n</var>, <var class="var">wc</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-butter-2"><span class="category-def">Function File: </span><code class="def-type">[<var class="var">b</var>, <var class="var">a</var>] =</code> <strong class="def-name">butter</strong> <code class="def-code-arguments">(<var class="var">n</var>, <var class="var">wc</var>, <var class="var">filter_type</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-butter-3"><span class="category-def">Function File: </span><code class="def-type">[<var class="var">z</var>, <var class="var">p</var>, <var class="var">g</var>] =</code> <strong class="def-name">butter</strong> <code class="def-code-arguments">(&hellip;)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-butter-4"><span class="category-def">Function File: </span><code class="def-type">[<var class="var">a</var>, <var class="var">b</var>, <var class="var">c</var>, <var class="var">d</var>] =</code> <strong class="def-name">butter</strong> <code class="def-code-arguments">(&hellip;)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-butter-5"><span class="category-def">Function File: </span><code class="def-type">[&hellip;] =</code> <strong class="def-name">butter</strong> <code class="def-code-arguments">(&hellip;, &quot;s&quot;)</code></dt>
+<dt class="deftypefn def-line" id="index-butter-1"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">b</var>, <var class="var">a</var>] =</code> <strong class="def-name">butter</strong> <code class="def-code-arguments">(<var class="var">n</var>, <var class="var">wc</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-butter-2"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">b</var>, <var class="var">a</var>] =</code> <strong class="def-name">butter</strong> <code class="def-code-arguments">(<var class="var">n</var>, <var class="var">wc</var>, <var class="var">filter_type</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-butter-3"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">z</var>, <var class="var">p</var>, <var class="var">g</var>] =</code> <strong class="def-name">butter</strong> <code class="def-code-arguments">(&hellip;)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-butter-4"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">a</var>, <var class="var">b</var>, <var class="var">c</var>, <var class="var">d</var>] =</code> <strong class="def-name">butter</strong> <code class="def-code-arguments">(&hellip;)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-butter-5"><span class="category-def">Function File: </span><span><code class="def-type">[&hellip;] =</code> <strong class="def-name">butter</strong> <code class="def-code-arguments">(&hellip;, &quot;s&quot;)</code></span></dt>
 <dd><p>Generate a Butterworth filter.
  Default is a discrete space (Z) filter.
 </p>
@@ -2194,11 +2454,11 @@ section 1, etc.  The b0 entry must be nonzero for each section.
 <h4 class="subsection">3.7.6 buttord</h4>
 <a class="index-entry-id" id="index-buttord"></a>
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-buttord-1"><span class="category-def">Function File: </span><code class="def-type"><var class="var">n</var> =</code> <strong class="def-name">buttord</strong> <code class="def-code-arguments">(<var class="var">wp</var>, <var class="var">ws</var>, <var class="var">rp</var>, <var class="var">rs</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-buttord-2"><span class="category-def">Function File: </span><code class="def-type"><var class="var">n</var> =</code> <strong class="def-name">buttord</strong> <code class="def-code-arguments">([<var class="var">wp1</var>, <var class="var">wp2</var>], [<var class="var">ws1</var>, <var class="var">ws2</var>], <var class="var">rp</var>, <var class="var">rs</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-buttord-3"><span class="category-def">Function File: </span><code class="def-type"><var class="var">n</var> =</code> <strong class="def-name">buttord</strong> <code class="def-code-arguments">([<var class="var">wp1</var>, <var class="var">wp2</var>], [<var class="var">ws1</var>, <var class="var">ws2</var>], <var class="var">rp</var>, <var class="var">rs</var>, &quot;s&quot;)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-buttord-4"><span class="category-def">Function File: </span><code class="def-type">[<var class="var">n</var>, <var class="var">wc_p</var>] =</code> <strong class="def-name">buttord</strong> <code class="def-code-arguments">(&hellip;)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-buttord-5"><span class="category-def">Function File: </span><code class="def-type">[<var class="var">n</var>, <var class="var">wc_p</var>, <var class="var">wc_s</var>] =</code> <strong class="def-name">buttord</strong> <code class="def-code-arguments">(&hellip;)</code></dt>
+<dt class="deftypefn def-line" id="index-buttord-1"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">n</var> =</code> <strong class="def-name">buttord</strong> <code class="def-code-arguments">(<var class="var">wp</var>, <var class="var">ws</var>, <var class="var">rp</var>, <var class="var">rs</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-buttord-2"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">n</var> =</code> <strong class="def-name">buttord</strong> <code class="def-code-arguments">([<var class="var">wp1</var>, <var class="var">wp2</var>], [<var class="var">ws1</var>, <var class="var">ws2</var>], <var class="var">rp</var>, <var class="var">rs</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-buttord-3"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">n</var> =</code> <strong class="def-name">buttord</strong> <code class="def-code-arguments">([<var class="var">wp1</var>, <var class="var">wp2</var>], [<var class="var">ws1</var>, <var class="var">ws2</var>], <var class="var">rp</var>, <var class="var">rs</var>, &quot;s&quot;)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-buttord-4"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">n</var>, <var class="var">wc_p</var>] =</code> <strong class="def-name">buttord</strong> <code class="def-code-arguments">(&hellip;)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-buttord-5"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">n</var>, <var class="var">wc_p</var>, <var class="var">wc_s</var>] =</code> <strong class="def-name">buttord</strong> <code class="def-code-arguments">(&hellip;)</code></span></dt>
 <dd><p>Compute the minimum filter order of a Butterworth filter with the desired
  response characteristics.  The filter frequency band edges are specified by
  the passband frequency <var class="var">wp</var> and stopband frequency <var class="var">ws</var>.  Frequencies
@@ -2231,7 +2491,7 @@ section 1, etc.  The b0 entry must be nonzero for each section.
 <p>Theory: For Low pass filters, |H(W)|^2 = 1/[1+(W/Wc)^(2N)] = 10^(-R/10).
  With some algebra, you can solve simultaneously for Wc and N given
  Ws,Rs and Wp,Rp. Rounding N to the next greater integer, one can recalculate
- the allowable range for Wc (filter caracteristic touching the pass band edge
+ the allowable range for Wc (filter characteristic touching the pass band edge
  or the stop band edge).
 </p>
 <p>For other types of filter, before making the above calculation, the
@@ -2245,7 +2505,7 @@ section 1, etc.  The b0 entry must be nonzero for each section.
 <h4 class="subsection">3.7.7 cheb</h4>
 <a class="index-entry-id" id="index-cheb"></a>
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-cheb-1"><span class="category-def">Function File: </span><strong class="def-name">cheb</strong> <code class="def-code-arguments">(<var class="var">n</var>, <var class="var">x</var>)</code></dt>
+<dt class="deftypefn def-line" id="index-cheb-1"><span class="category-def">Function File: </span><span><strong class="def-name">cheb</strong> <code class="def-code-arguments">(<var class="var">n</var>, <var class="var">x</var>)</code></span></dt>
 <dd><p>Returns the value of the nth-order Chebyshev polynomial calculated at
  the point x. The Chebyshev polynomials are defined by the equations:
 </p>
@@ -2262,7 +2522,7 @@ section 1, etc.  The b0 entry must be nonzero for each section.
 <h4 class="subsection">3.7.8 cheb1ap</h4>
 <a class="index-entry-id" id="index-cheb1ap"></a>
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-cheb1ap-1"><span class="category-def">Function File: </span><code class="def-type">[<var class="var">z</var>, <var class="var">p</var>, <var class="var">g</var>] =</code> <strong class="def-name">cheb1ap</strong> <code class="def-code-arguments">(<var class="var">n</var>, <var class="var">Rp</var>)</code></dt>
+<dt class="deftypefn def-line" id="index-cheb1ap-1"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">z</var>, <var class="var">p</var>, <var class="var">g</var>] =</code> <strong class="def-name">cheb1ap</strong> <code class="def-code-arguments">(<var class="var">n</var>, <var class="var">Rp</var>)</code></span></dt>
 <dd><p>Design lowpass analog Chebyshev type I filter.
 </p>
 <p>This function exists for <small class="sc">MATLAB</small> compatibility only, and is equivalent
@@ -2295,11 +2555,11 @@ section 1, etc.  The b0 entry must be nonzero for each section.
 <h4 class="subsection">3.7.9 cheb1ord</h4>
 <a class="index-entry-id" id="index-cheb1ord"></a>
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-cheb1ord-1"><span class="category-def">Function File: </span><code class="def-type"><var class="var">n</var> =</code> <strong class="def-name">cheb1ord</strong> <code class="def-code-arguments">(<var class="var">wp</var>, <var class="var">ws</var>, <var class="var">rp</var>, <var class="var">rs</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-cheb1ord-2"><span class="category-def">Function File: </span><code class="def-type"><var class="var">n</var> =</code> <strong class="def-name">cheb1ord</strong> <code class="def-code-arguments">([<var class="var">wp1</var>, <var class="var">wp2</var>], [<var class="var">ws1</var>, <var class="var">ws2</var>], <var class="var">rp</var>, <var class="var">rs</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-cheb1ord-3"><span class="category-def">Function File: </span><code class="def-type"><var class="var">n</var> =</code> <strong class="def-name">cheb1ord</strong> <code class="def-code-arguments">([<var class="var">wp1</var>, <var class="var">wp2</var>], [<var class="var">ws1</var>, <var class="var">ws2</var>], <var class="var">rp</var>, <var class="var">rs</var>, &quot;s&quot;)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-cheb1ord-4"><span class="category-def">Function File: </span><code class="def-type">[<var class="var">n</var>, <var class="var">wc</var>] =</code> <strong class="def-name">cheb1ord</strong> <code class="def-code-arguments">(&hellip;)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-cheb1ord-5"><span class="category-def">Function File: </span><code class="def-type">[<var class="var">n</var>, <var class="var">wc_p</var>, <var class="var">wc_s</var>] =</code> <strong class="def-name">cheb1ord</strong> <code class="def-code-arguments">(&hellip;)</code></dt>
+<dt class="deftypefn def-line" id="index-cheb1ord-1"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">n</var> =</code> <strong class="def-name">cheb1ord</strong> <code class="def-code-arguments">(<var class="var">wp</var>, <var class="var">ws</var>, <var class="var">rp</var>, <var class="var">rs</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-cheb1ord-2"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">n</var> =</code> <strong class="def-name">cheb1ord</strong> <code class="def-code-arguments">([<var class="var">wp1</var>, <var class="var">wp2</var>], [<var class="var">ws1</var>, <var class="var">ws2</var>], <var class="var">rp</var>, <var class="var">rs</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-cheb1ord-3"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">n</var> =</code> <strong class="def-name">cheb1ord</strong> <code class="def-code-arguments">([<var class="var">wp1</var>, <var class="var">wp2</var>], [<var class="var">ws1</var>, <var class="var">ws2</var>], <var class="var">rp</var>, <var class="var">rs</var>, &quot;s&quot;)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-cheb1ord-4"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">n</var>, <var class="var">wc</var>] =</code> <strong class="def-name">cheb1ord</strong> <code class="def-code-arguments">(&hellip;)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-cheb1ord-5"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">n</var>, <var class="var">wc_p</var>, <var class="var">wc_s</var>] =</code> <strong class="def-name">cheb1ord</strong> <code class="def-code-arguments">(&hellip;)</code></span></dt>
 <dd><p>Compute the minimum filter order of a Chebyshev type I filter with the
  desired response characteristics. The filter frequency band edges are
  specified by the passband frequency <var class="var">wp</var> and stopband frequency <var class="var">ws</var>.
@@ -2336,7 +2596,7 @@ section 1, etc.  The b0 entry must be nonzero for each section.
 <h4 class="subsection">3.7.10 cheb2ap</h4>
 <a class="index-entry-id" id="index-cheb2ap"></a>
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-cheb2ap-1"><span class="category-def">Function File: </span><code class="def-type">[<var class="var">z</var>, <var class="var">p</var>, <var class="var">g</var>] =</code> <strong class="def-name">cheb2ap</strong> <code class="def-code-arguments">(<var class="var">n</var>, <var class="var">Rs</var>)</code></dt>
+<dt class="deftypefn def-line" id="index-cheb2ap-1"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">z</var>, <var class="var">p</var>, <var class="var">g</var>] =</code> <strong class="def-name">cheb2ap</strong> <code class="def-code-arguments">(<var class="var">n</var>, <var class="var">Rs</var>)</code></span></dt>
 <dd><p>Design lowpass analog Chebyshev type II filter.
 </p>
 <p>This function exists for <small class="sc">MATLAB</small> compatibility only, and is equivalent
@@ -2353,11 +2613,11 @@ section 1, etc.  The b0 entry must be nonzero for each section.
 <h4 class="subsection">3.7.11 cheb2ord</h4>
 <a class="index-entry-id" id="index-cheb2ord"></a>
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-cheb2ord-1"><span class="category-def">Function File: </span><code class="def-type"><var class="var">n</var> =</code> <strong class="def-name">cheb2ord</strong> <code class="def-code-arguments">(<var class="var">wp</var>, <var class="var">ws</var>, <var class="var">rp</var>, <var class="var">rs</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-cheb2ord-2"><span class="category-def">Function File: </span><code class="def-type"><var class="var">n</var> =</code> <strong class="def-name">cheb2ord</strong> <code class="def-code-arguments">([<var class="var">wp1</var>, <var class="var">wp2</var>], [<var class="var">ws1</var>, <var class="var">ws2</var>], <var class="var">rp</var>, <var class="var">rs</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-cheb2ord-3"><span class="category-def">Function File: </span><code class="def-type"><var class="var">n</var> =</code> <strong class="def-name">cheb2ord</strong> <code class="def-code-arguments">([<var class="var">wp1</var>, <var class="var">wp2</var>], [<var class="var">ws1</var>, <var class="var">ws2</var>], <var class="var">rp</var>, <var class="var">rs</var>, &quot;s&quot;)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-cheb2ord-4"><span class="category-def">Function File: </span><code class="def-type">[<var class="var">n</var>, <var class="var">wc_s</var>] =</code> <strong class="def-name">cheb2ord</strong> <code class="def-code-arguments">(&hellip;)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-cheb2ord-5"><span class="category-def">Function File: </span><code class="def-type">[<var class="var">n</var>, <var class="var">wc_s</var>, <var class="var">wc_p</var>] =</code> <strong class="def-name">cheb2ord</strong> <code class="def-code-arguments">(&hellip;)</code></dt>
+<dt class="deftypefn def-line" id="index-cheb2ord-1"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">n</var> =</code> <strong class="def-name">cheb2ord</strong> <code class="def-code-arguments">(<var class="var">wp</var>, <var class="var">ws</var>, <var class="var">rp</var>, <var class="var">rs</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-cheb2ord-2"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">n</var> =</code> <strong class="def-name">cheb2ord</strong> <code class="def-code-arguments">([<var class="var">wp1</var>, <var class="var">wp2</var>], [<var class="var">ws1</var>, <var class="var">ws2</var>], <var class="var">rp</var>, <var class="var">rs</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-cheb2ord-3"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">n</var> =</code> <strong class="def-name">cheb2ord</strong> <code class="def-code-arguments">([<var class="var">wp1</var>, <var class="var">wp2</var>], [<var class="var">ws1</var>, <var class="var">ws2</var>], <var class="var">rp</var>, <var class="var">rs</var>, &quot;s&quot;)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-cheb2ord-4"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">n</var>, <var class="var">wc_s</var>] =</code> <strong class="def-name">cheb2ord</strong> <code class="def-code-arguments">(&hellip;)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-cheb2ord-5"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">n</var>, <var class="var">wc_s</var>, <var class="var">wc_p</var>] =</code> <strong class="def-name">cheb2ord</strong> <code class="def-code-arguments">(&hellip;)</code></span></dt>
 <dd><p>Compute the minimum filter order of a Chebyshev type II filter with the
  desired response characteristics. The filter frequency band edges are
  specified by the passband frequency <var class="var">wp</var> and stopband frequency <var class="var">ws</var>.
@@ -2394,13 +2654,13 @@ section 1, etc.  The b0 entry must be nonzero for each section.
 <h4 class="subsection">3.7.12 cheby1</h4>
 <a class="index-entry-id" id="index-cheby1"></a>
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-cheby1-1"><span class="category-def">Function File: </span><code class="def-type">[<var class="var">b</var>, <var class="var">a</var>] =</code> <strong class="def-name">cheby1</strong> <code class="def-code-arguments">(<var class="var">n</var>, <var class="var">rp</var>, <var class="var">w</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-cheby1-2"><span class="category-def">Function File: </span><code class="def-type">[<var class="var">b</var>, <var class="var">a</var>] =</code> <strong class="def-name">cheby1</strong> <code class="def-code-arguments">(<var class="var">n</var>, <var class="var">rp</var>, <var class="var">w</var>, &quot;high&quot;)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-cheby1-3"><span class="category-def">Function File: </span><code class="def-type">[<var class="var">b</var>, <var class="var">a</var>] =</code> <strong class="def-name">cheby1</strong> <code class="def-code-arguments">(<var class="var">n</var>, <var class="var">rp</var>, [<var class="var">wl</var>, <var class="var">wh</var>])</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-cheby1-4"><span class="category-def">Function File: </span><code class="def-type">[<var class="var">b</var>, <var class="var">a</var>] =</code> <strong class="def-name">cheby1</strong> <code class="def-code-arguments">(<var class="var">n</var>, <var class="var">rp</var>, [<var class="var">wl</var>, <var class="var">wh</var>], &quot;stop&quot;)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-cheby1-5"><span class="category-def">Function File: </span><code class="def-type">[<var class="var">z</var>, <var class="var">p</var>, <var class="var">g</var>] =</code> <strong class="def-name">cheby1</strong> <code class="def-code-arguments">(&hellip;)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-cheby1-6"><span class="category-def">Function File: </span><code class="def-type">[<var class="var">a</var>, <var class="var">b</var>, <var class="var">c</var>, <var class="var">d</var>] =</code> <strong class="def-name">cheby1</strong> <code class="def-code-arguments">(&hellip;)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-cheby1-7"><span class="category-def">Function File: </span><code class="def-type">[&hellip;] =</code> <strong class="def-name">cheby1</strong> <code class="def-code-arguments">(&hellip;, &quot;s&quot;)</code></dt>
+<dt class="deftypefn def-line" id="index-cheby1-1"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">b</var>, <var class="var">a</var>] =</code> <strong class="def-name">cheby1</strong> <code class="def-code-arguments">(<var class="var">n</var>, <var class="var">rp</var>, <var class="var">w</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-cheby1-2"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">b</var>, <var class="var">a</var>] =</code> <strong class="def-name">cheby1</strong> <code class="def-code-arguments">(<var class="var">n</var>, <var class="var">rp</var>, <var class="var">w</var>, &quot;high&quot;)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-cheby1-3"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">b</var>, <var class="var">a</var>] =</code> <strong class="def-name">cheby1</strong> <code class="def-code-arguments">(<var class="var">n</var>, <var class="var">rp</var>, [<var class="var">wl</var>, <var class="var">wh</var>])</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-cheby1-4"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">b</var>, <var class="var">a</var>] =</code> <strong class="def-name">cheby1</strong> <code class="def-code-arguments">(<var class="var">n</var>, <var class="var">rp</var>, [<var class="var">wl</var>, <var class="var">wh</var>], &quot;stop&quot;)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-cheby1-5"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">z</var>, <var class="var">p</var>, <var class="var">g</var>] =</code> <strong class="def-name">cheby1</strong> <code class="def-code-arguments">(&hellip;)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-cheby1-6"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">a</var>, <var class="var">b</var>, <var class="var">c</var>, <var class="var">d</var>] =</code> <strong class="def-name">cheby1</strong> <code class="def-code-arguments">(&hellip;)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-cheby1-7"><span class="category-def">Function File: </span><span><code class="def-type">[&hellip;] =</code> <strong class="def-name">cheby1</strong> <code class="def-code-arguments">(&hellip;, &quot;s&quot;)</code></span></dt>
 <dd><p>Generate a Chebyshev type I filter with <var class="var">rp</var> dB of passband ripple.
 </p>
 <p>[b, a] = cheby1(n, Rp, Wc)
@@ -2435,13 +2695,13 @@ section 1, etc.  The b0 entry must be nonzero for each section.
 <h4 class="subsection">3.7.13 cheby2</h4>
 <a class="index-entry-id" id="index-cheby2"></a>
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-cheby2-1"><span class="category-def">Function File: </span><code class="def-type">[<var class="var">b</var>, <var class="var">a</var>] =</code> <strong class="def-name">cheby2</strong> <code class="def-code-arguments">(<var class="var">n</var>, <var class="var">rs</var>, <var class="var">wc</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-cheby2-2"><span class="category-def">Function File: </span><code class="def-type">[<var class="var">b</var>, <var class="var">a</var>] =</code> <strong class="def-name">cheby2</strong> <code class="def-code-arguments">(<var class="var">n</var>, <var class="var">rs</var>, <var class="var">wc</var>, &quot;high&quot;)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-cheby2-3"><span class="category-def">Function File: </span><code class="def-type">[<var class="var">b</var>, <var class="var">a</var>] =</code> <strong class="def-name">cheby2</strong> <code class="def-code-arguments">(<var class="var">n</var>, <var class="var">rs</var>, [<var class="var">wl</var>, <var class="var">wh</var>])</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-cheby2-4"><span class="category-def">Function File: </span><code class="def-type">[<var class="var">b</var>, <var class="var">a</var>] =</code> <strong class="def-name">cheby2</strong> <code class="def-code-arguments">(<var class="var">n</var>, <var class="var">rs</var>, [<var class="var">wl</var>, <var class="var">wh</var>], &quot;stop&quot;)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-cheby2-5"><span class="category-def">Function File: </span><code class="def-type">[<var class="var">z</var>, <var class="var">p</var>, <var class="var">g</var>] =</code> <strong class="def-name">cheby2</strong> <code class="def-code-arguments">(&hellip;)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-cheby2-6"><span class="category-def">Function File: </span><code class="def-type">[<var class="var">a</var>, <var class="var">b</var>, <var class="var">c</var>, <var class="var">d</var>] =</code> <strong class="def-name">cheby2</strong> <code class="def-code-arguments">(&hellip;)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-cheby2-7"><span class="category-def">Function File: </span><code class="def-type">[&hellip;] =</code> <strong class="def-name">cheby2</strong> <code class="def-code-arguments">(&hellip;, &quot;s&quot;)</code></dt>
+<dt class="deftypefn def-line" id="index-cheby2-1"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">b</var>, <var class="var">a</var>] =</code> <strong class="def-name">cheby2</strong> <code class="def-code-arguments">(<var class="var">n</var>, <var class="var">rs</var>, <var class="var">wc</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-cheby2-2"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">b</var>, <var class="var">a</var>] =</code> <strong class="def-name">cheby2</strong> <code class="def-code-arguments">(<var class="var">n</var>, <var class="var">rs</var>, <var class="var">wc</var>, &quot;high&quot;)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-cheby2-3"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">b</var>, <var class="var">a</var>] =</code> <strong class="def-name">cheby2</strong> <code class="def-code-arguments">(<var class="var">n</var>, <var class="var">rs</var>, [<var class="var">wl</var>, <var class="var">wh</var>])</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-cheby2-4"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">b</var>, <var class="var">a</var>] =</code> <strong class="def-name">cheby2</strong> <code class="def-code-arguments">(<var class="var">n</var>, <var class="var">rs</var>, [<var class="var">wl</var>, <var class="var">wh</var>], &quot;stop&quot;)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-cheby2-5"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">z</var>, <var class="var">p</var>, <var class="var">g</var>] =</code> <strong class="def-name">cheby2</strong> <code class="def-code-arguments">(&hellip;)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-cheby2-6"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">a</var>, <var class="var">b</var>, <var class="var">c</var>, <var class="var">d</var>] =</code> <strong class="def-name">cheby2</strong> <code class="def-code-arguments">(&hellip;)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-cheby2-7"><span class="category-def">Function File: </span><span><code class="def-type">[&hellip;] =</code> <strong class="def-name">cheby2</strong> <code class="def-code-arguments">(&hellip;, &quot;s&quot;)</code></span></dt>
 <dd><p>Generate a Chebyshev type II filter with <var class="var">rs</var> dB of stopband attenuation.
 </p>
 <p>[b, a] = cheby2(n, Rs, Wc)
@@ -2476,13 +2736,13 @@ section 1, etc.  The b0 entry must be nonzero for each section.
 <h4 class="subsection">3.7.14 ellip</h4>
 <a class="index-entry-id" id="index-ellip"></a>
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-ellip-1"><span class="category-def">Function File: </span><code class="def-type">[<var class="var">b</var>, <var class="var">a</var>] =</code> <strong class="def-name">ellip</strong> <code class="def-code-arguments">(<var class="var">n</var>, <var class="var">rp</var>, <var class="var">rs</var>, <var class="var">wp</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-ellip-2"><span class="category-def">Function File: </span><code class="def-type">[<var class="var">b</var>, <var class="var">a</var>] =</code> <strong class="def-name">ellip</strong> <code class="def-code-arguments">(<var class="var">n</var>, <var class="var">rp</var>, <var class="var">rs</var>, <var class="var">wp</var>, &quot;high&quot;)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-ellip-3"><span class="category-def">Function File: </span><code class="def-type">[<var class="var">b</var>, <var class="var">a</var>] =</code> <strong class="def-name">ellip</strong> <code class="def-code-arguments">(<var class="var">n</var>, <var class="var">rp</var>, <var class="var">rs</var>, [<var class="var">wl</var>, <var class="var">wh</var>])</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-ellip-4"><span class="category-def">Function File: </span><code class="def-type">[<var class="var">b</var>, <var class="var">a</var>] =</code> <strong class="def-name">ellip</strong> <code class="def-code-arguments">(<var class="var">n</var>, <var class="var">rp</var>, <var class="var">rs</var>, [<var class="var">wl</var>, <var class="var">wh</var>], &quot;stop&quot;)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-ellip-5"><span class="category-def">Function File: </span><code class="def-type">[<var class="var">z</var>, <var class="var">p</var>, <var class="var">g</var>] =</code> <strong class="def-name">ellip</strong> <code class="def-code-arguments">(&hellip;)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-ellip-6"><span class="category-def">Function File: </span><code class="def-type">[<var class="var">a</var>, <var class="var">b</var>, <var class="var">c</var>, <var class="var">d</var>] =</code> <strong class="def-name">ellip</strong> <code class="def-code-arguments">(&hellip;)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-ellip-7"><span class="category-def">Function File: </span><code class="def-type">[&hellip;] =</code> <strong class="def-name">ellip</strong> <code class="def-code-arguments">(&hellip;, &quot;s&quot;)</code></dt>
+<dt class="deftypefn def-line" id="index-ellip-1"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">b</var>, <var class="var">a</var>] =</code> <strong class="def-name">ellip</strong> <code class="def-code-arguments">(<var class="var">n</var>, <var class="var">rp</var>, <var class="var">rs</var>, <var class="var">wp</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-ellip-2"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">b</var>, <var class="var">a</var>] =</code> <strong class="def-name">ellip</strong> <code class="def-code-arguments">(<var class="var">n</var>, <var class="var">rp</var>, <var class="var">rs</var>, <var class="var">wp</var>, &quot;high&quot;)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-ellip-3"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">b</var>, <var class="var">a</var>] =</code> <strong class="def-name">ellip</strong> <code class="def-code-arguments">(<var class="var">n</var>, <var class="var">rp</var>, <var class="var">rs</var>, [<var class="var">wl</var>, <var class="var">wh</var>])</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-ellip-4"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">b</var>, <var class="var">a</var>] =</code> <strong class="def-name">ellip</strong> <code class="def-code-arguments">(<var class="var">n</var>, <var class="var">rp</var>, <var class="var">rs</var>, [<var class="var">wl</var>, <var class="var">wh</var>], &quot;stop&quot;)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-ellip-5"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">z</var>, <var class="var">p</var>, <var class="var">g</var>] =</code> <strong class="def-name">ellip</strong> <code class="def-code-arguments">(&hellip;)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-ellip-6"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">a</var>, <var class="var">b</var>, <var class="var">c</var>, <var class="var">d</var>] =</code> <strong class="def-name">ellip</strong> <code class="def-code-arguments">(&hellip;)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-ellip-7"><span class="category-def">Function File: </span><span><code class="def-type">[&hellip;] =</code> <strong class="def-name">ellip</strong> <code class="def-code-arguments">(&hellip;, &quot;s&quot;)</code></span></dt>
 <dd>
 <p>Generate an elliptic or Cauer filter with <var class="var">rp</var> dB of passband ripple and
 <var class="var">rs</var> dB of stopband attenuation.
@@ -2520,7 +2780,7 @@ section 1, etc.  The b0 entry must be nonzero for each section.
 <h4 class="subsection">3.7.15 ellipap</h4>
 <a class="index-entry-id" id="index-ellipap"></a>
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-ellipap-1"><span class="category-def">Function File: </span><code class="def-type">[<var class="var">z</var>, <var class="var">p</var>, <var class="var">g</var>] =</code> <strong class="def-name">ellipap</strong> <code class="def-code-arguments">(<var class="var">n</var>, <var class="var">Rp</var>, <var class="var">Rs</var>)</code></dt>
+<dt class="deftypefn def-line" id="index-ellipap-1"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">z</var>, <var class="var">p</var>, <var class="var">g</var>] =</code> <strong class="def-name">ellipap</strong> <code class="def-code-arguments">(<var class="var">n</var>, <var class="var">Rp</var>, <var class="var">Rs</var>)</code></span></dt>
 <dd><p>Design lowpass analog elliptic filter.
 </p>
 <p>This function exists for <small class="sc">MATLAB</small> compatibility only, and is equivalent
@@ -2533,10 +2793,10 @@ section 1, etc.  The b0 entry must be nonzero for each section.
 <h4 class="subsection">3.7.16 ellipord</h4>
 <a class="index-entry-id" id="index-ellipord"></a>
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-ellipord-1"><span class="category-def">Function File: </span><code class="def-type"><var class="var">n</var> =</code> <strong class="def-name">ellipord</strong> <code class="def-code-arguments">(<var class="var">wp</var>, <var class="var">ws</var>, <var class="var">rp</var>, <var class="var">rs</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-ellipord-2"><span class="category-def">Function File: </span><code class="def-type"><var class="var">n</var> =</code> <strong class="def-name">ellipord</strong> <code class="def-code-arguments">([<var class="var">wp1</var>, <var class="var">wp2</var>], [<var class="var">ws1</var>, <var class="var">ws2</var>], <var class="var">rp</var>, <var class="var">rs</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-ellipord-3"><span class="category-def">Function File: </span><code class="def-type"><var class="var">n</var> =</code> <strong class="def-name">ellipord</strong> <code class="def-code-arguments">([<var class="var">wp1</var>, <var class="var">wp2</var>], [<var class="var">ws1</var>, <var class="var">ws2</var>], <var class="var">rp</var>, <var class="var">rs</var>, &quot;s&quot;)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-ellipord-4"><span class="category-def">Function File: </span><code class="def-type">[<var class="var">n</var>, <var class="var">wc</var>] =</code> <strong class="def-name">ellipord</strong> <code class="def-code-arguments">(&hellip;)</code></dt>
+<dt class="deftypefn def-line" id="index-ellipord-1"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">n</var> =</code> <strong class="def-name">ellipord</strong> <code class="def-code-arguments">(<var class="var">wp</var>, <var class="var">ws</var>, <var class="var">rp</var>, <var class="var">rs</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-ellipord-2"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">n</var> =</code> <strong class="def-name">ellipord</strong> <code class="def-code-arguments">([<var class="var">wp1</var>, <var class="var">wp2</var>], [<var class="var">ws1</var>, <var class="var">ws2</var>], <var class="var">rp</var>, <var class="var">rs</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-ellipord-3"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">n</var> =</code> <strong class="def-name">ellipord</strong> <code class="def-code-arguments">([<var class="var">wp1</var>, <var class="var">wp2</var>], [<var class="var">ws1</var>, <var class="var">ws2</var>], <var class="var">rp</var>, <var class="var">rs</var>, &quot;s&quot;)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-ellipord-4"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">n</var>, <var class="var">wc</var>] =</code> <strong class="def-name">ellipord</strong> <code class="def-code-arguments">(&hellip;)</code></span></dt>
 <dd><p>Compute the minimum filter order of an elliptic filter with the desired
  response characteristics.  The filter frequency band edges are specified
  by the passband frequency <var class="var">wp</var> and stopband frequency <var class="var">ws</var>.
@@ -2571,14 +2831,14 @@ section 1, etc.  The b0 entry must be nonzero for each section.
 <h4 class="subsection">3.7.17 firpm</h4>
 <a class="index-entry-id" id="index-firpm"></a>
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-firpm-1"><span class="category-def">Loadable Function: </span><code class="def-type"><var class="var">b</var> =</code> <strong class="def-name">firpm</strong> <code class="def-code-arguments">(<var class="var">n</var>, <var class="var">f</var>, <var class="var">a</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-firpm-2"><span class="category-def">Loadable Function: </span><code class="def-type"><var class="var">b</var> =</code> <strong class="def-name">firpm</strong> <code class="def-code-arguments">(<var class="var">n</var>, <var class="var">f</var>, @<var class="var">respFn</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-firpm-3"><span class="category-def">Loadable Function: </span><code class="def-type"><var class="var">b</var> =</code> <strong class="def-name">firpm</strong> <code class="def-code-arguments">(<var class="var">n</var>, <var class="var">f</var>, {@<var class="var">respFn</var>, &hellip;})</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-firpm-4"><span class="category-def">Loadable Function: </span><code class="def-type"><var class="var">b</var> =</code> <strong class="def-name">firpm</strong> <code class="def-code-arguments">(&hellip;, <var class="var">w</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-firpm-5"><span class="category-def">Loadable Function: </span><code class="def-type"><var class="var">b</var> =</code> <strong class="def-name">firpm</strong> <code class="def-code-arguments">(&hellip;, <var class="var">class</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-firpm-6"><span class="category-def">Loadable Function: </span><code class="def-type"><var class="var">b</var> =</code> <strong class="def-name">firpm</strong> <code class="def-code-arguments">(&hellip;, {<var class="var">accuracy, &hellip;}</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-firpm-7"><span class="category-def">Loadable Function: </span><code class="def-type">[<var class="var">b</var>, <var class="var">minimax</var>] =</code> <strong class="def-name">firpm</strong> <code class="def-code-arguments">(&hellip;)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-firpm-8"><span class="category-def">Loadable Function: </span><code class="def-type">[<var class="var">b</var>, <var class="var">minimax</var>, <var class="var">res</var>] =</code> <strong class="def-name">firpm</strong> <code class="def-code-arguments">(&hellip;)</code></dt>
+<dt class="deftypefn def-line" id="index-firpm-1"><span class="category-def">Loadable Function: </span><span><code class="def-type"><var class="var">b</var> =</code> <strong class="def-name">firpm</strong> <code class="def-code-arguments">(<var class="var">n</var>, <var class="var">f</var>, <var class="var">a</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-firpm-2"><span class="category-def">Loadable Function: </span><span><code class="def-type"><var class="var">b</var> =</code> <strong class="def-name">firpm</strong> <code class="def-code-arguments">(<var class="var">n</var>, <var class="var">f</var>, @<var class="var">respFn</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-firpm-3"><span class="category-def">Loadable Function: </span><span><code class="def-type"><var class="var">b</var> =</code> <strong class="def-name">firpm</strong> <code class="def-code-arguments">(<var class="var">n</var>, <var class="var">f</var>, {@<var class="var">respFn</var>, &hellip;})</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-firpm-4"><span class="category-def">Loadable Function: </span><span><code class="def-type"><var class="var">b</var> =</code> <strong class="def-name">firpm</strong> <code class="def-code-arguments">(&hellip;, <var class="var">w</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-firpm-5"><span class="category-def">Loadable Function: </span><span><code class="def-type"><var class="var">b</var> =</code> <strong class="def-name">firpm</strong> <code class="def-code-arguments">(&hellip;, <var class="var">class</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-firpm-6"><span class="category-def">Loadable Function: </span><span><code class="def-type"><var class="var">b</var> =</code> <strong class="def-name">firpm</strong> <code class="def-code-arguments">(&hellip;, {<var class="var">accuracy, &hellip;}</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-firpm-7"><span class="category-def">Loadable Function: </span><span><code class="def-type">[<var class="var">b</var>, <var class="var">minimax</var>] =</code> <strong class="def-name">firpm</strong> <code class="def-code-arguments">(&hellip;)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-firpm-8"><span class="category-def">Loadable Function: </span><span><code class="def-type">[<var class="var">b</var>, <var class="var">minimax</var>, <var class="var">res</var>] =</code> <strong class="def-name">firpm</strong> <code class="def-code-arguments">(&hellip;)</code></span></dt>
 <dd><a class="index-entry-id" id="index-signal-processing"></a>
 <p>Designs a linear-phase FIR filter according to given specifications and the
 &lsquo;minimax&rsquo; criterion.  The method (per McClellan et al.<a class="footnote" id="DOCF1" href="#FOOT1"><sup>1</sup></a>) uses successive approximation to minimize
@@ -2732,7 +2992,7 @@ b = firpm (31, [0 0.5 0.7 1], [0 1], &quot;antisym&quot;);
 </pre></div></div>
 <div class="example">
 <div class="group"><pre class="example-preformatted"># Inverse-sinc (arbitrary response):
-b = firpm (20, [0 0.5 0.9 1], @(n,f,g) ...
+b = firpm (20, [0 0.5 0.9 1], @(n,f,g,w) ...
 deal ((g&lt;=f(2))./sinc (g), (g&gt;=f(3))*9+1));
 </pre></div></div>
 <div class="example">
@@ -2758,10 +3018,10 @@ compatibility, take the absolute value.
 <h4 class="subsection">3.7.18 firpmord</h4>
 <a class="index-entry-id" id="index-firpmord"></a>
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-firpmord-1"><span class="category-def">Function File: </span><code class="def-type">[<var class="var">n</var>, <var class="var">Fout</var>, <var class="var">a</var>, <var class="var">w</var>] =</code> <strong class="def-name">firpmord</strong> <code class="def-code-arguments">(<var class="var">f</var>, <var class="var">a</var>, <var class="var">d</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-firpmord-2"><span class="category-def">Function File: </span><code class="def-type">[<var class="var">n</var>, <var class="var">Fout</var>, <var class="var">a</var>, <var class="var">w</var>] =</code> <strong class="def-name">firpmord</strong> <code class="def-code-arguments">(<var class="var">f</var>, <var class="var">a</var>, <var class="var">d</var>, <var class="var">fs</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-firpmord-3"><span class="category-def">Function File: </span><code class="def-type"><var class="var">c</var> =</code> <strong class="def-name">firpmord</strong> <code class="def-code-arguments">(<var class="var">f</var>, <var class="var">a</var>, <var class="var">d</var>, &quot;cell&quot;)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-firpmord-4"><span class="category-def">Function File: </span><code class="def-type"><var class="var">c</var> =</code> <strong class="def-name">firpmord</strong> <code class="def-code-arguments">(<var class="var">f</var>, <var class="var">a</var>, <var class="var">d</var>, <var class="var">fs</var>, &quot;cell&quot;)</code></dt>
+<dt class="deftypefn def-line" id="index-firpmord-1"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">n</var>, <var class="var">Fout</var>, <var class="var">a</var>, <var class="var">w</var>] =</code> <strong class="def-name">firpmord</strong> <code class="def-code-arguments">(<var class="var">f</var>, <var class="var">a</var>, <var class="var">d</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-firpmord-2"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">n</var>, <var class="var">Fout</var>, <var class="var">a</var>, <var class="var">w</var>] =</code> <strong class="def-name">firpmord</strong> <code class="def-code-arguments">(<var class="var">f</var>, <var class="var">a</var>, <var class="var">d</var>, <var class="var">fs</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-firpmord-3"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">c</var> =</code> <strong class="def-name">firpmord</strong> <code class="def-code-arguments">(<var class="var">f</var>, <var class="var">a</var>, <var class="var">d</var>, &quot;cell&quot;)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-firpmord-4"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">c</var> =</code> <strong class="def-name">firpmord</strong> <code class="def-code-arguments">(<var class="var">f</var>, <var class="var">a</var>, <var class="var">d</var>, <var class="var">fs</var>, &quot;cell&quot;)</code></span></dt>
 <dd><a class="index-entry-id" id="index-signal-processing-1"></a>
 <p>Estimate the filter-order needed for <code class="code">firpm</code> to design a type-I or
  type-II linear-phase FIR filter according to the given specifications.
@@ -2859,9 +3119,9 @@ compatibility, take the absolute value.
 <h4 class="subsection">3.7.19 impinvar</h4>
 <a class="index-entry-id" id="index-impinvar"></a>
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-impinvar-1"><span class="category-def">Function File: </span><code class="def-type">[<var class="var">b_out</var>, <var class="var">a_out</var>] =</code> <strong class="def-name">impinvar</strong> <code class="def-code-arguments">(<var class="var">b</var>, <var class="var">a</var>, <var class="var">fs</var>, <var class="var">tol</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-impinvar-2"><span class="category-def">Function File: </span><code class="def-type">[<var class="var">b_out</var>, <var class="var">a_out</var>] =</code> <strong class="def-name">impinvar</strong> <code class="def-code-arguments">(<var class="var">b</var>, <var class="var">a</var>, <var class="var">fs</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-impinvar-3"><span class="category-def">Function File: </span><code class="def-type">[<var class="var">b_out</var>, <var class="var">a_out</var>] =</code> <strong class="def-name">impinvar</strong> <code class="def-code-arguments">(<var class="var">b</var>, <var class="var">a</var>)</code></dt>
+<dt class="deftypefn def-line" id="index-impinvar-1"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">b_out</var>, <var class="var">a_out</var>] =</code> <strong class="def-name">impinvar</strong> <code class="def-code-arguments">(<var class="var">b</var>, <var class="var">a</var>, <var class="var">fs</var>, <var class="var">tol</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-impinvar-2"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">b_out</var>, <var class="var">a_out</var>] =</code> <strong class="def-name">impinvar</strong> <code class="def-code-arguments">(<var class="var">b</var>, <var class="var">a</var>, <var class="var">fs</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-impinvar-3"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">b_out</var>, <var class="var">a_out</var>] =</code> <strong class="def-name">impinvar</strong> <code class="def-code-arguments">(<var class="var">b</var>, <var class="var">a</var>)</code></span></dt>
 <dd><p>Converts analog filter with coefficients <var class="var">b</var> and <var class="var">a</var> to digital,
  conserving impulse response.
 </p>
@@ -2886,9 +3146,9 @@ compatibility, take the absolute value.
 <h4 class="subsection">3.7.20 invimpinvar</h4>
 <a class="index-entry-id" id="index-invimpinvar"></a>
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-invimpinvar-1"><span class="category-def">Function File: </span><code class="def-type">[<var class="var">b_out</var>, <var class="var">a_out</var>] =</code> <strong class="def-name">invimpinvar</strong> <code class="def-code-arguments">(<var class="var">b</var>, <var class="var">a</var>, <var class="var">fs</var>, <var class="var">tol</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-invimpinvar-2"><span class="category-def">Function File: </span><code class="def-type">[<var class="var">b_out</var>, <var class="var">a_out</var>] =</code> <strong class="def-name">invimpinvar</strong> <code class="def-code-arguments">(<var class="var">b</var>, <var class="var">a</var>, <var class="var">fs</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-invimpinvar-3"><span class="category-def">Function File: </span><code class="def-type">[<var class="var">b_out</var>, <var class="var">a_out</var>] =</code> <strong class="def-name">invimpinvar</strong> <code class="def-code-arguments">(<var class="var">b</var>, <var class="var">a</var>)</code></dt>
+<dt class="deftypefn def-line" id="index-invimpinvar-1"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">b_out</var>, <var class="var">a_out</var>] =</code> <strong class="def-name">invimpinvar</strong> <code class="def-code-arguments">(<var class="var">b</var>, <var class="var">a</var>, <var class="var">fs</var>, <var class="var">tol</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-invimpinvar-2"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">b_out</var>, <var class="var">a_out</var>] =</code> <strong class="def-name">invimpinvar</strong> <code class="def-code-arguments">(<var class="var">b</var>, <var class="var">a</var>, <var class="var">fs</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-invimpinvar-3"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">b_out</var>, <var class="var">a_out</var>] =</code> <strong class="def-name">invimpinvar</strong> <code class="def-code-arguments">(<var class="var">b</var>, <var class="var">a</var>)</code></span></dt>
 <dd><p>Converts digital filter with coefficients <var class="var">b</var> and <var class="var">a</var> to analog,
  conserving impulse response.
 </p>
@@ -2908,11 +3168,144 @@ compatibility, take the absolute value.
 <p><strong class="strong">See also:</strong> bilinear, impinvar.
 </p></dd></dl>
 </div>
+<div class="subsection-level-extent" id="lp2bp">
+<h4 class="subsection">3.7.21 lp2bp</h4>
+<a class="index-entry-id" id="index-lp2bp"></a>
+<dl class="first-deftypefn def-block">
+<dt class="deftypefn def-line" id="index-lp2bp-1"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">bt</var>, <var class="var">at</var>] =</code> <strong class="def-name">lp2bp</strong> <code class="def-code-arguments">(<var class="var">b</var>, <var class="var">a</var>, <var class="var">Wo</var>, <var class="var">Bw</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-lp2bp-2"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">At</var>, <var class="var">Bt</var>, <var class="var">Ct</var>, <var class="var">Dt</var>] =</code> <strong class="def-name">lp2bp</strong> <code class="def-code-arguments">(<var class="var">A</var>, <var class="var">B</var>, <var class="var">C</var>, <var class="var">D</var>, <var class="var">Wo</var>, <var class="var">Bw</var>)</code></span></dt>
+<dd>
+<p>Transform an analog lowpass filter prototype to a bandpass filter with a
+ given center frequency and bandwidth.
+</p>
+<p>Two calling forms are available:
+</p>
+<dl class="table">
+<dt>Transfer function form</dt>
+<dd><p>[bt, at] = lp2bp (b, a, Wo, Bw)
+</p>
+<p>Given a lowpass filter with numerator coefficients <var class="var">b</var> and denominator
+ coefficients <var class="var">a</var>, returns the bandpass filter coefficients <var class="var">bt</var>
+ and <var class="var">at</var> with center frequency <var class="var">Wo</var> and bandwidth <var class="var">Bw</var>
+ (both in rad/s).
+</p>
+</dd>
+<dt>State-space form</dt>
+<dd><p>[At, Bt, Ct, Dt] = lp2bp (A, B, C, D, Wo, Bw)
+</p>
+<p>Given a lowpass filter in state-space form (<var class="var">A</var>, <var class="var">B</var>, <var class="var">C</var>,
+<var class="var">D</var>), returns the transformed state-space matrices (<var class="var">At</var>, <var class="var">Bt</var>,
+<var class="var">Ct</var>, <var class="var">Dt</var>) for the bandpass filter with center frequency <var class="var">Wo</var>
+ and bandwidth <var class="var">Bw</var> (both in rad/s).
+</p></dd>
+</dl>
+<p><strong class="strong">See also:</strong> lp2lp, lp2hp, lp2bs.
+</p></dd></dl>
+</div>
+<div class="subsection-level-extent" id="lp2bs">
+<h4 class="subsection">3.7.22 lp2bs</h4>
+<a class="index-entry-id" id="index-lp2bs"></a>
+<dl class="first-deftypefn def-block">
+<dt class="deftypefn def-line" id="index-lp2bs-1"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">bt</var>, <var class="var">at</var>] =</code> <strong class="def-name">lp2bs</strong> <code class="def-code-arguments">(<var class="var">b</var>, <var class="var">a</var>, <var class="var">Wo</var>, <var class="var">Bw</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-lp2bs-2"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">At</var>, <var class="var">Bt</var>, <var class="var">Ct</var>, <var class="var">Dt</var>] =</code> <strong class="def-name">lp2bs</strong> <code class="def-code-arguments">(<var class="var">A</var>, <var class="var">B</var>, <var class="var">C</var>, <var class="var">D</var>, <var class="var">Wo</var>, <var class="var">Bw</var>)</code></span></dt>
+<dd>
+<p>Transform an analog lowpass filter prototype to a bandstop filter with a
+ given center frequency and bandwidth.
+</p>
+<p>Two calling forms are available:
+</p>
+<dl class="table">
+<dt>Transfer function form</dt>
+<dd><p>[bt, at] = lp2bs (b, a, Wo, Bw)
+</p>
+<p>Given a lowpass filter with numerator coefficients <var class="var">b</var> and denominator
+ coefficients <var class="var">a</var>, returns the bandstop filter coefficients <var class="var">bt</var>
+ and <var class="var">at</var> with center frequency <var class="var">Wo</var> and bandwidth <var class="var">Bw</var>
+ (both in rad/s).
+</p>
+</dd>
+<dt>State-space form</dt>
+<dd><p>[At, Bt, Ct, Dt] = lp2bs (A, B, C, D, Wo, Bw)
+</p>
+<p>Given a lowpass filter in state-space form (<var class="var">A</var>, <var class="var">B</var>, <var class="var">C</var>,
+<var class="var">D</var>), returns the transformed state-space matrices (<var class="var">At</var>, <var class="var">Bt</var>,
+<var class="var">Ct</var>, <var class="var">Dt</var>) for the bandstop filter with center frequency <var class="var">Wo</var>
+ and bandwidth <var class="var">Bw</var> (both in rad/s).
+</p></dd>
+</dl>
+<p><strong class="strong">See also:</strong> lp2bp, lp2hp, lp2lp.
+</p></dd></dl>
+</div>
+<div class="subsection-level-extent" id="lp2hp">
+<h4 class="subsection">3.7.23 lp2hp</h4>
+<a class="index-entry-id" id="index-lp2hp"></a>
+<dl class="first-deftypefn def-block">
+<dt class="deftypefn def-line" id="index-lp2hp-1"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">bt</var>, <var class="var">at</var>] =</code> <strong class="def-name">lp2hp</strong> <code class="def-code-arguments">(<var class="var">b</var>, <var class="var">a</var>, <var class="var">Wo</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-lp2hp-2"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">At</var>, <var class="var">Bt</var>, <var class="var">Ct</var>, <var class="var">Dt</var>] =</code> <strong class="def-name">lp2hp</strong> <code class="def-code-arguments">(<var class="var">A</var>, <var class="var">B</var>, <var class="var">C</var>, <var class="var">D</var>, <var class="var">Wo</var>)</code></span></dt>
+<dd>
+<p>Transform an analog lowpass filter prototype to a highpass filter with a
+ given cutoff frequency.
+</p>
+<p>Two calling forms are available:
+</p>
+<dl class="table">
+<dt>Transfer function form</dt>
+<dd><p>[bt, at] = lp2hp (b, a, Wo)
+</p>
+<p>Given a lowpass filter with numerator coefficients <var class="var">b</var> and denominator
+ coefficients <var class="var">a</var>, returns the highpass filter coefficients <var class="var">bt</var>
+ and <var class="var">at</var> with cutoff frequency <var class="var">Wo</var> (in rad/s).
+</p>
+</dd>
+<dt>State-space form</dt>
+<dd><p>[At, Bt, Ct, Dt] = lp2hp (A, B, C, D, Wo)
+</p>
+<p>Given a lowpass filter in state-space form (<var class="var">A</var>, <var class="var">B</var>, <var class="var">C</var>,
+<var class="var">D</var>), returns the transformed state-space matrices (<var class="var">At</var>, <var class="var">Bt</var>,
+<var class="var">Ct</var>, <var class="var">Dt</var>) for the highpass filter with cutoff frequency <var class="var">Wo</var>
+ (in rad/s).
+</p></dd>
+</dl>
+<p><strong class="strong">See also:</strong> lp2lp, lp2bp, lp2bs.
+</p></dd></dl>
+</div>
+<div class="subsection-level-extent" id="lp2lp">
+<h4 class="subsection">3.7.24 lp2lp</h4>
+<a class="index-entry-id" id="index-lp2lp"></a>
+<dl class="first-deftypefn def-block">
+<dt class="deftypefn def-line" id="index-lp2lp-1"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">bt</var>, <var class="var">at</var>] =</code> <strong class="def-name">lp2lp</strong> <code class="def-code-arguments">(<var class="var">b</var>, <var class="var">a</var>, <var class="var">Wo</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-lp2lp-2"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">At</var>, <var class="var">Bt</var>, <var class="var">Ct</var>, <var class="var">Dt</var>] =</code> <strong class="def-name">lp2lp</strong> <code class="def-code-arguments">(<var class="var">A</var>, <var class="var">B</var>, <var class="var">C</var>, <var class="var">D</var>, <var class="var">Wo</var>)</code></span></dt>
+<dd>
+<p>Transform an analog lowpass filter prototype to a lowpass filter with a
+ different cutoff frequency.
+</p>
+<p>Two calling forms are available:
+</p>
+<dl class="table">
+<dt>Transfer function form</dt>
+<dd><p>[bt, at] = lp2lp (b, a, Wo)
+</p>
+<p>Given a lowpass filter with numerator coefficients <var class="var">b</var> and denominator
+ coefficients <var class="var">a</var>, returns the transformed filter coefficients <var class="var">bt</var>
+ and <var class="var">at</var> with cutoff frequency <var class="var">Wo</var> (in rad/s).
+</p>
+</dd>
+<dt>State-space form</dt>
+<dd><p>[At, Bt, Ct, Dt] = lp2lp (A, B, C, D, Wo)
+</p>
+<p>Given a lowpass filter in state-space form (<var class="var">A</var>, <var class="var">B</var>, <var class="var">C</var>,
+<var class="var">D</var>), returns the transformed state-space matrices (<var class="var">At</var>, <var class="var">Bt</var>,
+<var class="var">Ct</var>, <var class="var">Dt</var>) with cutoff frequency <var class="var">Wo</var> (in rad/s).
+</p></dd>
+</dl>
+<p><strong class="strong">See also:</strong> lp2hp, lp2bp, lp2bs.
+</p></dd></dl>
+</div>
 <div class="subsection-level-extent" id="ncauer">
-<h4 class="subsection">3.7.21 ncauer</h4>
+<h4 class="subsection">3.7.25 ncauer</h4>
 <a class="index-entry-id" id="index-ncauer"></a>
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-cauer_0028Rp_002c"><span class="category-def">Function File: </span><code class="def-type">[<var class="var">z</var>, <var class="var">p</var>, <var class="var">g</var>] =</code> <strong class="def-name">cauer(<var class="var">Rp</var>,</strong> <code class="def-code-arguments"><var class="var">Rs</var>, <var class="var">n</var>)</code></dt>
+<dt class="deftypefn def-line" id="index-cauer_0028Rp_002c"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">z</var>, <var class="var">p</var>, <var class="var">g</var>] =</code> <strong class="def-name">cauer(<var class="var">Rp</var>,</strong> <code class="def-code-arguments"><var class="var">Rs</var>, <var class="var">n</var>)</code></span></dt>
 <dd><p>Analog prototype for Cauer filter.
 </p>
 <dl class="table">
@@ -2945,10 +3338,10 @@ compatibility, take the absolute value.
 </p></dd></dl>
 </div>
 <div class="subsection-level-extent" id="pei_005ftseng_005fnotch">
-<h4 class="subsection">3.7.22 pei_tseng_notch</h4>
+<h4 class="subsection">3.7.26 pei_tseng_notch</h4>
 <a class="index-entry-id" id="index-pei_005ftseng_005fnotch"></a>
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-pei_005ftseng_005fnotch-1"><span class="category-def">Function File: </span><code class="def-type">[<var class="var">b</var>, <var class="var">a</var>] =</code> <strong class="def-name">pei_tseng_notch</strong> <code class="def-code-arguments">(<var class="var">frequencies</var>, <var class="var">bandwidths</var>)</code></dt>
+<dt class="deftypefn def-line" id="index-pei_005ftseng_005fnotch-1"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">b</var>, <var class="var">a</var>] =</code> <strong class="def-name">pei_tseng_notch</strong> <code class="def-code-arguments">(<var class="var">frequencies</var>, <var class="var">bandwidths</var>)</code></span></dt>
 <dd><p>Return coefficients for an IIR notch-filter with one or more filter frequencies and according (very narrow) bandwidths
  to be used with <code class="code">filter</code> or <code class="code">filtfilt</code>.
  The filter construction is based on an allpass which performs a reversal of phase at the filter frequencies.
@@ -2963,10 +3356,10 @@ compatibility, take the absolute value.
 </p></dd></dl>
 </div>
 <div class="subsection-level-extent" id="sftrans">
-<h4 class="subsection">3.7.23 sftrans</h4>
+<h4 class="subsection">3.7.27 sftrans</h4>
 <a class="index-entry-id" id="index-sftrans"></a>
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-sftrans-1"><span class="category-def">Function File: </span><code class="def-type">[<var class="var">Sz</var>, <var class="var">Sp</var>, <var class="var">Sg</var>] =</code> <strong class="def-name">sftrans</strong> <code class="def-code-arguments">(<var class="var">Sz</var>, <var class="var">Sp</var>, <var class="var">Sg</var>, <var class="var">W</var>, <var class="var">stop</var>)</code></dt>
+<dt class="deftypefn def-line" id="index-sftrans-1"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">Sz</var>, <var class="var">Sp</var>, <var class="var">Sg</var>] =</code> <strong class="def-name">sftrans</strong> <code class="def-code-arguments">(<var class="var">Sz</var>, <var class="var">Sp</var>, <var class="var">Sg</var>, <var class="var">W</var>, <var class="var">stop</var>)</code></span></dt>
 <dd>
 <p>Transform band edges of a generic lowpass filter (cutoff at W=1)
  represented in splane zero-pole-gain form.  W is the edge of the
@@ -3049,8 +3442,8 @@ compatibility, take the absolute value.
 <h4 class="subsection">3.8.1 cl2bp</h4>
 <a class="index-entry-id" id="index-cl2bp"></a>
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-cl2bp-1"><span class="category-def">Loadable Function: </span><code class="def-type"><var class="var">h</var> =</code> <strong class="def-name">cl2bp</strong> <code class="def-code-arguments">(<var class="var">m</var>, <var class="var">w1</var>, <var class="var">w2</var>, <var class="var">up</var>, <var class="var">lo</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-cl2bp-2"><span class="category-def">Loadable Function: </span><code class="def-type"><var class="var">h</var> =</code> <strong class="def-name">cl2bp</strong> <code class="def-code-arguments">(<var class="var">m</var>, <var class="var">w1</var>, <var class="var">w2</var>, <var class="var">up</var>, <var class="var">lo</var>, <var class="var">gridsize</var>)</code></dt>
+<dt class="deftypefn def-line" id="index-cl2bp-1"><span class="category-def">Loadable Function: </span><span><code class="def-type"><var class="var">h</var> =</code> <strong class="def-name">cl2bp</strong> <code class="def-code-arguments">(<var class="var">m</var>, <var class="var">w1</var>, <var class="var">w2</var>, <var class="var">up</var>, <var class="var">lo</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-cl2bp-2"><span class="category-def">Loadable Function: </span><span><code class="def-type"><var class="var">h</var> =</code> <strong class="def-name">cl2bp</strong> <code class="def-code-arguments">(<var class="var">m</var>, <var class="var">w1</var>, <var class="var">w2</var>, <var class="var">up</var>, <var class="var">lo</var>, <var class="var">gridsize</var>)</code></span></dt>
 <dd>
 <p>Constrained L2 bandpass FIR filter design.  This is a fast implementation of
 the algorithm cited below.  Compared to <em class="dfn">remez</em>, it offers implicit
@@ -3101,10 +3494,10 @@ IEEE Trans. on Signal Processing, 46(2):497-501, February 1998.
 <h4 class="subsection">3.8.2 fir1</h4>
 <a class="index-entry-id" id="index-fir1"></a>
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-fir1-1"><span class="category-def">Function File: </span><code class="def-type"><var class="var">b</var> =</code> <strong class="def-name">fir1</strong> <code class="def-code-arguments">(<var class="var">n</var>, <var class="var">w</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-fir1-2"><span class="category-def">Function File: </span><code class="def-type"><var class="var">b</var> =</code> <strong class="def-name">fir1</strong> <code class="def-code-arguments">(<var class="var">n</var>, <var class="var">w</var>, <var class="var">type</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-fir1-3"><span class="category-def">Function File: </span><code class="def-type"><var class="var">b</var> =</code> <strong class="def-name">fir1</strong> <code class="def-code-arguments">(<var class="var">n</var>, <var class="var">w</var>, <var class="var">type</var>, <var class="var">window</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-fir1-4"><span class="category-def">Function File: </span><code class="def-type"><var class="var">b</var> =</code> <strong class="def-name">fir1</strong> <code class="def-code-arguments">(<var class="var">n</var>, <var class="var">w</var>, <var class="var">type</var>, <var class="var">window</var>, <var class="var">noscale</var>)</code></dt>
+<dt class="deftypefn def-line" id="index-fir1-1"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">b</var> =</code> <strong class="def-name">fir1</strong> <code class="def-code-arguments">(<var class="var">n</var>, <var class="var">w</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-fir1-2"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">b</var> =</code> <strong class="def-name">fir1</strong> <code class="def-code-arguments">(<var class="var">n</var>, <var class="var">w</var>, <var class="var">type</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-fir1-3"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">b</var> =</code> <strong class="def-name">fir1</strong> <code class="def-code-arguments">(<var class="var">n</var>, <var class="var">w</var>, <var class="var">type</var>, <var class="var">window</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-fir1-4"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">b</var> =</code> <strong class="def-name">fir1</strong> <code class="def-code-arguments">(<var class="var">n</var>, <var class="var">w</var>, <var class="var">type</var>, <var class="var">window</var>, <var class="var">noscale</var>)</code></span></dt>
 <dd>
 <p>Produce an order <var class="var">n</var> FIR filter with the given frequency cutoff <var class="var">w</var>,
  returning the <var class="var">n</var>+1 filter coefficients in <var class="var">b</var>.  If <var class="var">w</var> is a
@@ -3141,10 +3534,10 @@ IEEE Trans. on Signal Processing, 46(2):497-501, February 1998.
 <h4 class="subsection">3.8.3 fir2</h4>
 <a class="index-entry-id" id="index-fir2"></a>
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-fir2-1"><span class="category-def">Function File: </span><code class="def-type"><var class="var">b</var> =</code> <strong class="def-name">fir2</strong> <code class="def-code-arguments">(<var class="var">n</var>, <var class="var">f</var>, <var class="var">m</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-fir2-2"><span class="category-def">Function File: </span><code class="def-type"><var class="var">b</var> =</code> <strong class="def-name">fir2</strong> <code class="def-code-arguments">(<var class="var">n</var>, <var class="var">f</var>, <var class="var">m</var>, <var class="var">grid_n</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-fir2-3"><span class="category-def">Function File: </span><code class="def-type"><var class="var">b</var> =</code> <strong class="def-name">fir2</strong> <code class="def-code-arguments">(<var class="var">n</var>, <var class="var">f</var>, <var class="var">m</var>, <var class="var">grid_n</var>, <var class="var">ramp_n</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-fir2-4"><span class="category-def">Function File: </span><code class="def-type"><var class="var">b</var> =</code> <strong class="def-name">fir2</strong> <code class="def-code-arguments">(<var class="var">n</var>, <var class="var">f</var>, <var class="var">m</var>, <var class="var">grid_n</var>, <var class="var">ramp_n</var>, <var class="var">window</var>)</code></dt>
+<dt class="deftypefn def-line" id="index-fir2-1"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">b</var> =</code> <strong class="def-name">fir2</strong> <code class="def-code-arguments">(<var class="var">n</var>, <var class="var">f</var>, <var class="var">m</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-fir2-2"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">b</var> =</code> <strong class="def-name">fir2</strong> <code class="def-code-arguments">(<var class="var">n</var>, <var class="var">f</var>, <var class="var">m</var>, <var class="var">grid_n</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-fir2-3"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">b</var> =</code> <strong class="def-name">fir2</strong> <code class="def-code-arguments">(<var class="var">n</var>, <var class="var">f</var>, <var class="var">m</var>, <var class="var">grid_n</var>, <var class="var">ramp_n</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-fir2-4"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">b</var> =</code> <strong class="def-name">fir2</strong> <code class="def-code-arguments">(<var class="var">n</var>, <var class="var">f</var>, <var class="var">m</var>, <var class="var">grid_n</var>, <var class="var">ramp_n</var>, <var class="var">window</var>)</code></span></dt>
 <dd>
 <p>Produce an order <var class="var">n</var> FIR filter with arbitrary frequency response
 <var class="var">m</var> over frequency bands <var class="var">f</var>, returning the <var class="var">n</var>+1 filter
@@ -3184,8 +3577,8 @@ IEEE Trans. on Signal Processing, 46(2):497-501, February 1998.
 <h4 class="subsection">3.8.4 firls</h4>
 <a class="index-entry-id" id="index-firls"></a>
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-firls-1"><span class="category-def">Function File: </span><code class="def-type"><var class="var">b</var> =</code> <strong class="def-name">firls</strong> <code class="def-code-arguments">(<var class="var">n</var>, <var class="var">f</var>, <var class="var">a</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-firls-2"><span class="category-def">Function File: </span><code class="def-type"><var class="var">b</var> =</code> <strong class="def-name">firls</strong> <code class="def-code-arguments">(<var class="var">n</var>, <var class="var">f</var>, <var class="var">a</var>, <var class="var">w</var>)</code></dt>
+<dt class="deftypefn def-line" id="index-firls-1"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">b</var> =</code> <strong class="def-name">firls</strong> <code class="def-code-arguments">(<var class="var">n</var>, <var class="var">f</var>, <var class="var">a</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-firls-2"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">b</var> =</code> <strong class="def-name">firls</strong> <code class="def-code-arguments">(<var class="var">n</var>, <var class="var">f</var>, <var class="var">a</var>, <var class="var">w</var>)</code></span></dt>
 <dd>
 <p>FIR filter design using least squares method. Returns a length <var class="var">n</var>+1
  linear phase filter such that the integral of the weighted mean
@@ -3212,12 +3605,52 @@ IEEE Trans. on Signal Processing, 46(2):497-501, February 1998.
  http://cnx.org/content/m10577
 </p></dd></dl>
 </div>
+<div class="subsection-level-extent" id="gaussdesign">
+<h4 class="subsection">3.8.5 gaussdesign</h4>
+<a class="index-entry-id" id="index-gaussdesign"></a>
+<dl class="first-deftypefn def-block">
+<dt class="deftypefn def-line" id="index-gaussdesign-1"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">h</var> =</code> <strong class="def-name">gaussdesign</strong> <code class="def-code-arguments">(<var class="var">bt</var>, <var class="var">span</var>, <var class="var">sps</var>)</code></span></dt>
+<dd>
+<p>Design a Gaussian FIR pulse-shaping filter.
+</p>
+<p>The function returns the coefficients <var class="var">h</var> of a Gaussian finite impulse
+ response (FIR) filter. The filter is designed to have a normalized bandwidth-symbol
+ time product <var class="var">bt</var>, a specified duration <var class="var">span</var> in symbol intervals, and
+ a given number of samples per symbol <var class="var">sps</var>.
+</p>
+<p><strong class="strong">Inputs</strong>
+</p>
+<dl class="table">
+<dt><var class="var">bt</var></dt>
+<dd><p>Bandwidth-symbol time product. A smaller <var class="var">bt</var> yields a narrower
+ frequency response but longer impulse response.
+</p>
+</dd>
+<dt><var class="var">span</var></dt>
+<dd><p>Filter duration in symbol intervals. Default is 3.
+</p>
+</dd>
+<dt><var class="var">sps</var></dt>
+<dd><p>Number of samples per symbol. It defines the oversampling factor.
+ Default is 2.
+</p></dd>
+</dl>
+<p><strong class="strong">Outputs</strong>
+</p>
+<dl class="table">
+<dt><var class="var">h</var></dt>
+<dd><p>Normalized FIR filter coefficients.
+</p></dd>
+</dl>
+<p><strong class="strong">See also:</strong> gaussian, rcosdesign.
+</p></dd></dl>
+</div>
 <div class="subsection-level-extent" id="kaiserord">
-<h4 class="subsection">3.8.5 kaiserord</h4>
+<h4 class="subsection">3.8.6 kaiserord</h4>
 <a class="index-entry-id" id="index-kaiserord"></a>
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-kaiserord-1"><span class="category-def">Function File: </span><code class="def-type">[<var class="var">n</var>, <var class="var">Wn</var>, <var class="var">beta</var>, <var class="var">ftype</var>] =</code> <strong class="def-name">kaiserord</strong> <code class="def-code-arguments">(<var class="var">f</var>, <var class="var">m</var>, <var class="var">dev</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-kaiserord-2"><span class="category-def">Function File: </span><code class="def-type">[&hellip;] =</code> <strong class="def-name">kaiserord</strong> <code class="def-code-arguments">(<var class="var">f</var>, <var class="var">m</var>, <var class="var">dev</var>, <var class="var">fs</var>)</code></dt>
+<dt class="deftypefn def-line" id="index-kaiserord-1"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">n</var>, <var class="var">Wn</var>, <var class="var">beta</var>, <var class="var">ftype</var>] =</code> <strong class="def-name">kaiserord</strong> <code class="def-code-arguments">(<var class="var">f</var>, <var class="var">m</var>, <var class="var">dev</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-kaiserord-2"><span class="category-def">Function File: </span><span><code class="def-type">[&hellip;] =</code> <strong class="def-name">kaiserord</strong> <code class="def-code-arguments">(<var class="var">f</var>, <var class="var">m</var>, <var class="var">dev</var>, <var class="var">fs</var>)</code></span></dt>
 <dd>
 <p>Return the parameters needed to produce a filter of the desired
  specification from a Kaiser window.  The vector <var class="var">f</var> contains pairs of
@@ -3255,11 +3688,11 @@ IEEE Trans. on Signal Processing, 46(2):497-501, February 1998.
 </p></dd></dl>
 </div>
 <div class="subsection-level-extent" id="qp_005fkaiser">
-<h4 class="subsection">3.8.6 qp_kaiser</h4>
+<h4 class="subsection">3.8.7 qp_kaiser</h4>
 <a class="index-entry-id" id="index-qp_005fkaiser"></a>
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-qp_005fkaiser-1"><span class="category-def">Function File: </span><strong class="def-name">qp_kaiser</strong> <code class="def-code-arguments">(<var class="var">nb</var>, <var class="var">at</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-qp_005fkaiser-2"><span class="category-def">Function File: </span><strong class="def-name">qp_kaiser</strong> <code class="def-code-arguments">(<var class="var">nb</var>, <var class="var">at</var>, <var class="var">linear</var>)</code></dt>
+<dt class="deftypefn def-line" id="index-qp_005fkaiser-1"><span class="category-def">Function File: </span><span><strong class="def-name">qp_kaiser</strong> <code class="def-code-arguments">(<var class="var">nb</var>, <var class="var">at</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-qp_005fkaiser-2"><span class="category-def">Function File: </span><span><strong class="def-name">qp_kaiser</strong> <code class="def-code-arguments">(<var class="var">nb</var>, <var class="var">at</var>, <var class="var">linear</var>)</code></span></dt>
 <dd>
 <p>Computes a finite impulse response (FIR) filter for use with a
  quasi-perfect reconstruction polyphase-network filter bank. This
@@ -3275,14 +3708,47 @@ IEEE Trans. on Signal Processing, 46(2):497-501, February 1998.
  omitted at all.
 </p></dd></dl>
 </div>
+<div class="subsection-level-extent" id="rcosdesign">
+<h4 class="subsection">3.8.8 rcosdesign</h4>
+<a class="index-entry-id" id="index-rcosdesign"></a>
+<dl class="first-deftypefn def-block">
+<dt class="deftypefn def-line" id="index-rcosdesign-1"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">b</var> =</code> <strong class="def-name">rcosdesign</strong> <code class="def-code-arguments">(<var class="var">beta</var>, <var class="var">span</var>, <var class="var">sps</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-rcosdesign-2"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">b</var> =</code> <strong class="def-name">rcosdesign</strong> <code class="def-code-arguments">(<var class="var">beta</var>, <var class="var">span</var>, <var class="var">sps</var>, <var class="var">shape</var>)</code></span></dt>
+<dd>
+<p>Design a raised cosine FIR filter.
+</p>
+<p>The filter coefficients <var class="var">b</var> are returned as a row vector of length
+<code class="code"><var class="var">sps</var> * <var class="var">span</var> + 1</code>. The roll-off factor <var class="var">beta</var>
+ controls the excess bandwidth and must be in the range [0, 1]. The
+ filter is truncated to <var class="var">span</var> symbol periods, with <var class="var">sps</var>
+ samples per symbol.
+</p>
+<p>The optional argument <var class="var">shape</var> selects the raised cosine variant:
+</p>
+<dl class="table">
+<dt><code class="code">&quot;sqrt&quot;</code> (default)</dt>
+<dd><p>Square-root raised cosine filter. When two such filters are used in
+ cascade (e.g., one at the transmitter and one at the receiver), the
+ combined response matches a normal raised cosine filter.
+</p>
+</dd>
+<dt><code class="code">&quot;normal&quot;</code></dt>
+<dd><p>Normal (full) raised cosine filter. This filter satisfies the Nyquist
+ criterion for zero intersymbol interference, with zero crossings at
+ multiples of the symbol period.
+</p></dd>
+</dl>
+<p><strong class="strong">See also:</strong> gaussdesign.
+</p></dd></dl>
+</div>
 <div class="subsection-level-extent" id="remez">
-<h4 class="subsection">3.8.7 remez</h4>
+<h4 class="subsection">3.8.9 remez</h4>
 <a class="index-entry-id" id="index-remez"></a>
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-remez-1"><span class="category-def">Loadable Function: </span><code class="def-type"><var class="var">b</var> =</code> <strong class="def-name">remez</strong> <code class="def-code-arguments">(<var class="var">n</var>, <var class="var">f</var>, <var class="var">a</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-remez-2"><span class="category-def">Loadable Function: </span><code class="def-type"><var class="var">b</var> =</code> <strong class="def-name">remez</strong> <code class="def-code-arguments">(<var class="var">n</var>, <var class="var">f</var>, <var class="var">a</var>, <var class="var">w</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-remez-3"><span class="category-def">Loadable Function: </span><code class="def-type"><var class="var">b</var> =</code> <strong class="def-name">remez</strong> <code class="def-code-arguments">(<var class="var">n</var>, <var class="var">f</var>, <var class="var">a</var>, <var class="var">w</var>, <var class="var">ftype</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-remez-4"><span class="category-def">Loadable Function: </span><code class="def-type"><var class="var">b</var> =</code> <strong class="def-name">remez</strong> <code class="def-code-arguments">(<var class="var">n</var>, <var class="var">f</var>, <var class="var">a</var>, <var class="var">w</var>, <var class="var">ftype</var>, <var class="var">griddensity</var>)</code></dt>
+<dt class="deftypefn def-line" id="index-remez-1"><span class="category-def">Loadable Function: </span><span><code class="def-type"><var class="var">b</var> =</code> <strong class="def-name">remez</strong> <code class="def-code-arguments">(<var class="var">n</var>, <var class="var">f</var>, <var class="var">a</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-remez-2"><span class="category-def">Loadable Function: </span><span><code class="def-type"><var class="var">b</var> =</code> <strong class="def-name">remez</strong> <code class="def-code-arguments">(<var class="var">n</var>, <var class="var">f</var>, <var class="var">a</var>, <var class="var">w</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-remez-3"><span class="category-def">Loadable Function: </span><span><code class="def-type"><var class="var">b</var> =</code> <strong class="def-name">remez</strong> <code class="def-code-arguments">(<var class="var">n</var>, <var class="var">f</var>, <var class="var">a</var>, <var class="var">w</var>, <var class="var">ftype</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-remez-4"><span class="category-def">Loadable Function: </span><span><code class="def-type"><var class="var">b</var> =</code> <strong class="def-name">remez</strong> <code class="def-code-arguments">(<var class="var">n</var>, <var class="var">f</var>, <var class="var">a</var>, <var class="var">w</var>, <var class="var">ftype</var>, <var class="var">griddensity</var>)</code></span></dt>
 <dd><p>Parks-McClellan optimal FIR filter design.
 </p><dl class="table">
 <dt><var class="var">n</var></dt>
@@ -3310,12 +3776,12 @@ slower to compute.
 </p></dd></dl>
 </div>
 <div class="subsection-level-extent" id="sgolay">
-<h4 class="subsection">3.8.8 sgolay</h4>
+<h4 class="subsection">3.8.10 sgolay</h4>
 <a class="index-entry-id" id="index-sgolay"></a>
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-sgolay-1"><span class="category-def">Function File: </span><code class="def-type"><var class="var">f</var> =</code> <strong class="def-name">sgolay</strong> <code class="def-code-arguments">(<var class="var">p</var>, <var class="var">n</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-sgolay-2"><span class="category-def">Function File: </span><code class="def-type"><var class="var">f</var> =</code> <strong class="def-name">sgolay</strong> <code class="def-code-arguments">(<var class="var">p</var>, <var class="var">n</var>, <var class="var">m</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-sgolay-3"><span class="category-def">Function File: </span><code class="def-type"><var class="var">f</var> =</code> <strong class="def-name">sgolay</strong> <code class="def-code-arguments">(<var class="var">p</var>, <var class="var">n</var>, <var class="var">m</var>, <var class="var">ts</var>)</code></dt>
+<dt class="deftypefn def-line" id="index-sgolay-1"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">f</var> =</code> <strong class="def-name">sgolay</strong> <code class="def-code-arguments">(<var class="var">p</var>, <var class="var">n</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-sgolay-2"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">f</var> =</code> <strong class="def-name">sgolay</strong> <code class="def-code-arguments">(<var class="var">p</var>, <var class="var">n</var>, <var class="var">m</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-sgolay-3"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">f</var> =</code> <strong class="def-name">sgolay</strong> <code class="def-code-arguments">(<var class="var">p</var>, <var class="var">n</var>, <var class="var">m</var>, <var class="var">ts</var>)</code></span></dt>
 <dd><p>Computes the filter coefficients for all Savitzsky-Golay smoothing
  filters of order p for length n (odd). m can be used in order to
  get directly the mth derivative. In this case, ts is a scaling factor.
@@ -3348,8 +3814,8 @@ slower to compute.
 <h4 class="subsection">3.9.1 bitrevorder</h4>
 <a class="index-entry-id" id="index-bitrevorder"></a>
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-bitrevorder-1"><span class="category-def">Function File: </span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">bitrevorder</strong> <code class="def-code-arguments">(<var class="var">x</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-bitrevorder-2"><span class="category-def">Function File: </span><code class="def-type">[<var class="var">y</var> <var class="var">i</var>] =</code> <strong class="def-name">bitrevorder</strong> <code class="def-code-arguments">(<var class="var">x</var>)</code></dt>
+<dt class="deftypefn def-line" id="index-bitrevorder-1"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">bitrevorder</strong> <code class="def-code-arguments">(<var class="var">x</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-bitrevorder-2"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">y</var> <var class="var">i</var>] =</code> <strong class="def-name">bitrevorder</strong> <code class="def-code-arguments">(<var class="var">x</var>)</code></span></dt>
 <dd><p>Reorder the elements of the vector <var class="var">x</var> in bit-reversed order.
  Equivalent to calling <code class="code">digitrevorder (<var class="var">x</var>, 2)</code>.
 </p>
@@ -3360,8 +3826,8 @@ slower to compute.
 <h4 class="subsection">3.9.2 cceps</h4>
 <a class="index-entry-id" id="index-cceps"></a>
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-cceps-1"><span class="category-def">Function File: </span><strong class="def-name">cceps</strong> <code class="def-code-arguments">(<var class="var">x</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-cceps-2"><span class="category-def">Function File: </span><strong class="def-name">cceps</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">correct</var>)</code></dt>
+<dt class="deftypefn def-line" id="index-cceps-1"><span class="category-def">Function File: </span><span><strong class="def-name">cceps</strong> <code class="def-code-arguments">(<var class="var">x</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-cceps-2"><span class="category-def">Function File: </span><span><strong class="def-name">cceps</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">correct</var>)</code></span></dt>
 <dd><p>Return the complex cepstrum of the vector <var class="var">x</var>.
  If the optional argument <var class="var">correct</var> has the value 1, a correction
  method is applied.  The default is not to do this.
@@ -3371,9 +3837,9 @@ slower to compute.
 <h4 class="subsection">3.9.3 cplxreal</h4>
 <a class="index-entry-id" id="index-cplxreal"></a>
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-cplxreal-1"><span class="category-def">Function File: </span><code class="def-type">[<var class="var">zc</var>, <var class="var">zr</var>] =</code> <strong class="def-name">cplxreal</strong> <code class="def-code-arguments">(<var class="var">z</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-cplxreal-2"><span class="category-def">Function File: </span><code class="def-type">[<var class="var">zc</var>, <var class="var">zr</var>] =</code> <strong class="def-name">cplxreal</strong> <code class="def-code-arguments">(<var class="var">z</var>, <var class="var">tol</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-cplxreal-3"><span class="category-def">Function File: </span><code class="def-type">[<var class="var">zc</var>, <var class="var">zr</var>] =</code> <strong class="def-name">cplxreal</strong> <code class="def-code-arguments">(<var class="var">z</var>, <var class="var">tol</var>, <var class="var">dim</var>)</code></dt>
+<dt class="deftypefn def-line" id="index-cplxreal-1"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">zc</var>, <var class="var">zr</var>] =</code> <strong class="def-name">cplxreal</strong> <code class="def-code-arguments">(<var class="var">z</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-cplxreal-2"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">zc</var>, <var class="var">zr</var>] =</code> <strong class="def-name">cplxreal</strong> <code class="def-code-arguments">(<var class="var">z</var>, <var class="var">tol</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-cplxreal-3"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">zc</var>, <var class="var">zr</var>] =</code> <strong class="def-name">cplxreal</strong> <code class="def-code-arguments">(<var class="var">z</var>, <var class="var">tol</var>, <var class="var">dim</var>)</code></span></dt>
 <dd><p>Sort the numbers <var class="var">z</var> into complex-conjugate-valued and real-valued
  elements.  The positive imaginary complex numbers of each complex conjugate
  pair are returned in <var class="var">zc</var> and the real numbers are returned in <var class="var">zr</var>.
@@ -3399,10 +3865,10 @@ slower to compute.
 <h4 class="subsection">3.9.4 czt</h4>
 <a class="index-entry-id" id="index-czt"></a>
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-czt-1"><span class="category-def">Function File: </span><strong class="def-name">czt</strong> <code class="def-code-arguments">(<var class="var">x</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-czt-2"><span class="category-def">Function File: </span><strong class="def-name">czt</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">m</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-czt-3"><span class="category-def">Function File: </span><strong class="def-name">czt</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">m</var>, <var class="var">w</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-czt-4"><span class="category-def">Function File: </span><strong class="def-name">czt</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">m</var>, <var class="var">w</var>, <var class="var">a</var>)</code></dt>
+<dt class="deftypefn def-line" id="index-czt-1"><span class="category-def">Function File: </span><span><strong class="def-name">czt</strong> <code class="def-code-arguments">(<var class="var">x</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-czt-2"><span class="category-def">Function File: </span><span><strong class="def-name">czt</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">m</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-czt-3"><span class="category-def">Function File: </span><span><strong class="def-name">czt</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">m</var>, <var class="var">w</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-czt-4"><span class="category-def">Function File: </span><span><strong class="def-name">czt</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">m</var>, <var class="var">w</var>, <var class="var">a</var>)</code></span></dt>
 <dd><p>Chirp z-transform.  Compute the frequency response starting at a and
  stepping by w for m steps.  a is a point in the complex plane, and
  w is the ratio between points in each step (i.e., radius increases
@@ -3428,12 +3894,12 @@ slower to compute.
 <h4 class="subsection">3.9.5 dct</h4>
 <a class="index-entry-id" id="index-dct"></a>
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-dct-1"><span class="category-def">Function File: </span><strong class="def-name">dct</strong> <code class="def-code-arguments">(<var class="var">x</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-dct-2"><span class="category-def">Function File: </span><strong class="def-name">dct</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">n</var>)</code></dt>
+<dt class="deftypefn def-line" id="index-dct-1"><span class="category-def">Function File: </span><span><strong class="def-name">dct</strong> <code class="def-code-arguments">(<var class="var">x</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-dct-2"><span class="category-def">Function File: </span><span><strong class="def-name">dct</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">n</var>)</code></span></dt>
 <dd><p>Compute the discrete cosine transform of <var class="var">x</var>.  If <var class="var">n</var> is given,
  then <var class="var">x</var> is padded or trimmed to length <var class="var">n</var> before computing the
  transform.  If <var class="var">x</var> is a matrix, compute the transform along the columns
- of the the matrix.  The transform is faster if <var class="var">x</var> is real-valued and
+ of the matrix.  The transform is faster if <var class="var">x</var> is real-valued and
  has even length.
 </p>
 <p>The discrete cosine transform <var class="var">x</var> can be defined as follows:
@@ -3454,9 +3920,9 @@ slower to compute.
 <h4 class="subsection">3.9.6 dct2</h4>
 <a class="index-entry-id" id="index-dct2"></a>
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-dct2-1"><span class="category-def">Function File: </span><strong class="def-name">dct2</strong> <code class="def-code-arguments">(<var class="var">x</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-dct2-2"><span class="category-def">Function File: </span><strong class="def-name">dct2</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">m</var>, <var class="var">n</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-dct2-3"><span class="category-def">Function File: </span><strong class="def-name">dct2</strong> <code class="def-code-arguments">(<var class="var">x</var>, [<var class="var">m</var>, <var class="var">n</var>])</code></dt>
+<dt class="deftypefn def-line" id="index-dct2-1"><span class="category-def">Function File: </span><span><strong class="def-name">dct2</strong> <code class="def-code-arguments">(<var class="var">x</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-dct2-2"><span class="category-def">Function File: </span><span><strong class="def-name">dct2</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">m</var>, <var class="var">n</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-dct2-3"><span class="category-def">Function File: </span><span><strong class="def-name">dct2</strong> <code class="def-code-arguments">(<var class="var">x</var>, [<var class="var">m</var>, <var class="var">n</var>])</code></span></dt>
 <dd><p>Compute the 2-D discrete cosine transform of matrix <var class="var">x</var>.  If
 <var class="var">m</var> and <var class="var">n</var> are specified, the input is padded or trimmed
  to the desired size.
@@ -3468,7 +3934,7 @@ slower to compute.
 <h4 class="subsection">3.9.7 dctmtx</h4>
 <a class="index-entry-id" id="index-dctmtx"></a>
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-dctmtx-1"><span class="category-def">Function File: </span><strong class="def-name">dctmtx</strong> <code class="def-code-arguments">(<var class="var">n</var>)</code></dt>
+<dt class="deftypefn def-line" id="index-dctmtx-1"><span class="category-def">Function File: </span><span><strong class="def-name">dctmtx</strong> <code class="def-code-arguments">(<var class="var">n</var>)</code></span></dt>
 <dd><p>Return the DCT transformation matrix of size <var class="var">n</var>-by-<var class="var">n</var>.
 </p>
 <p>If A is an <var class="var">n</var>-by-<var class="var">n</var> matrix, then the following are true:
@@ -3491,7 +3957,7 @@ slower to compute.
 <h4 class="subsection">3.9.8 dftmtx</h4>
 <a class="index-entry-id" id="index-dftmtx"></a>
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-dftmtx-1"><span class="category-def">Function File: </span><code class="def-type"><var class="var">d</var> =</code> <strong class="def-name">dftmtx</strong> <code class="def-code-arguments">(<var class="var">n</var>)</code></dt>
+<dt class="deftypefn def-line" id="index-dftmtx-1"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">d</var> =</code> <strong class="def-name">dftmtx</strong> <code class="def-code-arguments">(<var class="var">n</var>)</code></span></dt>
 <dd><p>Compute the <var class="var">n</var>-by-<var class="var">n</var> Fourier transformation matrix.  This is
  the matrix <var class="var">d</var> such that the Fourier transform of a column vector of
  length <var class="var">n</var> is given by <code class="code">dftmtx(<var class="var">n</var>) * <var class="var">x</var></code> and the
@@ -3507,8 +3973,8 @@ slower to compute.
 <h4 class="subsection">3.9.9 digitrevorder</h4>
 <a class="index-entry-id" id="index-digitrevorder"></a>
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-digitrevorder-1"><span class="category-def">Function File: </span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">digitrevorder</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">r</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-digitrevorder-2"><span class="category-def">Function File: </span><code class="def-type">[<var class="var">y</var>, <var class="var">i</var>] =</code> <strong class="def-name">digitrevorder</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">r</var>)</code></dt>
+<dt class="deftypefn def-line" id="index-digitrevorder-1"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">digitrevorder</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">r</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-digitrevorder-2"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">y</var>, <var class="var">i</var>] =</code> <strong class="def-name">digitrevorder</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">r</var>)</code></span></dt>
 <dd><p>Reorder the elements of the vector <var class="var">x</var> in digit-reversed order.
  The elements of <var class="var">x</var> are converted to radix <var class="var">r</var> and reversed.
  The reordered indices of the elements of <var class="var">x</var> are returned in <var class="var">i</var>.
@@ -3520,8 +3986,8 @@ slower to compute.
 <h4 class="subsection">3.9.10 dst</h4>
 <a class="index-entry-id" id="index-dst"></a>
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-dst-1"><span class="category-def">Function File: </span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">dst</strong> <code class="def-code-arguments">(<var class="var">x</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-dst-2"><span class="category-def">Function File: </span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">dst</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">n</var>)</code></dt>
+<dt class="deftypefn def-line" id="index-dst-1"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">dst</strong> <code class="def-code-arguments">(<var class="var">x</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-dst-2"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">dst</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">n</var>)</code></span></dt>
 <dd><p>Computes the type I discrete sine transform of <var class="var">x</var>.  If <var class="var">n</var> is given,
  then <var class="var">x</var> is padded or trimmed to length <var class="var">n</var> before computing the transform.
  If <var class="var">x</var> is a matrix, compute the transform along the columns of the
@@ -3540,9 +4006,9 @@ slower to compute.
 <h4 class="subsection">3.9.11 dwt</h4>
 <a class="index-entry-id" id="index-dwt"></a>
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-dwt-1"><span class="category-def">Function File: </span><code class="def-type">[<var class="var">u</var>, <var class="var">v</var>] =</code> <strong class="def-name">dwt</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">wname</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-dwt-2"><span class="category-def">Function File: </span><code class="def-type">[<var class="var">u</var>, <var class="var">v</var>] =</code> <strong class="def-name">dwt</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">Hp</var>, <var class="var">Gp</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-dwt-3"><span class="category-def">Function File: </span><code class="def-type">[<var class="var">u</var>, <var class="var">v</var>] =</code> <strong class="def-name">dwt</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">Hp</var>, <var class="var">Gp</var>, &hellip;)</code></dt>
+<dt class="deftypefn def-line" id="index-dwt-1"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">u</var>, <var class="var">v</var>] =</code> <strong class="def-name">dwt</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">wname</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-dwt-2"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">u</var>, <var class="var">v</var>] =</code> <strong class="def-name">dwt</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">Hp</var>, <var class="var">Gp</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-dwt-3"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">u</var>, <var class="var">v</var>] =</code> <strong class="def-name">dwt</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">Hp</var>, <var class="var">Gp</var>, &hellip;)</code></span></dt>
 <dd><p>Discrete wavelet transform (1D).
 </p>
 <p><strong class="strong">Inputs</strong>
@@ -3575,9 +4041,9 @@ slower to compute.
 <h4 class="subsection">3.9.12 fht</h4>
 <a class="index-entry-id" id="index-fht"></a>
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-fht-1"><span class="category-def">Function File: </span><code class="def-type"><var class="var">m</var> =</code> <strong class="def-name">fht</strong> <code class="def-code-arguments">(<var class="var">d</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-fht-2"><span class="category-def">Function File: </span><code class="def-type"><var class="var">m</var> =</code> <strong class="def-name">fht</strong> <code class="def-code-arguments">(<var class="var">d</var>, <var class="var">n</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-fht-3"><span class="category-def">Function File: </span><code class="def-type"><var class="var">m</var> =</code> <strong class="def-name">fht</strong> <code class="def-code-arguments">(<var class="var">d</var>, <var class="var">n</var>, <var class="var">dim</var>)</code></dt>
+<dt class="deftypefn def-line" id="index-fht-1"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">m</var> =</code> <strong class="def-name">fht</strong> <code class="def-code-arguments">(<var class="var">d</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-fht-2"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">m</var> =</code> <strong class="def-name">fht</strong> <code class="def-code-arguments">(<var class="var">d</var>, <var class="var">n</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-fht-3"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">m</var> =</code> <strong class="def-name">fht</strong> <code class="def-code-arguments">(<var class="var">d</var>, <var class="var">n</var>, <var class="var">dim</var>)</code></span></dt>
 <dd><p>Calculate the Fast Hartley Transform of real input <var class="var">d</var>.  If <var class="var">d</var> is
  a matrix, the Hartley transform is calculated along the columns by default.
  The options <var class="var">n</var> and <var class="var">dim</var> are similar to the options of FFT
@@ -3601,9 +4067,9 @@ slower to compute.
 <h4 class="subsection">3.9.13 fwht</h4>
 <a class="index-entry-id" id="index-fwht"></a>
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-fwht-1"><span class="category-def">Function File: </span><strong class="def-name">fwht</strong> <code class="def-code-arguments">(<var class="var">x</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-fwht-2"><span class="category-def">Function File: </span><strong class="def-name">fwht</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">n</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-fwht-3"><span class="category-def">Function File: </span><strong class="def-name">fwht</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">n</var>, <var class="var">order</var>)</code></dt>
+<dt class="deftypefn def-line" id="index-fwht-1"><span class="category-def">Function File: </span><span><strong class="def-name">fwht</strong> <code class="def-code-arguments">(<var class="var">x</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-fwht-2"><span class="category-def">Function File: </span><span><strong class="def-name">fwht</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">n</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-fwht-3"><span class="category-def">Function File: </span><span><strong class="def-name">fwht</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">n</var>, <var class="var">order</var>)</code></span></dt>
 <dd><p>Compute the Walsh-Hadamard transform of <var class="var">x</var> using the Fast
  Walsh-Hadamard Transform (FWHT) algorithm.  If the input is a matrix,
  the FWHT is calculated along the columns of <var class="var">x</var>.
@@ -3637,7 +4103,7 @@ slower to compute.
 <h4 class="subsection">3.9.14 hilbert</h4>
 <a class="index-entry-id" id="index-hilbert"></a>
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-hilbert-1"><span class="category-def">Function File: </span><code class="def-type"><var class="var">h</var> =</code> <strong class="def-name">hilbert</strong> <code class="def-code-arguments">(<var class="var">f</var>, <var class="var">N</var>, <var class="var">dim</var>)</code></dt>
+<dt class="deftypefn def-line" id="index-hilbert-1"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">h</var> =</code> <strong class="def-name">hilbert</strong> <code class="def-code-arguments">(<var class="var">f</var>, <var class="var">N</var>, <var class="var">dim</var>)</code></span></dt>
 <dd><p>Analytic extension of real valued signal.
 </p>
 <p><code class="code"><var class="var">h</var> = hilbert (<var class="var">f</var>)</code> computes the extension of the real
@@ -3660,12 +4126,12 @@ slower to compute.
 <h4 class="subsection">3.9.15 idct</h4>
 <a class="index-entry-id" id="index-idct"></a>
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-idct-1"><span class="category-def">Function File: </span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">idct</strong> <code class="def-code-arguments">(<var class="var">x</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-idct-2"><span class="category-def">Function File: </span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">idct</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">n</var>)</code></dt>
+<dt class="deftypefn def-line" id="index-idct-1"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">idct</strong> <code class="def-code-arguments">(<var class="var">x</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-idct-2"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">idct</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">n</var>)</code></span></dt>
 <dd><p>Compute the inverse discrete cosine transform of <var class="var">x</var>.  If <var class="var">n</var> is
  given, then <var class="var">x</var> is padded or trimmed to length <var class="var">n</var> before computing
  the transform.  If <var class="var">x</var> is a matrix, compute the transform along the
- columns of the the matrix.  The transform is faster if <var class="var">x</var> is
+ columns of the matrix.  The transform is faster if <var class="var">x</var> is
  real-valued and even length.
 </p>
 <p>The inverse discrete cosine transform <var class="var">x</var> can be defined as follows:
@@ -3684,9 +4150,9 @@ slower to compute.
 <h4 class="subsection">3.9.16 idct2</h4>
 <a class="index-entry-id" id="index-idct2"></a>
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-idct2-1"><span class="category-def">Function File: </span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">idct2</strong> <code class="def-code-arguments">(<var class="var">x</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-idct2-2"><span class="category-def">Function File: </span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">idct2</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">m</var>, <var class="var">n</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-idct2-3"><span class="category-def">Function File: </span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">idct2</strong> <code class="def-code-arguments">(<var class="var">x</var>, [<var class="var">m</var>, <var class="var">n</var>])</code></dt>
+<dt class="deftypefn def-line" id="index-idct2-1"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">idct2</strong> <code class="def-code-arguments">(<var class="var">x</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-idct2-2"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">idct2</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">m</var>, <var class="var">n</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-idct2-3"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">idct2</strong> <code class="def-code-arguments">(<var class="var">x</var>, [<var class="var">m</var>, <var class="var">n</var>])</code></span></dt>
 <dd><p>Compute the inverse 2-D discrete cosine transform of matrix <var class="var">x</var>.
  If <var class="var">m</var> and <var class="var">n</var> are specified, the input is either padded or truncated
  to have <var class="var">m</var> rows and <var class="var">n</var> columns.
@@ -3696,12 +4162,12 @@ slower to compute.
 <h4 class="subsection">3.9.17 idst</h4>
 <a class="index-entry-id" id="index-idst"></a>
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-idst-1"><span class="category-def">Function File: </span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">idst</strong> <code class="def-code-arguments">(<var class="var">x</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-idst-2"><span class="category-def">Function File: </span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">idst</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">n</var>)</code></dt>
+<dt class="deftypefn def-line" id="index-idst-1"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">idst</strong> <code class="def-code-arguments">(<var class="var">x</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-idst-2"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">idst</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">n</var>)</code></span></dt>
 <dd><p>Computes the inverse type I discrete sine transform of <var class="var">y</var>.  If <var class="var">n</var> is
  given, then <var class="var">y</var> is padded or trimmed to length <var class="var">n</var> before computing
  the transform.  If <var class="var">y</var> is a matrix, compute the transform along the
- columns of the the matrix.
+ columns of the matrix.
 </p>
 <p><strong class="strong">See also:</strong> dst.
 </p></dd></dl>
@@ -3710,7 +4176,7 @@ slower to compute.
 <h4 class="subsection">3.9.18 ifht</h4>
 <a class="index-entry-id" id="index-ifht"></a>
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-ifht-1"><span class="category-def">Function File: </span><code class="def-type"><var class="var">m</var> =</code> <strong class="def-name">ifht</strong> <code class="def-code-arguments">(<var class="var">d</var>, <var class="var">n</var>, <var class="var">dim</var>)</code></dt>
+<dt class="deftypefn def-line" id="index-ifht-1"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">m</var> =</code> <strong class="def-name">ifht</strong> <code class="def-code-arguments">(<var class="var">d</var>, <var class="var">n</var>, <var class="var">dim</var>)</code></span></dt>
 <dd><p>Calculate the inverse Fast Hartley Transform of real input <var class="var">d</var>.  If
 <var class="var">d</var> is a matrix, the inverse Hartley transform is calculated along the
  columns by default.  The options <var class="var">n</var> and <var class="var">dim</var> are similar to the
@@ -3734,9 +4200,9 @@ slower to compute.
 <h4 class="subsection">3.9.19 ifwht</h4>
 <a class="index-entry-id" id="index-ifwht"></a>
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-ifwht-1"><span class="category-def">Function File: </span><strong class="def-name">ifwht</strong> <code class="def-code-arguments">(<var class="var">x</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-ifwht-2"><span class="category-def">Function File: </span><strong class="def-name">ifwht</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">n</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-ifwht-3"><span class="category-def">Function File: </span><strong class="def-name">ifwht</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">n</var>, <var class="var">order</var>)</code></dt>
+<dt class="deftypefn def-line" id="index-ifwht-1"><span class="category-def">Function File: </span><span><strong class="def-name">ifwht</strong> <code class="def-code-arguments">(<var class="var">x</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-ifwht-2"><span class="category-def">Function File: </span><span><strong class="def-name">ifwht</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">n</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-ifwht-3"><span class="category-def">Function File: </span><span><strong class="def-name">ifwht</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">n</var>, <var class="var">order</var>)</code></span></dt>
 <dd><p>Compute the inverse Walsh-Hadamard transform of <var class="var">x</var> using the
  Fast Walsh-Hadamard Transform (FWHT) algorithm.  If the input is a
  matrix, the inverse FWHT is calculated along the columns of <var class="var">x</var>.
@@ -3770,7 +4236,7 @@ slower to compute.
 <h4 class="subsection">3.9.20 rceps</h4>
 <a class="index-entry-id" id="index-rceps"></a>
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-rceps-1"><span class="category-def">Function File: </span><code class="def-type">[<var class="var">y</var>, <var class="var">ym</var>] =</code> <strong class="def-name">rceps</strong> <code class="def-code-arguments">(<var class="var">x</var>)</code></dt>
+<dt class="deftypefn def-line" id="index-rceps-1"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">y</var>, <var class="var">ym</var>] =</code> <strong class="def-name">rceps</strong> <code class="def-code-arguments">(<var class="var">x</var>)</code></span></dt>
 <dd><p>Return the cepstrum of the signal <var class="var">x</var>.
 </p>
 <p>If <var class="var">x</var> is a matrix, return the cepstrum of each column.
@@ -3801,12 +4267,12 @@ slower to compute.
 <h4 class="subsection">3.10.1 __power</h4>
 <a class="index-entry-id" id="index-_005f_005fpower"></a>
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-_005f_005fpower-1"><span class="category-def">Function File: </span><code class="def-type">[<var class="var">P</var>, <var class="var">w</var>] =</code> <strong class="def-name">__power</strong> <code class="def-code-arguments">(<var class="var">b</var>, <var class="var">a</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-_005f_005fpower-2"><span class="category-def">Function File: </span><code class="def-type">[&hellip;] =</code> <strong class="def-name">__power</strong> <code class="def-code-arguments">(<var class="var">b</var>, <var class="var">a</var>, <var class="var">nfft</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-_005f_005fpower-3"><span class="category-def">Function File: </span><code class="def-type">[&hellip;] =</code> <strong class="def-name">__power</strong> <code class="def-code-arguments">(<var class="var">b</var>, <var class="var">a</var>, <var class="var">nfft</var>, <var class="var">Fs</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-_005f_005fpower-4"><span class="category-def">Function File: </span><code class="def-type">[&hellip;] =</code> <strong class="def-name">__power</strong> <code class="def-code-arguments">(<var class="var">b</var>, <var class="var">a</var>, <var class="var">nfft</var>, <var class="var">Fs</var>, <var class="var">range</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-_005f_005fpower-5"><span class="category-def">Function File: </span><code class="def-type">[&hellip;] =</code> <strong class="def-name">__power</strong> <code class="def-code-arguments">(<var class="var">b</var>, <var class="var">a</var>, <var class="var">nfft</var>, <var class="var">Fs</var>, <var class="var">range</var>, <var class="var">units</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-_005f_005fpower-6"><span class="category-def">Function File: </span><strong class="def-name">__power</strong> <code class="def-code-arguments">(&hellip;)</code></dt>
+<dt class="deftypefn def-line" id="index-_005f_005fpower-1"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">P</var>, <var class="var">w</var>] =</code> <strong class="def-name">__power</strong> <code class="def-code-arguments">(<var class="var">b</var>, <var class="var">a</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-_005f_005fpower-2"><span class="category-def">Function File: </span><span><code class="def-type">[&hellip;] =</code> <strong class="def-name">__power</strong> <code class="def-code-arguments">(<var class="var">b</var>, <var class="var">a</var>, <var class="var">nfft</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-_005f_005fpower-3"><span class="category-def">Function File: </span><span><code class="def-type">[&hellip;] =</code> <strong class="def-name">__power</strong> <code class="def-code-arguments">(<var class="var">b</var>, <var class="var">a</var>, <var class="var">nfft</var>, <var class="var">Fs</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-_005f_005fpower-4"><span class="category-def">Function File: </span><span><code class="def-type">[&hellip;] =</code> <strong class="def-name">__power</strong> <code class="def-code-arguments">(<var class="var">b</var>, <var class="var">a</var>, <var class="var">nfft</var>, <var class="var">Fs</var>, <var class="var">range</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-_005f_005fpower-5"><span class="category-def">Function File: </span><span><code class="def-type">[&hellip;] =</code> <strong class="def-name">__power</strong> <code class="def-code-arguments">(<var class="var">b</var>, <var class="var">a</var>, <var class="var">nfft</var>, <var class="var">Fs</var>, <var class="var">range</var>, <var class="var">units</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-_005f_005fpower-6"><span class="category-def">Function File: </span><span><strong class="def-name">__power</strong> <code class="def-code-arguments">(&hellip;)</code></span></dt>
 <dd>
 <p>Plot the power spectrum of the given ARMA model.
 </p>
@@ -3827,13 +4293,13 @@ slower to compute.
 <h4 class="subsection">3.10.2 ar_psd</h4>
 <a class="index-entry-id" id="index-ar_005fpsd"></a>
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-ar_005fpsd-1"><span class="category-def">Function File: </span><strong class="def-name">ar_psd</strong> <code class="def-code-arguments">(<var class="var">a</var>, <var class="var">v</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-ar_005fpsd-2"><span class="category-def">Function File: </span><strong class="def-name">ar_psd</strong> <code class="def-code-arguments">(<var class="var">a</var>, <var class="var">v</var>, <var class="var">freq</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-ar_005fpsd-3"><span class="category-def">Function File: </span><strong class="def-name">ar_psd</strong> <code class="def-code-arguments">(<var class="var">a</var>, <var class="var">v</var>, <var class="var">freq</var>, <var class="var">Fs</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-ar_005fpsd-4"><span class="category-def">Function File: </span><strong class="def-name">ar_psd</strong> <code class="def-code-arguments">(&hellip;, <var class="var">range</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-ar_005fpsd-5"><span class="category-def">Function File: </span><strong class="def-name">ar_psd</strong> <code class="def-code-arguments">(&hellip;, <var class="var">method</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-ar_005fpsd-6"><span class="category-def">Function File: </span><strong class="def-name">ar_psd</strong> <code class="def-code-arguments">(&hellip;, <var class="var">plottype</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-ar_005fpsd-7"><span class="category-def">Function File: </span><code class="def-type">[<var class="var">psd</var>, <var class="var">f_out</var>] =</code> <strong class="def-name">ar_psd</strong> <code class="def-code-arguments">(&hellip;)</code></dt>
+<dt class="deftypefn def-line" id="index-ar_005fpsd-1"><span class="category-def">Function File: </span><span><strong class="def-name">ar_psd</strong> <code class="def-code-arguments">(<var class="var">a</var>, <var class="var">v</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-ar_005fpsd-2"><span class="category-def">Function File: </span><span><strong class="def-name">ar_psd</strong> <code class="def-code-arguments">(<var class="var">a</var>, <var class="var">v</var>, <var class="var">freq</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-ar_005fpsd-3"><span class="category-def">Function File: </span><span><strong class="def-name">ar_psd</strong> <code class="def-code-arguments">(<var class="var">a</var>, <var class="var">v</var>, <var class="var">freq</var>, <var class="var">Fs</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-ar_005fpsd-4"><span class="category-def">Function File: </span><span><strong class="def-name">ar_psd</strong> <code class="def-code-arguments">(&hellip;, <var class="var">range</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-ar_005fpsd-5"><span class="category-def">Function File: </span><span><strong class="def-name">ar_psd</strong> <code class="def-code-arguments">(&hellip;, <var class="var">method</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-ar_005fpsd-6"><span class="category-def">Function File: </span><span><strong class="def-name">ar_psd</strong> <code class="def-code-arguments">(&hellip;, <var class="var">plottype</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-ar_005fpsd-7"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">psd</var>, <var class="var">f_out</var>] =</code> <strong class="def-name">ar_psd</strong> <code class="def-code-arguments">(&hellip;)</code></span></dt>
 <dd>
 <p>Calculate the power spectrum of the autoregressive model
 </p>
@@ -3933,7 +4399,7 @@ slower to compute.
 <h4 class="subsection">3.10.3 cohere</h4>
 <a class="index-entry-id" id="index-cohere"></a>
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-_003d"><span class="category-def">Function File: </span><code class="def-type">[<var class="var">Pxx</var>, <var class="var">freq</var>]</code> <strong class="def-name">=</strong> <code class="def-code-arguments">cohere(<var class="var">x</var>,<var class="var">y</var>,<var class="var">Nfft</var>,<var class="var">Fs</var>,<var class="var">window</var>,<var class="var">overlap</var>,<var class="var">range</var>,<var class="var">plot_type</var>,<var class="var">detrend</var>)</code></dt>
+<dt class="deftypefn def-line" id="index-_003d"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">Pxx</var>, <var class="var">freq</var>]</code> <strong class="def-name">=</strong> <code class="def-code-arguments">cohere(<var class="var">x</var>,<var class="var">y</var>,<var class="var">Nfft</var>,<var class="var">Fs</var>,<var class="var">window</var>,<var class="var">overlap</var>,<var class="var">range</var>,<var class="var">plot_type</var>,<var class="var">detrend</var>)</code></span></dt>
 <dd><p>Estimate (mean square) coherence of signals &quot;x&quot; and &quot;y&quot;.
 </p>
 <p>Use the Welch (1967) periodogram/FFT method.
@@ -3948,13 +4414,13 @@ slower to compute.
 <h4 class="subsection">3.10.4 cpsd</h4>
 <a class="index-entry-id" id="index-cpsd"></a>
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-cpsd-1"><span class="category-def">Function File: </span><code class="def-type">[<var class="var">Pxx</var>, <var class="var">freq</var>] =</code> <strong class="def-name">cpsd</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">y</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-cpsd-2"><span class="category-def">Function File: </span><code class="def-type">[&hellip;] =</code> <strong class="def-name">cpsd</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">y</var>, <var class="var">window</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-cpsd-3"><span class="category-def">Function File: </span><code class="def-type">[&hellip;] =</code> <strong class="def-name">cpsd</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">y</var>, <var class="var">window</var>, <var class="var">overlap</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-cpsd-4"><span class="category-def">Function File: </span><code class="def-type">[&hellip;] =</code> <strong class="def-name">cpsd</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">y</var>, <var class="var">window</var>, <var class="var">overlap</var>, <var class="var">Nfft</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-cpsd-5"><span class="category-def">Function File: </span><code class="def-type">[&hellip;] =</code> <strong class="def-name">cpsd</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">y</var>, <var class="var">window</var>, <var class="var">overlap</var>, <var class="var">Nfft</var>, <var class="var">Fs</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-cpsd-6"><span class="category-def">Function File: </span><code class="def-type">[&hellip;] =</code> <strong class="def-name">cpsd</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">y</var>, <var class="var">window</var>, <var class="var">overlap</var>, <var class="var">Nfft</var>, <var class="var">Fs</var>, <var class="var">range</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-cpsd-7"><span class="category-def">Function File: </span><strong class="def-name">cpsd</strong> <code class="def-code-arguments">(&hellip;)</code></dt>
+<dt class="deftypefn def-line" id="index-cpsd-1"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">Pxx</var>, <var class="var">freq</var>] =</code> <strong class="def-name">cpsd</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">y</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-cpsd-2"><span class="category-def">Function File: </span><span><code class="def-type">[&hellip;] =</code> <strong class="def-name">cpsd</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">y</var>, <var class="var">window</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-cpsd-3"><span class="category-def">Function File: </span><span><code class="def-type">[&hellip;] =</code> <strong class="def-name">cpsd</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">y</var>, <var class="var">window</var>, <var class="var">overlap</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-cpsd-4"><span class="category-def">Function File: </span><span><code class="def-type">[&hellip;] =</code> <strong class="def-name">cpsd</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">y</var>, <var class="var">window</var>, <var class="var">overlap</var>, <var class="var">Nfft</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-cpsd-5"><span class="category-def">Function File: </span><span><code class="def-type">[&hellip;] =</code> <strong class="def-name">cpsd</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">y</var>, <var class="var">window</var>, <var class="var">overlap</var>, <var class="var">Nfft</var>, <var class="var">Fs</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-cpsd-6"><span class="category-def">Function File: </span><span><code class="def-type">[&hellip;] =</code> <strong class="def-name">cpsd</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">y</var>, <var class="var">window</var>, <var class="var">overlap</var>, <var class="var">Nfft</var>, <var class="var">Fs</var>, <var class="var">range</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-cpsd-7"><span class="category-def">Function File: </span><span><strong class="def-name">cpsd</strong> <code class="def-code-arguments">(&hellip;)</code></span></dt>
 <dd>
 <p>Estimate cross power spectrum of data <var class="var">x</var> and <var class="var">y</var> by the Welch (1967)
  periodogram/FFT method.
@@ -3966,7 +4432,7 @@ slower to compute.
 <h4 class="subsection">3.10.5 csd</h4>
 <a class="index-entry-id" id="index-csd"></a>
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-_003d-1"><span class="category-def">Function File: </span><code class="def-type">[<var class="var">Pxx</var>,<var class="var">freq</var>]</code> <strong class="def-name">=</strong> <code class="def-code-arguments">csd(<var class="var">x</var>, <var class="var">y</var>, <var class="var">Nfft</var>, <var class="var">Fs</var>, <var class="var">window</var>, <var class="var">overlap</var>, <var class="var">range</var>, <var class="var">plot_type</var>, <var class="var">detrend</var>)</code></dt>
+<dt class="deftypefn def-line" id="index-_003d-1"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">Pxx</var>,<var class="var">freq</var>]</code> <strong class="def-name">=</strong> <code class="def-code-arguments">csd(<var class="var">x</var>, <var class="var">y</var>, <var class="var">Nfft</var>, <var class="var">Fs</var>, <var class="var">window</var>, <var class="var">overlap</var>, <var class="var">range</var>, <var class="var">plot_type</var>, <var class="var">detrend</var>)</code></span></dt>
 <dd><p>Estimate cross power spectrum of data &quot;x&quot; and &quot;y&quot; by the Welch (1967)
  periodogram/FFT method.
 </p>
@@ -3976,11 +4442,55 @@ slower to compute.
  &mdash; especially hint (7) for Matlab R11 defaults.
 </p></dd></dl>
 </div>
+<div class="subsection-level-extent" id="db">
+<h4 class="subsection">3.10.6 db</h4>
+<a class="index-entry-id" id="index-db"></a>
+<dl class="first-deftypefn def-block">
+<dt class="deftypefn def-line" id="index-db-1"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">dbout</var> =</code> <strong class="def-name">db</strong> <code class="def-code-arguments">(<var class="var">x</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-db-2"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">dbout</var> =</code> <strong class="def-name">db</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">signaltype</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-db-3"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">dbout</var> =</code> <strong class="def-name">db</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">R</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-db-4"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">dbout</var> =</code> <strong class="def-name">db</strong> <code class="def-code-arguments">(<var class="var">x</var>, &quot;voltage&quot;, <var class="var">R</var>)</code></span></dt>
+<dd>
+<p>Convert signal values to decibels (dB).
+</p>
+<p>If <var class="var">x</var> represents voltage (default):
+</p><div class="display">
+<pre class="display-preformatted"> dbout = 10 * log10 (abs(<var class="var">x</var>).^2 / <var class="var">R</var>)
+</pre></div>
+<p>where <var class="var">R</var> is the resistance in ohms (default = 1).
+</p>
+<p>If <var class="var">x</var> represents power:
+</p><div class="display">
+<pre class="display-preformatted"> dbout = 10 * log10 (<var class="var">x</var>)
+</pre></div>
+<p>Usage forms:
+</p>
+<dl class="table">
+<dt><code class="code">db(<var class="var">x</var>)</code></dt>
+<dd><p>Voltage conversion with <var class="var">R</var> = 1.
+</p>
+</dd>
+<dt><code class="code">db(<var class="var">x</var>, <var class="var">signaltype</var>)</code></dt>
+<dd><p><var class="var">signaltype</var> is <code class="code">&quot;voltage&quot;</code> (default) or <code class="code">&quot;power&quot;</code>.
+</p>
+</dd>
+<dt><code class="code">db(<var class="var">x</var>, <var class="var">R</var>)</code></dt>
+<dd><p>Voltage conversion with resistance <var class="var">R</var>.  <var class="var">R</var> can be a scalar,
+ vector, matrix, or N-D array with a size compatible with <var class="var">x</var>.
+</p>
+</dd>
+<dt><code class="code">db(<var class="var">x</var>, &quot;voltage&quot;, <var class="var">R</var>)</code></dt>
+<dd><p>Same as <code class="code">db(<var class="var">x</var>, <var class="var">R</var>)</code>.
+</p></dd>
+</dl>
+<p><strong class="strong">See also:</strong> pow2db, db2pow.
+</p></dd></dl>
+</div>
 <div class="subsection-level-extent" id="db2pow">
-<h4 class="subsection">3.10.6 db2pow</h4>
+<h4 class="subsection">3.10.7 db2pow</h4>
 <a class="index-entry-id" id="index-db2pow"></a>
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-db2pow-1"><span class="category-def">Function File: </span><strong class="def-name">db2pow</strong> <code class="def-code-arguments">(<var class="var">x</var>)</code></dt>
+<dt class="deftypefn def-line" id="index-db2pow-1"><span class="category-def">Function File: </span><span><strong class="def-name">db2pow</strong> <code class="def-code-arguments">(<var class="var">x</var>)</code></span></dt>
 <dd><p>Convert decibels (dB) to power.
 </p>
 <p>The power of <var class="var">x</var> is defined as
@@ -3999,16 +4509,16 @@ slower to compute.
 </p></dd></dl>
 </div>
 <div class="subsection-level-extent" id="mscohere">
-<h4 class="subsection">3.10.7 mscohere</h4>
+<h4 class="subsection">3.10.8 mscohere</h4>
 <a class="index-entry-id" id="index-mscohere"></a>
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-mscohere-1"><span class="category-def">Function File: </span><code class="def-type">[<var class="var">Pxx</var>, <var class="var">freq</var>] =</code> <strong class="def-name">mscohere</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">y</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-mscohere-2"><span class="category-def">Function File: </span><code class="def-type">[&hellip;] =</code> <strong class="def-name">mscohere</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">y</var>, <var class="var">window</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-mscohere-3"><span class="category-def">Function File: </span><code class="def-type">[&hellip;] =</code> <strong class="def-name">mscohere</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">y</var>, <var class="var">window</var>, <var class="var">overlap</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-mscohere-4"><span class="category-def">Function File: </span><code class="def-type">[&hellip;] =</code> <strong class="def-name">mscohere</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">y</var>, <var class="var">window</var>, <var class="var">overlap</var>, <var class="var">Nfft</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-mscohere-5"><span class="category-def">Function File: </span><code class="def-type">[&hellip;] =</code> <strong class="def-name">mscohere</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">y</var>, <var class="var">window</var>, <var class="var">overlap</var>, <var class="var">Nfft</var>, <var class="var">Fs</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-mscohere-6"><span class="category-def">Function File: </span><code class="def-type">[&hellip;] =</code> <strong class="def-name">mscohere</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">y</var>, <var class="var">window</var>, <var class="var">overlap</var>, <var class="var">Nfft</var>, <var class="var">Fs</var>, <var class="var">range</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-mscohere-7"><span class="category-def">Function File: </span><strong class="def-name">mscohere</strong> <code class="def-code-arguments">(&hellip;)</code></dt>
+<dt class="deftypefn def-line" id="index-mscohere-1"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">Pxx</var>, <var class="var">freq</var>] =</code> <strong class="def-name">mscohere</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">y</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-mscohere-2"><span class="category-def">Function File: </span><span><code class="def-type">[&hellip;] =</code> <strong class="def-name">mscohere</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">y</var>, <var class="var">window</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-mscohere-3"><span class="category-def">Function File: </span><span><code class="def-type">[&hellip;] =</code> <strong class="def-name">mscohere</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">y</var>, <var class="var">window</var>, <var class="var">overlap</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-mscohere-4"><span class="category-def">Function File: </span><span><code class="def-type">[&hellip;] =</code> <strong class="def-name">mscohere</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">y</var>, <var class="var">window</var>, <var class="var">overlap</var>, <var class="var">Nfft</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-mscohere-5"><span class="category-def">Function File: </span><span><code class="def-type">[&hellip;] =</code> <strong class="def-name">mscohere</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">y</var>, <var class="var">window</var>, <var class="var">overlap</var>, <var class="var">Nfft</var>, <var class="var">Fs</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-mscohere-6"><span class="category-def">Function File: </span><span><code class="def-type">[&hellip;] =</code> <strong class="def-name">mscohere</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">y</var>, <var class="var">window</var>, <var class="var">overlap</var>, <var class="var">Nfft</var>, <var class="var">Fs</var>, <var class="var">range</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-mscohere-7"><span class="category-def">Function File: </span><span><strong class="def-name">mscohere</strong> <code class="def-code-arguments">(&hellip;)</code></span></dt>
 <dd>
 <p>Estimate (mean square) coherence of signals <var class="var">x</var> and <var class="var">y</var>.
  Use the Welch (1967) periodogram/FFT method.
@@ -4017,10 +4527,10 @@ slower to compute.
 </p></dd></dl>
 </div>
 <div class="subsection-level-extent" id="pburg">
-<h4 class="subsection">3.10.8 pburg</h4>
+<h4 class="subsection">3.10.9 pburg</h4>
 <a class="index-entry-id" id="index-pburg"></a>
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-pburg_0028x_002c"><span class="category-def">Function File: </span><code class="def-type">[<var class="var">psd</var>,<var class="var">f_out</var>] =</code> <strong class="def-name">pburg(<var class="var">x</var>,</strong> <code class="def-code-arguments"><var class="var">poles</var>, <var class="var">freq</var>, <var class="var">Fs</var>, <var class="var">range</var>, <var class="var">method</var>, <var class="var">plot_type</var>, <var class="var">criterion</var>)</code></dt>
+<dt class="deftypefn def-line" id="index-pburg_0028x_002c"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">psd</var>,<var class="var">f_out</var>] =</code> <strong class="def-name">pburg(<var class="var">x</var>,</strong> <code class="def-code-arguments"><var class="var">poles</var>, <var class="var">freq</var>, <var class="var">Fs</var>, <var class="var">range</var>, <var class="var">method</var>, <var class="var">plot_type</var>, <var class="var">criterion</var>)</code></span></dt>
 <dd><p>Calculate Burg maximum-entropy power spectral density.
 </p>
 <p>The functions &quot;arburg&quot; and &quot;ar_psd&quot; do all the work.
@@ -4132,10 +4642,10 @@ slower to compute.
 </p></dd></dl>
 </div>
 <div class="subsection-level-extent" id="pow2db">
-<h4 class="subsection">3.10.9 pow2db</h4>
+<h4 class="subsection">3.10.10 pow2db</h4>
 <a class="index-entry-id" id="index-pow2db"></a>
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-pow2db-1"><span class="category-def">Function File: </span><strong class="def-name">pow2db</strong> <code class="def-code-arguments">(<var class="var">x</var>)</code></dt>
+<dt class="deftypefn def-line" id="index-pow2db-1"><span class="category-def">Function File: </span><span><strong class="def-name">pow2db</strong> <code class="def-code-arguments">(<var class="var">x</var>)</code></span></dt>
 <dd><p>Convert power to decibels (dB).
 </p>
 <p>The decibel value of <var class="var">x</var> is defined as
@@ -4148,16 +4658,16 @@ slower to compute.
 </p>
 <div class="example">
 <div class="group"><pre class="example-preformatted"> pow2db ([0, 10, 100])
-&rArr; -Inf 10 20
+&rArr; -Inf 10.0000 20.0000
 </pre></div></div>
 <p><strong class="strong">See also:</strong> db2pow.
 </p></dd></dl>
 </div>
 <div class="subsection-level-extent" id="pwelch">
-<h4 class="subsection">3.10.10 pwelch</h4>
+<h4 class="subsection">3.10.11 pwelch</h4>
 <a class="index-entry-id" id="index-pwelch"></a>
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-pwelch_0028x_002c"><span class="category-def">Function File: </span><code class="def-type">[<var class="var">spectra</var>,<var class="var">freq</var>] =</code> <strong class="def-name">pwelch(<var class="var">x</var>,</strong> <code class="def-code-arguments"><var class="var">window</var>, <var class="var">overlap</var>, <var class="var">Nfft</var>, <var class="var">Fs</var>, <var class="var">range</var>, <var class="var">plot_type</var>, <var class="var">detrend</var>, <var class="var">sloppy</var>)</code></dt>
+<dt class="deftypefn def-line" id="index-pwelch_0028x_002c"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">spectra</var>,<var class="var">freq</var>] =</code> <strong class="def-name">pwelch(<var class="var">x</var>,</strong> <code class="def-code-arguments"><var class="var">window</var>, <var class="var">overlap</var>, <var class="var">Nfft</var>, <var class="var">Fs</var>, <var class="var">range</var>, <var class="var">plot_type</var>, <var class="var">detrend</var>, <var class="var">sloppy</var>)</code></span></dt>
 <dd><p>Estimate power spectral density of data &quot;x&quot; by the Welch (1967) periodogram/FFT method.
 </p>
 <p>All arguments except &quot;x&quot; are optional.
@@ -4473,10 +4983,10 @@ slower to compute.
 </p></dd></dl>
 </div>
 <div class="subsection-level-extent" id="pyulear">
-<h4 class="subsection">3.10.11 pyulear</h4>
+<h4 class="subsection">3.10.12 pyulear</h4>
 <a class="index-entry-id" id="index-pyulear"></a>
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-pyulear_0028x_002cpoles_002cfreq_002cFs_002crange_002cmethod_002cplot_005ftype_0029"><span class="category-def">Function File: </span><code class="def-type">[psd,f_out] =</code> <strong class="def-name">pyulear(x,poles,freq,Fs,range,method,plot_type)</strong></dt>
+<dt class="deftypefn def-line" id="index-pyulear_0028x_002cpoles_002cfreq_002cFs_002crange_002cmethod_002cplot_005ftype_0029"><span class="category-def">Function File: </span><span><code class="def-type">[psd,f_out] =</code> <strong class="def-name">pyulear(x,poles,freq,Fs,range,method,plot_type)</strong></span></dt>
 <dd><p>Calculates a Yule-Walker autoregressive (all-pole) model of the data &quot;x&quot;
  and computes the power spectrum of the model.
 </p>
@@ -4575,10 +5085,10 @@ slower to compute.
 </p></dd></dl>
 </div>
 <div class="subsection-level-extent" id="tfe">
-<h4 class="subsection">3.10.12 tfe</h4>
+<h4 class="subsection">3.10.13 tfe</h4>
 <a class="index-entry-id" id="index-tfe"></a>
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-tfe_0028x_002cy_002cNfft_002cFs_002cwindow_002coverlap_002crange_002cplot_005ftype_002cdetrend_0029"><span class="category-def">Function File: </span><code class="def-type">[Pxx,freq] =</code> <strong class="def-name">tfe(x,y,Nfft,Fs,window,overlap,range,plot_type,detrend)</strong></dt>
+<dt class="deftypefn def-line" id="index-tfe_0028x_002cy_002cNfft_002cFs_002cwindow_002coverlap_002crange_002cplot_005ftype_002cdetrend_0029"><span class="category-def">Function File: </span><span><code class="def-type">[Pxx,freq] =</code> <strong class="def-name">tfe(x,y,Nfft,Fs,window,overlap,range,plot_type,detrend)</strong></span></dt>
 <dd><p>Estimate transfer function of system with input &quot;x&quot; and output &quot;y&quot;.
 </p>
 <p>Use the Welch (1967) periodogram/FFT method.
@@ -4590,16 +5100,16 @@ slower to compute.
 </p></dd></dl>
 </div>
 <div class="subsection-level-extent" id="tfestimate">
-<h4 class="subsection">3.10.13 tfestimate</h4>
+<h4 class="subsection">3.10.14 tfestimate</h4>
 <a class="index-entry-id" id="index-tfestimate"></a>
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-tfestimate-1"><span class="category-def">Function File: </span><strong class="def-name">tfestimate</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">y</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-tfestimate-2"><span class="category-def">Function File: </span><strong class="def-name">tfestimate</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">y</var>, <var class="var">window</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-tfestimate-3"><span class="category-def">Function File: </span><strong class="def-name">tfestimate</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">y</var>, <var class="var">window</var>, <var class="var">overlap</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-tfestimate-4"><span class="category-def">Function File: </span><strong class="def-name">tfestimate</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">y</var>, <var class="var">window</var>, <var class="var">overlap</var>, <var class="var">Nfft</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-tfestimate-5"><span class="category-def">Function File: </span><strong class="def-name">tfestimate</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">y</var>, <var class="var">window</var>, <var class="var">overlap</var>, <var class="var">Nfft</var>, <var class="var">Fs</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-tfestimate-6"><span class="category-def">Function File: </span><strong class="def-name">tfestimate</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">y</var>, <var class="var">window</var>, <var class="var">overlap</var>, <var class="var">Nfft</var>, <var class="var">Fs</var>, <var class="var">range</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-tfestimate-7"><span class="category-def">Function File: </span><code class="def-type">[<var class="var">Pxx</var>, <var class="var">freq</var>] =</code> <strong class="def-name">tfestimate</strong> <code class="def-code-arguments">(&hellip;)</code></dt>
+<dt class="deftypefn def-line" id="index-tfestimate-1"><span class="category-def">Function File: </span><span><strong class="def-name">tfestimate</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">y</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-tfestimate-2"><span class="category-def">Function File: </span><span><strong class="def-name">tfestimate</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">y</var>, <var class="var">window</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-tfestimate-3"><span class="category-def">Function File: </span><span><strong class="def-name">tfestimate</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">y</var>, <var class="var">window</var>, <var class="var">overlap</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-tfestimate-4"><span class="category-def">Function File: </span><span><strong class="def-name">tfestimate</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">y</var>, <var class="var">window</var>, <var class="var">overlap</var>, <var class="var">Nfft</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-tfestimate-5"><span class="category-def">Function File: </span><span><strong class="def-name">tfestimate</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">y</var>, <var class="var">window</var>, <var class="var">overlap</var>, <var class="var">Nfft</var>, <var class="var">Fs</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-tfestimate-6"><span class="category-def">Function File: </span><span><strong class="def-name">tfestimate</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">y</var>, <var class="var">window</var>, <var class="var">overlap</var>, <var class="var">Nfft</var>, <var class="var">Fs</var>, <var class="var">range</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-tfestimate-7"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">Pxx</var>, <var class="var">freq</var>] =</code> <strong class="def-name">tfestimate</strong> <code class="def-code-arguments">(&hellip;)</code></span></dt>
 <dd>
 <p>Estimate transfer function of system with input <var class="var">x</var> and output <var class="var">y</var>.
  Use the Welch (1967) periodogram/FFT method.
@@ -4616,7 +5126,7 @@ slower to compute.
 <h4 class="subsection">3.11.1 barthannwin</h4>
 <a class="index-entry-id" id="index-barthannwin"></a>
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-barthannwin-1"><span class="category-def">Function File: </span><strong class="def-name">barthannwin</strong> <code class="def-code-arguments">(<var class="var">m</var>)</code></dt>
+<dt class="deftypefn def-line" id="index-barthannwin-1"><span class="category-def">Function File: </span><span><strong class="def-name">barthannwin</strong> <code class="def-code-arguments">(<var class="var">m</var>)</code></span></dt>
 <dd><p>Return the filter coefficients of a modified Bartlett-Hann window of length
 <var class="var">m</var>.
 </p>
@@ -4627,9 +5137,9 @@ slower to compute.
 <h4 class="subsection">3.11.2 blackmanharris</h4>
 <a class="index-entry-id" id="index-blackmanharris"></a>
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-blackmanharris-1"><span class="category-def">Function File: </span><strong class="def-name">blackmanharris</strong> <code class="def-code-arguments">(<var class="var">m</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-blackmanharris-2"><span class="category-def">Function File: </span><strong class="def-name">blackmanharris</strong> <code class="def-code-arguments">(<var class="var">m</var>, &quot;periodic&quot;)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-blackmanharris-3"><span class="category-def">Function File: </span><strong class="def-name">blackmanharris</strong> <code class="def-code-arguments">(<var class="var">m</var>, &quot;symmetric&quot;)</code></dt>
+<dt class="deftypefn def-line" id="index-blackmanharris-1"><span class="category-def">Function File: </span><span><strong class="def-name">blackmanharris</strong> <code class="def-code-arguments">(<var class="var">m</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-blackmanharris-2"><span class="category-def">Function File: </span><span><strong class="def-name">blackmanharris</strong> <code class="def-code-arguments">(<var class="var">m</var>, &quot;periodic&quot;)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-blackmanharris-3"><span class="category-def">Function File: </span><span><strong class="def-name">blackmanharris</strong> <code class="def-code-arguments">(<var class="var">m</var>, &quot;symmetric&quot;)</code></span></dt>
 <dd><p>Return the filter coefficients of a Blackman-Harris window of length <var class="var">m</var>.
 </p>
 <p>If the optional argument <code class="code">&quot;periodic&quot;</code> is given, the periodic form
@@ -4644,9 +5154,9 @@ slower to compute.
 <h4 class="subsection">3.11.3 blackmannuttall</h4>
 <a class="index-entry-id" id="index-blackmannuttall"></a>
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-blackmannuttall-1"><span class="category-def">Function File: </span><strong class="def-name">blackmannuttall</strong> <code class="def-code-arguments">(<var class="var">m</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-blackmannuttall-2"><span class="category-def">Function File: </span><strong class="def-name">blackmannuttall</strong> <code class="def-code-arguments">(<var class="var">m</var>, &quot;periodic&quot;)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-blackmannuttall-3"><span class="category-def">Function File: </span><strong class="def-name">blackmannuttall</strong> <code class="def-code-arguments">(<var class="var">m</var>, &quot;symmetric&quot;)</code></dt>
+<dt class="deftypefn def-line" id="index-blackmannuttall-1"><span class="category-def">Function File: </span><span><strong class="def-name">blackmannuttall</strong> <code class="def-code-arguments">(<var class="var">m</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-blackmannuttall-2"><span class="category-def">Function File: </span><span><strong class="def-name">blackmannuttall</strong> <code class="def-code-arguments">(<var class="var">m</var>, &quot;periodic&quot;)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-blackmannuttall-3"><span class="category-def">Function File: </span><span><strong class="def-name">blackmannuttall</strong> <code class="def-code-arguments">(<var class="var">m</var>, &quot;symmetric&quot;)</code></span></dt>
 <dd><p>Return the filter coefficients of a Blackman-Nuttall window of length
 <var class="var">m</var>.
 </p>
@@ -4662,7 +5172,7 @@ slower to compute.
 <h4 class="subsection">3.11.4 bohmanwin</h4>
 <a class="index-entry-id" id="index-bohmanwin"></a>
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-bohmanwin-1"><span class="category-def">Function File: </span><strong class="def-name">bohmanwin</strong> <code class="def-code-arguments">(<var class="var">m</var>)</code></dt>
+<dt class="deftypefn def-line" id="index-bohmanwin-1"><span class="category-def">Function File: </span><span><strong class="def-name">bohmanwin</strong> <code class="def-code-arguments">(<var class="var">m</var>)</code></span></dt>
 <dd><p>Return the filter coefficients of a Bohman window of length <var class="var">m</var>.
 </p>
 <p><strong class="strong">See also:</strong> rectwin, bartlett.
@@ -4672,7 +5182,7 @@ slower to compute.
 <h4 class="subsection">3.11.5 boxcar</h4>
 <a class="index-entry-id" id="index-boxcar"></a>
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-boxcar-1"><span class="category-def">Function File: </span><strong class="def-name">boxcar</strong> <code class="def-code-arguments">(<var class="var">m</var>)</code></dt>
+<dt class="deftypefn def-line" id="index-boxcar-1"><span class="category-def">Function File: </span><span><strong class="def-name">boxcar</strong> <code class="def-code-arguments">(<var class="var">m</var>)</code></span></dt>
 <dd><p>Return the filter coefficients of a rectangular window of length <var class="var">m</var>.
 </p></dd></dl>
 </div>
@@ -4680,8 +5190,8 @@ slower to compute.
 <h4 class="subsection">3.11.6 chebwin</h4>
 <a class="index-entry-id" id="index-chebwin"></a>
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-chebwin-1"><span class="category-def">Function File: </span><strong class="def-name">chebwin</strong> <code class="def-code-arguments">(<var class="var">m</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-chebwin-2"><span class="category-def">Function File: </span><strong class="def-name">chebwin</strong> <code class="def-code-arguments">(<var class="var">m</var>, <var class="var">at</var>)</code></dt>
+<dt class="deftypefn def-line" id="index-chebwin-1"><span class="category-def">Function File: </span><span><strong class="def-name">chebwin</strong> <code class="def-code-arguments">(<var class="var">m</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-chebwin-2"><span class="category-def">Function File: </span><span><strong class="def-name">chebwin</strong> <code class="def-code-arguments">(<var class="var">m</var>, <var class="var">at</var>)</code></span></dt>
 <dd>
 <p>Return the filter coefficients of a Dolph-Chebyshev window of length <var class="var">m</var>.
  The Fourier transform of the window has a stop-band attenuation of <var class="var">at</var>
@@ -4719,13 +5229,33 @@ slower to compute.
 <p><strong class="strong">See also:</strong> kaiser.
 </p></dd></dl>
 </div>
+<div class="subsection-level-extent" id="enbw">
+<h4 class="subsection">3.11.7 enbw</h4>
+<a class="index-entry-id" id="index-enbw"></a>
+<dl class="first-deftypefn def-block">
+<dt class="deftypefn def-line" id="index-enbw-1"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">bw</var> =</code> <strong class="def-name">enbw</strong> <code class="def-code-arguments">(<var class="var">window</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-enbw-2"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">bw</var> =</code> <strong class="def-name">enbw</strong> <code class="def-code-arguments">(<var class="var">window</var>, <var class="var">fs</var>)</code></span></dt>
+<dd><p>Compute the equivalent noise bandwidth of a window.
+</p>
+<p>The equivalent noise bandwidth (ENBW) represents the bandwidth of a
+ rectangular filter that would accumulate the same noise power as the
+ given window.
+</p>
+<p>If only <var class="var">window</var> is specified, the ENBW is returned in bins, which is
+ the normalized bandwidth multiplied by the window length <code class="code">N</code>.
+</p>
+<p>If <var class="var">fs</var> is provided, the ENBW is returned in the same units as the
+ sampling frequency.
+</p>
+</dd></dl>
+</div>
 <div class="subsection-level-extent" id="expwin">
-<h4 class="subsection">3.11.7 expwin</h4>
+<h4 class="subsection">3.11.8 expwin</h4>
 <a class="index-entry-id" id="index-expwin"></a>
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-_0028m_002c"><span class="category-def">Function File: </span><code class="def-type">expwin</code> <strong class="def-name">(<var class="var">m</var>,</strong> <code class="def-code-arguments"><var class="var">alpha</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-_0028m_002c-1"><span class="category-def">Function File: </span><code class="def-type">expwin</code> <strong class="def-name">(<var class="var">m</var>,</strong> <code class="def-code-arguments"><var class="var">sll</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-_0028_002e_002e_002e_002c"><span class="category-def">Function File: </span><code class="def-type">expwin</code> <strong class="def-name">(&hellip;,</strong> <code class="def-code-arguments">&quot;canonical&quot;)</code></dt>
+<dt class="deftypefn def-line" id="index-_0028m_002c"><span class="category-def">Function File: </span><span><code class="def-type">expwin</code> <strong class="def-name">(<var class="var">m</var>,</strong> <code class="def-code-arguments"><var class="var">alpha</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-_0028m_002c-1"><span class="category-def">Function File: </span><span><code class="def-type">expwin</code> <strong class="def-name">(<var class="var">m</var>,</strong> <code class="def-code-arguments"><var class="var">sll</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-_0028_002e_002e_002e_002c"><span class="category-def">Function File: </span><span><code class="def-type">expwin</code> <strong class="def-name">(&hellip;,</strong> <code class="def-code-arguments">&quot;canonical&quot;)</code></span></dt>
 <dd><p>Return the coefficients of an exponential window<a class="footnote" id="DOCF4" href="#FOOT4"><sup>4</sup></a> of length <var class="var">m</var>.
 </p>
 <p>The window&rsquo;s adjustable parameter can be set directly as
@@ -4740,12 +5270,12 @@ slower to compute.
 </p></dd></dl>
 </div>
 <div class="subsection-level-extent" id="flattopwin">
-<h4 class="subsection">3.11.8 flattopwin</h4>
+<h4 class="subsection">3.11.9 flattopwin</h4>
 <a class="index-entry-id" id="index-flattopwin"></a>
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-flattopwin-1"><span class="category-def">Function File: </span><strong class="def-name">flattopwin</strong> <code class="def-code-arguments">(<var class="var">m</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-flattopwin-2"><span class="category-def">Function File: </span><strong class="def-name">flattopwin</strong> <code class="def-code-arguments">(<var class="var">m</var>, &quot;periodic&quot;)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-flattopwin-3"><span class="category-def">Function File: </span><strong class="def-name">flattopwin</strong> <code class="def-code-arguments">(<var class="var">m</var>, &quot;symmetric&quot;)</code></dt>
+<dt class="deftypefn def-line" id="index-flattopwin-1"><span class="category-def">Function File: </span><span><strong class="def-name">flattopwin</strong> <code class="def-code-arguments">(<var class="var">m</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-flattopwin-2"><span class="category-def">Function File: </span><span><strong class="def-name">flattopwin</strong> <code class="def-code-arguments">(<var class="var">m</var>, &quot;periodic&quot;)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-flattopwin-3"><span class="category-def">Function File: </span><span><strong class="def-name">flattopwin</strong> <code class="def-code-arguments">(<var class="var">m</var>, &quot;symmetric&quot;)</code></span></dt>
 <dd>
 <p>Return the filter coefficients of a Flat Top window of length <var class="var">m</var>.
  The Flat Top window is defined by the function f(w):
@@ -4771,11 +5301,11 @@ slower to compute.
 </p></dd></dl>
 </div>
 <div class="subsection-level-extent" id="gaussian">
-<h4 class="subsection">3.11.9 gaussian</h4>
+<h4 class="subsection">3.11.10 gaussian</h4>
 <a class="index-entry-id" id="index-gaussian"></a>
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-gaussian-1"><span class="category-def">Function File: </span><strong class="def-name">gaussian</strong> <code class="def-code-arguments">(<var class="var">m</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-gaussian-2"><span class="category-def">Function File: </span><strong class="def-name">gaussian</strong> <code class="def-code-arguments">(<var class="var">m</var>, <var class="var">a</var>)</code></dt>
+<dt class="deftypefn def-line" id="index-gaussian-1"><span class="category-def">Function File: </span><span><strong class="def-name">gaussian</strong> <code class="def-code-arguments">(<var class="var">m</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-gaussian-2"><span class="category-def">Function File: </span><span><strong class="def-name">gaussian</strong> <code class="def-code-arguments">(<var class="var">m</var>, <var class="var">a</var>)</code></span></dt>
 <dd>
 <p>Return a Gaussian convolution window of length <var class="var">m</var>.  The width of the
  window is inversely proportional to the parameter <var class="var">a</var>.  Use larger
@@ -4791,11 +5321,11 @@ slower to compute.
 </p></dd></dl>
 </div>
 <div class="subsection-level-extent" id="gausswin">
-<h4 class="subsection">3.11.10 gausswin</h4>
+<h4 class="subsection">3.11.11 gausswin</h4>
 <a class="index-entry-id" id="index-gausswin"></a>
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-gausswin-1"><span class="category-def">Function File: </span><strong class="def-name">gausswin</strong> <code class="def-code-arguments">(<var class="var">m</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-gausswin-2"><span class="category-def">Function File: </span><strong class="def-name">gausswin</strong> <code class="def-code-arguments">(<var class="var">m</var>, <var class="var">a</var>)</code></dt>
+<dt class="deftypefn def-line" id="index-gausswin-1"><span class="category-def">Function File: </span><span><strong class="def-name">gausswin</strong> <code class="def-code-arguments">(<var class="var">m</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-gausswin-2"><span class="category-def">Function File: </span><span><strong class="def-name">gausswin</strong> <code class="def-code-arguments">(<var class="var">m</var>, <var class="var">a</var>)</code></span></dt>
 <dd>
 <p>Return the filter coefficients of a Gaussian window of length <var class="var">m</var>.
  The width of the window is inversely proportional to the parameter <var class="var">a</var>.
@@ -4808,12 +5338,12 @@ slower to compute.
 </p></dd></dl>
 </div>
 <div class="subsection-level-extent" id="hann">
-<h4 class="subsection">3.11.11 hann</h4>
+<h4 class="subsection">3.11.12 hann</h4>
 <a class="index-entry-id" id="index-hann"></a>
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-hann-1"><span class="category-def">Function File: </span><strong class="def-name">hann</strong> <code class="def-code-arguments">(<var class="var">m</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-hann-2"><span class="category-def">Function File: </span><strong class="def-name">hann</strong> <code class="def-code-arguments">(<var class="var">m</var>, &quot;periodic&quot;)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-hann-3"><span class="category-def">Function File: </span><strong class="def-name">hann</strong> <code class="def-code-arguments">(<var class="var">m</var>, &quot;symmetric&quot;)</code></dt>
+<dt class="deftypefn def-line" id="index-hann-1"><span class="category-def">Function File: </span><span><strong class="def-name">hann</strong> <code class="def-code-arguments">(<var class="var">m</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-hann-2"><span class="category-def">Function File: </span><span><strong class="def-name">hann</strong> <code class="def-code-arguments">(<var class="var">m</var>, &quot;periodic&quot;)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-hann-3"><span class="category-def">Function File: </span><span><strong class="def-name">hann</strong> <code class="def-code-arguments">(<var class="var">m</var>, &quot;symmetric&quot;)</code></span></dt>
 <dd><p>Return the filter coefficients of a Hanning window of length <var class="var">m</var>.
 </p>
 <p>If the optional argument <code class="code">&quot;periodic&quot;</code> is given, the periodic form
@@ -4828,11 +5358,11 @@ slower to compute.
 </p></dd></dl>
 </div>
 <div class="subsection-level-extent" id="kaiser">
-<h4 class="subsection">3.11.12 kaiser</h4>
+<h4 class="subsection">3.11.13 kaiser</h4>
 <a class="index-entry-id" id="index-kaiser"></a>
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-kaiser-1"><span class="category-def">Function File: </span><strong class="def-name">kaiser</strong> <code class="def-code-arguments">(<var class="var">m</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-kaiser-2"><span class="category-def">Function File: </span><strong class="def-name">kaiser</strong> <code class="def-code-arguments">(<var class="var">m</var>, <var class="var">beta</var>)</code></dt>
+<dt class="deftypefn def-line" id="index-kaiser-1"><span class="category-def">Function File: </span><span><strong class="def-name">kaiser</strong> <code class="def-code-arguments">(<var class="var">m</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-kaiser-2"><span class="category-def">Function File: </span><span><strong class="def-name">kaiser</strong> <code class="def-code-arguments">(<var class="var">m</var>, <var class="var">beta</var>)</code></span></dt>
 <dd>
 <p>Return the filter coefficients of a Kaiser window of length <var class="var">m</var>.  The
  Fourier transform of the window has a stop-band attenuation that is derived
@@ -4852,12 +5382,12 @@ slower to compute.
 </p></dd></dl>
 </div>
 <div class="subsection-level-extent" id="nuttallwin">
-<h4 class="subsection">3.11.13 nuttallwin</h4>
+<h4 class="subsection">3.11.14 nuttallwin</h4>
 <a class="index-entry-id" id="index-nuttallwin"></a>
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-nuttallwin-1"><span class="category-def">Function File: </span><strong class="def-name">nuttallwin</strong> <code class="def-code-arguments">(<var class="var">m</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-nuttallwin-2"><span class="category-def">Function File: </span><strong class="def-name">nuttallwin</strong> <code class="def-code-arguments">(<var class="var">m</var>, &quot;periodic&quot;)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-nuttallwin-3"><span class="category-def">Function File: </span><strong class="def-name">nuttallwin</strong> <code class="def-code-arguments">(<var class="var">m</var>, &quot;symmetric&quot;)</code></dt>
+<dt class="deftypefn def-line" id="index-nuttallwin-1"><span class="category-def">Function File: </span><span><strong class="def-name">nuttallwin</strong> <code class="def-code-arguments">(<var class="var">m</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-nuttallwin-2"><span class="category-def">Function File: </span><span><strong class="def-name">nuttallwin</strong> <code class="def-code-arguments">(<var class="var">m</var>, &quot;periodic&quot;)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-nuttallwin-3"><span class="category-def">Function File: </span><span><strong class="def-name">nuttallwin</strong> <code class="def-code-arguments">(<var class="var">m</var>, &quot;symmetric&quot;)</code></span></dt>
 <dd><p>Return the filter coefficients of a Blackman-Harris window defined by
  Nuttall of length <var class="var">m</var>.
 </p>
@@ -4870,42 +5400,42 @@ slower to compute.
 </p></dd></dl>
 </div>
 <div class="subsection-level-extent" id="parzenwin">
-<h4 class="subsection">3.11.14 parzenwin</h4>
+<h4 class="subsection">3.11.15 parzenwin</h4>
 <a class="index-entry-id" id="index-parzenwin"></a>
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-parzenwin-1"><span class="category-def">Function File: </span><strong class="def-name">parzenwin</strong> <code class="def-code-arguments">(<var class="var">m</var>)</code></dt>
+<dt class="deftypefn def-line" id="index-parzenwin-1"><span class="category-def">Function File: </span><span><strong class="def-name">parzenwin</strong> <code class="def-code-arguments">(<var class="var">m</var>)</code></span></dt>
 <dd><p>Return the filter coefficients of a Parzen window of length <var class="var">m</var>.
 </p>
 <p><strong class="strong">See also:</strong> rectwin, bartlett.
 </p></dd></dl>
 </div>
 <div class="subsection-level-extent" id="poisswin">
-<h4 class="subsection">3.11.15 poisswin</h4>
+<h4 class="subsection">3.11.16 poisswin</h4>
 <a class="index-entry-id" id="index-poisswin"></a>
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-_0028m_002c-2"><span class="category-def">Function File: </span><code class="def-type">poisswin</code> <strong class="def-name">(<var class="var">m</var>,</strong> <code class="def-code-arguments"><var class="var">alpha</var>)</code></dt>
+<dt class="deftypefn def-line" id="index-_0028m_002c-2"><span class="category-def">Function File: </span><span><code class="def-type">poisswin</code> <strong class="def-name">(<var class="var">m</var>,</strong> <code class="def-code-arguments"><var class="var">alpha</var>)</code></span></dt>
 <dd><p>Return the coefficients of a Poisson (a.k.a. exponential) window<a class="footnote" id="DOCF5" href="#FOOT5"><sup>5</sup></a> of length <var class="var">m</var> and adjustable parameter
 <var class="var">alpha</var>.
 </p></dd></dl>
 </div>
 <div class="subsection-level-extent" id="rectwin">
-<h4 class="subsection">3.11.16 rectwin</h4>
+<h4 class="subsection">3.11.17 rectwin</h4>
 <a class="index-entry-id" id="index-rectwin"></a>
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-rectwin-1"><span class="category-def">Function File: </span><strong class="def-name">rectwin</strong> <code class="def-code-arguments">(<var class="var">m</var>)</code></dt>
+<dt class="deftypefn def-line" id="index-rectwin-1"><span class="category-def">Function File: </span><span><strong class="def-name">rectwin</strong> <code class="def-code-arguments">(<var class="var">m</var>)</code></span></dt>
 <dd><p>Return the filter coefficients of a rectangular window of length <var class="var">m</var>.
 </p>
 <p><strong class="strong">See also:</strong> boxcar, hamming, hanning.
 </p></dd></dl>
 </div>
 <div class="subsection-level-extent" id="taylorwin">
-<h4 class="subsection">3.11.17 taylorwin</h4>
+<h4 class="subsection">3.11.18 taylorwin</h4>
 <a class="index-entry-id" id="index-taylorwin"></a>
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-_0028m_0029"><span class="category-def">Function File: </span><code class="def-type">taylorwin</code> <strong class="def-name">(<var class="var">m</var>)</strong></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-_0028m_002c-3"><span class="category-def">Function File: </span><code class="def-type">taylorwin</code> <strong class="def-name">(<var class="var">m</var>,</strong> <code class="def-code-arguments"><var class="var">nbar</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-_0028m_002c-4"><span class="category-def">Function File: </span><code class="def-type">taylorwin</code> <strong class="def-name">(<var class="var">m</var>,</strong> <code class="def-code-arguments"><var class="var">nbar</var>, <var class="var">sll</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-_0028m_002c-5"><span class="category-def">Function File: </span><code class="def-type">taylorwin</code> <strong class="def-name">(<var class="var">m</var>,</strong> <code class="def-code-arguments"><var class="var">nbar</var>, <var class="var">sll</var>, <var class="var">plots</var>)</code></dt>
+<dt class="deftypefn def-line" id="index-_0028m_0029"><span class="category-def">Function File: </span><span><code class="def-type">taylorwin</code> <strong class="def-name">(<var class="var">m</var>)</strong></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-_0028m_002c-3"><span class="category-def">Function File: </span><span><code class="def-type">taylorwin</code> <strong class="def-name">(<var class="var">m</var>,</strong> <code class="def-code-arguments"><var class="var">nbar</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-_0028m_002c-4"><span class="category-def">Function File: </span><span><code class="def-type">taylorwin</code> <strong class="def-name">(<var class="var">m</var>,</strong> <code class="def-code-arguments"><var class="var">nbar</var>, <var class="var">sll</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-_0028m_002c-5"><span class="category-def">Function File: </span><span><code class="def-type">taylorwin</code> <strong class="def-name">(<var class="var">m</var>,</strong> <code class="def-code-arguments"><var class="var">nbar</var>, <var class="var">sll</var>, <var class="var">plots</var>)</code></span></dt>
 <dd><p>Return the coefficients of a Taylor window of length <var class="var">m</var>, whose
  Fourier transform has <var class="var">nbar</var> (default 4) quasi-equiripple side-lobes
  adjacent to the main-lobe, at a nominal level of <var class="var">sll</var> (default
@@ -4921,10 +5451,10 @@ slower to compute.
 </p></dd></dl>
 </div>
 <div class="subsection-level-extent" id="triang">
-<h4 class="subsection">3.11.18 triang</h4>
+<h4 class="subsection">3.11.19 triang</h4>
 <a class="index-entry-id" id="index-triang"></a>
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-triang-1"><span class="category-def">Function File: </span><strong class="def-name">triang</strong> <code class="def-code-arguments">(<var class="var">m</var>)</code></dt>
+<dt class="deftypefn def-line" id="index-triang-1"><span class="category-def">Function File: </span><span><strong class="def-name">triang</strong> <code class="def-code-arguments">(<var class="var">m</var>)</code></span></dt>
 <dd>
 <p>Return the filter coefficients of a triangular window of length <var class="var">m</var>.
  Unlike the Bartlett window, <code class="code">triang</code> does not go to zero at the edges
@@ -4936,14 +5466,14 @@ slower to compute.
 </p></dd></dl>
 </div>
 <div class="subsection-level-extent" id="tukeywin">
-<h4 class="subsection">3.11.19 tukeywin</h4>
+<h4 class="subsection">3.11.20 tukeywin</h4>
 <a class="index-entry-id" id="index-tukeywin"></a>
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-tukeywin-1"><span class="category-def">Function File: </span><strong class="def-name">tukeywin</strong> <code class="def-code-arguments">(<var class="var">m</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-tukeywin-2"><span class="category-def">Function File: </span><strong class="def-name">tukeywin</strong> <code class="def-code-arguments">(<var class="var">m</var>, <var class="var">r</var>)</code></dt>
+<dt class="deftypefn def-line" id="index-tukeywin-1"><span class="category-def">Function File: </span><span><strong class="def-name">tukeywin</strong> <code class="def-code-arguments">(<var class="var">m</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-tukeywin-2"><span class="category-def">Function File: </span><span><strong class="def-name">tukeywin</strong> <code class="def-code-arguments">(<var class="var">m</var>, <var class="var">r</var>)</code></span></dt>
 <dd><p>Return the filter coefficients of a Tukey window (also known as the
  cosine-tapered window) of length <var class="var">m</var>.  <var class="var">r</var> defines the ratio
- between the constant section and and the cosine section.  It has to be
+ between the constant section and the cosine section.  It has to be
  between 0 and 1.  The function returns a Hanning window for <var class="var">r</var>
  equal to 1 and a rectangular window for <var class="var">r</var> equal to 0.
  The default value of <var class="var">r</var> is 1/2.
@@ -4957,13 +5487,13 @@ slower to compute.
 </p></dd></dl>
 </div>
 <div class="subsection-level-extent" id="ultrwin">
-<h4 class="subsection">3.11.20 ultrwin</h4>
+<h4 class="subsection">3.11.21 ultrwin</h4>
 <a class="index-entry-id" id="index-ultrwin"></a>
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-ultrwin-1"><span class="category-def">Function File: </span><code class="def-type">[<var class="var">w</var>, <var class="var">xmu</var>] =</code> <strong class="def-name">ultrwin</strong> <code class="def-code-arguments">(<var class="var">m</var>, <var class="var">mu</var>, <var class="var">beta</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-ultrwin-2"><span class="category-def">Function File: </span><code class="def-type">[<var class="var">w</var>, <var class="var">xmu</var>] =</code> <strong class="def-name">ultrwin</strong> <code class="def-code-arguments">(<var class="var">m</var>, <var class="var">mu</var>, <var class="var">att</var>, &quot;att&quot;)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-ultrwin-3"><span class="category-def">Function File: </span><code class="def-type">[<var class="var">w</var>, <var class="var">xmu</var>] =</code> <strong class="def-name">ultrwin</strong> <code class="def-code-arguments">(<var class="var">m</var>, <var class="var">mu</var>, <var class="var">latt</var>, &quot;latt&quot;)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-ultrwin-4"><span class="category-def">Function File: </span><code class="def-type"><var class="var">w</var> =</code> <strong class="def-name">ultrwin</strong> <code class="def-code-arguments">(<var class="var">m</var>, <var class="var">mu</var>, <var class="var">xmu</var>, &quot;xmu&quot;)</code></dt>
+<dt class="deftypefn def-line" id="index-ultrwin-1"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">w</var>, <var class="var">xmu</var>] =</code> <strong class="def-name">ultrwin</strong> <code class="def-code-arguments">(<var class="var">m</var>, <var class="var">mu</var>, <var class="var">beta</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-ultrwin-2"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">w</var>, <var class="var">xmu</var>] =</code> <strong class="def-name">ultrwin</strong> <code class="def-code-arguments">(<var class="var">m</var>, <var class="var">mu</var>, <var class="var">att</var>, &quot;att&quot;)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-ultrwin-3"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">w</var>, <var class="var">xmu</var>] =</code> <strong class="def-name">ultrwin</strong> <code class="def-code-arguments">(<var class="var">m</var>, <var class="var">mu</var>, <var class="var">latt</var>, &quot;latt&quot;)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-ultrwin-4"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">w</var> =</code> <strong class="def-name">ultrwin</strong> <code class="def-code-arguments">(<var class="var">m</var>, <var class="var">mu</var>, <var class="var">xmu</var>, &quot;xmu&quot;)</code></span></dt>
 <dd><p>Return the coefficients of an Ultraspherical window of length <var class="var">m</var>.
  The parameter <var class="var">mu</var> controls the window&rsquo;s Fourier transform&rsquo;s side-lobe
  to side-lobe ratio, and the third given parameter controls the transform&rsquo;s
@@ -5011,12 +5541,12 @@ slower to compute.
 </p></dd></dl>
 </div>
 <div class="subsection-level-extent" id="welchwin">
-<h4 class="subsection">3.11.21 welchwin</h4>
+<h4 class="subsection">3.11.22 welchwin</h4>
 <a class="index-entry-id" id="index-welchwin"></a>
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-welchwin-1"><span class="category-def">Function File: </span><strong class="def-name">welchwin</strong> <code class="def-code-arguments">(<var class="var">m</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-welchwin-2"><span class="category-def">Function File: </span><strong class="def-name">welchwin</strong> <code class="def-code-arguments">(<var class="var">m</var>, &quot;periodic&quot;)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-welchwin-3"><span class="category-def">Function File: </span><strong class="def-name">welchwin</strong> <code class="def-code-arguments">(<var class="var">m</var>, &quot;symmetric&quot;)</code></dt>
+<dt class="deftypefn def-line" id="index-welchwin-1"><span class="category-def">Function File: </span><span><strong class="def-name">welchwin</strong> <code class="def-code-arguments">(<var class="var">m</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-welchwin-2"><span class="category-def">Function File: </span><span><strong class="def-name">welchwin</strong> <code class="def-code-arguments">(<var class="var">m</var>, &quot;periodic&quot;)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-welchwin-3"><span class="category-def">Function File: </span><span><strong class="def-name">welchwin</strong> <code class="def-code-arguments">(<var class="var">m</var>, &quot;symmetric&quot;)</code></span></dt>
 <dd><p>Return the filter coefficients of a Welch window of length <var class="var">m</var>.  The
  Welch window is given by
 <var class="var">w</var>(n)=1-(n/N-1)^2,   n=[0,1, ... <var class="var">m</var>-1].
@@ -5036,24 +5566,24 @@ slower to compute.
 </p></dd></dl>
 </div>
 <div class="subsection-level-extent" id="window">
-<h4 class="subsection">3.11.22 window</h4>
+<h4 class="subsection">3.11.23 window</h4>
 <a class="index-entry-id" id="index-window"></a>
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-window-1"><span class="category-def">Function File: </span><code class="def-type"><var class="var">w</var> =</code> <strong class="def-name">window</strong> <code class="def-code-arguments">(<var class="var">f</var>, <var class="var">m</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-window-2"><span class="category-def">Function File: </span><code class="def-type"><var class="var">w</var> =</code> <strong class="def-name">window</strong> <code class="def-code-arguments">(<var class="var">f</var>, <var class="var">m</var>, <var class="var">opts</var>)</code></dt>
+<dt class="deftypefn def-line" id="index-window-1"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">w</var> =</code> <strong class="def-name">window</strong> <code class="def-code-arguments">(<var class="var">f</var>, <var class="var">m</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-window-2"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">w</var> =</code> <strong class="def-name">window</strong> <code class="def-code-arguments">(<var class="var">f</var>, <var class="var">m</var>, <var class="var">opts</var>)</code></span></dt>
 <dd><p>Create an <var class="var">m</var>-point window from the function <var class="var">f</var>.  The function
 <var class="var">f</var> can be for example <code class="code">@blackman</code>.  Any additional
  arguments <var class="var">opt</var> are passed to the windowing function.
 </p></dd></dl>
 </div>
 <div class="subsection-level-extent" id="wvtool">
-<h4 class="subsection">3.11.23 wvtool</h4>
+<h4 class="subsection">3.11.24 wvtool</h4>
 <a class="index-entry-id" id="index-wvtool"></a>
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-_0028w_002c"><span class="category-def">Function File: </span><code class="def-type">wvtool</code> <strong class="def-name">(<var class="var">w</var>,</strong> <code class="def-code-arguments">&hellip;)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-_0028_002e_002e_002e_002c-1"><span class="category-def">Function File: </span><code class="def-type">wvtool</code> <strong class="def-name">(&hellip;,</strong> <code class="def-code-arguments"><var class="var">options</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-_0028title_002c"><span class="category-def">Function File: </span><code class="def-type">wvtool</code> <strong class="def-name">(<var class="var">title</var>,</strong> <code class="def-code-arguments">&hellip;)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-_003d-2"><span class="category-def">Function File: </span><code class="def-type"><var class="var">h</var></code> <strong class="def-name">=</strong> <code class="def-code-arguments">wvtool (&hellip;)</code></dt>
+<dt class="deftypefn def-line" id="index-_0028w_002c"><span class="category-def">Function File: </span><span><code class="def-type">wvtool</code> <strong class="def-name">(<var class="var">w</var>,</strong> <code class="def-code-arguments">&hellip;)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-_0028_002e_002e_002e_002c-1"><span class="category-def">Function File: </span><span><code class="def-type">wvtool</code> <strong class="def-name">(&hellip;,</strong> <code class="def-code-arguments"><var class="var">options</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-_0028title_002c"><span class="category-def">Function File: </span><span><code class="def-type">wvtool</code> <strong class="def-name">(<var class="var">title</var>,</strong> <code class="def-code-arguments">&hellip;)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-_003d-2"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">h</var></code> <strong class="def-name">=</strong> <code class="def-code-arguments">wvtool (&hellip;)</code></span></dt>
 <dd><p>Plot time and frequency domain graphs of each vector of window function
  coefficients given in <var class="var">w</var> and any following arguments.  Given vectors
  must have the same length.
@@ -5089,12 +5619,45 @@ slower to compute.
 <div class="section-level-extent" id="System-Identification">
 <h3 class="section" id="System-Identification-1">3.12 System Identification</h3>
 <a class="index-entry-id" id="index-System-Identification"></a>
+<div class="subsection-level-extent" id="ac2poly">
+<h4 class="subsection">3.12.1 ac2poly</h4>
+<a class="index-entry-id" id="index-ac2poly"></a>
+<dl class="first-deftypefn def-block">
+<dt class="deftypefn def-line" id="index-ac2poly-1"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">a</var> =</code> <strong class="def-name">ac2poly</strong> <code class="def-code-arguments">(<var class="var">r</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-ac2poly-2"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">a</var>, <var class="var">e</var>] =</code> <strong class="def-name">ac2poly</strong> <code class="def-code-arguments">(<var class="var">r</var>)</code></span></dt>
+<dd><p>Convert autocorrelation sequence to prediction polynomial.
+</p>
+<p>Compute the prediction filter coefficients <var class="var">a</var> from the autocorrelation
+ sequence <var class="var">r</var> using the Levinson-Durbin recursion. The second optional
+ output <var class="var">e</var> returns the final prediction error power.
+</p>
+<p>This function directly calls <code class="code">levinson</code>.
+</p>
+<p><strong class="strong">See also:</strong> levinson.
+</p></dd></dl>
+</div>
+<div class="subsection-level-extent" id="ac2rc">
+<h4 class="subsection">3.12.2 ac2rc</h4>
+<a class="index-entry-id" id="index-ac2rc"></a>
+<dl class="first-deftypefn def-block">
+<dt class="deftypefn def-line" id="index-ac2rc-1"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">k</var>, <var class="var">r0</var>] =</code> <strong class="def-name">ac2rc</strong> <code class="def-code-arguments">(<var class="var">r</var>)</code></span></dt>
+<dd><p>Convert autocorrelation sequence to reflection coefficients.
+</p>
+<p>Compute the reflection coefficients <var class="var">k</var> from the autocorrelation
+ sequence <var class="var">r</var> using the Levinson-Durbin recursion. The second optional
+ output <var class="var">r0</var> returns the zero-lag autocorrelation <em class="math">r(0)</em>.
+</p>
+<p>This function directly calls <code class="code">levinson</code>.
+</p>
+<p><strong class="strong">See also:</strong> levinson.
+</p></dd></dl>
+</div>
 <div class="subsection-level-extent" id="arburg">
-<h4 class="subsection">3.12.1 arburg</h4>
+<h4 class="subsection">3.12.3 arburg</h4>
 <a class="index-entry-id" id="index-arburg"></a>
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-arburg-1"><span class="category-def">Function File: </span><code class="def-type">[<var class="var">a</var>, <var class="var">v</var>, <var class="var">k</var>] =</code> <strong class="def-name">arburg</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">poles</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-arburg-2"><span class="category-def">Function File: </span><code class="def-type">[<var class="var">a</var>, <var class="var">v</var>, <var class="var">k</var>] =</code> <strong class="def-name">arburg</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">poles</var>, <var class="var">criterion</var>)</code></dt>
+<dt class="deftypefn def-line" id="index-arburg-1"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">a</var>, <var class="var">v</var>, <var class="var">k</var>] =</code> <strong class="def-name">arburg</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">poles</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-arburg-2"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">a</var>, <var class="var">v</var>, <var class="var">k</var>] =</code> <strong class="def-name">arburg</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">poles</var>, <var class="var">criterion</var>)</code></span></dt>
 <dd>
 <p>Calculate coefficients of an autoregressive (AR) model of complex data
 <var class="var">x</var> using the whitening lattice-filter method of Burg (1968).  The
@@ -5185,11 +5748,11 @@ slower to compute.
 </p></dd></dl>
 </div>
 <div class="subsection-level-extent" id="aryule">
-<h4 class="subsection">3.12.2 aryule</h4>
+<h4 class="subsection">3.12.4 aryule</h4>
 <a class="index-entry-id" id="index-aryule"></a>
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-aryule-1"><span class="category-def">Function File: </span><code class="def-type"><var class="var">a</var> =</code> <strong class="def-name">aryule</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">p</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-aryule-2"><span class="category-def">Function File: </span><code class="def-type">[<var class="var">a</var>, <var class="var">v</var>, <var class="var">k</var>] =</code> <strong class="def-name">aryule</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">p</var>)</code></dt>
+<dt class="deftypefn def-line" id="index-aryule-1"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">a</var> =</code> <strong class="def-name">aryule</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">p</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-aryule-2"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">a</var>, <var class="var">v</var>, <var class="var">k</var>] =</code> <strong class="def-name">aryule</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">p</var>)</code></span></dt>
 <dd><p>Fit an AR (<var class="var">p</var>)-model with Yule-Walker estimates.
 </p><dl class="table">
 <dt><var class="var">x</var></dt>
@@ -5221,13 +5784,13 @@ slower to compute.
 </p></dd></dl>
 </div>
 <div class="subsection-level-extent" id="invfreq">
-<h4 class="subsection">3.12.3 invfreq</h4>
+<h4 class="subsection">3.12.5 invfreq</h4>
 <a class="index-entry-id" id="index-invfreq"></a>
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-invfreq_0028H_002cF_002cnB_002cnA_0029"><span class="category-def">Function File: </span><code class="def-type">[B,A] =</code> <strong class="def-name">invfreq(H,F,nB,nA)</strong></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-invfreq_0028H_002cF_002cnB_002cnA_002cW_0029"><span class="category-def">: </span><code class="def-type">[B,A] =</code> <strong class="def-name">invfreq(H,F,nB,nA,W)</strong></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-invfreq_0028H_002cF_002cnB_002cnA_002cW_002c_005b_005d_002c_005b_005d_002cplane_0029"><span class="category-def">: </span><code class="def-type">[B,A] =</code> <strong class="def-name">invfreq(H,F,nB,nA,W,[],[],plane)</strong></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-invfreq_0028H_002cF_002cnB_002cnA_002cW_002citer_002ctol_002cplane_0029"><span class="category-def">: </span><code class="def-type">[B,A] =</code> <strong class="def-name">invfreq(H,F,nB,nA,W,iter,tol,plane)</strong></dt>
+<dt class="deftypefn def-line" id="index-invfreq_0028H_002cF_002cnB_002cnA_0029"><span class="category-def">Function File: </span><span><code class="def-type">[B,A] =</code> <strong class="def-name">invfreq(H,F,nB,nA)</strong></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-invfreq_0028H_002cF_002cnB_002cnA_002cW_0029"><span><code class="def-type">[B,A] =</code> <strong class="def-name">invfreq(H,F,nB,nA,W)</strong></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-invfreq_0028H_002cF_002cnB_002cnA_002cW_002c_005b_005d_002c_005b_005d_002cplane_0029"><span><code class="def-type">[B,A] =</code> <strong class="def-name">invfreq(H,F,nB,nA,W,[],[],plane)</strong></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-invfreq_0028H_002cF_002cnB_002cnA_002cW_002citer_002ctol_002cplane_0029"><span><code class="def-type">[B,A] =</code> <strong class="def-name">invfreq(H,F,nB,nA,W,iter,tol,plane)</strong></span></dt>
 <dd><p>Fit filter B(z)/A(z) or B(s)/A(s) to complex frequency response at
  frequency points F.
 </p>
@@ -5273,12 +5836,12 @@ slower to compute.
 </p></dd></dl>
 </div>
 <div class="subsection-level-extent" id="invfreqs">
-<h4 class="subsection">3.12.4 invfreqs</h4>
+<h4 class="subsection">3.12.6 invfreqs</h4>
 <a class="index-entry-id" id="index-invfreqs"></a>
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-invfreqs_0028H_002cF_002cnB_002cnA_0029"><span class="category-def">Function File: </span><code class="def-type">[B,A] =</code> <strong class="def-name">invfreqs(H,F,nB,nA)</strong></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-invfreqs_0028H_002cF_002cnB_002cnA_002cW_0029"><span class="category-def">: </span><code class="def-type">[B,A] =</code> <strong class="def-name">invfreqs(H,F,nB,nA,W)</strong></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-invfreqs_0028H_002cF_002cnB_002cnA_002cW_002citer_002ctol_002c_0027trace_0027_0029"><span class="category-def">: </span><code class="def-type">[B,A] =</code> <strong class="def-name">invfreqs(H,F,nB,nA,W,iter,tol,'trace')</strong></dt>
+<dt class="deftypefn def-line" id="index-invfreqs_0028H_002cF_002cnB_002cnA_0029"><span class="category-def">Function File: </span><span><code class="def-type">[B,A] =</code> <strong class="def-name">invfreqs(H,F,nB,nA)</strong></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-invfreqs_0028H_002cF_002cnB_002cnA_002cW_0029"><span><code class="def-type">[B,A] =</code> <strong class="def-name">invfreqs(H,F,nB,nA,W)</strong></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-invfreqs_0028H_002cF_002cnB_002cnA_002cW_002citer_002ctol_002c_0027trace_0027_0029"><span><code class="def-type">[B,A] =</code> <strong class="def-name">invfreqs(H,F,nB,nA,W,iter,tol,'trace')</strong></span></dt>
 <dd><p>Fit filter B(s)/A(s)to the complex frequency response H at frequency
  points F.
 </p>
@@ -5315,12 +5878,12 @@ slower to compute.
 </dd></dl>
 </div>
 <div class="subsection-level-extent" id="invfreqz">
-<h4 class="subsection">3.12.5 invfreqz</h4>
+<h4 class="subsection">3.12.7 invfreqz</h4>
 <a class="index-entry-id" id="index-invfreqz"></a>
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-invfreqz_0028H_002cF_002cnB_002cnA_0029"><span class="category-def">Function File: </span><code class="def-type">[B,A] =</code> <strong class="def-name">invfreqz(H,F,nB,nA)</strong></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-invfreqz_0028H_002cF_002cnB_002cnA_002cW_0029"><span class="category-def">: </span><code class="def-type">[B,A] =</code> <strong class="def-name">invfreqz(H,F,nB,nA,W)</strong></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-invfreqz_0028H_002cF_002cnB_002cnA_002cW_002citer_002ctol_002c_0027trace_0027_0029"><span class="category-def">: </span><code class="def-type">[B,A] =</code> <strong class="def-name">invfreqz(H,F,nB,nA,W,iter,tol,'trace')</strong></dt>
+<dt class="deftypefn def-line" id="index-invfreqz_0028H_002cF_002cnB_002cnA_0029"><span class="category-def">Function File: </span><span><code class="def-type">[B,A] =</code> <strong class="def-name">invfreqz(H,F,nB,nA)</strong></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-invfreqz_0028H_002cF_002cnB_002cnA_002cW_0029"><span><code class="def-type">[B,A] =</code> <strong class="def-name">invfreqz(H,F,nB,nA,W)</strong></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-invfreqz_0028H_002cF_002cnB_002cnA_002cW_002citer_002ctol_002c_0027trace_0027_0029"><span><code class="def-type">[B,A] =</code> <strong class="def-name">invfreqz(H,F,nB,nA,W,iter,tol,'trace')</strong></span></dt>
 <dd><p>Fit filter B(z)/A(z)to the complex frequency response H at frequency
  points F.
 </p>
@@ -5351,11 +5914,11 @@ slower to compute.
 </dd></dl>
 </div>
 <div class="subsection-level-extent" id="levinson">
-<h4 class="subsection">3.12.6 levinson</h4>
+<h4 class="subsection">3.12.8 levinson</h4>
 <a class="index-entry-id" id="index-levinson"></a>
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-levinson-1"><span class="category-def">Function File: </span><code class="def-type">[<var class="var">a</var>, <var class="var">v</var>, <var class="var">ref</var>] =</code> <strong class="def-name">levinson</strong> <code class="def-code-arguments">(<var class="var">acf</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-levinson-2"><span class="category-def">Function File: </span><code class="def-type">[&hellip;] =</code> <strong class="def-name">levinson</strong> <code class="def-code-arguments">(<var class="var">acf</var>, <var class="var">p</var>)</code></dt>
+<dt class="deftypefn def-line" id="index-levinson-1"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">a</var>, <var class="var">v</var>, <var class="var">ref</var>] =</code> <strong class="def-name">levinson</strong> <code class="def-code-arguments">(<var class="var">acf</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-levinson-2"><span class="category-def">Function File: </span><span><code class="def-type">[&hellip;] =</code> <strong class="def-name">levinson</strong> <code class="def-code-arguments">(<var class="var">acf</var>, <var class="var">p</var>)</code></span></dt>
 <dd>
 <p>Use the Durbin-Levinson algorithm to solve:
     toeplitz(acf(1:p)) * x = -acf(2:p+1).
@@ -5379,13 +5942,13 @@ slower to compute.
 </p></dd></dl>
 </div>
 <div class="subsection-level-extent" id="lpc">
-<h4 class="subsection">3.12.7 lpc</h4>
+<h4 class="subsection">3.12.9 lpc</h4>
 <a class="index-entry-id" id="index-lpc"></a>
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-lpc-1"><span class="category-def">Function File: </span><code class="def-type"><var class="var">a</var> =</code> <strong class="def-name">lpc</strong> <code class="def-code-arguments">(<var class="var">x</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-lpc-2"><span class="category-def">Function File: </span><code class="def-type"><var class="var">a</var> =</code> <strong class="def-name">lpc</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">p</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-lpc-3"><span class="category-def">Function File: </span><code class="def-type">[<var class="var">a</var>, <var class="var">g</var>] =</code> <strong class="def-name">lpc</strong> <code class="def-code-arguments">(&hellip;)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-lpc-4"><span class="category-def">Function File: </span><code class="def-type">[<var class="var">a</var>, <var class="var">g</var>] =</code> <strong class="def-name">lpc</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">p</var>)</code></dt>
+<dt class="deftypefn def-line" id="index-lpc-1"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">a</var> =</code> <strong class="def-name">lpc</strong> <code class="def-code-arguments">(<var class="var">x</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-lpc-2"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">a</var> =</code> <strong class="def-name">lpc</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">p</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-lpc-3"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">a</var>, <var class="var">g</var>] =</code> <strong class="def-name">lpc</strong> <code class="def-code-arguments">(&hellip;)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-lpc-4"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">a</var>, <var class="var">g</var>] =</code> <strong class="def-name">lpc</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">p</var>)</code></span></dt>
 <dd>
 <p>Determines the forward linear predictor by minimizing the prediction error
  in the least squares sense. Use the Durbin-Levinson algorithm to solve
@@ -5416,8 +5979,8 @@ slower to compute.
 <h4 class="subsection">3.13.1 data2fun</h4>
 <a class="index-entry-id" id="index-data2fun"></a>
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-data2fun-1"><span class="category-def">Function File: </span><code class="def-type">[<var class="var">fhandle</var>, <var class="var">fullname</var>] =</code> <strong class="def-name">data2fun</strong> <code class="def-code-arguments">(<var class="var">ti</var>, <var class="var">yi</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-data2fun-2"><span class="category-def">Function File: </span><code class="def-type">[&hellip;] =</code> <strong class="def-name">data2fun</strong> <code class="def-code-arguments">(&hellip;, <var class="var">property</var>, <var class="var">value</var>)</code></dt>
+<dt class="deftypefn def-line" id="index-data2fun-1"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">fhandle</var>, <var class="var">fullname</var>] =</code> <strong class="def-name">data2fun</strong> <code class="def-code-arguments">(<var class="var">ti</var>, <var class="var">yi</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-data2fun-2"><span class="category-def">Function File: </span><span><code class="def-type">[&hellip;] =</code> <strong class="def-name">data2fun</strong> <code class="def-code-arguments">(&hellip;, <var class="var">property</var>, <var class="var">value</var>)</code></span></dt>
 <dd><p>Create a vectorized function based on data samples using interpolation.
 </p>
 <p>The values given in <var class="var">yi</var> (N-by-k matrix) correspond to evaluations of the
@@ -5449,9 +6012,9 @@ slower to compute.
 <h4 class="subsection">3.13.2 decimate</h4>
 <a class="index-entry-id" id="index-decimate"></a>
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-decimate-1"><span class="category-def">Function File: </span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">decimate</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">q</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-decimate-2"><span class="category-def">Function File: </span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">decimate</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">q</var>, <var class="var">n</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-decimate-3"><span class="category-def">Function File: </span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">decimate</strong> <code class="def-code-arguments">(&hellip;, &quot;fir&quot;)</code></dt>
+<dt class="deftypefn def-line" id="index-decimate-1"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">decimate</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">q</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-decimate-2"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">decimate</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">q</var>, <var class="var">n</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-decimate-3"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">decimate</strong> <code class="def-code-arguments">(&hellip;, &quot;fir&quot;)</code></span></dt>
 <dd>
 <p>Downsample the signal <var class="var">x</var> by a reduction factor of <var class="var">q</var>. A lowpass
  antialiasing filter is applied to the signal prior to reducing the input
@@ -5484,8 +6047,8 @@ slower to compute.
 <h4 class="subsection">3.13.3 downsample</h4>
 <a class="index-entry-id" id="index-downsample"></a>
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-downsample-1"><span class="category-def">Function File: </span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">downsample</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">n</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-downsample-2"><span class="category-def">Function File: </span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">downsample</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">n</var>, <var class="var">offset</var>)</code></dt>
+<dt class="deftypefn def-line" id="index-downsample-1"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">downsample</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">n</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-downsample-2"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">downsample</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">n</var>, <var class="var">offset</var>)</code></span></dt>
 <dd><p>Downsample the signal, selecting every <var class="var">n</var>th element.  If <var class="var">x</var>
  is a matrix, downsample every column.
 </p>
@@ -5503,9 +6066,9 @@ slower to compute.
 <h4 class="subsection">3.13.4 interp</h4>
 <a class="index-entry-id" id="index-interp"></a>
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-interp-1"><span class="category-def">Function File: </span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">interp</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">q</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-interp-2"><span class="category-def">Function File: </span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">interp</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">q</var>, <var class="var">n</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-interp-3"><span class="category-def">Function File: </span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">interp</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">q</var>, <var class="var">n</var>, <var class="var">Wc</var>)</code></dt>
+<dt class="deftypefn def-line" id="index-interp-1"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">interp</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">q</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-interp-2"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">interp</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">q</var>, <var class="var">n</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-interp-3"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">interp</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">q</var>, <var class="var">n</var>, <var class="var">Wc</var>)</code></span></dt>
 <dd>
 <p>Upsample the signal x by a factor of q, using an order 2*q*n+1 FIR
  filter. Note that q must be an integer for this rate change method.
@@ -5527,8 +6090,8 @@ slower to compute.
 <h4 class="subsection">3.13.5 resample</h4>
 <a class="index-entry-id" id="index-resample"></a>
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-resample-1"><span class="category-def">Function File: </span><code class="def-type">[<var class="var">y</var>, <var class="var">h</var>] =</code> <strong class="def-name">resample</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">p</var>, <var class="var">q</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-resample-2"><span class="category-def">Function File: </span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">resample</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">p</var>, <var class="var">q</var>, <var class="var">h</var>)</code></dt>
+<dt class="deftypefn def-line" id="index-resample-1"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">y</var>, <var class="var">h</var>] =</code> <strong class="def-name">resample</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">p</var>, <var class="var">q</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-resample-2"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">resample</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">p</var>, <var class="var">q</var>, <var class="var">h</var>)</code></span></dt>
 <dd><p>Change the sample rate of <var class="var">x</var> by a factor of <var class="var">p</var>/<var class="var">q</var>.  This is
  performed using a polyphase algorithm.  The impulse response <var class="var">h</var> of
  the antialiasing filter is either specified or either designed with a
@@ -5547,16 +6110,45 @@ slower to compute.
 <h4 class="subsection">3.13.6 upfirdn</h4>
 <a class="index-entry-id" id="index-upfirdn"></a>
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-upfirdn-1"><span class="category-def">Loadable Function: </span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">upfirdn</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">h</var>, <var class="var">p</var>, <var class="var">q</var>)</code></dt>
+<dt class="deftypefn def-line" id="index-upfirdn-1"><span class="category-def">Loadable Function: </span><span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">upfirdn</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">h</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-upfirdn-2"><span class="category-def">Loadable Function: </span><span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">upfirdn</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">h</var>, <var class="var">p</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-upfirdn-3"><span class="category-def">Loadable Function: </span><span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">upfirdn</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">h</var>, <var class="var">p</var>, <var class="var">q</var>)</code></span></dt>
 <dd><p>Upsample, FIR filtering, and downsample.
+</p>
+<p><var class="var">x</var> is the input and <var class="var">y</var> is the output. The function performs three operations:
+</p><ol class="enumerate">
+<li> Upsample the input <var class="var">x</var> by a factor of <var class="var">p</var> (insert zeros).
+</li><li> FIR filter the upsampled signal with the impulse response <var class="var">h</var>.
+</li><li> Downsample the result by a factor of <var class="var">q</var> (keep every <var class="var">q</var>-th sample).
+</li></ol>
+<p>Other input parameters:
+</p>
+<dl class="table">
+<dt><var class="var">h</var></dt>
+<dd><p>FIR filter impulse response, specified as a vector.  The filter is applied
+after upsampling and before downsampling.
+</p>
+</dd>
+<dt><var class="var">p</var></dt>
+<dd><p>Upsampling factor, should be a positive integer.  <code class="code"><var class="var">p</var> = 1</code>
+means no upsampling.  Default: 1.
+</p>
+</dd>
+<dt><var class="var">q</var></dt>
+<dd><p>Downsampling factor, should be a positive integer.  <code class="code"><var class="var">q</var> = 1</code>
+means no downsampling.  Default: 1.
+</p></dd>
+</dl>
+<p>The FIR filter <var class="var">h</var> should typically be a lowpass filter designed to
+suppress imaging artifacts (for upsampling) and aliasing (for downsampling).
 </p></dd></dl>
 </div>
 <div class="subsection-level-extent" id="upsample">
 <h4 class="subsection">3.13.7 upsample</h4>
 <a class="index-entry-id" id="index-upsample"></a>
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-upsample-1"><span class="category-def">Function File: </span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">upsample</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">n</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-upsample-2"><span class="category-def">Function File: </span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">upsample</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">n</var>, <var class="var">offset</var>)</code></dt>
+<dt class="deftypefn def-line" id="index-upsample-1"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">upsample</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">n</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-upsample-2"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">upsample</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">n</var>, <var class="var">offset</var>)</code></span></dt>
 <dd><p>Upsample the signal, inserting <var class="var">n</var>-1 zeros between every element.
 </p>
 <p>If <var class="var">x</var> is a matrix, upsample every column.
@@ -5576,13 +6168,13 @@ slower to compute.
 <h4 class="subsection">3.14.1 statelevels</h4>
 <a class="index-entry-id" id="index-statelevels"></a>
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-statelevels-1"><span class="category-def">Function File: </span><code class="def-type"><var class="var">levels</var> =</code> <strong class="def-name">statelevels</strong> <code class="def-code-arguments">(<var class="var">A</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-statelevels-2"><span class="category-def">Function File: </span><code class="def-type"><var class="var">levels</var> =</code> <strong class="def-name">statelevels</strong> <code class="def-code-arguments">(<var class="var">A</var>, <var class="var">nbins</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-statelevels-3"><span class="category-def">Function File: </span><code class="def-type"><var class="var">levels</var> =</code> <strong class="def-name">statelevels</strong> <code class="def-code-arguments">(<var class="var">A</var>, <var class="var">nbins</var>, <var class="var">method</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-statelevels-4"><span class="category-def">Function File: </span><code class="def-type"><var class="var">levels</var> =</code> <strong class="def-name">statelevels</strong> <code class="def-code-arguments">(<var class="var">A</var>, <var class="var">nbins</var>, <var class="var">method</var>, <var class="var">bounds</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-statelevels-5"><span class="category-def">Function File: </span><code class="def-type">[<var class="var">levels</var>, <var class="var">histograms</var>] =</code> <strong class="def-name">statelevels</strong> <code class="def-code-arguments">(&hellip;)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-statelevels-6"><span class="category-def">Function File: </span><code class="def-type">[<var class="var">levels</var>, <var class="var">histograms</var>, <var class="var">binlevels</var>] =</code> <strong class="def-name">statelevels</strong> <code class="def-code-arguments">(&hellip;)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-statelevels-7"><span class="category-def">Function File: </span><strong class="def-name">statelevels</strong> <code class="def-code-arguments">(&hellip;)</code></dt>
+<dt class="deftypefn def-line" id="index-statelevels-1"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">levels</var> =</code> <strong class="def-name">statelevels</strong> <code class="def-code-arguments">(<var class="var">A</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-statelevels-2"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">levels</var> =</code> <strong class="def-name">statelevels</strong> <code class="def-code-arguments">(<var class="var">A</var>, <var class="var">nbins</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-statelevels-3"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">levels</var> =</code> <strong class="def-name">statelevels</strong> <code class="def-code-arguments">(<var class="var">A</var>, <var class="var">nbins</var>, <var class="var">method</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-statelevels-4"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">levels</var> =</code> <strong class="def-name">statelevels</strong> <code class="def-code-arguments">(<var class="var">A</var>, <var class="var">nbins</var>, <var class="var">method</var>, <var class="var">bounds</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-statelevels-5"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">levels</var>, <var class="var">histograms</var>] =</code> <strong class="def-name">statelevels</strong> <code class="def-code-arguments">(&hellip;)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-statelevels-6"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">levels</var>, <var class="var">histograms</var>, <var class="var">binlevels</var>] =</code> <strong class="def-name">statelevels</strong> <code class="def-code-arguments">(&hellip;)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-statelevels-7"><span class="category-def">Function File: </span><span><strong class="def-name">statelevels</strong> <code class="def-code-arguments">(&hellip;)</code></span></dt>
 <dd><p>Estimate state-level for bilevel waveform <var class="var">A</var> using histogram method
 </p>
 <p>INPUTS:
@@ -5620,15 +6212,46 @@ slower to compute.
 <hr>
 </div>
 </div>
+<div class="section-level-extent" id="Plotting">
+<h3 class="section" id="Plotting-1">3.15 Plotting</h3>
+<a class="index-entry-id" id="index-Plotting"></a>
+<div class="subsection-level-extent" id="strips">
+<h4 class="subsection">3.15.1 strips</h4>
+<a class="index-entry-id" id="index-strips"></a>
+<dl class="first-deftypefn def-block">
+<dt class="deftypefn def-line" id="index-strips-1"><span class="category-def">Function File: </span><span><strong class="def-name">strips</strong> <code class="def-code-arguments">(<var class="var">x</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-strips-2"><span class="category-def">Function File: </span><span><strong class="def-name">strips</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">n</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-strips-3"><span class="category-def">Function File: </span><span><strong class="def-name">strips</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">sd</var>, <var class="var">fs</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-strips-4"><span class="category-def">Function File: </span><span><strong class="def-name">strips</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">sd</var>, <var class="var">fs</var>, <var class="var">scale</var>)</code></span></dt>
+<dd><p>Cut signal data into horizontal strips and plot for visualization.
+</p>
+<p><code class="code">strips (<var class="var">x</var>)</code> plots the input signal <var class="var">x</var> in horizontal strips
+ of length 250 samples each.
+</p>
+<p><code class="code">strips (<var class="var">x</var>, <var class="var">n</var>)</code> uses strips of length <var class="var">n</var> samples.
+</p>
+<p><code class="code">strips (<var class="var">x</var>, <var class="var">sd</var>, <var class="var">fs</var>)</code> uses strips of duration
+<var class="var">sd</var> seconds given the sample rate <var class="var">fs</var> (in Hz). The strip length
+ in samples is calculated as <code class="code">ceil (<var class="var">sd</var> * <var class="var">fs</var>)</code>.
+</p>
+<p><code class="code">strips (<var class="var">x</var>, <var class="var">sd</var>, <var class="var">fs</var>, <var class="var">scale</var>)</code> scales the
+ vertical axis of each strip by the factor <var class="var">scale</var>.
+</p>
+<p>If <var class="var">x</var> is a matrix, each column is plotted as a separate strip.
+</p>
+</dd></dl>
+<hr>
+</div>
+</div>
 <div class="section-level-extent" id="Utility">
-<h3 class="section" id="Utility-1">3.15 Utility</h3>
+<h3 class="section" id="Utility-1">3.16 Utility</h3>
 <a class="index-entry-id" id="index-Utility"></a>
 <div class="subsection-level-extent" id="buffer-1">
-<h4 class="subsection">3.15.1 buffer</h4>
+<h4 class="subsection">3.16.1 buffer</h4>
 <a class="index-entry-id" id="index-buffer-1"></a>
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-buffer-4"><span class="category-def">Function File: </span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">buffer</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">n</var>, <var class="var">p</var>, <var class="var">opt</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-buffer-5"><span class="category-def">Function File: </span><code class="def-type">[<var class="var">y</var>, <var class="var">z</var>, <var class="var">opt</var>] =</code> <strong class="def-name">buffer</strong> <code class="def-code-arguments">(&hellip;)</code></dt>
+<dt class="deftypefn def-line" id="index-buffer-4"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">buffer</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">n</var>, <var class="var">p</var>, <var class="var">opt</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-buffer-5"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">y</var>, <var class="var">z</var>, <var class="var">opt</var>] =</code> <strong class="def-name">buffer</strong> <code class="def-code-arguments">(&hellip;)</code></span></dt>
 <dd><p>Buffer a signal into a data frame. The arguments to <code class="code">buffer</code> are
 </p>
 <dl class="table">
@@ -5653,7 +6276,7 @@ slower to compute.
 <var class="var">opt</var> is the string &rsquo;nodelay&rsquo;, then the first value of <var class="var">y</var>
  corresponds to the first value of <var class="var">x</var>.
 </p>
-<p>In the can of an underlap, <var class="var">opt</var> must be an integer between 0 and
+<p>In the case of an underlap, <var class="var">opt</var> must be an integer between 0 and
 <code class="code">-<var class="var">p</var></code>. The represents the initial underlap of the first
  column of <var class="var">y</var>.
 </p>
@@ -5671,10 +6294,10 @@ slower to compute.
 </p></dd></dl>
 </div>
 <div class="subsection-level-extent" id="clustersegment">
-<h4 class="subsection">3.15.2 clustersegment</h4>
+<h4 class="subsection">3.16.2 clustersegment</h4>
 <a class="index-entry-id" id="index-clustersegment"></a>
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-clustersegment-1"><span class="category-def">Function File: </span><code class="def-type"><var class="var">clusteridx</var> =</code> <strong class="def-name">clustersegment</strong> <code class="def-code-arguments">(<var class="var">unos</var>)</code></dt>
+<dt class="deftypefn def-line" id="index-clustersegment-1"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">clusteridx</var> =</code> <strong class="def-name">clustersegment</strong> <code class="def-code-arguments">(<var class="var">unos</var>)</code></span></dt>
 <dd><p>Calculate boundary indexes of clusters of 1&rsquo;s.
 </p>
 <p>The function calculates the initial index and end index of the sequences of
@@ -5694,11 +6317,11 @@ slower to compute.
 </dd></dl>
 </div>
 <div class="subsection-level-extent" id="fracshift">
-<h4 class="subsection">3.15.3 fracshift</h4>
+<h4 class="subsection">3.16.3 fracshift</h4>
 <a class="index-entry-id" id="index-fracshift"></a>
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-fracshift-1"><span class="category-def">Function File: </span><code class="def-type">[<var class="var">y</var>, <var class="var">h</var>] =</code> <strong class="def-name">fracshift</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">d</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-fracshift-2"><span class="category-def">Function File: </span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">fracshift</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">d</var>, <var class="var">h</var>)</code></dt>
+<dt class="deftypefn def-line" id="index-fracshift-1"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">y</var>, <var class="var">h</var>] =</code> <strong class="def-name">fracshift</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">d</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-fracshift-2"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">fracshift</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">d</var>, <var class="var">h</var>)</code></span></dt>
 <dd><p>Shift the series <var class="var">x</var> by a (possibly fractional) number of samples <var class="var">d</var>.
  The interpolator <var class="var">h</var> is either specified or either designed with a
  Kaiser-windowed sinecard.
@@ -5706,13 +6329,47 @@ slower to compute.
 <p><strong class="strong">See also:</strong> circshift.
 </p></dd></dl>
 </div>
+<div class="subsection-level-extent" id="is2rc">
+<h4 class="subsection">3.16.4 is2rc</h4>
+<a class="index-entry-id" id="index-is2rc"></a>
+<dl class="first-deftypefn def-block">
+<dt class="deftypefn def-line" id="index-is2rc-1"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">k</var> =</code> <strong class="def-name">is2rc</strong> <code class="def-code-arguments">(<var class="var">is</var>)</code></span></dt>
+<dd>
+<p>Convert inverse sine parameters to reflection coefficients.
+</p>
+<p>The inverse sine parameters <var class="var">k</var> (real numeric vector or matrix)
+ are converted to reflection coefficients <var class="var">is</var> using the formula:
+</p>
+<div class="example">
+<pre class="example-preformatted"> k(i) = sin((pi / 2) * is(i))
+</pre></div>
+<p><strong class="strong">See also:</strong> rc2is.
+</p></dd></dl>
+</div>
+<div class="subsection-level-extent" id="lar2rc">
+<h4 class="subsection">3.16.5 lar2rc</h4>
+<a class="index-entry-id" id="index-lar2rc"></a>
+<dl class="first-deftypefn def-block">
+<dt class="deftypefn def-line" id="index-lar2rc-1"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">k</var> =</code> <strong class="def-name">lar2rc</strong> <code class="def-code-arguments">(<var class="var">g</var>)</code></span></dt>
+<dd>
+<p>Convert log area ratio to reflection coefficients.
+</p>
+<p>The log area ratio parameters <var class="var">g</var> (real numeric vector or matrix)
+ are converted to reflection coefficients <var class="var">k</var> using the formula:
+</p>
+<div class="example">
+<pre class="example-preformatted"> k(i) = -tanh(-g(i) / 2)
+</pre></div>
+<p><strong class="strong">See also:</strong> rc2lar.
+</p></dd></dl>
+</div>
 <div class="subsection-level-extent" id="marcumq">
-<h4 class="subsection">3.15.4 marcumq</h4>
+<h4 class="subsection">3.16.6 marcumq</h4>
 <a class="index-entry-id" id="index-marcumq"></a>
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-marcumq-1"><span class="category-def">Function File: </span><code class="def-type"><var class="var">q</var> =</code> <strong class="def-name">marcumq</strong> <code class="def-code-arguments">(<var class="var">a</var>, <var class="var">b</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-marcumq-2"><span class="category-def">Function File: </span><code class="def-type"><var class="var">q</var> =</code> <strong class="def-name">marcumq</strong> <code class="def-code-arguments">(<var class="var">a</var>, <var class="var">b</var>, <var class="var">m</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-marcumq-3"><span class="category-def">Function File: </span><code class="def-type"><var class="var">q</var> =</code> <strong class="def-name">marcumq</strong> <code class="def-code-arguments">(<var class="var">a</var>, <var class="var">b</var>, <var class="var">m</var>, <var class="var">tol</var>)</code></dt>
+<dt class="deftypefn def-line" id="index-marcumq-1"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">q</var> =</code> <strong class="def-name">marcumq</strong> <code class="def-code-arguments">(<var class="var">a</var>, <var class="var">b</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-marcumq-2"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">q</var> =</code> <strong class="def-name">marcumq</strong> <code class="def-code-arguments">(<var class="var">a</var>, <var class="var">b</var>, <var class="var">m</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-marcumq-3"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">q</var> =</code> <strong class="def-name">marcumq</strong> <code class="def-code-arguments">(<var class="var">a</var>, <var class="var">b</var>, <var class="var">m</var>, <var class="var">tol</var>)</code></span></dt>
 <dd>
 <p>Compute the generalized Marcum Q function of order <var class="var">m</var> with
  noncentrality parameter <var class="var">a</var> and argument <var class="var">b</var>.  If the order
@@ -5736,10 +6393,10 @@ slower to compute.
 </dd></dl>
 </div>
 <div class="subsection-level-extent" id="primitive">
-<h4 class="subsection">3.15.5 primitive</h4>
+<h4 class="subsection">3.16.7 primitive</h4>
 <a class="index-entry-id" id="index-primitive"></a>
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-primitive-1"><span class="category-def">Function File: </span><code class="def-type"><var class="var">F</var> =</code> <strong class="def-name">primitive</strong> <code class="def-code-arguments">(<var class="var">f</var>, <var class="var">t</var>, <var class="var">F0</var>)</code></dt>
+<dt class="deftypefn def-line" id="index-primitive-1"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">F</var> =</code> <strong class="def-name">primitive</strong> <code class="def-code-arguments">(<var class="var">f</var>, <var class="var">t</var>, <var class="var">F0</var>)</code></span></dt>
 <dd><p>Calculate the primitive of a function.
 </p>
 <p>The function approximates the primitive (indefinite integral) of the
@@ -5763,11 +6420,45 @@ slower to compute.
 <p><strong class="strong">See also:</strong> quadgk, cumsum.
 </p></dd></dl>
 </div>
+<div class="subsection-level-extent" id="rc2is">
+<h4 class="subsection">3.16.8 rc2is</h4>
+<a class="index-entry-id" id="index-rc2is"></a>
+<dl class="first-deftypefn def-block">
+<dt class="deftypefn def-line" id="index-rc2is-1"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">is</var> =</code> <strong class="def-name">rc2is</strong> <code class="def-code-arguments">(<var class="var">k</var>)</code></span></dt>
+<dd>
+<p>Convert reflection coefficients to inverse sine parameters.
+</p>
+<p>The reflection coefficients <var class="var">k</var> (real numeric vector or matrix)
+ are converted to inverse sine parameters <var class="var">is</var> using the formula:
+</p>
+<div class="example">
+<pre class="example-preformatted"> is(i) = (2 / pi) * asin(k(i))
+</pre></div>
+<p><strong class="strong">See also:</strong> is2rc.
+</p></dd></dl>
+</div>
+<div class="subsection-level-extent" id="rc2lar">
+<h4 class="subsection">3.16.9 rc2lar</h4>
+<a class="index-entry-id" id="index-rc2lar"></a>
+<dl class="first-deftypefn def-block">
+<dt class="deftypefn def-line" id="index-rc2lar-1"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">g</var> =</code> <strong class="def-name">rc2lar</strong> <code class="def-code-arguments">(<var class="var">k</var>)</code></span></dt>
+<dd>
+<p>Convert reflection coefficients to log area ratio.
+</p>
+<p>The reflection coefficients <var class="var">k</var> (real numeric vector or matrix)
+ are converted to log area ratio parameters <var class="var">g</var> using the formula:
+</p>
+<div class="example">
+<pre class="example-preformatted"> g(i) = -2 * atanh(-k(i))
+</pre></div>
+<p><strong class="strong">See also:</strong> lar2rc.
+</p></dd></dl>
+</div>
 <div class="subsection-level-extent" id="sampled2continuous">
-<h4 class="subsection">3.15.6 sampled2continuous</h4>
+<h4 class="subsection">3.16.10 sampled2continuous</h4>
 <a class="index-entry-id" id="index-sampled2continuous"></a>
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-sampled2continuous-1"><span class="category-def">Function File: </span><code class="def-type"><var class="var">xt</var> =</code> <strong class="def-name">sampled2continuous</strong> <code class="def-code-arguments">(<var class="var">xn</var>, <var class="var">T</var>, <var class="var">t</var>)</code></dt>
+<dt class="deftypefn def-line" id="index-sampled2continuous-1"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">xt</var> =</code> <strong class="def-name">sampled2continuous</strong> <code class="def-code-arguments">(<var class="var">xn</var>, <var class="var">T</var>, <var class="var">t</var>)</code></span></dt>
 <dd>
 <p>Calculate the x(t) reconstructed
  from samples x[n] sampled at a rate 1/T samples
@@ -5783,11 +6474,11 @@ slower to compute.
 </p></dd></dl>
 </div>
 <div class="subsection-level-extent" id="schtrig">
-<h4 class="subsection">3.15.7 schtrig</h4>
+<h4 class="subsection">3.16.11 schtrig</h4>
 <a class="index-entry-id" id="index-schtrig"></a>
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-_0028x_002clvl_002crst_003d1_0029"><span class="category-def"><var class="var">v</var> =: </span><code class="def-type">schtrig</code> <strong class="def-name">(<var class="var">x</var>,<var class="var">lvl</var>,<var class="var">rst</var>=1)</strong></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-_0028_002e_002e_002e_0029"><span class="category-def">[<var class="var">v</var>,<var class="var">rng</var>] =: </span><code class="def-type">schtrig</code> <strong class="def-name">(&hellip;)</strong></dt>
+<dt class="deftypefn def-line" id="index-_0028x_002clvl_002crst_003d1_0029"><span class="category-def"><var class="var">v</var> =: </span><span><code class="def-type">schtrig</code> <strong class="def-name">(<var class="var">x</var>,<var class="var">lvl</var>,<var class="var">rst</var>=1)</strong></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-_0028_002e_002e_002e_0029"><span class="category-def">[<var class="var">v</var>,<var class="var">rng</var>] =: </span><span><code class="def-type">schtrig</code> <strong class="def-name">(&hellip;)</strong></span></dt>
 <dd><p>Implements a multisignal Schmitt trigger with levels <var class="var">lvl</var>.
 </p>
 <p>The triger works along the first dimension of the 2-dimensional array <var class="var">x</var>.
@@ -5830,11 +6521,11 @@ slower to compute.
 </p></dd></dl>
 </div>
 <div class="subsection-level-extent" id="upsamplefill">
-<h4 class="subsection">3.15.8 upsamplefill</h4>
+<h4 class="subsection">3.16.12 upsamplefill</h4>
 <a class="index-entry-id" id="index-upsamplefill"></a>
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-upsamplefill-1"><span class="category-def">Function File: </span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">upsamplefill</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">v</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-upsamplefill-2"><span class="category-def">Function File: </span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">upsamplefill</strong> <code class="def-code-arguments">(&hellip;, <var class="var">copy</var>)</code></dt>
+<dt class="deftypefn def-line" id="index-upsamplefill-1"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">upsamplefill</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">v</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-upsamplefill-2"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">upsamplefill</strong> <code class="def-code-arguments">(&hellip;, <var class="var">copy</var>)</code></span></dt>
 <dd><p>Upsamples a vector interleaving given values or copies of the vector elements.
 </p>
 <p>The values in the vector <var class="var">v</var> are placed between the elements of <var class="var">x</var>.
@@ -5865,30 +6556,30 @@ slower to compute.
 </p></dd></dl>
 </div>
 <div class="subsection-level-extent" id="wkeep">
-<h4 class="subsection">3.15.9 wkeep</h4>
+<h4 class="subsection">3.16.13 wkeep</h4>
 <a class="index-entry-id" id="index-wkeep"></a>
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-wkeep-1"><span class="category-def">Function File: </span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">wkeep</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">l</var>)</code></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-wkeep-2"><span class="category-def">Function File: </span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">wkeep</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">l</var>, <var class="var">opt</var>)</code></dt>
+<dt class="deftypefn def-line" id="index-wkeep-1"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">wkeep</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">l</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-wkeep-2"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">wkeep</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">l</var>, <var class="var">opt</var>)</code></span></dt>
 <dd><p>Extract the elements of <var class="var">x</var> of size <var class="var">l</var> from the center, the right
  or the left.
 </p></dd></dl>
 </div>
 <div class="subsection-level-extent" id="wrev">
-<h4 class="subsection">3.15.10 wrev</h4>
+<h4 class="subsection">3.16.14 wrev</h4>
 <a class="index-entry-id" id="index-wrev"></a>
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-wrev-1"><span class="category-def">Function File: </span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">wrev</strong> <code class="def-code-arguments">(<var class="var">x</var>)</code></dt>
+<dt class="deftypefn def-line" id="index-wrev-1"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">wrev</strong> <code class="def-code-arguments">(<var class="var">x</var>)</code></span></dt>
 <dd><p>Reverse the order of the element of the vector <var class="var">x</var>.
 </p>
 <p><strong class="strong">See also:</strong> flipud, fliplr.
 </p></dd></dl>
 </div>
 <div class="subsection-level-extent" id="zerocrossing">
-<h4 class="subsection">3.15.11 zerocrossing</h4>
+<h4 class="subsection">3.16.15 zerocrossing</h4>
 <a class="index-entry-id" id="index-zerocrossing"></a>
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-zerocrossing-1"><span class="category-def">Function File: </span><code class="def-type"><var class="var">x0</var> =</code> <strong class="def-name">zerocrossing</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">y</var>)</code></dt>
+<dt class="deftypefn def-line" id="index-zerocrossing-1"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">x0</var> =</code> <strong class="def-name">zerocrossing</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">y</var>)</code></span></dt>
 <dd><p>Estimates the points at which a given waveform y=y(x) crosses the
  x-axis using linear interpolation.
 </p>

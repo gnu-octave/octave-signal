@@ -2,7 +2,7 @@
 layout: "default"
 permalink: "/functions/6_wvtool/"
 pkg_name: "signal"
-pkg_version: "1.4.7"
+pkg_version: "1.4.8"
 pkg_description: "Signal processing tools, including filtering, windowing and display functions."
 title: "Signal Toolkit - wvtool"
 category: "Utility"
@@ -70,6 +70,10 @@ navigation:
   name: "&nbsp;&nbsp;Pulse Metrics"
   url: "/functions/#13_PulseMetrics"
   subitems:
+- id: "8_Plotting"
+  name: "&nbsp;&nbsp;Plotting"
+  url: "/functions/#8_Plotting"
+  subitems:
 - id: "7_Utility"
   name: "&nbsp;&nbsp;Utility"
   url: "/functions/#7_Utility"
@@ -82,10 +86,10 @@ navigation:
   url: "/manual"
 ---
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-_0028w_002c"><span class="category-def">Function File: </span><span><code class="def-type">wvtool</code> <strong class="def-name">(<var class="var">w</var>,</strong> <code class="def-code-arguments">&hellip;)</code><a class="copiable-link" href="#index-_0028w_002c"></a></span></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-_0028_002e_002e_002e_002c"><span class="category-def">Function File: </span><span><code class="def-type">wvtool</code> <strong class="def-name">(&hellip;,</strong> <code class="def-code-arguments"><var class="var">options</var>)</code><a class="copiable-link" href="#index-_0028_002e_002e_002e_002c"></a></span></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-_0028title_002c"><span class="category-def">Function File: </span><span><code class="def-type">wvtool</code> <strong class="def-name">(<var class="var">title</var>,</strong> <code class="def-code-arguments">&hellip;)</code><a class="copiable-link" href="#index-_0028title_002c"></a></span></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-_003d"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">h</var></code> <strong class="def-name">=</strong> <code class="def-code-arguments">wvtool (&hellip;)</code><a class="copiable-link" href="#index-_003d"></a></span></dt>
+<dt class="deftypefn def-line" id="index-_0028w_002c"><span class="category-def">Function File: </span><span><code class="def-type">wvtool</code> <strong class="def-name">(<var class="var">w</var>,</strong> <code class="def-code-arguments">&hellip;)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-_0028_002e_002e_002e_002c"><span class="category-def">Function File: </span><span><code class="def-type">wvtool</code> <strong class="def-name">(&hellip;,</strong> <code class="def-code-arguments"><var class="var">options</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-_0028title_002c"><span class="category-def">Function File: </span><span><code class="def-type">wvtool</code> <strong class="def-name">(<var class="var">title</var>,</strong> <code class="def-code-arguments">&hellip;)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-_003d"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">h</var></code> <strong class="def-name">=</strong> <code class="def-code-arguments">wvtool (&hellip;)</code></span></dt>
 <dd><p>Plot time and frequency domain graphs of each vector of window function
  coefficients given in <var class="var">w</var> and any following arguments.  Given vectors
  must have the same length.

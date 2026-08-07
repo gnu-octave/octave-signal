@@ -2,7 +2,7 @@
 layout: "default"
 permalink: "/functions/5_chirp/"
 pkg_name: "signal"
-pkg_version: "1.4.7"
+pkg_version: "1.4.8"
 pkg_description: "Signal processing tools, including filtering, windowing and display functions."
 title: "Signal Toolkit - chirp"
 category: "Utility"
@@ -70,6 +70,10 @@ navigation:
   name: "&nbsp;&nbsp;Pulse Metrics"
   url: "/functions/#13_PulseMetrics"
   subitems:
+- id: "8_Plotting"
+  name: "&nbsp;&nbsp;Plotting"
+  url: "/functions/#8_Plotting"
+  subitems:
 - id: "7_Utility"
   name: "&nbsp;&nbsp;Utility"
   url: "/functions/#7_Utility"
@@ -82,12 +86,12 @@ navigation:
   url: "/manual"
 ---
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-chirp"><span class="category-def">Function File: </span><span><strong class="def-name">chirp</strong> <code class="def-code-arguments">(<var class="var">t</var>)</code><a class="copiable-link" href="#index-chirp"></a></span></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-chirp-1"><span class="category-def">Function File: </span><span><strong class="def-name">chirp</strong> <code class="def-code-arguments">(<var class="var">t</var>, <var class="var">f0</var>)</code><a class="copiable-link" href="#index-chirp-1"></a></span></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-chirp-2"><span class="category-def">Function File: </span><span><strong class="def-name">chirp</strong> <code class="def-code-arguments">(<var class="var">t</var>, <var class="var">f0</var>, <var class="var">t1</var>)</code><a class="copiable-link" href="#index-chirp-2"></a></span></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-chirp-3"><span class="category-def">Function File: </span><span><strong class="def-name">chirp</strong> <code class="def-code-arguments">(<var class="var">t</var>, <var class="var">f0</var>, <var class="var">t1</var>, <var class="var">f1</var>)</code><a class="copiable-link" href="#index-chirp-3"></a></span></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-chirp-4"><span class="category-def">Function File: </span><span><strong class="def-name">chirp</strong> <code class="def-code-arguments">(<var class="var">t</var>, <var class="var">f0</var>, <var class="var">t1</var>, <var class="var">f1</var>, <var class="var">shape</var>)</code><a class="copiable-link" href="#index-chirp-4"></a></span></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-chirp-5"><span class="category-def">Function File: </span><span><strong class="def-name">chirp</strong> <code class="def-code-arguments">(<var class="var">t</var>, <var class="var">f0</var>, <var class="var">t1</var>, <var class="var">f1</var>, <var class="var">shape</var>, <var class="var">phase</var>)</code><a class="copiable-link" href="#index-chirp-5"></a></span></dt>
+<dt class="deftypefn def-line" id="index-chirp"><span class="category-def">Function File: </span><span><strong class="def-name">chirp</strong> <code class="def-code-arguments">(<var class="var">t</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-chirp-1"><span class="category-def">Function File: </span><span><strong class="def-name">chirp</strong> <code class="def-code-arguments">(<var class="var">t</var>, <var class="var">f0</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-chirp-2"><span class="category-def">Function File: </span><span><strong class="def-name">chirp</strong> <code class="def-code-arguments">(<var class="var">t</var>, <var class="var">f0</var>, <var class="var">t1</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-chirp-3"><span class="category-def">Function File: </span><span><strong class="def-name">chirp</strong> <code class="def-code-arguments">(<var class="var">t</var>, <var class="var">f0</var>, <var class="var">t1</var>, <var class="var">f1</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-chirp-4"><span class="category-def">Function File: </span><span><strong class="def-name">chirp</strong> <code class="def-code-arguments">(<var class="var">t</var>, <var class="var">f0</var>, <var class="var">t1</var>, <var class="var">f1</var>, <var class="var">shape</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-chirp-5"><span class="category-def">Function File: </span><span><strong class="def-name">chirp</strong> <code class="def-code-arguments">(<var class="var">t</var>, <var class="var">f0</var>, <var class="var">t1</var>, <var class="var">f1</var>, <var class="var">shape</var>, <var class="var">phase</var>)</code></span></dt>
 <dd>
 <p>Evaluate a chirp signal at time <var class="var">t</var>.  A chirp signal is a frequency
  swept cosine wave.

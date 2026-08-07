@@ -2,7 +2,7 @@
 layout: "default"
 permalink: "/functions/5_firpm/"
 pkg_name: "signal"
-pkg_version: "1.4.7"
+pkg_version: "1.4.8"
 pkg_description: "Signal processing tools, including filtering, windowing and display functions."
 title: "Signal Toolkit - firpm"
 category: "Utility"
@@ -70,6 +70,10 @@ navigation:
   name: "&nbsp;&nbsp;Pulse Metrics"
   url: "/functions/#13_PulseMetrics"
   subitems:
+- id: "8_Plotting"
+  name: "&nbsp;&nbsp;Plotting"
+  url: "/functions/#8_Plotting"
+  subitems:
 - id: "7_Utility"
   name: "&nbsp;&nbsp;Utility"
   url: "/functions/#7_Utility"
@@ -82,14 +86,14 @@ navigation:
   url: "/manual"
 ---
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-firpm"><span class="category-def">Loadable Function: </span><span><code class="def-type"><var class="var">b</var> =</code> <strong class="def-name">firpm</strong> <code class="def-code-arguments">(<var class="var">n</var>, <var class="var">f</var>, <var class="var">a</var>)</code><a class="copiable-link" href="#index-firpm"></a></span></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-firpm-1"><span class="category-def">Loadable Function: </span><span><code class="def-type"><var class="var">b</var> =</code> <strong class="def-name">firpm</strong> <code class="def-code-arguments">(<var class="var">n</var>, <var class="var">f</var>, @<var class="var">respFn</var>)</code><a class="copiable-link" href="#index-firpm-1"></a></span></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-firpm-2"><span class="category-def">Loadable Function: </span><span><code class="def-type"><var class="var">b</var> =</code> <strong class="def-name">firpm</strong> <code class="def-code-arguments">(<var class="var">n</var>, <var class="var">f</var>, {@<var class="var">respFn</var>, &hellip;})</code><a class="copiable-link" href="#index-firpm-2"></a></span></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-firpm-3"><span class="category-def">Loadable Function: </span><span><code class="def-type"><var class="var">b</var> =</code> <strong class="def-name">firpm</strong> <code class="def-code-arguments">(&hellip;, <var class="var">w</var>)</code><a class="copiable-link" href="#index-firpm-3"></a></span></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-firpm-4"><span class="category-def">Loadable Function: </span><span><code class="def-type"><var class="var">b</var> =</code> <strong class="def-name">firpm</strong> <code class="def-code-arguments">(&hellip;, <var class="var">class</var>)</code><a class="copiable-link" href="#index-firpm-4"></a></span></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-firpm-5"><span class="category-def">Loadable Function: </span><span><code class="def-type"><var class="var">b</var> =</code> <strong class="def-name">firpm</strong> <code class="def-code-arguments">(&hellip;, {<var class="var">accuracy, &hellip;}</var>)</code><a class="copiable-link" href="#index-firpm-5"></a></span></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-firpm-6"><span class="category-def">Loadable Function: </span><span><code class="def-type">[<var class="var">b</var>, <var class="var">minimax</var>] =</code> <strong class="def-name">firpm</strong> <code class="def-code-arguments">(&hellip;)</code><a class="copiable-link" href="#index-firpm-6"></a></span></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-firpm-7"><span class="category-def">Loadable Function: </span><span><code class="def-type">[<var class="var">b</var>, <var class="var">minimax</var>, <var class="var">res</var>] =</code> <strong class="def-name">firpm</strong> <code class="def-code-arguments">(&hellip;)</code><a class="copiable-link" href="#index-firpm-7"></a></span></dt>
+<dt class="deftypefn def-line" id="index-firpm"><span class="category-def">Loadable Function: </span><span><code class="def-type"><var class="var">b</var> =</code> <strong class="def-name">firpm</strong> <code class="def-code-arguments">(<var class="var">n</var>, <var class="var">f</var>, <var class="var">a</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-firpm-1"><span class="category-def">Loadable Function: </span><span><code class="def-type"><var class="var">b</var> =</code> <strong class="def-name">firpm</strong> <code class="def-code-arguments">(<var class="var">n</var>, <var class="var">f</var>, @<var class="var">respFn</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-firpm-2"><span class="category-def">Loadable Function: </span><span><code class="def-type"><var class="var">b</var> =</code> <strong class="def-name">firpm</strong> <code class="def-code-arguments">(<var class="var">n</var>, <var class="var">f</var>, {@<var class="var">respFn</var>, &hellip;})</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-firpm-3"><span class="category-def">Loadable Function: </span><span><code class="def-type"><var class="var">b</var> =</code> <strong class="def-name">firpm</strong> <code class="def-code-arguments">(&hellip;, <var class="var">w</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-firpm-4"><span class="category-def">Loadable Function: </span><span><code class="def-type"><var class="var">b</var> =</code> <strong class="def-name">firpm</strong> <code class="def-code-arguments">(&hellip;, <var class="var">class</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-firpm-5"><span class="category-def">Loadable Function: </span><span><code class="def-type"><var class="var">b</var> =</code> <strong class="def-name">firpm</strong> <code class="def-code-arguments">(&hellip;, {<var class="var">accuracy, &hellip;}</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-firpm-6"><span class="category-def">Loadable Function: </span><span><code class="def-type">[<var class="var">b</var>, <var class="var">minimax</var>] =</code> <strong class="def-name">firpm</strong> <code class="def-code-arguments">(&hellip;)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-firpm-7"><span class="category-def">Loadable Function: </span><span><code class="def-type">[<var class="var">b</var>, <var class="var">minimax</var>, <var class="var">res</var>] =</code> <strong class="def-name">firpm</strong> <code class="def-code-arguments">(&hellip;)</code></span></dt>
 <dd><a class="index-entry-id" id="index-signal-processing"></a>
 
 <p>Designs a linear-phase FIR filter according to given specifications and the
@@ -98,7 +102,7 @@ the maximum weighted error between the desired and actual frequency response of
 the filter.  Such filters are variably described as being &lsquo;minimax&rsquo;,
 &lsquo;equiripple&rsquo;, or &lsquo;optimal (in the Chebyshev sense)&rsquo;.
 </p>
-<h3 class="heading" id="Arguments"><span>Arguments<a class="copiable-link" href="#Arguments"></a></span></h3>
+<h3 class="heading" id="Arguments"><span>Arguments</span></h3>
 
 <dl class="table">
 <dt><var class="var">&hellip;</var></dt>
@@ -205,7 +209,7 @@ can be used to leave an item unchanged.
 </dd>
 </dl>
 
-<h3 class="heading" id="Results"><span>Results<a class="copiable-link" href="#Results"></a></span></h3>
+<h3 class="heading" id="Results"><span>Results</span></h3>
 
 <p>If a problem occurs during the computation, a diagnostic message will normally
 be displayed.  If this happens, adjusting <var class="var">accuracy</var>, <var class="var">persistence</var>, or
@@ -247,7 +251,7 @@ the analysis excludes transition-bands, any &lsquo;anomalies&rsquo;<a class="foo
 discern.  In general, <code class="code">freqz</code> suffices to check that the response of the
 computed filter is satisfactory.
 </p>
-<h3 class="heading" id="Examples"><span>Examples<a class="copiable-link" href="#Examples"></a></span></h3>
+<h3 class="heading" id="Examples"><span>Examples</span></h3>
 <div class="example">
 <div class="group"><pre class="example-preformatted"># Low-pass with frequencies in Hz:
 Fs = 96000; Fn = Fs/2; # Sampling &amp; Nyquist frequencies.
@@ -261,7 +265,7 @@ b = firpm (31, [0 0.5 0.7 1], [0 1], &quot;antisym&quot;);
 
 <div class="example">
 <div class="group"><pre class="example-preformatted"># Inverse-sinc (arbitrary response):
-b = firpm (20, [0 0.5 0.9 1], @(n,f,g) ...
+b = firpm (20, [0 0.5 0.9 1], @(n,f,g,w) ...
     deal ((g&lt;=f(2))./sinc (g), (g&gt;=f(3))*9+1));
 </pre></div></div>
 
@@ -273,7 +277,7 @@ freqz (firpm (40, [0 3 4 6 8 10]/10, [0 1 0]))
 <p>Further examples can be found in the <code class="code">firpm</code> and <code class="code">firpmord</code>
 demonstration scripts.
 </p>
-<h3 class="heading" id="Compatibility"><span>Compatibility<a class="copiable-link" href="#Compatibility"></a></span></h3>
+<h3 class="heading" id="Compatibility"><span>Compatibility</span></h3>
 <p>Given invalid filter specifications, Octave emits an error and does not produce
 a filter; <small class="sc">MATLAB</small> in such circumstances may still produce filter
 coefficients.

@@ -2,7 +2,7 @@
 layout: "default"
 permalink: "/functions/5_remez/"
 pkg_name: "signal"
-pkg_version: "1.4.7"
+pkg_version: "1.4.8"
 pkg_description: "Signal processing tools, including filtering, windowing and display functions."
 title: "Signal Toolkit - remez"
 category: "Utility"
@@ -70,6 +70,10 @@ navigation:
   name: "&nbsp;&nbsp;Pulse Metrics"
   url: "/functions/#13_PulseMetrics"
   subitems:
+- id: "8_Plotting"
+  name: "&nbsp;&nbsp;Plotting"
+  url: "/functions/#8_Plotting"
+  subitems:
 - id: "7_Utility"
   name: "&nbsp;&nbsp;Utility"
   url: "/functions/#7_Utility"
@@ -82,10 +86,10 @@ navigation:
   url: "/manual"
 ---
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-remez"><span class="category-def">Loadable Function: </span><span><code class="def-type"><var class="var">b</var> =</code> <strong class="def-name">remez</strong> <code class="def-code-arguments">(<var class="var">n</var>, <var class="var">f</var>, <var class="var">a</var>)</code><a class="copiable-link" href="#index-remez"></a></span></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-remez-1"><span class="category-def">Loadable Function: </span><span><code class="def-type"><var class="var">b</var> =</code> <strong class="def-name">remez</strong> <code class="def-code-arguments">(<var class="var">n</var>, <var class="var">f</var>, <var class="var">a</var>, <var class="var">w</var>)</code><a class="copiable-link" href="#index-remez-1"></a></span></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-remez-2"><span class="category-def">Loadable Function: </span><span><code class="def-type"><var class="var">b</var> =</code> <strong class="def-name">remez</strong> <code class="def-code-arguments">(<var class="var">n</var>, <var class="var">f</var>, <var class="var">a</var>, <var class="var">w</var>, <var class="var">ftype</var>)</code><a class="copiable-link" href="#index-remez-2"></a></span></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-remez-3"><span class="category-def">Loadable Function: </span><span><code class="def-type"><var class="var">b</var> =</code> <strong class="def-name">remez</strong> <code class="def-code-arguments">(<var class="var">n</var>, <var class="var">f</var>, <var class="var">a</var>, <var class="var">w</var>, <var class="var">ftype</var>, <var class="var">griddensity</var>)</code><a class="copiable-link" href="#index-remez-3"></a></span></dt>
+<dt class="deftypefn def-line" id="index-remez"><span class="category-def">Loadable Function: </span><span><code class="def-type"><var class="var">b</var> =</code> <strong class="def-name">remez</strong> <code class="def-code-arguments">(<var class="var">n</var>, <var class="var">f</var>, <var class="var">a</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-remez-1"><span class="category-def">Loadable Function: </span><span><code class="def-type"><var class="var">b</var> =</code> <strong class="def-name">remez</strong> <code class="def-code-arguments">(<var class="var">n</var>, <var class="var">f</var>, <var class="var">a</var>, <var class="var">w</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-remez-2"><span class="category-def">Loadable Function: </span><span><code class="def-type"><var class="var">b</var> =</code> <strong class="def-name">remez</strong> <code class="def-code-arguments">(<var class="var">n</var>, <var class="var">f</var>, <var class="var">a</var>, <var class="var">w</var>, <var class="var">ftype</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-remez-3"><span class="category-def">Loadable Function: </span><span><code class="def-type"><var class="var">b</var> =</code> <strong class="def-name">remez</strong> <code class="def-code-arguments">(<var class="var">n</var>, <var class="var">f</var>, <var class="var">a</var>, <var class="var">w</var>, <var class="var">ftype</var>, <var class="var">griddensity</var>)</code></span></dt>
 <dd><p>Parks-McClellan optimal FIR filter design.
 </p><dl class="table">
 <dt><var class="var">n</var></dt>

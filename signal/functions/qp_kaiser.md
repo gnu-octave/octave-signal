@@ -2,7 +2,7 @@
 layout: "default"
 permalink: "/functions/9_qpkaiser/"
 pkg_name: "signal"
-pkg_version: "1.4.7"
+pkg_version: "1.4.8"
 pkg_description: "Signal processing tools, including filtering, windowing and display functions."
 title: "Signal Toolkit - qp_kaiser"
 category: "Utility"
@@ -70,6 +70,10 @@ navigation:
   name: "&nbsp;&nbsp;Pulse Metrics"
   url: "/functions/#13_PulseMetrics"
   subitems:
+- id: "8_Plotting"
+  name: "&nbsp;&nbsp;Plotting"
+  url: "/functions/#8_Plotting"
+  subitems:
 - id: "7_Utility"
   name: "&nbsp;&nbsp;Utility"
   url: "/functions/#7_Utility"
@@ -82,8 +86,8 @@ navigation:
   url: "/manual"
 ---
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-qp_005fkaiser"><span class="category-def">Function File: </span><span><strong class="def-name">qp_kaiser</strong> <code class="def-code-arguments">(<var class="var">nb</var>, <var class="var">at</var>)</code><a class="copiable-link" href="#index-qp_005fkaiser"></a></span></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-qp_005fkaiser-1"><span class="category-def">Function File: </span><span><strong class="def-name">qp_kaiser</strong> <code class="def-code-arguments">(<var class="var">nb</var>, <var class="var">at</var>, <var class="var">linear</var>)</code><a class="copiable-link" href="#index-qp_005fkaiser-1"></a></span></dt>
+<dt class="deftypefn def-line" id="index-qp_005fkaiser"><span class="category-def">Function File: </span><span><strong class="def-name">qp_kaiser</strong> <code class="def-code-arguments">(<var class="var">nb</var>, <var class="var">at</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-qp_005fkaiser-1"><span class="category-def">Function File: </span><span><strong class="def-name">qp_kaiser</strong> <code class="def-code-arguments">(<var class="var">nb</var>, <var class="var">at</var>, <var class="var">linear</var>)</code></span></dt>
 <dd>
 <p>Computes a finite impulse response (FIR) filter for use with a
  quasi-perfect reconstruction polyphase-network filter bank. This

@@ -2,7 +2,7 @@
 layout: "default"
 permalink: "/functions/8_welchwin/"
 pkg_name: "signal"
-pkg_version: "1.4.7"
+pkg_version: "1.4.8"
 pkg_description: "Signal processing tools, including filtering, windowing and display functions."
 title: "Signal Toolkit - welchwin"
 category: "Utility"
@@ -70,6 +70,10 @@ navigation:
   name: "&nbsp;&nbsp;Pulse Metrics"
   url: "/functions/#13_PulseMetrics"
   subitems:
+- id: "8_Plotting"
+  name: "&nbsp;&nbsp;Plotting"
+  url: "/functions/#8_Plotting"
+  subitems:
 - id: "7_Utility"
   name: "&nbsp;&nbsp;Utility"
   url: "/functions/#7_Utility"
@@ -82,9 +86,9 @@ navigation:
   url: "/manual"
 ---
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-welchwin"><span class="category-def">Function File: </span><span><strong class="def-name">welchwin</strong> <code class="def-code-arguments">(<var class="var">m</var>)</code><a class="copiable-link" href="#index-welchwin"></a></span></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-welchwin-1"><span class="category-def">Function File: </span><span><strong class="def-name">welchwin</strong> <code class="def-code-arguments">(<var class="var">m</var>, &quot;periodic&quot;)</code><a class="copiable-link" href="#index-welchwin-1"></a></span></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-welchwin-2"><span class="category-def">Function File: </span><span><strong class="def-name">welchwin</strong> <code class="def-code-arguments">(<var class="var">m</var>, &quot;symmetric&quot;)</code><a class="copiable-link" href="#index-welchwin-2"></a></span></dt>
+<dt class="deftypefn def-line" id="index-welchwin"><span class="category-def">Function File: </span><span><strong class="def-name">welchwin</strong> <code class="def-code-arguments">(<var class="var">m</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-welchwin-1"><span class="category-def">Function File: </span><span><strong class="def-name">welchwin</strong> <code class="def-code-arguments">(<var class="var">m</var>, &quot;periodic&quot;)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-welchwin-2"><span class="category-def">Function File: </span><span><strong class="def-name">welchwin</strong> <code class="def-code-arguments">(<var class="var">m</var>, &quot;symmetric&quot;)</code></span></dt>
 <dd><p>Return the filter coefficients of a Welch window of length <var class="var">m</var>.  The
  Welch window is given by
  <var class="var">w</var>(n)=1-(n/N-1)^2,   n=[0,1, ... <var class="var">m</var>-1].

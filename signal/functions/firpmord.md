@@ -2,7 +2,7 @@
 layout: "default"
 permalink: "/functions/8_firpmord/"
 pkg_name: "signal"
-pkg_version: "1.4.7"
+pkg_version: "1.4.8"
 pkg_description: "Signal processing tools, including filtering, windowing and display functions."
 title: "Signal Toolkit - firpmord"
 category: "Utility"
@@ -70,6 +70,10 @@ navigation:
   name: "&nbsp;&nbsp;Pulse Metrics"
   url: "/functions/#13_PulseMetrics"
   subitems:
+- id: "8_Plotting"
+  name: "&nbsp;&nbsp;Plotting"
+  url: "/functions/#8_Plotting"
+  subitems:
 - id: "7_Utility"
   name: "&nbsp;&nbsp;Utility"
   url: "/functions/#7_Utility"
@@ -82,16 +86,16 @@ navigation:
   url: "/manual"
 ---
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-firpmord"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">n</var>, <var class="var">Fout</var>, <var class="var">a</var>, <var class="var">w</var>] =</code> <strong class="def-name">firpmord</strong> <code class="def-code-arguments">(<var class="var">f</var>, <var class="var">a</var>, <var class="var">d</var>)</code><a class="copiable-link" href="#index-firpmord"></a></span></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-firpmord-1"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">n</var>, <var class="var">Fout</var>, <var class="var">a</var>, <var class="var">w</var>] =</code> <strong class="def-name">firpmord</strong> <code class="def-code-arguments">(<var class="var">f</var>, <var class="var">a</var>, <var class="var">d</var>, <var class="var">fs</var>)</code><a class="copiable-link" href="#index-firpmord-1"></a></span></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-firpmord-2"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">c</var> =</code> <strong class="def-name">firpmord</strong> <code class="def-code-arguments">(<var class="var">f</var>, <var class="var">a</var>, <var class="var">d</var>, &quot;cell&quot;)</code><a class="copiable-link" href="#index-firpmord-2"></a></span></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-firpmord-3"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">c</var> =</code> <strong class="def-name">firpmord</strong> <code class="def-code-arguments">(<var class="var">f</var>, <var class="var">a</var>, <var class="var">d</var>, <var class="var">fs</var>, &quot;cell&quot;)</code><a class="copiable-link" href="#index-firpmord-3"></a></span></dt>
+<dt class="deftypefn def-line" id="index-firpmord"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">n</var>, <var class="var">Fout</var>, <var class="var">a</var>, <var class="var">w</var>] =</code> <strong class="def-name">firpmord</strong> <code class="def-code-arguments">(<var class="var">f</var>, <var class="var">a</var>, <var class="var">d</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-firpmord-1"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">n</var>, <var class="var">Fout</var>, <var class="var">a</var>, <var class="var">w</var>] =</code> <strong class="def-name">firpmord</strong> <code class="def-code-arguments">(<var class="var">f</var>, <var class="var">a</var>, <var class="var">d</var>, <var class="var">fs</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-firpmord-2"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">c</var> =</code> <strong class="def-name">firpmord</strong> <code class="def-code-arguments">(<var class="var">f</var>, <var class="var">a</var>, <var class="var">d</var>, &quot;cell&quot;)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-firpmord-3"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">c</var> =</code> <strong class="def-name">firpmord</strong> <code class="def-code-arguments">(<var class="var">f</var>, <var class="var">a</var>, <var class="var">d</var>, <var class="var">fs</var>, &quot;cell&quot;)</code></span></dt>
 <dd><a class="index-entry-id" id="index-signal-processing"></a>
 
 <p>Estimate the filter-order needed for <code class="code">firpm</code> to design a type-I or
  type-II linear-phase FIR filter according to the given specifications.
 </p>
-<h3 class="heading" id="Arguments"><span>Arguments<a class="copiable-link" href="#Arguments"></a></span></h3>
+<h3 class="heading" id="Arguments"><span>Arguments</span></h3>
 
 <dl class="table">
 <dt><var class="var">f</var></dt>
@@ -124,7 +128,7 @@ navigation:
 </dd>
 </dl>
 
-<h3 class="heading" id="Usage"><span>Usage<a class="copiable-link" href="#Usage"></a></span></h3>
+<h3 class="heading" id="Usage"><span>Usage</span></h3>
 
 <p>The function returns the estimated filter-order, together with the other
  design specification values, in one of two forms suitable for use with
@@ -173,7 +177,7 @@ navigation:
  firpmord ([1 2 3 4 5 6 7 8]/10, [0 1 0 1 0], [ds dp]);
  </pre></div><pre class="example-preformatted"> </pre></div>
 
-<h3 class="heading" id="Notes"><span>Notes<a class="copiable-link" href="#Notes"></a></span></h3>
+<h3 class="heading" id="Notes"><span>Notes</span></h3>
 
 <p>The estimation algorithm used is per Ichige et al.<a class="footnote" id="DOCF1" href="#FOOT1"><sup>1</sup></a> Accuracy tends to decrease as
  the number of bands increases.  Even with two bands (i.e. high-pass or
@@ -184,7 +188,7 @@ navigation:
  design, <code class="code">firpmord</code> could be used to seed an algorithm iterating
  invocations of <code class="code">firpm</code> (as exemplified in demonstration number five).
 </p>
-<h3 class="heading" id="Related-documentation"><span>Related documentation<a class="copiable-link" href="#Related-documentation"></a></span></h3>
+<h3 class="heading" id="Related-documentation"><span>Related documentation</span></h3>
 
 
 <p><strong class="strong">See also:</strong> firpm, kaiserord.

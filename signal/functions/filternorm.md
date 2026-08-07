@@ -2,7 +2,7 @@
 layout: "default"
 permalink: "/functions/10_filternorm/"
 pkg_name: "signal"
-pkg_version: "1.4.7"
+pkg_version: "1.4.8"
 pkg_description: "Signal processing tools, including filtering, windowing and display functions."
 title: "Signal Toolkit - filternorm"
 category: "Utility"
@@ -70,6 +70,10 @@ navigation:
   name: "&nbsp;&nbsp;Pulse Metrics"
   url: "/functions/#13_PulseMetrics"
   subitems:
+- id: "8_Plotting"
+  name: "&nbsp;&nbsp;Plotting"
+  url: "/functions/#8_Plotting"
+  subitems:
 - id: "7_Utility"
   name: "&nbsp;&nbsp;Utility"
   url: "/functions/#7_Utility"
@@ -82,9 +86,9 @@ navigation:
   url: "/manual"
 ---
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-filternorm"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">L</var> =</code> <strong class="def-name">filternorm</strong> <code class="def-code-arguments">(<var class="var">b</var>, <var class="var">a</var>)</code><a class="copiable-link" href="#index-filternorm"></a></span></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-filternorm-1"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">L</var> =</code> <strong class="def-name">filternorm</strong> <code class="def-code-arguments">(<var class="var">b</var>, <var class="var">a</var>, <var class="var">pnorm</var>)</code><a class="copiable-link" href="#index-filternorm-1"></a></span></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-filternorm-2"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">L</var> =</code> <strong class="def-name">filternorm</strong> <code class="def-code-arguments">(<var class="var">b</var>, <var class="var">a</var>, 2, <var class="var">tol</var>)</code><a class="copiable-link" href="#index-filternorm-2"></a></span></dt>
+<dt class="deftypefn def-line" id="index-filternorm"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">L</var> =</code> <strong class="def-name">filternorm</strong> <code class="def-code-arguments">(<var class="var">b</var>, <var class="var">a</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-filternorm-1"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">L</var> =</code> <strong class="def-name">filternorm</strong> <code class="def-code-arguments">(<var class="var">b</var>, <var class="var">a</var>, <var class="var">pnorm</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-filternorm-2"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">L</var> =</code> <strong class="def-name">filternorm</strong> <code class="def-code-arguments">(<var class="var">b</var>, <var class="var">a</var>, 2, <var class="var">tol</var>)</code></span></dt>
 <dd>
 <p>Compute the 2-norm of a digital filter defined by the numerator coefficients,
  <var class="var">b</var>, and the denominator coefficients, <var class="var">a</var>. It is also possible to

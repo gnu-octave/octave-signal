@@ -2,7 +2,7 @@
 layout: "default"
 permalink: "/functions/10_freqsplot/"
 pkg_name: "signal"
-pkg_version: "1.4.7"
+pkg_version: "1.4.8"
 pkg_description: "Signal processing tools, including filtering, windowing and display functions."
 title: "Signal Toolkit - freqs_plot"
 category: "Utility"
@@ -70,6 +70,10 @@ navigation:
   name: "&nbsp;&nbsp;Pulse Metrics"
   url: "/functions/#13_PulseMetrics"
   subitems:
+- id: "8_Plotting"
+  name: "&nbsp;&nbsp;Plotting"
+  url: "/functions/#8_Plotting"
+  subitems:
 - id: "7_Utility"
   name: "&nbsp;&nbsp;Utility"
   url: "/functions/#7_Utility"
@@ -82,6 +86,12 @@ navigation:
   url: "/manual"
 ---
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-freqs_005fplot"><span class="category-def">Function File: </span><span><strong class="def-name">freqs_plot</strong> <code class="def-code-arguments">(<var class="var">w</var>, <var class="var">h</var>)</code><a class="copiable-link" href="#index-freqs_005fplot"></a></span></dt>
+<dt class="deftypefn def-line" id="index-freqs_005fplot"><span class="category-def">Function File: </span><span><strong class="def-name">freqs_plot</strong> <code class="def-code-arguments">(<var class="var">w</var>, <var class="var">h</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-freqs_005fplot-1"><span class="category-def">Function File: </span><span><strong class="def-name">freqs_plot</strong> <code class="def-code-arguments">(<var class="var">w</var>, <var class="var">h</var>, <var class="var">freqscale</var>)</code></span></dt>
 <dd><p>Plot the amplitude and phase of the vector <var class="var">h</var>.
+</p>
+<p>The optional argument <var class="var">freqscale</var> specifies the scaling of the
+ frequency axis.  It can be <code class="code">&quot;log&quot;</code> (default) or <code class="code">&quot;linear&quot;</code>.
+ </p>
+<p><strong class="strong">See also:</strong> freqs.
  </p></dd></dl>

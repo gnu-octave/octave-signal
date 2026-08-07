@@ -2,7 +2,7 @@
 layout: "default"
 permalink: "/functions/7_pyulear/"
 pkg_name: "signal"
-pkg_version: "1.4.7"
+pkg_version: "1.4.8"
 pkg_description: "Signal processing tools, including filtering, windowing and display functions."
 title: "Signal Toolkit - pyulear"
 category: "Utility"
@@ -70,6 +70,10 @@ navigation:
   name: "&nbsp;&nbsp;Pulse Metrics"
   url: "/functions/#13_PulseMetrics"
   subitems:
+- id: "8_Plotting"
+  name: "&nbsp;&nbsp;Plotting"
+  url: "/functions/#8_Plotting"
+  subitems:
 - id: "7_Utility"
   name: "&nbsp;&nbsp;Utility"
   url: "/functions/#7_Utility"
@@ -82,7 +86,7 @@ navigation:
   url: "/manual"
 ---
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-pyulear_0028x_002cpoles_002cfreq_002cFs_002crange_002cmethod_002cplot_005ftype_0029"><span class="category-def">Function File: </span><span><code class="def-type">[psd,f_out] =</code> <strong class="def-name">pyulear(x,poles,freq,Fs,range,method,plot_type)</strong><a class="copiable-link" href="#index-pyulear_0028x_002cpoles_002cfreq_002cFs_002crange_002cmethod_002cplot_005ftype_0029"></a></span></dt>
+<dt class="deftypefn def-line" id="index-pyulear_0028x_002cpoles_002cfreq_002cFs_002crange_002cmethod_002cplot_005ftype_0029"><span class="category-def">Function File: </span><span><code class="def-type">[psd,f_out] =</code> <strong class="def-name">pyulear(x,poles,freq,Fs,range,method,plot_type)</strong></span></dt>
 <dd><p>Calculates a Yule-Walker autoregressive (all-pole) model of the data &quot;x&quot;
  and computes the power spectrum of the model.
 </p>

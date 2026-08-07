@@ -2,7 +2,7 @@
 layout: "default"
 permalink: "/functions/4_fir1/"
 pkg_name: "signal"
-pkg_version: "1.4.7"
+pkg_version: "1.4.8"
 pkg_description: "Signal processing tools, including filtering, windowing and display functions."
 title: "Signal Toolkit - fir1"
 category: "Utility"
@@ -70,6 +70,10 @@ navigation:
   name: "&nbsp;&nbsp;Pulse Metrics"
   url: "/functions/#13_PulseMetrics"
   subitems:
+- id: "8_Plotting"
+  name: "&nbsp;&nbsp;Plotting"
+  url: "/functions/#8_Plotting"
+  subitems:
 - id: "7_Utility"
   name: "&nbsp;&nbsp;Utility"
   url: "/functions/#7_Utility"
@@ -82,10 +86,10 @@ navigation:
   url: "/manual"
 ---
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-fir1"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">b</var> =</code> <strong class="def-name">fir1</strong> <code class="def-code-arguments">(<var class="var">n</var>, <var class="var">w</var>)</code><a class="copiable-link" href="#index-fir1"></a></span></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-fir1-1"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">b</var> =</code> <strong class="def-name">fir1</strong> <code class="def-code-arguments">(<var class="var">n</var>, <var class="var">w</var>, <var class="var">type</var>)</code><a class="copiable-link" href="#index-fir1-1"></a></span></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-fir1-2"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">b</var> =</code> <strong class="def-name">fir1</strong> <code class="def-code-arguments">(<var class="var">n</var>, <var class="var">w</var>, <var class="var">type</var>, <var class="var">window</var>)</code><a class="copiable-link" href="#index-fir1-2"></a></span></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-fir1-3"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">b</var> =</code> <strong class="def-name">fir1</strong> <code class="def-code-arguments">(<var class="var">n</var>, <var class="var">w</var>, <var class="var">type</var>, <var class="var">window</var>, <var class="var">noscale</var>)</code><a class="copiable-link" href="#index-fir1-3"></a></span></dt>
+<dt class="deftypefn def-line" id="index-fir1"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">b</var> =</code> <strong class="def-name">fir1</strong> <code class="def-code-arguments">(<var class="var">n</var>, <var class="var">w</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-fir1-1"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">b</var> =</code> <strong class="def-name">fir1</strong> <code class="def-code-arguments">(<var class="var">n</var>, <var class="var">w</var>, <var class="var">type</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-fir1-2"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">b</var> =</code> <strong class="def-name">fir1</strong> <code class="def-code-arguments">(<var class="var">n</var>, <var class="var">w</var>, <var class="var">type</var>, <var class="var">window</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-fir1-3"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">b</var> =</code> <strong class="def-name">fir1</strong> <code class="def-code-arguments">(<var class="var">n</var>, <var class="var">w</var>, <var class="var">type</var>, <var class="var">window</var>, <var class="var">noscale</var>)</code></span></dt>
 <dd>
 <p>Produce an order <var class="var">n</var> FIR filter with the given frequency cutoff <var class="var">w</var>,
  returning the <var class="var">n</var>+1 filter coefficients in <var class="var">b</var>.  If <var class="var">w</var> is a

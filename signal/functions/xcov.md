@@ -2,7 +2,7 @@
 layout: "default"
 permalink: "/functions/4_xcov/"
 pkg_name: "signal"
-pkg_version: "1.4.7"
+pkg_version: "1.4.8"
 pkg_description: "Signal processing tools, including filtering, windowing and display functions."
 title: "Signal Toolkit - xcov"
 category: "Utility"
@@ -70,6 +70,10 @@ navigation:
   name: "&nbsp;&nbsp;Pulse Metrics"
   url: "/functions/#13_PulseMetrics"
   subitems:
+- id: "8_Plotting"
+  name: "&nbsp;&nbsp;Plotting"
+  url: "/functions/#8_Plotting"
+  subitems:
 - id: "7_Utility"
   name: "&nbsp;&nbsp;Utility"
   url: "/functions/#7_Utility"
@@ -82,10 +86,10 @@ navigation:
   url: "/manual"
 ---
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-xcov"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">R</var>, <var class="var">lag</var>] =</code> <strong class="def-name">xcov</strong> <code class="def-code-arguments">( <var class="var">X</var> )</code><a class="copiable-link" href="#index-xcov"></a></span></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-xcov-1"><span class="category-def">Function File: </span><span><code class="def-type">&hellip; =</code> <strong class="def-name">xcov</strong> <code class="def-code-arguments">( <var class="var">X</var>, <var class="var">Y</var> )</code><a class="copiable-link" href="#index-xcov-1"></a></span></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-xcov-2"><span class="category-def">Function File: </span><span><code class="def-type">&hellip; =</code> <strong class="def-name">xcov</strong> <code class="def-code-arguments">( &hellip;, <var class="var">maxlag</var>)</code><a class="copiable-link" href="#index-xcov-2"></a></span></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-xcov-3"><span class="category-def">Function File: </span><span><code class="def-type">&hellip; =</code> <strong class="def-name">xcov</strong> <code class="def-code-arguments">( &hellip;, <var class="var">scale</var>)</code><a class="copiable-link" href="#index-xcov-3"></a></span></dt>
+<dt class="deftypefn def-line" id="index-xcov"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">R</var>, <var class="var">lag</var>] =</code> <strong class="def-name">xcov</strong> <code class="def-code-arguments">( <var class="var">X</var> )</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-xcov-1"><span class="category-def">Function File: </span><span><code class="def-type">&hellip; =</code> <strong class="def-name">xcov</strong> <code class="def-code-arguments">( <var class="var">X</var>, <var class="var">Y</var> )</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-xcov-2"><span class="category-def">Function File: </span><span><code class="def-type">&hellip; =</code> <strong class="def-name">xcov</strong> <code class="def-code-arguments">( &hellip;, <var class="var">maxlag</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-xcov-3"><span class="category-def">Function File: </span><span><code class="def-type">&hellip; =</code> <strong class="def-name">xcov</strong> <code class="def-code-arguments">( &hellip;, <var class="var">scale</var>)</code></span></dt>
 <dd><p>Compute covariance at various lags [=correlation(x-mean(x),y-mean(y))].
 </p>
 <dl class="table">

@@ -2,7 +2,7 @@
 layout: "default"
 permalink: "/functions/7_buttord/"
 pkg_name: "signal"
-pkg_version: "1.4.7"
+pkg_version: "1.4.8"
 pkg_description: "Signal processing tools, including filtering, windowing and display functions."
 title: "Signal Toolkit - buttord"
 category: "Utility"
@@ -70,6 +70,10 @@ navigation:
   name: "&nbsp;&nbsp;Pulse Metrics"
   url: "/functions/#13_PulseMetrics"
   subitems:
+- id: "8_Plotting"
+  name: "&nbsp;&nbsp;Plotting"
+  url: "/functions/#8_Plotting"
+  subitems:
 - id: "7_Utility"
   name: "&nbsp;&nbsp;Utility"
   url: "/functions/#7_Utility"
@@ -82,11 +86,11 @@ navigation:
   url: "/manual"
 ---
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-buttord"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">n</var> =</code> <strong class="def-name">buttord</strong> <code class="def-code-arguments">(<var class="var">wp</var>, <var class="var">ws</var>, <var class="var">rp</var>, <var class="var">rs</var>)</code><a class="copiable-link" href="#index-buttord"></a></span></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-buttord-1"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">n</var> =</code> <strong class="def-name">buttord</strong> <code class="def-code-arguments">([<var class="var">wp1</var>, <var class="var">wp2</var>], [<var class="var">ws1</var>, <var class="var">ws2</var>], <var class="var">rp</var>, <var class="var">rs</var>)</code><a class="copiable-link" href="#index-buttord-1"></a></span></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-buttord-2"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">n</var> =</code> <strong class="def-name">buttord</strong> <code class="def-code-arguments">([<var class="var">wp1</var>, <var class="var">wp2</var>], [<var class="var">ws1</var>, <var class="var">ws2</var>], <var class="var">rp</var>, <var class="var">rs</var>, &quot;s&quot;)</code><a class="copiable-link" href="#index-buttord-2"></a></span></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-buttord-3"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">n</var>, <var class="var">wc_p</var>] =</code> <strong class="def-name">buttord</strong> <code class="def-code-arguments">(&hellip;)</code><a class="copiable-link" href="#index-buttord-3"></a></span></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-buttord-4"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">n</var>, <var class="var">wc_p</var>, <var class="var">wc_s</var>] =</code> <strong class="def-name">buttord</strong> <code class="def-code-arguments">(&hellip;)</code><a class="copiable-link" href="#index-buttord-4"></a></span></dt>
+<dt class="deftypefn def-line" id="index-buttord"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">n</var> =</code> <strong class="def-name">buttord</strong> <code class="def-code-arguments">(<var class="var">wp</var>, <var class="var">ws</var>, <var class="var">rp</var>, <var class="var">rs</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-buttord-1"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">n</var> =</code> <strong class="def-name">buttord</strong> <code class="def-code-arguments">([<var class="var">wp1</var>, <var class="var">wp2</var>], [<var class="var">ws1</var>, <var class="var">ws2</var>], <var class="var">rp</var>, <var class="var">rs</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-buttord-2"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">n</var> =</code> <strong class="def-name">buttord</strong> <code class="def-code-arguments">([<var class="var">wp1</var>, <var class="var">wp2</var>], [<var class="var">ws1</var>, <var class="var">ws2</var>], <var class="var">rp</var>, <var class="var">rs</var>, &quot;s&quot;)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-buttord-3"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">n</var>, <var class="var">wc_p</var>] =</code> <strong class="def-name">buttord</strong> <code class="def-code-arguments">(&hellip;)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-buttord-4"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">n</var>, <var class="var">wc_p</var>, <var class="var">wc_s</var>] =</code> <strong class="def-name">buttord</strong> <code class="def-code-arguments">(&hellip;)</code></span></dt>
 <dd><p>Compute the minimum filter order of a Butterworth filter with the desired
  response characteristics.  The filter frequency band edges are specified by
  the passband frequency <var class="var">wp</var> and stopband frequency <var class="var">ws</var>.  Frequencies
@@ -119,7 +123,7 @@ navigation:
 <p>Theory: For Low pass filters, |H(W)|^2 = 1/[1+(W/Wc)^(2N)] = 10^(-R/10).
  With some algebra, you can solve simultaneously for Wc and N given
  Ws,Rs and Wp,Rp. Rounding N to the next greater integer, one can recalculate
- the allowable range for Wc (filter caracteristic touching the pass band edge
+ the allowable range for Wc (filter characteristic touching the pass band edge
  or the stop band edge).
 </p>
 <p>For other types of filter, before making the above calculation, the

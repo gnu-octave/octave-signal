@@ -2,7 +2,7 @@
 layout: "default"
 permalink: "/functions/7_besself/"
 pkg_name: "signal"
-pkg_version: "1.4.7"
+pkg_version: "1.4.8"
 pkg_description: "Signal processing tools, including filtering, windowing and display functions."
 title: "Signal Toolkit - besself"
 category: "Utility"
@@ -70,6 +70,10 @@ navigation:
   name: "&nbsp;&nbsp;Pulse Metrics"
   url: "/functions/#13_PulseMetrics"
   subitems:
+- id: "8_Plotting"
+  name: "&nbsp;&nbsp;Plotting"
+  url: "/functions/#8_Plotting"
+  subitems:
 - id: "7_Utility"
   name: "&nbsp;&nbsp;Utility"
   url: "/functions/#7_Utility"
@@ -82,11 +86,11 @@ navigation:
   url: "/manual"
 ---
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-besself"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">b</var>, <var class="var">a</var>] =</code> <strong class="def-name">besself</strong> <code class="def-code-arguments">(<var class="var">n</var>, <var class="var">w</var>)</code><a class="copiable-link" href="#index-besself"></a></span></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-besself-1"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">b</var>, <var class="var">a</var>] =</code> <strong class="def-name">besself</strong> <code class="def-code-arguments">(<var class="var">n</var>, <var class="var">w</var>, &quot;high&quot;)</code><a class="copiable-link" href="#index-besself-1"></a></span></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-besself-2"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">z</var>, <var class="var">p</var>, <var class="var">g</var>] =</code> <strong class="def-name">besself</strong> <code class="def-code-arguments">(&hellip;)</code><a class="copiable-link" href="#index-besself-2"></a></span></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-besself-3"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">a</var>, <var class="var">b</var>, <var class="var">c</var>, <var class="var">d</var>] =</code> <strong class="def-name">besself</strong> <code class="def-code-arguments">(&hellip;)</code><a class="copiable-link" href="#index-besself-3"></a></span></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-besself-4"><span class="category-def">Function File: </span><span><code class="def-type">[&hellip;] =</code> <strong class="def-name">besself</strong> <code class="def-code-arguments">(&hellip;, &quot;z&quot;)</code><a class="copiable-link" href="#index-besself-4"></a></span></dt>
+<dt class="deftypefn def-line" id="index-besself"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">b</var>, <var class="var">a</var>] =</code> <strong class="def-name">besself</strong> <code class="def-code-arguments">(<var class="var">n</var>, <var class="var">w</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-besself-1"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">b</var>, <var class="var">a</var>] =</code> <strong class="def-name">besself</strong> <code class="def-code-arguments">(<var class="var">n</var>, <var class="var">w</var>, &quot;high&quot;)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-besself-2"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">z</var>, <var class="var">p</var>, <var class="var">g</var>] =</code> <strong class="def-name">besself</strong> <code class="def-code-arguments">(&hellip;)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-besself-3"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">a</var>, <var class="var">b</var>, <var class="var">c</var>, <var class="var">d</var>] =</code> <strong class="def-name">besself</strong> <code class="def-code-arguments">(&hellip;)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-besself-4"><span class="category-def">Function File: </span><span><code class="def-type">[&hellip;] =</code> <strong class="def-name">besself</strong> <code class="def-code-arguments">(&hellip;, &quot;z&quot;)</code></span></dt>
 <dd><p>Generate a Bessel filter.
  Default is a Laplace space (s) filter.
 </p>

@@ -2,7 +2,7 @@
 layout: "default"
 permalink: "/functions/5_pburg/"
 pkg_name: "signal"
-pkg_version: "1.4.7"
+pkg_version: "1.4.8"
 pkg_description: "Signal processing tools, including filtering, windowing and display functions."
 title: "Signal Toolkit - pburg"
 category: "Utility"
@@ -70,6 +70,10 @@ navigation:
   name: "&nbsp;&nbsp;Pulse Metrics"
   url: "/functions/#13_PulseMetrics"
   subitems:
+- id: "8_Plotting"
+  name: "&nbsp;&nbsp;Plotting"
+  url: "/functions/#8_Plotting"
+  subitems:
 - id: "7_Utility"
   name: "&nbsp;&nbsp;Utility"
   url: "/functions/#7_Utility"
@@ -82,7 +86,7 @@ navigation:
   url: "/manual"
 ---
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-pburg_0028x_002c"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">psd</var>,<var class="var">f_out</var>] =</code> <strong class="def-name">pburg(<var class="var">x</var>,</strong> <code class="def-code-arguments"><var class="var">poles</var>, <var class="var">freq</var>, <var class="var">Fs</var>, <var class="var">range</var>, <var class="var">method</var>, <var class="var">plot_type</var>, <var class="var">criterion</var>)</code><a class="copiable-link" href="#index-pburg_0028x_002c"></a></span></dt>
+<dt class="deftypefn def-line" id="index-pburg_0028x_002c"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">psd</var>,<var class="var">f_out</var>] =</code> <strong class="def-name">pburg(<var class="var">x</var>,</strong> <code class="def-code-arguments"><var class="var">poles</var>, <var class="var">freq</var>, <var class="var">Fs</var>, <var class="var">range</var>, <var class="var">method</var>, <var class="var">plot_type</var>, <var class="var">criterion</var>)</code></span></dt>
 <dd><p>Calculate Burg maximum-entropy power spectral density.
 </p>
 <p>The functions &quot;arburg&quot; and &quot;ar_psd&quot; do all the work.

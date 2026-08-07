@@ -2,7 +2,7 @@
 layout: "default"
 permalink: "/functions/3_tfe/"
 pkg_name: "signal"
-pkg_version: "1.4.7"
+pkg_version: "1.4.8"
 pkg_description: "Signal processing tools, including filtering, windowing and display functions."
 title: "Signal Toolkit - tfe"
 category: "Utility"
@@ -70,6 +70,10 @@ navigation:
   name: "&nbsp;&nbsp;Pulse Metrics"
   url: "/functions/#13_PulseMetrics"
   subitems:
+- id: "8_Plotting"
+  name: "&nbsp;&nbsp;Plotting"
+  url: "/functions/#8_Plotting"
+  subitems:
 - id: "7_Utility"
   name: "&nbsp;&nbsp;Utility"
   url: "/functions/#7_Utility"
@@ -82,7 +86,7 @@ navigation:
   url: "/manual"
 ---
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-tfe_0028x_002cy_002cNfft_002cFs_002cwindow_002coverlap_002crange_002cplot_005ftype_002cdetrend_0029"><span class="category-def">Function File: </span><span><code class="def-type">[Pxx,freq] =</code> <strong class="def-name">tfe(x,y,Nfft,Fs,window,overlap,range,plot_type,detrend)</strong><a class="copiable-link" href="#index-tfe_0028x_002cy_002cNfft_002cFs_002cwindow_002coverlap_002crange_002cplot_005ftype_002cdetrend_0029"></a></span></dt>
+<dt class="deftypefn def-line" id="index-tfe_0028x_002cy_002cNfft_002cFs_002cwindow_002coverlap_002crange_002cplot_005ftype_002cdetrend_0029"><span class="category-def">Function File: </span><span><code class="def-type">[Pxx,freq] =</code> <strong class="def-name">tfe(x,y,Nfft,Fs,window,overlap,range,plot_type,detrend)</strong></span></dt>
 <dd><p>Estimate transfer function of system with input &quot;x&quot; and output &quot;y&quot;.
 </p>
 <p>Use the Welch (1967) periodogram/FFT method.

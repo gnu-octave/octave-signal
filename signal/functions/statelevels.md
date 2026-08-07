@@ -2,7 +2,7 @@
 layout: "default"
 permalink: "/functions/11_statelevels/"
 pkg_name: "signal"
-pkg_version: "1.4.7"
+pkg_version: "1.4.8"
 pkg_description: "Signal processing tools, including filtering, windowing and display functions."
 title: "Signal Toolkit - statelevels"
 category: "Utility"
@@ -70,6 +70,10 @@ navigation:
   name: "&nbsp;&nbsp;Pulse Metrics"
   url: "/functions/#13_PulseMetrics"
   subitems:
+- id: "8_Plotting"
+  name: "&nbsp;&nbsp;Plotting"
+  url: "/functions/#8_Plotting"
+  subitems:
 - id: "7_Utility"
   name: "&nbsp;&nbsp;Utility"
   url: "/functions/#7_Utility"
@@ -82,13 +86,13 @@ navigation:
   url: "/manual"
 ---
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-statelevels"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">levels</var> =</code> <strong class="def-name">statelevels</strong> <code class="def-code-arguments">(<var class="var">A</var>)</code><a class="copiable-link" href="#index-statelevels"></a></span></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-statelevels-1"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">levels</var> =</code> <strong class="def-name">statelevels</strong> <code class="def-code-arguments">(<var class="var">A</var>, <var class="var">nbins</var>)</code><a class="copiable-link" href="#index-statelevels-1"></a></span></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-statelevels-2"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">levels</var> =</code> <strong class="def-name">statelevels</strong> <code class="def-code-arguments">(<var class="var">A</var>, <var class="var">nbins</var>, <var class="var">method</var>)</code><a class="copiable-link" href="#index-statelevels-2"></a></span></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-statelevels-3"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">levels</var> =</code> <strong class="def-name">statelevels</strong> <code class="def-code-arguments">(<var class="var">A</var>, <var class="var">nbins</var>, <var class="var">method</var>, <var class="var">bounds</var>)</code><a class="copiable-link" href="#index-statelevels-3"></a></span></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-statelevels-4"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">levels</var>, <var class="var">histograms</var>] =</code> <strong class="def-name">statelevels</strong> <code class="def-code-arguments">(&hellip;)</code><a class="copiable-link" href="#index-statelevels-4"></a></span></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-statelevels-5"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">levels</var>, <var class="var">histograms</var>, <var class="var">binlevels</var>] =</code> <strong class="def-name">statelevels</strong> <code class="def-code-arguments">(&hellip;)</code><a class="copiable-link" href="#index-statelevels-5"></a></span></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-statelevels-6"><span class="category-def">Function File: </span><span><strong class="def-name">statelevels</strong> <code class="def-code-arguments">(&hellip;)</code><a class="copiable-link" href="#index-statelevels-6"></a></span></dt>
+<dt class="deftypefn def-line" id="index-statelevels"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">levels</var> =</code> <strong class="def-name">statelevels</strong> <code class="def-code-arguments">(<var class="var">A</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-statelevels-1"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">levels</var> =</code> <strong class="def-name">statelevels</strong> <code class="def-code-arguments">(<var class="var">A</var>, <var class="var">nbins</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-statelevels-2"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">levels</var> =</code> <strong class="def-name">statelevels</strong> <code class="def-code-arguments">(<var class="var">A</var>, <var class="var">nbins</var>, <var class="var">method</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-statelevels-3"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">levels</var> =</code> <strong class="def-name">statelevels</strong> <code class="def-code-arguments">(<var class="var">A</var>, <var class="var">nbins</var>, <var class="var">method</var>, <var class="var">bounds</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-statelevels-4"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">levels</var>, <var class="var">histograms</var>] =</code> <strong class="def-name">statelevels</strong> <code class="def-code-arguments">(&hellip;)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-statelevels-5"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">levels</var>, <var class="var">histograms</var>, <var class="var">binlevels</var>] =</code> <strong class="def-name">statelevels</strong> <code class="def-code-arguments">(&hellip;)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-statelevels-6"><span class="category-def">Function File: </span><span><strong class="def-name">statelevels</strong> <code class="def-code-arguments">(&hellip;)</code></span></dt>
 <dd><p>Estimate state-level for bilevel waveform <var class="var">A</var> using histogram method
 </p>
 <p>INPUTS:

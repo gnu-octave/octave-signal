@@ -2,7 +2,7 @@
 layout: "default"
 permalink: "/functions/8_isstable/"
 pkg_name: "signal"
-pkg_version: "1.4.7"
+pkg_version: "1.4.8"
 pkg_description: "Signal processing tools, including filtering, windowing and display functions."
 title: "Signal Toolkit - isstable"
 category: "Utility"
@@ -70,6 +70,10 @@ navigation:
   name: "&nbsp;&nbsp;Pulse Metrics"
   url: "/functions/#13_PulseMetrics"
   subitems:
+- id: "8_Plotting"
+  name: "&nbsp;&nbsp;Plotting"
+  url: "/functions/#8_Plotting"
+  subitems:
 - id: "7_Utility"
   name: "&nbsp;&nbsp;Utility"
   url: "/functions/#7_Utility"
@@ -82,7 +86,8 @@ navigation:
   url: "/manual"
 ---
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-isstable"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">FLAG</var> =</code> <strong class="def-name">isstable</strong> <code class="def-code-arguments">(<var class="var">B</var>, <var class="var">A</var>)</code><a class="copiable-link" href="#index-isstable"></a></span></dt>
+<dt class="deftypefn def-line" id="index-isstable"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">FLAG</var> =</code> <strong class="def-name">isstable</strong> <code class="def-code-arguments">(<var class="var">B</var>, <var class="var">A</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-isstable-1"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">FLAG</var> =</code> <strong class="def-name">isstable</strong> <code class="def-code-arguments">(<var class="var">sos</var>)</code></span></dt>
 <dd><p>Returns a logical output equal to TRUE, if the filter is stable.
  This can be done with coeffients of the filer <var class="var">B</var> and <var class="var">A</var>.
  Alternatively by using a second order sections matrix (SOS).

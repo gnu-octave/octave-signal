@@ -2,7 +2,7 @@
 layout: "default"
 permalink: "/functions/8_polystab/"
 pkg_name: "signal"
-pkg_version: "1.4.7"
+pkg_version: "1.4.8"
 pkg_description: "Signal processing tools, including filtering, windowing and display functions."
 title: "Signal Toolkit - polystab"
 category: "Utility"
@@ -69,6 +69,10 @@ navigation:
 - id: "13_PulseMetrics"
   name: "&nbsp;&nbsp;Pulse Metrics"
   url: "/functions/#13_PulseMetrics"
+  subitems:
+- id: "8_Plotting"
+  name: "&nbsp;&nbsp;Plotting"
+  url: "/functions/#8_Plotting"
   subitems:
 - id: "7_Utility"
   name: "&nbsp;&nbsp;Utility"

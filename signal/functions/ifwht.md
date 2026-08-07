@@ -2,7 +2,7 @@
 layout: "default"
 permalink: "/functions/5_ifwht/"
 pkg_name: "signal"
-pkg_version: "1.4.7"
+pkg_version: "1.4.8"
 pkg_description: "Signal processing tools, including filtering, windowing and display functions."
 title: "Signal Toolkit - ifwht"
 category: "Utility"
@@ -70,6 +70,10 @@ navigation:
   name: "&nbsp;&nbsp;Pulse Metrics"
   url: "/functions/#13_PulseMetrics"
   subitems:
+- id: "8_Plotting"
+  name: "&nbsp;&nbsp;Plotting"
+  url: "/functions/#8_Plotting"
+  subitems:
 - id: "7_Utility"
   name: "&nbsp;&nbsp;Utility"
   url: "/functions/#7_Utility"
@@ -82,9 +86,9 @@ navigation:
   url: "/manual"
 ---
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-ifwht"><span class="category-def">Function File: </span><span><strong class="def-name">ifwht</strong> <code class="def-code-arguments">(<var class="var">x</var>)</code><a class="copiable-link" href="#index-ifwht"></a></span></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-ifwht-1"><span class="category-def">Function File: </span><span><strong class="def-name">ifwht</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">n</var>)</code><a class="copiable-link" href="#index-ifwht-1"></a></span></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-ifwht-2"><span class="category-def">Function File: </span><span><strong class="def-name">ifwht</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">n</var>, <var class="var">order</var>)</code><a class="copiable-link" href="#index-ifwht-2"></a></span></dt>
+<dt class="deftypefn def-line" id="index-ifwht"><span class="category-def">Function File: </span><span><strong class="def-name">ifwht</strong> <code class="def-code-arguments">(<var class="var">x</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-ifwht-1"><span class="category-def">Function File: </span><span><strong class="def-name">ifwht</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">n</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-ifwht-2"><span class="category-def">Function File: </span><span><strong class="def-name">ifwht</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">n</var>, <var class="var">order</var>)</code></span></dt>
 <dd><p>Compute the inverse Walsh-Hadamard transform of <var class="var">x</var> using the
  Fast Walsh-Hadamard Transform (FWHT) algorithm.  If the input is a
  matrix, the inverse FWHT is calculated along the columns of <var class="var">x</var>.

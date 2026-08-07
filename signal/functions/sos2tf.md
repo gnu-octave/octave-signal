@@ -2,7 +2,7 @@
 layout: "default"
 permalink: "/functions/6_sos2tf/"
 pkg_name: "signal"
-pkg_version: "1.4.7"
+pkg_version: "1.4.8"
 pkg_description: "Signal processing tools, including filtering, windowing and display functions."
 title: "Signal Toolkit - sos2tf"
 category: "Utility"
@@ -70,6 +70,10 @@ navigation:
   name: "&nbsp;&nbsp;Pulse Metrics"
   url: "/functions/#13_PulseMetrics"
   subitems:
+- id: "8_Plotting"
+  name: "&nbsp;&nbsp;Plotting"
+  url: "/functions/#8_Plotting"
+  subitems:
 - id: "7_Utility"
   name: "&nbsp;&nbsp;Utility"
   url: "/functions/#7_Utility"
@@ -82,8 +86,8 @@ navigation:
   url: "/manual"
 ---
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-sos2tf"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">b</var>, <var class="var">a</var>] =</code> <strong class="def-name">sos2tf</strong> <code class="def-code-arguments">(<var class="var">sos</var>)</code><a class="copiable-link" href="#index-sos2tf"></a></span></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-sos2tf-1"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">b</var>, <var class="var">a</var>] =</code> <strong class="def-name">sos2tf</strong> <code class="def-code-arguments">(<var class="var">sos</var>, <var class="var">g</var>)</code><a class="copiable-link" href="#index-sos2tf-1"></a></span></dt>
+<dt class="deftypefn def-line" id="index-sos2tf"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">b</var>, <var class="var">a</var>] =</code> <strong class="def-name">sos2tf</strong> <code class="def-code-arguments">(<var class="var">sos</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-sos2tf-1"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">b</var>, <var class="var">a</var>] =</code> <strong class="def-name">sos2tf</strong> <code class="def-code-arguments">(<var class="var">sos</var>, <var class="var">g</var>)</code></span></dt>
 <dd><p>Convert series second-order sections to transfer function.
 </p>
 <p>INPUTS:

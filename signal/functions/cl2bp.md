@@ -2,7 +2,7 @@
 layout: "default"
 permalink: "/functions/5_cl2bp/"
 pkg_name: "signal"
-pkg_version: "1.4.7"
+pkg_version: "1.4.8"
 pkg_description: "Signal processing tools, including filtering, windowing and display functions."
 title: "Signal Toolkit - cl2bp"
 category: "Utility"
@@ -70,6 +70,10 @@ navigation:
   name: "&nbsp;&nbsp;Pulse Metrics"
   url: "/functions/#13_PulseMetrics"
   subitems:
+- id: "8_Plotting"
+  name: "&nbsp;&nbsp;Plotting"
+  url: "/functions/#8_Plotting"
+  subitems:
 - id: "7_Utility"
   name: "&nbsp;&nbsp;Utility"
   url: "/functions/#7_Utility"
@@ -82,8 +86,8 @@ navigation:
   url: "/manual"
 ---
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-cl2bp"><span class="category-def">Loadable Function: </span><span><code class="def-type"><var class="var">h</var> =</code> <strong class="def-name">cl2bp</strong> <code class="def-code-arguments">(<var class="var">m</var>, <var class="var">w1</var>, <var class="var">w2</var>, <var class="var">up</var>, <var class="var">lo</var>)</code><a class="copiable-link" href="#index-cl2bp"></a></span></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-cl2bp-1"><span class="category-def">Loadable Function: </span><span><code class="def-type"><var class="var">h</var> =</code> <strong class="def-name">cl2bp</strong> <code class="def-code-arguments">(<var class="var">m</var>, <var class="var">w1</var>, <var class="var">w2</var>, <var class="var">up</var>, <var class="var">lo</var>, <var class="var">gridsize</var>)</code><a class="copiable-link" href="#index-cl2bp-1"></a></span></dt>
+<dt class="deftypefn def-line" id="index-cl2bp"><span class="category-def">Loadable Function: </span><span><code class="def-type"><var class="var">h</var> =</code> <strong class="def-name">cl2bp</strong> <code class="def-code-arguments">(<var class="var">m</var>, <var class="var">w1</var>, <var class="var">w2</var>, <var class="var">up</var>, <var class="var">lo</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-cl2bp-1"><span class="category-def">Loadable Function: </span><span><code class="def-type"><var class="var">h</var> =</code> <strong class="def-name">cl2bp</strong> <code class="def-code-arguments">(<var class="var">m</var>, <var class="var">w1</var>, <var class="var">w2</var>, <var class="var">up</var>, <var class="var">lo</var>, <var class="var">gridsize</var>)</code></span></dt>
 <dd>
 <p>Constrained L2 bandpass FIR filter design.  This is a fast implementation of
 the algorithm cited below.  Compared to <em class="dfn">remez</em>, it offers implicit

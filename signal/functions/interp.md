@@ -2,7 +2,7 @@
 layout: "default"
 permalink: "/functions/6_interp/"
 pkg_name: "signal"
-pkg_version: "1.4.7"
+pkg_version: "1.4.8"
 pkg_description: "Signal processing tools, including filtering, windowing and display functions."
 title: "Signal Toolkit - interp"
 category: "Utility"
@@ -70,6 +70,10 @@ navigation:
   name: "&nbsp;&nbsp;Pulse Metrics"
   url: "/functions/#13_PulseMetrics"
   subitems:
+- id: "8_Plotting"
+  name: "&nbsp;&nbsp;Plotting"
+  url: "/functions/#8_Plotting"
+  subitems:
 - id: "7_Utility"
   name: "&nbsp;&nbsp;Utility"
   url: "/functions/#7_Utility"
@@ -82,9 +86,9 @@ navigation:
   url: "/manual"
 ---
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-interp"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">interp</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">q</var>)</code><a class="copiable-link" href="#index-interp"></a></span></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-interp-1"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">interp</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">q</var>, <var class="var">n</var>)</code><a class="copiable-link" href="#index-interp-1"></a></span></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-interp-2"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">interp</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">q</var>, <var class="var">n</var>, <var class="var">Wc</var>)</code><a class="copiable-link" href="#index-interp-2"></a></span></dt>
+<dt class="deftypefn def-line" id="index-interp"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">interp</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">q</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-interp-1"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">interp</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">q</var>, <var class="var">n</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-interp-2"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">interp</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">q</var>, <var class="var">n</var>, <var class="var">Wc</var>)</code></span></dt>
 <dd>
 <p>Upsample the signal x by a factor of q, using an order 2*q*n+1 FIR
  filter. Note that q must be an integer for this rate change method.

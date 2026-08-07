@@ -2,7 +2,7 @@
 layout: "default"
 permalink: "/functions/9_findpeaks/"
 pkg_name: "signal"
-pkg_version: "1.4.7"
+pkg_version: "1.4.8"
 pkg_description: "Signal processing tools, including filtering, windowing and display functions."
 title: "Signal Toolkit - findpeaks"
 category: "Utility"
@@ -70,6 +70,10 @@ navigation:
   name: "&nbsp;&nbsp;Pulse Metrics"
   url: "/functions/#13_PulseMetrics"
   subitems:
+- id: "8_Plotting"
+  name: "&nbsp;&nbsp;Plotting"
+  url: "/functions/#8_Plotting"
+  subitems:
 - id: "7_Utility"
   name: "&nbsp;&nbsp;Utility"
   url: "/functions/#7_Utility"
@@ -82,9 +86,9 @@ navigation:
   url: "/manual"
 ---
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-findpeaks"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">pks</var>, <var class="var">loc</var>, <var class="var">extra</var>] =</code> <strong class="def-name">findpeaks</strong> <code class="def-code-arguments">(<var class="var">data</var>)</code><a class="copiable-link" href="#index-findpeaks"></a></span></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-findpeaks-1"><span class="category-def">Function File: </span><span><code class="def-type">&hellip; =</code> <strong class="def-name">findpeaks</strong> <code class="def-code-arguments">(&hellip;, <var class="var">property</var>, <var class="var">value</var>)</code><a class="copiable-link" href="#index-findpeaks-1"></a></span></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-findpeaks-2"><span class="category-def">Function File: </span><span><code class="def-type">&hellip; =</code> <strong class="def-name">findpeaks</strong> <code class="def-code-arguments">(&hellip;, &quot;DoubleSided&quot;)</code><a class="copiable-link" href="#index-findpeaks-2"></a></span></dt>
+<dt class="deftypefn def-line" id="index-findpeaks"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">pks</var>, <var class="var">loc</var>, <var class="var">extra</var>] =</code> <strong class="def-name">findpeaks</strong> <code class="def-code-arguments">(<var class="var">data</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-findpeaks-1"><span class="category-def">Function File: </span><span><code class="def-type">&hellip; =</code> <strong class="def-name">findpeaks</strong> <code class="def-code-arguments">(&hellip;, <var class="var">property</var>, <var class="var">value</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-findpeaks-2"><span class="category-def">Function File: </span><span><code class="def-type">&hellip; =</code> <strong class="def-name">findpeaks</strong> <code class="def-code-arguments">(&hellip;, &quot;DoubleSided&quot;)</code></span></dt>
 <dd><p>Finds peaks on <var class="var">data</var>.
 </p>
 <p>Peaks of a positive array of data are defined as local maxima. For
@@ -144,7 +148,7 @@ navigation:
  estimated using a parabola fitted to the neighborhood of each peak.
  The width is calculated with the formula
  </p><pre class="verbatim"> a * width^2 = 1
- </pre><p>where a is the the concavity of the parabola.
+ </pre><p>where a is the concavity of the parabola.
  Default value <code class="code">eps</code>.
 </p>
 </dd>

@@ -2,7 +2,7 @@
 layout: "default"
 permalink: "/functions/8_cplxreal/"
 pkg_name: "signal"
-pkg_version: "1.4.7"
+pkg_version: "1.4.8"
 pkg_description: "Signal processing tools, including filtering, windowing and display functions."
 title: "Signal Toolkit - cplxreal"
 category: "Utility"
@@ -70,6 +70,10 @@ navigation:
   name: "&nbsp;&nbsp;Pulse Metrics"
   url: "/functions/#13_PulseMetrics"
   subitems:
+- id: "8_Plotting"
+  name: "&nbsp;&nbsp;Plotting"
+  url: "/functions/#8_Plotting"
+  subitems:
 - id: "7_Utility"
   name: "&nbsp;&nbsp;Utility"
   url: "/functions/#7_Utility"
@@ -82,9 +86,9 @@ navigation:
   url: "/manual"
 ---
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-cplxreal"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">zc</var>, <var class="var">zr</var>] =</code> <strong class="def-name">cplxreal</strong> <code class="def-code-arguments">(<var class="var">z</var>)</code><a class="copiable-link" href="#index-cplxreal"></a></span></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-cplxreal-1"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">zc</var>, <var class="var">zr</var>] =</code> <strong class="def-name">cplxreal</strong> <code class="def-code-arguments">(<var class="var">z</var>, <var class="var">tol</var>)</code><a class="copiable-link" href="#index-cplxreal-1"></a></span></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-cplxreal-2"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">zc</var>, <var class="var">zr</var>] =</code> <strong class="def-name">cplxreal</strong> <code class="def-code-arguments">(<var class="var">z</var>, <var class="var">tol</var>, <var class="var">dim</var>)</code><a class="copiable-link" href="#index-cplxreal-2"></a></span></dt>
+<dt class="deftypefn def-line" id="index-cplxreal"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">zc</var>, <var class="var">zr</var>] =</code> <strong class="def-name">cplxreal</strong> <code class="def-code-arguments">(<var class="var">z</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-cplxreal-1"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">zc</var>, <var class="var">zr</var>] =</code> <strong class="def-name">cplxreal</strong> <code class="def-code-arguments">(<var class="var">z</var>, <var class="var">tol</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-cplxreal-2"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">zc</var>, <var class="var">zr</var>] =</code> <strong class="def-name">cplxreal</strong> <code class="def-code-arguments">(<var class="var">z</var>, <var class="var">tol</var>, <var class="var">dim</var>)</code></span></dt>
 <dd><p>Sort the numbers <var class="var">z</var> into complex-conjugate-valued and real-valued
  elements.  The positive imaginary complex numbers of each complex conjugate
  pair are returned in <var class="var">zc</var> and the real numbers are returned in <var class="var">zr</var>.

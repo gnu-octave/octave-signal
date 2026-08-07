@@ -2,7 +2,7 @@
 layout: "default"
 permalink: "/functions/15_peitsengnotch/"
 pkg_name: "signal"
-pkg_version: "1.4.7"
+pkg_version: "1.4.8"
 pkg_description: "Signal processing tools, including filtering, windowing and display functions."
 title: "Signal Toolkit - pei_tseng_notch"
 category: "Utility"
@@ -70,6 +70,10 @@ navigation:
   name: "&nbsp;&nbsp;Pulse Metrics"
   url: "/functions/#13_PulseMetrics"
   subitems:
+- id: "8_Plotting"
+  name: "&nbsp;&nbsp;Plotting"
+  url: "/functions/#8_Plotting"
+  subitems:
 - id: "7_Utility"
   name: "&nbsp;&nbsp;Utility"
   url: "/functions/#7_Utility"
@@ -82,7 +86,7 @@ navigation:
   url: "/manual"
 ---
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-pei_005ftseng_005fnotch"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">b</var>, <var class="var">a</var>] =</code> <strong class="def-name">pei_tseng_notch</strong> <code class="def-code-arguments">(<var class="var">frequencies</var>, <var class="var">bandwidths</var>)</code><a class="copiable-link" href="#index-pei_005ftseng_005fnotch"></a></span></dt>
+<dt class="deftypefn def-line" id="index-pei_005ftseng_005fnotch"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">b</var>, <var class="var">a</var>] =</code> <strong class="def-name">pei_tseng_notch</strong> <code class="def-code-arguments">(<var class="var">frequencies</var>, <var class="var">bandwidths</var>)</code></span></dt>
 <dd><p>Return coefficients for an IIR notch-filter with one or more filter frequencies and according (very narrow) bandwidths
  to be used with <code class="code">filter</code> or <code class="code">filtfilt</code>.
  The filter construction is based on an allpass which performs a reversal of phase at the filter frequencies.

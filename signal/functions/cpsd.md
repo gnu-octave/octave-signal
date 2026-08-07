@@ -2,7 +2,7 @@
 layout: "default"
 permalink: "/functions/4_cpsd/"
 pkg_name: "signal"
-pkg_version: "1.4.7"
+pkg_version: "1.4.8"
 pkg_description: "Signal processing tools, including filtering, windowing and display functions."
 title: "Signal Toolkit - cpsd"
 category: "Utility"
@@ -70,6 +70,10 @@ navigation:
   name: "&nbsp;&nbsp;Pulse Metrics"
   url: "/functions/#13_PulseMetrics"
   subitems:
+- id: "8_Plotting"
+  name: "&nbsp;&nbsp;Plotting"
+  url: "/functions/#8_Plotting"
+  subitems:
 - id: "7_Utility"
   name: "&nbsp;&nbsp;Utility"
   url: "/functions/#7_Utility"
@@ -82,13 +86,13 @@ navigation:
   url: "/manual"
 ---
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-cpsd"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">Pxx</var>, <var class="var">freq</var>] =</code> <strong class="def-name">cpsd</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">y</var>)</code><a class="copiable-link" href="#index-cpsd"></a></span></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-cpsd-1"><span class="category-def">Function File: </span><span><code class="def-type">[&hellip;] =</code> <strong class="def-name">cpsd</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">y</var>, <var class="var">window</var>)</code><a class="copiable-link" href="#index-cpsd-1"></a></span></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-cpsd-2"><span class="category-def">Function File: </span><span><code class="def-type">[&hellip;] =</code> <strong class="def-name">cpsd</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">y</var>, <var class="var">window</var>, <var class="var">overlap</var>)</code><a class="copiable-link" href="#index-cpsd-2"></a></span></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-cpsd-3"><span class="category-def">Function File: </span><span><code class="def-type">[&hellip;] =</code> <strong class="def-name">cpsd</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">y</var>, <var class="var">window</var>, <var class="var">overlap</var>, <var class="var">Nfft</var>)</code><a class="copiable-link" href="#index-cpsd-3"></a></span></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-cpsd-4"><span class="category-def">Function File: </span><span><code class="def-type">[&hellip;] =</code> <strong class="def-name">cpsd</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">y</var>, <var class="var">window</var>, <var class="var">overlap</var>, <var class="var">Nfft</var>, <var class="var">Fs</var>)</code><a class="copiable-link" href="#index-cpsd-4"></a></span></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-cpsd-5"><span class="category-def">Function File: </span><span><code class="def-type">[&hellip;] =</code> <strong class="def-name">cpsd</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">y</var>, <var class="var">window</var>, <var class="var">overlap</var>, <var class="var">Nfft</var>, <var class="var">Fs</var>, <var class="var">range</var>)</code><a class="copiable-link" href="#index-cpsd-5"></a></span></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-cpsd-6"><span class="category-def">Function File: </span><span><strong class="def-name">cpsd</strong> <code class="def-code-arguments">(&hellip;)</code><a class="copiable-link" href="#index-cpsd-6"></a></span></dt>
+<dt class="deftypefn def-line" id="index-cpsd"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">Pxx</var>, <var class="var">freq</var>] =</code> <strong class="def-name">cpsd</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">y</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-cpsd-1"><span class="category-def">Function File: </span><span><code class="def-type">[&hellip;] =</code> <strong class="def-name">cpsd</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">y</var>, <var class="var">window</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-cpsd-2"><span class="category-def">Function File: </span><span><code class="def-type">[&hellip;] =</code> <strong class="def-name">cpsd</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">y</var>, <var class="var">window</var>, <var class="var">overlap</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-cpsd-3"><span class="category-def">Function File: </span><span><code class="def-type">[&hellip;] =</code> <strong class="def-name">cpsd</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">y</var>, <var class="var">window</var>, <var class="var">overlap</var>, <var class="var">Nfft</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-cpsd-4"><span class="category-def">Function File: </span><span><code class="def-type">[&hellip;] =</code> <strong class="def-name">cpsd</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">y</var>, <var class="var">window</var>, <var class="var">overlap</var>, <var class="var">Nfft</var>, <var class="var">Fs</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-cpsd-5"><span class="category-def">Function File: </span><span><code class="def-type">[&hellip;] =</code> <strong class="def-name">cpsd</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">y</var>, <var class="var">window</var>, <var class="var">overlap</var>, <var class="var">Nfft</var>, <var class="var">Fs</var>, <var class="var">range</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-cpsd-6"><span class="category-def">Function File: </span><span><strong class="def-name">cpsd</strong> <code class="def-code-arguments">(&hellip;)</code></span></dt>
 <dd>
 <p>Estimate cross power spectrum of data <var class="var">x</var> and <var class="var">y</var> by the Welch (1967)
  periodogram/FFT method.

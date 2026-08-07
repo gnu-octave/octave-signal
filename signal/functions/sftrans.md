@@ -2,7 +2,7 @@
 layout: "default"
 permalink: "/functions/7_sftrans/"
 pkg_name: "signal"
-pkg_version: "1.4.7"
+pkg_version: "1.4.8"
 pkg_description: "Signal processing tools, including filtering, windowing and display functions."
 title: "Signal Toolkit - sftrans"
 category: "Utility"
@@ -70,6 +70,10 @@ navigation:
   name: "&nbsp;&nbsp;Pulse Metrics"
   url: "/functions/#13_PulseMetrics"
   subitems:
+- id: "8_Plotting"
+  name: "&nbsp;&nbsp;Plotting"
+  url: "/functions/#8_Plotting"
+  subitems:
 - id: "7_Utility"
   name: "&nbsp;&nbsp;Utility"
   url: "/functions/#7_Utility"
@@ -82,7 +86,7 @@ navigation:
   url: "/manual"
 ---
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-sftrans"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">Sz</var>, <var class="var">Sp</var>, <var class="var">Sg</var>] =</code> <strong class="def-name">sftrans</strong> <code class="def-code-arguments">(<var class="var">Sz</var>, <var class="var">Sp</var>, <var class="var">Sg</var>, <var class="var">W</var>, <var class="var">stop</var>)</code><a class="copiable-link" href="#index-sftrans"></a></span></dt>
+<dt class="deftypefn def-line" id="index-sftrans"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">Sz</var>, <var class="var">Sp</var>, <var class="var">Sg</var>] =</code> <strong class="def-name">sftrans</strong> <code class="def-code-arguments">(<var class="var">Sz</var>, <var class="var">Sp</var>, <var class="var">Sg</var>, <var class="var">W</var>, <var class="var">stop</var>)</code></span></dt>
 <dd>
 <p>Transform band edges of a generic lowpass filter (cutoff at W=1)
  represented in splane zero-pole-gain form.  W is the edge of the

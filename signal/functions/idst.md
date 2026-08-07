@@ -2,7 +2,7 @@
 layout: "default"
 permalink: "/functions/4_idst/"
 pkg_name: "signal"
-pkg_version: "1.4.7"
+pkg_version: "1.4.8"
 pkg_description: "Signal processing tools, including filtering, windowing and display functions."
 title: "Signal Toolkit - idst"
 category: "Utility"
@@ -70,6 +70,10 @@ navigation:
   name: "&nbsp;&nbsp;Pulse Metrics"
   url: "/functions/#13_PulseMetrics"
   subitems:
+- id: "8_Plotting"
+  name: "&nbsp;&nbsp;Plotting"
+  url: "/functions/#8_Plotting"
+  subitems:
 - id: "7_Utility"
   name: "&nbsp;&nbsp;Utility"
   url: "/functions/#7_Utility"
@@ -82,12 +86,12 @@ navigation:
   url: "/manual"
 ---
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-idst"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">idst</strong> <code class="def-code-arguments">(<var class="var">x</var>)</code><a class="copiable-link" href="#index-idst"></a></span></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-idst-1"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">idst</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">n</var>)</code><a class="copiable-link" href="#index-idst-1"></a></span></dt>
+<dt class="deftypefn def-line" id="index-idst"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">idst</strong> <code class="def-code-arguments">(<var class="var">x</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-idst-1"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">idst</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">n</var>)</code></span></dt>
 <dd><p>Computes the inverse type I discrete sine transform of <var class="var">y</var>.  If <var class="var">n</var> is
  given, then <var class="var">y</var> is padded or trimmed to length <var class="var">n</var> before computing
  the transform.  If <var class="var">y</var> is a matrix, compute the transform along the
- columns of the the matrix.
+ columns of the matrix.
  </p>
 <p><strong class="strong">See also:</strong> dst.
  </p></dd></dl>

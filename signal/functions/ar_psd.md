@@ -2,7 +2,7 @@
 layout: "default"
 permalink: "/functions/6_arpsd/"
 pkg_name: "signal"
-pkg_version: "1.4.7"
+pkg_version: "1.4.8"
 pkg_description: "Signal processing tools, including filtering, windowing and display functions."
 title: "Signal Toolkit - ar_psd"
 category: "Utility"
@@ -70,6 +70,10 @@ navigation:
   name: "&nbsp;&nbsp;Pulse Metrics"
   url: "/functions/#13_PulseMetrics"
   subitems:
+- id: "8_Plotting"
+  name: "&nbsp;&nbsp;Plotting"
+  url: "/functions/#8_Plotting"
+  subitems:
 - id: "7_Utility"
   name: "&nbsp;&nbsp;Utility"
   url: "/functions/#7_Utility"
@@ -82,13 +86,13 @@ navigation:
   url: "/manual"
 ---
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-ar_005fpsd"><span class="category-def">Function File: </span><span><strong class="def-name">ar_psd</strong> <code class="def-code-arguments">(<var class="var">a</var>, <var class="var">v</var>)</code><a class="copiable-link" href="#index-ar_005fpsd"></a></span></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-ar_005fpsd-1"><span class="category-def">Function File: </span><span><strong class="def-name">ar_psd</strong> <code class="def-code-arguments">(<var class="var">a</var>, <var class="var">v</var>, <var class="var">freq</var>)</code><a class="copiable-link" href="#index-ar_005fpsd-1"></a></span></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-ar_005fpsd-2"><span class="category-def">Function File: </span><span><strong class="def-name">ar_psd</strong> <code class="def-code-arguments">(<var class="var">a</var>, <var class="var">v</var>, <var class="var">freq</var>, <var class="var">Fs</var>)</code><a class="copiable-link" href="#index-ar_005fpsd-2"></a></span></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-ar_005fpsd-3"><span class="category-def">Function File: </span><span><strong class="def-name">ar_psd</strong> <code class="def-code-arguments">(&hellip;, <var class="var">range</var>)</code><a class="copiable-link" href="#index-ar_005fpsd-3"></a></span></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-ar_005fpsd-4"><span class="category-def">Function File: </span><span><strong class="def-name">ar_psd</strong> <code class="def-code-arguments">(&hellip;, <var class="var">method</var>)</code><a class="copiable-link" href="#index-ar_005fpsd-4"></a></span></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-ar_005fpsd-5"><span class="category-def">Function File: </span><span><strong class="def-name">ar_psd</strong> <code class="def-code-arguments">(&hellip;, <var class="var">plottype</var>)</code><a class="copiable-link" href="#index-ar_005fpsd-5"></a></span></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-ar_005fpsd-6"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">psd</var>, <var class="var">f_out</var>] =</code> <strong class="def-name">ar_psd</strong> <code class="def-code-arguments">(&hellip;)</code><a class="copiable-link" href="#index-ar_005fpsd-6"></a></span></dt>
+<dt class="deftypefn def-line" id="index-ar_005fpsd"><span class="category-def">Function File: </span><span><strong class="def-name">ar_psd</strong> <code class="def-code-arguments">(<var class="var">a</var>, <var class="var">v</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-ar_005fpsd-1"><span class="category-def">Function File: </span><span><strong class="def-name">ar_psd</strong> <code class="def-code-arguments">(<var class="var">a</var>, <var class="var">v</var>, <var class="var">freq</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-ar_005fpsd-2"><span class="category-def">Function File: </span><span><strong class="def-name">ar_psd</strong> <code class="def-code-arguments">(<var class="var">a</var>, <var class="var">v</var>, <var class="var">freq</var>, <var class="var">Fs</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-ar_005fpsd-3"><span class="category-def">Function File: </span><span><strong class="def-name">ar_psd</strong> <code class="def-code-arguments">(&hellip;, <var class="var">range</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-ar_005fpsd-4"><span class="category-def">Function File: </span><span><strong class="def-name">ar_psd</strong> <code class="def-code-arguments">(&hellip;, <var class="var">method</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-ar_005fpsd-5"><span class="category-def">Function File: </span><span><strong class="def-name">ar_psd</strong> <code class="def-code-arguments">(&hellip;, <var class="var">plottype</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-ar_005fpsd-6"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">psd</var>, <var class="var">f_out</var>] =</code> <strong class="def-name">ar_psd</strong> <code class="def-code-arguments">(&hellip;)</code></span></dt>
 <dd>
 <p>Calculate the power spectrum of the autoregressive model
 </p>

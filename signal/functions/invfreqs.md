@@ -2,7 +2,7 @@
 layout: "default"
 permalink: "/functions/8_invfreqs/"
 pkg_name: "signal"
-pkg_version: "1.4.7"
+pkg_version: "1.4.8"
 pkg_description: "Signal processing tools, including filtering, windowing and display functions."
 title: "Signal Toolkit - invfreqs"
 category: "Utility"
@@ -70,6 +70,10 @@ navigation:
   name: "&nbsp;&nbsp;Pulse Metrics"
   url: "/functions/#13_PulseMetrics"
   subitems:
+- id: "8_Plotting"
+  name: "&nbsp;&nbsp;Plotting"
+  url: "/functions/#8_Plotting"
+  subitems:
 - id: "7_Utility"
   name: "&nbsp;&nbsp;Utility"
   url: "/functions/#7_Utility"
@@ -82,9 +86,9 @@ navigation:
   url: "/manual"
 ---
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-invfreqs_0028H_002cF_002cnB_002cnA_0029"><span class="category-def">Function File: </span><span><code class="def-type">[B,A] =</code> <strong class="def-name">invfreqs(H,F,nB,nA)</strong><a class="copiable-link" href="#index-invfreqs_0028H_002cF_002cnB_002cnA_0029"></a></span></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-invfreqs_0028H_002cF_002cnB_002cnA_002cW_0029"><span class="category-def">: </span><span><code class="def-type">[B,A] =</code> <strong class="def-name">invfreqs(H,F,nB,nA,W)</strong><a class="copiable-link" href="#index-invfreqs_0028H_002cF_002cnB_002cnA_002cW_0029"></a></span></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-invfreqs_0028H_002cF_002cnB_002cnA_002cW_002citer_002ctol_002c_0027trace_0027_0029"><span class="category-def">: </span><span><code class="def-type">[B,A] =</code> <strong class="def-name">invfreqs(H,F,nB,nA,W,iter,tol,'trace')</strong><a class="copiable-link" href="#index-invfreqs_0028H_002cF_002cnB_002cnA_002cW_002citer_002ctol_002c_0027trace_0027_0029"></a></span></dt>
+<dt class="deftypefn def-line" id="index-invfreqs_0028H_002cF_002cnB_002cnA_0029"><span class="category-def">Function File: </span><span><code class="def-type">[B,A] =</code> <strong class="def-name">invfreqs(H,F,nB,nA)</strong></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-invfreqs_0028H_002cF_002cnB_002cnA_002cW_0029"><span><code class="def-type">[B,A] =</code> <strong class="def-name">invfreqs(H,F,nB,nA,W)</strong></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-invfreqs_0028H_002cF_002cnB_002cnA_002cW_002citer_002ctol_002c_0027trace_0027_0029"><span><code class="def-type">[B,A] =</code> <strong class="def-name">invfreqs(H,F,nB,nA,W,iter,tol,'trace')</strong></span></dt>
 <dd><p>Fit filter B(s)/A(s)to the complex frequency response H at frequency
  points F.
 </p>

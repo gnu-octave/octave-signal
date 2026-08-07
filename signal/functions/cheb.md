@@ -2,7 +2,7 @@
 layout: "default"
 permalink: "/functions/4_cheb/"
 pkg_name: "signal"
-pkg_version: "1.4.7"
+pkg_version: "1.4.8"
 pkg_description: "Signal processing tools, including filtering, windowing and display functions."
 title: "Signal Toolkit - cheb"
 category: "Utility"
@@ -70,6 +70,10 @@ navigation:
   name: "&nbsp;&nbsp;Pulse Metrics"
   url: "/functions/#13_PulseMetrics"
   subitems:
+- id: "8_Plotting"
+  name: "&nbsp;&nbsp;Plotting"
+  url: "/functions/#8_Plotting"
+  subitems:
 - id: "7_Utility"
   name: "&nbsp;&nbsp;Utility"
   url: "/functions/#7_Utility"
@@ -82,7 +86,7 @@ navigation:
   url: "/manual"
 ---
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-cheb"><span class="category-def">Function File: </span><span><strong class="def-name">cheb</strong> <code class="def-code-arguments">(<var class="var">n</var>, <var class="var">x</var>)</code><a class="copiable-link" href="#index-cheb"></a></span></dt>
+<dt class="deftypefn def-line" id="index-cheb"><span class="category-def">Function File: </span><span><strong class="def-name">cheb</strong> <code class="def-code-arguments">(<var class="var">n</var>, <var class="var">x</var>)</code></span></dt>
 <dd><p>Returns the value of the nth-order Chebyshev polynomial calculated at
  the point x. The Chebyshev polynomials are defined by the equations:
 </p>

@@ -2,7 +2,7 @@
 layout: "default"
 permalink: "/functions/6_zp2sos/"
 pkg_name: "signal"
-pkg_version: "1.4.7"
+pkg_version: "1.4.8"
 pkg_description: "Signal processing tools, including filtering, windowing and display functions."
 title: "Signal Toolkit - zp2sos"
 category: "Utility"
@@ -70,6 +70,10 @@ navigation:
   name: "&nbsp;&nbsp;Pulse Metrics"
   url: "/functions/#13_PulseMetrics"
   subitems:
+- id: "8_Plotting"
+  name: "&nbsp;&nbsp;Plotting"
+  url: "/functions/#8_Plotting"
+  subitems:
 - id: "7_Utility"
   name: "&nbsp;&nbsp;Utility"
   url: "/functions/#7_Utility"
@@ -82,10 +86,10 @@ navigation:
   url: "/manual"
 ---
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-zp2sos"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">sos</var>, <var class="var">g</var>] =</code> <strong class="def-name">zp2sos</strong> <code class="def-code-arguments">(<var class="var">z</var>)</code><a class="copiable-link" href="#index-zp2sos"></a></span></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-zp2sos-1"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">sos</var>, <var class="var">g</var>] =</code> <strong class="def-name">zp2sos</strong> <code class="def-code-arguments">(<var class="var">z</var>, <var class="var">p</var>)</code><a class="copiable-link" href="#index-zp2sos-1"></a></span></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-zp2sos-2"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">sos</var>, <var class="var">g</var>] =</code> <strong class="def-name">zp2sos</strong> <code class="def-code-arguments">(<var class="var">z</var>, <var class="var">p</var>, <var class="var">k</var>)</code><a class="copiable-link" href="#index-zp2sos-2"></a></span></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-zp2sos-3"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">sos</var> =</code> <strong class="def-name">zp2sos</strong> <code class="def-code-arguments">(&hellip;)</code><a class="copiable-link" href="#index-zp2sos-3"></a></span></dt>
+<dt class="deftypefn def-line" id="index-zp2sos"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">sos</var>, <var class="var">g</var>] =</code> <strong class="def-name">zp2sos</strong> <code class="def-code-arguments">(<var class="var">z</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-zp2sos-1"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">sos</var>, <var class="var">g</var>] =</code> <strong class="def-name">zp2sos</strong> <code class="def-code-arguments">(<var class="var">z</var>, <var class="var">p</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-zp2sos-2"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">sos</var>, <var class="var">g</var>] =</code> <strong class="def-name">zp2sos</strong> <code class="def-code-arguments">(<var class="var">z</var>, <var class="var">p</var>, <var class="var">k</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-zp2sos-3"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">sos</var> =</code> <strong class="def-name">zp2sos</strong> <code class="def-code-arguments">(&hellip;)</code></span></dt>
 <dd><p>Convert filter poles and zeros to second-order sections.
 </p>
 <p>INPUTS:
@@ -105,7 +109,7 @@ navigation:
  <code class="code"><var class="var">B1</var>.' = [b0 b1 b2] and <var class="var">A1</var>.' = [a0 a1 a2]</code> for
  section 1, etc.
  See <code class="code">filter</code> for documentation of the second-order direct-form filter
- coefficients <var class="var">B</var>i and %<var class="var">A</var>i, i=1:N.
+ coefficients <var class="var">B</var>i and <var class="var">A</var>i, i=1:N.
 </p>
 </li><li><var class="var">g</var> is the overall gain factor that effectively scales
  any one of the <var class="var">B</var>i vectors.

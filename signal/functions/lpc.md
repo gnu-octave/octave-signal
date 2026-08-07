@@ -2,7 +2,7 @@
 layout: "default"
 permalink: "/functions/3_lpc/"
 pkg_name: "signal"
-pkg_version: "1.4.7"
+pkg_version: "1.4.8"
 pkg_description: "Signal processing tools, including filtering, windowing and display functions."
 title: "Signal Toolkit - lpc"
 category: "Utility"
@@ -70,6 +70,10 @@ navigation:
   name: "&nbsp;&nbsp;Pulse Metrics"
   url: "/functions/#13_PulseMetrics"
   subitems:
+- id: "8_Plotting"
+  name: "&nbsp;&nbsp;Plotting"
+  url: "/functions/#8_Plotting"
+  subitems:
 - id: "7_Utility"
   name: "&nbsp;&nbsp;Utility"
   url: "/functions/#7_Utility"
@@ -82,10 +86,10 @@ navigation:
   url: "/manual"
 ---
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-lpc"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">a</var> =</code> <strong class="def-name">lpc</strong> <code class="def-code-arguments">(<var class="var">x</var>)</code><a class="copiable-link" href="#index-lpc"></a></span></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-lpc-1"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">a</var> =</code> <strong class="def-name">lpc</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">p</var>)</code><a class="copiable-link" href="#index-lpc-1"></a></span></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-lpc-2"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">a</var>, <var class="var">g</var>] =</code> <strong class="def-name">lpc</strong> <code class="def-code-arguments">(&hellip;)</code><a class="copiable-link" href="#index-lpc-2"></a></span></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-lpc-3"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">a</var>, <var class="var">g</var>] =</code> <strong class="def-name">lpc</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">p</var>)</code><a class="copiable-link" href="#index-lpc-3"></a></span></dt>
+<dt class="deftypefn def-line" id="index-lpc"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">a</var> =</code> <strong class="def-name">lpc</strong> <code class="def-code-arguments">(<var class="var">x</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-lpc-1"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">a</var> =</code> <strong class="def-name">lpc</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">p</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-lpc-2"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">a</var>, <var class="var">g</var>] =</code> <strong class="def-name">lpc</strong> <code class="def-code-arguments">(&hellip;)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-lpc-3"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">a</var>, <var class="var">g</var>] =</code> <strong class="def-name">lpc</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">p</var>)</code></span></dt>
 <dd>
 <p>Determines the forward linear predictor by minimizing the prediction error
  in the least squares sense. Use the Durbin-Levinson algorithm to solve

@@ -2,7 +2,7 @@
 layout: "default"
 permalink: "/functions/6_cheby2/"
 pkg_name: "signal"
-pkg_version: "1.4.7"
+pkg_version: "1.4.8"
 pkg_description: "Signal processing tools, including filtering, windowing and display functions."
 title: "Signal Toolkit - cheby2"
 category: "Utility"
@@ -70,6 +70,10 @@ navigation:
   name: "&nbsp;&nbsp;Pulse Metrics"
   url: "/functions/#13_PulseMetrics"
   subitems:
+- id: "8_Plotting"
+  name: "&nbsp;&nbsp;Plotting"
+  url: "/functions/#8_Plotting"
+  subitems:
 - id: "7_Utility"
   name: "&nbsp;&nbsp;Utility"
   url: "/functions/#7_Utility"
@@ -82,13 +86,13 @@ navigation:
   url: "/manual"
 ---
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-cheby2"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">b</var>, <var class="var">a</var>] =</code> <strong class="def-name">cheby2</strong> <code class="def-code-arguments">(<var class="var">n</var>, <var class="var">rs</var>, <var class="var">wc</var>)</code><a class="copiable-link" href="#index-cheby2"></a></span></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-cheby2-1"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">b</var>, <var class="var">a</var>] =</code> <strong class="def-name">cheby2</strong> <code class="def-code-arguments">(<var class="var">n</var>, <var class="var">rs</var>, <var class="var">wc</var>, &quot;high&quot;)</code><a class="copiable-link" href="#index-cheby2-1"></a></span></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-cheby2-2"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">b</var>, <var class="var">a</var>] =</code> <strong class="def-name">cheby2</strong> <code class="def-code-arguments">(<var class="var">n</var>, <var class="var">rs</var>, [<var class="var">wl</var>, <var class="var">wh</var>])</code><a class="copiable-link" href="#index-cheby2-2"></a></span></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-cheby2-3"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">b</var>, <var class="var">a</var>] =</code> <strong class="def-name">cheby2</strong> <code class="def-code-arguments">(<var class="var">n</var>, <var class="var">rs</var>, [<var class="var">wl</var>, <var class="var">wh</var>], &quot;stop&quot;)</code><a class="copiable-link" href="#index-cheby2-3"></a></span></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-cheby2-4"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">z</var>, <var class="var">p</var>, <var class="var">g</var>] =</code> <strong class="def-name">cheby2</strong> <code class="def-code-arguments">(&hellip;)</code><a class="copiable-link" href="#index-cheby2-4"></a></span></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-cheby2-5"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">a</var>, <var class="var">b</var>, <var class="var">c</var>, <var class="var">d</var>] =</code> <strong class="def-name">cheby2</strong> <code class="def-code-arguments">(&hellip;)</code><a class="copiable-link" href="#index-cheby2-5"></a></span></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-cheby2-6"><span class="category-def">Function File: </span><span><code class="def-type">[&hellip;] =</code> <strong class="def-name">cheby2</strong> <code class="def-code-arguments">(&hellip;, &quot;s&quot;)</code><a class="copiable-link" href="#index-cheby2-6"></a></span></dt>
+<dt class="deftypefn def-line" id="index-cheby2"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">b</var>, <var class="var">a</var>] =</code> <strong class="def-name">cheby2</strong> <code class="def-code-arguments">(<var class="var">n</var>, <var class="var">rs</var>, <var class="var">wc</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-cheby2-1"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">b</var>, <var class="var">a</var>] =</code> <strong class="def-name">cheby2</strong> <code class="def-code-arguments">(<var class="var">n</var>, <var class="var">rs</var>, <var class="var">wc</var>, &quot;high&quot;)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-cheby2-2"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">b</var>, <var class="var">a</var>] =</code> <strong class="def-name">cheby2</strong> <code class="def-code-arguments">(<var class="var">n</var>, <var class="var">rs</var>, [<var class="var">wl</var>, <var class="var">wh</var>])</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-cheby2-3"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">b</var>, <var class="var">a</var>] =</code> <strong class="def-name">cheby2</strong> <code class="def-code-arguments">(<var class="var">n</var>, <var class="var">rs</var>, [<var class="var">wl</var>, <var class="var">wh</var>], &quot;stop&quot;)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-cheby2-4"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">z</var>, <var class="var">p</var>, <var class="var">g</var>] =</code> <strong class="def-name">cheby2</strong> <code class="def-code-arguments">(&hellip;)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-cheby2-5"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">a</var>, <var class="var">b</var>, <var class="var">c</var>, <var class="var">d</var>] =</code> <strong class="def-name">cheby2</strong> <code class="def-code-arguments">(&hellip;)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-cheby2-6"><span class="category-def">Function File: </span><span><code class="def-type">[&hellip;] =</code> <strong class="def-name">cheby2</strong> <code class="def-code-arguments">(&hellip;, &quot;s&quot;)</code></span></dt>
 <dd><p>Generate a Chebyshev type II filter with <var class="var">rs</var> dB of stopband attenuation.
 </p>
 <p>[b, a] = cheby2(n, Rs, Wc)

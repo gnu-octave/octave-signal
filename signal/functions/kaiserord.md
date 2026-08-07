@@ -2,7 +2,7 @@
 layout: "default"
 permalink: "/functions/9_kaiserord/"
 pkg_name: "signal"
-pkg_version: "1.4.7"
+pkg_version: "1.4.8"
 pkg_description: "Signal processing tools, including filtering, windowing and display functions."
 title: "Signal Toolkit - kaiserord"
 category: "Utility"
@@ -70,6 +70,10 @@ navigation:
   name: "&nbsp;&nbsp;Pulse Metrics"
   url: "/functions/#13_PulseMetrics"
   subitems:
+- id: "8_Plotting"
+  name: "&nbsp;&nbsp;Plotting"
+  url: "/functions/#8_Plotting"
+  subitems:
 - id: "7_Utility"
   name: "&nbsp;&nbsp;Utility"
   url: "/functions/#7_Utility"
@@ -82,8 +86,8 @@ navigation:
   url: "/manual"
 ---
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-kaiserord"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">n</var>, <var class="var">Wn</var>, <var class="var">beta</var>, <var class="var">ftype</var>] =</code> <strong class="def-name">kaiserord</strong> <code class="def-code-arguments">(<var class="var">f</var>, <var class="var">m</var>, <var class="var">dev</var>)</code><a class="copiable-link" href="#index-kaiserord"></a></span></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-kaiserord-1"><span class="category-def">Function File: </span><span><code class="def-type">[&hellip;] =</code> <strong class="def-name">kaiserord</strong> <code class="def-code-arguments">(<var class="var">f</var>, <var class="var">m</var>, <var class="var">dev</var>, <var class="var">fs</var>)</code><a class="copiable-link" href="#index-kaiserord-1"></a></span></dt>
+<dt class="deftypefn def-line" id="index-kaiserord"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">n</var>, <var class="var">Wn</var>, <var class="var">beta</var>, <var class="var">ftype</var>] =</code> <strong class="def-name">kaiserord</strong> <code class="def-code-arguments">(<var class="var">f</var>, <var class="var">m</var>, <var class="var">dev</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-kaiserord-1"><span class="category-def">Function File: </span><span><code class="def-type">[&hellip;] =</code> <strong class="def-name">kaiserord</strong> <code class="def-code-arguments">(<var class="var">f</var>, <var class="var">m</var>, <var class="var">dev</var>, <var class="var">fs</var>)</code></span></dt>
 <dd>
 <p>Return the parameters needed to produce a filter of the desired
  specification from a Kaiser window.  The vector <var class="var">f</var> contains pairs of

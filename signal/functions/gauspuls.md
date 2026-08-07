@@ -2,7 +2,7 @@
 layout: "default"
 permalink: "/functions/8_gauspuls/"
 pkg_name: "signal"
-pkg_version: "1.4.7"
+pkg_version: "1.4.8"
 pkg_description: "Signal processing tools, including filtering, windowing and display functions."
 title: "Signal Toolkit - gauspuls"
 category: "Utility"
@@ -70,6 +70,10 @@ navigation:
   name: "&nbsp;&nbsp;Pulse Metrics"
   url: "/functions/#13_PulseMetrics"
   subitems:
+- id: "8_Plotting"
+  name: "&nbsp;&nbsp;Plotting"
+  url: "/functions/#8_Plotting"
+  subitems:
 - id: "7_Utility"
   name: "&nbsp;&nbsp;Utility"
   url: "/functions/#7_Utility"
@@ -82,10 +86,35 @@ navigation:
   url: "/manual"
 ---
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-gauspuls"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">gauspuls</strong> <code class="def-code-arguments">(<var class="var">t</var>)</code><a class="copiable-link" href="#index-gauspuls"></a></span></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-gauspuls-1"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">gauspuls</strong> <code class="def-code-arguments">(<var class="var">t</var>, <var class="var">fc</var>)</code><a class="copiable-link" href="#index-gauspuls-1"></a></span></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-gauspuls-2"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">gauspuls</strong> <code class="def-code-arguments">(<var class="var">t</var>, <var class="var">fc</var>, <var class="var">bw</var>)</code><a class="copiable-link" href="#index-gauspuls-2"></a></span></dt>
+<dt class="deftypefn def-line" id="index-gauspuls"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">yi</var> =</code> <strong class="def-name">gauspuls</strong> <code class="def-code-arguments">(<var class="var">t</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-gauspuls-1"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">yi</var> =</code> <strong class="def-name">gauspuls</strong> <code class="def-code-arguments">(<var class="var">t</var>, <var class="var">fc</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-gauspuls-2"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">yi</var> =</code> <strong class="def-name">gauspuls</strong> <code class="def-code-arguments">(<var class="var">t</var>, <var class="var">fc</var>, <var class="var">bw</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-gauspuls-3"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">yi</var> =</code> <strong class="def-name">gauspuls</strong> <code class="def-code-arguments">(<var class="var">t</var>, <var class="var">fc</var>, <var class="var">bw</var>, <var class="var">bwr</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-gauspuls-4"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">yi</var>, <var class="var">yq</var>] =</code> <strong class="def-name">gauspuls</strong> <code class="def-code-arguments">(&hellip;)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-gauspuls-5"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">yi</var>, <var class="var">yq</var>, <var class="var">ye</var>] =</code> <strong class="def-name">gauspuls</strong> <code class="def-code-arguments">(&hellip;)</code></span></dt>
 <dd><p>Generate a Gaussian modulated sinusoidal pulse sampled at times <var class="var">t</var>.
- </p>
+</p>
+<p>The input arguments are:
+ </p><ul class="itemize mark-bullet">
+<li><var class="var">t</var> : vector of time values (in seconds) at which the pulse is
+ evaluated.
+ </li><li><var class="var">fc</var> : center frequency in Hz (default 1000).  Must be a
+ non-negative real scalar.
+ </li><li><var class="var">bw</var> : fractional bandwidth (default 0.5).  Must be a positive
+ real scalar.  The bandwidth is measured at the reference level given by
+ <var class="var">bwr</var>.
+ </li><li><var class="var">bwr</var> : reference level in dB (default -6).  Must be a negative
+ real scalar.  The pulse&rsquo;s envelope amplitude at the band edges is
+ <code class="code">10^(<var class="var">bwr</var>/20)</code> times the peak amplitude.
+ </li></ul>
+
+<p>The output arguments are:
+ </p><ul class="itemize mark-bullet">
+<li><var class="var">yi</var> : inphase (cosine) component of the pulse.
+ </li><li><var class="var">yq</var> : quadrature (sine) component of the pulse.
+ </li><li><var class="var">ye</var> : envelope of the pulse 
+ (same as <code class="code">sqrt (<var class="var">yi</var>.^2 + <var class="var">yq</var>.^2)</code>).
+ </li></ul>
+
 <p><strong class="strong">See also:</strong> pulstran, rectpuls, tripuls.
  </p></dd></dl>

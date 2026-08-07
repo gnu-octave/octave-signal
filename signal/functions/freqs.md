@@ -2,7 +2,7 @@
 layout: "default"
 permalink: "/functions/5_freqs/"
 pkg_name: "signal"
-pkg_version: "1.4.7"
+pkg_version: "1.4.8"
 pkg_description: "Signal processing tools, including filtering, windowing and display functions."
 title: "Signal Toolkit - freqs"
 category: "Utility"
@@ -70,6 +70,10 @@ navigation:
   name: "&nbsp;&nbsp;Pulse Metrics"
   url: "/functions/#13_PulseMetrics"
   subitems:
+- id: "8_Plotting"
+  name: "&nbsp;&nbsp;Plotting"
+  url: "/functions/#8_Plotting"
+  subitems:
 - id: "7_Utility"
   name: "&nbsp;&nbsp;Utility"
   url: "/functions/#7_Utility"
@@ -82,12 +86,17 @@ navigation:
   url: "/manual"
 ---
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-freqs"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">h</var> =</code> <strong class="def-name">freqs</strong> <code class="def-code-arguments">(<var class="var">b</var>, <var class="var">a</var>, <var class="var">w</var>)</code><a class="copiable-link" href="#index-freqs"></a></span></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-freqs-1"><span class="category-def">Function File: </span><span><strong class="def-name">freqs</strong> <code class="def-code-arguments">(<var class="var">b</var>, <var class="var">a</var>, <var class="var">w</var>)</code><a class="copiable-link" href="#index-freqs-1"></a></span></dt>
-<dd>
-<p>Compute the s-plane frequency response of the IIR filter B(s)/A(s) as
- H = polyval(B,j*W)./polyval(A,j*W).  If called with no output
- argument, a plot of magnitude and phase are displayed.
+<dt class="deftypefn def-line" id="index-freqs"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">h</var> =</code> <strong class="def-name">freqs</strong> <code class="def-code-arguments">(<var class="var">b</var>, <var class="var">a</var>, <var class="var">w</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-freqs-1"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">h</var>, <var class="var">wout</var>] =</code> <strong class="def-name">freqs</strong> <code class="def-code-arguments">(<var class="var">b</var>, <var class="var">a</var>, <var class="var">n</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-freqs-2"><span class="category-def">Function File: </span><span><strong class="def-name">freqs</strong> <code class="def-code-arguments">(&hellip;)</code></span></dt>
+<dd><p>Compute the s-plane frequency response of the analog filter B(s)/A(s).
+</p>
+<p>The frequency response is evaluated at the angular frequencies specified
+ by vector <var class="var">w</var> (in rad/s).  If the third argument is a scalar integer
+ <var class="var">n</var>, or if it is omitted, the frequency response is computed at
+ <var class="var">n</var> logarithmically spaced frequencies (default <var class="var">n</var> = 200).
+</p>
+<p>If no output argument is requested, the magnitude and phase are plotted.
 </p>
 <p>Example:
  </p><div class="example">

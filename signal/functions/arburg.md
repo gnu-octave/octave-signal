@@ -2,7 +2,7 @@
 layout: "default"
 permalink: "/functions/6_arburg/"
 pkg_name: "signal"
-pkg_version: "1.4.7"
+pkg_version: "1.4.8"
 pkg_description: "Signal processing tools, including filtering, windowing and display functions."
 title: "Signal Toolkit - arburg"
 category: "Utility"
@@ -70,6 +70,10 @@ navigation:
   name: "&nbsp;&nbsp;Pulse Metrics"
   url: "/functions/#13_PulseMetrics"
   subitems:
+- id: "8_Plotting"
+  name: "&nbsp;&nbsp;Plotting"
+  url: "/functions/#8_Plotting"
+  subitems:
 - id: "7_Utility"
   name: "&nbsp;&nbsp;Utility"
   url: "/functions/#7_Utility"
@@ -82,8 +86,8 @@ navigation:
   url: "/manual"
 ---
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-arburg"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">a</var>, <var class="var">v</var>, <var class="var">k</var>] =</code> <strong class="def-name">arburg</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">poles</var>)</code><a class="copiable-link" href="#index-arburg"></a></span></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-arburg-1"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">a</var>, <var class="var">v</var>, <var class="var">k</var>] =</code> <strong class="def-name">arburg</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">poles</var>, <var class="var">criterion</var>)</code><a class="copiable-link" href="#index-arburg-1"></a></span></dt>
+<dt class="deftypefn def-line" id="index-arburg"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">a</var>, <var class="var">v</var>, <var class="var">k</var>] =</code> <strong class="def-name">arburg</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">poles</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-arburg-1"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">a</var>, <var class="var">v</var>, <var class="var">k</var>] =</code> <strong class="def-name">arburg</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">poles</var>, <var class="var">criterion</var>)</code></span></dt>
 <dd>
 <p>Calculate coefficients of an autoregressive (AR) model of complex data
  <var class="var">x</var> using the whitening lattice-filter method of Burg (1968).  The

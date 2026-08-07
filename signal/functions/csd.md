@@ -2,7 +2,7 @@
 layout: "default"
 permalink: "/functions/3_csd/"
 pkg_name: "signal"
-pkg_version: "1.4.7"
+pkg_version: "1.4.8"
 pkg_description: "Signal processing tools, including filtering, windowing and display functions."
 title: "Signal Toolkit - csd"
 category: "Utility"
@@ -70,6 +70,10 @@ navigation:
   name: "&nbsp;&nbsp;Pulse Metrics"
   url: "/functions/#13_PulseMetrics"
   subitems:
+- id: "8_Plotting"
+  name: "&nbsp;&nbsp;Plotting"
+  url: "/functions/#8_Plotting"
+  subitems:
 - id: "7_Utility"
   name: "&nbsp;&nbsp;Utility"
   url: "/functions/#7_Utility"
@@ -82,7 +86,7 @@ navigation:
   url: "/manual"
 ---
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-_003d"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">Pxx</var>,<var class="var">freq</var>]</code> <strong class="def-name">=</strong> <code class="def-code-arguments">csd(<var class="var">x</var>, <var class="var">y</var>, <var class="var">Nfft</var>, <var class="var">Fs</var>, <var class="var">window</var>, <var class="var">overlap</var>, <var class="var">range</var>, <var class="var">plot_type</var>, <var class="var">detrend</var>)</code><a class="copiable-link" href="#index-_003d"></a></span></dt>
+<dt class="deftypefn def-line" id="index-_003d"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">Pxx</var>,<var class="var">freq</var>]</code> <strong class="def-name">=</strong> <code class="def-code-arguments">csd(<var class="var">x</var>, <var class="var">y</var>, <var class="var">Nfft</var>, <var class="var">Fs</var>, <var class="var">window</var>, <var class="var">overlap</var>, <var class="var">range</var>, <var class="var">plot_type</var>, <var class="var">detrend</var>)</code></span></dt>
 <dd><p>Estimate cross power spectrum of data &quot;x&quot; and &quot;y&quot; by the Welch (1967)
  periodogram/FFT method.
 </p>

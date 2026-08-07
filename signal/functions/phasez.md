@@ -2,7 +2,7 @@
 layout: "default"
 permalink: "/functions/6_phasez/"
 pkg_name: "signal"
-pkg_version: "1.4.7"
+pkg_version: "1.4.8"
 pkg_description: "Signal processing tools, including filtering, windowing and display functions."
 title: "Signal Toolkit - phasez"
 category: "Utility"
@@ -70,6 +70,10 @@ navigation:
   name: "&nbsp;&nbsp;Pulse Metrics"
   url: "/functions/#13_PulseMetrics"
   subitems:
+- id: "8_Plotting"
+  name: "&nbsp;&nbsp;Plotting"
+  url: "/functions/#8_Plotting"
+  subitems:
 - id: "7_Utility"
   name: "&nbsp;&nbsp;Utility"
   url: "/functions/#7_Utility"
@@ -82,13 +86,13 @@ navigation:
   url: "/manual"
 ---
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-phasez"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">phi</var>, <var class="var">w</var>] =</code> <strong class="def-name">phasez</strong> <code class="def-code-arguments">(<var class="var">b</var>, <var class="var">a</var>, <var class="var">n</var>)</code><a class="copiable-link" href="#index-phasez"></a></span></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-phasez-1"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">phi</var>, <var class="var">w</var>] =</code> <strong class="def-name">phasez</strong> <code class="def-code-arguments">(<var class="var">b</var>, <var class="var">a</var>)</code><a class="copiable-link" href="#index-phasez-1"></a></span></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-phasez-2"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">phi</var>, <var class="var">w</var>] =</code> <strong class="def-name">phasez</strong> <code class="def-code-arguments">(<var class="var">sos</var>, <var class="var">n</var>)</code><a class="copiable-link" href="#index-phasez-2"></a></span></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-phasez-3"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">phi</var>, <var class="var">w</var>] =</code> <strong class="def-name">phasez</strong> <code class="def-code-arguments">(<var class="var">sos</var>)</code><a class="copiable-link" href="#index-phasez-3"></a></span></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-phasez-4"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">phi</var>, <var class="var">w</var>] =</code> <strong class="def-name">phasez</strong> <code class="def-code-arguments">(&hellip;, <var class="var">n</var>, &quot;whole&quot;)</code><a class="copiable-link" href="#index-phasez-4"></a></span></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-phasez-5"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">phi</var>, <var class="var">w</var>] =</code> <strong class="def-name">phasez</strong> <code class="def-code-arguments">(&hellip;, <var class="var">n</var>, Fs)</code><a class="copiable-link" href="#index-phasez-5"></a></span></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-phasez-6"><span class="category-def">Function File: </span><span><strong class="def-name">phasez</strong> <code class="def-code-arguments">(&hellip;)</code><a class="copiable-link" href="#index-phasez-6"></a></span></dt>
+<dt class="deftypefn def-line" id="index-phasez"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">phi</var>, <var class="var">w</var>] =</code> <strong class="def-name">phasez</strong> <code class="def-code-arguments">(<var class="var">b</var>, <var class="var">a</var>, <var class="var">n</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-phasez-1"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">phi</var>, <var class="var">w</var>] =</code> <strong class="def-name">phasez</strong> <code class="def-code-arguments">(<var class="var">b</var>, <var class="var">a</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-phasez-2"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">phi</var>, <var class="var">w</var>] =</code> <strong class="def-name">phasez</strong> <code class="def-code-arguments">(<var class="var">sos</var>, <var class="var">n</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-phasez-3"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">phi</var>, <var class="var">w</var>] =</code> <strong class="def-name">phasez</strong> <code class="def-code-arguments">(<var class="var">sos</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-phasez-4"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">phi</var>, <var class="var">w</var>] =</code> <strong class="def-name">phasez</strong> <code class="def-code-arguments">(&hellip;, <var class="var">n</var>, &quot;whole&quot;)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-phasez-5"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">phi</var>, <var class="var">w</var>] =</code> <strong class="def-name">phasez</strong> <code class="def-code-arguments">(&hellip;, <var class="var">n</var>, Fs)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-phasez-6"><span class="category-def">Function File: </span><span><strong class="def-name">phasez</strong> <code class="def-code-arguments">(&hellip;)</code></span></dt>
 <dd>
 <p>Compute the phase response of digital filter defined either by its
  coefficients (<var class="var">b</var> and <var class="var">a</var> are the numerator and denominator

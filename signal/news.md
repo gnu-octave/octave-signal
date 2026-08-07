@@ -3,7 +3,7 @@ layout: "default"
 permalink: "/news/"
 title: "Signal Toolkit - News"
 pkg_name: "signal"
-version: "1.4.7"
+version: "1.4.8"
 description: "Signal processing tools, including filtering, windowing and display functions."
 navigation:
 - id: "overview"
@@ -19,6 +19,32 @@ navigation:
   url: "/manual"
 ---
 <pre>
+Summary of important user-visible changes for signal 1.4.8:
+----------------------------------------------------------
+
+ ** Minor bug fixes and documentation improvements have been made to the
+    following functions:
+
+    besselap      buffer      buttord
+    cheb1ord      cheb2ord    db
+    downsample    findpeaks   firls
+    freqs         freqs_plot  gauspuls
+    gmonopuls     impz        istable
+    levinson      medfilt1    mmfir
+    specgram      square      statelevels
+    upfirdn       upsample    vco
+    zplane        __ultrwin__
+
+ ** The following new functions have been added to the signal package:
+
+    ac2poly       ac2rc       cell2sos
+    corrmtx       db          enbw
+    eqtflength    freqspace   gaussdesign
+    is2rc         impzlength  lar2rc
+    lp2bs         lp2bp       lp2hp
+    lp2lp         rc2is       rc2lar
+    rcosdesign    stepz       strips
+
 Summary of important user-visible changes for signal 1.4.7:
 ----------------------------------------------------------
 
@@ -32,7 +58,7 @@ Summary of important user-visible changes for signal 1.4.7:
 
     sos2cell      wvtool
 
- ** The following new functions have been removed from the signal package:
+ ** The following functions have been removed from the signal package:
 
     rms (If installing in octave 11+)
 

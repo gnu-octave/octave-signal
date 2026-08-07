@@ -2,7 +2,7 @@
 layout: "default"
 permalink: "/functions/10_sgolayfilt/"
 pkg_name: "signal"
-pkg_version: "1.4.7"
+pkg_version: "1.4.8"
 pkg_description: "Signal processing tools, including filtering, windowing and display functions."
 title: "Signal Toolkit - sgolayfilt"
 category: "Utility"
@@ -70,6 +70,10 @@ navigation:
   name: "&nbsp;&nbsp;Pulse Metrics"
   url: "/functions/#13_PulseMetrics"
   subitems:
+- id: "8_Plotting"
+  name: "&nbsp;&nbsp;Plotting"
+  url: "/functions/#8_Plotting"
+  subitems:
 - id: "7_Utility"
   name: "&nbsp;&nbsp;Utility"
   url: "/functions/#7_Utility"
@@ -82,13 +86,13 @@ navigation:
   url: "/manual"
 ---
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-sgolayfilt"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">sgolayfilt</strong> <code class="def-code-arguments">(<var class="var">x</var>)</code><a class="copiable-link" href="#index-sgolayfilt"></a></span></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-sgolayfilt-1"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">sgolayfilt</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">p</var>)</code><a class="copiable-link" href="#index-sgolayfilt-1"></a></span></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-sgolayfilt-2"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">sgolayfilt</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">p</var>, <var class="var">n</var>)</code><a class="copiable-link" href="#index-sgolayfilt-2"></a></span></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-sgolayfilt-3"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">sgolayfilt</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">p</var>, <var class="var">n</var>, <var class="var">m</var>)</code><a class="copiable-link" href="#index-sgolayfilt-3"></a></span></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-sgolayfilt-4"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">sgolayfilt</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">p</var>, <var class="var">n</var>, <var class="var">m</var>, <var class="var">ts</var>)</code><a class="copiable-link" href="#index-sgolayfilt-4"></a></span></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-sgolayfilt-5"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">sgolayfilt</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">p</var>, <var class="var">n</var>, <var class="var">m</var>, <var class="var">ts</var>)</code><a class="copiable-link" href="#index-sgolayfilt-5"></a></span></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-sgolayfilt-6"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">sgolayfilt</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">f</var>)</code><a class="copiable-link" href="#index-sgolayfilt-6"></a></span></dt>
+<dt class="deftypefn def-line" id="index-sgolayfilt"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">sgolayfilt</strong> <code class="def-code-arguments">(<var class="var">x</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-sgolayfilt-1"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">sgolayfilt</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">p</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-sgolayfilt-2"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">sgolayfilt</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">p</var>, <var class="var">n</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-sgolayfilt-3"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">sgolayfilt</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">p</var>, <var class="var">n</var>, <var class="var">m</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-sgolayfilt-4"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">sgolayfilt</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">p</var>, <var class="var">n</var>, <var class="var">m</var>, <var class="var">ts</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-sgolayfilt-5"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">sgolayfilt</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">p</var>, <var class="var">n</var>, <var class="var">m</var>, <var class="var">ts</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-sgolayfilt-6"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">y</var> =</code> <strong class="def-name">sgolayfilt</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">f</var>)</code></span></dt>
 <dd><p>Smooth the data in x with a Savitsky-Golay smoothing filter of
  polynomial order p and length n, n odd, n &gt; p.  By default, p=3
  and n=p+2 or n=p+3 if p is even.

@@ -2,7 +2,7 @@
 layout: "default"
 permalink: "/functions/4_impz/"
 pkg_name: "signal"
-pkg_version: "1.4.7"
+pkg_version: "1.4.8"
 pkg_description: "Signal processing tools, including filtering, windowing and display functions."
 title: "Signal Toolkit - impz"
 category: "Utility"
@@ -70,6 +70,10 @@ navigation:
   name: "&nbsp;&nbsp;Pulse Metrics"
   url: "/functions/#13_PulseMetrics"
   subitems:
+- id: "8_Plotting"
+  name: "&nbsp;&nbsp;Plotting"
+  url: "/functions/#8_Plotting"
+  subitems:
 - id: "7_Utility"
   name: "&nbsp;&nbsp;Utility"
   url: "/functions/#7_Utility"
@@ -82,20 +86,23 @@ navigation:
   url: "/manual"
 ---
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-impz"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">x</var>, <var class="var">t</var>] =</code> <strong class="def-name">impz</strong> <code class="def-code-arguments">(<var class="var">b</var>)</code><a class="copiable-link" href="#index-impz"></a></span></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-impz-1"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">x</var>, <var class="var">t</var>] =</code> <strong class="def-name">impz</strong> <code class="def-code-arguments">(<var class="var">b</var>, <var class="var">a</var>)</code><a class="copiable-link" href="#index-impz-1"></a></span></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-impz-2"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">x</var>, <var class="var">t</var>] =</code> <strong class="def-name">impz</strong> <code class="def-code-arguments">(<var class="var">b</var>, <var class="var">a</var>, <var class="var">n</var>)</code><a class="copiable-link" href="#index-impz-2"></a></span></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-impz-3"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">x</var>, <var class="var">t</var>] =</code> <strong class="def-name">impz</strong> <code class="def-code-arguments">(<var class="var">b</var>, <var class="var">a</var>, <var class="var">n</var>, <var class="var">fs</var>)</code><a class="copiable-link" href="#index-impz-3"></a></span></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-impz-4"><span class="category-def">Function File: </span><span><strong class="def-name">impz</strong> <code class="def-code-arguments">(&hellip;)</code><a class="copiable-link" href="#index-impz-4"></a></span></dt>
+<dt class="deftypefn def-line" id="index-impz"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">x</var>, <var class="var">t</var>] =</code> <strong class="def-name">impz</strong> <code class="def-code-arguments">(<var class="var">b</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-impz-1"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">x</var>, <var class="var">t</var>] =</code> <strong class="def-name">impz</strong> <code class="def-code-arguments">(<var class="var">b</var>, <var class="var">a</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-impz-2"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">x</var>, <var class="var">t</var>] =</code> <strong class="def-name">impz</strong> <code class="def-code-arguments">(<var class="var">b</var>, <var class="var">a</var>, <var class="var">n</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-impz-3"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">x</var>, <var class="var">t</var>] =</code> <strong class="def-name">impz</strong> <code class="def-code-arguments">(<var class="var">b</var>, <var class="var">a</var>, <var class="var">n</var>, <var class="var">fs</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-impz-4"><span class="category-def">Function File: </span><span><strong class="def-name">impz</strong> <code class="def-code-arguments">(&hellip;)</code></span></dt>
 <dd>
-<p>Generate impulse-response characteristics of the filter. The filter
- coefficients correspond to the the z-plane rational function with
- numerator b and denominator a.  If a is not specified, it defaults to
- 1. If n is not specified, or specified as [], it will be chosen such
- that the signal has a chance to die down to -120dB, or to not explode
- beyond 120dB, or to show five periods if there is no significant
- damping. If no return arguments are requested, plot the results.
+<p>Generate impulse-response characteristics of the filter.
+</p>
+<p>The filter coefficients correspond to the z-plane rational function
+ with numerator b and denominator a.  If a is not specified, it
+ defaults to 1.  When <var class="var">n</var> is a scalar, it specifies the number of
+ points to compute (default: determined by <code class="code">impzlength</code>).  When
+ <var class="var">n</var> is a vector of non-negative integers, the response is
+ computed only at those sample indices.  The sampling frequency
+ <var class="var">fs</var> (default: 1) controls the time spacing in the output
+ <var class="var">t</var>.  With no output arguments, the result is plotted.
 </p>
 
-<p><strong class="strong">See also:</strong> freqz, zplane.
+<p><strong class="strong">See also:</strong> freqz, zplane, stepz,impzlength.
  </p></dd></dl>

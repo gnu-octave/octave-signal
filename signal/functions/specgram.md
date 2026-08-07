@@ -2,7 +2,7 @@
 layout: "default"
 permalink: "/functions/8_specgram/"
 pkg_name: "signal"
-pkg_version: "1.4.7"
+pkg_version: "1.4.8"
 pkg_description: "Signal processing tools, including filtering, windowing and display functions."
 title: "Signal Toolkit - specgram"
 category: "Utility"
@@ -70,6 +70,10 @@ navigation:
   name: "&nbsp;&nbsp;Pulse Metrics"
   url: "/functions/#13_PulseMetrics"
   subitems:
+- id: "8_Plotting"
+  name: "&nbsp;&nbsp;Plotting"
+  url: "/functions/#8_Plotting"
+  subitems:
 - id: "7_Utility"
   name: "&nbsp;&nbsp;Utility"
   url: "/functions/#7_Utility"
@@ -82,12 +86,12 @@ navigation:
   url: "/manual"
 ---
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-specgram"><span class="category-def">Function File: </span><span><strong class="def-name">specgram</strong> <code class="def-code-arguments">(<var class="var">x</var>)</code><a class="copiable-link" href="#index-specgram"></a></span></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-specgram-1"><span class="category-def">Function File: </span><span><strong class="def-name">specgram</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">n</var>)</code><a class="copiable-link" href="#index-specgram-1"></a></span></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-specgram-2"><span class="category-def">Function File: </span><span><strong class="def-name">specgram</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">n</var>, <var class="var">Fs</var>)</code><a class="copiable-link" href="#index-specgram-2"></a></span></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-specgram-3"><span class="category-def">Function File: </span><span><strong class="def-name">specgram</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">n</var>, <var class="var">Fs</var>, <var class="var">window</var>)</code><a class="copiable-link" href="#index-specgram-3"></a></span></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-specgram-4"><span class="category-def">Function File: </span><span><strong class="def-name">specgram</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">n</var>, <var class="var">Fs</var>, <var class="var">window</var>, <var class="var">overlap</var>)</code><a class="copiable-link" href="#index-specgram-4"></a></span></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-specgram-5"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">S</var>, <var class="var">f</var>, <var class="var">t</var>] =</code> <strong class="def-name">specgram</strong> <code class="def-code-arguments">(&hellip;)</code><a class="copiable-link" href="#index-specgram-5"></a></span></dt>
+<dt class="deftypefn def-line" id="index-specgram"><span class="category-def">Function File: </span><span><strong class="def-name">specgram</strong> <code class="def-code-arguments">(<var class="var">x</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-specgram-1"><span class="category-def">Function File: </span><span><strong class="def-name">specgram</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">n</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-specgram-2"><span class="category-def">Function File: </span><span><strong class="def-name">specgram</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">n</var>, <var class="var">Fs</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-specgram-3"><span class="category-def">Function File: </span><span><strong class="def-name">specgram</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">n</var>, <var class="var">Fs</var>, <var class="var">window</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-specgram-4"><span class="category-def">Function File: </span><span><strong class="def-name">specgram</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">n</var>, <var class="var">Fs</var>, <var class="var">window</var>, <var class="var">overlap</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-specgram-5"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">S</var>, <var class="var">f</var>, <var class="var">t</var>] =</code> <strong class="def-name">specgram</strong> <code class="def-code-arguments">(&hellip;)</code></span></dt>
 <dd>
 <p>Generate a spectrogram for the signal <var class="var">x</var>.  The signal is chopped into
  overlapping segments of length <var class="var">n</var>, and each segment is windowed and

@@ -2,7 +2,7 @@
 layout: "default"
 permalink: "/functions/6_pow2db/"
 pkg_name: "signal"
-pkg_version: "1.4.7"
+pkg_version: "1.4.8"
 pkg_description: "Signal processing tools, including filtering, windowing and display functions."
 title: "Signal Toolkit - pow2db"
 category: "Utility"
@@ -70,6 +70,10 @@ navigation:
   name: "&nbsp;&nbsp;Pulse Metrics"
   url: "/functions/#13_PulseMetrics"
   subitems:
+- id: "8_Plotting"
+  name: "&nbsp;&nbsp;Plotting"
+  url: "/functions/#8_Plotting"
+  subitems:
 - id: "7_Utility"
   name: "&nbsp;&nbsp;Utility"
   url: "/functions/#7_Utility"
@@ -82,7 +86,7 @@ navigation:
   url: "/manual"
 ---
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-pow2db"><span class="category-def">Function File: </span><span><strong class="def-name">pow2db</strong> <code class="def-code-arguments">(<var class="var">x</var>)</code><a class="copiable-link" href="#index-pow2db"></a></span></dt>
+<dt class="deftypefn def-line" id="index-pow2db"><span class="category-def">Function File: </span><span><strong class="def-name">pow2db</strong> <code class="def-code-arguments">(<var class="var">x</var>)</code></span></dt>
 <dd><p>Convert power to decibels (dB).
 </p>
 <p>The decibel value of <var class="var">x</var> is defined as
@@ -95,7 +99,7 @@ navigation:
 </p>
 <div class="example">
 <pre class="example-preformatted"> </pre><div class="group"><pre class="example-preformatted"> pow2db ([0, 10, 100])
- &rArr; -Inf 10 20
+ &rArr; -Inf 10.0000 20.0000
  </pre></div><pre class="example-preformatted"> </pre></div>
 
 <p><strong class="strong">See also:</strong> db2pow.

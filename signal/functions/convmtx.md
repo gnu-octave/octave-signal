@@ -2,7 +2,7 @@
 layout: "default"
 permalink: "/functions/7_convmtx/"
 pkg_name: "signal"
-pkg_version: "1.4.7"
+pkg_version: "1.4.8"
 pkg_description: "Signal processing tools, including filtering, windowing and display functions."
 title: "Signal Toolkit - convmtx"
 category: "Utility"
@@ -70,6 +70,10 @@ navigation:
   name: "&nbsp;&nbsp;Pulse Metrics"
   url: "/functions/#13_PulseMetrics"
   subitems:
+- id: "8_Plotting"
+  name: "&nbsp;&nbsp;Plotting"
+  url: "/functions/#8_Plotting"
+  subitems:
 - id: "7_Utility"
   name: "&nbsp;&nbsp;Utility"
   url: "/functions/#7_Utility"
@@ -82,7 +86,7 @@ navigation:
   url: "/manual"
 ---
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-convmtx"><span class="category-def">Function File: </span><span><strong class="def-name">convmtx</strong> <code class="def-code-arguments">(<var class="var">a</var>, <var class="var">n</var>)</code><a class="copiable-link" href="#index-convmtx"></a></span></dt>
+<dt class="deftypefn def-line" id="index-convmtx"><span class="category-def">Function File: </span><span><strong class="def-name">convmtx</strong> <code class="def-code-arguments">(<var class="var">a</var>, <var class="var">n</var>)</code></span></dt>
 <dd><p>If <var class="var">a</var> is a column vector and <var class="var">x</var> is a column vector
  of length <var class="var">n</var>, then
 </p>

@@ -2,7 +2,7 @@
 layout: "default"
 permalink: "/functions/6_zplane/"
 pkg_name: "signal"
-pkg_version: "1.4.7"
+pkg_version: "1.4.8"
 pkg_description: "Signal processing tools, including filtering, windowing and display functions."
 title: "Signal Toolkit - zplane"
 category: "Utility"
@@ -70,6 +70,10 @@ navigation:
   name: "&nbsp;&nbsp;Pulse Metrics"
   url: "/functions/#13_PulseMetrics"
   subitems:
+- id: "8_Plotting"
+  name: "&nbsp;&nbsp;Plotting"
+  url: "/functions/#8_Plotting"
+  subitems:
 - id: "7_Utility"
   name: "&nbsp;&nbsp;Utility"
   url: "/functions/#7_Utility"
@@ -82,8 +86,9 @@ navigation:
   url: "/manual"
 ---
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-zplane"><span class="category-def">Function File: </span><span><strong class="def-name">zplane</strong> <code class="def-code-arguments">(<var class="var">z</var>, <var class="var">p</var>)</code><a class="copiable-link" href="#index-zplane"></a></span></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-zplane-1"><span class="category-def">Function File: </span><span><strong class="def-name">zplane</strong> <code class="def-code-arguments">(<var class="var">b</var>, <var class="var">a</var>)</code><a class="copiable-link" href="#index-zplane-1"></a></span></dt>
+<dt class="deftypefn def-line" id="index-zplane"><span class="category-def">Function File: </span><span><strong class="def-name">zplane</strong> <code class="def-code-arguments">(<var class="var">z</var>, <var class="var">p</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-zplane-1"><span class="category-def">Function File: </span><span><strong class="def-name">zplane</strong> <code class="def-code-arguments">(<var class="var">b</var>, <var class="var">a</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-zplane-2"><span class="category-def">Function File: </span><span><code class="def-type">[hz, hp, ht] =</code> <strong class="def-name">zplane</strong> <code class="def-code-arguments">(___)</code></span></dt>
 <dd><p>Plot the poles and zeros on a complex plane.  If the arguments are column
  vectors <var class="var">z</var> and <var class="var">p</var>, the complex zeros <var class="var">z</var> and poles <var class="var">p</var>
  are displayed. If the arguments are row vectors <var class="var">b</var> and <var class="var">a</var>, the
@@ -111,4 +116,8 @@ navigation:
 
 <p>If called with only one argument, the poles <var class="var">p</var> defaults to an empty
  vector, and the denominator coefficient vector <var class="var">a</var> defaults to 1.
+</p>
+<p>If output variables are provided, hz is the handle to the zero lines, hp is the handle to the pole lines
+ of the pole-zero plot. ht is a vector of handles to the axes/unit circle line and to text objects.
+ If there are no zeros or no poles, hz or hp is the empty matrix, [].
  </p></dd></dl>

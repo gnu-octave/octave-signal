@@ -2,7 +2,7 @@
 layout: "default"
 permalink: "/functions/8_tukeywin/"
 pkg_name: "signal"
-pkg_version: "1.4.7"
+pkg_version: "1.4.8"
 pkg_description: "Signal processing tools, including filtering, windowing and display functions."
 title: "Signal Toolkit - tukeywin"
 category: "Utility"
@@ -70,6 +70,10 @@ navigation:
   name: "&nbsp;&nbsp;Pulse Metrics"
   url: "/functions/#13_PulseMetrics"
   subitems:
+- id: "8_Plotting"
+  name: "&nbsp;&nbsp;Plotting"
+  url: "/functions/#8_Plotting"
+  subitems:
 - id: "7_Utility"
   name: "&nbsp;&nbsp;Utility"
   url: "/functions/#7_Utility"
@@ -82,11 +86,11 @@ navigation:
   url: "/manual"
 ---
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-tukeywin"><span class="category-def">Function File: </span><span><strong class="def-name">tukeywin</strong> <code class="def-code-arguments">(<var class="var">m</var>)</code><a class="copiable-link" href="#index-tukeywin"></a></span></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-tukeywin-1"><span class="category-def">Function File: </span><span><strong class="def-name">tukeywin</strong> <code class="def-code-arguments">(<var class="var">m</var>, <var class="var">r</var>)</code><a class="copiable-link" href="#index-tukeywin-1"></a></span></dt>
+<dt class="deftypefn def-line" id="index-tukeywin"><span class="category-def">Function File: </span><span><strong class="def-name">tukeywin</strong> <code class="def-code-arguments">(<var class="var">m</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-tukeywin-1"><span class="category-def">Function File: </span><span><strong class="def-name">tukeywin</strong> <code class="def-code-arguments">(<var class="var">m</var>, <var class="var">r</var>)</code></span></dt>
 <dd><p>Return the filter coefficients of a Tukey window (also known as the
  cosine-tapered window) of length <var class="var">m</var>.  <var class="var">r</var> defines the ratio
- between the constant section and and the cosine section.  It has to be
+ between the constant section and the cosine section.  It has to be
  between 0 and 1.  The function returns a Hanning window for <var class="var">r</var>
  equal to 1 and a rectangular window for <var class="var">r</var> equal to 0.
  The default value of <var class="var">r</var> is 1/2.

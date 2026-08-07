@@ -2,7 +2,7 @@
 layout: "default"
 permalink: "/functions/18_sampled2continuous/"
 pkg_name: "signal"
-pkg_version: "1.4.7"
+pkg_version: "1.4.8"
 pkg_description: "Signal processing tools, including filtering, windowing and display functions."
 title: "Signal Toolkit - sampled2continuous"
 category: "Utility"
@@ -70,6 +70,10 @@ navigation:
   name: "&nbsp;&nbsp;Pulse Metrics"
   url: "/functions/#13_PulseMetrics"
   subitems:
+- id: "8_Plotting"
+  name: "&nbsp;&nbsp;Plotting"
+  url: "/functions/#8_Plotting"
+  subitems:
 - id: "7_Utility"
   name: "&nbsp;&nbsp;Utility"
   url: "/functions/#7_Utility"
@@ -82,7 +86,7 @@ navigation:
   url: "/manual"
 ---
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-sampled2continuous"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">xt</var> =</code> <strong class="def-name">sampled2continuous</strong> <code class="def-code-arguments">(<var class="var">xn</var>, <var class="var">T</var>, <var class="var">t</var>)</code><a class="copiable-link" href="#index-sampled2continuous"></a></span></dt>
+<dt class="deftypefn def-line" id="index-sampled2continuous"><span class="category-def">Function File: </span><span><code class="def-type"><var class="var">xt</var> =</code> <strong class="def-name">sampled2continuous</strong> <code class="def-code-arguments">(<var class="var">xn</var>, <var class="var">T</var>, <var class="var">t</var>)</code></span></dt>
 <dd>
 <p>Calculate the x(t) reconstructed
  from samples x[n] sampled at a rate 1/T samples

@@ -2,7 +2,7 @@
 layout: "default"
 permalink: "/functions/7_power/"
 pkg_name: "signal"
-pkg_version: "1.4.7"
+pkg_version: "1.4.8"
 pkg_description: "Signal processing tools, including filtering, windowing and display functions."
 title: "Signal Toolkit - __power"
 category: "Utility"
@@ -70,6 +70,10 @@ navigation:
   name: "&nbsp;&nbsp;Pulse Metrics"
   url: "/functions/#13_PulseMetrics"
   subitems:
+- id: "8_Plotting"
+  name: "&nbsp;&nbsp;Plotting"
+  url: "/functions/#8_Plotting"
+  subitems:
 - id: "7_Utility"
   name: "&nbsp;&nbsp;Utility"
   url: "/functions/#7_Utility"
@@ -82,12 +86,12 @@ navigation:
   url: "/manual"
 ---
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-_005f_005fpower"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">P</var>, <var class="var">w</var>] =</code> <strong class="def-name">__power</strong> <code class="def-code-arguments">(<var class="var">b</var>, <var class="var">a</var>)</code><a class="copiable-link" href="#index-_005f_005fpower"></a></span></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-_005f_005fpower-1"><span class="category-def">Function File: </span><span><code class="def-type">[&hellip;] =</code> <strong class="def-name">__power</strong> <code class="def-code-arguments">(<var class="var">b</var>, <var class="var">a</var>, <var class="var">nfft</var>)</code><a class="copiable-link" href="#index-_005f_005fpower-1"></a></span></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-_005f_005fpower-2"><span class="category-def">Function File: </span><span><code class="def-type">[&hellip;] =</code> <strong class="def-name">__power</strong> <code class="def-code-arguments">(<var class="var">b</var>, <var class="var">a</var>, <var class="var">nfft</var>, <var class="var">Fs</var>)</code><a class="copiable-link" href="#index-_005f_005fpower-2"></a></span></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-_005f_005fpower-3"><span class="category-def">Function File: </span><span><code class="def-type">[&hellip;] =</code> <strong class="def-name">__power</strong> <code class="def-code-arguments">(<var class="var">b</var>, <var class="var">a</var>, <var class="var">nfft</var>, <var class="var">Fs</var>, <var class="var">range</var>)</code><a class="copiable-link" href="#index-_005f_005fpower-3"></a></span></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-_005f_005fpower-4"><span class="category-def">Function File: </span><span><code class="def-type">[&hellip;] =</code> <strong class="def-name">__power</strong> <code class="def-code-arguments">(<var class="var">b</var>, <var class="var">a</var>, <var class="var">nfft</var>, <var class="var">Fs</var>, <var class="var">range</var>, <var class="var">units</var>)</code><a class="copiable-link" href="#index-_005f_005fpower-4"></a></span></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-_005f_005fpower-5"><span class="category-def">Function File: </span><span><strong class="def-name">__power</strong> <code class="def-code-arguments">(&hellip;)</code><a class="copiable-link" href="#index-_005f_005fpower-5"></a></span></dt>
+<dt class="deftypefn def-line" id="index-_005f_005fpower"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">P</var>, <var class="var">w</var>] =</code> <strong class="def-name">__power</strong> <code class="def-code-arguments">(<var class="var">b</var>, <var class="var">a</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-_005f_005fpower-1"><span class="category-def">Function File: </span><span><code class="def-type">[&hellip;] =</code> <strong class="def-name">__power</strong> <code class="def-code-arguments">(<var class="var">b</var>, <var class="var">a</var>, <var class="var">nfft</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-_005f_005fpower-2"><span class="category-def">Function File: </span><span><code class="def-type">[&hellip;] =</code> <strong class="def-name">__power</strong> <code class="def-code-arguments">(<var class="var">b</var>, <var class="var">a</var>, <var class="var">nfft</var>, <var class="var">Fs</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-_005f_005fpower-3"><span class="category-def">Function File: </span><span><code class="def-type">[&hellip;] =</code> <strong class="def-name">__power</strong> <code class="def-code-arguments">(<var class="var">b</var>, <var class="var">a</var>, <var class="var">nfft</var>, <var class="var">Fs</var>, <var class="var">range</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-_005f_005fpower-4"><span class="category-def">Function File: </span><span><code class="def-type">[&hellip;] =</code> <strong class="def-name">__power</strong> <code class="def-code-arguments">(<var class="var">b</var>, <var class="var">a</var>, <var class="var">nfft</var>, <var class="var">Fs</var>, <var class="var">range</var>, <var class="var">units</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-_005f_005fpower-5"><span class="category-def">Function File: </span><span><strong class="def-name">__power</strong> <code class="def-code-arguments">(&hellip;)</code></span></dt>
 <dd>
 <p>Plot the power spectrum of the given ARMA model.
 </p>

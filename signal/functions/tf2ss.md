@@ -2,7 +2,7 @@
 layout: "default"
 permalink: "/functions/5_tf2ss/"
 pkg_name: "signal"
-pkg_version: "1.4.7"
+pkg_version: "1.4.8"
 pkg_description: "Signal processing tools, including filtering, windowing and display functions."
 title: "Signal Toolkit - tf2ss"
 category: "Utility"
@@ -70,6 +70,10 @@ navigation:
   name: "&nbsp;&nbsp;Pulse Metrics"
   url: "/functions/#13_PulseMetrics"
   subitems:
+- id: "8_Plotting"
+  name: "&nbsp;&nbsp;Plotting"
+  url: "/functions/#8_Plotting"
+  subitems:
 - id: "7_Utility"
   name: "&nbsp;&nbsp;Utility"
   url: "/functions/#7_Utility"
@@ -82,7 +86,7 @@ navigation:
   url: "/manual"
 ---
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-tf2ss"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">a</var>, <var class="var">b</var>, <var class="var">c</var>, <var class="var">d</var>] =</code> <strong class="def-name">tf2ss</strong> <code class="def-code-arguments">(<var class="var">num</var>, <var class="var">den</var>)</code><a class="copiable-link" href="#index-tf2ss"></a></span></dt>
+<dt class="deftypefn def-line" id="index-tf2ss"><span class="category-def">Function File: </span><span><code class="def-type">[<var class="var">a</var>, <var class="var">b</var>, <var class="var">c</var>, <var class="var">d</var>] =</code> <strong class="def-name">tf2ss</strong> <code class="def-code-arguments">(<var class="var">num</var>, <var class="var">den</var>)</code></span></dt>
 <dd><p>Conversion from transfer function to state-space.
  The state space system:
    </p><div class="example">

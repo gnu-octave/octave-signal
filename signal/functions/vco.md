@@ -2,7 +2,7 @@
 layout: "default"
 permalink: "/functions/3_vco/"
 pkg_name: "signal"
-pkg_version: "1.4.7"
+pkg_version: "1.4.8"
 pkg_description: "Signal processing tools, including filtering, windowing and display functions."
 title: "Signal Toolkit - vco"
 category: "Utility"
@@ -70,6 +70,10 @@ navigation:
   name: "&nbsp;&nbsp;Pulse Metrics"
   url: "/functions/#13_PulseMetrics"
   subitems:
+- id: "8_Plotting"
+  name: "&nbsp;&nbsp;Plotting"
+  url: "/functions/#8_Plotting"
+  subitems:
 - id: "7_Utility"
   name: "&nbsp;&nbsp;Utility"
   url: "/functions/#7_Utility"
@@ -82,13 +86,13 @@ navigation:
   url: "/manual"
 ---
 <dl class="first-deftypefn def-block">
-<dt class="deftypefn def-line" id="index-vco"><span class="category-def">: </span><span><code class="def-type">y =</code> <strong class="def-name">vco</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">fc</var>, <var class="var">fs</var>)</code><a class="copiable-link" href="#index-vco"></a></span></dt>
-<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-vco-1"><span class="category-def">: </span><span><code class="def-type">y =</code> <strong class="def-name">vco</strong> <code class="def-code-arguments">(<var class="var">x</var>, [<var class="var">fmin</var>, <var class="var">fmax</var>], <var class="var">fs</var>)</code><a class="copiable-link" href="#index-vco-1"></a></span></dt>
+<dt class="deftypefn def-line" id="index-vco"><span><code class="def-type">y =</code> <strong class="def-name">vco</strong> <code class="def-code-arguments">(<var class="var">x</var>, <var class="var">fc</var>, <var class="var">fs</var>)</code></span></dt>
+<dt class="deftypefnx def-cmd-deftypefn def-line" id="index-vco-1"><span><code class="def-type">y =</code> <strong class="def-name">vco</strong> <code class="def-code-arguments">(<var class="var">x</var>, [<var class="var">fmin</var>, <var class="var">fmax</var>], <var class="var">fs</var>)</code></span></dt>
 <dd><p>Creates a signal that oscillates at a frequency determined by input <var class="var">x</var> with a sampling frequency <var class="var">fs</var>.
 </p>
 <p>Inputs:
  </p><ul class="itemize mark-bullet">
-<li><var class="var">x</var> - input data with a range of -1 to 1. A value of -1 means no output, 0 cuoreesponds to <var class="var">fc</var>,
+<li><var class="var">x</var> - input data with a range of -1 to 1. A value of -1 means no output, 0 corresponds to <var class="var">fc</var>,
  and 1 corresponds to 2*<var class="var">fc</var>.
 
 </li><li><var class="var">fc</var> - Carrier frequency
