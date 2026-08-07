@@ -173,7 +173,11 @@ def process(name):
       f.write('    </keywords>\n')
       f.write('    <files>\n')
       f.write('      <file>{}.html</file>\n'.format(name))
-      f.write('      <file>{}.css</file>\n'.format(name))
+      # include octave.css if we have it
+      if os.path.exists("octave.css"):
+          f.write('      <file>octave.css</file>\n')
+      if os.path.exists("{}.css".format(name)):
+          f.write('      <file>{}.css</file>\n'.format(name))
       f.write('    </files>\n')
       f.write('  </filterSection>\n')
       f.write('</QtHelpProject>\n')

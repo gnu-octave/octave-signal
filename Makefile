@@ -16,7 +16,8 @@ SHA256SUM ?= sha256sum
 TAR       ?= tar
 GZIP      ?= gzip
 MAKEINFO  ?= makeinfo
-MAKEINFO_HTML_OPTIONS := --no-headers --set-customization-variable 'COPIABLE_LINKS 0' --set-customization-variable 'COPIABLE_ANCHORS 0' --no-split 
+MAKEINFO_HTML_OPTIONS := --no-headers --no-split 
+MAKEINFO_HTML_FILTER :=  $(SED) 's|<span class="category[^"]*">: </span>||g' | $(SED) 's|<a[^>]*class=.copiable[^>]*> &para;</a>||g' | $(SED) 's|<span>\([^<]*\)</span>|\1|g'
 
 # work out a possible help generator
 ifeq ($(strip $(QHELPGENERATOR)),)
@@ -173,7 +174,7 @@ doc/functions.texi: $(release_dir_dep)
 
 doc/$(PACKAGE).qhc: doc/$(PACKAGE).texi doc/functions.texi doc/version.texi
 	# extract html
-	cd doc && SOURCE_DATE_EPOCH=$(REPO_TIMESTAMP) $(MAKEINFO) --html --css-ref=$(PACKAGE).css $(MAKEINFO_HTML_OPTIONS) $(PACKAGE).texi
+	cd doc && SOURCE_DATE_EPOCH=$(REPO_TIMESTAMP) $(MAKEINFO) --html --css-ref=octave.css $(MAKEINFO_HTML_OPTIONS) $(PACKAGE).texi -o - | $(MAKEINFO_HTML_FILTER) > $(PACKAGE).html
 
 ifeq ($(QHELPGENERATOR),true)
 	$(warning No QHELPGENERATOR ... skipping QT doc build)
