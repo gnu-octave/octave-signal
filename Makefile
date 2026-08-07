@@ -97,11 +97,11 @@ ifeq (${vcs},git)
 	$(RM) "$@/.gitignore"
 endif
 	$(MAKE) BASEDIR=$(BASEDIR) -C $@ build-docs
-	cd "$@" && $(RM) -f Makefile .hg*
-	# doc/mkfuncdocs.py doc/mkqhcp.py
 ifneq (,$(wildcard doc/mkdoccache.m))
 	$(MAKE) -C "$@" doc-cache
 endif
+	cd "$@" && $(RM) -f Makefile .hg*
+	# doc/mkfuncdocs.py doc/mkqhcp.py
 	chmod -R a+rX,u+w,go-w $@
 
 $(RELEASE_TARBALL): $(RELEASE_DIR)
