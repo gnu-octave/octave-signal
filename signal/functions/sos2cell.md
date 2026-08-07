@@ -104,7 +104,7 @@ navigation:
  with the following format:
 </p>
 <div class="example">
-<pre class="example-preformatted"> </pre><div class="group"><pre class="example-preformatted"> C = { {B1, A1}, {B2, A2}, ..., {BL, AL} }
+<pre class="example-preformatted"> </pre><div class="group"><pre class="example-preformatted"> C = \{ \{B1, A1\}, \{B2, A2\}, ..., \{BL, AL\} \}
  </pre></div><pre class="example-preformatted"> </pre></div>
 
 <p>Each element of the cell array is a cell containing a pair of vectors: <var class="var">Bi</var> and <var class="var">Ai</var>.
@@ -112,10 +112,10 @@ navigation:
 <p>If an additional gain term <var class="var">G</var> is provided, the function returns:
 </p>
 <div class="example">
-<pre class="example-preformatted"> </pre><div class="group"><pre class="example-preformatted"> C = { {G, 1}, {B1, A1}, {B2, A2}, ..., {BL, AL} }
+<pre class="example-preformatted"> </pre><div class="group"><pre class="example-preformatted"> C = \{ \{G, 1\}, \{B1, A1\}, \{B2, A2\}, ..., \{BL, AL\} \}
  </pre></div><pre class="example-preformatted"> </pre></div>
 
-<p>where {G, 1} represents the constant gain term applied to the filter.
+<p>where \{G, 1\} represents the constant gain term applied to the filter.
 </p>
 <div class="example">
 <pre class="example-preformatted"> </pre><div class="group"><pre class="example-preformatted"> S = [ [1, 2, 3, 4, 5, 6];

@@ -149,12 +149,12 @@ navigation:
 <div class="example">
 <pre class="example-preformatted"> </pre><div class="group"><pre class="example-preformatted"> # Band-pass:
  c = firpmord ([3 4 8 9], [0 1 0], [1e-3 1e-2 1e-3], 20, &quot;cell&quot;);
- b = firpm (c{:});
+ b = firpm (c\{:\});
  </pre></div><pre class="example-preformatted"> </pre></div>
 
 <div class="example">
 <pre class="example-preformatted"> </pre><div class="group"><pre class="example-preformatted"> # High-pass:
- b = firpm (firpmord ([6.4 8]/16, [0 1], [1e-4 0.01], &quot;c&quot;){:});
+ b = firpm (firpmord ([6.4 8]/16, [0 1], [1e-4 0.01], &quot;c&quot;)\{:\});
  </pre></div><pre class="example-preformatted"> </pre></div>
 
 <p>In cases where elements of <var class="var">d</var> follow a repeating pattern (e.g. all the

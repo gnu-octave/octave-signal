@@ -97,13 +97,13 @@ navigation:
 <p>A valid <var class="var">cll</var> input is a cell array of 2-element cell arrays.
  Each element consists of a numerator vector <code class="code">[b0, b1, b2]</code> and a
  denominator vector <code class="code">[1, a1, a2]</code>.  If the first element contains
- two scalars <code class="code">{gn, gd}</code>, it is treated as an overall gain.
+ two scalars <code class="code">\{gn, gd\}</code>, it is treated as an overall gain.
 </p>
 <p>Examples:
 </p>
 <div class="example">
 <pre class="example-preformatted"> </pre><div class="group"><pre class="example-preformatted"> ## Two sections, no gain:
- cll = {{[2 4 2] [6 0 2]}, {[3 3 0] [6 0 0]}};
+ cll = \{\{[2 4 2] [6 0 2]\}, \{[3 3 0] [6 0 0]\}\};
  sos = cell2sos (cll)
    &rArr; sos =
        2   4   2   6   0   2
@@ -112,7 +112,7 @@ navigation:
 
 <div class="example">
 <pre class="example-preformatted"> </pre><div class="group"><pre class="example-preformatted"> ## With gain:
- cll = {{7 5}, {[2 4 2] [6 0 2]}, {[3 3 0] [6 0 0]}};
+ cll = \{\{7 5\}, \{[2 4 2] [6 0 2]\}, \{[3 3 0] [6 0 0]\}\};
  [sos, g] = cell2sos (cll)
    &rArr; sos =
        2   4   2   6   0   2

@@ -135,7 +135,7 @@ navigation:
  is set to zero.  (The group delay approaches infinity when
  there are poles or zeros very close to the unit circle in the z plane.)
 </p>
-<p>Theory: group delay, g(w) = -d/dw [arg{H(e^jw)}],  is the rate of change of
+<p>Theory: group delay, g(w) = -d/dw [arg\{H(e^jw)\}],  is the rate of change of
  phase with respect to frequency.  It can be computed as:
 </p>
 <div class="example">

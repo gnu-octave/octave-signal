@@ -97,8 +97,8 @@ navigation:
  implemented using different functions.
 </p>
 <p>The definition of the forward hartley transform for vector d,
- <em class="math"> m[K] = 1/N \sum_{i=0}^{N-1} d[i]*(cos[K*2*pi*i/N] + sin[K*2*pi*i/N]), for  0 &lt;= K &lt; N.
- m[K] = 1/N \sum_{i=0}^{N-1} d[i]*CAS[K*i], for  0 &lt;= K &lt; N. </em>
+ <em class="math"> m[K] = 1/N \sum_\{i=0\}^\{N-1\} d[i]*(cos[K*2*pi*i/N] + sin[K*2*pi*i/N]), for  0 &lt;= K &lt; N.
+ m[K] = 1/N \sum_\{i=0\}^\{N-1\} d[i]*CAS[K*i], for  0 &lt;= K &lt; N. </em>
 </p>
 <div class="example">
 <pre class="example-preformatted"> ifht(1:4)

@@ -103,7 +103,7 @@ navigation:
 </p>
 <div class="example">
 <pre class="example-preformatted"> </pre><div class="group"><pre class="example-preformatted">            N
- R_xy(k) = sum x_{i+k} conj(y_i),
+ R_xy(k) = sum x_\{i+k\} conj(y_i),
            i=1
  </pre></div><pre class="example-preformatted"> </pre></div>
 
