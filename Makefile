@@ -99,6 +99,9 @@ endif
 	$(MAKE) BASEDIR=$(BASEDIR) -C $@ build-docs
 	cd "$@" && $(RM) -f Makefile .hg*
 	# doc/mkfuncdocs.py doc/mkqhcp.py
+ifneq (,$(wildcard doc/mkdoccache.m))
+	$(MAKE) -C "$@" doc-cache
+endif
 	chmod -R a+rX,u+w,go-w $@
 
 $(RELEASE_TARBALL): $(RELEASE_DIR)
@@ -189,6 +192,15 @@ doc/$(PACKAGE).info: doc/$(PACKAGE).texi doc/functions.texi doc/version.texi
 
 build-docs: doc/$(PACKAGE).qhc  doc/$(PACKAGE).info
 
+# Doc cache
+.PHONY: doc-cache clean-doc-cache
+doc-cache:
+	cd doc && ./mkdoccache.m ../inst
+
+clean-doc-cache:
+	$(RM) -f inst/doc-cache src/doc-cache
+
+
 clean-docs:
 	$(RM) -f doc/$(PACKAGE).html
 	$(RM) -f doc/$(PACKAGE).qhc
@@ -197,7 +209,7 @@ clean-docs:
 	$(RM) -f doc/functions.texi
 	$(RM) -f doc/version.texi
 
-clean: clean-docs
+clean: clean-docs clean-doc-cache
 	-rm -rf $(RELEASE_DIR) $(RELEASE_TARBALL) $(HTML_TARBALL) $(HTML_DIR)
 	cd src && $(MAKE) $@
 
