@@ -34,7 +34,7 @@
 ## @example
 ## @group
 ## pow2db ([0, 10, 100])
-## @result{} -Inf 10 20
+## @result{} -Inf 10.0000 20.0000
 ## @end group
 ## @end example
 ## @seealso{db2pow}
