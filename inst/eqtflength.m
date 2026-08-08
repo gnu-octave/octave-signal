@@ -30,8 +30,11 @@
 ##
 ## @example
 ## [b, a] = eqtflength ([1 2], [1 0.5 0.25])
-##      b = [1 2 0]
-##      a = [1 0.5 0.25]
+## @result {}
+##      b =
+##          1 2 0
+##      a =
+##          1.0000 0.5000 0.2500
 ## @end example
 ##
 ## @seealso{tf2ss, tf2zp}
