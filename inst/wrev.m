@@ -31,3 +31,8 @@ function y = wrev(x)
   y = x(l-k);
 
 endfunction
+
+%!error wrev;
+%!error wrev([1 2; 3 4]);
+%!assert (wrev([1 2 3 4 5]), [5 4 3 2 1]);
+%!assert (wrev([1 2 3 4 5]'), [5 4 3 2 1]');
