@@ -30,3 +30,43 @@ function [psi,x] = mexihat(lb,ub,n)
   psi = (1-x.^2).*(2/(sqrt(3)*pi^0.25)) .* exp(-x.^2/2)  ;
 
 endfunction
+
+%!error mexihat
+%!error mexihat(1)
+%!error mexihat(1, 2)
+%!error mexihat(1, 2, 0)
+
+%!test
+%! [psi, x] = mexihat(-5, 5, 3);
+%!
+%! # types/size
+%! assert(length(psi), 3);
+%! assert(length(psi), length(x));
+%! assert(isreal(psi));
+%! assert(isreal(x));
+%! assert(max(psi) > 0);
+%! assert(min(psi) < 0);
+%! assert(x, [-5  0 5])
+%!
+%! # wavelet is symmetric
+%! assert(psi, fliplr(psi), 100*eps);
+%!
+%! # wavelet has a positive center and negative side lobes
+%! center = ceil(length(psi) / 2);
+%! assert(psi(center) > 0);
+%! assert(psi(1) < 0);
+%! assert(psi(end) < 0);
+
+%!test
+%! [psi, x] = mexihat(-15, 15, 3);
+%! assert(length(psi), 3);
+%! assert(length(psi), length(x));
+%! assert(x, [-15 0 15])
+%! assert(psi, fliplr(psi), 100*eps);
+
+%!test
+%! [psi, x] = mexihat(-5, 5, 5);
+%! assert(length(psi), 5);
+%! assert(length(psi), length(x));
+%! assert(x, [-5.0000 -2.5000 0 2.5000 5.0000])
+%! assert(psi, fliplr(psi), 100*eps);
