@@ -99,8 +99,6 @@ IIR Filter Design
   iirlp2mb
   impinvar
   invimpinvar
-  firpm
-  firpmord
   lp2bp
   lp2bs
   lp2hp
@@ -113,6 +111,8 @@ FIR Filter Design
   fir1
   fir2
   firls
+  firpm
+  firpmord
   gaussdesign
   kaiserord
   qp_kaiser
