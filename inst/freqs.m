@@ -83,6 +83,8 @@ function [H, Wout] = freqs(B, A, W)
 
   if (nargout == 0)
     freqs_plot (Wout, H);
+    clear Wout;
+    clear H;
   endif
 
 endfunction
