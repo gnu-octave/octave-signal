@@ -31,7 +31,7 @@ ifeq ($(strip $(QHELPGENERATOR)),)
   # v4 doesnt work
   #  QHELPGENERATOR = qhelpgenerator -qt5
   else ifneq ($(shell qcollectiongenerator -qt5 -v 2>/dev/null),)
-$(GZIP)    QHELPGENERATOR = qcollectiongenerator -qt5
+    QHELPGENERATOR = qcollectiongenerator -qt5
   else
     QHELPGENERATOR = true
   endif
@@ -43,6 +43,14 @@ DATE := $(shell $(SED) -n -e 's/^Date: *\(\w\+\)/\1/p' DESCRIPTION)
 DEPENDS := $(shell $(SED) -n -e 's/^Depends[^,]*, *\(.*\)/\1/p' DESCRIPTION | $(SED) 's/ *([^()]*)//g; s/ *, */ /g')
 
 BASEDIR ?= $(realpath $(CURDIR))
+
+CHECK_OCTAVE_VERSION ?= latest
+
+OCTAVE_CACHE_ROOT := $(BASEDIR)/.octave-packages
+OCTAVE_CACHE := $(OCTAVE_CACHE_ROOT)/$(CHECK_OCTAVE_VERSION)
+
+CONTROL_VERSION ?= 4.2.3
+CONTROL_TARBALL ?= https://github.com/gnu-octave/pkg-control/releases/download/control-$(CONTROL_VERSION)/control-$(CONTROL_VERSION).tar.gz
 
 ## Detect which VCS is used
 vcs := $(if $(wildcard .hg),hg,$(if $(wildcard .git),git,unknown))
@@ -69,6 +77,7 @@ HTML_TARBALL    := $(PACKAGE)-html.tar.gz
 
 .PHONY: help dist html release install all check doctest run doc clean maintainer-clean
 .PHONY: build-docs cleandocs
+.PHONY: install-deps check-ci check-local
 
 help:
 	@echo "Targets:"
@@ -79,6 +88,9 @@ help:
 	@echo "   install          - Install the package in GNU Octave"
 	@echo "   all              - Build all oct files"
 	@echo "   check            - Execute package tests (w/o install)"
+	@echo "   check-ci         - Install deps, then run package tests, failing on error"
+	@echo "   check-local      - Run check-ci in Docker via CHECK_OCTAVE_VERSION"
+	@echo "   install-deps     - Install the packages that signal depends on"
 	@echo "   doctest          - Execute package doc tests (w/o install)"
 	@echo "   run              - Run Octave with development in PATH (no install)"
 	@echo "   doc              - Build Texinfo package manual"
@@ -148,6 +160,22 @@ check: all
 	  --eval 'if exist("oruntests") == 2, runtestsfunc=@oruntests;, else runtestsfunc=@runtests;, endif;' \
 	  --eval 'runtestsfunc ("inst"); runtestsfunc ("src");'
 
+install-deps:
+	$(OCTAVE) --no-gui --silent \
+	  --eval 'if (isempty (pkg ("list", "control"))); pkg install "$(CONTROL_TARBALL)"; else; disp ("control already installed, skipping"); endif;'
+
+check-ci: install-deps all
+	$(OCTAVE) --no-gui --version
+	$(OCTAVE) --no-gui --silent devel/run_tests.m "$(DEPENDS)"
+
+$(OCTAVE_CACHE):
+	mkdir -p $@
+
+check-local: $(OCTAVE_CACHE)
+	HOST_UID=$(shell id -u) HOST_GID=$(shell id -g) \
+	OCTAVE_CACHE=$(OCTAVE_CACHE) \
+		docker compose --file devel/compose.yaml --project-directory . run -e CHECK_OCTAVE_VERSION=$(CHECK_OCTAVE_VERSION) --rm octave
+
 doctest: all
 	$(OCTAVE) --silent \
 	  --eval 'if (! isempty ("$(DEPENDS)")); pkg load $(DEPENDS); endif;' \
@@ -200,7 +228,6 @@ doc-cache:
 clean-doc-cache:
 	$(RM) -f inst/doc-cache src/doc-cache
 
-
 clean-docs:
 	$(RM) -f doc/$(PACKAGE).html
 	$(RM) -f doc/$(PACKAGE).qhc
@@ -210,7 +237,7 @@ clean-docs:
 	$(RM) -f doc/version.texi
 
 clean: clean-docs clean-doc-cache
-	-rm -rf $(RELEASE_DIR) $(RELEASE_TARBALL) $(HTML_TARBALL) $(HTML_DIR)
+	-rm -rf $(RELEASE_DIR) $(RELEASE_TARBALL) $(HTML_TARBALL) $(HTML_DIR) $(OCTAVE_CACHE_ROOT)
 	cd src && $(MAKE) $@
 
 maintainer-clean: clean

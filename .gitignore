@@ -6,6 +6,9 @@ src/*/*.o
 src/PKG_ADD
 src/PKG_DEL
 
+# test suite output
+fntests.log
+
 # emacs backup files
 *~
 
@@ -36,3 +39,4 @@ doc/*.info
 doc/version.texi
 doc/functions.texi
 
+.octave-packages/
